@@ -1,5 +1,4 @@
 #include <fstream>
-#include <string>
 #include <qfile.h>
 #include <qmutex.h>
 #include "MessageHandler.h"
@@ -9,10 +8,10 @@ void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 	using namespace std;
 
 	QMutex mutex;
-	QFile outFile("file.log");
+	QFile logging_file("file.log");
 	mutex.lock();
-	outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-	QTextStream stream(&outFile);
+	logging_file.open(QIODevice::WriteOnly | QIODevice::Append);
+	QTextStream stream(&logging_file);
 
 	switch (type)
 	{
