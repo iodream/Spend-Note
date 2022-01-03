@@ -7,7 +7,7 @@ CREATE TABLE IncomeCategory
 	name character(30) not null unique
 )
 
-CREATE TABLE User
+CREATE TABLE User_
 (
 	id bigint primary key,
 	login character(15) not null unique,
@@ -18,7 +18,7 @@ CREATE TABLE Income
 (
 	id bigint primary key,
 	name character not null,
-	userId bigint not null references User(id),
+	userId bigint not null references User_(id),
 	amount money not null,
 	categoryId bigint not null references IncomeCategory(id),
 	addTime timestamp not null,
@@ -34,14 +34,14 @@ CREATE TABLE ListState
 CREATE TABLE List
 (
 	id bigint primary key,
-	userId bigint not null references User(id),
+	userId bigint not null references User_(id),
 	name character(30) not null,
 	stateId bigint not null references ListState(id)
 )
 
 CREATE TABLE Coownership
 (
-	userId bigint not null unique references User(id),
+	userId bigint not null unique references User_(id),
 	listId bigint not null unique references List(id)
 )
 
