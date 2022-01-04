@@ -10,10 +10,10 @@ public:
     UserRepository(pqxx::connection& db_connection);
 
 	void Add(const User& user);
-	User GetById(int id);
+	User GetById(IdType id);
 	User GetByLogin(const std::string& login);
 	void Update(const User& user);
-	void Remove(int id);
+	void Remove(IdType id);
 private:
-    pqxx::connection& db_connection;
+	pqxx::connection& m_database_connection;
 };

@@ -12,10 +12,10 @@ public:
     DbFacade(const std::string& connection_string);
 
     void AddUser(const User &user) override;
-    User GetUserById(int id) override;
+	User GetUserById(IdType id) override;
     User GetUserByLogin(const std::string& login) override;
     void UpdateUser(const User &user) override;
-    void RemoveUser(int id) override;
+	void RemoveUser(IdType id) override;
 
 private:
 	pqxx::connection m_connection;

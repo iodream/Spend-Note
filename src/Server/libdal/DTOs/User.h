@@ -2,9 +2,11 @@
 
 #include <string>
 
+using IdType = long long int;
+
 struct User
 {
-    int id;
+	IdType id;
     std::string login;
     std::string pass;
 };

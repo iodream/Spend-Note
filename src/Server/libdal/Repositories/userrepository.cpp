@@ -1,20 +1,20 @@
 #include "userrepository.h"
 
-UserRepository::UserRepository(pqxx::connection &db_connection) : db_connection(db_connection)
+UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)
 {
 
 }
 
 void UserRepository::Add(const User &user)
 {
-    pqxx::work w(db_connection);
+	pqxx::work w(m_database_connection);
     w.exec1("INSERT INTO Users (login, pass) VALUES (" + w.quote(user.login) + ", " + w.quote(user.pass) + ");");
     w.commit();
 }
 
-User UserRepository::GetById(int id)
+User UserRepository::GetById(IdType id)
 {
-    pqxx::work w(db_connection);
+	pqxx::work w(m_database_connection);
     pqxx::row user = w.exec1("SELECT * FROM Users WHERE id = " + w.quote(id) + ";");
     w.commit();
 
@@ -23,7 +23,7 @@ User UserRepository::GetById(int id)
 
 User UserRepository::GetByLogin(const std::string& login)
 {
-    pqxx::work w(db_connection);
+	pqxx::work w(m_database_connection);
     pqxx::row user = w.exec1("SELECT * FROM Users WHERE login = " + w.quote(login) + ";");
     w.commit();
 
@@ -32,14 +32,14 @@ User UserRepository::GetByLogin(const std::string& login)
 
 void UserRepository::Update(const User &user)
 {
-    pqxx::work w(db_connection);
+	pqxx::work w(m_database_connection);
     w.exec1("UPDATE table_name SET login = " + w.quote(user.login) + ", pass = " + w.quote(user.pass) + ", ... WHERE id = " + w.quote(user.id) + ";");
     w.commit();
 }
 
-void UserRepository::Remove(int id)
+void UserRepository::Remove(IdType id)
 {
-    pqxx::work w(db_connection);
+	pqxx::work w(m_database_connection);
     w.exec1("DELETE FROM Users WHERE id = " + w.quote(id) + ";");
     w.commit();
 }

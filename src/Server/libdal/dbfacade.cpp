@@ -10,7 +10,7 @@ void DbFacade::AddUser(const User &user)
 	m_users.Add(user);
 }
 
-User DbFacade::GetUserById(int id)
+User DbFacade::GetUserById(IdType id)
 {
 	return m_users.GetById(id);
 }
@@ -25,7 +25,7 @@ void DbFacade::UpdateUser(const User &user)
 	m_users.Update(user);
 }
 
-void DbFacade::RemoveUser(int id)
+void DbFacade::RemoveUser(IdType id)
 {
 	m_users.Remove(id);
 }
