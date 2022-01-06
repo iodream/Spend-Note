@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QJsonDocument>
+#include "Net/Message.h"
 
 class ICommandHandler
 {
@@ -8,5 +8,5 @@ public:
     ICommandHandler() {}
     virtual ~ICommandHandler() {}
 
-    virtual QJsonDocument Handle(const QJsonDocument& json_doc) = 0;
+	virtual Net::Response Handle(Net::Request& request) = 0;
 };

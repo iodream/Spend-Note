@@ -1,31 +1,40 @@
 #include <QJsonObject>
 
 #include "EchoHandler.h"
-#include "../ClientError.h"
+#include "Common.h"
+#include "Net/Parsing.h"
+#include "Net/Error.h"
 
-EchoHandler::InDTO EchoHandler::Parser::Parse(const QJsonDocument& json_doc)
+EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
+		const QJsonDocument& playload)
 {
-    InDTO dto;
-    auto json = json_doc.object();
-	if (json.contains("msg") && json["msg"].isString()) {
-		dto.msg = json["msg"].toString().toStdString();
+	DTO dto;
+	auto json = playload.object();
+
+	try {
+		SafeReadString(json, "msg", dto.msg);
+	}  catch (const ParsingError& ex) {
+		throw Net::BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
-	else {
-		throw BadRequestError{"Failed to parse \"msg\" field"};
-	}
+
 	return dto;
 }
 
-QJsonDocument EchoHandler::Formatter::Format(const OutDTO& dto)
+QJsonDocument EchoHandler::JSONFormatter::Format(
+		const EchoHandler::JSONFormatter::DTO& dto)
 {
 	QJsonObject json;
 	json["msg"] = dto.msg.c_str();
 	return QJsonDocument{json};
 }
 
-QJsonDocument EchoHandler::Handle(const QJsonDocument& json_doc)
+Net::Response EchoHandler::Handle(Net::Request& request)
 {
-    auto in_dto = m_parser.Parse(json_doc);
-    OutDTO out_dto{in_dto.msg};
-    return m_formatter.Format(out_dto);
+	if (request.method == Net::HTTP_METHOD_POST) {
+		Net::Response response;
+		auto in_dto = m_parser.Parse(request.json_playload);
+		JSONFormatter::DTO out_dto{in_dto.msg};
+		return FormJSONResponse(m_formatter.Format(out_dto));
+	}
+	throw Net::BadRequestError("Unsupported method");
 }

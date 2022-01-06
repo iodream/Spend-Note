@@ -6,34 +6,32 @@
 
 class EchoHandler : public ICommandHandler
 {
-    struct InDTO
-    {
-        std::string msg;
-    };
-
-    struct OutDTO
-    {
-        std::string msg;
-    };
-
-    class Parser
-    {
+	class JSONParser
+    {		
     public:
-        InDTO Parse(const QJsonDocument& json_doc);
+		struct DTO {
+			std::string msg;
+		};
+
+		DTO Parse(const QJsonDocument& playload);
     };
 
-    class Formatter
+	class JSONFormatter
     {
-    public:
-        QJsonDocument Format(const OutDTO& dto);
+	public:
+		struct DTO {
+			std::string msg;
+		};
+
+		QJsonDocument Format(const DTO& dto);
     };
 
 public:
     EchoHandler() {}
     virtual ~EchoHandler() override {}
 
-    QJsonDocument Handle(const QJsonDocument& json_doc) override;
+	Net::Response Handle(Net::Request& request) override;
 
-    Parser m_parser{};
-    Formatter m_formatter{};
+	JSONParser m_parser{};
+	JSONFormatter m_formatter{};
 };

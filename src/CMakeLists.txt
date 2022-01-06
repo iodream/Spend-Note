@@ -11,17 +11,14 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(
-    GTest
-    REQUIRED
-)
-
+find_package(GTest REQUIRED)
 find_package(Qt6 COMPONENTS Core REQUIRED)
 
 add_subdirectory(Server)
 add_subdirectory(Client)
 
 add_executable(Spend-Note-Server ${Spend-Note-Server_SOURCES})
+target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(CMAKE_COMPILER_IS_GNUCC)
     target_compile_options(Spend-Note-Server PRIVATE -Wall -Wextra -pedantic -Werror)

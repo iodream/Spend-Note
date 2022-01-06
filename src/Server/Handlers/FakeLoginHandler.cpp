@@ -3,34 +3,29 @@
 #include "Poco/JWT/Token.h"
 #include "Poco/JWT/Signer.h"
 
+#include "Net/Error.h"
 #include "FakeLoginHandler.h"
-#include "../ClientError.h"
+#include "Common.h"
 
-FakeLoginHandler::InDTO FakeLoginHandler::Parser::Parse(const QJsonDocument& json_doc)
-{
-	InDTO dto;
-	Q_UNUSED(json_doc);
-	return dto;
-}
-
-QJsonDocument FakeLoginHandler::Formatter::Format(const OutDTO& dto)
+QJsonDocument FakeLoginHandler::JSONFormatter::Format(const DTO& dto)
 {
 	QJsonObject json;
 	json["token"] = dto.token.c_str();
 	return QJsonDocument{json};
 }
 
-QJsonDocument FakeLoginHandler::Handle(const QJsonDocument& json_doc)
+Net::Response FakeLoginHandler::Handle(Net::Request& request)
 {
-	Q_UNUSED(json_doc)
-	Poco::JWT::Token token;
-	token.setType("JWT");
-	token.payload().set("name", std::string("Admin"));
-	token.setIssuedAt(Poco::Timestamp());
+	if (request.method == Net::HTTP_METHOD_GET) {
+		Poco::JWT::Token token;
+		token.setType("JWT");
+		token.payload().set("user", std::string("Admin"));
+		token.setIssuedAt(Poco::Timestamp());
 
-	Poco::JWT::Signer signer("0123456789ABCDEF0123456789ABCDEF");
-	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
-
-	OutDTO out_dto{jwt};
-	return m_formatter.Format(out_dto);
+		Poco::JWT::Signer signer("0123456789ABCDEF0123456789ABCDEF");
+		std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
+		JSONFormatter::DTO out_dto{jwt};
+		return FormJSONResponse(m_formatter.Format(out_dto));
+	}
+	throw Net::BadRequestError("Unsupported method");
 }

@@ -2,40 +2,39 @@
 
 #include <string>
 
-#include "ICommandHandler.h"
+#include "AuthorizedHandler.h"
 
-class FakeGetListsHandler : public ICommandHandler
+class FakeGetListsHandler : public AuthorizedHandler
 {
-    struct InDTO
-    {
-        std::string token;
-        std::string user;
-    };
-
-    struct OutDTO
-    {
-        std::string user;
-        std::string msg;
-    };
-
-    class Parser
-    {
-    public:
-        InDTO Parse(const QJsonDocument& json_doc);
-    };
-
-    class Formatter
-    {
-    public:
-        QJsonDocument Format(const OutDTO& dto);
-    };
-
 public:
+    class JSONParser
+    {
+    public:
+        struct DTO
+        {
+            std::string user;
+        };
+
+        DTO Parse(const QJsonDocument& token_body);
+    };
+
+    class JSONFormatter
+    {
+    public:
+        struct DTO
+        {
+            std::string user;
+            std::string msg;
+        };
+
+        QJsonDocument Format(const DTO& dto);
+    };
+
     FakeGetListsHandler() {}
     virtual ~FakeGetListsHandler() override {}
 
-    QJsonDocument Handle(const QJsonDocument& json_doc) override;
+    virtual Net::Response AuthHandle(const Net::Request& request) override;
 
-    Parser m_parser{};
-    Formatter m_formatter{};
+    JSONParser m_parser{};
+    JSONFormatter m_formatter{};
 };

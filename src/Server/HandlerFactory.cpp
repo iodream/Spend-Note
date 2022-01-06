@@ -1,11 +1,11 @@
 #include "HandlerFactory.h"
-#include "Handlers/EchoHandler.h"
 #include "Handlers/FakeLoginHandler.h"
+#include "Handlers/EchoHandler.h"
 #include "Handlers/FakeGetListsHandler.h"
 
 ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 {
-    if (uri == std::string("/echo"))
+	if (uri == std::string("/echo"))
 		return new EchoHandler;
 	if (uri == std::string("/fake_login"))
 		return new FakeLoginHandler;

@@ -6,33 +6,21 @@
 
 class FakeLoginHandler : public ICommandHandler
 {
-    struct InDTO
-    {
-    };
+	class JSONFormatter
+	{
+	public:
+		struct DTO {
+			std::string token;
+		};
 
-    struct OutDTO
-    {
-        std::string token;
-    };
-
-    class Parser
-    {
-    public:
-        InDTO Parse(const QJsonDocument& json_doc);
-    };
-
-    class Formatter
-    {
-    public:
-        QJsonDocument Format(const OutDTO& dto);
-    };
+		QJsonDocument Format(const DTO& dto);
+	};
 
 public:
     FakeLoginHandler() {}
     virtual ~FakeLoginHandler() override {}
 
-    QJsonDocument Handle(const QJsonDocument& json_doc) override;
+	Net::Response Handle(Net::Request& request) override;
 
-    Parser m_parser{};
-    Formatter m_formatter{};
+    JSONFormatter m_formatter{};
 };
