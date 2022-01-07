@@ -1,3 +1,18 @@
+cmake_minimum_required(VERSION 3.16)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+project(SpendNoteServer VERSION 0.1)
+
+configure_file(SpendNoteServer_Config.h.in SpendNoteServer_Config.h)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt6 COMPONENTS Core REQUIRED)
+
 add_subdirectory(Handlers)
 
 list(APPEND Spend-Note-Server_SOURCES
@@ -21,5 +36,20 @@ list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
 )
 
-set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
-set(Spend-Note-Server_LIBS "${Spend-Note-Server_LIBS}" PARENT_SCOPE)
+add_executable(Spend-Note-Server ${Spend-Note-Server_SOURCES})
+target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+
+if(CMAKE_COMPILER_IS_GNUCC)
+    target_compile_options(Spend-Note-Server PRIVATE -Wall -Wextra -pedantic -Werror)
+endif()
+
+list(APPEND Spend-Note-Server_LIBS
+    Qt::Core
+)
+
+target_link_libraries(
+    Spend-Note-Server
+    PUBLIC
+    ${Spend-Note-Server_LIBS}
+)
