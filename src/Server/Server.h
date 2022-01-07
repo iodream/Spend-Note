@@ -13,7 +13,7 @@
 class HTTPRequestHandler: public Poco::Net::HTTPRequestHandler
 {
 public:
-    HTTPRequestHandler(ICommandHandler* handler) : m_handler{handler} {}
+	HTTPRequestHandler(ICommandHandler* handler) : m_handler{handler} {}
 private:
 	using HTTPResponse = Poco::Net::HTTPServerResponse;
 	using HTTPRequest = Poco::Net::HTTPServerRequest;
@@ -26,5 +26,5 @@ private:
 	Net::Response FormErrorResponse(const Net::ServerError& ex);
 	Net::Response FormErrorResponse(const std::exception& ex);
 private:
-    std::unique_ptr<ICommandHandler> m_handler;
+	std::unique_ptr<ICommandHandler> m_handler;
 };
