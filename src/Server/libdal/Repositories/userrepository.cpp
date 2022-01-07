@@ -1,4 +1,12 @@
 #include "userrepository.h"
+#include <string_view>
+
+namespace
+{
+	const std::string& ID_FIELD = "id";
+	const std::string& LOGIN_FIELD = "login";
+	const std::string& PASSWORD_FIELD = "password";
+}
 
 UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)
 {
@@ -8,38 +16,36 @@ UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_con
 void UserRepository::Add(const User &user)
 {
 	pqxx::work w(m_database_connection);
-    w.exec1("INSERT INTO Users (login, pass) VALUES (" + w.quote(user.login) + ", " + w.quote(user.pass) + ");");
+	w.exec0("INSERT INTO Users (" + LOGIN_FIELD + ", " + PASSWORD_FIELD + ") VALUES (" + w.quote(user.login) + ", " + w.quote(user.password) + ");");
     w.commit();
 }
 
 User UserRepository::GetById(IdType id)
 {
-	pqxx::work w(m_database_connection);
-    pqxx::row user = w.exec1("SELECT * FROM Users WHERE id = " + w.quote(id) + ";");
-    w.commit();
+	pqxx::nontransaction w(m_database_connection);
+	pqxx::row user = w.exec1("SELECT * FROM Users WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 
-    return User {user["id"].as<int>(), user["login"].as<std::string>(), user["pass"].as<std::string>()};
+	return User {user[ID_FIELD].as<int>(), user[LOGIN_FIELD].as<std::string>(), user[PASSWORD_FIELD].as<std::string>()};
 }
 
 User UserRepository::GetByLogin(const std::string& login)
 {
-	pqxx::work w(m_database_connection);
-    pqxx::row user = w.exec1("SELECT * FROM Users WHERE login = " + w.quote(login) + ";");
-    w.commit();
+	pqxx::nontransaction w(m_database_connection);
+	pqxx::row user = w.exec1("SELECT * FROM Users WHERE " + LOGIN_FIELD + " = " + w.quote(login) + ";");
 
-    return User {user["id"].as<int>(), user["login"].as<std::string>(), user["pass"].as<std::string>()};
+	return User {user[ID_FIELD].as<int>(), user[LOGIN_FIELD].as<std::string>(), user[PASSWORD_FIELD].as<std::string>()};
 }
 
 void UserRepository::Update(const User &user)
 {
 	pqxx::work w(m_database_connection);
-    w.exec1("UPDATE table_name SET login = " + w.quote(user.login) + ", pass = " + w.quote(user.pass) + ", ... WHERE id = " + w.quote(user.id) + ";");
+	w.exec0("UPDATE table_name SET " + LOGIN_FIELD + " = " + w.quote(user.login) + ", " + PASSWORD_FIELD + " = " + w.quote(user.password) + ", ... WHERE " + ID_FIELD + " = " + w.quote(user.id) + ";");
     w.commit();
 }
 
 void UserRepository::Remove(IdType id)
 {
 	pqxx::work w(m_database_connection);
-    w.exec1("DELETE FROM Users WHERE id = " + w.quote(id) + ";");
+	w.exec0("DELETE FROM Users WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
     w.commit();
 }

@@ -8,5 +8,5 @@ struct User
 {
 	IdType id;
     std::string login;
-    std::string pass;
+	std::string password;
 };

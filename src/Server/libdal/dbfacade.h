@@ -9,12 +9,12 @@
 class DbFacade : public IDbFacade
 {
 public:
-    DbFacade(const std::string& connection_string);
+	DbFacade(const std::string& connection_string);
 
-    void AddUser(const User &user) override;
+	void AddUser(const User &user) override;
 	User GetUserById(IdType id) override;
-    User GetUserByLogin(const std::string& login) override;
-    void UpdateUser(const User &user) override;
+	User GetUserByLogin(const std::string& login) override;
+	void UpdateUser(const User &user) override;
 	void RemoveUser(IdType id) override;
 
 private:

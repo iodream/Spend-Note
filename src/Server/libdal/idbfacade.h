@@ -6,6 +6,8 @@
 class IDbFacade
 {
 public:
+	using Ptr = std::shared_ptr<IDbFacade>;
+
 	virtual void AddUser(const User& user) = 0;
 	virtual User GetUserById(IdType id) = 0;
 	virtual User GetUserByLogin(const std::string& login) = 0;
