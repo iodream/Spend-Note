@@ -22,7 +22,7 @@ struct Request : public Message
 	HTTPMethod method;
 	AuthSchemeType auth_scheme;
     std::string auth_info;
-	QJsonDocument JWT_token_body;
+	QJsonDocument jwt_token_body;
 };
 
 struct Response : public Message

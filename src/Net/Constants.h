@@ -6,17 +6,19 @@ namespace Net {
 
 using HTTPMethod = std::string;
 
-extern const HTTPMethod HTTP_METHOD_GET;
-extern const HTTPMethod HTTP_METHOD_POST;
+const HTTPMethod HTTP_METHOD_GET = "GET";
+const HTTPMethod HTTP_METHOD_POST = "POST";
 
 using ContentType = std::string;
 
-extern const ContentType CONTENT_TYPE_PLAIN_TEXT;
-extern const ContentType CONTENT_TYPE_APPLICATION_JSON;
-extern const ContentType CONTENT_TYPE_EMPTY;
+const ContentType CONTENT_TYPE_PLAIN_TEXT = "text/plain; charset=UTF-8";
+const ContentType CONTENT_TYPE_APPLICATION_JSON = "application/json";
+const ContentType CONTENT_TYPE_EMPTY = "";
 
 using AuthSchemeType = std::string;
 
-extern const AuthSchemeType AUTH_SCHEME_TYPE_BEARER;
+const AuthSchemeType AUTH_SCHEME_TYPE_BEARER = "Bearer";
+
+const std::string DUMMY_PASSWORD = "0123456789ABCDEF0123456789ABCDEF";
 
 }

@@ -24,7 +24,7 @@ private:
 	Net::Request ParseRequest(HTTPRequest& http_req);
 	Net::Response FormErrorResponse(const Net::ClientError& ex);
 	Net::Response FormErrorResponse(const Net::ServerError& ex);
-	Net::Response FormErrorResponse(const std::exception& ex);
+	Net::Response FormErrorResponse();
 private:
 	std::unique_ptr<ICommandHandler> m_handler;
 };

@@ -44,7 +44,12 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 	catch (const std::exception& ex) {
 		std::cout << "Unhandled exception \"" << ex.what() << "\""
 		<< "(URI: " << http_req.getURI() << ")" << "\n";
-		SendResponse(FormErrorResponse(ex), http_res);
+		SendResponse(FormErrorResponse(), http_res);
+	}
+	catch (...) {
+		std::cout << "Unhandled exception"
+		<< "(URI: " << http_req.getURI() << ")" << "\n";
+		SendResponse(FormErrorResponse(), http_res);
 	}
 }
 
@@ -124,7 +129,7 @@ Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ServerError& ex)
 	return response;
 }
 
-Net::Response HTTPRequestHandler::FormErrorResponse(const std::exception&)
+Net::Response HTTPRequestHandler::FormErrorResponse()
 {
 	Net::Response response;
 	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;

@@ -1,5 +1,4 @@
 list(APPEND Spend-Note-Net_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constants.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Constants.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Error.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Message.h
