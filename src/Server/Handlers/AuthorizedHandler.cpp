@@ -61,7 +61,7 @@ void AuthorizedHandler::CheckAuthorization(const Net::Request& request)
 Net::Response AuthorizedHandler::Handle(Net::Request& request)
 {
 	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER)
-		request.JWT_token_body = DecodeJWTTokenBody(request.auth_info);
+        request.jwt_token_body = DecodeJWTTokenBody(request.auth_info);
 	CheckAuthorization(request);
 	return AuthHandle(request);
 }

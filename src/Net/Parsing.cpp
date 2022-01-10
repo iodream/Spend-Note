@@ -1,6 +1,5 @@
 #include "Parsing.h"
 
-
 void SafeReadString(
     const QJsonObject& json,
     const std::string& label,
@@ -22,3 +21,4 @@ void SafeReadString(
             std::string{"Failed to parse \""}.append(label).append("\" field")};
     }
 }
+
