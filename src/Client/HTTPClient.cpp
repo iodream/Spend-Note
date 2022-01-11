@@ -1,18 +1,11 @@
-#include <iostream>
 #include <sstream>
 #include <QJsonObject>
-#include <QString>
 
 #include <Poco/URI.h>
-#include <Poco/Net/HTTPClientSession.h>
-#include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/StreamCopier.h>
 #include <Poco/Message.h>
 
-#include "Net/Message.h"
-#include "Net/Constants.h"
-#include "Net/Error.h"
 #include "Exception.h"
 #include "HTTPClient.h"
 
@@ -21,10 +14,17 @@ void HTTPClient::set_token(const std::string& str_token)
     m_token = str_token;
 }
 
-void HTTPClient::SendRequest(Poco::Net::HTTPRequest &request,
-                             Poco::Net::HTTPClientSession &session,
-                             const Net::Request &net_request)
+void HTTPClient::set_auth_scheme(const std::string& str_auth_scheme)
 {
+    m_auth_scheme = str_auth_scheme;
+}
+
+void HTTPClient::SendRequest(
+    Poco::Net::HTTPRequest &request,
+    Poco::Net::HTTPClientSession &session,
+    const Net::Request &net_request)
+{
+    AddCredentials(request, net_request);
     request.setContentType(net_request.content_type);
     if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
     {
@@ -34,9 +34,11 @@ void HTTPClient::SendRequest(Poco::Net::HTTPRequest &request,
         o << net_request.json_playload.toJson().constData();
     }
     else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-        ;
+    {
+    }
     else if (net_request.content_type == Net::CONTENT_TYPE_EMPTY)
-        ;
+    {
+    }
     else
     {
         throw Exception("Unsupported content type");
@@ -79,4 +81,13 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     Poco::Net::HTTPResponse response;
     std::istream &received_stream = session.receiveResponse(response);
     return FormResponse(response, received_stream);
+}
+
+void HTTPClient::AddCredentials(Poco::Net::HTTPRequest &request,
+                                const Net::Request& net_request)
+{
+    if (!m_token.empty())
+    {
+        request.setCredentials(m_auth_scheme, m_token);
+    }
 }
