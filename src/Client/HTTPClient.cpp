@@ -24,14 +24,14 @@ void HTTPClient::SendRequest(
     Poco::Net::HTTPClientSession &session,
     const Net::Request &net_request)
 {
-    AddCredentials(request, net_request);
+    AddCredentials(request);
     request.setContentType(net_request.content_type);
     if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
     {
         QByteArray byte_array = net_request.json_playload.toJson();
         request.setContentLength(byte_array.size());
-        std::ostream& o = session.sendRequest(request);
-        o << net_request.json_playload.toJson().constData();
+        std::ostream& out_stream = session.sendRequest(request);
+        out_stream << net_request.json_playload.toJson().constData();
     }
     else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
     {
@@ -45,25 +45,28 @@ void HTTPClient::SendRequest(
     }
 }
 
-Net::Response HTTPClient::FormResponse(const Poco::Net::HTTPResponse& response,
-                                          std::istream &received_stream)
+Net::Response HTTPClient::FormResponse(
+    const Poco::Net::HTTPResponse& response,
+    std::istream &received_stream)
 {
     Net::Response net_response;
     net_response.content_type = response.getContentType();
     net_response.status = response.getStatus();
     net_response.reason = response.getReason();
-    std::stringstream ss;
-    Poco::StreamCopier::copyStream(received_stream, ss);
+    std::stringstream string_stream;
+    Poco::StreamCopier::copyStream(received_stream, string_stream);
     if (net_response.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
     {
-        QByteArray br = QString::fromStdString(ss.str()).toUtf8();
+        QByteArray br = QString::fromStdString(string_stream.str()).toUtf8();
         QJsonDocument json_doc = QJsonDocument::fromJson(br);
         net_response.json_playload = json_doc;
     }
     else if (net_response.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-        ;
+    {
+    }
     else if (net_response.content_type == Net::CONTENT_TYPE_EMPTY)
-        ;
+    {
+    }
     else
     {
         throw Exception("Unsupported content type");
@@ -83,8 +86,7 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     return FormResponse(response, received_stream);
 }
 
-void HTTPClient::AddCredentials(Poco::Net::HTTPRequest &request,
-                                const Net::Request& net_request)
+void HTTPClient::AddCredentials(Poco::Net::HTTPRequest &request)
 {
     if (!m_token.empty())
     {

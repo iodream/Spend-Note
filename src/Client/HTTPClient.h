@@ -14,14 +14,15 @@ public:
     HTTPClient(){};
     void set_token(const std::string& str_token);
     void set_auth_scheme(const std::string& str_auth_scheme);
+    void AddCredentials (Poco::Net::HTTPRequest& request);
     Net::Response Request(const Net::Request& net_request);
-    void SendRequest(Poco::Net::HTTPRequest& request,
-                     Poco::Net::HTTPClientSession& session,
-                     const Net::Request& net_request);
-    Net::Response FormResponse(const Poco::Net::HTTPResponse& response,
-                                  std::istream &received_stream);
-    void AddCredentials (Poco::Net::HTTPRequest& request,
-                         const Net::Request& net_request);
+    void SendRequest(
+        Poco::Net::HTTPRequest& request,
+        Poco::Net::HTTPClientSession& session,
+        const Net::Request& net_request);
+    Net::Response FormResponse(
+        const Poco::Net::HTTPResponse& response,
+        std::istream &received_stream);
 private:
     std::string m_token;
     Net::AuthSchemeType m_auth_scheme;
