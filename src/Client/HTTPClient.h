@@ -12,8 +12,8 @@ class HTTPClient
 public:
     HTTPClient(){};
     void set_token(const std::string& str_token);
-    Net::Response SendRequest(const Net::Request& net_request);
-    void FormRequest(Poco::Net::HTTPRequest& request,
+    Net::Response Request(const Net::Request& net_request);
+    void SendRequest(Poco::Net::HTTPRequest& request,
                      Poco::Net::HTTPClientSession& session,
                      const Net::Request& net_request);
     Net::Response FormResponse(const Poco::Net::HTTPResponse& response,

@@ -13,6 +13,7 @@
 #include "Net/Message.h"
 #include "Net/Constants.h"
 #include "Net/Error.h"
+#include "Exception.h"
 #include "HTTPClient.h"
 
 void HTTPClient::set_token(const std::string& str_token)
@@ -20,7 +21,7 @@ void HTTPClient::set_token(const std::string& str_token)
     m_token = str_token;
 }
 
-void HTTPClient::FormRequest(Poco::Net::HTTPRequest &request,
+void HTTPClient::SendRequest(Poco::Net::HTTPRequest &request,
                              Poco::Net::HTTPClientSession &session,
                              const Net::Request &net_request)
 {
@@ -38,7 +39,7 @@ void HTTPClient::FormRequest(Poco::Net::HTTPRequest &request,
         ;
     else
     {
-        throw ("Unsupported content type");
+        throw Exception("Unsupported content type");
     }
 }
 
@@ -63,18 +64,18 @@ Net::Response HTTPClient::FormResponse(const Poco::Net::HTTPResponse& response,
         ;
     else
     {
-        throw ("Unsupported content type");
+        throw Exception("Unsupported content type");
     }
     return net_response;
 }
 
-Net::Response HTTPClient::SendRequest(const Net::Request& net_request)
+Net::Response HTTPClient::Request(const Net::Request& net_request)
 {
     Poco::URI uri(net_request.uri);
     Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
     std::string path(uri.getPathAndQuery());
     Poco::Net::HTTPRequest request(net_request.method, path, Poco::Net::HTTPMessage::HTTP_1_1);
-    FormRequest(request, session, net_request);
+    SendRequest(request, session, net_request);
     Poco::Net::HTTPResponse response;
     std::istream &received_stream = session.receiveResponse(response);
     return FormResponse(response, received_stream);
