@@ -18,6 +18,7 @@ add_library(libdal STATIC
   idbfacade.h
   dbfacade.h
   dbfacade.cpp
+  Types.h
   DTOs/User.h
   Repositories/userrepository.h Repositories/userrepository.cpp
 )

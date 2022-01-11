@@ -10,12 +10,12 @@ void DbFacade::AddUser(const User &user)
 	m_users.Add(user);
 }
 
-User DbFacade::GetUserById(IdType id)
+std::optional<User> DbFacade::GetUserById(IdType id)
 {
 	return m_users.GetById(id);
 }
 
-User DbFacade::GetUserByLogin(const std::string& login)
+std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
 {
 	return m_users.GetByLogin(login);
 }

@@ -1,8 +1,7 @@
 #pragma once
 
 #include <string>
-
-using IdType = long long int;
+#include "Types.h"
 
 struct User
 {

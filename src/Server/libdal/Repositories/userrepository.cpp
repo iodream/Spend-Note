@@ -21,20 +21,36 @@ void UserRepository::Add(const User &user)
     w.commit();
 }
 
-User UserRepository::GetById(IdType id)
+std::optional<User> UserRepository::GetById(IdType id)
 {
 	pqxx::nontransaction w(m_database_connection);
-	pqxx::row user = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+	pqxx::result user_rows = w.exec(
+			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
+			" FROM " + w.quote_name(TABLE_NAME) +
+			" WHERE " + w.quote_name(ID_FIELD) + " = " + w.quote(id) + ";");
 
-	return User {user[ID_FIELD].as<int>(), user[LOGIN_FIELD].as<std::string>(), user[PASSWORD_FIELD].as<std::string>()};
+	if (user_rows.empty())
+	{
+		return std::nullopt;
+	}
+
+	return UserFromRow(user_rows.front());
 }
 
-User UserRepository::GetByLogin(const std::string& login)
+std::optional<User> UserRepository::GetByLogin(const std::string& login)
 {
 	pqxx::nontransaction w(m_database_connection);
-	pqxx::row user = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + LOGIN_FIELD + " = " + w.quote(login) + ";");
+	pqxx::result user_rows = w.exec(
+			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
+			" FROM " + w.quote_name(TABLE_NAME) +
+			" WHERE " + w.quote_name(LOGIN_FIELD) + " = " + w.quote(login) + ";");
 
-	return User {user[ID_FIELD].as<int>(), user[LOGIN_FIELD].as<std::string>(), user[PASSWORD_FIELD].as<std::string>()};
+	if (user_rows.empty())
+	{
+		return std::nullopt;
+	}
+
+	return UserFromRow(user_rows.front());
 }
 
 void UserRepository::Update(const User &user)
@@ -48,5 +64,15 @@ void UserRepository::Remove(IdType id)
 {
 	pqxx::work w(m_database_connection);
 	w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
-    w.commit();
+	w.commit();
+}
+
+User UserRepository::UserFromRow(const pqxx::row& row)
+{
+	User user;
+	user.id = row[ID_FIELD].as<int>();
+	user.login = row[LOGIN_FIELD].as<std::string>();
+	user.password = row[PASSWORD_FIELD].as<std::string>();
+
+	return user;
 }

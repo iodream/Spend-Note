@@ -12,8 +12,8 @@ public:
 	DbFacade(const std::string& connection_string);
 
 	void AddUser(const User &user) override;
-	User GetUserById(IdType id) override;
-	User GetUserByLogin(const std::string& login) override;
+	std::optional<User> GetUserById(IdType id) override;
+	std::optional<User> GetUserByLogin(const std::string& login) override;
 	void UpdateUser(const User &user) override;
 	void RemoveUser(IdType id) override;
 
