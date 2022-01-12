@@ -3,10 +3,9 @@
 #include <QTime>
 #include <mutex>
 
-Logger* Logger::m_logger = nullptr;
 QMutex Logger::m_logmutex;
-std::mutex Logger::m_instance_mutex;
 QFile* Logger::m_logging_file;
+Logger* Logger::m_logger = nullptr;
 std::string Logger::m_filename("logfile.log");
 
 Logger::Logger()
@@ -15,6 +14,12 @@ Logger::Logger()
 	m_logging_file = new QFile(QString(m_filename.c_str()));
 	m_logging_file->open(QIODevice::WriteOnly | QIODevice::Append);
 	qDebug() << "Logger created\n" << "Time created:" << QTime::currentTime().toString()<<"\n";
+}
+
+void Logger::Init(const std::string& filename)
+{
+	m_filename=filename;
+	m_logger = new Logger;
 }
 
 void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -45,36 +50,5 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, c
 	}
 }
 
-Logger* Logger::GetInstance()
-{
-	   std::lock_guard<std::mutex> lock(m_instance_mutex);
-	   if (m_logger == nullptr)
-		   m_logger = new Logger;
 
-	   return m_logger;
-}
 
-void Logger::SetFileName(const std::string& filename)
-{
-	m_filename=filename;
-}
-
-QDebug Logger::debug()
-{
-	return qDebug();
-}
-
-QDebug Logger::info()
-{
-	return qInfo();
-}
-
-QDebug Logger::warning()
-{
-	return qWarning();
-}
-
-QDebug Logger::critical()
-{
-	return qCritical();
-}
