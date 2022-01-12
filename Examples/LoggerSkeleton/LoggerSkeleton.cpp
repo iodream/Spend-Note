@@ -4,14 +4,15 @@
 #include <mutex>
 
 Logger* Logger::m_logger = nullptr;
-QMutex Logger::m_mutex;
-Logger::log_severity Logger::m_severity = debug;
+QMutex Logger::m_logmutex;
+std::mutex Logger::m_instance_mutex;
 QFile* Logger::m_logging_file;
+std::string Logger::m_filename("logfile.log");
 
-Logger::Logger(const std::string filename): m_filename(filename)
+Logger::Logger()
 {
 	qInstallMessageHandler(MessageHandler);
-	m_logging_file = new QFile(QString(filename.c_str()));
+	m_logging_file = new QFile(QString(m_filename.c_str()));
 	m_logging_file->open(QIODevice::WriteOnly | QIODevice::Append);
 	qDebug() << "Logger created\n" << "Time created:" << QTime::currentTime().toString()<<"\n";
 }
@@ -20,7 +21,7 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, c
 {
 	using namespace std;
 
-	std::lock_guard<QMutex> lock(m_mutex);
+	std::lock_guard<QMutex> lock(m_logmutex);
 	QTextStream stream(m_logging_file);
 
 	switch (type)
@@ -41,53 +42,39 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, c
 		stream <<  "CRIT: " << " " << msg << " " << context.file << " " <<  context.line << " "
 			 <<  context.function << "\n";
 		break;
-	case QtFatalMsg:
-		stream <<  "FAT: "<<  " " << msg << " " << context.file << " " <<  context.line << " "
-			 <<  context.function << "\n";
-		abort();
 	}
 }
 
-Logger* Logger::GetInstance(const std::string filename)
+Logger* Logger::GetInstance()
 {
+	   std::lock_guard<std::mutex> lock(m_instance_mutex);
 	   if (m_logger == nullptr)
-		   m_logger = new Logger(filename);
+		   m_logger = new Logger;
 
 	   return m_logger;
 }
 
-Logger& operator<<(Logger& stream, const char* log_msg)
+void Logger::SetFileName(const std::string& filename)
 {
-	using log = Logger::log_severity;
-	switch(Logger::GetLogSeverity())
-	{
-	case log::debug:
-		qDebug() << QString(log_msg) << "\n";
-		break;
-	case log::info:
-		qInfo() << QString(log_msg) << "\n";
-		break;
-	case log::warning:
-		qWarning() << QString(log_msg) << "\n";
-		break;
-	case log::critical:
-		qCritical() << QString(log_msg) << "\n";
-		break;
-	case log::fatal:
-		qFatal(log_msg);
-		break;
-	default:
-		qDebug() << QString(log_msg) << "\n";
-	};
-	return stream;
+	m_filename=filename;
 }
 
-inline Logger::log_severity Logger::GetLogSeverity()
+QDebug Logger::debug()
 {
-   return m_severity;
+	return qDebug();
 }
 
-void Logger::SetLogSeverity(const Logger::log_severity& severity)
+QDebug Logger::info()
 {
-	m_severity=severity;
+	return qInfo();
+}
+
+QDebug Logger::warning()
+{
+	return qWarning();
+}
+
+QDebug Logger::critical()
+{
+	return qCritical();
 }

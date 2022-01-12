@@ -4,34 +4,31 @@
 #include <QMutex>
 #include <QFile>
 #include <QtGlobal>
-
+#include <mutex>
 
 class Logger
 {
 public:
-	enum log_severity
-	{
-		debug,
-		info,
-		critical,
-		warning,
-		fatal,
-	};
-
 	Logger(Logger &other) = delete;
 	void operator=(const Logger &) = delete;
-	static Logger* GetInstance(const std::string filename);
+
+	static void SetFileName(const std::string& filename);
+	static Logger* GetInstance();
 	friend Logger& operator<<(Logger& stream, const char* log_msg);
-	static log_severity GetLogSeverity();
-	static void SetLogSeverity(const Logger::log_severity& lvl);
+
+	QDebug debug();
+	QDebug info();
+	QDebug critical();
+	QDebug warning();
 
 private:
-	Logger(const std::string filename);
+	Logger();
 	static void MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
 	static QFile* m_logging_file;
 	static Logger* m_logger;
-	static QMutex m_mutex;
-	std::string m_filename;
-	static log_severity m_severity;
+	static QMutex m_logmutex;
+	static std::mutex m_instance_mutex;
+	static std::string m_filename;
+
 };

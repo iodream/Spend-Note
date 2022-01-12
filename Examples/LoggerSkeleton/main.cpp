@@ -3,15 +3,10 @@
 
 int main(int argc, char **argv)
 {
-
 	QCoreApplication app(argc, argv);
-	auto p_logger = Logger::GetInstance("logfile.log");
-
-	*p_logger <<  "hello" ;
-
-	Logger::SetLogSeverity(Logger::warning);
-
-	*p_logger <<  "a warning" ;
-
+	Logger::SetFileName("log1file.log");
+	auto p_logger = Logger::GetInstance();
+	p_logger->debug() <<  "debug" ;
+	p_logger->info() << "debug info";
 	return app.exec();
 }
