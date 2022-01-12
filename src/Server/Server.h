@@ -8,7 +8,7 @@
 
 #include "Handlers/ICommandHandler.h"
 #include "Net/Message.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 
 class HTTPRequestHandler: public Poco::Net::HTTPRequestHandler
 {

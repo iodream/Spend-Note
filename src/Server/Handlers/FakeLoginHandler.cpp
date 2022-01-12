@@ -3,7 +3,7 @@
 #include "Poco/JWT/Token.h"
 #include "Poco/JWT/Signer.h"
 
-#include "Net/Error.h"
+#include "Server/Error.h"
 #include "FakeLoginHandler.h"
 #include "Common.h"
 

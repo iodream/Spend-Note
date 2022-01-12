@@ -2,7 +2,7 @@
 
 #include "FakeGetListsHandler.h"
 #include "Common.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 #include "Net/Parsing.h"
 
 

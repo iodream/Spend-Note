@@ -10,7 +10,7 @@
 #include "Poco/Base64Decoder.h"
 
 #include "AuthorizedHandler.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 
 QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 {

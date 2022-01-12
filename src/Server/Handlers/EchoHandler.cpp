@@ -3,7 +3,7 @@
 #include "EchoHandler.h"
 #include "Common.h"
 #include "Net/Parsing.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 
 EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
 		const QJsonDocument& playload)

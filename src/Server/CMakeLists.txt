@@ -18,6 +18,7 @@ add_subdirectory(Handlers)
 list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Server.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Server.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Error.h
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
 )
