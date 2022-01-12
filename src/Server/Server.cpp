@@ -12,6 +12,7 @@
 #include "Poco/Net/NetException.h"
 
 #include "Server.h"
+#include "Utils.h"
 #include "Net/Constants.h"
 #include "HandlerFactory.h"
 #include "SpendNoteServer_Config.h"
@@ -114,30 +115,19 @@ void HTTPRequestHandler::SendResponse(
 
 Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ClientError& ex)
 {
-	Net::Response response;
-	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
-	response.reason = ex.what();
-	response.status = ex.get_status();
-	return response;
+	return ::FormErrorResponse(ex.get_status(), ex.what());
 }
 
 Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ServerError& ex)
 {
-	Net::Response response;
-	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
-	response.status = ex.get_status();
-	return response;
+	return ::FormErrorResponse(ex.get_status());
 }
 
 Net::Response HTTPRequestHandler::FormErrorResponse()
 {
-	Net::Response response;
-	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
-	response.status =
-		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR;
-	return response;
+	return ::FormErrorResponse(
+		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR);
 }
-
 
 class HTTPRequestHandlerFactory: public Poco::Net::HTTPRequestHandlerFactory
 {

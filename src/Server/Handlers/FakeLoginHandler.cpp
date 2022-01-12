@@ -3,9 +3,10 @@
 #include "Poco/JWT/Token.h"
 #include "Poco/JWT/Signer.h"
 
-#include "Server/Error.h"
 #include "FakeLoginHandler.h"
 #include "Common.h"
+#include "Server/Error.h"
+#include "Server/Utils.h"
 
 QJsonDocument FakeLoginHandler::JSONFormatter::Format(const DTO& dto)
 {
@@ -27,5 +28,7 @@ Net::Response FakeLoginHandler::Handle(Net::Request& request)
 		JSONFormatter::DTO out_dto{jwt};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
-	throw Net::BadRequestError("Unsupported method");
+	return FormErrorResponse(
+		Net::NetError::Status::HTTP_BAD_REQUEST,
+		"Unsupported method");
 }

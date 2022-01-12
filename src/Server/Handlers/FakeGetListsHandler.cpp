@@ -2,9 +2,10 @@
 
 #include "FakeGetListsHandler.h"
 #include "Common.h"
-#include "Server/Error.h"
 #include "Net/Parsing.h"
 
+#include "Server/Error.h"
+#include "Server/Utils.h"
 
 FakeGetListsHandler::JSONParser::DTO FakeGetListsHandler::JSONParser::Parse(
 	const QJsonDocument& token_body)
@@ -38,5 +39,7 @@ Net::Response FakeGetListsHandler::AuthHandle(const Net::Request& request)
 		};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
-	throw Net::BadRequestError("Unsupported method");
+	return FormErrorResponse(
+		Net::NetError::Status::HTTP_BAD_REQUEST,
+		"Unsupported method");
 }

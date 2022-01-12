@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "Net/Parsing.h"
 #include "Server/Error.h"
+#include "Server/Utils.h"
 
 EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
 		const QJsonDocument& playload)
@@ -36,5 +37,7 @@ Net::Response EchoHandler::Handle(Net::Request& request)
 		JSONFormatter::DTO out_dto{in_dto.msg};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
-	throw Net::BadRequestError("Unsupported method");
+	return FormErrorResponse(
+		Net::NetError::Status::HTTP_BAD_REQUEST,
+		"Unsupported method");
 }
