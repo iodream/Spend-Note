@@ -10,7 +10,7 @@
 #include "Poco/Base64Decoder.h"
 
 #include "AuthorizedHandler.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 
 QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 {
@@ -50,7 +50,7 @@ void AuthorizedHandler::CheckAuthorization(const Net::Request& request)
 		throw Net::UnauthorizedError("Unsupported authorization scheme");
 
 	try {
-		Poco::JWT::Signer signer("0123456789ABCDEF0123456789ABCDEF");
+		Poco::JWT::Signer signer(Net::DUMMY_PASSWORD);
 		Poco::JWT::Token token = signer.verify(request.auth_info);
 	}
 	catch (const Poco::JWT::SignatureVerificationException& ex) {
@@ -61,7 +61,7 @@ void AuthorizedHandler::CheckAuthorization(const Net::Request& request)
 Net::Response AuthorizedHandler::Handle(Net::Request& request)
 {
 	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER)
-        request.jwt_token_body = DecodeJWTTokenBody(request.auth_info);
+		request.jwt_token_body = DecodeJWTTokenBody(request.auth_info);
 	CheckAuthorization(request);
 	return AuthHandle(request);
 }

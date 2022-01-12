@@ -35,9 +35,11 @@ void HTTPClient::SendRequest(
     }
     else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
     {
+		session.sendRequest(request);
     }
     else if (net_request.content_type == Net::CONTENT_TYPE_EMPTY)
     {
+		session.sendRequest(request);
     }
     else
     {

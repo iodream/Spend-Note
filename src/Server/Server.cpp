@@ -14,6 +14,7 @@
 #include "Server.h"
 #include "Net/Constants.h"
 #include "HandlerFactory.h"
+#include "SpendNoteServer_Config.h"
 
 
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
@@ -43,7 +44,12 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 	catch (const std::exception& ex) {
 		std::cout << "Unhandled exception \"" << ex.what() << "\""
 		<< "(URI: " << http_req.getURI() << ")" << "\n";
-		SendResponse(FormErrorResponse(ex), http_res);
+		SendResponse(FormErrorResponse(), http_res);
+	}
+	catch (...) {
+		std::cout << "Unhandled exception"
+		<< "(URI: " << http_req.getURI() << ")" << "\n";
+		SendResponse(FormErrorResponse(), http_res);
 	}
 }
 
@@ -109,7 +115,7 @@ void HTTPRequestHandler::SendResponse(
 Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ClientError& ex)
 {
 	Net::Response response;
-	response.content_type = "text/plain; charset=UTF-8";
+	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
 	response.reason = ex.what();
 	response.status = ex.get_status();
 	return response;
@@ -118,15 +124,15 @@ Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ClientError& ex)
 Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ServerError& ex)
 {
 	Net::Response response;
-	response.content_type = "text/plain; charset=UTF-8";
+	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
 	response.status = ex.get_status();
 	return response;
 }
 
-Net::Response HTTPRequestHandler::FormErrorResponse(const std::exception&)
+Net::Response HTTPRequestHandler::FormErrorResponse()
 {
 	Net::Response response;
-	response.content_type = "text/plain; charset=UTF-8";
+	response.content_type = Net::CONTENT_TYPE_PLAIN_TEXT;
 	response.status =
 		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR;
 	return response;
@@ -144,31 +150,34 @@ class HTTPRequestHandlerFactory: public Poco::Net::HTTPRequestHandlerFactory
 	HandlerFactory m_handler_factory{};
 };
 
-
 class HTTPServer: public Poco::Util::ServerApplication
 {
-    void initialize(Application& self)
-    {
-        loadConfiguration();
-        ServerApplication::initialize(self);
-    }
+	void initialize(Application& self)
+	{
+		loadConfiguration();
+		ServerApplication::initialize(self);
+	}
 
-    int main(const std::vector<std::string>&)
-    {
+	int main(const std::vector<std::string>&)
+	{
 		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
 
 		auto* params = new Poco::Net::HTTPServerParams();
-		params->setSoftwareVersion("Spend&NoteServer/1.0");
+		params->setSoftwareVersion(
+			std::string{"Spend&NoteServer/"}.
+			append(std::string{SpendNoteServer_VERSION_MAJOR}).
+			append(std::string{"."}).
+			append(std::string{SpendNoteServer_VERSION_MINOR}));
 
 		Poco::Net::HTTPServer srv(new HTTPRequestHandlerFactory, port);
-        srv.start();
+		srv.start();
 		std::cout << "HTTP Server started on port " << port << "\n";
-        waitForTerminationRequest();
+		waitForTerminationRequest();
 		std::cout << "Stopping HTTP Server..." << "\n";
-        srv.stop();
+		srv.stop();
 
-        return Application::EXIT_OK;
-    }
+		return Application::EXIT_OK;
+	}
 };
 
 POCO_SERVER_MAIN(HTTPServer)

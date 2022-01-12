@@ -8,12 +8,12 @@
 
 #include "Handlers/ICommandHandler.h"
 #include "Net/Message.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 
 class HTTPRequestHandler: public Poco::Net::HTTPRequestHandler
 {
 public:
-    HTTPRequestHandler(ICommandHandler* handler) : m_handler{handler} {}
+	HTTPRequestHandler(ICommandHandler* handler) : m_handler{handler} {}
 private:
 	using HTTPResponse = Poco::Net::HTTPServerResponse;
 	using HTTPRequest = Poco::Net::HTTPServerRequest;
@@ -24,7 +24,7 @@ private:
 	Net::Request ParseRequest(HTTPRequest& http_req);
 	Net::Response FormErrorResponse(const Net::ClientError& ex);
 	Net::Response FormErrorResponse(const Net::ServerError& ex);
-	Net::Response FormErrorResponse(const std::exception& ex);
+	Net::Response FormErrorResponse();
 private:
-    std::unique_ptr<ICommandHandler> m_handler;
+	std::unique_ptr<ICommandHandler> m_handler;
 };

@@ -2,7 +2,7 @@
 
 #include "FakeGetListsHandler.h"
 #include "Common.h"
-#include "Net/Error.h"
+#include "Server/Error.h"
 #include "Net/Parsing.h"
 
 
@@ -31,7 +31,7 @@ QJsonDocument FakeGetListsHandler::JSONFormatter::Format(const DTO& dto)
 Net::Response FakeGetListsHandler::AuthHandle(const Net::Request& request)
 {
 	if (request.method == Net::HTTP_METHOD_GET) {
-        auto in_dto = m_parser.Parse(request.jwt_token_body);
+		auto in_dto = m_parser.Parse(request.jwt_token_body);
 		JSONFormatter::DTO out_dto{
 			in_dto.user,
 			"Some lists msg for user "
