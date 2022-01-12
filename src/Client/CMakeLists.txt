@@ -21,7 +21,6 @@ list(APPEND Spend-Note-Client_LIBS
     PocoNet
     PocoUtil
     PocoFoundation
-    PocoJSON
 )
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
