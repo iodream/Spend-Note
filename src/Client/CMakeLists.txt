@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(Spend-Note-Client VERSION 0.1 LANGUAGES CXX)
 
@@ -16,13 +16,27 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 
 set(Spend-Note-Client_SOURCES
-    main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.h
+)
+
+list(APPEND Spend-Note-Client_LIBS
+    PocoNet
+    PocoUtil
+    PocoFoundation
 )
 
 add_subdirectory(Controller)
 add_subdirectory(DTO)
 add_subdirectory(Models)
 add_subdirectory(View)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
+
+list(APPEND Spend-Note-Client_SOURCES
+    ${Spend-Note-Net_SOURCES}
+)
 
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -34,9 +48,21 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 endif()
 
 
+list(APPEND Spend-Note-Client_LIBS
+    Qt::Core
+    Qt::Widgets
+)
+
+
 target_include_directories(Spend-Note-Client PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
-target_link_libraries(Spend-Note-Client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(
+    Spend-Note-Client
+    PUBLIC
+    ${Spend-Note-Client_LIBS}
+)
+
+target_link_libraries(Spend-Note-Client PRIVATE )
 
 set_target_properties(Spend-Note-Client PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

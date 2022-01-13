@@ -1,5 +1,4 @@
-CREATE DATABASE SpendAndNote
-USE SpendAndNote
+/* CREATE DATABASE moved to database-setup.sh */
 
 create table IncomeCategory
 (
@@ -66,3 +65,4 @@ create table Product
 	purchaseDate timestamp,
 	buyUntilDate timestamp
 );
+

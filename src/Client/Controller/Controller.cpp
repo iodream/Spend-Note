@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+#include "Net/Constants.h"
+
 Controller::Controller()
 {
     QObject::connect(
@@ -13,12 +15,19 @@ void Controller::Start()
 	main_window.SetCurrentPage(UIPages::LOGIN);
 }
 
-void Controller::OnLogin(LoginInDTO loginInDTO)
+void Controller::OnLogin(LoginInDTO in_dto)
 {
-    LoginModel loginModel;
+	LoginModel model;
+	auto request  = model.FormRequest(in_dto);
+	auto response = m_http_client.Request(request);
+	// there i should check response status
+	// but now i think that everything is ok
+	auto out_dto = model.ParseResponse(response);
 
-    // LoginOutDTO loginOutDTO = httpClient.Request();
+	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
+	m_http_client.set_token(out_dto.token);
 
-    LoginOutDTO loginOutDTO;
+	// there i could set new data to the page
+
+	main_window.SetCurrentPage(UIPages::HOME);
 }
-

@@ -4,24 +4,28 @@
 #include <QJsonObject>
 
 #include "DTO/Login.h"
+#include "Net/Constants.h"
+#include "Net/Message.h"
 
 class LoginModel
 {
 public:
-    LoginModel();
-
     class JSONFormatter
     {
     public:
-        QJsonDocument Form(LoginInDTO loginInDTO);
+		QJsonDocument Format(const LoginInDTO& dto);
     };
 
-    class JSONParser
-    {
-    public:
-        LoginOutDTO Parse(QJsonDocument json);
-    };
+	class JSONParser
+	{
+	public:
+		void Parse(QJsonObject json, LoginOutDTO& dto);
+	};
 
-    void Request(LoginInDTO loginInDto);
+	Net::Request FormRequest(LoginInDTO loginInDto);
+	LoginOutDTO  ParseResponse(const Net::Response& response);
+
+	JSONParser m_parser{};
+	JSONFormatter m_formatter{};
 };
 

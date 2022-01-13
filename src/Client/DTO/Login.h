@@ -10,7 +10,5 @@ struct LoginInDTO
 
 struct LoginOutDTO
 {
-    std::string status;
-    std::string reason;
+	std::string token;
 };
-
