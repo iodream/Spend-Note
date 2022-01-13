@@ -20,6 +20,7 @@ add_library(libdal STATIC
   dbfacade.cpp
   Types.h
   DTOs/User.h
+  Exceptions/databasefailure.h Exceptions/databasefailure.cpp
   Repositories/userrepository.h Repositories/userrepository.cpp
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
