@@ -1,4 +1,4 @@
-#include "LoggerSkeleton.h"
+#include "Logger.h"
 #include <fstream>
 #include <QTime>
 #include <mutex>
