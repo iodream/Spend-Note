@@ -27,7 +27,7 @@ add_subdirectory(View)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(
-	Spend-Note-Client
+        Spend-Note-Client
         MANUAL_FINALIZATION
 	${Spend-Note-Client_SOURCES}
     )

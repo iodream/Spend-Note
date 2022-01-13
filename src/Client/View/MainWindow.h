@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 
-#include "LoginWindow/LoginWindow.h"
+#include "LoginPage/LoginPage.h"
 #include "Constants.h"
 
 QT_BEGIN_NAMESPACE
@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-	LoginWindow loginWindow;
+    LoginPage loginPage;
 
 private slots:
 	void OnCurrentPageChange(UIPages page);

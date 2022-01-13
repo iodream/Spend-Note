@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-	ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &loginWindow);
+    ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &loginPage);
 }
 
 MainWindow::~MainWindow()

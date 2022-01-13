@@ -5,6 +5,6 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/MainWindow.ui
 )
 
-add_subdirectory(LoginWindow)
+add_subdirectory(LoginPage)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
