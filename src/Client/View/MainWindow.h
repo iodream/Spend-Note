@@ -2,9 +2,7 @@
 
 #include <QMainWindow>
 
-#include "LoginWindow.h"
-#include "SignupWindow.h"
-#include "AuthorizedWindow.h"
+#include "LoginWindow/LoginWindow.h"
 #include "Constants.h"
 
 QT_BEGIN_NAMESPACE
@@ -19,14 +17,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+	static int PageToInt(UIPages page);
+
 private:
     Ui::MainWindow *ui;
-    LoginWindow loginWindow;
-    SignupWindow signupWindow;
-    AuthorizedWindow authorizedWindow;
+	LoginWindow loginWindow;
 
 private slots:
-    void on_loginButton_clicked();
-    void on_signupButton_clicked();
-    void on_stackedWidget_currentChanged(int arg1);
+	void OnCurrentPageChange(UIPages page);
 };

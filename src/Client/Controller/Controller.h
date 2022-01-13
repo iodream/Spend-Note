@@ -1,19 +1,22 @@
 #pragma once
 #include "Models/LoginModel.h"
-#include "Views/MainWindow.h"
-#include "Views/Constants.h"
+#include "View/MainWindow.h"
+#include "View/Constants.h"
 
 class Controller : public QObject
 {
     Q_OBJECT
 public:
+	Controller();
+	void Start();
 
-   // HTTPClient httpClient;
+private:
+	// HTTPClient httpClient;
+	MainWindow main_window;
 
 signals:
-    void OnSuccessLogin(UIPages);
-    void OnUnsuccessLogin(std::string reason);
+	void SetCurrentPage(UIPages page);
 
 public slots:
-    void OnLogin(LoginInDTO loginInDTO);
+//	void OnLogin(LoginInDTO loginInDTO);
 };

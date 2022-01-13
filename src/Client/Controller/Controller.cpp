@@ -1,23 +1,35 @@
 #include "Controller.h"
 
-void Controller::OnLogin(LoginInDTO loginInDTO)
+Controller::Controller()
 {
-    LoginModel loginModel;
-    loginModel.RequestDTO(loginInDTO);
+	QObject::connect(
+		this, SIGNAL(SetCurrentPage(UIPages)),
+		&main_window, SLOT(OnCurrentPageChange(UIPages)));
+}
 
-    // LoginOutDTO loginOutDTO = httpClient.Request();
+void Controller::Start()
+{
+	main_window.show();
+	emit SetCurrentPage(UIPages::LOGIN);
+}
 
-    LoginOutDTO loginOutDTO;
-    loginOutDTO.status = "fail";
-    loginOutDTO.reason = "login and password`s mismatch";
+//void Controller::OnLogin(LoginInDTO loginInDTO)
+//{
+//	LoginModel loginModel;
 
-    if(loginOutDTO.status == "ok")
-    {
-        emit this->OnSuccessLogin(UIPages::AUTHORIZED);
-    }
-    else if(loginOutDTO.status == "fail")
-    {
-        emit this->OnUnsuccessLogin(loginOutDTO.reason);
-    }
-};
+//    // LoginOutDTO loginOutDTO = httpClient.Request();
+
+//    LoginOutDTO loginOutDTO;
+//    loginOutDTO.status = "fail";
+//    loginOutDTO.reason = "login or password mismatch";
+
+//    if(loginOutDTO.status == "ok")
+//    {
+//        emit this->OnSuccessLogin(UIPages::AUTHORIZED);
+//    }
+//    else if(loginOutDTO.status == "fail")
+//    {
+//        emit this->OnUnsuccessLogin(loginOutDTO.reason);
+//    }
+//};
 
