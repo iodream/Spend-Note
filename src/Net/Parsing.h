@@ -1,6 +1,7 @@
 #pragma once
 
-#include "QJsonObject"
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #include "../Exception.h"
 

@@ -7,6 +7,7 @@ project(SpendNoteServer VERSION 0.1)
 
 configure_file(SpendNoteServer_Config.h.in SpendNoteServer_Config.h)
 
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)

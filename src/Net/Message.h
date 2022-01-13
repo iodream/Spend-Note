@@ -19,6 +19,7 @@ struct Message
 
 struct Request : public Message
 {
+    std::string uri;
 	HTTPMethod method;
 	AuthSchemeType auth_scheme;
 	std::string auth_info;
