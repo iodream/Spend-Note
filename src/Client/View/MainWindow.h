@@ -19,6 +19,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+	void SetCurrentPage(UIPages page);
+private:
 	static int PageToInt(UIPages page);
 
 private:
@@ -28,7 +30,4 @@ public:
     LoginPage loginPage;
     SignupPage signupPage;
     HomePage homePage;
-
-private slots:
-	void OnCurrentPageChange(UIPages page);
 };

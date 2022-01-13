@@ -17,9 +17,6 @@ private:
 	// HTTPClient httpClient;
 	MainWindow main_window;
 
-signals:
-	void SetCurrentPage(UIPages page);
-
 public slots:
     void OnLogin(LoginInDTO loginInDTO);
 };

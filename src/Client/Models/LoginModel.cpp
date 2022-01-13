@@ -18,8 +18,3 @@ QJsonDocument LoginModel::JSONFormatter::Form(LoginInDTO loginInDTO)
     json.insert("password", QString::fromStdString(loginInDTO.password));
     return QJsonDocument(json);
 }
-
-LoginOutDTO LoginModel::JSONParser::Parse(QJsonDocument json)
-{
-
-}

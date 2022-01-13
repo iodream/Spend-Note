@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::OnCurrentPageChange(UIPages page)
+void MainWindow::SetCurrentPage(UIPages page)
 {
 	ui->stackedWidget->setCurrentIndex(PageToInt(page));
 }
