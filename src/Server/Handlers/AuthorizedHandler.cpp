@@ -11,6 +11,7 @@
 
 #include "AuthorizedHandler.h"
 #include "Server/Error.h"
+#include "Server/Utils.h"
 
 QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 {
@@ -44,24 +45,42 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 	return QJsonDocument::fromJson(raw_token_body);
 }
 
-void AuthorizedHandler::CheckAuthorization(const Net::Request& request)
+bool AuthorizedHandler::CheckAuthorization(const Net::Request& request)
 {
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
-		throw Net::UnauthorizedError("Unsupported authorization scheme");
+		return false;
 
 	try {
 		Poco::JWT::Signer signer(Net::DUMMY_PASSWORD);
 		Poco::JWT::Token token = signer.verify(request.auth_info);
 	}
 	catch (const Poco::JWT::SignatureVerificationException& ex) {
-		throw Net::UnauthorizedError("Invalid token");
+		return false;
 	}
+	return true;
 }
 
 Net::Response AuthorizedHandler::Handle(Net::Request& request)
 {
-	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER)
+	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER) {
+		if (!request.auth_info.size()) {
+			return FormErrorResponse(
+				Net::NetError::Status::HTTP_UNAUTHORIZED,
+				"No authorization data");
+		}
 		request.jwt_token_body = DecodeJWTTokenBody(request.auth_info);
-	CheckAuthorization(request);
+	}
+	else {
+		return FormErrorResponse(
+			Net::NetError::Status::HTTP_UNAUTHORIZED,
+			"Unsupported authorization scheme");
+	}
+
+
+	if (!CheckAuthorization(request)) {
+		return FormErrorResponse(
+			Net::NetError::Status::HTTP_UNAUTHORIZED,
+			"Invalid authorizaion data");
+	}
 	return AuthHandle(request);
 }
