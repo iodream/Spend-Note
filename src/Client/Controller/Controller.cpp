@@ -20,3 +20,4 @@ void Controller::OnLogin(LoginInDTO loginInDTO)
         emit this->OnUnsuccessLogin(loginOutDTO.reason);
     }
 };
+

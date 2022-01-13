@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(SpendAndNoteUI VERSION 0.1 LANGUAGES CXX)
+project(Client VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -16,52 +16,56 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
-        View/MainWindow.cpp
-        View/MainWindow.h
-        View/MainWindow.ui
-        ClickableLabel.h
-        ClickableLabel.cpp
-        View/Handlers/IHandler.h
-        View/Handlers/LoginHandler.cpp
-        View/Handlers/LoginHandler.h
-        Controller/Controller.cpp
+        Views/MainWindow.cpp
+        Views/MainWindow.h
+        Views/MainWindow.ui
+        Views/LoginWindow.h
+        Views/LoginWindow.cpp
+        Views/LoginWindow.ui
+        Views/SignupWindow.h
+        Views/SignupWindow.cpp
+        Views/SignupWindow.ui
+        Views/AuthorizedWindow.h
+        Views/AuthorizedWindow.cpp
+        Views/AuthorizedWindow.ui
+        Views/Constants.h
         Controller/Controller.h
-        DTO/Login.h
-        Model/LoginModel.cpp
-        Model/LoginModel.h
+        Controller/Controller.cpp
+        Models/LoginModel.h
+        Models/LoginModel.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(SpendAndNoteUI
+    qt_add_executable(Client
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
     )
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET SpendAndNoteUI APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET Client APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
     if(ANDROID)
-        add_library(SpendAndNoteUI SHARED
+        add_library(Client SHARED
             ${PROJECT_SOURCES}
         )
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
     else()
-        add_executable(SpendAndNoteUI
+        add_executable(Client
             ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_link_libraries(SpendAndNoteUI PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-set_target_properties(SpendAndNoteUI PROPERTIES
+set_target_properties(Client PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(SpendAndNoteUI)
+    qt_finalize_executable(Client)
 endif()

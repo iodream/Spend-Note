@@ -1,7 +1,7 @@
 #pragma once
-#include "Model/LoginModel.h"
-#include "View/MainWindow.h"
-#include "./Constants.h"
+#include "Models/LoginModel.h"
+#include "Views/MainWindow.h"
+#include "Views/Constants.h"
 
 class Controller : public QObject
 {

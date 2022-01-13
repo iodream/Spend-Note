@@ -2,7 +2,7 @@
 
 enum class UIPages
 {
-    LOGIN = 0,
+    LOGIN = 1,
     SIGNUP,
     AUTHORIZED,
 };

@@ -1,6 +1,17 @@
 #include "LoginModel.h"
 
-QJsonDocument LoginModel::JSONFormatter::Format(LoginInDTO loginInDTO)
+LoginModel::LoginModel()
+{
+
+}
+
+void LoginModel::Request(LoginInDTO loginInDto)
+{
+
+}
+
+
+QJsonDocument LoginModel::JSONFormatter::Form(LoginInDTO loginInDTO)
 {
     QJsonObject json;
     json.insert("login", QString::fromStdString(loginInDTO.login));
@@ -8,7 +19,7 @@ QJsonDocument LoginModel::JSONFormatter::Format(LoginInDTO loginInDTO)
     return QJsonDocument(json);
 }
 
-void LoginModel::RequestDTO(LoginInDTO loginInDTO)
+LoginOutDTO LoginModel::JSONParser::Parse(QJsonDocument json)
 {
 
-};
+}

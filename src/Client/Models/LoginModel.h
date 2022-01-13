@@ -2,25 +2,26 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QString>
 
 #include "DTO/Login.h"
 
 class LoginModel
 {
 public:
+    LoginModel();
 
     class JSONFormatter
     {
     public:
-        QJsonDocument Format(LoginInDTO loginInDTO);
+        QJsonDocument Form(LoginInDTO loginInDTO);
     };
 
     class JSONParser
     {
     public:
-        // InnerDTO Parse(QJsonDocument json);
+        LoginOutDTO Parse(QJsonDocument json);
     };
 
-    void RequestDTO(LoginInDTO loginInDTO);
+    void Request(LoginInDTO loginInDto);
 };
+
