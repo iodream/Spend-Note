@@ -1,0 +1,2 @@
+#define SpendNoteServer_VERSION_MAJOR @SpendNoteServer_VERSION_MAJOR@
+#define SpendNoteServer_VERSION_MINOR @SpendNoteServer_VERSION_MINOR@
