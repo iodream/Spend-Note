@@ -1,8 +1,6 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-#include <iostream>
-
 int MainWindow::PageToInt(UIPages page)
 {
 	return static_cast<int>(page);
@@ -13,7 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &loginPage);
+    ui->stackedWidget->insertWidget(PageToInt(UIPages::SIGNUP), &signupPage);
+    ui->stackedWidget->insertWidget(PageToInt(UIPages::HOME), &homePage);
 }
 
 MainWindow::~MainWindow()

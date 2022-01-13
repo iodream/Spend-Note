@@ -5,6 +5,10 @@ Controller::Controller()
 	QObject::connect(
 		this, SIGNAL(SetCurrentPage(UIPages)),
 		&main_window, SLOT(OnCurrentPageChange(UIPages)));
+
+    QObject::connect(
+                &main_window.loginPage, &LoginPage::Login,
+                this, &Controller::OnLogin);
 }
 
 void Controller::Start()
@@ -13,23 +17,26 @@ void Controller::Start()
 	emit SetCurrentPage(UIPages::LOGIN);
 }
 
-//void Controller::OnLogin(LoginInDTO loginInDTO)
-//{
-//	LoginModel loginModel;
+void Controller::OnLogin(LoginInDTO loginInDTO)
+{
+    // zaglushka
+    LoginModel loginModel;
 
-//    // LoginOutDTO loginOutDTO = httpClient.Request();
+    // LoginOutDTO loginOutDTO = httpClient.Request();
 
-//    LoginOutDTO loginOutDTO;
-//    loginOutDTO.status = "fail";
-//    loginOutDTO.reason = "login or password mismatch";
+    LoginOutDTO loginOutDTO;
+    loginOutDTO.status = "ok";
+    loginOutDTO.reason = "login or password mismatch";
 
-//    if(loginOutDTO.status == "ok")
-//    {
-//        emit this->OnSuccessLogin(UIPages::AUTHORIZED);
-//    }
-//    else if(loginOutDTO.status == "fail")
-//    {
-//        emit this->OnUnsuccessLogin(loginOutDTO.reason);
-//    }
-//};
+    if(loginOutDTO.status == "ok")
+    {
+        emit SetCurrentPage(UIPages::HOME);
+    }
+    else if(loginOutDTO.status == "fail")
+    {
+        QMessageBox::critical(&main_window,
+                              tr("xi jinping"),
+                              tr("your public execution will be tomorrow"));
+    }
+}
 

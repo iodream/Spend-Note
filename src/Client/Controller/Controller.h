@@ -1,4 +1,7 @@
 #pragma once
+
+#include <QMessageBox>
+
 #include "Models/LoginModel.h"
 #include "View/MainWindow.h"
 #include "View/Constants.h"
@@ -18,5 +21,5 @@ signals:
 	void SetCurrentPage(UIPages page);
 
 public slots:
-//	void OnLogin(LoginInDTO loginInDTO);
+    void OnLogin(LoginInDTO loginInDTO);
 };

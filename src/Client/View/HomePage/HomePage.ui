@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AuthorizedWindow</class>
- <widget class="QWidget" name="AuthorizedWindow">
+ <class>HomePage</class>
+ <widget class="QWidget" name="HomePage">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>990</width>
-    <height>652</height>
+    <width>537</width>
+    <height>641</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -131,7 +131,7 @@ color: rgb(255, 255, 255);</string>
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>817</width>
+                       <width>376</width>
                        <height>227</height>
                       </rect>
                      </property>
