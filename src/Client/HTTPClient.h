@@ -23,7 +23,7 @@ private:
 		const Net::Request& net_request);
 	Net::Response FormResponse(
 		const Poco::Net::HTTPResponse& response,
-		std::istream &received_stream);
+		std::istream& received_stream);
 private:
 	std::string m_token;
 	Net::AuthSchemeType m_auth_scheme;

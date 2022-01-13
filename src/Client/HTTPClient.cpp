@@ -20,9 +20,9 @@ void HTTPClient::set_auth_scheme(const std::string& str_auth_scheme)
 }
 
 void HTTPClient::SendRequest(
-    Poco::Net::HTTPRequest &request,
-    Poco::Net::HTTPClientSession &session,
-    const Net::Request &net_request)
+	Poco::Net::HTTPRequest& request,
+	Poco::Net::HTTPClientSession& session,
+	const Net::Request& net_request)
 {
     AddCredentials(request);
     request.setContentType(net_request.content_type);
@@ -49,7 +49,7 @@ void HTTPClient::SendRequest(
 
 Net::Response HTTPClient::FormResponse(
     const Poco::Net::HTTPResponse& response,
-    std::istream &received_stream)
+	std::istream& received_stream)
 {
     Net::Response net_response;
     net_response.content_type = response.getContentType();
@@ -84,11 +84,11 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     Poco::Net::HTTPRequest request(net_request.method, path, Poco::Net::HTTPMessage::HTTP_1_1);
     SendRequest(request, session, net_request);
     Poco::Net::HTTPResponse response;
-    std::istream &received_stream = session.receiveResponse(response);
+	std::istream& received_stream = session.receiveResponse(response);
     return FormResponse(response, received_stream);
 }
 
-void HTTPClient::AddCredentials(Poco::Net::HTTPRequest &request)
+void HTTPClient::AddCredentials(Poco::Net::HTTPRequest& request)
 {
     if (!m_token.empty())
     {
