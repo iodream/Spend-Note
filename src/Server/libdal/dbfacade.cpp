@@ -1,6 +1,9 @@
 #include "dbfacade.h"
 
-DbFacade::DbFacade(const std::string& connection_string) : m_connection(connection_string), m_users(m_connection)
+DbFacade::DbFacade(const std::string& connection_string) :
+		m_connection(connection_string),
+		m_users(m_connection),
+		m_products(m_connection)
 {
 
 }
@@ -28,4 +31,30 @@ void DbFacade::UpdateUser(const User &user)
 void DbFacade::RemoveUser(IdType id)
 {
 	m_users.Remove(id);
+}
+
+
+void DbFacade::AddProduct(const Product& product)
+{
+	m_products.Add(product);
+}
+
+std::optional<Product> DbFacade::GetProductById(IdType id)
+{
+	return m_products.GetById(id);
+}
+
+std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
+{
+	return m_products.GetByListId(list_id);
+}
+
+void DbFacade::UpdateProduct(const Product& user)
+{
+	m_products.Update(user);
+}
+
+void DbFacade::RemoveProduct(IdType id)
+{
+	m_products.Remove(id);
 }

@@ -4,7 +4,7 @@
 #include <pqxx/pqxx>
 #include "idbfacade.h"
 #include "Repositories/userrepository.h"
-
+#include "Repositories/productrepository.h"
 
 class DbFacade : public IDbFacade
 {
@@ -17,7 +17,15 @@ public:
 	void UpdateUser(const User &user) override;
 	void RemoveUser(IdType id) override;
 
+	void AddProduct(const Product& product) override;
+	std::optional<Product> GetProductById(IdType id) override;
+	std::vector<Product> GetProductsForList(IdType list_id) override;
+	void UpdateProduct(const Product& user) override;
+	void RemoveProduct(IdType id) override;
+
 private:
 	pqxx::connection m_connection;
+
 	UserRepository m_users;
+	ProductRepository m_products;
 };
