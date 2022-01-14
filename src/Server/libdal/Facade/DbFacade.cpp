@@ -1,4 +1,4 @@
-#include "dbfacade.h"
+#include "DbFacade.h"
 
 DbFacade::DbFacade(const std::string& connection_string) :
 		m_connection(connection_string),

@@ -2,9 +2,9 @@
 
 #include <string>
 #include <pqxx/pqxx>
-#include "idbfacade.h"
-#include "Repositories/userrepository.h"
-#include "Repositories/productrepository.h"
+#include "IDbFacade.h"
+#include "Repositories/UserRepository/UserRepository.h"
+#include "Repositories/ProductRepository/ProductRepository.h"
 
 class DbFacade : public IDbFacade
 {

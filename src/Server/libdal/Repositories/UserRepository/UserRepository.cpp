@@ -1,5 +1,5 @@
-#include "userrepository.h"
-#include "Exceptions/databasefailure.h"
+#include "UserRepository.h"
+#include "Exceptions/DatabaseFailure.h"
 
 namespace
 {

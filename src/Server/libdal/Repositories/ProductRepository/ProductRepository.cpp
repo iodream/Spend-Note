@@ -1,8 +1,8 @@
-#include "productrepository.h"
+#include "ProductRepository.h"
 
 #include <algorithm>
 #include "Types.h"
-#include "Exceptions/databasefailure.h"
+#include "Exceptions/DatabaseFailure.h"
 
 namespace
 {
