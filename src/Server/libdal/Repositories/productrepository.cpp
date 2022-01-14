@@ -80,8 +80,8 @@ std::optional<Product> ProductRepository::GetById(IdType id)
 					ADD_DATE_FIELD + ", " +
 					PURCHASE_DATE_FIELD + ", " +
 					BUY_UNTIL_DATE_FIELD +
-				" FROM " + w.quote_name(TABLE_NAME) +
-				" WHERE " + w.quote_name(ID_FIELD) + " = " + w.quote(id) + ";");
+				" FROM " + TABLE_NAME +
+				" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 
 		if (!product_rows.empty())
 		{
@@ -116,8 +116,8 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 					ADD_DATE_FIELD + ", " +
 					PURCHASE_DATE_FIELD + ", " +
 					BUY_UNTIL_DATE_FIELD +
-				" FROM " + w.quote_name(TABLE_NAME) +
-				" WHERE " + w.quote_name(LIST_ID_FIELD) + " = " + w.quote(list_id) + ";");
+				" FROM " + TABLE_NAME +
+				" WHERE " + LIST_ID_FIELD + " = " + w.quote(list_id) + ";");
 
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
