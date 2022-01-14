@@ -94,7 +94,6 @@ void UserRepository::Update(const User &user)
 
 void UserRepository::Remove(IdType id)
 {
-
 	pqxx::work w(m_database_connection);
 
 	try
