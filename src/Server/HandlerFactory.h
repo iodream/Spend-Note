@@ -8,5 +8,5 @@
 class HandlerFactory
 {
 public:
-    ICommandHandler* GetHandler(std::string uri);
+	ICommandHandler* GetHandler(std::string uri);
 };
