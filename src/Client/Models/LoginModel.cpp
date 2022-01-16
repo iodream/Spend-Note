@@ -16,9 +16,14 @@ Net::Request LoginModel::FormRequest(LoginInDTO dto)
 QJsonDocument LoginModel::JSONFormatter::Format(const LoginInDTO& dto)
 {
 	QJsonObject json;
+
+    QByteArray encrypted_password = QByteArray::fromStdString(dto.password);
+    encrypted_password = QCryptographicHash::hash(encrypted_password, QCryptographicHash::Sha1);
+
 	json.insert("login", QString::fromStdString(dto.login));
-	json.insert("password", QString::fromStdString(dto.password));
-	return QJsonDocument(json);
+    json.insert("password", QString(encrypted_password));
+
+    return QJsonDocument(json);
 }
 
 

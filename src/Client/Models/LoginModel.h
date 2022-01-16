@@ -2,6 +2,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QCryptographicHash>
 
 #include "DTO/Login.h"
 #include "Net/Constants.h"
