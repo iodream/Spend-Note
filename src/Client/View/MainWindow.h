@@ -26,6 +26,6 @@ public:
     HomePage homePage;
 
 private:
-	static int PageToInt(UIPages page);
+    static int PageToInt(UIPages page);
     Ui::MainWindow *ui;
 };

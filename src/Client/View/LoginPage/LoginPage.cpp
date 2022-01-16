@@ -24,7 +24,7 @@ void LoginPage::ChangeLoginErrorLabel(std::string reason)
 void LoginPage::on_loginSubmitButton_clicked()
 {
     LoginInDTO loginInDTO;
-	loginInDTO.login	= ui->loginLineEdit->text().toStdString();   
+    loginInDTO.login = ui->loginLineEdit->text().toStdString();
     loginInDTO.password = ui->passwordLineEdit->text().toStdString();;
     emit Login(loginInDTO);
 }

@@ -22,7 +22,7 @@ void Controller::OnLogin(LoginInDTO in_dto)
 	auto response = m_http_client.Request(request);
 
     // checking response status
-    if(response.status >= 400)
+    if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
     {
         main_window.loginPage.ChangeLoginErrorLabel(response.reason);
         return;
