@@ -27,7 +27,7 @@ private:
     Ui::MainWindow *ui;
 
 public:
-    LoginPage loginPage;
-    SignupPage signupPage;
-    HomePage homePage;
+	LoginPage m_login_page;
+	SignupPage m_signup_page;
+	HomePage m_home_page;
 };

@@ -5,14 +5,24 @@
 Controller::Controller()
 {
     QObject::connect(
-		&main_window.loginPage, &LoginPage::Login,
+		&m_main_window.m_login_page, &LoginPage::Login,
 		this, &Controller::OnLogin);
 }
 
-void Controller::Start()
+void Controller::Start(UIPages at_page)
 {
-	main_window.show();
-	main_window.SetCurrentPage(UIPages::LOGIN);
+	m_main_window.show();
+	m_main_window.SetCurrentPage(at_page);
+}
+
+void Controller::StartTest()
+{
+	Start(UIPages::HOME);
+	m_main_window.m_home_page.AddListPage("Some list 1", 1);
+	m_main_window.m_home_page.AddListPage("Some list 2", 2);
+	m_main_window.m_home_page.AddListPage("Some list 3", 3);
+	m_main_window.m_home_page.RemoveListPage(3);
+	m_main_window.m_home_page.SetCurrentPageList(2);
 }
 
 void Controller::OnLogin(LoginInDTO in_dto)
@@ -29,5 +39,5 @@ void Controller::OnLogin(LoginInDTO in_dto)
 
 	// there i could set new data to the page
 
-	main_window.SetCurrentPage(UIPages::HOME);
+	m_main_window.SetCurrentPage(UIPages::HOME);
 }
