@@ -32,4 +32,8 @@
 *.app
 *.vs
  
+# Build folders
+build/
 
+# user build settings
+CMakeLists.txt.user
