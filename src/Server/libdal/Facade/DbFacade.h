@@ -5,6 +5,7 @@
 #include "IDbFacade.h"
 #include "Repositories/UserRepository/UserRepository.h"
 #include "Repositories/ProductRepository/ProductRepository.h"
+#include "Repositories/ProductCategoryRepository/ProductCategoryRepository.h"
 
 class DbFacade : public IDbFacade
 {
@@ -23,9 +24,12 @@ public:
 	void UpdateProduct(const Product& user) override;
 	void RemoveProduct(IdType id) override;
 
+	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
+	std::vector<ProductCategory> GetAllProductCategories() override;
 private:
 	pqxx::connection m_connection;
 
 	UserRepository m_users;
 	ProductRepository m_products;
+	ProductCategoryRepository m_product_categories;
 };

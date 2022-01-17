@@ -5,6 +5,7 @@
 
 #include "DTOs/User.h"
 #include "DTOs/Product.h"
+#include "DTOs/ProductCategory.h"
 
 class IDbFacade
 {
@@ -22,4 +23,7 @@ public:
 	virtual std::vector<Product> GetProductsForList(IdType list_id) = 0;
 	virtual void UpdateProduct(const Product& user) = 0;
 	virtual void RemoveProduct(IdType id) = 0;
+
+	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
+	virtual std::vector<ProductCategory> GetAllProductCategories() = 0;
 };

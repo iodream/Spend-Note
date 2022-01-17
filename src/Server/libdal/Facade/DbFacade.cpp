@@ -3,7 +3,8 @@
 DbFacade::DbFacade(const std::string& connection_string) :
 		m_connection(connection_string),
 		m_users(m_connection),
-		m_products(m_connection)
+		m_products(m_connection),
+		m_product_categories(m_connection)
 {
 
 }
@@ -57,4 +58,15 @@ void DbFacade::UpdateProduct(const Product& user)
 void DbFacade::RemoveProduct(IdType id)
 {
 	m_products.Remove(id);
+}
+
+
+std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
+{
+	return m_product_categories.GetById(id);
+}
+
+std::vector<ProductCategory> DbFacade::GetAllProductCategories()
+{
+	return m_product_categories.GetAll();
 }
