@@ -23,11 +23,13 @@ add_library(libdal STATIC
 
 	DTOs/User.h
 	DTOs/Product.h
+	DTOs/ProductCategory.h
 
 	Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
 
 	Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
 	Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
+	Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)
