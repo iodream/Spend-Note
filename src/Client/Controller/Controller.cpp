@@ -5,14 +5,14 @@
 Controller::Controller()
 {
     QObject::connect(
-		&main_window.loginPage, &LoginPage::Login,
+        &m_main_window.m_login_page, &LoginPage::Login,
 		this, &Controller::OnLogin);
 }
 
 void Controller::Start()
 {
-	main_window.show();
-	main_window.SetCurrentPage(UIPages::LOGIN);
+    m_main_window.show();
+    m_main_window.SetCurrentPage(UIPages::LOGIN);
 }
 
 void Controller::OnLogin(LoginInDTO in_dto)
@@ -26,14 +26,14 @@ void Controller::OnLogin(LoginInDTO in_dto)
 	{
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
-			main_window.loginPage.ChangeLoginErrorLabel(
+            m_main_window.m_login_page.ChangeLoginErrorLabel(
 					"Login and password do not match");
 		}
 		else
 		{
-			QMessageBox::information(&main_window
-					, tr("Login failed!")
-					, tr(response.reason.c_str()));
+            QMessageBox::information(&m_main_window
+                    , QString::fromStdString("Login failed!")
+                    , QString::fromStdString(response.reason));
 		}
 		return;
     }
@@ -45,5 +45,5 @@ void Controller::OnLogin(LoginInDTO in_dto)
 
 	// there i could set new data to the page
 
-    main_window.SetCurrentPage(UIPages::HOME);
+    m_main_window.SetCurrentPage(UIPages::HOME);
 }

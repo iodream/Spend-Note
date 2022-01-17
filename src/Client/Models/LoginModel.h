@@ -23,7 +23,7 @@ public:
 		void Parse(QJsonObject json, LoginOutDTO& dto);
 	};
 
-	Net::Request FormRequest(LoginInDTO loginInDto);
+    Net::Request FormRequest(LoginInDTO dto);
 	LoginOutDTO  ParseResponse(const Net::Response& response);
 
 	JSONParser m_parser{};

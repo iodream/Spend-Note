@@ -17,11 +17,11 @@ QJsonDocument LoginModel::JSONFormatter::Format(const LoginInDTO& dto)
 {
 	QJsonObject json;
 
-    QByteArray encrypted_password = QByteArray::fromStdString(dto.password);
-    encrypted_password = QCryptographicHash::hash(encrypted_password, QCryptographicHash::Sha1);
+    QByteArray password = QByteArray::fromStdString(dto.password);
 
     json.insert("login", QString::fromStdString(dto.login));
-    json.insert("password", QString(encrypted_password));
+    json.insert("password", QString(QCryptographicHash::hash(password
+            , QCryptographicHash::Sha1)));
 
     return QJsonDocument(json);
 }

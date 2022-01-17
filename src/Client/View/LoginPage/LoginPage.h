@@ -26,6 +26,6 @@ signals:
     void Login(LoginInDTO);
 
 private slots:
-    void on_loginSubmitButton_clicked();
+    void OnLoginSubmitButtonClicked();
 };
 

@@ -16,7 +16,7 @@ public:
 
 private:
 	HTTPClient m_http_client;
-	MainWindow main_window;
+    MainWindow m_main_window;
 
 public slots:
     void OnLogin(LoginInDTO loginInDTO);
