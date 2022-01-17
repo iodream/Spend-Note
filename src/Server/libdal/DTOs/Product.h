@@ -11,7 +11,7 @@ struct Product
 	IdType category_id;
 	std::string name;
 	Money price;
-	int amount;
+	BigInt amount;
 	int product_priority;
 	bool is_bought;
 	Timestamp add_date;

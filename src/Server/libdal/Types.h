@@ -2,6 +2,7 @@
 
 #include <string>
 
-using IdType = long long int;
+using BigInt = long long int;
+using IdType = BigInt;
 using Timestamp = std::string;
-using Money = std::string;
+using Money = BigInt;
