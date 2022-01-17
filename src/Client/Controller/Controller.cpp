@@ -22,10 +22,20 @@ void Controller::OnLogin(LoginInDTO in_dto)
 	auto response = m_http_client.Request(request);
 
     // checking response status
-    if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-    {
-        main_window.loginPage.ChangeLoginErrorLabel(response.reason);
-        return;
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
+		{
+			main_window.loginPage.ChangeLoginErrorLabel(
+					"Login and password do not match");
+		}
+		else
+		{
+			QMessageBox::information(&main_window
+					, tr("Login failed!")
+					, tr(response.reason.c_str()));
+		}
+		return;
     }
 
 	auto out_dto = model.ParseResponse(response);
