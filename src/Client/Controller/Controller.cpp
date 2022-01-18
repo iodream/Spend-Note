@@ -9,10 +9,20 @@ Controller::Controller()
 		this, &Controller::OnLogin);
 }
 
-void Controller::Start()
+void Controller::Start(UIPages at_page)
 {
 	m_main_window.show();
-	m_main_window.SetCurrentPage(UIPages::LOGIN);
+	m_main_window.SetCurrentPage(at_page);
+}
+
+void Controller::StartTest()
+{
+	Start(UIPages::MAIN);
+	m_main_window.m_main_page.AddListSubPage("Some list 1", 1);
+	m_main_window.m_main_page.AddListSubPage("Some list 2", 2);
+	m_main_window.m_main_page.AddListSubPage("Some list 3", 3);
+	m_main_window.m_main_page.RemoveListSubPage(3);
+	m_main_window.m_main_page.SetCurrentSubPageList(2);
 }
 
 void Controller::OnLogin(LoginInDTO in_dto)
@@ -45,5 +55,5 @@ void Controller::OnLogin(LoginInDTO in_dto)
 
 	// there i could set new data to the page
 
-	m_main_window.SetCurrentPage(UIPages::HOME);
+	m_main_window.SetCurrentPage(UIPages::MAIN);
 }
