@@ -9,7 +9,7 @@
 
 class Controller : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
 	Controller();
 	void Start(UIPages at_page=UIPages::LOGIN);
@@ -21,5 +21,5 @@ private:
 	MainWindow m_main_window;
 
 public slots:
-    void OnLogin(LoginInDTO loginInDTO);
+	void OnLogin(LoginInDTO loginInDTO);
 };

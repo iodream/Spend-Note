@@ -8,21 +8,21 @@ int MainWindow::PageToInt(UIPages page)
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+	, m_ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+	m_ui->setupUi(this);
 
-	ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &m_login_page);
-	ui->stackedWidget->insertWidget(PageToInt(UIPages::SIGNUP), &m_signup_page);
-	ui->stackedWidget->insertWidget(PageToInt(UIPages::MAIN), &m_main_page);
+	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &m_login_page);
+	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::SIGNUP), &m_signup_page);
+	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::MAIN), &m_main_page);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+	delete m_ui;
 }
 
 void MainWindow::SetCurrentPage(UIPages page)
 {
-	ui->stackedWidget->setCurrentIndex(PageToInt(page));
+	m_ui->stackedWidget->setCurrentIndex(PageToInt(page));
 }

@@ -16,13 +16,16 @@ public:
     explicit LoginPage(QWidget *parent = nullptr);
     ~LoginPage();
 
+    void ChangeLoginErrorLabel(std::string reason);
+
+private:
+	Ui::LoginPage *m_ui;
+
+
 signals:
     void Login(LoginInDTO);
 
 private slots:
-    void on_loginSubmitButton_clicked();
-
-private:
-    Ui::LoginPage *ui;
+    void OnLoginSubmitButtonClicked();
 };
 

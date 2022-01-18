@@ -15,5 +15,5 @@ public:
     ~SignupPage();
 
 private:
-    Ui::SignupPage *ui;
+	Ui::SignupPage *m_ui;
 };

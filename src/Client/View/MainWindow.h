@@ -20,14 +20,13 @@ public:
     ~MainWindow();
 
 	void SetCurrentPage(UIPages page);
-private:
-	static int PageToInt(UIPages page);
-
-private:
-    Ui::MainWindow *ui;
 
 public:
 	LoginPage m_login_page;
 	SignupPage m_signup_page;
 	MainPage m_main_page;
+
+private:
+    static int PageToInt(UIPages page);
+	Ui::MainWindow *m_ui;
 };
