@@ -6,18 +6,18 @@
 #include "ListItem.h"
 
 namespace Ui {
-class ListPage;
+class ListSubPage;
 }
 
-class ListPage : public QWidget
+class ListSubPage : public QWidget
 {
 	Q_OBJECT
 
 public:
 	using IdType = int;
 
-	explicit ListPage(QString name, IdType id, QWidget *parent=nullptr);
-	~ListPage();
+	explicit ListSubPage(const QString& name, IdType id, QWidget *parent=nullptr);
+	~ListSubPage();
 
 	void AppendProduct(ListItem* product);
 	void InsertProduct(ListItem* product, int idx);
@@ -30,7 +30,7 @@ private:
 	void set_list_size(int size);
 	int get_list_size();
 
-	Ui::ListPage *ui;
+	Ui::ListSubPage *m_ui;
 
 	QString m_name;
 	IdType m_id;

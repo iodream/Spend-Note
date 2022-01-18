@@ -20,9 +20,9 @@ public:
 
 	void Update();
 
-	void set_name(QString name);
-	void set_buy_until(QString buy_until);
-	void set_price(QString price);
+	void set_name(const QString& name);
+	void set_buy_until(const QString& buy_until);
+	void set_price(const QString& price);
 	void set_is_purchased(bool is_purchased);
 
 	void set_number(int number);
@@ -42,5 +42,5 @@ private:
 	int m_number{1};
 	QString m_color;
 
-	Ui::ListItem *ui;
+	Ui::ListItem *m_ui;
 };

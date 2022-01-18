@@ -15,14 +15,14 @@ const QString DEFAULT_COLOR_EVEN = "rgba(235, 235, 235, 50%)";
 ListItem::ListItem(IdType id, QWidget *parent)
 	: QPushButton(parent)
 	, m_id(id)
-	, ui(new Ui::ListItem)
+	, m_ui(new Ui::ListItem)
 {
-	ui->setupUi(this);
+	m_ui->setupUi(this);
 }
 
 ListItem::~ListItem()
 {
-	delete ui;
+	delete m_ui;
 }
 
 void ListItem::UpdateColor()
@@ -38,14 +38,14 @@ void ListItem::UpdateColor()
 
 void ListItem::Update()
 {
-	ui->ProductName->setText(m_name);
-	ui->BuyUntil->setText(m_buy_until);
-	ui->Price->setText(m_price);
-	ui->Number->setText(QString("%1").arg(m_number));
+	m_ui->ProductName->setText(m_name);
+	m_ui->BuyUntil->setText(m_buy_until);
+	m_ui->Price->setText(m_price);
+	m_ui->Number->setText(QString("%1").arg(m_number));
 	UpdateColor();
-	ui->Holder->setStyleSheet(
+	m_ui->Holder->setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	ui->Holder->show();
+	m_ui->Holder->show();
 }
 
 void ListItem::set_number(int number)
@@ -59,17 +59,17 @@ int ListItem::get_number()
 	return m_number;
 }
 
-void ListItem::set_name(QString name)
+void ListItem::set_name(const QString& name)
 {
 	m_name = name;
 }
 
-void ListItem::set_buy_until(QString buy_until)
+void ListItem::set_buy_until(const QString& buy_until)
 {
 	m_buy_until = buy_until;
 }
 
-void ListItem::set_price(QString price)
+void ListItem::set_price(const QString& price)
 {
 	m_price = price;
 }

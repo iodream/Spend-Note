@@ -6,10 +6,10 @@ enum class UIPages
 {
 	LOGIN = 0,
 	SIGNUP,
-    HOME,
+	MAIN,
 };
 
-enum class HomePages
+enum class MainSubPages
 {
 	LISTS = 0,
 	ICOMES,

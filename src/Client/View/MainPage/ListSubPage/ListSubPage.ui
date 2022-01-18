@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListPage</class>
- <widget class="QWidget" name="ListPage">
+ <class>ListSubPage</class>
+ <widget class="QWidget" name="ListSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>

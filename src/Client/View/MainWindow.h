@@ -4,7 +4,7 @@
 
 #include "LoginPage/LoginPage.h"
 #include "SignupPage/SignupPage.h"
-#include "HomePage/HomePage.h"
+#include "MainPage/MainPage.h"
 #include "Constants.h"
 
 QT_BEGIN_NAMESPACE
@@ -29,5 +29,5 @@ private:
 public:
 	LoginPage m_login_page;
 	SignupPage m_signup_page;
-	HomePage m_home_page;
+	MainPage m_main_page;
 };

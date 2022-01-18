@@ -1,34 +1,34 @@
-#include "ListPage.h"
-#include "ui_ListPage.h"
+#include "ListSubPage.h"
+#include "ui_ListSubPage.h"
 
 #include "Exception.h"
 
 #include <iostream>
 
-ListPage::ListPage(QString name, int id, QWidget *parent)
+ListSubPage::ListSubPage(const QString& name, int id, QWidget *parent)
 	: QWidget(parent)
-	, ui(new Ui::ListPage)
+	, m_ui(new Ui::ListSubPage)
 	, m_name(name)
 	, m_id(id)
 {
-	ui->setupUi(this);
-	ui->ListName->setText(name);
+	m_ui->setupUi(this);
+	m_ui->ListName->setText(name);
 	set_list_size(0);
 
-	connect(ui->AddProductButton, SIGNAL(released()), this, SLOT(OnAddProduct()));
+	connect(m_ui->AddProductButton, SIGNAL(released()), this, SLOT(OnAddProduct()));
 }
 
-void ListPage::AppendProduct(ListItem* product)
+void ListSubPage::AppendProduct(ListItem* product)
 {
 	InsertProduct(product, get_list_size());
 }
 
-void ListPage::InsertProduct(ListItem* product, int idx)
+void ListSubPage::InsertProduct(ListItem* product, int idx)
 {
 	if (get_list_size() < idx || idx < 0) {
 		throw Exception("Trying to insert a widget out of range");
 	}
-	ui->ItemsLayout->insertWidget(idx, product);
+	m_ui->ItemsLayout->insertWidget(idx, product);
 	connect(product, SIGNAL(released()), this, SLOT(OnProductClicked()));
 	product->set_number(idx + 1);
 	set_list_size(get_list_size() + 1);
@@ -36,7 +36,7 @@ void ListPage::InsertProduct(ListItem* product, int idx)
 }
 
 
-void ListPage::OnAddProduct()
+void ListSubPage::OnAddProduct()
 {
 	int id = get_list_size();
 	ListItem* product = new ListItem(id);
@@ -49,7 +49,7 @@ void ListPage::OnAddProduct()
 	InsertProduct(product, 0);
 }
 
-void ListPage::OnProductClicked()
+void ListSubPage::OnProductClicked()
 {
 	ListItem* product = qobject_cast<ListItem*>(sender());
 	if (!product) {
@@ -59,9 +59,9 @@ void ListPage::OnProductClicked()
 	RemoveProduct(product);
 }
 
-ListItem* ListPage::SafeGetProduct(int idx)
+ListItem* ListSubPage::SafeGetProduct(int idx)
 {
-	QLayoutItem *layout = ui->ItemsLayout->itemAt(idx);
+	QLayoutItem *layout = m_ui->ItemsLayout->itemAt(idx);
 	if (!layout) {
 		throw Exception("Failed to get product layout");
 	}
@@ -72,10 +72,10 @@ ListItem* ListPage::SafeGetProduct(int idx)
 	return product;
 }
 
-void ListPage::RemoveProduct(ListItem* product)
+void ListSubPage::RemoveProduct(ListItem* product)
 {
 	int idx = product->get_number() - 1;
-	QLayoutItem *layout = ui->ItemsLayout->takeAt(idx);
+	QLayoutItem *layout = m_ui->ItemsLayout->takeAt(idx);
 	if (!layout) {
 		throw Exception("Failed to get product layout");
 	}
@@ -87,7 +87,7 @@ void ListPage::RemoveProduct(ListItem* product)
 	UpdateProductNumbers(idx);
 }
 
-void ListPage::UpdateProductNumbers(int idx)
+void ListSubPage::UpdateProductNumbers(int idx)
 {
 	while (idx < get_list_size())
 	{
@@ -97,19 +97,19 @@ void ListPage::UpdateProductNumbers(int idx)
 	}
 }
 
-void ListPage::set_list_size(int size)
+void ListSubPage::set_list_size(int size)
 {
 	m_list_size = size;
-	ui->ListSize->setText(QString("%1").arg(m_list_size));
-	ui->ListSize->show();
+	m_ui->ListSize->setText(QString("%1").arg(m_list_size));
+	m_ui->ListSize->show();
 }
 
-int ListPage::get_list_size()
+int ListSubPage::get_list_size()
 {
 	return m_list_size;
 }
 
-ListPage::~ListPage()
+ListSubPage::~ListSubPage()
 {
-	delete ui;
+	delete m_ui;
 }
