@@ -19,7 +19,7 @@ public:
     void ChangeLoginErrorLabel(std::string reason);
 
 private:
-    Ui::LoginPage *ui;
+	Ui::LoginPage *m_ui;
 
 
 signals:

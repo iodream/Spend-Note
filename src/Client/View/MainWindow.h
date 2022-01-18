@@ -27,5 +27,5 @@ public:
 
 private:
     static int PageToInt(UIPages page);
-    Ui::MainWindow *ui;
+	Ui::MainWindow *m_ui;
 };

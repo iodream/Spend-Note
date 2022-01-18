@@ -15,5 +15,5 @@ public:
     ~HomePage();
 
 private:
-    Ui::HomePage *ui;
+	Ui::HomePage *m_ui;
 };
