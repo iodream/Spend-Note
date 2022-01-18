@@ -34,7 +34,10 @@ list(APPEND Spend-Note-Server_LIBS
     PocoJSON
 )
 
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libdal ${CMAKE_CURRENT_BINARY_DIR}/libdal)
+
 
 list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
@@ -43,6 +46,7 @@ list(APPEND Spend-Note-Server_SOURCES
 add_executable(Spend-Note-Server ${Spend-Note-Server_SOURCES})
 target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/libdal)
 
 if(CMAKE_COMPILER_IS_GNUCC)
     target_compile_options(Spend-Note-Server PRIVATE -Wall -Wextra -pedantic -Werror)
@@ -50,8 +54,10 @@ endif()
 
 list(APPEND Spend-Note-Server_LIBS
     Qt::Core
+#    pq
+#    pqxx
+   libdal
 )
-
 target_link_libraries(
     Spend-Note-Server
     PUBLIC
