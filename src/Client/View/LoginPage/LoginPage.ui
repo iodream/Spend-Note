@@ -124,7 +124,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QLabel" name="loginVerificationLabel">
+         <widget class="QLabel" name="loginErrorLabel">
           <property name="styleSheet">
            <string notr="true">color: rgb(204, 0, 0);</string>
           </property>

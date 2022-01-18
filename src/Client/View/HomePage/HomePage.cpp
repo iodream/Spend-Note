@@ -3,12 +3,12 @@
 
 HomePage::HomePage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::HomePage)
+	m_ui(new Ui::HomePage)
 {
-    ui->setupUi(this);
+	m_ui->setupUi(this);
 }
 
 HomePage::~HomePage()
 {
-    delete ui;
+	delete m_ui;
 }
