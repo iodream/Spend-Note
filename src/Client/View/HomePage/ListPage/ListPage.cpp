@@ -28,12 +28,13 @@ void ListPage::InsertProduct(ListItem* product, int idx)
 	if (get_list_size() < idx || idx < 0) {
 		throw Exception("Trying to insert a widget out of range");
 	}
-	ui->ProductsLayout->insertWidget(idx, product);
+	ui->ItemsLayout->insertWidget(idx, product);
 	connect(product, SIGNAL(released()), this, SLOT(OnProductClicked()));
 	product->set_number(idx + 1);
 	set_list_size(get_list_size() + 1);
 	UpdateProductNumbers(idx + 1);
 }
+
 
 void ListPage::OnAddProduct()
 {
@@ -60,7 +61,7 @@ void ListPage::OnProductClicked()
 
 ListItem* ListPage::SafeGetProduct(int idx)
 {
-	QLayoutItem *layout = ui->ProductsLayout->itemAt(idx);
+	QLayoutItem *layout = ui->ItemsLayout->itemAt(idx);
 	if (!layout) {
 		throw Exception("Failed to get product layout");
 	}
@@ -74,7 +75,7 @@ ListItem* ListPage::SafeGetProduct(int idx)
 void ListPage::RemoveProduct(ListItem* product)
 {
 	int idx = product->get_number() - 1;
-	QLayoutItem *layout = ui->ProductsLayout->takeAt(idx);
+	QLayoutItem *layout = ui->ItemsLayout->takeAt(idx);
 	if (!layout) {
 		throw Exception("Failed to get product layout");
 	}
