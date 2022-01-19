@@ -13,6 +13,7 @@ enum class MainSubPages
 {
 	LISTS = 0,
 	ICOMES,
+	SETTINGS,
 };
 
 

@@ -8,5 +8,5 @@ int main(int argc, char *argv[])
 	Controller controller;
 //	controller.Start();
 	controller.StartTest();
-    return a.exec();
+	return a.exec();
 }

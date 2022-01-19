@@ -17,13 +17,13 @@ QJsonDocument LoginModel::JSONFormatter::Format(const LoginInDTO& dto)
 {
 	QJsonObject json;
 
-    QByteArray password = QByteArray::fromStdString(dto.password);
+	QByteArray password = QByteArray::fromStdString(dto.password);
 
-    json.insert("login", QString::fromStdString(dto.login));
-    json.insert("password", QString(QCryptographicHash::hash(password
-            , QCryptographicHash::Sha1)));
+	json.insert("login", QString::fromStdString(dto.login));
+	json.insert("password", QString(QCryptographicHash::hash(password
+			, QCryptographicHash::Sha1)));
 
-    return QJsonDocument(json);
+	return QJsonDocument(json);
 }
 
 
@@ -34,7 +34,7 @@ void LoginModel::JSONParser::Parse(QJsonObject json, LoginOutDTO& dto)
 
 LoginOutDTO LoginModel::ParseResponse(const Net::Response& response)
 {
-    LoginOutDTO dto;
+	LoginOutDTO dto;
 
 	m_parser.Parse(response.json_playload.object(), dto);
 

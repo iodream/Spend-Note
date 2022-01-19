@@ -12,9 +12,9 @@ class HTTPClient
 {
 public:
 	HTTPClient() {};
-    void set_token(const std::string& str_token);
-    void set_auth_scheme(const std::string& str_auth_scheme);
-    Net::Response Request(const Net::Request& net_request);
+	void set_token(const std::string& str_token);
+	void set_auth_scheme(const std::string& str_auth_scheme);
+	Net::Response Request(const Net::Request& net_request);
 private:
 	void AddCredentials (Poco::Net::HTTPRequest& request);
 	void SendRequest(

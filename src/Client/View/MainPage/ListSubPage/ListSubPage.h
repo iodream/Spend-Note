@@ -3,7 +3,8 @@
 #include <QString>
 #include <QWidget>
 
-#include "ListItem.h"
+#include "ListItem/ListItem.h"
+#include "ProductPage/ProductPage.h"
 
 namespace Ui {
 class ListSubPage;

@@ -3,7 +3,11 @@
 #include <QMessageBox>
 
 #include "Models/LoginModel.h"
+
 #include "View/MainWindow.h"
+#include "View/MainPage/MainPage.h"
+#include "View/MainPage/SettingsSubPage/SettingsSubPage.h"
+
 #include "View/Constants.h"
 #include "HTTPClient.h"
 
@@ -22,4 +26,5 @@ private:
 
 public slots:
 	void OnLogin(LoginInDTO loginInDTO);
+	void OnLogout();
 };
