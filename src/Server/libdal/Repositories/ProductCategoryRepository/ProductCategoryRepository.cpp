@@ -5,9 +5,9 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "ProductCategory";
-	const std::string& ID_FIELD = "id";
-	const std::string& NAME_FIELD = "name";
+	const std::string TABLE_NAME = "ProductCategory";
+	const std::string ID_FIELD = "id";
+	const std::string NAME_FIELD = "name";
 }
 
 ProductCategoryRepository::ProductCategoryRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)

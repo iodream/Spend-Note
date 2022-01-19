@@ -3,10 +3,10 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "User_";
-	const std::string& ID_FIELD = "id";
-	const std::string& LOGIN_FIELD = "login";
-	const std::string& PASSWORD_FIELD = "password";
+	const std::string TABLE_NAME = "User_";
+	const std::string ID_FIELD = "id";
+	const std::string LOGIN_FIELD = "login";
+	const std::string PASSWORD_FIELD = "password";
 }
 
 UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)

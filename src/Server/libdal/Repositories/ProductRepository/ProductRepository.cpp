@@ -6,18 +6,18 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "Product";
-	const std::string& ID_FIELD = "id";
-	const std::string& LIST_ID_FIELD = "listId";
-	const std::string& CATEGORY_ID_FIELD = "categoryId";
-	const std::string& NAME_FIELD = "name";
-	const std::string& PRICE_FIELD = "price";
-	const std::string& AMOUNT_FIELD = "amount";
-	const std::string& PRODUCT_PRIORITY_FIELD = "productPriority";
-	const std::string& IS_BOUGHT_FIELD = "isBought";
-	const std::string& ADD_DATE_FIELD = "addDate";
-	const std::string& PURCHASE_DATE_FIELD = "purchaseDate";
-	const std::string& BUY_UNTIL_DATE_FIELD = "buyUntilDate";
+	const std::string TABLE_NAME = "Product";
+	const std::string ID_FIELD = "id";
+	const std::string LIST_ID_FIELD = "listId";
+	const std::string CATEGORY_ID_FIELD = "categoryId";
+	const std::string NAME_FIELD = "name";
+	const std::string PRICE_FIELD = "price";
+	const std::string AMOUNT_FIELD = "amount";
+	const std::string PRODUCT_PRIORITY_FIELD = "productPriority";
+	const std::string IS_BOUGHT_FIELD = "isBought";
+	const std::string ADD_DATE_FIELD = "addDate";
+	const std::string PURCHASE_DATE_FIELD = "purchaseDate";
+	const std::string BUY_UNTIL_DATE_FIELD = "buyUntilDate";
 }
 
 ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
