@@ -4,6 +4,7 @@
 #include <QJsonObject>
 
 #include "../Exception.h"
+#include "Server/libdal/Types.h"
 
 class ParsingError : public Exception {
 public:
@@ -26,3 +27,13 @@ void SafeReadString(
     const QJsonObject& json,
     const char* label,
     std::string& dest);
+
+void SafeReadId(
+	const QJsonObject& json,
+	const char* label,
+	IdType& dest);
+
+void SafeReadId(
+	const QJsonObject& json,
+	const std::string& label,
+	IdType& dest);
