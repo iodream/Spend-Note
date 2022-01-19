@@ -17,8 +17,7 @@ QJsonDocument LoginModel::JSONFormatter::Format(const LoginInDTO& dto)
 	QByteArray password = QByteArray::fromStdString(dto.password);
 
 	json["login"] = dto.login.c_str();
-	auto digest = QString(
-		QCryptographicHash::hash(
+	auto digest = QString(QCryptographicHash::hash(
 			password, QCryptographicHash::Sha1).toHex());
 	json["password"] = digest.toStdString().c_str();
     return QJsonDocument(json);
