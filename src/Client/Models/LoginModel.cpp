@@ -5,7 +5,7 @@
 Net::Request LoginModel::FormRequest(LoginInDTO dto)
 {
 	Net::Request request;
-	request.uri = "http://localhost:8080/fake_login";
+	request.uri = "http://localhost:8080/login";
 	request.method = Net::HTTP_METHOD_GET;
 	request.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
 	request.json_playload = m_formatter.Format(dto);
