@@ -1,5 +1,4 @@
 #include "LoginModel.h"
-
 #include "Net/Parsing.h"
 
 Net::Request LoginModel::FormRequest(LoginInDTO dto)
@@ -12,20 +11,18 @@ Net::Request LoginModel::FormRequest(LoginInDTO dto)
 	return request;
 }
 
-
 QJsonDocument LoginModel::JSONFormatter::Format(const LoginInDTO& dto)
 {
 	QJsonObject json;
+	QByteArray password = QByteArray::fromStdString(dto.password);
 
-    QByteArray password = QByteArray::fromStdString(dto.password);
-
-    json.insert("login", QString::fromStdString(dto.login));
-    json.insert("password", QString(QCryptographicHash::hash(password
-            , QCryptographicHash::Sha1)));
-
+	json["login"] = dto.login.c_str();
+	auto digest = QString(
+		QCryptographicHash::hash(
+			password, QCryptographicHash::Sha1).toHex());
+	json["password"] = digest.toStdString().c_str();
     return QJsonDocument(json);
 }
-
 
 void LoginModel::JSONParser::Parse(QJsonObject json, LoginOutDTO& dto)
 {

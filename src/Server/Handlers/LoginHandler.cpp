@@ -6,8 +6,13 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../libdal/dbfacade.h"
-#include "../Net/Parsing.h"
-#include "../libdal/Exceptions/databasefailure.h"
+#include "Net/Parsing.h"
+
+LoginHandler::LoginHandler()
+	: m_facade(DB_CONN_STRING)
+{
+
+}
 
 QJsonDocument LoginHandler::JSONFormatter::Format(const DTO& dto)
 {
@@ -32,14 +37,11 @@ LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
 	return dto;
 }
 
-
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
-	using namespace std;
 	if (request.method == Net::HTTP_METHOD_GET) {
 		auto dto = m_parser.Parse(request.json_playload);
-		DbFacade facade(DB_CONN_USER + " " + DB_CONN_HOST + " " + DB_CONN_PASS + " " + DB_CONN_DBNAME);
-		auto user = facade.GetUserByLogin(dto.login);
+		auto user = m_facade.GetUserByLogin(dto.login);
 
 		if(!user || dto.passwd_hash != user->password) {
 			return FormErrorResponse(

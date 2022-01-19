@@ -3,6 +3,7 @@
 #include <string>
 
 #include "ICommandHandler.h"
+#include "../libdal/dbfacade.h"
 
 class LoginHandler : public ICommandHandler
 {
@@ -26,12 +27,13 @@ class LoginHandler : public ICommandHandler
 
 	};
 public:
-	LoginHandler() {}
+	LoginHandler();
 	virtual ~LoginHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;
 
     JSONFormatter m_formatter{};
 	JSONParser m_parser{};
+	DbFacade m_facade;
 
 };
