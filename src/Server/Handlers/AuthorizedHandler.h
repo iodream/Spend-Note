@@ -19,7 +19,7 @@ public:
 			std::string login;
 			std::string iat;
 		};
-	DTO Parse(const QJsonDocument& playload);
+	DTO Parse(const QJsonDocument& payload);
 
 	};
 

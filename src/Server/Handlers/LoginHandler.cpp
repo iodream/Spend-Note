@@ -22,10 +22,10 @@ QJsonDocument LoginHandler::JSONFormatter::Format(const DTO& dto)
 }
 
 LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
-		const QJsonDocument& playload)
+		const QJsonDocument& payload)
 {
 	DTO dto;
-	auto json = playload.object();
+	auto json = payload.object();
 
 	try {
 		SafeReadString(json, "login", dto.login);
@@ -40,7 +40,7 @@ LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
 	if (request.method == Net::HTTP_METHOD_GET) {
-		auto dto = m_parser.Parse(request.json_playload);
+		auto dto = m_parser.Parse(request.json_payload);
 		auto user = m_facade.GetUserByLogin(dto.login);
 
 		if(!user || dto.passwd_hash != user->password) {

@@ -55,10 +55,10 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 }
 
 AuthorizedHandler::JSONParser::DTO AuthorizedHandler::JSONParser::Parse(
-	const QJsonDocument& playload)
+	const QJsonDocument& payload)
 {
 	DTO dto;
-	auto json = playload.object();
+	auto json = payload.object();
 
 	try {
 		SafeReadId(json, "id", dto.id);
@@ -75,7 +75,7 @@ bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 {
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
 		return false;
-	auto parsed_token = m_parser.Parse(request.json_playload);
+	auto parsed_token = m_parser.Parse(request.json_payload);
 	auto user = m_facade.GetUserById(parsed_token.id);
 	if(!user)
 		return false;

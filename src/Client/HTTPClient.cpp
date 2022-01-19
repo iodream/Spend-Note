@@ -28,10 +28,10 @@ void HTTPClient::SendRequest(
     request.setContentType(net_request.content_type);
     if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
     {
-        QByteArray byte_array = net_request.json_playload.toJson();
+		QByteArray byte_array = net_request.json_payload.toJson();
         request.setContentLength(byte_array.size());
         std::ostream& out_stream = session.sendRequest(request);
-        out_stream << net_request.json_playload.toJson().constData();
+		out_stream << net_request.json_payload.toJson().constData();
     }
     else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
     {
@@ -61,7 +61,7 @@ Net::Response HTTPClient::FormResponse(
     {
         QByteArray br = QString::fromStdString(string_stream.str()).toUtf8();
         QJsonDocument json_doc = QJsonDocument::fromJson(br);
-        net_response.json_playload = json_doc;
+		net_response.json_payload = json_doc;
     }
     else if (net_response.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
     {

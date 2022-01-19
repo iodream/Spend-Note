@@ -23,7 +23,7 @@ class LoginHandler : public ICommandHandler
 			std::string login;
 			std::string passwd_hash;
 		};
-	DTO Parse(const QJsonDocument& playload);
+	DTO Parse(const QJsonDocument& payload);
 
 	};
 public:
