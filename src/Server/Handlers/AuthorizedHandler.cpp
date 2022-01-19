@@ -12,12 +12,12 @@
 #include "AuthorizedHandler.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "../libdal/dbfacade.h"
+#include "../libdal/Facade/DbFacade.h"
 #include "Common.h"
 #include "Net/Parsing.h"
 
 AuthorizedHandler::AuthorizedHandler()
-	: m_facade(DB_CONN_STRING)
+	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
 {
 
 }
@@ -76,7 +76,7 @@ bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
 		return false;
 	auto parsed_token = m_parser.Parse(request.json_payload);
-	auto user = m_facade.GetUserById(parsed_token.id);
+	auto user = m_facade->GetUserById(parsed_token.id);
 	if(!user)
 		return false;
 	auto password = user->password;

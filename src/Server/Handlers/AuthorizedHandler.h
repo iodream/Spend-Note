@@ -3,7 +3,7 @@
 #include <string>
 
 #include "ICommandHandler.h"
-#include "../libdal/dbfacade.h"
+#include "../libdal/Facade/IDbFacade.h"
 
 class AuthorizedHandler : public ICommandHandler
 {
@@ -27,6 +27,6 @@ public:
 	bool CheckAuthorization(Net::Request& request);
 	Net::Response Handle(Net::Request& request) override;
 	virtual Net::Response AuthHandle(const Net::Request& request) = 0;
-	DbFacade m_facade;
+	std::unique_ptr<IDbFacade> m_facade;
 	JSONParser m_parser;
 };

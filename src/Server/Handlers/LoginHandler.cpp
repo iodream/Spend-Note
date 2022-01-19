@@ -1,3 +1,4 @@
+#include <memory>
 #include <QJsonObject>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
@@ -5,11 +6,11 @@
 #include "Common.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "../libdal/dbfacade.h"
+#include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 
 LoginHandler::LoginHandler()
-	: m_facade(DB_CONN_STRING)
+	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
 {
 
 }
@@ -41,7 +42,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 {
 	if (request.method == Net::HTTP_METHOD_GET) {
 		auto dto = m_parser.Parse(request.json_payload);
-		auto user = m_facade.GetUserByLogin(dto.login);
+		auto user = m_facade->GetUserByLogin(dto.login);
 
 		if(!user || dto.passwd_hash != user->password) {
 			return FormErrorResponse(

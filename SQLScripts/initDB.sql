@@ -57,7 +57,7 @@ create table Product
 	listId bigint not null references List(id),
 	categoryId bigint not null references ProductCategory(id),
 	name character(30) not null,
-	price money not null,
+	price bigint not null,
 	amount bigint not null,
 	productPriority integer not null,
 	isBought boolean not null,

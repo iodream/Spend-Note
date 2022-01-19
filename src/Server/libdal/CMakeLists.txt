@@ -15,13 +15,21 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
 add_library(libdal STATIC
-  idbfacade.h
-  dbfacade.h
-  dbfacade.cpp
-  Types.h
-  DTOs/User.h
-  Exceptions/databasefailure.h Exceptions/databasefailure.cpp
-  Repositories/userrepository.h Repositories/userrepository.cpp
+	Types.h
+
+	Facade/IDbFacade.h
+	Facade/DbFacade.h
+	Facade/DbFacade.cpp
+
+	DTOs/User.h
+	DTOs/Product.h
+	DTOs/ProductCategory.h
+
+	Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
+
+	Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
+	Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
+	Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)

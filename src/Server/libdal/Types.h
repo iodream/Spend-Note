@@ -1,3 +1,8 @@
 #pragma once
 
-using IdType = long long int;
+#include <string>
+
+using BigInt = long long int;
+using IdType = BigInt;
+using Timestamp = std::string;
+using Money = BigInt;

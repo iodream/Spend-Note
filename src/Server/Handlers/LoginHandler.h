@@ -1,9 +1,10 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include "ICommandHandler.h"
-#include "../libdal/dbfacade.h"
+#include "../libdal/Facade/IDbFacade.h"
 
 class LoginHandler : public ICommandHandler
 {
@@ -32,8 +33,7 @@ public:
 
 	Net::Response Handle(Net::Request& request) override;
 
-    JSONFormatter m_formatter{};
+	JSONFormatter m_formatter{};
 	JSONParser m_parser{};
-	DbFacade m_facade;
-
+	std::unique_ptr<IDbFacade> m_facade;
 };
