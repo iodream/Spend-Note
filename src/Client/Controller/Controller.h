@@ -9,15 +9,17 @@
 
 class Controller : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
 	Controller();
-	void Start();
+	void Start(UIPages at_page=UIPages::LOGIN);
+
+	void StartTest();
 
 private:
 	HTTPClient m_http_client;
-	MainWindow main_window;
+	MainWindow m_main_window;
 
 public slots:
-    void OnLogin(LoginInDTO loginInDTO);
+	void OnLogin(LoginInDTO loginInDTO);
 };

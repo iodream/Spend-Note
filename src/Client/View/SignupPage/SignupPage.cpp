@@ -3,12 +3,12 @@
 
 SignupPage::SignupPage(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::SignupPage)
+	, m_ui(new Ui::SignupPage)
 {
-    ui->setupUi(this);
+	m_ui->setupUi(this);
 }
 
 SignupPage::~SignupPage()
 {
-    delete ui;
+	delete m_ui;
 }
