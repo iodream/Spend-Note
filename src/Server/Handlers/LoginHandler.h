@@ -4,7 +4,7 @@
 
 #include "ICommandHandler.h"
 
-class FakeLoginHandler : public ICommandHandler
+class LoginHandler : public ICommandHandler
 {
 	class JSONFormatter
 	{
@@ -26,8 +26,8 @@ class FakeLoginHandler : public ICommandHandler
 
 	};
 public:
-    FakeLoginHandler() {}
-    virtual ~FakeLoginHandler() override {}
+	LoginHandler() {}
+	virtual ~LoginHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;
 

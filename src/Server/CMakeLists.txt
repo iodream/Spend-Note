@@ -54,9 +54,7 @@ endif()
 
 list(APPEND Spend-Note-Server_LIBS
     Qt::Core
-#    pq
-#    pqxx
-   libdal
+    libdal
 )
 target_link_libraries(
     Spend-Note-Server
