@@ -15,13 +15,13 @@ ProductPage::~ProductPage()
 	delete m_ui;
 }
 
-void ProductPage::Setup(QString name, int id, QString buy_until, QString price, bool is_purchased)
+void ProductPage::Setup(ListItem* list_item)
 {
-	m_ui->name->setText(name);
-	m_ui->buyUntil->setText(buy_until);
-	m_ui->id->setText(QString::number(id));
-	m_ui->price->setText(price);
-	m_ui->isPurchased->setChecked(is_purchased);
+	m_ui->name->setText(list_item->get_name());
+	m_ui->buyUntil->setText(list_item->get_buy_until());
+	m_ui->id->setText(QString::number(list_item->get_id()));
+	m_ui->price->setText(list_item->get_price());
+	m_ui->isPurchased->setChecked(list_item->get_is_purchased());
 }
 
 void ProductPage::OnGoBackClicked()

@@ -58,11 +58,7 @@ void ListSubPage::OnProductClicked()
 
 	// adding new page to stackedWidget
 	ProductPage* product_page = new ProductPage;
-	product_page->Setup(product->get_name()
-						  , product->get_id()
-						  , product->get_buy_until()
-						  , product->get_price()
-						  , product->get_is_purchased());
+	product_page->Setup(product);
 
 	m_ui->stackedWidget->addWidget(product_page);
 	m_ui->stackedWidget->setCurrentIndex(1);

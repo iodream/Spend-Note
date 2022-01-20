@@ -2,6 +2,8 @@
 
 #include <QWidget>
 
+#include "../ListItem/ListItem.h"
+
 namespace Ui {
 class ProductPage;
 }
@@ -16,10 +18,12 @@ public:
 	explicit ProductPage(QWidget *parent = nullptr);
 	~ProductPage();
 
-	void Setup(QString name, IdType id, QString buy_until, QString price, bool is_purchased);
+	void Setup(ListItem* list_item);
 
 private:
 	Ui::ProductPage *m_ui;
+
+	ListItem* m_list_item;
 
 private slots:
 	void OnGoBackClicked();

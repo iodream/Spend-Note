@@ -4,11 +4,17 @@
 
 Controller::Controller()
 {
-	QObject::connect(&m_main_window.m_login_page, &LoginPage::Login
-			, this, &Controller::OnLogin);
+	QObject::connect(
+		&m_main_window.m_login_page,
+		&LoginPage::Login,
+		this,
+		&Controller::OnLogin);
 
-	QObject::connect(&m_main_window.m_main_page.m_settings_page, &SettingsSubPage::Logout
-			, this, &Controller::OnLogout);
+	QObject::connect(
+		&m_main_window.m_main_page.m_settings_page,
+		&SettingsSubPage::Logout,
+		this,
+		&Controller::OnLogout);
 }
 
 void Controller::Start(UIPages at_page)

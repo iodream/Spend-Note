@@ -7,8 +7,11 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 {
 	m_ui->setupUi(this);
 
-	connect(m_ui->logoutButton, SIGNAL(clicked())
-			, this, SLOT(OnLogoutButtonClicked()));
+	connect(
+		m_ui->logoutButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnLogoutButtonClicked()));
 }
 
 SettingsSubPage::~SettingsSubPage()

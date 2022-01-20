@@ -9,11 +9,17 @@ MainPage::MainPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
-	connect(m_ui->mainToolButton, SIGNAL(clicked())
-			, this, SLOT(OnMainToolButtonClicked()));
+	connect(
+		m_ui->mainToolButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnMainToolButtonClicked()));
 
-	connect(m_ui->settingsToolButton, SIGNAL(clicked())
-			, this, SLOT(OnSettingsToolButtonClicked()));
+	connect(
+		m_ui->settingsToolButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnSettingsToolButtonClicked()));
 
 	AddListSubPage("Some list 1", 1);
 	// add income page here
@@ -68,12 +74,12 @@ void MainPage::SetCurrentSubPageList(ListSubPage::IdType id)
 
 void MainPage::OnMainToolButtonClicked()
 {
-	SetCurrentSubPage(0); // currently 0
+	SetCurrentSubPage(MainSubPages::LISTS); // currently 0
 	// but value should be changed to MainSubPages::LISTS later
 }
 
 void MainPage::OnSettingsToolButtonClicked()
 {
-	SetCurrentSubPage(1); // currently 1
+	SetCurrentSubPage(1); // currently 1, because we dont have income page
 	// but value should be changed to MainSubPages::SETTINGS later
 }
