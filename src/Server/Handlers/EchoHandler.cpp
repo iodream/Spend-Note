@@ -7,10 +7,10 @@
 #include "Server/Utils.h"
 
 EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
-		const QJsonDocument& playload)
+		const QJsonDocument& payload)
 {
 	DTO dto;
-	auto json = playload.object();
+	auto json = payload.object();
 
 	try {
 		SafeReadString(json, "msg", dto.msg);
@@ -33,7 +33,7 @@ Net::Response EchoHandler::Handle(Net::Request& request)
 {
 	if (request.method == Net::HTTP_METHOD_POST) {
 		Net::Response response;
-		auto in_dto = m_parser.Parse(request.json_playload);
+		auto in_dto = m_parser.Parse(request.json_payload);
 		JSONFormatter::DTO out_dto{in_dto.msg};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}

@@ -3,23 +3,29 @@
 
 LoginPage::LoginPage(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::LoginPage)
+	, m_ui(new Ui::LoginPage)
 {
-    ui->setupUi(this);
+	m_ui->setupUi(this);
 
+	connect(m_ui->loginSubmitButton, SIGNAL(clicked())
+			, this, SLOT(OnLoginSubmitButtonClicked()));
 }
 
 LoginPage::~LoginPage()
 {
-    delete ui;
+	delete m_ui;
 }
 
-void LoginPage::on_loginSubmitButton_clicked()
+void LoginPage::ChangeLoginErrorLabel(std::string reason)
 {
-    LoginInDTO loginInDTO;
-	loginInDTO.login	= ui->loginLineEdit->text().toStdString();
-    loginInDTO.password = ui->passwordLineEdit->text().toStdString();
+	m_ui->loginErrorLabel->setText(QString::fromStdString(reason));
+}
 
-    emit Login(loginInDTO);
+void LoginPage::OnLoginSubmitButtonClicked()
+{
+    LoginInDTO login_in_dto;
+	login_in_dto.login = m_ui->loginLineEdit->text().toStdString();
+	login_in_dto.password = m_ui->passwordLineEdit->text().toStdString();
+    emit Login(login_in_dto);
 }
 

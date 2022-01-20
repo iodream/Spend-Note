@@ -11,14 +11,14 @@ ListStateRepository::ListStateRepository(pqxx::connection& db_connection) : m_db
 {
 }
 
-std::optional<ListState> ListStateRepository::GetById(const idType &list_state_id)
+std::optional<ListState> ListStateRepository::GetById(const IdType &list_state_id)
 {
     try
     {
          pqxx::work w{m_db_connection};
          pqxx::row list_state = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_state_id) + ";");
 
-         return ListState{list_state[ID_FIELD].as<idType>(), list_state[NAME_FIELD].as<std::string>()};
+		 return ListState{list_state[ID_FIELD].as<IdType>(), list_state[NAME_FIELD].as<std::string>()};
     }
     catch(const pqxx::pqxx_exception& e)
     {
@@ -31,7 +31,7 @@ ListState ListStateRepository::ParseSQLRow(const pqxx::row &row)
 {
     ListState list_state;
 
-    list_state.list_state_id = row[ID_FIELD].as<idType>();
+	list_state.list_state_id = row[ID_FIELD].as<IdType>();
     list_state.name = row[NAME_FIELD].as<std::string>();
 
     return list_state;

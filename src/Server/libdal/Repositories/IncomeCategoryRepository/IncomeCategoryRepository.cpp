@@ -11,14 +11,14 @@ IncomeCategoryRepository::IncomeCategoryRepository(pqxx::connection& db_connecti
 {
 }
 
-std::optional<IncomeCategory> IncomeCategoryRepository::GetById(const idType& category_id)
+std::optional<IncomeCategory> IncomeCategoryRepository::GetById(const IdType& category_id)
 {
     try
     {
          pqxx::work w{m_db_connection};
          pqxx::row income_category = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(category_id) + ";");
 
-         return IncomeCategory{income_category[ID_FIELD].as<idType>(), income_category[NAME_FIELD].as<std::string>()};
+		 return IncomeCategory{income_category[ID_FIELD].as<IdType>(), income_category[NAME_FIELD].as<std::string>()};
     }
     catch(const pqxx::pqxx_exception& e)
     {
@@ -31,7 +31,7 @@ IncomeCategory IncomeCategoryRepository::ParseSQLRow(const pqxx::row& row)
 {
     IncomeCategory income_category;
 
-    income_category.income_category_id = row[ID_FIELD].as<idType>();
+	income_category.income_category_id = row[ID_FIELD].as<IdType>();
     income_category.name = row[NAME_FIELD].as<std::string>();
 
     return income_category;

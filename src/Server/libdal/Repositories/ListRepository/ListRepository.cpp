@@ -33,7 +33,7 @@ void ListRepository::AddList(const List& list)
 }
 
 
-void ListRepository::Remove(const idType& list_id)
+void ListRepository::Remove(const IdType& list_id)
 {
     try
     {
@@ -48,7 +48,7 @@ void ListRepository::Remove(const idType& list_id)
 }
 
 
-std::optional<List> ListRepository::GetList(const idType& list_id)
+std::optional<List> ListRepository::GetList(const IdType& list_id)
 {
     try
     {
@@ -57,8 +57,8 @@ std::optional<List> ListRepository::GetList(const idType& list_id)
 
         if(!list.empty())
         {
-            return List{list[ID_FIELD].as<idType>(), list[USER_ID].as<idType>(),
-                        list[LIST_STATE_ID].as<idType>(), list[LIST_NAME].as<std::string>()};
+			return List{list[ID_FIELD].as<IdType>(), list[USER_ID].as<IdType>(),
+						list[LIST_STATE_ID].as<IdType>(), list[LIST_NAME].as<std::string>()};
         }
     }
     catch(const pqxx::pqxx_exception& e)
@@ -89,15 +89,15 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 {
     List list;
 
-	list.list_id = row[ID_FIELD].as<idType>();
-	list.owner_id = row[USER_ID].as<idType>();
-	list.state_id = row[LIST_STATE_ID].as<idType>();
+	list.list_id = row[ID_FIELD].as<IdType>();
+	list.owner_id = row[USER_ID].as<IdType>();
+	list.state_id = row[LIST_STATE_ID].as<IdType>();
     list.name = row[LIST_NAME].as<std::string>();
 
     return list;
 }
 
-std::optional<std::vector<List>> ListRepository::GetAllLists(const idType& user_id)
+std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_id)
 {
     try
     {

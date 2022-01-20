@@ -41,7 +41,7 @@ void IncomeRepository::Add(const Income& income)
     }
 }
 
-std::optional<Income> IncomeRepository::GetIncome(const idType& income_id)
+std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
 {
 	try
     {
@@ -50,9 +50,9 @@ std::optional<Income> IncomeRepository::GetIncome(const idType& income_id)
 
         if(!income[EXPERATION_TIME].is_null())
         {
-            return Income{income[ID_FIELD].as<idType>(), income[USER_ID].as<idType>(),
+			return Income{income[ID_FIELD].as<IdType>(), income[USER_ID].as<IdType>(),
                           income[INCOME_NAME].as<std::string>(), income[AMOUNT].as<double>(),
-                          income[CATEGORY_ID].as<idType>(), income[ADD_TIME].as<std::string>(),
+						  income[CATEGORY_ID].as<IdType>(), income[ADD_TIME].as<std::string>(),
                           income[EXPERATION_TIME].as<std::string>()};
         }
 
@@ -61,9 +61,9 @@ std::optional<Income> IncomeRepository::GetIncome(const idType& income_id)
 
         else
         {
-            return Income{income[ID_FIELD].as<idType>(), income[USER_ID].as<idType>(),
+			return Income{income[ID_FIELD].as<IdType>(), income[USER_ID].as<IdType>(),
                           income[INCOME_NAME].as<std::string>(), income[AMOUNT].as<double>(),
-                          income[CATEGORY_ID].as<idType>(), income[ADD_TIME].as<std::string>()};
+						  income[CATEGORY_ID].as<IdType>(), income[ADD_TIME].as<std::string>()};
         }
     }
     catch(const pqxx::pqxx_exception& e)
@@ -90,7 +90,7 @@ void IncomeRepository::Update(const Income& income)
     }
 }
 
-void IncomeRepository::Remove(const idType& id)
+void IncomeRepository::Remove(const IdType& id)
 {
     try
     {
@@ -104,7 +104,7 @@ void IncomeRepository::Remove(const idType& id)
     }
 }
 
-std::optional<std::vector<Income>> IncomeRepository::GetAllIncomes(const idType &id)
+std::optional<std::vector<Income>> IncomeRepository::GetAllIncomes(const IdType &id)
 {
 	try
 	{
@@ -135,11 +135,11 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 
     if(!row[EXPERATION_TIME].is_null())
     {
-		income.income_id = row[ID_FIELD].as<idType>();
-		income.user_id = row[USER_ID].as<idType>();
+		income.income_id = row[ID_FIELD].as<IdType>();
+		income.user_id = row[USER_ID].as<IdType>();
 		income.name = row[INCOME_NAME].as<std::string>();
         income.amount = row[AMOUNT].as<double>();
-		income.category_id = row[CATEGORY_ID].as<idType>();
+		income.category_id = row[CATEGORY_ID].as<IdType>();
 		income.add_time = row[ADD_TIME].as<std::string>();
 		income.expoiration_time = row[EXPERATION_TIME].as<std::string>();
 
@@ -147,11 +147,11 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
     }
     else
     {
-		income.income_id = row[ID_FIELD].as<idType>();
-		income.user_id = row[USER_ID].as<idType>();
+		income.income_id = row[ID_FIELD].as<IdType>();
+		income.user_id = row[USER_ID].as<IdType>();
 		income.name = row[INCOME_NAME].as<std::string>();
         income.amount = row[AMOUNT].as<double>();
-		income.category_id = row[CATEGORY_ID].as<idType>();
+		income.category_id = row[CATEGORY_ID].as<IdType>();
 		income.add_time = row[ADD_TIME].as<std::string>();
 		income.expoiration_time = "";
 

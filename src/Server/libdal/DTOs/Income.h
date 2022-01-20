@@ -5,11 +5,11 @@
 
 struct Income
 {
-	idType income_id;
-	idType user_id;
+	IdType income_id;
+	IdType user_id;
     std::string name;
     double amount;
-	idType category_id;
+	IdType category_id;
 	std::string add_time;
 	std::string expoiration_time;
 };

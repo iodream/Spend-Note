@@ -3,14 +3,14 @@
 #include "pqxx/pqxx"
 
 #include "DTOs/IncomeCategory.h"
-#include "Exceptions/databasefailure.h"
+#include "Exceptions/DatabaseFailure.h"
 
 class IncomeCategoryRepository
 {
 public:
     IncomeCategoryRepository(pqxx::connection& db_connection);
 
-    std::optional<IncomeCategory> GetById(const idType& category_id);
+	std::optional<IncomeCategory> GetById(const IdType& category_id);
     std::vector<IncomeCategory> GetAll();
 
 private:

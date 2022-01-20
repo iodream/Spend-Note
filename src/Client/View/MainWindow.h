@@ -4,7 +4,7 @@
 
 #include "LoginPage/LoginPage.h"
 #include "SignupPage/SignupPage.h"
-#include "HomePage/HomePage.h"
+#include "MainPage/MainPage.h"
 #include "Constants.h"
 
 QT_BEGIN_NAMESPACE
@@ -20,14 +20,13 @@ public:
     ~MainWindow();
 
 	void SetCurrentPage(UIPages page);
-private:
-	static int PageToInt(UIPages page);
-
-private:
-    Ui::MainWindow *ui;
 
 public:
-    LoginPage loginPage;
-    SignupPage signupPage;
-    HomePage homePage;
+	LoginPage m_login_page;
+	SignupPage m_signup_page;
+	MainPage m_main_page;
+
+private:
+    static int PageToInt(UIPages page);
+	Ui::MainWindow *m_ui;
 };

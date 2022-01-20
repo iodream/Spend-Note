@@ -7,6 +7,6 @@ list(APPEND Spend-Note-Client_SOURCES
 
 add_subdirectory(LoginPage)
 add_subdirectory(SignupPage)
-add_subdirectory(HomePage)
+add_subdirectory(MainPage)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
