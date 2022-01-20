@@ -9,7 +9,7 @@ Net::Response FormJSONResponse(
 {
 	Net::Response response;
 	response.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
-    response.json_playload = json_doc;
+	response.json_payload = json_doc;
     response.status = status;
     return response;
 }

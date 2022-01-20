@@ -1,13 +1,12 @@
-#include "userrepository.h"
-#include <string_view>
-#include "Exceptions/databasefailure.h"
+#include "UserRepository.h"
+#include "Exceptions/DatabaseFailure.h"
 
 namespace
 {
-	const std::string& TABLE_NAME = "User";
-	const std::string& ID_FIELD = "id";
-	const std::string& LOGIN_FIELD = "login";
-	const std::string& PASSWORD_FIELD = "password";
+	const std::string TABLE_NAME = "User_";
+	const std::string ID_FIELD = "id";
+	const std::string LOGIN_FIELD = "login";
+	const std::string PASSWORD_FIELD = "password";
 }
 
 UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)
@@ -20,7 +19,13 @@ void UserRepository::Add(const User &user)
 	pqxx::work w(m_database_connection);
 	try
 	{
-		w.exec0("INSERT INTO " + TABLE_NAME + " (" + LOGIN_FIELD + ", " + PASSWORD_FIELD + ") VALUES (" + w.quote(user.login) + ", " + w.quote(user.password) + ");");
+		w.exec0(
+			"INSERT INTO " + TABLE_NAME + " (" +
+				LOGIN_FIELD + ", " +
+				PASSWORD_FIELD +
+			") VALUES (" +
+				w.quote(user.login) + ", " +
+				w.quote(user.password) + ");");
 		w.commit();
 	}
 	catch(const pqxx::pqxx_exception& e)
@@ -37,8 +42,8 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::result user_rows = w.exec(
 			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
-			" FROM " + w.quote_name(TABLE_NAME) +
-			" WHERE " + w.quote_name(ID_FIELD) + " = " + w.quote(id) + ";");
+			" FROM " + TABLE_NAME +
+			" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 
 		if (!user_rows.empty())
 		{
@@ -61,8 +66,8 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 	{
 		pqxx::result user_rows = w.exec(
 			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
-			" FROM " + w.quote_name(TABLE_NAME) +
-			" WHERE " + w.quote_name(LOGIN_FIELD) + " = " + w.quote(login) + ";");
+			" FROM " + TABLE_NAME +
+			" WHERE " + LOGIN_FIELD + " = " + w.quote(login) + ";");
 
 		if (!user_rows.empty())
 		{
@@ -83,7 +88,12 @@ void UserRepository::Update(const User &user)
 
 	try
 	{
-		w.exec0("UPDATE " + TABLE_NAME + " SET " + LOGIN_FIELD + " = " + w.quote(user.login) + ", " + PASSWORD_FIELD + " = " + w.quote(user.password) + " WHERE " + ID_FIELD + " = " + w.quote(user.id) + ";");
+		w.exec0(
+			"UPDATE " + TABLE_NAME +
+			" SET " +
+				LOGIN_FIELD + " = " + w.quote(user.login) + ", " +
+				PASSWORD_FIELD + " = " + w.quote(user.password) +
+			" WHERE " + ID_FIELD + " = " + w.quote(user.id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::pqxx_exception& e)
@@ -94,7 +104,6 @@ void UserRepository::Update(const User &user)
 
 void UserRepository::Remove(IdType id)
 {
-
 	pqxx::work w(m_database_connection);
 
 	try

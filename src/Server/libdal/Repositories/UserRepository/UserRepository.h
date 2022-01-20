@@ -8,7 +8,7 @@
 class UserRepository
 {
 public:
-    UserRepository(pqxx::connection& db_connection);
+	UserRepository(pqxx::connection& db_connection);
 
 	void Add(const User& user);
 	std::optional<User> GetById(IdType id);

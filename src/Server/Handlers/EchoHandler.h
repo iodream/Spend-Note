@@ -13,7 +13,7 @@ class EchoHandler : public ICommandHandler
 			std::string msg;
 		};
 
-		DTO Parse(const QJsonDocument& playload);
+		DTO Parse(const QJsonDocument& payload);
     };
 
 	class JSONFormatter
