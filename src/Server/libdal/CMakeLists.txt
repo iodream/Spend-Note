@@ -14,22 +14,39 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
+option(TestLibdal "build test executable" OFF)
+
 add_library(libdal STATIC
-	Types.h
+  Types.h
 
-	Facade/IDbFacade.h
-	Facade/DbFacade.h
-	Facade/DbFacade.cpp
+  DTOs/Income.h
+  DTOs/List.h
+  DTOs/IncomeCategory.h
+  DTOs/ListState.h
+  DTOs/User.h
+  DTOs/Product.h
+  DTOs/ProductCategory.h
 
-	DTOs/User.h
-	DTOs/Product.h
-	DTOs/ProductCategory.h
 
-	Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
+  Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
+  Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
+  Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h Repositories/IncomeCategoryRepository/IncomeCategoryRepository.cpp
+  Repositories/ListStateRepository/ListStateRepository.h Repositories/ListStateRepository/ListStateRepository.cpp
+  Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
+  Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
+  Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
 
-	Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
-	Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
-	Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
+  Facade/IDbFacade.h
+  Facade/DbFacade.h
+  Facade/DbFacade.cpp
+
+  Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
+
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)
+
+if(TestLibdal)
+    add_executable(TestLibdal main.cpp)
+    target_link_libraries(TestLibdal libdal)
+endif()

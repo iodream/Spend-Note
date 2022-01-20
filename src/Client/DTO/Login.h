@@ -4,8 +4,8 @@
 
 struct LoginInDTO
 {
-    std::string login;
-    std::string password;
+	std::string login;
+	std::string password;
 };
 
 struct LoginOutDTO

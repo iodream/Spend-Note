@@ -3,7 +3,8 @@
 #include <QString>
 #include <QWidget>
 
-#include "ListItem.h"
+#include "ListItem/ListItem.h"
+#include "ProductPage/ProductPage.h"
 
 namespace Ui {
 class ListSubPage;
@@ -27,6 +28,8 @@ public:
 
 	ListItem* SafeGetProduct(int idx);
 private:
+	void OnProductClicked(ListItem* product);
+
 	void set_list_size(int size);
 	int get_list_size();
 
@@ -40,5 +43,4 @@ private:
 private slots:
 	// temporary plugs, should be reimplemented
 	void OnAddProduct();
-	void OnProductClicked();
 };

@@ -27,13 +27,13 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 	std::stringstream body_encoded;
 	auto body_begin_pos = token.find(".");
 	if (body_begin_pos == std::string::npos)
-		throw Net::UnauthorizedError("No token body");
+		throw UnauthorizedError("No token body");
 
 	body_begin_pos++;
 
 	auto body_end_pos = token.find(".", body_begin_pos);
 	if (body_end_pos == std::string::npos)
-		throw Net::UnauthorizedError("No token body");
+		throw UnauthorizedError("No token body");
 
 	auto body_size = body_end_pos - body_begin_pos;
 
@@ -65,7 +65,7 @@ AuthorizedHandler::JSONParser::DTO AuthorizedHandler::JSONParser::Parse(
 		SafeReadString(json, "login", dto.login);
 		SafeReadString(json, "iat", dto.iat);
 	}  catch (const ParsingError& ex) {
-		throw Net::BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
 
 	return dto;
@@ -96,21 +96,21 @@ Net::Response AuthorizedHandler::Handle(Net::Request& request)
 	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER) {
 		if (!request.auth_info.size()) {
 			return FormErrorResponse(
-				Net::NetError::Status::HTTP_UNAUTHORIZED,
+				NetError::Status::HTTP_UNAUTHORIZED,
 				"No authorization data");
 		}
 		request.jwt_token_body = DecodeJWTTokenBody(request.auth_info);
 	}
 	else {
 		return FormErrorResponse(
-			Net::NetError::Status::HTTP_UNAUTHORIZED,
+			NetError::Status::HTTP_UNAUTHORIZED,
 			"Unsupported authorization scheme");
 	}
 
 
 	if (!CheckAuthorization(request)) {
 		return FormErrorResponse(
-			Net::NetError::Status::HTTP_UNAUTHORIZED,
+			NetError::Status::HTTP_UNAUTHORIZED,
 			"Invalid authorizaion data");
 	}
 	return AuthHandle(request);
