@@ -22,8 +22,8 @@ private:
     QJsonDocument ReadJSON(std::istream& is);
 	void SendResponse(const Net::Response& response, HTTPResponse& http_res);
 	Net::Request ParseRequest(HTTPRequest& http_req);
-	Net::Response FormErrorResponse(const Net::ClientError& ex);
-	Net::Response FormErrorResponse(const Net::ServerError& ex);
+	Net::Response FormErrorResponse(const ClientError& ex);
+	Net::Response FormErrorResponse(const ServerError& ex);
 	Net::Response FormErrorResponse();
 private:
 	std::unique_ptr<ICommandHandler> m_handler;

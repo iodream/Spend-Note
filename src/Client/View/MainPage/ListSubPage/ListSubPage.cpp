@@ -29,12 +29,11 @@ void ListSubPage::InsertProduct(ListItem* product, int idx)
 		throw Exception("Trying to insert a widget out of range");
 	}
 	m_ui->ItemsLayout->insertWidget(idx, product);
-	connect(product, SIGNAL(released()), this, SLOT(OnProductClicked()));
+	connect(product, &ListItem::released, [this, product](){ OnProductClicked(product); });
 	product->set_number(idx + 1);
 	set_list_size(get_list_size() + 1);
 	UpdateProductNumbers(idx + 1);
 }
-
 
 void ListSubPage::OnAddProduct()
 {
@@ -49,13 +48,8 @@ void ListSubPage::OnAddProduct()
 	InsertProduct(product, 0);
 }
 
-void ListSubPage::OnProductClicked()
+void ListSubPage::OnProductClicked(ListItem* product)
 {
-	ListItem* product = qobject_cast<ListItem*>(sender());
-	if (!product) {
-		throw Exception("Failed to get caller object pointer");
-	}
-
 	// adding new page to stackedWidget
 	ProductPage* product_page = new ProductPage;
 	product_page->Setup(product);

@@ -4,8 +4,6 @@
 
 #include "../Exception.h"
 
-namespace Net {
-
 class NetError : public Exception {
 public:
     using Status = Poco::Net::HTTPServerResponse::HTTPStatus;
@@ -129,5 +127,3 @@ public:
 
     virtual ~NotImplementedError() noexcept {}
 };
-
-}
