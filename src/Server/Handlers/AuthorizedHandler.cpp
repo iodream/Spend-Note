@@ -12,6 +12,15 @@
 #include "AuthorizedHandler.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
+#include "../libdal/Facade/DbFacade.h"
+#include "Common.h"
+#include "Net/Parsing.h"
+
+AuthorizedHandler::AuthorizedHandler()
+	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
+{
+
+}
 
 QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 {
@@ -45,13 +54,35 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 	return QJsonDocument::fromJson(raw_token_body);
 }
 
-bool AuthorizedHandler::CheckAuthorization(const Net::Request& request)
+AuthorizedHandler::JSONParser::DTO AuthorizedHandler::JSONParser::Parse(
+	const QJsonDocument& payload)
+{
+	DTO dto;
+	auto json = payload.object();
+
+	try {
+		SafeReadId(json, "id", dto.id);
+		SafeReadString(json, "login", dto.login);
+		SafeReadString(json, "iat", dto.iat);
+	}  catch (const ParsingError& ex) {
+		throw Net::BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+	}
+
+	return dto;
+}
+
+bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 {
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
 		return false;
-
+	auto parsed_token = m_parser.Parse(request.json_payload);
+	auto user = m_facade->GetUserById(parsed_token.id);
+	if(!user)
+		return false;
+	auto password = user->password;
+	request.uid = user->id;
 	try {
-		Poco::JWT::Signer signer(Net::DUMMY_PASSWORD);
+		Poco::JWT::Signer signer(password);
 		Poco::JWT::Token token = signer.verify(request.auth_info);
 	}
 	catch (const Poco::JWT::SignatureVerificationException& ex) {

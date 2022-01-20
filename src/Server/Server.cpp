@@ -60,7 +60,7 @@ Net::Request HTTPRequestHandler::ParseRequest(HTTPRequest& http_req)
 	request.method = http_req.getMethod();
 	request.content_type = http_req.getContentType();
 	if (request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
-		request.json_playload = ReadJSON(http_req.stream());
+		request.json_payload = ReadJSON(http_req.stream());
 	else if (request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
 		;
 	else if (request.content_type == Net::CONTENT_TYPE_EMPTY)
@@ -104,7 +104,7 @@ void HTTPRequestHandler::SendResponse(
 	std::ostream& data_stream = http_res.send();
 
 	if (response.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
-		data_stream << response.json_playload.toJson().constData();
+		data_stream << response.json_payload.toJson().constData();
 	else if (response.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
 		;
 	else if (response.content_type == Net::CONTENT_TYPE_EMPTY)
