@@ -3,10 +3,8 @@
 #include <string>
 #include "Types.h"
 
-struct List
+struct ListState
 {
-	idType list_id;
-	idType owner_id;
-	idType state_id;
+    idType list_state_id;
     std::string name;
 };

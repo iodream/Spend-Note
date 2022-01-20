@@ -8,13 +8,15 @@
 class ListRepository
 {
 public:
-    ListRepository(pqxx::connection& database_connection);
+    ListRepository(pqxx::connection& db_connection);
 
-    void AddList(const List& list_);
-    std::optional<List> GetList(const idType& id);
-    void Update(const List& list_);
-    void Remuve(const idType& id);
+	void AddList(const List& list);
+	std::optional<List> GetList(const idType& list_id);
+	std::optional<std::vector<List>> GetAllLists(const idType& user_id);
+	void Update(const List& list);
+	void Remove(const idType& list_id);
 
 private:
-    pqxx::connection& m_database_connection;
+    List ParseSQLRow(const pqxx::row& row);
+    pqxx::connection& m_db_connection;
 };

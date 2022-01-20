@@ -1,16 +1,22 @@
-#include "idbfacade.h"
-#include "dbfacade.h"
-
+#include "Facade/dbfacade.h"
+#include "Facade/idbfacade.h"
 #include <memory>
 #include <iostream>
 
 int main()
 {
-    std::unique_ptr<IDbFacade> db = std::make_unique<DbFacade>("user=postgres host=localhost dbname=Test password=postgres");
-    auto user = db->getUserById(2);
-    std::cout
-            << "User:\n"
-            << "\tid: " << user.id << "\n"
-            << "\tlogin: " << user.login << "\n"
-            << "\tpass: " << user.pass << "\n";
+	DbFacade facade{"user=postgres host=localhost dbname=postgres password=123445"};
+
+	auto r = facade.GetAllIncomes(20);
+	for(auto& el : *r)
+	{
+		std::cout << el.amount << std::endl;
+	}
+
+	auto t = facade.GetListCategoriesAll();
+	for(auto& el : t)
+	{
+		std::cout << el.name << std::endl;
+	}
+
 }
