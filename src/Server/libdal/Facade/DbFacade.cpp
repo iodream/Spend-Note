@@ -1,14 +1,14 @@
 #include "DbFacade.h"
 
-DbFacade::DbFacade(const std::string& connection_string) :
-		m_connection(connection_string),
-		m_users(m_connection),
-		m_products(m_connection),
-		m_product_categories(m_connection),
-		m_incomes(m_connection),
-		m_lists(m_connection),
-		m_list_states(m_connection),
-		m_income_categories(m_connection)
+DbFacade::DbFacade(const std::string& connection_string)
+		: m_connection(connection_string)
+		, m_users(m_connection)
+		, m_products(m_connection)
+		, m_product_categories(m_connection)
+		, m_incomes(m_connection)
+		, m_lists(m_connection)
+		, m_list_states(m_connection)
+		, m_income_categories(m_connection)
 {
 }
 

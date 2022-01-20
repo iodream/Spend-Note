@@ -152,15 +152,3 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 		return income;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

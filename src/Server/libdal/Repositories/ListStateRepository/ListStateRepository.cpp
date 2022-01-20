@@ -18,7 +18,7 @@ std::optional<ListState> ListStateRepository::GetById(const IdType &list_state_i
 		pqxx::work w{m_db_connection};
 		pqxx::row list_state = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_state_id) + ";");
 
-		 return ListState{list_state[ID_FIELD].as<IdType>(), list_state[NAME_FIELD].as<std::string>()};
+		return ListState{list_state[ID_FIELD].as<IdType>(), list_state[NAME_FIELD].as<std::string>()};
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
