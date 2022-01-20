@@ -6,6 +6,6 @@
 struct User
 {
 	IdType id;
-    std::string login;
+	std::string login;
 	std::string password;
 };
