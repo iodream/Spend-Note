@@ -2,7 +2,7 @@
 #include "ui_LoginPage.h"
 
 LoginPage::LoginPage(QWidget *parent)
-    : QWidget(parent)
+	: QWidget(parent)
 	, m_ui(new Ui::LoginPage)
 {
 	m_ui->setupUi(this);
@@ -23,9 +23,9 @@ void LoginPage::ChangeLoginErrorLabel(std::string reason)
 
 void LoginPage::OnLoginSubmitButtonClicked()
 {
-    LoginInDTO login_in_dto;
+	LoginInDTO login_in_dto;
 	login_in_dto.login = m_ui->loginLineEdit->text().toStdString();
 	login_in_dto.password = m_ui->passwordLineEdit->text().toStdString();
-    emit Login(login_in_dto);
+	emit Login(login_in_dto);
 }
 
