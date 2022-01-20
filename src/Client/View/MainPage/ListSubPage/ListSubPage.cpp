@@ -56,7 +56,14 @@ void ListSubPage::OnProductClicked()
 		throw Exception("Failed to get caller object pointer");
 	}
 
-	RemoveProduct(product);
+	// adding new page to stackedWidget
+	ProductPage* product_page = new ProductPage;
+	product_page->Setup(product);
+
+	m_ui->stackedWidget->addWidget(product_page);
+	m_ui->stackedWidget->setCurrentIndex(1);
+	// no use in creating some constants here
+	// because it's temporary page that will be deleted in case of exit from her (GoBackButton)
 }
 
 ListItem* ListSubPage::SafeGetProduct(int idx)

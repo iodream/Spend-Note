@@ -11,11 +11,11 @@
 class LoginModel
 {
 public:
-    class JSONFormatter
-    {
-    public:
+	class JSONFormatter
+	{
+	public:
 		QJsonDocument Format(const LoginInDTO& dto);
-    };
+	};
 
 	class JSONParser
 	{
@@ -23,7 +23,7 @@ public:
 		void Parse(QJsonObject json, LoginOutDTO& dto);
 	};
 
-    Net::Request FormRequest(LoginInDTO dto);
+	Net::Request FormRequest(LoginInDTO dto);
 	LoginOutDTO  ParseResponse(const Net::Response& response);
 
 	JSONParser m_parser{};

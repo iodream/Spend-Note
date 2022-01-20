@@ -30,7 +30,7 @@ void LoginModel::JSONParser::Parse(QJsonObject json, LoginOutDTO& dto)
 
 LoginOutDTO LoginModel::ParseResponse(const Net::Response& response)
 {
-    LoginOutDTO dto;
+	LoginOutDTO dto;
 
 	m_parser.Parse(response.json_payload.object(), dto);
 

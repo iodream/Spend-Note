@@ -25,6 +25,12 @@ public:
 	void set_price(const QString& price);
 	void set_is_purchased(bool is_purchased);
 
+	QString get_name() { return m_name; };
+	QString get_buy_until() { return m_buy_until; };
+	QString get_price() { return m_price; };
+	bool get_is_purchased() { return m_is_purchased; };
+	IdType get_id() { return m_id; };
+
 	void set_number(int number);
 	int get_number();
 

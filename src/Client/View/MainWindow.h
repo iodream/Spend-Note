@@ -13,11 +13,11 @@ QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+	MainWindow(QWidget *parent = nullptr);
+	~MainWindow();
 
 	void SetCurrentPage(UIPages page);
 
@@ -27,6 +27,6 @@ public:
 	MainPage m_main_page;
 
 private:
-    static int PageToInt(UIPages page);
+	static int PageToInt(UIPages page);
 	Ui::MainWindow *m_ui;
 };
