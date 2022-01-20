@@ -32,7 +32,7 @@ LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
 		SafeReadString(json, "login", dto.login);
 		SafeReadString(json, "password", dto.passwd_hash);
 	}  catch (const ParsingError& ex) {
-		throw Net::BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
 
 	return dto;
@@ -46,7 +46,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 
 		if(!user || dto.passwd_hash != user->password) {
 			return FormErrorResponse(
-			Net::NetError::Status::HTTP_UNAUTHORIZED,
+			NetError::Status::HTTP_UNAUTHORIZED,
 			"Invalid login data");
 		}
 
@@ -64,6 +64,6 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
 	return FormErrorResponse(
-		Net::NetError::Status::HTTP_BAD_REQUEST,
+		NetError::Status::HTTP_BAD_REQUEST,
 		"Unsupported method");
 }

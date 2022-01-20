@@ -24,7 +24,7 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 
 	try {
 		if (!m_handler) {
-			throw Net::NotFoundError{
+			throw NotFoundError{
 				std::string{"No such URI \""}.
 				append(http_req.getURI()).
 				append("\"")};
@@ -34,11 +34,11 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 		auto response = m_handler->Handle(request);
 		SendResponse(response, http_res);
 	}
-	catch (const Net::ClientError& ex) {
+	catch (const ClientError& ex) {
 		std::cout << ex.what() << "(URI: " << http_req.getURI() << ")" << "\n";
 		SendResponse(FormErrorResponse(ex), http_res);
 	}
-	catch (const Net::ServerError& ex) {
+	catch (const ServerError& ex) {
 		std::cout << ex.what() << "(URI: " << http_req.getURI() << ")" << "\n";
 		SendResponse(FormErrorResponse(ex), http_res);
 	}
@@ -66,7 +66,7 @@ Net::Request HTTPRequestHandler::ParseRequest(HTTPRequest& http_req)
 	else if (request.content_type == Net::CONTENT_TYPE_EMPTY)
 		;
 	else
-		throw Net::BadRequestError("Unsupported content type");
+		throw BadRequestError("Unsupported content type");
 
 	try {
 		http_req.getCredentials(request.auth_scheme, request.auth_info);
@@ -110,15 +110,15 @@ void HTTPRequestHandler::SendResponse(
 	else if (response.content_type == Net::CONTENT_TYPE_EMPTY)
 		;
 	else
-		throw Net::InternalError("Unsupported content type");
+		throw InternalError("Unsupported content type");
 }
 
-Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ClientError& ex)
+Net::Response HTTPRequestHandler::FormErrorResponse(const ClientError& ex)
 {
 	return ::FormErrorResponse(ex.get_status(), ex.what());
 }
 
-Net::Response HTTPRequestHandler::FormErrorResponse(const Net::ServerError& ex)
+Net::Response HTTPRequestHandler::FormErrorResponse(const ServerError& ex)
 {
 	return ::FormErrorResponse(ex.get_status());
 }

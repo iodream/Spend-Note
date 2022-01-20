@@ -15,7 +15,7 @@ EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
 	try {
 		SafeReadString(json, "msg", dto.msg);
 	}  catch (const ParsingError& ex) {
-		throw Net::BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
 
 	return dto;
@@ -38,6 +38,6 @@ Net::Response EchoHandler::Handle(Net::Request& request)
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
 	return FormErrorResponse(
-		Net::NetError::Status::HTTP_BAD_REQUEST,
+		NetError::Status::HTTP_BAD_REQUEST,
 		"Unsupported method");
 }
