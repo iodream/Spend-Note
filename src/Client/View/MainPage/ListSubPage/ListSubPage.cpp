@@ -15,7 +15,19 @@ ListSubPage::ListSubPage(const QString& name, int id, QWidget *parent)
 	m_ui->ListName->setText(name);
 	set_list_size(0);
 
-	connect(m_ui->AddProductButton, SIGNAL(released()), this, SLOT(OnAddProduct()));
+	connect(
+		m_ui->AddProductButton,
+		SIGNAL(released()),
+		this,
+		SLOT(OnAddProduct()));
+
+	connect(
+		&m_product_page,
+		SIGNAL(GoBack()),
+		this,
+		SLOT(OnGoBack()));
+
+	m_ui->stackedWidget->addWidget(&m_product_page);
 }
 
 void ListSubPage::AppendProduct(ListItem* product)
@@ -48,18 +60,6 @@ void ListSubPage::OnAddProduct()
 	InsertProduct(product, 0);
 }
 
-void ListSubPage::OnProductClicked(ListItem* product)
-{
-	// adding new page to stackedWidget
-	ProductPage* product_page = new ProductPage;
-	product_page->Setup(product);
-
-	m_ui->stackedWidget->addWidget(product_page);
-	m_ui->stackedWidget->setCurrentIndex(1);
-	// no use in creating some constants here
-	// because it's temporary page that will be deleted in case of exit from her (GoBackButton)
-}
-
 ListItem* ListSubPage::SafeGetProduct(int idx)
 {
 	QLayoutItem *layout = m_ui->ItemsLayout->itemAt(idx);
@@ -71,6 +71,11 @@ ListItem* ListSubPage::SafeGetProduct(int idx)
 		throw Exception("Failed to get product widget pointer");
 	}
 	return product;
+}
+
+void ListSubPage::SetCurrentListSubPage(ListProductsPages sub_page)
+{
+	m_ui->stackedWidget->setCurrentIndex(static_cast<int>(sub_page));
 }
 
 void ListSubPage::RemoveProduct(ListItem* product)
@@ -110,7 +115,20 @@ int ListSubPage::get_list_size()
 	return m_list_size;
 }
 
+void ListSubPage::OnProductClicked(ListItem* product)
+{
+	m_product_page.Setup(product);
+	SetCurrentListSubPage(ListProductsPages::PRODUCT);
+}
+
+void ListSubPage::OnGoBack()
+{
+	SetCurrentListSubPage(ListProductsPages::LISTS);
+};
+
 ListSubPage::~ListSubPage()
 {
 	delete m_ui;
 }
+
+
