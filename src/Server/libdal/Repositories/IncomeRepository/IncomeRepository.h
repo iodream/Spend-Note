@@ -8,17 +8,17 @@
 class IncomeRepository
 {
 public:
-    IncomeRepository(pqxx::connection& db_connection);
+	IncomeRepository(pqxx::connection& db_connection);
 
-    void Add(const Income& income);
+	void Add(const Income& income);
 	std::optional<Income> GetIncome(const IdType& income_id);
 	std::optional<std::vector<Income>> GetAllIncomes(const IdType& user_id);
-    void Update(const Income& income);
+	void Update(const Income& income);
 	void Remove(const IdType& income_id);
 
 
 private:
-    pqxx::connection& m_db_connection;
+	pqxx::connection& m_db_connection;
 
-    Income ParseSQLRow(const pqxx::row& row);
+	Income ParseSQLRow(const pqxx::row& row);
 };

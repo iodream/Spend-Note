@@ -8,7 +8,7 @@
 class ListRepository
 {
 public:
-    ListRepository(pqxx::connection& db_connection);
+	ListRepository(pqxx::connection& db_connection);
 
 	void AddList(const List& list);
 	std::optional<List> GetList(const IdType& list_id);
@@ -17,6 +17,7 @@ public:
 	void Remove(const IdType& list_id);
 
 private:
-    List ParseSQLRow(const pqxx::row& row);
-    pqxx::connection& m_db_connection;
+	List ParseSQLRow(const pqxx::row& row);
+
+	pqxx::connection& m_db_connection;
 };

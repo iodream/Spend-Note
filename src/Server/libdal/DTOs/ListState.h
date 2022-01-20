@@ -6,5 +6,5 @@
 struct ListState
 {
 	IdType list_state_id;
-    std::string name;
+	std::string name;
 };

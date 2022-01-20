@@ -6,5 +6,5 @@
 struct IncomeCategory
 {
 	IdType income_category_id;
-    std::string name;
+	std::string name;
 };
