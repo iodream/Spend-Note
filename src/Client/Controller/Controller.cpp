@@ -27,6 +27,7 @@ void Controller::StartTest()
 {
 	Start(UIPages::MAIN);
 	m_main_window.m_main_page.SetCurrentSubPage(MainSubPages::LISTS);
+	//m_main_window.m_main_page.SetCurrentSubPage(MainSubPages::INCOMES);
 //	m_main_window.m_main_page.AddListSubPage("Some list 1", 1);
 //	m_main_window.m_main_page.AddListSubPage("Some list 2", 2);
 //	m_main_window.m_main_page.AddListSubPage("Some list 3", 3);

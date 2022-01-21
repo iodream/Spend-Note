@@ -12,7 +12,7 @@ enum class UIPages
 enum class MainSubPages
 {
 	LISTS = 0,
-	ICOMES,
+	INCOMES,
 	SETTINGS,
 };
 

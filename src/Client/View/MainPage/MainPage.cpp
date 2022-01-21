@@ -6,6 +6,7 @@
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::MainPage)
+	, m_incomes_page(1)
 {
 	m_ui->setupUi(this);
 

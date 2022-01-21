@@ -6,6 +6,7 @@
 #include <QWidget>
 
 #include "ListSubPage/ListSubPage.h"
+#include "IncomesSubPage/IncomeListSubPage.h"
 #include "View/Constants.h"
 
 namespace Ui {
@@ -32,7 +33,7 @@ private:
 
 	Ui::MainPage *m_ui;
 //	ListsPage m_lists_page;
-//	IncomesPage m_incomes_page;
+	IncomeListSubPage m_incomes_page;
 
 	// probably should be removed when m_lists_page will be ready
 	std::map<ListSubPage::IdType, ListSubPage*> m_list_sub_pages;
