@@ -27,7 +27,7 @@ class EchoHandler : public ICommandHandler
     };
 
 public:
-    EchoHandler() {}
+	EchoHandler(IDbFacade::Ptr facade) : ICommandHandler(std::move(facade)) {}
     virtual ~EchoHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;

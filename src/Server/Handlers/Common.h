@@ -2,9 +2,8 @@
 
 #include "Net/Message.h"
 
-const std::string DB_CONN_STRING =
-				"user=test_user host=127.0.0.1 "
-				"password=test_pass dbname=SpendAndNote";
+extern const char* EMPTY_C_STRING;
+extern const std::string EMPTY_STD_STRING;
 
 Net::Response FormJSONResponse(
 	QJsonDocument&& json_doc,

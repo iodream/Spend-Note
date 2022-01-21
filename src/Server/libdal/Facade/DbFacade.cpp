@@ -53,9 +53,9 @@ std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
 	return m_products.GetByListId(list_id);
 }
 
-void DbFacade::UpdateProduct(const Product& user)
+void DbFacade::UpdateProduct(const Product& product)
 {
-	m_products.Update(user);
+	m_products.Update(product);
 }
 
 void DbFacade::RemoveProduct(IdType id)

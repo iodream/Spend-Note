@@ -14,6 +14,7 @@ class DbFacade : public IDbFacade
 {
 public:
 	DbFacade(const std::string& connection_string);
+	virtual ~DbFacade() override {}
 
 	void AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;

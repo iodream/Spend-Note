@@ -16,8 +16,8 @@
 #include "Common.h"
 #include "Net/Parsing.h"
 
-AuthorizedHandler::AuthorizedHandler()
-	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
+AuthorizedHandler::AuthorizedHandler(IDbFacade::Ptr facade)
+	: ICommandHandler(std::move(facade))
 {
 
 }
@@ -63,7 +63,7 @@ AuthorizedHandler::JSONParser::DTO AuthorizedHandler::JSONParser::Parse(
 	try {
 		SafeReadId(json, "id", dto.id);
 		SafeReadString(json, "login", dto.login);
-		SafeReadString(json, "iat", dto.iat);
+		SafeReadNumber(json, "iat", dto.iat);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
@@ -75,7 +75,7 @@ bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 {
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
 		return false;
-	auto parsed_token = m_parser.Parse(request.json_payload);
+	auto parsed_token = m_parser.Parse(request.jwt_token_body);
 	auto user = m_facade->GetUserById(parsed_token.id);
 	if(!user)
 		return false;
