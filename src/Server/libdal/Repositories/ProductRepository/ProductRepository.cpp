@@ -185,7 +185,24 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	product.product_priority = row[PRODUCT_PRIORITY_FIELD].as<int>();
 	product.is_bought = row[IS_BOUGHT_FIELD].as<bool>();
 	product.add_date = row[ADD_DATE_FIELD].as<Timestamp>();
-	product.purchase_date = row[PURCHASE_DATE_FIELD].get<Timestamp, std::optional>();
-	product.buy_until_date = row[BUY_UNTIL_DATE_FIELD].get<Timestamp, std::optional>();
+
+	if (row[PURCHASE_DATE_FIELD].is_null())
+	{
+		product.purchase_date = std::nullopt;
+	}
+	else
+	{
+		product.purchase_date = row[PURCHASE_DATE_FIELD].as<Timestamp>();
+	}
+
+	if (row[BUY_UNTIL_DATE_FIELD].is_null())
+	{
+		product.purchase_date = std::nullopt;
+	}
+	else
+	{
+		product.purchase_date = row[BUY_UNTIL_DATE_FIELD].as<Timestamp>();
+	}
+
 	return product;
 }
