@@ -35,5 +35,5 @@ public:
 
 	JSONFormatter m_formatter{};
 	JSONParser m_parser{};
-	std::unique_ptr<IDbFacade> m_facade;
+	IDbFacade::Ptr m_facade;
 };

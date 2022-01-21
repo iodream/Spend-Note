@@ -27,6 +27,6 @@ public:
 	bool CheckAuthorization(Net::Request& request);
 	Net::Response Handle(Net::Request& request) override;
 	virtual Net::Response AuthHandle(const Net::Request& request) = 0;
-	std::unique_ptr<IDbFacade> m_facade;
+	IDbFacade::Ptr m_facade;
 	JSONParser m_parser;
 };
