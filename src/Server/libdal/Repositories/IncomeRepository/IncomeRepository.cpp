@@ -28,7 +28,7 @@ void IncomeRepository::Add(const Income& income)
 				+ CATEGORY_ID + ", " + ADD_TIME + ", " + EXPERATION_TIME + ") " +
 				"VALUES (" + w.quote(income.user_id) + ", " + w.quote(income.name)+ ", " + w.quote(income.amount) + ", "
 				+ w.quote(income.category_id) + ", " + w.quote(income.add_time) + ", "
-				+ w.quote(income.expoiration_time) + ");"
+				+ w.quote(income.expiration_time) + ");"
 				);
 
 		w.commit();
@@ -73,7 +73,7 @@ void IncomeRepository::Update(const Income& income)
 		pqxx::work w{m_db_connection};
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + INCOME_NAME + " = " + w.quote(income.name) + ", "
 				+ AMOUNT + " = " + w.quote(income.amount) + ", " + CATEGORY_ID + " = " + w.quote(income.category_id) + ", "
-				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPERATION_TIME + " = " + w.quote(income.expoiration_time)
+				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPERATION_TIME + " = " + w.quote(income.expiration_time)
 				+ " WHERE " + ID_FIELD + " = " + w.quote(income.income_id) + ";");
 		w.commit();
 
@@ -135,7 +135,7 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 		income.amount = row[AMOUNT].as<double>();
 		income.category_id = row[CATEGORY_ID].as<IdType>();
 		income.add_time = row[ADD_TIME].as<std::string>();
-		income.expoiration_time = row[EXPERATION_TIME].as<std::string>();
+		income.expiration_time = row[EXPERATION_TIME].as<std::string>();
 
 		return income;
 	}
@@ -147,7 +147,7 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 		income.amount = row[AMOUNT].as<double>();
 		income.category_id = row[CATEGORY_ID].as<IdType>();
 		income.add_time = row[ADD_TIME].as<std::string>();
-		income.expoiration_time = "";
+		income.expiration_time = "";
 
 		return income;
 	}
