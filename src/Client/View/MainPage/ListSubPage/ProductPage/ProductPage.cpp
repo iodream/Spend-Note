@@ -7,7 +7,11 @@ ProductPage::ProductPage(QWidget *parent) :
 {
 	m_ui->setupUi(this);
 
-	connect(m_ui->goBackButton, SIGNAL(clicked()), this, SLOT(OnGoBackClicked()));
+	connect(
+		m_ui->goBackButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnGoBackClicked()));
 }
 
 ProductPage::~ProductPage()
@@ -26,5 +30,5 @@ void ProductPage::Setup(ListItem* list_item)
 
 void ProductPage::OnGoBackClicked()
 {
-	this->~ProductPage();
+	emit GoBack();
 }

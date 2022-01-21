@@ -5,6 +5,7 @@
 
 #include "ListItem/ListItem.h"
 #include "ProductPage/ProductPage.h"
+#include "../../Constants.h"
 
 namespace Ui {
 class ListSubPage;
@@ -27,6 +28,9 @@ public:
 	void UpdateProductNumbers(int idx);
 
 	ListItem* SafeGetProduct(int idx);
+
+	void SetCurrentListSubPage(ListProductsPages sub_page);
+
 private:
 	void OnProductClicked(ListItem* product);
 
@@ -34,6 +38,7 @@ private:
 	int get_list_size();
 
 	Ui::ListSubPage *m_ui;
+	ProductPage m_product_page;
 
 	QString m_name;
 	IdType m_id;
@@ -43,4 +48,5 @@ private:
 private slots:
 	// temporary plugs, should be reimplemented
 	void OnAddProduct();
+	void OnGoBack();
 };
