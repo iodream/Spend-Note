@@ -6,8 +6,25 @@
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::MainPage)
+	, m_incomes_page(1)
 {
 	m_ui->setupUi(this);
+
+	connect(
+		m_ui->mainToolButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnMainToolButtonClicked()));
+
+	connect(
+		m_ui->settingsToolButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnSettingsToolButtonClicked()));
+
+	AddListSubPage("Some list 1", 1);
+	m_ui->Display->addWidget(&m_incomes_page);
+	m_ui->Display->addWidget(&m_settings_page);
 }
 
 MainPage::~MainPage()
@@ -54,4 +71,14 @@ void MainPage::SetCurrentSubPageList(ListSubPage::IdType id)
 	}  catch (const std::out_of_range& ex) {
 		throw Exception(ex.what());
 	}
+}
+
+void MainPage::OnMainToolButtonClicked()
+{
+	SetCurrentSubPage(MainSubPages::LISTS);
+}
+
+void MainPage::OnSettingsToolButtonClicked()
+{
+	SetCurrentSubPage(MainSubPages::SETTINGS);
 }

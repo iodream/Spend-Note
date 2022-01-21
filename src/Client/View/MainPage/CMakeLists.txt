@@ -5,5 +5,7 @@ list(APPEND Spend-Note-Client_SOURCES
 )
 
 add_subdirectory(ListSubPage)
+add_subdirectory(SettingsSubPage)
+add_subdirectory(IncomesSubPage)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
