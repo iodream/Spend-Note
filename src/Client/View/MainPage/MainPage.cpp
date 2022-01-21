@@ -16,14 +16,12 @@ MainPage::MainPage(QWidget *parent)
 		SLOT(OnMainToolButtonClicked()));
 
 	connect(
-		m_ui->settingsToolButton,
+		m_ui->logoutToolButton,
 		SIGNAL(clicked()),
 		this,
-		SLOT(OnSettingsToolButtonClicked()));
+		SLOT(OnLogoutToolButtonClicked()));
 
 	AddListSubPage("Some list 1", 1);
-	// add income page here
-	m_ui->Display->addWidget(&m_settings_page);
 }
 
 MainPage::~MainPage()
@@ -78,8 +76,7 @@ void MainPage::OnMainToolButtonClicked()
 	// but value should be changed to MainSubPages::LISTS later
 }
 
-void MainPage::OnSettingsToolButtonClicked()
+void MainPage::OnLogoutToolButtonClicked()
 {
-	SetCurrentSubPage(1); // currently 1, because we dont have income page
-	// but value should be changed to MainSubPages::SETTINGS later
+	emit Logout();
 }

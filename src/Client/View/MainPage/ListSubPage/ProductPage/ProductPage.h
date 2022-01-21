@@ -25,6 +25,9 @@ private:
 
 	ListItem* m_list_item;
 
+signals:
+	void GoBack();
+
 private slots:
 	void OnGoBackClicked();
 };

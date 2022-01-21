@@ -11,8 +11,8 @@ Controller::Controller()
 		&Controller::OnLogin);
 
 	QObject::connect(
-		&m_main_window.m_main_page.m_settings_page,
-		&SettingsSubPage::Logout,
+		&m_main_window.m_main_page,
+		&MainPage::Logout,
 		this,
 		&Controller::OnLogout);
 }
