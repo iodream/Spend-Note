@@ -84,7 +84,7 @@ std::optional<Income> DbFacade::GetIncomeById(const IdType& id)
 	return m_incomes.GetIncome(id);
 }
 
-std::optional<std::vector<Income>> DbFacade::GetAllIncomes(const IdType& user_id)
+std::vector<Income> DbFacade::GetAllIncomes(const IdType& user_id)
 {
 	return m_incomes.GetAllIncomes(user_id);
 }
@@ -129,7 +129,7 @@ std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& cate
 	return m_income_categories.GetById(category_id);
 }
 
-std::vector<IncomeCategory> DbFacade::GetIncomeCategoriesAll()
+std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories()
 {
 	return m_income_categories.GetAll();
 }

@@ -1,7 +1,5 @@
 #include <DTOs/List.h>
-
 #include <pqxx/pqxx>
-#include <chrono>
 
 #include "Exceptions/DatabaseFailure.h"
 

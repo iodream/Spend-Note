@@ -16,9 +16,9 @@ std::optional<IncomeCategory> IncomeCategoryRepository::GetById(const IdType& ca
 	try
 	{
 		pqxx::work w{m_db_connection};
-		pqxx::row income_category = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(category_id) + ";");
+		pqxx::result income_category = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(category_id) + ";");
 
-	return IncomeCategory{income_category[ID_FIELD].as<IdType>(), income_category[NAME_FIELD].as<std::string>()};
+		return ParseSQLRow(income_category.front());
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
@@ -44,8 +44,7 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 		pqxx::work w{m_db_connection};
 		std::vector<IncomeCategory> income_categories;
 
-		auto number_of_rows = w.exec("SELECT FROM " + TABLE_NAME + ";");
-		pqxx::result r = w.exec_n(number_of_rows.size(), "SELECT * FROM " + TABLE_NAME + ";");
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + ";");
 
 		for(const auto& row : r)
 		{

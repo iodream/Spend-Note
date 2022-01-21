@@ -2,7 +2,7 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "List";
+    const std::string& TABLE_NAME = "List";
 	const std::string& ID_FIELD = "id";
 	const std::string& USER_ID = "userId";
 	const std::string& LIST_NAME = "name";
@@ -53,11 +53,11 @@ std::optional<List> ListRepository::GetList(const IdType& list_id)
 	try
 	{
 		pqxx::work w{m_db_connection};
-		pqxx::row list =  w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id));
+		pqxx::result list =  w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id) + ";");
 
 		if(!list.empty())
 		{
-			return ParseSQLRow(list);
+			return ParseSQLRow(list.front());
 		}
 	}
 	catch(const pqxx::pqxx_exception& e)
@@ -103,9 +103,7 @@ std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_
 		pqxx::work w{m_db_connection};
 		std::vector<List> list;
 
-		auto number_of_rows = w.exec("SELECT FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
-		pqxx::result r = w.exec_n(number_of_rows.size(),
-									"SELEC * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
 
 		for(const auto& row : r)
 		{

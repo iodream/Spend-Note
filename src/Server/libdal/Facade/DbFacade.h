@@ -32,7 +32,7 @@ public:
 
 	void AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
-	std::optional<std::vector<Income>> GetAllIncomes(const IdType& user_id) override;
+    std::vector<Income> GetAllIncomes(const IdType& user_id) override;
 	void UpdateIncome(const Income& income) override;
 	void RemoveIncome(const IdType& id) override;
 
@@ -43,7 +43,7 @@ public:
 	void RemoveList(const IdType& id) override;
 
 	std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) override;
-	std::vector<IncomeCategory> GetIncomeCategoriesAll() override;
+	std::vector<IncomeCategory> GetAllIncomeCategories() override;
 
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;

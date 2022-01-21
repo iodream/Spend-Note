@@ -10,7 +10,7 @@ namespace
 	const std::string& AMOUNT = "amount";
 	const std::string& CATEGORY_ID = "categoryId";
 	const std::string& ADD_TIME = "addTime";
-	const std::string& EXPERATION_TIME = "expirationTime";
+    const std::string& EXPIRATION_TIME= "expirationTime";
 	const std::string& TABLE_WITH_CATEGORY = "IncomeCategory";
 }
 
@@ -23,12 +23,13 @@ void IncomeRepository::Add(const Income& income)
 	try
 	{
 		pqxx::work w{m_db_connection};
-
-		w.exec0("INSERT INTO " + TABLE_NAME + " (" + USER_ID + ", " + INCOME_NAME + ", " + AMOUNT + ", "
-				+ CATEGORY_ID + ", " + ADD_TIME + ", " + EXPERATION_TIME + ") " +
-				"VALUES (" + w.quote(income.user_id) + ", " + w.quote(income.name)+ ", " + w.quote(income.amount) + ", "
-				+ w.quote(income.category_id) + ", " + w.quote(income.add_time) + ", "
-				+ w.quote(income.expoiration_time) + ");"
+		w.exec0(
+				"INSERT INTO " + TABLE_NAME +
+				" (" + USER_ID + ", " + INCOME_NAME + ", " + AMOUNT + ", "
+				+ CATEGORY_ID + ", " + ADD_TIME + ", " + EXPIRATION_TIME+ ") " +
+				"VALUES (" + w.quote(income.user_id) + ", " + w.quote(income.name)+ ", "
+				+ w.quote(income.amount) + ", " 	+ w.quote(income.category_id) + ", "
+				+ w.quote(income.add_time) + ", " + w.quote(income.expiration_time) + ");"
 				);
 
 		w.commit();
@@ -45,25 +46,18 @@ std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
 	try
 	{
 		pqxx::work w{m_db_connection};
-		pqxx::row income = w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = "  + w.quote(income_id) + ";");
+		pqxx::result income = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = "  + w.quote(income_id) + ";");
 
-		if(!income[EXPERATION_TIME].is_null())
+		if(!income.empty())
 		{
-			return ParseSQLRow(income);
-		}
-
-		else if(income.empty())
-			return std::nullopt;
-
-		else
-		{
-			return ParseSQLRow(income);
+			return ParseSQLRow(income.front());
 		}
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
 		throw DatabaseFailure();
 	}
+    return std::nullopt;
 }
 
 void IncomeRepository::Update(const Income& income)
@@ -73,7 +67,7 @@ void IncomeRepository::Update(const Income& income)
 		pqxx::work w{m_db_connection};
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + INCOME_NAME + " = " + w.quote(income.name) + ", "
 				+ AMOUNT + " = " + w.quote(income.amount) + ", " + CATEGORY_ID + " = " + w.quote(income.category_id) + ", "
-				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPERATION_TIME + " = " + w.quote(income.expoiration_time)
+				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPIRATION_TIME+ " = " + w.quote(income.expiration_time)
 				+ " WHERE " + ID_FIELD + " = " + w.quote(income.income_id) + ";");
 		w.commit();
 
@@ -98,16 +92,14 @@ void IncomeRepository::Remove(const IdType& id)
 	}
 }
 
-std::optional<std::vector<Income>> IncomeRepository::GetAllIncomes(const IdType &id)
+std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
 		std::vector<Income> incomes;
 
-		auto number_of_rows = w.exec("SELECT FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(id) + ";");
-		pqxx::result r = w.exec_n(number_of_rows.size(),
-								"SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(id) + ";");
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(id) + ";");
 
 		for(const auto& row : r)
 		{
@@ -119,7 +111,6 @@ std::optional<std::vector<Income>> IncomeRepository::GetAllIncomes(const IdType 
 	{
 		throw DatabaseFailure();
 	}
-	return std::nullopt;
 }
 
 
@@ -127,28 +118,13 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 {
 	Income income;
 
-	if(!row[EXPERATION_TIME].is_null())
-	{
-		income.income_id = row[ID_FIELD].as<IdType>();
-		income.user_id = row[USER_ID].as<IdType>();
-		income.name = row[INCOME_NAME].as<std::string>();
-		income.amount = row[AMOUNT].as<double>();
-		income.category_id = row[CATEGORY_ID].as<IdType>();
-		income.add_time = row[ADD_TIME].as<std::string>();
-		income.expoiration_time = row[EXPERATION_TIME].as<std::string>();
+    income.income_id = row[ID_FIELD].as<IdType>();
+    income.user_id = row[USER_ID].as<IdType>();
+    income.name = row[INCOME_NAME].as<std::string>();
+    income.amount = row[AMOUNT].as<double>();
+    income.category_id = row[CATEGORY_ID].as<IdType>();
+    income.add_time = row[ADD_TIME].as<std::string>();
+    income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
 
-		return income;
-	}
-	else
-	{
-		income.income_id = row[ID_FIELD].as<IdType>();
-		income.user_id = row[USER_ID].as<IdType>();
-		income.name = row[INCOME_NAME].as<std::string>();
-		income.amount = row[AMOUNT].as<double>();
-		income.category_id = row[CATEGORY_ID].as<IdType>();
-		income.add_time = row[ADD_TIME].as<std::string>();
-		income.expoiration_time = "";
-
-		return income;
-	}
+    return income;
 }
