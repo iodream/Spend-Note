@@ -6,7 +6,6 @@
 
 #include "View/MainWindow.h"
 #include "View/MainPage/MainPage.h"
-#include "View/MainPage/SettingsSubPage/SettingsSubPage.h"
 
 #include "View/Constants.h"
 #include "HTTPClient.h"
