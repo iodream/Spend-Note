@@ -41,13 +41,13 @@ QJsonDocument GetIncomesHandler::JSONFormatter::Format(const DTO& dto)
 	for (const Income& income : dto.incomes)
 	{
 		QJsonObject income_json;
-		income_json["id"] = income.income_id;
-		income_json["user_id"] = income.user_id;
-		income_json["name"] = QString::fromStdString(income.name);
-		income_json["amount"] = income.income_id;
+		income_json["id"] = std::to_string(income.income_id).c_str();
+		income_json["user_id"] = std::to_string(income.user_id).c_str();
+		income_json["name"] = income.name.c_str();
+		income_json["amount"] = income.amount;
 		income_json["category_id"] = income.category_id;
-		income_json["add_time"] = QString::fromStdString(income.add_time);
-		income_json["expiration_time"] = QString::fromStdString(income.expiration_time);
+		income_json["add_time"] = income.add_time.c_str();
+		income_json["expiration_time"] = income.expiration_time.c_str();
 		incomes_json.append(income_json);
 	}
 
