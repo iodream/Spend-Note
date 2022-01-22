@@ -39,7 +39,7 @@ public:
 
 	void AddList(const List& list_) override;
 	std::optional<List> GetListById(const IdType& id) override;
-	std::optional<std::vector<List>> GetAllLists(const IdType& user_id) override;
+    std::vector<List> GetAllLists(const IdType& user_id) override;
 	void UpdateList(const List& list_) override;
 	void RemoveList(const IdType& id) override;
 

@@ -96,12 +96,12 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 	return list;
 }
 
-std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_id)
+std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 {
-try
+    std::vector<List> list;
+    try
 	{
 		pqxx::work w{m_db_connection};
-		std::vector<List> list;
 
 		auto number_of_rows = w.exec("SELECT FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
 		pqxx::result r = w.exec_n(number_of_rows.size(),
@@ -111,11 +111,10 @@ try
 		{
 			list.push_back(ParseSQLRow(row));
 		}
-		return list;
 	}
     catch(const pqxx::pqxx_exception& e)
     {
         throw DatabaseFailure();
     }
-	return std::nullopt;
+    return list;
 }
