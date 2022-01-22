@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
+#include "Exceptions/SQLFailure.h"
 
 namespace
 {
@@ -25,12 +26,12 @@ ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_databa
 
 }
 
-void ProductRepository::Add(const Product& product)
+std::optional<IdType> ProductRepository::Add(const Product& product)
 {
 	pqxx::work w(m_database_connection);
 	try
 	{
-		w.exec0(
+		pqxx::result id_rows = w.exec(
 				"INSERT INTO " + TABLE_NAME + " (" +
 					LIST_ID_FIELD + ", " +
 					CATEGORY_ID_FIELD + ", " +
@@ -52,13 +53,21 @@ void ProductRepository::Add(const Product& product)
 					w.quote(product.is_bought) + ", " +
 					w.quote(product.add_date) + ", " +
 					w.quote(product.purchase_date) + ", " +
-					w.quote(product.buy_until_date) + ");");
+					w.quote(product.buy_until_date) + ") " +
+					"RETURNING " + ID_FIELD + ";");
 		w.commit();
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::sql_error& e)
 	{
-		throw DatabaseFailure();
+		throw SQLFailure(e.what());
 	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return std::nullopt;
 }
 
 std::optional<Product> ProductRepository::GetById(IdType id)

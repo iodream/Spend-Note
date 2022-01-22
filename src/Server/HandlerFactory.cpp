@@ -2,7 +2,8 @@
 #include "Handlers/LoginHandler.h"
 #include "Handlers/EchoHandler.h"
 #include "Handlers/FakeGetListsHandler.h"
-#include "Handlers/GetProductsHandler.h"
+#include "Handlers/Product/GetProductsHandler.h"
+#include "Handlers/Product/AddProductHandler.h"
 
 #include "../libdal/Facade/DbFacade.h"
 
@@ -20,7 +21,9 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new LoginHandler(std::move(facade));
 	if (uri == std::string("/fake_get_lists"))
 		return new FakeGetListsHandler(std::move(facade));
-	if (uri == std::string("/get_products"))
+	if (uri == std::string("/product/get_by_list_id"))
 		return new GetProductsHandler(std::move(facade));
+	if (uri == std::string("/product/add"))
+		return new AddProductHandler(std::move(facade));
 	return nullptr;
 }
