@@ -10,7 +10,7 @@ namespace
 	const std::string& AMOUNT = "amount";
 	const std::string& CATEGORY_ID = "categoryId";
 	const std::string& ADD_TIME = "addTime";
-    const std::string& EXPIRATION_TIME= "expirationTime";
+	const std::string& EXPIRATION_TIME= "expirationTime";
 	const std::string& TABLE_WITH_CATEGORY = "IncomeCategory";
 }
 
@@ -18,22 +18,32 @@ IncomeRepository::IncomeRepository(pqxx::connection& db_connection) : m_db_conne
 {
 }
 
-void IncomeRepository::Add(const Income& income)
+std::optional<IdType> IncomeRepository::Add(const Income& income)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
-		w.exec0(
-				"INSERT INTO " + TABLE_NAME +
-				" (" + USER_ID + ", " + INCOME_NAME + ", " + AMOUNT + ", "
-				+ CATEGORY_ID + ", " + ADD_TIME + ", " + EXPIRATION_TIME+ ") " +
-				"VALUES (" + w.quote(income.user_id) + ", " + w.quote(income.name)+ ", "
-				+ w.quote(income.amount) + ", " 	+ w.quote(income.category_id) + ", "
-				+ w.quote(income.add_time) + ", " + w.quote(income.expiration_time) + ");"
-				);
+		auto id_rows = w.exec(
+				"INSERT INTO " + TABLE_NAME + " (" +
+				USER_ID + ", " +
+				INCOME_NAME + ", " +
+				AMOUNT + ", " +
+				CATEGORY_ID + ", " +
+				ADD_TIME + ", " +
+				EXPIRATION_TIME+ ") " +
+				"VALUES (" +
+				w.quote(income.user_id) + ", " +
+				w.quote(income.name)+ ", " +
+				w.quote(income.amount) + ", " 	+
+				w.quote(income.category_id) + ", " 	+
+				w.quote(income.add_time) + ", " +
+				w.quote(income.expiration_time) + ")" +
+				" RETURNING " + ID_FIELD + ";");
 
 		w.commit();
 
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{

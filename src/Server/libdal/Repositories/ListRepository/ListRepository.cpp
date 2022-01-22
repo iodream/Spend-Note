@@ -16,20 +16,32 @@ ListRepository::ListRepository(pqxx::connection& db_connection) : m_db_connectio
 }
 
 
-void ListRepository::AddList(const List& list)
+std::optional<IdType> ListRepository::AddList(const List& list)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
-		w.exec0("INSERT INTO " + TABLE_NAME + " ( " +  USER_ID + ", " + LIST_STATE_ID + ", " + LIST_NAME + ") "
-				+ "VALUES (" + w.quote(list.owner_id) + ", " + w.quote(list.state_id) + ", " + w.quote(list.name) + ");");
+		pqxx::result id_rows = w.exec(
+					"INSERT INTO " + TABLE_NAME + " ( " +
+					USER_ID + ", " +
+					LIST_STATE_ID + ", " +
+					LIST_NAME + ") " +
+					"VALUES (" +
+					w.quote(list.owner_id) + ", " +
+					w.quote(list.state_id) + ", " +
+					w.quote(list.name) + ")" +
+					" RETURNING " + ID_FIELD + ";");
 
 		w.commit();
+
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
 		throw DatabaseFailure();
 	}
+	return std::nullopt;
 }
 
 
@@ -96,7 +108,7 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 	return list;
 }
 
-std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_id)
+std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 {
 	try
 	{
@@ -115,5 +127,4 @@ std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_
 	{
 		throw DatabaseFailure();
 	}
-	return std::nullopt;
 }

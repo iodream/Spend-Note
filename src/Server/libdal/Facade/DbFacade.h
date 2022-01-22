@@ -30,13 +30,13 @@ public:
 	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
 	std::vector<ProductCategory> GetAllProductCategories() override;
 
-	void AddIncome(const Income& income) override;
+	std::optional<IdType> AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
-    std::vector<Income> GetAllIncomes(const IdType& user_id) override;
+	std::vector<Income> GetAllIncomes(const IdType& user_id) override;
 	void UpdateIncome(const Income& income) override;
 	void RemoveIncome(const IdType& id) override;
 
-	void AddList(const List& list_) override;
+	std::optional<IdType> AddList(const List& list) override;
 	std::optional<List> GetListById(const IdType& id) override;
 	std::optional<std::vector<List>> GetAllLists(const IdType& user_id) override;
 	void UpdateList(const List& list_) override;

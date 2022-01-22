@@ -12,5 +12,5 @@ struct Income
 	double amount;
 	IdType category_id;
 	std::string add_time;
-    std::optional<std::string> expiration_time;
+	std::optional<std::string> expiration_time;
 };
