@@ -23,7 +23,7 @@ Product ReassembleProduct(const QJsonObject& json)
 	SafeReadBool(json, "is_bought", product.is_bought);
 	SafeReadString(json, "add_date", product.add_date);
 
-	SafeReadString(json, "purcahse_date", tmp_date);
+	SafeReadString(json, "purchase_date", tmp_date);
 	product.purchase_date = (tmp_date != "")
 		? std::optional<Timestamp>{tmp_date} : std::nullopt;
 	SafeReadString(json, "buy_until_date", tmp_date);

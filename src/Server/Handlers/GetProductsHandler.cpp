@@ -30,7 +30,7 @@ QJsonDocument GetProductsHandler::JSONFormatter::Format(const DTO& dto)
 		product["is_bought"] = dto_item.first.is_bought;
 		product["add_date"] = dto_item.first.add_date.c_str();
 
-		product["purcahse_date"] = (dto_item.first.purchase_date)
+		product["purchase_date"] = (dto_item.first.purchase_date)
 			? dto_item.first.purchase_date->c_str() : EMPTY_C_STRING;
 		product["buy_until_date"] = (dto_item.first.buy_until_date)
 			? dto_item.first.buy_until_date->c_str() : EMPTY_C_STRING;
