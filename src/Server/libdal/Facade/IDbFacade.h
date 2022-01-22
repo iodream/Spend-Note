@@ -34,7 +34,7 @@ public:
 	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
 	virtual std::vector<ProductCategory> GetAllProductCategories() = 0;
 
-	virtual void AddIncome(const Income& income) = 0;
+	virtual std::optional<IdType> AddIncome(const Income& income) = 0;
 	virtual std::optional<Income> GetIncomeById(const IdType& id) = 0;
 	virtual std::optional<std::vector<Income>> GetAllIncomes(const IdType& user_id) = 0;
 	virtual void UpdateIncome(const Income& income) = 0;

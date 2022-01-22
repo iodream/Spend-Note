@@ -31,7 +31,7 @@ public:
 	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
 	std::vector<ProductCategory> GetAllProductCategories() override;
 
-	void AddIncome(const Income& income) override;
+	std::optional<IdType> AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
 	std::optional<std::vector<Income>> GetAllIncomes(const IdType& user_id) override;
 	void UpdateIncome(const Income& income) override;

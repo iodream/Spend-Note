@@ -24,17 +24,6 @@ Income income
 	"some time 2"
 };
 
-void CheckIncomesEquality(const Income& i1, const Income& i2)
-{
-	EXPECT_EQ(i1.income_id, i2.income_id);
-	EXPECT_EQ(i1.user_id, i2.user_id);
-	EXPECT_EQ(i1.name, i2.name);
-	EXPECT_EQ(i1.amount, i2.amount);
-	EXPECT_EQ(i1.category_id, i2.category_id);
-	EXPECT_EQ(i1.add_time, i2.add_time);
-	EXPECT_EQ(i1.expiration_time, i2.expiration_time);
-}
-
 }
 
 TEST(AddIncomeHandler, ADD_INCOME)
@@ -52,5 +41,4 @@ TEST(AddIncomeHandler, ADD_INCOME)
 
 	auto response = handler->AuthHandle(request);
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
-
 }

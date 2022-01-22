@@ -74,9 +74,9 @@ std::vector<ProductCategory> DbFacade::GetAllProductCategories()
 	return m_product_categories.GetAll();
 }
 
-void DbFacade::AddIncome(const Income& income)
+std::optional<IdType> DbFacade::AddIncome(const Income& income)
 {
-	m_incomes.Add(income);
+	return m_incomes.Add(income);
 }
 
 std::optional<Income> DbFacade::GetIncomeById(const IdType& id)
