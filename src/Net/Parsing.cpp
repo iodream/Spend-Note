@@ -44,3 +44,69 @@ void SafeReadId(
 	return SafeReadId(json, label.c_str(), dest);
 }
 
+void SafeReadNumber(
+	const QJsonObject& json,
+	const char* label,
+	double& dest)
+{
+	if (json.contains(label) && json[label].isDouble()) {
+		dest = json[label].toDouble();
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadNumber(
+	const QJsonObject& json,
+	const std::string& label,
+	double& dest)
+{
+	return SafeReadNumber(json, label.c_str(), dest);
+}
+
+void SafeReadArray(
+	const QJsonObject& json,
+	const char* label,
+	QJsonArray& dest)
+{
+	if (json.contains(label) && json[label].isArray()) {
+		dest = json[label].toArray();
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadArray(
+	const QJsonObject& json,
+	const std::string& label,
+	QJsonArray& dest)
+{
+	return SafeReadArray(json, label.c_str(), dest);
+}
+
+void SafeReadBool(
+	const QJsonObject& json,
+	const char* label,
+	bool& dest)
+{
+	if (json.contains(label) && json[label].isBool()) {
+		dest = json[label].toBool();
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadBool(
+	const QJsonObject& json,
+	const std::string& label,
+	bool& dest)
+{
+	return SafeReadBool(json, label.c_str(), dest);
+}
+

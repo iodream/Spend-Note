@@ -9,8 +9,8 @@
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 
-LoginHandler::LoginHandler()
-	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
+LoginHandler::LoginHandler(IDbFacade::Ptr facade)
+	: ICommandHandler(std::move(facade))
 {
 
 }
@@ -40,7 +40,7 @@ LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
 
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_GET) {
+	if (request.method == Net::HTTP_METHOD_POST) {
 		auto dto = m_parser.Parse(request.json_payload);
 		auto user = m_facade->GetUserByLogin(dto.login);
 
