@@ -3,6 +3,9 @@
 #include "Common.h"
 #include "Net/Constants.h"
 
+const char* EMPTY_C_STRING = "";
+const std::string EMPTY_STD_STRING = std::string{};
+
 Net::Response FormJSONResponse(
         QJsonDocument&& json_doc,
         Poco::Net::HTTPServerResponse::HTTPStatus status)
