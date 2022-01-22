@@ -2,7 +2,7 @@
 #include "Handlers/LoginHandler.h"
 #include "Handlers/EchoHandler.h"
 #include "Handlers/FakeGetListsHandler.h"
-#include "Handlers/GetIncomesHandler/GetIncomesHandler.h"
+#include "Handlers/Income/GetIncomesHandler.h"
 
 ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 {

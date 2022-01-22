@@ -10,8 +10,8 @@ list(APPEND Spend-Note-Server_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/AuthorizedHandler.h
 	${CMAKE_CURRENT_SOURCE_DIR}/FakeGetListsHandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/FakeGetListsHandler.h
-	${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandler/GetIncomesHandler.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandler/GetIncomesHandler.h
+	${CMAKE_CURRENT_SOURCE_DIR}/Income/GetIncomesHandler.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Income/GetIncomesHandler.h
 )
 
 set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)

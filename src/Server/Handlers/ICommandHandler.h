@@ -5,8 +5,8 @@
 class ICommandHandler
 {
 public:
-    ICommandHandler() {}
-    virtual ~ICommandHandler() {}
+	ICommandHandler() {}
+	virtual ~ICommandHandler() {}
 
 	virtual Net::Response Handle(Net::Request& request) = 0;
 };
