@@ -9,7 +9,8 @@
 #include "Server/Utils.h"
 #include "../Common.h"
 
-GetIncomesHandler::GetIncomesHandler()
+GetIncomesHandler::GetIncomesHandler(IDbFacade::Ptr facade)
+	: AuthorizedHandler(std::move(facade))
 {
 
 }

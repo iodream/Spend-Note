@@ -38,9 +38,9 @@ void DbFacade::RemoveUser(IdType id)
 }
 
 
-void DbFacade::AddProduct(const Product& product)
+std::optional<IdType> DbFacade::AddProduct(const Product& product)
 {
-	m_products.Add(product);
+	return m_products.Add(product);
 }
 
 std::optional<Product> DbFacade::GetProductById(IdType id)
@@ -53,9 +53,9 @@ std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
 	return m_products.GetByListId(list_id);
 }
 
-void DbFacade::UpdateProduct(const Product& user)
+void DbFacade::UpdateProduct(const Product& product)
 {
-	m_products.Update(user);
+	m_products.Update(product);
 }
 
 void DbFacade::RemoveProduct(IdType id)
@@ -109,7 +109,7 @@ std::optional<List> DbFacade::GetListById(const IdType& id)
 	return m_lists.GetList(id);
 }
 
-std::optional<std::vector<List>> DbFacade::GetAllLists(const IdType& user_id)
+std::vector<List> DbFacade::GetAllLists(const IdType& user_id)
 {
 	return m_lists.GetAllLists(user_id);
 }

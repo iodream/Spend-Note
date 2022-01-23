@@ -4,7 +4,6 @@
 #include <memory>
 
 #include "ICommandHandler.h"
-#include "../libdal/Facade/IDbFacade.h"
 
 class LoginHandler : public ICommandHandler
 {
@@ -28,12 +27,11 @@ class LoginHandler : public ICommandHandler
 
 	};
 public:
-	LoginHandler();
+	LoginHandler(IDbFacade::Ptr facade);
 	virtual ~LoginHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;
 
 	JSONFormatter m_formatter{};
 	JSONParser m_parser{};
-	IDbFacade::Ptr m_facade;
 };

@@ -15,7 +15,9 @@
 class IDbFacade
 {
 public:
-	using Ptr = std::shared_ptr<IDbFacade>;
+	using Ptr = std::unique_ptr<IDbFacade>;
+
+	virtual ~IDbFacade() {}
 
 	virtual void AddUser(const User& user) = 0;
 	virtual std::optional<User> GetUserById(IdType id) = 0;
@@ -23,10 +25,10 @@ public:
 	virtual void UpdateUser(const User& user) = 0;
 	virtual void RemoveUser(IdType id) = 0;
 
-	virtual void AddProduct(const Product& product) = 0;
+	virtual std::optional<IdType> AddProduct(const Product& product) = 0;
 	virtual std::optional<Product> GetProductById(IdType id) = 0;
 	virtual std::vector<Product> GetProductsForList(IdType list_id) = 0;
-	virtual void UpdateProduct(const Product& user) = 0;
+	virtual void UpdateProduct(const Product& product) = 0;
 	virtual void RemoveProduct(IdType id) = 0;
 
 	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
@@ -40,7 +42,7 @@ public:
 
 	virtual void AddList(const List& list_) = 0;
 	virtual std::optional<List> GetListById(const IdType& id) = 0;
-	virtual std::optional<std::vector<List>> GetAllLists(const IdType& user_id) = 0;
+	virtual std::vector<List> GetAllLists(const IdType& user_id) = 0;
 	virtual void UpdateList(const List& list_) = 0;
 	virtual void RemoveList(const IdType& id) = 0;
 

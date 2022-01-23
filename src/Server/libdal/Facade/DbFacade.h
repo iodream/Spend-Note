@@ -14,6 +14,7 @@ class DbFacade : public IDbFacade
 {
 public:
 	DbFacade(const std::string& connection_string);
+	virtual ~DbFacade() override {}
 
 	void AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
@@ -21,7 +22,7 @@ public:
 	void UpdateUser(const User &user) override;
 	void RemoveUser(IdType id) override;
 
-	void AddProduct(const Product& product) override;
+	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
 	void UpdateProduct(const Product& user) override;
@@ -38,7 +39,7 @@ public:
 
 	void AddList(const List& list_) override;
 	std::optional<List> GetListById(const IdType& id) override;
-	std::optional<std::vector<List>> GetAllLists(const IdType& user_id) override;
+	std::vector<List> GetAllLists(const IdType& user_id) override;
 	void UpdateList(const List& list_) override;
 	void RemoveList(const IdType& id) override;
 
