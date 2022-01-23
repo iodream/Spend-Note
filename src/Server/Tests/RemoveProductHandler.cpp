@@ -15,10 +15,8 @@ TEST(RemoveProductsHandlerTest, PRODUCT_PRESENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ProductExists(_))
-		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, RemoveProduct(_))
-		.Times(1);
+		.WillOnce(Return(true));
 
 	auto handler = std::make_unique<RemoveProductHandler>(std::move(facade));
 
@@ -39,7 +37,7 @@ TEST(RemoveProductsHandlerTest, PRODUCT_ABSENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ProductExists(_))
+	EXPECT_CALL(*facade, RemoveProduct(_))
 		.WillOnce(Return(false));
 
 	auto handler = std::make_unique<RemoveProductHandler>(std::move(facade));

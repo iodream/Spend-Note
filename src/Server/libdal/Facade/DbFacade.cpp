@@ -53,11 +53,6 @@ std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
 	return m_products.GetByListId(list_id);
 }
 
-bool DbFacade::ProductExists(IdType id)
-{
-	return m_products.Exists(id);
-}
-
 void DbFacade::UpdateProduct(const Product& product)
 {
 	m_products.Update(product);

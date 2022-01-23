@@ -28,13 +28,14 @@ Net::Response RemoveProductHandler::AuthHandle(const Net::Request& request)
 	if (request.method == Net::HTTP_METHOD_DELETE) {
 		auto in_dto = m_parser.Parse(request.json_payload);
 
-		if (!m_facade->ProductExists(in_dto.id)) {
+		if (m_facade->RemoveProduct(in_dto.id)) {
+			return FormEmptyResponse();
+		}
+		else {
 			return FormErrorResponse(
 				NetError::Status::HTTP_NOT_FOUND,
 				"Resource not found");
 		}
-		m_facade->RemoveProduct(in_dto.id);
-		return FormEmptyResponse();
 	}
 	return FormErrorResponse(
 		NetError::Status::HTTP_BAD_REQUEST,

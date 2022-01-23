@@ -14,8 +14,6 @@ public:
 	std::optional<Product> GetById(IdType id);
 	std::vector<Product> GetByListId(IdType list_id);
 
-	bool Exists(IdType id);
-
 	void Update(const Product& product);
 	bool Remove(IdType id);
 private:
