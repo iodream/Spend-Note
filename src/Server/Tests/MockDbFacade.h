@@ -22,7 +22,7 @@ public:
     MOCK_METHOD(std::optional<ProductCategory>, GetProductCategoryById, (IdType), (override));
     MOCK_METHOD(std::vector<ProductCategory>, GetAllProductCategories, (), (override));
 
-    MOCK_METHOD(void, AddIncome, (const Income&), (override));
+	MOCK_METHOD(std::optional<IdType>, AddIncome, (const Income&), (override));
     MOCK_METHOD(std::optional<Income>, GetIncomeById, (const IdType& id), (override));
     MOCK_METHOD(std::optional<std::vector<Income>>, GetAllIncomes, (const IdType& id), (override));
     MOCK_METHOD(void, UpdateIncome, (const Income&), (override));
