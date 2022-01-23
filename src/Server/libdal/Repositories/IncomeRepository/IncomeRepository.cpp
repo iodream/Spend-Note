@@ -24,21 +24,21 @@ std::optional<IdType> IncomeRepository::Add(const Income& income)
 	{
 		pqxx::work w{m_db_connection};
 		auto id_rows = w.exec(
-				"INSERT INTO " + TABLE_NAME + " (" +
-				USER_ID + ", " +
-				INCOME_NAME + ", " +
-				AMOUNT + ", " +
-				CATEGORY_ID + ", " +
-				ADD_TIME + ", " +
-				EXPIRATION_TIME+ ") " +
-				"VALUES (" +
-				w.quote(income.user_id) + ", " +
-				w.quote(income.name)+ ", " +
-				w.quote(income.amount) + ", " 	+
-				w.quote(income.category_id) + ", " 	+
-				w.quote(income.add_time) + ", " +
-				w.quote(income.expiration_time) + ")" +
-				" RETURNING " + ID_FIELD + ";");
+			"INSERT INTO " + TABLE_NAME + " (" +
+			USER_ID + ", " +
+			INCOME_NAME + ", " +
+			AMOUNT + ", " +
+			CATEGORY_ID + ", " +
+			ADD_TIME + ", " +
+			EXPIRATION_TIME+ ") " +
+			"VALUES (" +
+			w.quote(income.user_id) + ", " +
+			w.quote(income.name)+ ", " +
+			w.quote(income.amount) + ", " 	+
+			w.quote(income.category_id) + ", " 	+
+			w.quote(income.add_time) + ", " +
+			w.quote(income.expiration_time) + ")" +
+			" RETURNING " + ID_FIELD + ";");
 
 		w.commit();
 

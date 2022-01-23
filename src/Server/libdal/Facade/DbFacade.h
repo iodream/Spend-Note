@@ -16,7 +16,7 @@ public:
 	DbFacade(const std::string& connection_string);
 	virtual ~DbFacade() override {}
 
-	void AddUser(const User &user) override;
+	std::optional<IdType> AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
 	std::optional<User> GetUserByLogin(const std::string& login) override;
 	void UpdateUser(const User &user) override;

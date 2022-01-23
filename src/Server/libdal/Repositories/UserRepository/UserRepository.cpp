@@ -14,19 +14,24 @@ UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_con
 
 }
 
-void UserRepository::Add(const User &user)
+std::optional<IdType> UserRepository::Add(const User &user)
 {
 	pqxx::work w(m_database_connection);
 	try
 	{
-		w.exec0(
+		auto id_rows = w.exec0(
 			"INSERT INTO " + TABLE_NAME + " (" +
 				LOGIN_FIELD + ", " +
 				PASSWORD_FIELD +
 			") VALUES (" +
 				w.quote(user.login) + ", " +
-				w.quote(user.password) + ");");
+				w.quote(user.password) + ")" +
+			" RETURNING " + ID_FIELD + ";");
+
 		w.commit();
+
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
