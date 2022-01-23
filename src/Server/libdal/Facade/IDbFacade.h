@@ -4,6 +4,8 @@
 #include <vector>
 #include <pqxx/pqxx>
 
+#include "Types.h"
+
 #include "DTOs/User.h"
 #include "DTOs/Product.h"
 #include "DTOs/ProductCategory.h"
@@ -51,4 +53,7 @@ public:
 
 	virtual std::optional<ListState> GetListStateById(const IdType& list_state_id) = 0;
 	virtual std::vector<ListState> GetAllListStates() = 0;
+
+	virtual Money CalculateBalanceForUser(IdType user_id) = 0;
+	virtual Money CalculatePlannedBalanceForUser(IdType user_id) = 0;
 };

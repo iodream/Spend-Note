@@ -1,5 +1,4 @@
 #include "IncomeRepository.h"
-#include <iostream>
 
 namespace
 {
