@@ -167,12 +167,17 @@ void ProductRepository::Update(const Product& product)
 	}
 }
 
-void ProductRepository::Remove(IdType id)
+bool ProductRepository::Remove(IdType id)
 {
 	pqxx::work w(m_database_connection);
 
 	try
 	{
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
@@ -184,6 +189,7 @@ void ProductRepository::Remove(IdType id)
 	{
 		throw DatabaseFailure(e.what());
 	}
+	return true;
 }
 
 Product ProductRepository::ProductFromRow(const pqxx::row& row)

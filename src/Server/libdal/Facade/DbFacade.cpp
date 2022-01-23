@@ -32,9 +32,9 @@ void DbFacade::UpdateUser(const User &user)
 	m_users.Update(user);
 }
 
-void DbFacade::RemoveUser(IdType id)
+bool DbFacade::RemoveUser(IdType id)
 {
-	m_users.Remove(id);
+	return m_users.Remove(id);
 }
 
 
@@ -63,9 +63,9 @@ void DbFacade::UpdateProduct(const Product& product)
 	m_products.Update(product);
 }
 
-void DbFacade::RemoveProduct(IdType id)
+bool DbFacade::RemoveProduct(IdType id)
 {
-	m_products.Remove(id);
+	return m_products.Remove(id);
 }
 
 
@@ -79,9 +79,9 @@ std::vector<ProductCategory> DbFacade::GetAllProductCategories()
 	return m_product_categories.GetAll();
 }
 
-void DbFacade::AddIncome(const Income& income)
+std::optional<IdType> DbFacade::AddIncome(const Income& income)
 {
-	m_incomes.Add(income);
+	return m_incomes.Add(income);
 }
 
 std::optional<Income> DbFacade::GetIncomeById(const IdType& id)
@@ -89,7 +89,7 @@ std::optional<Income> DbFacade::GetIncomeById(const IdType& id)
 	return m_incomes.GetIncome(id);
 }
 
-std::optional<std::vector<Income>> DbFacade::GetAllIncomes(const IdType& user_id)
+std::vector<Income> DbFacade::GetAllIncomes(const IdType& user_id)
 {
 	return m_incomes.GetAllIncomes(user_id);
 }
@@ -99,14 +99,14 @@ void DbFacade::UpdateIncome(const Income& income)
 	m_incomes.Update(income);
 }
 
-void DbFacade::RemoveIncome(const IdType& id)
+bool DbFacade::RemoveIncome(const IdType& id)
 {
-	m_incomes.Remove(id);
+	return m_incomes.Remove(id);
 }
 
-void DbFacade::AddList(const List& list)
+std::optional<IdType>  DbFacade::AddList(const List& list)
 {
-	 m_lists.AddList(list);
+	return m_lists.AddList(list);
 }
 
 std::optional<List> DbFacade::GetListById(const IdType& id)
@@ -124,9 +124,9 @@ void DbFacade::UpdateList(const List& list)
 	m_lists.Update(list);
 }
 
-void DbFacade::RemoveList(const IdType& id)
+bool DbFacade::RemoveList(const IdType& id)
 {
-	m_lists.Remove(id);
+	return m_lists.Remove(id);
 }
 
 std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& category_id)
@@ -134,7 +134,7 @@ std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& cate
 	return m_income_categories.GetById(category_id);
 }
 
-std::vector<IncomeCategory> DbFacade::GetIncomeCategoriesAll()
+std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories()
 {
 	return m_income_categories.GetAll();
 }
