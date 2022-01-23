@@ -30,7 +30,7 @@ public:
 
     MOCK_METHOD(void, AddList, (const List& list_), (override));
     MOCK_METHOD(std::optional<List>, GetListById, (const IdType&), (override));
-    MOCK_METHOD(std::optional<std::vector<List>>, GetAllLists, (const IdType&), (override));
+	MOCK_METHOD(std::vector<List>, GetAllLists, (const IdType&), (override));
     MOCK_METHOD(void, UpdateList, (const List&), (override));
     MOCK_METHOD(void, RemoveList, (const IdType&), (override));
 

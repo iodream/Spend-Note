@@ -42,7 +42,7 @@ public:
 
 	virtual void AddList(const List& list_) = 0;
 	virtual std::optional<List> GetListById(const IdType& id) = 0;
-	virtual std::optional<std::vector<List>> GetAllLists(const IdType& user_id) = 0;
+	virtual std::vector<List> GetAllLists(const IdType& user_id) = 0;
 	virtual void UpdateList(const List& list_) = 0;
 	virtual void RemoveList(const IdType& id) = 0;
 
