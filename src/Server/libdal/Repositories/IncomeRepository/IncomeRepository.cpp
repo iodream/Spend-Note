@@ -134,13 +134,13 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 {
 	Income income;
 
-    income.income_id = row[ID_FIELD].as<IdType>();
-    income.user_id = row[USER_ID].as<IdType>();
-    income.name = row[INCOME_NAME].as<std::string>();
-    income.amount = row[AMOUNT].as<double>();
-    income.category_id = row[CATEGORY_ID].as<IdType>();
-    income.add_time = row[ADD_TIME].as<std::string>();
-    income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
+	income.income_id = row[ID_FIELD].as<IdType>();
+	income.user_id = row[USER_ID].as<IdType>();
+	income.name = row[INCOME_NAME].as<std::string>();
+	income.amount = row[AMOUNT].as<Money>();
+	income.category_id = row[CATEGORY_ID].as<IdType>();
+	income.add_time = row[ADD_TIME].as<std::string>();
+	income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
 
-    return income;
+	return income;
 }
