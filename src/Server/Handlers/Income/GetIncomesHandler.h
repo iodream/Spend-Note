@@ -5,17 +5,6 @@
 class GetIncomesHandler : public AuthorizedHandler
 {
 public:
-	class JSONParser
-	{
-	public:
-		struct DTO
-		{
-			IdType user_id;
-		};
-
-		DTO Parse(const QJsonDocument& token_body);
-	};
-
 	class JSONFormatter
 	{
 	public:
@@ -49,7 +38,6 @@ private:
 	JSONFormatter::Incomes Map(const std::vector<Income>& incomes);
 	JSONFormatter::Income MapIncome(const Income& income);
 
-	JSONParser m_parser{};
 	JSONFormatter m_formatter{};
 };
 
