@@ -19,6 +19,12 @@ void HTTPClient::set_auth_scheme(const std::string& str_auth_scheme)
     m_auth_scheme = str_auth_scheme;
 }
 
+void HTTPClient::ReleaseToken()
+{
+	set_token("");
+	set_auth_scheme("");
+}
+
 void HTTPClient::SendRequest(
 	Poco::Net::HTTPRequest& request,
 	Poco::Net::HTTPClientSession& session,
