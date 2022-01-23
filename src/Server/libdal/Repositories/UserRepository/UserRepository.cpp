@@ -16,9 +16,9 @@ UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_con
 
 std::optional<IdType> UserRepository::Add(const User &user)
 {
-	pqxx::work w(m_database_connection);
 	try
 	{
+		pqxx::work w(m_database_connection);
 		auto id_rows = w.exec0(
 			"INSERT INTO " + TABLE_NAME + " (" +
 				LOGIN_FIELD + ", " +
@@ -41,10 +41,9 @@ std::optional<IdType> UserRepository::Add(const User &user)
 
 std::optional<User> UserRepository::GetById(IdType id)
 {
-	pqxx::nontransaction w(m_database_connection);
-
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
 			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
 			" FROM " + TABLE_NAME +
@@ -65,10 +64,9 @@ std::optional<User> UserRepository::GetById(IdType id)
 
 std::optional<User> UserRepository::GetByLogin(const std::string& login)
 {
-	pqxx::nontransaction w(m_database_connection);
-
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
 			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
 			" FROM " + TABLE_NAME +
@@ -89,10 +87,9 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 
 void UserRepository::Update(const User &user)
 {
-	pqxx::work w(m_database_connection);
-
 	try
 	{
+		pqxx::work w(m_database_connection);
 		w.exec0(
 			"UPDATE " + TABLE_NAME +
 			" SET " +
@@ -134,6 +131,5 @@ User UserRepository::UserFromRow(const pqxx::row& row)
 	user.id = row[ID_FIELD].as<int>();
 	user.login = row[LOGIN_FIELD].as<std::string>();
 	user.password = row[PASSWORD_FIELD].as<std::string>();
-
 	return user;
 }
