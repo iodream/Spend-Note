@@ -131,10 +131,17 @@ Net::Response HTTPRequestHandler::FormErrorResponse()
 
 class HTTPRequestHandlerFactory: public Poco::Net::HTTPRequestHandlerFactory
 {
+
 	Poco::Net::HTTPRequestHandler* createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)
 	{
-		auto uri = http_req.getURI();
-		return new HTTPRequestHandler{m_handler_factory.GetHandler(uri)};
+		try{
+			auto uri = http_req.getURI();
+			return new HTTPRequestHandler{m_handler_factory.GetHandler(uri)};
+		}
+		catch(const std::exception& exception){
+			std::cout << exception.what() << std::endl;
+		}
+		return nullptr;
 	}
 
 	HandlerFactory m_handler_factory{};
