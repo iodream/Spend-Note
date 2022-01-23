@@ -14,7 +14,7 @@ public:
 	std::optional<User> GetById(IdType id);
 	std::optional<User> GetByLogin(const std::string& login);
 	void Update(const User& user);
-	void Remove(IdType id);
+	bool Remove(IdType id);
 private:
 	static User UserFromRow(const pqxx::row& row);
 

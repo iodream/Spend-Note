@@ -88,11 +88,16 @@ void IncomeRepository::Update(const Income& income)
 	}
 }
 
-void IncomeRepository::Remove(const IdType& id)
+bool IncomeRepository::Remove(const IdType& id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
@@ -100,6 +105,7 @@ void IncomeRepository::Remove(const IdType& id)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &id)
