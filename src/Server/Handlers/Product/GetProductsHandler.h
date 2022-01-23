@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "AuthorizedHandler.h"
+#include "../AuthorizedHandler.h"
 #include "../libdal/DTOs/Product.h"
 
 class GetProductsHandler : public AuthorizedHandler
@@ -18,14 +18,16 @@ class GetProductsHandler : public AuthorizedHandler
 
 		QJsonDocument Format(const DTO& dto);
 	};
+
 	class JSONParser
 	{
 	public:
 		struct DTO {
 			IdType list_id;
 		};
-	DTO Parse(const QJsonDocument& payload);
+		DTO Parse(const QJsonDocument& payload);
 	};
+
 public:
 	GetProductsHandler(IDbFacade::Ptr facade);
 	virtual ~GetProductsHandler() override {}

@@ -4,9 +4,10 @@
 #include <QJsonObject>
 
 #include "MockDbFacade.h"
-#include "Server/Handlers/GetProductsHandler.h"
+#include "Server/Handlers/Product/GetProductsHandler.h"
+#include "Server/Handlers/Product/Utils.h"
 #include "Net/Parsing.h"
-#include "Utils.h"
+
 
 using ::testing::Return;
 using ::testing::_;
@@ -105,7 +106,7 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 	EXPECT_EQ(products.size(), 1);
 
 	auto product = products.at(0).toObject();
-	auto product_dto = ReassembleProduct(product);
+	auto product_dto = ParseProduct(product);
 
 	CheckProductsEquality(p1, product_dto);
 

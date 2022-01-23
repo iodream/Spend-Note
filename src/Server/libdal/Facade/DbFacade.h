@@ -22,7 +22,7 @@ public:
 	void UpdateUser(const User &user) override;
 	void RemoveUser(IdType id) override;
 
-	void AddProduct(const Product& product) override;
+	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
 	void UpdateProduct(const Product& user) override;

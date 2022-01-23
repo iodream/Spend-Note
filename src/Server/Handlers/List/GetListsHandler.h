@@ -4,7 +4,7 @@
 #include <memory>
 #include <utility>
 
-#include "AuthorizedHandler.h"
+#include "../AuthorizedHandler.h"
 #include "../libdal/DTOs/List.h"
 
 class GetListsHandler : public AuthorizedHandler

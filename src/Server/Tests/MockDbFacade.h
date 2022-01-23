@@ -13,7 +13,7 @@ public:
     MOCK_METHOD(void, UpdateUser, (const User&), (override));
     MOCK_METHOD(void, RemoveUser, (IdType), (override));
 
-    MOCK_METHOD(void, AddProduct, (const Product&), (override));
+	MOCK_METHOD(std::optional<IdType>, AddProduct, (const Product&), (override));
     MOCK_METHOD(std::optional<Product>, GetProductById, (IdType), (override));
     MOCK_METHOD(std::vector<Product>, GetProductsForList, (IdType), (override));
     MOCK_METHOD(void, UpdateProduct, (const Product&), (override));

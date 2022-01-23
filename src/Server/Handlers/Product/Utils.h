@@ -4,4 +4,4 @@
 
 #include "../libdal/Facade/IDbFacade.h"
 
-Product ReassembleProduct(const QJsonObject& json);
+Product ParseProduct(const QJsonObject& json);

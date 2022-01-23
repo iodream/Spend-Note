@@ -38,9 +38,9 @@ void DbFacade::RemoveUser(IdType id)
 }
 
 
-void DbFacade::AddProduct(const Product& product)
+std::optional<IdType> DbFacade::AddProduct(const Product& product)
 {
-	m_products.Add(product);
+	return m_products.Add(product);
 }
 
 std::optional<Product> DbFacade::GetProductById(IdType id)

@@ -4,7 +4,7 @@
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "Common.h"
+#include "../Common.h"
 
 GetProductsHandler::GetProductsHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
