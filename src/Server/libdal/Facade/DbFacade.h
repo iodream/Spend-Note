@@ -25,6 +25,7 @@ public:
 	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
+	bool ProductExists(IdType id) override;
 	void UpdateProduct(const Product& user) override;
 	void RemoveProduct(IdType id) override;
 

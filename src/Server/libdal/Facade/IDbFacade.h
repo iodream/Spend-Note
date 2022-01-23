@@ -28,6 +28,7 @@ public:
 	virtual std::optional<IdType> AddProduct(const Product& product) = 0;
 	virtual std::optional<Product> GetProductById(IdType id) = 0;
 	virtual std::vector<Product> GetProductsForList(IdType list_id) = 0;
+	virtual bool ProductExists(IdType id) = 0;
 	virtual void UpdateProduct(const Product& product) = 0;
 	virtual void RemoveProduct(IdType id) = 0;
 

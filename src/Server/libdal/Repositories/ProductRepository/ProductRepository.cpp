@@ -176,9 +176,13 @@ void ProductRepository::Remove(IdType id)
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::sql_error& e)
 	{
-		throw DatabaseFailure();
+		throw SQLFailure(e.what());
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
 	}
 }
 
@@ -214,4 +218,27 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	}
 
 	return product;
+}
+
+bool ProductRepository::Exists(IdType id)
+{
+	pqxx::nontransaction w(m_database_connection);
+
+	try
+	{
+		pqxx::row row = w.exec1(
+			"SELECT EXISTS(SELECT 1 FROM " + TABLE_NAME +
+			" WHERE " + ID_FIELD + " = " + w.quote(id) + ");");
+		return row.front().as<bool>();
+	}
+	catch(const pqxx::sql_error& e)
+	{
+		throw SQLFailure(e.what());
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return false;
 }
