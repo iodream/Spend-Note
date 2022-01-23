@@ -15,7 +15,7 @@ public:
 	std::vector<Product> GetByListId(IdType list_id);
 
 	void Update(const Product& product);
-	void Remove(IdType id);
+	bool Remove(IdType id);
 private:
 	static Product ProductFromRow(const pqxx::row& row);
 

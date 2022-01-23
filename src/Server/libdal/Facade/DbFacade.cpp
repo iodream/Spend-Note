@@ -32,9 +32,9 @@ void DbFacade::UpdateUser(const User &user)
 	m_users.Update(user);
 }
 
-void DbFacade::RemoveUser(IdType id)
+bool DbFacade::RemoveUser(IdType id)
 {
-	m_users.Remove(id);
+	return m_users.Remove(id);
 }
 
 
@@ -58,9 +58,9 @@ void DbFacade::UpdateProduct(const Product& product)
 	m_products.Update(product);
 }
 
-void DbFacade::RemoveProduct(IdType id)
+bool DbFacade::RemoveProduct(IdType id)
 {
-	m_products.Remove(id);
+	return m_products.Remove(id);
 }
 
 
@@ -94,9 +94,9 @@ void DbFacade::UpdateIncome(const Income& income)
 	m_incomes.Update(income);
 }
 
-void DbFacade::RemoveIncome(const IdType& id)
+bool DbFacade::RemoveIncome(const IdType& id)
 {
-	m_incomes.Remove(id);
+	return m_incomes.Remove(id);
 }
 
 std::optional<IdType>  DbFacade::AddList(const List& list)
@@ -119,9 +119,9 @@ void DbFacade::UpdateList(const List& list)
 	m_lists.Update(list);
 }
 
-void DbFacade::RemoveList(const IdType& id)
+bool DbFacade::RemoveList(const IdType& id)
 {
-	m_lists.Remove(id);
+	return m_lists.Remove(id);
 }
 
 std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& category_id)

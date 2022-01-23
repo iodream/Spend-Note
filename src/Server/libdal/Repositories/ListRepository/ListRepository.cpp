@@ -45,11 +45,16 @@ std::optional<IdType> ListRepository::AddList(const List& list)
 }
 
 
-void ListRepository::Remove(const IdType& list_id)
+bool ListRepository::Remove(const IdType& list_id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id) + ";");
 		w.commit();
 	}
@@ -57,6 +62,7 @@ void ListRepository::Remove(const IdType& list_id)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 

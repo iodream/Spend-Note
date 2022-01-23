@@ -20,13 +20,13 @@ public:
 	std::optional<User> GetUserById(IdType id) override;
 	std::optional<User> GetUserByLogin(const std::string& login) override;
 	void UpdateUser(const User &user) override;
-	void RemoveUser(IdType id) override;
+	bool RemoveUser(IdType id) override;
 
 	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
 	void UpdateProduct(const Product& user) override;
-	void RemoveProduct(IdType id) override;
+	bool RemoveProduct(IdType id) override;
 
 	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
 	std::vector<ProductCategory> GetAllProductCategories() override;
@@ -35,13 +35,13 @@ public:
 	std::optional<Income> GetIncomeById(const IdType& id) override;
 	std::vector<Income> GetAllIncomes(const IdType& user_id) override;
 	void UpdateIncome(const Income& income) override;
-	void RemoveIncome(const IdType& id) override;
+	bool RemoveIncome(const IdType& id) override;
 
 	std::optional<IdType> AddList(const List& list) override;
 	std::optional<List> GetListById(const IdType& id) override;
 	std::vector<List> GetAllLists(const IdType& user_id) override;
 	void UpdateList(const List& list_) override;
-	void RemoveList(const IdType& id) override;
+	bool RemoveList(const IdType& id) override;
 
 	std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) override;
 	std::vector<IncomeCategory> GetAllIncomeCategories() override;

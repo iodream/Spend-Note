@@ -14,7 +14,7 @@ public:
 	std::optional<Income> GetIncome(const IdType& income_id);
 	std::vector<Income> GetAllIncomes(const IdType& user_id);
 	void Update(const Income& income);
-	void Remove(const IdType& income_id);
+	bool Remove(const IdType& income_id);
 
 private:
 	pqxx::connection& m_db_connection;
