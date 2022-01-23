@@ -40,7 +40,8 @@ add_library(libdal STATIC
   Facade/DbFacade.h
   Facade/DbFacade.cpp
 
-  Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
+  Exceptions/DatabaseFailure.h
+  Exceptions/SQLFailure.h
 
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)

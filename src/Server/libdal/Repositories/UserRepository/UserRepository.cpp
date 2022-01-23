@@ -102,12 +102,17 @@ void UserRepository::Update(const User &user)
 	}
 }
 
-void UserRepository::Remove(IdType id)
+bool UserRepository::Remove(IdType id)
 {
 	pqxx::work w(m_database_connection);
 
 	try
 	{
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
@@ -115,6 +120,7 @@ void UserRepository::Remove(IdType id)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 User UserRepository::UserFromRow(const pqxx::row& row)

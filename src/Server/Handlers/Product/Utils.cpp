@@ -2,7 +2,7 @@
 
 #include "Net/Parsing.h"
 
-Product ReassembleProduct(const QJsonObject& json)
+Product ParseProduct(const QJsonObject& json)
 {
 	Product product;
 
