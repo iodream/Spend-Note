@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "ListItem/ListItem.h"
+#include "../ListCreateSubPage/ListCreatePage.h"
 #include "ProductPage/ProductPage.h"
 #include "../../Constants.h"
 
@@ -34,11 +35,13 @@ public:
 private:
 	void OnProductClicked(ListItem* product);
 
+
 	void set_list_size(int size);
 	int get_list_size();
 
 	Ui::ListSubPage *m_ui;
 	ProductPage m_product_page;
+	ListCreatePage m_list_create_page;
 
 	QString m_name;
 	IdType m_id;
@@ -49,4 +52,5 @@ private slots:
 	// temporary plugs, should be reimplemented
 	void OnAddProduct();
 	void OnGoBack();
+	void on_EditList_clicked();
 };
