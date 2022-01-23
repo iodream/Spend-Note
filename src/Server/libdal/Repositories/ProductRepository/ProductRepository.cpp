@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
+#include "Exceptions/SQLFailure.h"
 
 namespace
 {
@@ -25,12 +26,12 @@ ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_databa
 
 }
 
-void ProductRepository::Add(const Product& product)
+std::optional<IdType> ProductRepository::Add(const Product& product)
 {
 	pqxx::work w(m_database_connection);
 	try
 	{
-		w.exec0(
+		pqxx::result id_rows = w.exec(
 				"INSERT INTO " + TABLE_NAME + " (" +
 					LIST_ID_FIELD + ", " +
 					CATEGORY_ID_FIELD + ", " +
@@ -52,13 +53,21 @@ void ProductRepository::Add(const Product& product)
 					w.quote(product.is_bought) + ", " +
 					w.quote(product.add_date) + ", " +
 					w.quote(product.purchase_date) + ", " +
-					w.quote(product.buy_until_date) + ");");
+					w.quote(product.buy_until_date) + ") " +
+					"RETURNING " + ID_FIELD + ";");
 		w.commit();
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::sql_error& e)
 	{
-		throw DatabaseFailure();
+		throw SQLFailure(e.what());
 	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return std::nullopt;
 }
 
 std::optional<Product> ProductRepository::GetById(IdType id)
@@ -185,7 +194,24 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	product.product_priority = row[PRODUCT_PRIORITY_FIELD].as<int>();
 	product.is_bought = row[IS_BOUGHT_FIELD].as<bool>();
 	product.add_date = row[ADD_DATE_FIELD].as<Timestamp>();
-	product.purchase_date = row[PURCHASE_DATE_FIELD].get<Timestamp, std::optional>();
-	product.buy_until_date = row[BUY_UNTIL_DATE_FIELD].get<Timestamp, std::optional>();
+
+	if (row[PURCHASE_DATE_FIELD].is_null())
+	{
+		product.purchase_date = std::nullopt;
+	}
+	else
+	{
+		product.purchase_date = row[PURCHASE_DATE_FIELD].as<Timestamp>();
+	}
+
+	if (row[BUY_UNTIL_DATE_FIELD].is_null())
+	{
+		product.purchase_date = std::nullopt;
+	}
+	else
+	{
+		product.purchase_date = row[BUY_UNTIL_DATE_FIELD].as<Timestamp>();
+	}
+
 	return product;
 }

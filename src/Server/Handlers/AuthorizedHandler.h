@@ -3,21 +3,21 @@
 #include <string>
 
 #include "ICommandHandler.h"
-#include "../libdal/Facade/IDbFacade.h"
 
 class AuthorizedHandler : public ICommandHandler
 {
 public:
-	AuthorizedHandler();
+	AuthorizedHandler(IDbFacade::Ptr facade);
 	virtual ~AuthorizedHandler() override {}
 
+private:
 	class JSONParser
 	{
 	public:
 		struct DTO {
 			IdType id;
 			std::string login;
-			std::string iat;
+			double iat;
 		};
 	DTO Parse(const QJsonDocument& payload);
 
@@ -25,8 +25,9 @@ public:
 
 	QJsonDocument DecodeJWTTokenBody(const std::string& token);
 	bool CheckAuthorization(Net::Request& request);
+public:
 	Net::Response Handle(Net::Request& request) override;
 	virtual Net::Response AuthHandle(const Net::Request& request) = 0;
-	std::unique_ptr<IDbFacade> m_facade;
+private:
 	JSONParser m_parser;
 };
