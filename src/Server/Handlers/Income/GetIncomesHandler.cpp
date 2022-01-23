@@ -36,7 +36,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 		"Unsupported method");
 }
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(std::vector<Income> incomes)
+GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
 {
 	JSONFormatter::Incomes incomes_out;
 	incomes_out.reserve(incomes.size());
@@ -47,7 +47,7 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(std::vector<Inc
 	return incomes_out;
 }
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(Income income)
+GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
 {
 	JSONFormatter::Income income_out;
 

@@ -46,8 +46,8 @@ public:
 	virtual Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-	JSONFormatter::Incomes Map(std::vector<Income> incomes);
-	JSONFormatter::Income MapIncome(Income income);
+	JSONFormatter::Incomes Map(const std::vector<Income>& incomes);
+	JSONFormatter::Income MapIncome(const Income& income);
 
 	JSONParser m_parser{};
 	JSONFormatter m_formatter{};
