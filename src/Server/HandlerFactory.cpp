@@ -4,8 +4,9 @@
 #include "Handlers/FakeGetListsHandler.h"
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
+#include "Handlers/List/GetListsHandler.h"
 
-#include "../libdal/Facade/DbFacade.h"
+#include "libdal/Facade/DbFacade.h"
 
 const std::string DB_CONN_STRING =
 	"user=test_user host=127.0.0.1 "
@@ -25,5 +26,7 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new GetProductsHandler(std::move(facade));
 	if (uri == std::string("/product/add"))
 		return new AddProductHandler(std::move(facade));
+	if (uri == std::string("/list/get_lists"))
+		return new GetListsHandler(std::move(facade));
 	return nullptr;
 }

@@ -109,7 +109,7 @@ std::optional<List> DbFacade::GetListById(const IdType& id)
 	return m_lists.GetList(id);
 }
 
-std::optional<std::vector<List>> DbFacade::GetAllLists(const IdType& user_id)
+std::vector<List> DbFacade::GetAllLists(const IdType& user_id)
 {
 	return m_lists.GetAllLists(user_id);
 }
