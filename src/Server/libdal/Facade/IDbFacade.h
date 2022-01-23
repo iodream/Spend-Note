@@ -34,20 +34,20 @@ public:
 	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
 	virtual std::vector<ProductCategory> GetAllProductCategories() = 0;
 
-	virtual void AddIncome(const Income& income) = 0;
+	virtual std::optional<IdType> AddIncome(const Income& income) = 0;
 	virtual std::optional<Income> GetIncomeById(const IdType& id) = 0;
-	virtual std::optional<std::vector<Income>> GetAllIncomes(const IdType& user_id) = 0;
+	virtual std::vector<Income> GetAllIncomes(const IdType& user_id) = 0;
 	virtual void UpdateIncome(const Income& income) = 0;
 	virtual void RemoveIncome(const IdType& id) = 0;
 
-	virtual void AddList(const List& list_) = 0;
+	virtual std::optional<IdType> AddList(const List& list) = 0;
 	virtual std::optional<List> GetListById(const IdType& id) = 0;
 	virtual std::vector<List> GetAllLists(const IdType& user_id) = 0;
 	virtual void UpdateList(const List& list_) = 0;
 	virtual void RemoveList(const IdType& id) = 0;
 
 	virtual std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) = 0;
-	virtual std::vector<IncomeCategory> GetIncomeCategoriesAll() = 0;
+	virtual std::vector<IncomeCategory> GetAllIncomeCategories() = 0;
 
 	virtual std::optional<ListState> GetListStateById(const IdType& list_state_id) = 0;
 	virtual std::vector<ListState> GetAllListStates() = 0;

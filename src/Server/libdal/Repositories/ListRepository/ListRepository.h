@@ -1,7 +1,5 @@
 #include <DTOs/List.h>
-
 #include <pqxx/pqxx>
-#include <chrono>
 
 #include "Exceptions/DatabaseFailure.h"
 
@@ -10,7 +8,7 @@ class ListRepository
 public:
 	ListRepository(pqxx::connection& db_connection);
 
-	void AddList(const List& list);
+	std::optional<IdType> AddList(const List& list);
 	std::optional<List> GetList(const IdType& list_id);
 	std::vector<List> GetAllLists(const IdType& user_id);
 	void Update(const List& list);
