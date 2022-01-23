@@ -5,6 +5,7 @@
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
 #include "Handlers/List/GetListsHandler.h"
+#include "Handlers/Income/AddIncomeHandler.h"
 
 #include "libdal/Facade/DbFacade.h"
 
@@ -28,5 +29,7 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new AddProductHandler(std::move(facade));
 	if (uri == std::string("/list/get_lists"))
 		return new GetListsHandler(std::move(facade));
+	if (uri == std::string("/income/add"))
+		return new AddIncomeHandler(std::move(facade));
 	return nullptr;
 }

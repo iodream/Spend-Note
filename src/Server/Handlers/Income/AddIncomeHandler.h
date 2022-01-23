@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "AuthorizedHandler.h"
+#include "../AuthorizedHandler.h"
 #include "../libdal/Facade/IDbFacade.h"
 
 class AddIncomeHandler : public AuthorizedHandler

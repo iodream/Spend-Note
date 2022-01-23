@@ -6,7 +6,6 @@
 #include "MockDbFacade.h"
 #include "Server/Handlers/AddIncomeHandler.h"
 #include "Net/Parsing.h"
-#include "Utils.h"
 
 using ::testing::Return;
 using ::testing::_;

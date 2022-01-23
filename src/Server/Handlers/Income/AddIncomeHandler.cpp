@@ -1,6 +1,6 @@
 #include "AddIncomeHandler.h"
 
-#include "Common.h"
+#include "../Common.h"
 #include "Net/Parsing.h"
 
 #include "Server/Error.h"
