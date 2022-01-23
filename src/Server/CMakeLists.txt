@@ -23,7 +23,7 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
+	${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
 )
 
 list(APPEND Spend-Note-Server_LIBS
