@@ -30,7 +30,7 @@ public:
         QJsonDocument Format(const DTO& dto);
     };
 
-    FakeGetListsHandler() {}
+	FakeGetListsHandler(IDbFacade::Ptr facade) : AuthorizedHandler(std::move(facade)) {}
     virtual ~FakeGetListsHandler() override {}
 
     virtual Net::Response AuthHandle(const Net::Request& request) override;
