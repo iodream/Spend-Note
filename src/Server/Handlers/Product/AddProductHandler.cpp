@@ -17,7 +17,6 @@ AddProductHandler::AddProductHandler(IDbFacade::Ptr facade)
 AddProductHandler::JSONParser::DTO AddProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
-	DTO dto;
 	auto json = payload.object();
 	return ParseProduct(json);
 }
