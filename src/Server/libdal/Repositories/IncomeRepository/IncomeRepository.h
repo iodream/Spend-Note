@@ -13,7 +13,7 @@ public:
 	std::optional<IdType> Add(const Income& income);
 	std::optional<Income> GetIncome(const IdType& income_id);
 	std::vector<Income> GetAllIncomes(const IdType& user_id);
-	void Update(const Income& income);
+	bool Update(const Income& income);
 	bool Remove(const IdType& income_id);
 
 private:

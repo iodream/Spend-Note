@@ -18,10 +18,10 @@ Net::Response FormJSONResponse(
 }
 
 Net::Response FormEmptyResponse(
-    Poco::Net::HTTPServerResponse::HTTPStatus status)
+	Poco::Net::HTTPServerResponse::HTTPStatus status)
 {
-    Net::Response response;
-    response.content_type = Net::CONTENT_TYPE_EMPTY;
-    response.status = status;
-    return response;
+	Net::Response response;
+	response.content_type = Net::CONTENT_TYPE_EMPTY;
+	response.status = status;
+	return response;
 }
