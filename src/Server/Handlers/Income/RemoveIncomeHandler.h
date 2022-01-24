@@ -12,11 +12,11 @@ class RemoveIncomeHandler : public AuthorizedHandler
     class JSONParser
     {
     public:
-        struct DTO {
+		struct IncomeDTO{
             IdType id;
         };
 
-        DTO Parse(const QJsonDocument& payload);
+		IncomeDTO Parse(const QJsonDocument& payload);
     };
 public:
     RemoveIncomeHandler(IDbFacade::Ptr facade);

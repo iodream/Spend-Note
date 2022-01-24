@@ -14,10 +14,10 @@ RemoveIncomeHandler::RemoveIncomeHandler(IDbFacade::Ptr facade)
 {
 }
 
-RemoveIncomeHandler::JSONParser::DTO RemoveIncomeHandler::JSONParser::Parse(
+RemoveIncomeHandler::JSONParser::IncomeDTO RemoveIncomeHandler::JSONParser::Parse(
     const QJsonDocument& payload)
 {
-    DTO dto;
+	IncomeDTO dto;
     auto json = payload.object();
     SafeReadId(json, "income_id", dto.id);
     return dto;

@@ -14,9 +14,9 @@ class GetListsHandler : public AuthorizedHandler
 	public:
 		using DTOItem = std::pair<const List&, std::string>;
 
-		using DTO = std::vector<DTOItem>;
+		using ListDTO = std::vector<DTOItem>;
 
-		QJsonDocument Format(const DTO& dto);
+		QJsonDocument Format(const ListDTO& dto);
 	};
 public:
 	GetListsHandler(IDbFacade::Ptr facade);

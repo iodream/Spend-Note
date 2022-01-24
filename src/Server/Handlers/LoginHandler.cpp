@@ -15,17 +15,17 @@ LoginHandler::LoginHandler(IDbFacade::Ptr facade)
 
 }
 
-QJsonDocument LoginHandler::JSONFormatter::Format(const DTO& dto)
+QJsonDocument LoginHandler::JSONFormatter::Format(const LoginDTO& dto)
 {
 	QJsonObject json;
 	json["token"] = dto.token.c_str();
 	return QJsonDocument{json};
 }
 
-LoginHandler::JSONParser::DTO LoginHandler::JSONParser::Parse(
+LoginHandler::JSONParser::LoginDTO LoginHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
-	DTO dto;
+	LoginDTO dto;
 	auto json = payload.object();
 
 	try {
@@ -60,7 +60,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 
 		Poco::JWT::Signer signer(user->password);
 		std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
-		JSONFormatter::DTO out_dto{jwt};
+		JSONFormatter::LoginDTO out_dto{jwt};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
 	return FormErrorResponse(

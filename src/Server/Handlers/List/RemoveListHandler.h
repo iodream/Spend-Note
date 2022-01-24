@@ -12,11 +12,11 @@ class RemoveListHandler : public AuthorizedHandler
     class JSONParser
     {
     public:
-        struct DTO {
+		struct ListDTO {
             IdType id;
         };
 
-        DTO Parse(const QJsonDocument& payload);
+		ListDTO Parse(const QJsonDocument& payload);
     };
 public:
     RemoveListHandler(IDbFacade::Ptr facade);

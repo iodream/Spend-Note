@@ -12,8 +12,7 @@ class UpdateIncomeHandler : public AuthorizedHandler
     class JSONParser
     {
     public:
-        using DTO = Income;
-        DTO Parse(const QJsonDocument& payload);
+		Income Parse(const QJsonDocument& payload);
     };
 
 public:

@@ -10,10 +10,9 @@ UpdateIncomeHandler::UpdateIncomeHandler(IDbFacade::Ptr facade)
     : AuthorizedHandler(std::move(facade))
 {
 }
-UpdateIncomeHandler::JSONParser::DTO UpdateIncomeHandler::JSONParser::Parse(
+Income UpdateIncomeHandler::JSONParser::Parse(
     const QJsonDocument& payload)
 {
-    DTO dto;
     auto json = payload.object();
     return ParseIncome(json);
 }
