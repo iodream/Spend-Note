@@ -2,7 +2,6 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QCryptographicHash>
 
 #include "DTO/Login.h"
 #include "Net/Constants.h"
@@ -11,6 +10,8 @@
 class LoginModel
 {
 public:
+	LoginModel(const std::string& hostname) : m_hostname{hostname} {}
+
 	class JSONFormatter
 	{
 	public:
@@ -25,6 +26,9 @@ public:
 
 	Net::Request FormRequest(LoginInDTO dto);
 	LoginOutDTO  ParseResponse(const Net::Response& response);
+
+private:
+	const std::string& m_hostname;
 
 	JSONParser m_parser{};
 	JSONFormatter m_formatter{};
