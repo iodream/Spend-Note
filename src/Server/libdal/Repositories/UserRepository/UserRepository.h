@@ -10,7 +10,7 @@ class UserRepository
 public:
 	UserRepository(pqxx::connection& db_connection);
 
-	void Add(const User& user);
+	std::optional<IdType> Add(const User& user);
 	std::optional<User> GetById(IdType id);
 	std::optional<User> GetByLogin(const std::string& login);
 	void Update(const User& user);
