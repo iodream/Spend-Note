@@ -1,25 +1,48 @@
 #include "Controller.h"
 
+#include "Models/LoginModel.h"
+#include "Models/List/GetListsModel.h"
+
 #include "Net/Constants.h"
 
 Controller::Controller()
 {
+	ConnectLoginPage();
+	ConnectMainPage();
+}
+
+void Controller::ConnectLoginPage()
+{
+	auto& page = m_main_window.get_login_page();
+
 	QObject::connect(
-		&m_main_window.m_login_page,
+		&page,
 		&LoginPage::Login,
 		this,
 		&Controller::OnLogin);
+}
+
+void Controller::ConnectMainPage()
+{
+	auto& page = m_main_window.get_main_page();
 
 	QObject::connect(
-		&m_main_window.m_main_page,
+		&page,
 		&MainPage::Logout,
 		this,
 		&Controller::OnLogout);
+
+	QObject::connect(
+		&page,
+		&MainPage::ChangeSubPage,
+		this,
+		&Controller::OnChangeMainSubPage);
+
 //	QObject::connect(
-//		&m_main_window.m_main_page.m_lists_page,
-//		&ListsPage::GetLists,
+//		&page.get_list_create_spage(),
+//		&ListsSubPage::OnListClicked,
 //		this,
-//		&Controller::OnGetLists);
+//		&Controller::OnChangeMainSubPage);
 }
 
 void Controller::Start(UIPages at_page)
@@ -31,33 +54,27 @@ void Controller::Start(UIPages at_page)
 void Controller::StartTest()
 {
 	Start(UIPages::MAIN);
-	m_main_window.m_main_page.SetCurrentSubPage(MainSubPages::LISTS);
-//	m_main_window.m_main_page.AddListSubPage("Some list 1", 1);
-//	m_main_window.m_main_page.AddListSubPage("Some list 2", 2);
-//	m_main_window.m_main_page.AddListSubPage("Some list 3", 3);
-//	m_main_window.m_main_page.RemoveListSubPage(3);
-//	m_main_window.m_main_page.SetCurrentSubPageList(2);
+	m_main_window.get_main_page().SetCurrentSubPage(MainSubPages::LISTS);
 }
 
 void Controller::OnLogin(LoginInDTO in_dto)
 {
-	LoginModel model;
+	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(in_dto);
 	auto response = m_http_client.Request(request);
 
-	// checking response status
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
-			m_main_window.m_login_page.ChangeLoginErrorLabel(
-					"Login and password do not match");
+			m_main_window.get_login_page().ChangeLoginErrorLabel(
+				"Login or password is incorrect");
 		}
 		else
 		{
 			QMessageBox::information(&m_main_window
-					, QString::fromStdString("Login failed!")
-					, QString::fromStdString(response.reason));
+				, QString("Login failed!")
+				, QString::fromStdString(response.reason));
 		}
 		return;
 	}
@@ -67,46 +84,55 @@ void Controller::OnLogin(LoginInDTO in_dto)
 	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
 	m_http_client.set_token(out_dto.token);
 
-	// there i could set new data to the page
-
+	SetMainSubPage(MainSubPages::LISTS);
 	m_main_window.SetCurrentPage(UIPages::MAIN);
-}
-
-void Controller::OnGetLists()
-{
-	ListsModel model;
-	ListInDTO in_dto;
-	auto request  = model.FormRequest(in_dto);
-	auto response = m_http_client.Request(request);
-
-	// checking response status
-	// check if status ok
-	// errorstatus
-	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-	{
-		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
-		{
-			m_main_window.m_login_page.ChangeLoginErrorLabel(
-					"Login and password do not match");
-		}
-		else
-		{
-			QMessageBox::information(&m_main_window
-					, QString::fromStdString("Login failed!")
-					, QString::fromStdString(response.reason));
-		}
-		return;
-	}
-
-	auto out_dto = model.ParseResponse(response);
-//ok
-//use alias to make shorter
-
-	//m_main_window.m_main_page.m_lists_page.UpdateData(out_dto);
 }
 
 void Controller::OnLogout()
 {
-	m_http_client.set_token("");
+	m_http_client.ReleaseToken();
 	m_main_window.SetCurrentPage(UIPages::LOGIN);
+}
+
+void Controller::SetMainSubPage(MainSubPages page)
+{
+	switch(page) {
+	case MainSubPages::LISTS:
+		UpdateMainListsSubPage();
+		break;
+	case MainSubPages::CREATE_LIST:
+		break;
+	case MainSubPages::PRODUCTS:
+		break;
+	case MainSubPages::ICOMES:
+		break;
+	case MainSubPages::SETTINGS:
+		break;
+	}
+
+	m_main_window.get_main_page().SetCurrentSubPage(page);
+}
+
+void Controller::OnChangeMainSubPage(MainSubPages page)
+{
+	SetMainSubPage(page);
+}
+
+void Controller::UpdateMainListsSubPage()
+{
+	GetListsModel model{m_hostname};
+	auto request  = model.FormRequest();
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		QMessageBox::information(&m_main_window
+			, QString("Error occured")
+			, QString::fromStdString(response.reason));
+	}
+
+	auto lists = model.ParseResponse(response);
+
+	auto& lists_spage = m_main_window.get_main_page().get_lists_spage();
+	lists_spage.Update(lists);
 }

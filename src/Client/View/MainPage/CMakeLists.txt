@@ -4,10 +4,8 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/MainPage.ui
 )
 
-add_subdirectory(ListSubPage)
-add_subdirectory(ListsPage)
-add_subdirectory(ListCreateSubPage)
-
-
+add_subdirectory(List)
+#add_subdirectory(Product)
+#add_subdirectory(Income)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)

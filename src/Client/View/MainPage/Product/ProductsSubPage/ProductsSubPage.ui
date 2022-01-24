@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListsPage</class>
- <widget class="QWidget" name="ListsPage">
+ <class>ProductsSubPage</class>
+ <widget class="QWidget" name="ProductsSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -45,6 +45,22 @@
        <number>0</number>
       </property>
       <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QWidget" name="NameHolder" native="true">
         <property name="minimumSize">
          <size>
@@ -52,7 +68,46 @@
           <height>0</height>
          </size>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="ListName">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: black;</string>
+           </property>
+           <property name="text">
+            <string>ListName</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="EditList">
+        <property name="text">
+         <string>Edit</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -63,6 +118,19 @@
        </widget>
       </item>
       <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>26</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QWidget" name="widget" native="true">
         <property name="minimumSize">
          <size>
@@ -71,6 +139,13 @@
          </size>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Items:</string>
+           </property>
+          </widget>
+         </item>
          <item>
           <widget class="QLabel" name="ListSize">
            <property name="minimumSize">
@@ -84,8 +159,34 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="AddItemButton">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -96,9 +197,6 @@
       <number>0</number>
      </property>
      <widget class="QWidget" name="page">
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QScrollArea" name="scrollArea">
@@ -111,7 +209,7 @@
             <x>0</x>
             <y>0</y>
             <width>849</width>
-            <height>521</height>
+            <height>513</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="ItemsLayout">
