@@ -106,10 +106,9 @@ void UserRepository::Update(const User &user)
 
 bool UserRepository::Remove(IdType id)
 {
-	pqxx::work w(m_database_connection);
-
 	try
 	{
+		pqxx::work w(m_database_connection);
 		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
 		if (result.empty())
 		{
