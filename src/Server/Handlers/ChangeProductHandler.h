@@ -11,11 +11,19 @@ using IdType= long long int;
 
 class ChangeProductHandler : public AuthorizedHandler
 {
-	ChangeProductHandler();
+	ChangeProductHandler(IDbFacade::Ptr facade);
 	virtual ~ChangeProductHandler() override {}
 
-	Product Parser(const QJsonObject &obj);
-	virtual Net::Response AuthHandle(const Net::Request& request) override;
+	Net::Response AuthHandle(const Net::Request& request) override;
 
-	std::unique_ptr<IDbFacade> m_facade;
+public:
+	class JSONParser
+	{
+	public:
+		using DTO = Product;
+		DTO Parse(const QJsonDocument& payload);
+	};
+
+private:
+	JSONParser m_parser;
 };

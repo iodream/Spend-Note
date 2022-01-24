@@ -13,37 +13,43 @@
 #include "../libdal/DTOs/Product.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
+#include "Product/Utils.h"
 
-ChangeProductHandler::ChangeProductHandler()
-	: m_facade(std::make_unique<DbFacade>(DB_CONN_STRING))
+#include "../libdal/Exceptions/SQLFailure.h"
+
+ChangeProductHandler::ChangeProductHandler(IDbFacade::Ptr facade)
+	: AuthorizedHandler(std::move(facade))
 {
 }
 
-
-Product ChangeProductHandler::Parser(const QJsonObject &obj)
+ChangeProductHandler::JSONParser::DTO ChangeProductHandler::JSONParser::Parse(const QJsonDocument &payload)
 {
-	Product product;
-
-	product.id = obj["id"].toInt();
-	product.list_id = obj["list_id"].toInt();
-	product.category_id	= obj["category_id"].toInt();
-	product.name = (obj["name"].toString()).toStdString();
-	product.price = obj["price"].toDouble();
-	product.amount = obj["amount"].toInt();
-	product.is_bought = obj["is_bought"].toBool();
-	product.add_date = (obj["add_date"].toString()).toStdString();
-	product.purchase_date = (obj["purchase_date"].toString()).toStdString();
-	product.buy_until_date = (obj["buy_until_date"].toString()).toStdString();
-
-	return product;
+	auto json = payload.object();
+	return ParseProduct(json);
 }
 
-Net::Response ChangeProductHandler::AuthHandle(const Net::Request &request)
+Net::Response  ChangeProductHandler::AuthHandle(const Net::Request &request)
 {
-	if(request.method == Net::HTTP_METHOD_POST)
+	if(request.method == Net::HTTP_METHOD_PUT)
 	{
-		auto dto = request.json_payload;
-		m_facade->UpdateProduct(Parser(dto.object()));
+		auto json = request.json_payload;
+		try
+		{
+			if(m_facade->UpdateProduct(m_parser.Parse(json))){
+				return FormEmptyResponse();
+			}
+			else
+			{
+				return FormErrorResponse(
+					NetError::Status::HTTP_CONFLICT,
+					"Unable to update resource");
+			}
+		}
+		catch (const SQLFailure& ex) {
+			return FormErrorResponse(
+				NetError::Status::HTTP_CONFLICT,
+				"Unable to update resource");
+		}
 	}
 	return FormErrorResponse(
 		NetError::Status::HTTP_BAD_REQUEST,
