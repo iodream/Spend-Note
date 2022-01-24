@@ -139,12 +139,17 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 	return products;
 }
 
-void ProductRepository::Update(const Product& product)
+bool ProductRepository::Update(const Product& product)
 {
 	pqxx::work w(m_database_connection);
 
 	try
 	{
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(product.id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0(
 				"UPDATE " + TABLE_NAME +
 				" SET " +
@@ -165,6 +170,7 @@ void ProductRepository::Update(const Product& product)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 bool ProductRepository::Remove(IdType id)

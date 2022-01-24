@@ -27,9 +27,9 @@ std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
 	return m_users.GetByLogin(login);
 }
 
-void DbFacade::UpdateUser(const User &user)
+bool DbFacade::UpdateUser(const User &user)
 {
-	m_users.Update(user);
+	return m_users.Update(user);
 }
 
 bool DbFacade::RemoveUser(IdType id)
@@ -53,9 +53,9 @@ std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
 	return m_products.GetByListId(list_id);
 }
 
-void DbFacade::UpdateProduct(const Product& product)
+bool DbFacade::UpdateProduct(const Product& product)
 {
-	m_products.Update(product);
+	return m_products.Update(product);
 }
 
 bool DbFacade::RemoveProduct(IdType id)
@@ -89,9 +89,9 @@ std::vector<Income> DbFacade::GetAllIncomes(const IdType& user_id)
 	return m_incomes.GetAllIncomes(user_id);
 }
 
-void DbFacade::UpdateIncome(const Income& income)
+bool DbFacade::UpdateIncome(const Income& income)
 {
-	m_incomes.Update(income);
+	return m_incomes.Update(income);
 }
 
 bool DbFacade::RemoveIncome(const IdType& id)
@@ -114,9 +114,9 @@ std::vector<List> DbFacade::GetAllLists(const IdType& user_id)
 	return m_lists.GetAllLists(user_id);
 }
 
-void DbFacade::UpdateList(const List& list)
+bool DbFacade::UpdateList(const List& list)
 {
-	m_lists.Update(list);
+	return m_lists.Update(list);
 }
 
 bool DbFacade::RemoveList(const IdType& id)
