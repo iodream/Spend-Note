@@ -7,29 +7,31 @@
 
 class AddIncomeHandler : public AuthorizedHandler
 {
-  class JSONParser
-  {
-  public:
-	Income dto;
-	Income Parse(const QJsonDocument& json_doc);
-  };
-
-  class JSONFormatter
-  {
-  public:
-	struct DTO
+	class JSONParser
 	{
-	  IdType income_id;
+	public:
+		Income dto;
+
+		Income Parse(const QJsonDocument& json_doc);
 	};
-	QJsonDocument Format(const DTO& dto);
-  };
+
+	class JSONFormatter
+	{
+	public:
+		struct DTO
+		{
+			IdType income_id;
+		};
+
+		QJsonDocument Format(const DTO& dto);
+	};
 
 public:
-  AddIncomeHandler(IDbFacade::Ptr facade);
-  virtual ~AddIncomeHandler() override {};
+	AddIncomeHandler(IDbFacade::Ptr facade);
+	virtual ~AddIncomeHandler() override {};
 
-  Net::Response AuthHandle(const Net::Request& request) override;
+	Net::Response AuthHandle(const Net::Request& request) override;
 
-  JSONParser m_parser{};
-  JSONFormatter m_formatter{};
+	JSONParser m_parser{};
+	JSONFormatter m_formatter{};
 };

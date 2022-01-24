@@ -15,48 +15,61 @@ AddIncomeHandler::AddIncomeHandler(IDbFacade::Ptr facade)
 }
 
 Income AddIncomeHandler::JSONParser::Parse(
-  const QJsonDocument& json_doc)
+	const QJsonDocument& json_doc)
 {
-  Income dto;
+	Income dto;
 
-  auto json = json_doc.object();
+	auto json = json_doc.object();
 
-  try {
-	ParseIncome(json);
-  }  catch (const ParsingError& ex) {
-	throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
-  }
+	try
+	{
+		ParseIncome(json);
+	}
+	catch(const ParsingError& ex)
+	{
+		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+	}
 
   return dto;
 }
 
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 {
-  if(request.method == Net::HTTP_METHOD_POST)
-  {
-	auto dto = m_parser.Parse(request.json_payload);
-	dto.user_id = request.uid;
+	if(request.method == Net::HTTP_METHOD_POST)
+	{
+		auto dto = m_parser.Parse(request.json_payload);
+		dto.user_id = request.uid;
 
-	AddIncomeHandler::JSONFormatter::DTO out_dto;
+		AddIncomeHandler::JSONFormatter::DTO out_dto;
 
-	try {
-	  out_dto.income_id = m_facade->AddIncome(dto).value();
-	}  catch (const SQLFailure& e) {
-	  throw FormErrorResponse(
-		NetError::Status::HTTP_CONFLICT,
-		"Unable to create resource");
+		try
+		{
+			out_dto.income_id = m_facade->AddIncome(dto).value();
+		}
+		catch (const SQLFailure& e)
+		{
+			throw FormErrorResponse(
+				NetError::Status::HTTP_CONFLICT,
+				"Unable to create resource");
+		}
+		catch (const DatabaseFailure& e)
+		{
+			throw FormErrorResponse(
+				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+				"Failed to retrieve data from database");
+		}
+
+		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
 
-	return FormJSONResponse(m_formatter.Format(out_dto));
-  }
-  return FormErrorResponse(
-	NetError::Status::HTTP_BAD_REQUEST,
-	"Unsupported method");
+	return FormErrorResponse(
+		NetError::Status::HTTP_BAD_REQUEST,
+		"Unsupported method");
 }
 
 QJsonDocument AddIncomeHandler::JSONFormatter::Format(const DTO& dto)
 {
-  QJsonObject json;
-  json["id"] = std::to_string(dto.income_id).c_str();
-  return QJsonDocument{json};
+	QJsonObject json;
+	json["id"] = std::to_string(dto.income_id).c_str();
+	return QJsonDocument{json};
 }
