@@ -17,17 +17,10 @@ SignupHandler::SignupHandler(IDbFacade::Ptr facade)
 
 }
 
-QJsonDocument SignupHandler::JSONFormatter::Format(const DTO& dto)
-{
-	QJsonObject json;
-	json["id"] = std::to_string(dto.id).c_str();
-	return QJsonDocument{json};
-}
-
-SignupHandler::JSONParser::DTO SignupHandler::JSONParser::Parse(
+SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
-	DTO dto;
+	Credentials dto;
 	auto json = payload.object();
 
 	try {
@@ -55,9 +48,8 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 
 		try
 		{
-			IdType id = m_facade->AddUser(User {0, dto.login, dto.passwd_hash}).value();
-			JSONFormatter::DTO out_dto{id};
-			return FormJSONResponse(m_formatter.Format(out_dto));
+			m_facade->AddUser(User {0, dto.login, dto.passwd_hash}).value();
+			return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 		}
 		catch(const DatabaseFailure& e)
 		{

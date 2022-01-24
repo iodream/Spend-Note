@@ -9,23 +9,14 @@
 
 class SignupHandler : public ICommandHandler
 {
-	class JSONFormatter
-	{
-	public:
-		struct DTO {
-			IdType id;
-		};
-
-		QJsonDocument Format(const DTO& dto);
-	};
 	class JSONParser
 	{
 	public:
-		struct DTO {
+		struct Credentials {
 			std::string login;
 			std::string passwd_hash;
 		};
-		DTO Parse(const QJsonDocument& payload);
+		Credentials Parse(const QJsonDocument& payload);
 	};
 public:
 	SignupHandler(IDbFacade::Ptr facade);
@@ -33,6 +24,5 @@ public:
 
 	Net::Response Handle(Net::Request& request) override;
 
-	JSONFormatter m_formatter{};
 	JSONParser m_parser{};
 };

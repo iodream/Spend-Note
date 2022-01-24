@@ -11,7 +11,7 @@
 using ::testing::Return;
 using ::testing::_;
 
-TEST(SingupHandlerTest, USER_ALREADY_EXISTS)
+TEST(SignupHandlerTest, USER_ALREADY_EXISTS)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 	User existing_user;
@@ -42,11 +42,10 @@ TEST(SignupHandlerTest, USER_DOES_NOT_EXIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	IdType id = 1;
-
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional<User>{}));
 
+	IdType id;
 	EXPECT_CALL(*facade, AddUser(_))
 		.WillOnce(Return(std::optional{id}));
 
@@ -62,8 +61,6 @@ TEST(SignupHandlerTest, USER_DOES_NOT_EXIST)
 	}
 
 	auto response = handler->Handle(request);
-	auto response_id = response.json_payload.object()["id"].toString();
 
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
-	ASSERT_EQ(response_id, QString::number(id));
 }
