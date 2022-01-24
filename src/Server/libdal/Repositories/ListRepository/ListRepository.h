@@ -11,7 +11,7 @@ public:
 	std::optional<IdType> AddList(const List& list);
 	std::optional<List> GetList(const IdType& list_id);
 	std::vector<List> GetAllLists(const IdType& user_id);
-	void Update(const List& list);
+	bool Update(const List& list);
 	bool Remove(const IdType& list_id);
 
 private:
