@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "AuthorizedHandler.h"
+#include "../AuthorizedHandler.h"
 #include "../libdal/DTOs/Product.h"
 #include "../libdal/Facade/IDbFacade.h"
 

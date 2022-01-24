@@ -1,19 +1,11 @@
 #include <QJsonObject>
-#include <memory>
-#include <optional>
 
-#include "QJsonObject"
-#include "QJsonArray"
-
-
-#include "ChangeProductHandler.h"
-#include "Common.h"
+#include "UpdateProductHandler.h"
 #include "Net/Parsing.h"
-#include "../libdal/Facade/DbFacade.h"
-#include "../libdal/DTOs/Product.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "Product/Utils.h"
+#include "../Common.h"
+#include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
@@ -35,14 +27,15 @@ Net::Response  ChangeProductHandler::AuthHandle(const Net::Request &request)
 		auto json = request.json_payload;
 		try
 		{
-			if(m_facade->UpdateProduct(m_parser.Parse(json))){
+            if(m_facade->UpdateProduct(m_parser.Parse(json)))
+            {
 				return FormEmptyResponse();
 			}
 			else
-			{
-				return FormErrorResponse(
-					NetError::Status::HTTP_CONFLICT,
-					"Unable to update resource");
+            {
+                return FormErrorResponse(
+                    NetError::Status::HTTP_NOT_FOUND,
+                    "Resource not found");
 			}
 		}
 		catch (const SQLFailure& ex) {
