@@ -9,12 +9,13 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_lists(m_connection)
 		, m_list_states(m_connection)
 		, m_income_categories(m_connection)
+		, m_balance_repository(m_connection)
 {
 }
 
-void DbFacade::AddUser(const User &user)
+std::optional<IdType> DbFacade::AddUser(const User &user)
 {
-	m_users.Add(user);
+	return m_users.Add(user);
 }
 
 std::optional<User> DbFacade::GetUserById(IdType id)
@@ -27,9 +28,9 @@ std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
 	return m_users.GetByLogin(login);
 }
 
-void DbFacade::UpdateUser(const User &user)
+bool DbFacade::UpdateUser(const User &user)
 {
-	m_users.Update(user);
+	return m_users.Update(user);
 }
 
 bool DbFacade::RemoveUser(IdType id)
@@ -53,9 +54,9 @@ std::vector<Product> DbFacade::GetProductsForList(IdType list_id)
 	return m_products.GetByListId(list_id);
 }
 
-void DbFacade::UpdateProduct(const Product& product)
+bool DbFacade::UpdateProduct(const Product& product)
 {
-	m_products.Update(product);
+	return m_products.Update(product);
 }
 
 bool DbFacade::RemoveProduct(IdType id)
@@ -89,9 +90,9 @@ std::vector<Income> DbFacade::GetAllIncomes(const IdType& user_id)
 	return m_incomes.GetAllIncomes(user_id);
 }
 
-void DbFacade::UpdateIncome(const Income& income)
+bool DbFacade::UpdateIncome(const Income& income)
 {
-	m_incomes.Update(income);
+	return m_incomes.Update(income);
 }
 
 bool DbFacade::RemoveIncome(const IdType& id)
@@ -114,9 +115,9 @@ std::vector<List> DbFacade::GetAllLists(const IdType& user_id)
 	return m_lists.GetAllLists(user_id);
 }
 
-void DbFacade::UpdateList(const List& list)
+bool DbFacade::UpdateList(const List& list)
 {
-	m_lists.Update(list);
+	return m_lists.Update(list);
 }
 
 bool DbFacade::RemoveList(const IdType& id)
@@ -142,4 +143,15 @@ std::optional<ListState> DbFacade::GetListStateById(const IdType& list_state_id)
 std::vector<ListState> DbFacade::GetAllListStates()
 {
 	return m_list_states.GetAll();
+}
+
+
+Money DbFacade::CalculateBalanceForUser(IdType user_id)
+{
+	return m_balance_repository.CalculateBalance(user_id);
+}
+
+Money DbFacade::CalculatePlannedBalanceForUser(IdType user_id)
+{
+	return m_balance_repository.CalculatePlannedBalance(user_id);
 }

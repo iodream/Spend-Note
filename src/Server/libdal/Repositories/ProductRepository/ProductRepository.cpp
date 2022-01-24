@@ -28,33 +28,33 @@ ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_databa
 
 std::optional<IdType> ProductRepository::Add(const Product& product)
 {
-	pqxx::work w(m_database_connection);
 	try
 	{
+		pqxx::work w(m_database_connection);
 		pqxx::result id_rows = w.exec(
-				"INSERT INTO " + TABLE_NAME + " (" +
-					LIST_ID_FIELD + ", " +
-					CATEGORY_ID_FIELD + ", " +
-					NAME_FIELD + ", " +
-					PRICE_FIELD + ", " +
-					AMOUNT_FIELD + ", " +
-					PRODUCT_PRIORITY_FIELD + ", " +
-					IS_BOUGHT_FIELD + ", " +
-					ADD_DATE_FIELD + ", " +
-					PURCHASE_DATE_FIELD + ", " +
-					BUY_UNTIL_DATE_FIELD +
-				") VALUES (" +
-					w.quote(product.list_id) + ", " +
-					w.quote(product.category_id) + ", " +
-					w.quote(product.name) + ", " +
-					w.quote(product.price) + ", " +
-					w.quote(product.amount) + ", " +
-					w.quote(product.product_priority) + ", " +
-					w.quote(product.is_bought) + ", " +
-					w.quote(product.add_date) + ", " +
-					w.quote(product.purchase_date) + ", " +
-					w.quote(product.buy_until_date) + ") " +
-					"RETURNING " + ID_FIELD + ";");
+			"INSERT INTO " + TABLE_NAME + " (" +
+				LIST_ID_FIELD + ", " +
+				CATEGORY_ID_FIELD + ", " +
+				NAME_FIELD + ", " +
+				PRICE_FIELD + ", " +
+				AMOUNT_FIELD + ", " +
+				PRODUCT_PRIORITY_FIELD + ", " +
+				IS_BOUGHT_FIELD + ", " +
+				ADD_DATE_FIELD + ", " +
+				PURCHASE_DATE_FIELD + ", " +
+				BUY_UNTIL_DATE_FIELD +
+			") VALUES (" +
+				w.quote(product.list_id) + ", " +
+				w.quote(product.category_id) + ", " +
+				w.quote(product.name) + ", " +
+				w.quote(product.price) + ", " +
+				w.quote(product.amount) + ", " +
+				w.quote(product.product_priority) + ", " +
+				w.quote(product.is_bought) + ", " +
+				w.quote(product.add_date) + ", " +
+				w.quote(product.purchase_date) + ", " +
+				w.quote(product.buy_until_date) + ") " +
+				"RETURNING " + ID_FIELD + ";");
 		w.commit();
 		auto id_row = id_rows.front();
 		return id_row[ID_FIELD].as<IdType>();
@@ -72,10 +72,9 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 
 std::optional<Product> ProductRepository::GetById(IdType id)
 {
-	pqxx::nontransaction w(m_database_connection);
-
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_rows = w.exec(
 				"SELECT " +
 					ID_FIELD + ", " +
@@ -107,11 +106,11 @@ std::optional<Product> ProductRepository::GetById(IdType id)
 
 std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 {
-	pqxx::nontransaction w(m_database_connection);
 	std::vector<Product> products;
 
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_rows = w.exec(
 				"SELECT " +
 					ID_FIELD + ", " +
@@ -139,12 +138,17 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 	return products;
 }
 
-void ProductRepository::Update(const Product& product)
+bool ProductRepository::Update(const Product& product)
 {
-	pqxx::work w(m_database_connection);
-
 	try
 	{
+		pqxx::work w(m_database_connection);
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(product.id));
+		if (result.empty())
+		{
+			return false;
+		}
+
 		w.exec0(
 				"UPDATE " + TABLE_NAME +
 				" SET " +
@@ -165,14 +169,14 @@ void ProductRepository::Update(const Product& product)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 bool ProductRepository::Remove(IdType id)
 {
-	pqxx::work w(m_database_connection);
-
 	try
 	{
+		pqxx::work w(m_database_connection);
 		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
 		if (result.empty())
 		{
