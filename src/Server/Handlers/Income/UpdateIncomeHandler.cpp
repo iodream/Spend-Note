@@ -20,18 +20,17 @@ UpdateIncomeHandler::JSONParser::DTO UpdateIncomeHandler::JSONParser::Parse(
 
 Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
 {
-    if (request.method == Net::HTTP_METHOD_POST) {
+	if (request.method == Net::HTTP_METHOD_PUT) {
         auto in_dto = m_parser.Parse(request.json_payload);
-        try {
-        m_facade->UpdateIncome(in_dto);
-        return FormEmptyResponse();
-        }
-        catch(const DatabaseFailure& exception)
-        {
-            return FormErrorResponse(
-                InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-                "Failed to retrieve incomes from database");
-        }
+
+		if (m_facade->UpdateIncome(in_dto)) {
+			return FormEmptyResponse();
+		}
+		else {
+			return FormErrorResponse(
+				NetError::Status::HTTP_NOT_FOUND,
+				"Resource not found");
+		}
     }
     return FormErrorResponse(
         NetError::Status::HTTP_BAD_REQUEST,
