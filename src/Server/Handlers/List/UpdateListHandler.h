@@ -18,8 +18,7 @@ public:
     class JSONParser
     {
     public:
-        using DTO = List;
-        DTO Parser(const QJsonDocument& payload);
+        List Parser(const QJsonDocument& payload);
     };
 
 private:

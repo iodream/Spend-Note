@@ -20,8 +20,7 @@ public:
 	class JSONParser
 	{
 	public:
-		using DTO = Product;
-		DTO Parse(const QJsonDocument& payload);
+        Product Parse(const QJsonObject& payload);
 	};
 
 private:

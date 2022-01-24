@@ -14,9 +14,9 @@ ChangeProductHandler::ChangeProductHandler(IDbFacade::Ptr facade)
 {
 }
 
-ChangeProductHandler::JSONParser::DTO ChangeProductHandler::JSONParser::Parse(const QJsonDocument &payload)
+Product ChangeProductHandler::JSONParser::Parse(const QJsonObject &payload)
 {
-	auto json = payload.object();
+    auto json = payload;
 	return ParseProduct(json);
 }
 
@@ -25,9 +25,9 @@ Net::Response  ChangeProductHandler::AuthHandle(const Net::Request &request)
 	if(request.method == Net::HTTP_METHOD_PUT)
 	{
 		auto json = request.json_payload;
-		try
+        try
 		{
-            if(m_facade->UpdateProduct(m_parser.Parse(json)))
+            if(m_facade->UpdateProduct(m_parser.Parse(json.object())))
             {
 				return FormEmptyResponse();
 			}

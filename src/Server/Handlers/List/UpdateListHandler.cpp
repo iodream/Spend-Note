@@ -9,9 +9,9 @@
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
-UpdateListHandler::JSONParser::DTO UpdateListHandler::JSONParser::Parser(const QJsonDocument &payload)
+List UpdateListHandler::JSONParser::Parser(const QJsonDocument &payload)
 {
-    DTO list;
+    List list;
 
     SafeReadId(payload.object(), "list_id", list.list_id);
     SafeReadId(payload.object(), "owner_id", list.owner_id);
