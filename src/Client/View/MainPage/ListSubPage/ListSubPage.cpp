@@ -26,8 +26,13 @@ ListSubPage::ListSubPage(const QString& name, int id, QWidget *parent)
 		SIGNAL(GoBack()),
 		this,
 		SLOT(OnGoBack()));
-
+	connect(
+		&m_list_create_page,
+		SIGNAL(GoBack()),
+		this,
+		SLOT(OnGoBack()));
 	m_ui->stackedWidget->addWidget(&m_product_page);
+
 }
 
 void ListSubPage::AppendProduct(ListItem* product)
@@ -131,4 +136,9 @@ ListSubPage::~ListSubPage()
 	delete m_ui;
 }
 
+void ListSubPage::on_EditList_clicked()
+{
+	m_ui->stackedWidget->addWidget(&m_list_create_page);
+	m_ui->stackedWidget->setCurrentIndex(2);
+}
 

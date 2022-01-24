@@ -6,10 +6,12 @@
 #include "MockDbFacade.h"
 #include "Server/Handlers/Income/GetIncomesHandler.h"
 #include "Net/Parsing.h"
+#include "../libdal/Exceptions/DatabaseFailure.h"
 
 
 using ::testing::Return;
 using ::testing::_;
+using ::testing::Throw;
 
 TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 {
@@ -74,5 +76,21 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	ASSERT_EQ(income_json["amount"].toDouble(), i.amount);
 	ASSERT_EQ(income_json["category_name"].toString(), QString::fromStdString(c.name));
 	ASSERT_EQ(income_json["add_time"].toString(), QString::fromStdString(i.add_time));
-	ASSERT_EQ(income_json["expiration_time"].toString(), QString::fromStdString(i.expiration_time));
+	ASSERT_EQ(income_json["expiration_time"].toString(), QString::fromStdString(i.expiration_time.value_or("")));
+}
+
+TEST(GetIncomesHandlerTest, DATABASE_FAILURE)
+{
+	auto facade = std::make_unique<MockDbFacade>();
+
+	EXPECT_CALL(*facade, GetAllIncomes(_))
+		.WillOnce(Throw(DatabaseFailure()));
+
+	auto handler = std::make_unique<GetIncomesHandler>(std::move(facade));
+
+	Net::Request request;
+	request.method = Net::HTTP_METHOD_GET;
+	auto response = handler->AuthHandle(request);
+
+	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR);
 }

@@ -6,7 +6,9 @@
 #include <QWidget>
 
 #include "ListSubPage/ListSubPage.h"
+#include "ListsPage/ListsPage.h"
 #include "View/Constants.h"
+
 
 namespace Ui {
 class MainPage;
@@ -26,12 +28,12 @@ public:
 	void SetCurrentSubPageList(ListSubPage::IdType id);
 	void AddListSubPage(const QString& name, ListSubPage::IdType id);
 	void RemoveListSubPage(ListSubPage::IdType id);
-
-private:
 	void SetCurrentSubPage(int idx);
 
+
+	ListsPage m_lists_page;
+
 	Ui::MainPage *m_ui;
-//	ListsPage m_lists_page;
 //	IncomesPage m_incomes_page;
 
 	// probably should be removed when m_lists_page will be ready

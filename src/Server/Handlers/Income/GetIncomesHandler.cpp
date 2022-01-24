@@ -21,7 +21,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	{
 		try
 		{
-			JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(request.uid).value())};
+			JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(request.uid))};
 			return FormJSONResponse(m_formatter.Format(response_dto));
 		}
 		catch (const DatabaseFailure& e)
@@ -65,7 +65,7 @@ GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Inco
 		throw BadRequestError{std::string{"Referenced nonexistent category with id "} + std::to_string(income.category_id)};
 	}
 	income_out.add_time = income.add_time;
-	income_out.expiration_time = income.expiration_time; // replace with income.expiration_time.value_or("") when libdal changes merged
+	income_out.expiration_time = income.expiration_time.value_or("");
 
 	return income_out;
 }
