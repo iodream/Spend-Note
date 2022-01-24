@@ -5,6 +5,7 @@
 
 #include "Server/Error.h"
 #include "Server/Utils.h"
+#include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
@@ -21,12 +22,7 @@ Income AddIncomeHandler::JSONParser::Parse(
   auto json = json_doc.object();
 
   try {
-	SafeReadId(json, "user_id", dto.user_id);
-	SafeReadString(json, "name", dto.name);
-	SafeReadNumber(json, "amount", dto.amount);
-	SafeReadId(json, "category_id", dto.category_id);
-	SafeReadString(json, "add_time", dto.add_time);
-	SafeReadString(json, "expiration_time", *dto.expiration_time);
+	ParseIncome(json);
   }  catch (const ParsingError& ex) {
 	throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
   }
