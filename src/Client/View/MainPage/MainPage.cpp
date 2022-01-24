@@ -21,6 +21,8 @@ MainPage::MainPage(QWidget *parent)
 		this,
 		SLOT(OnLogoutToolButtonClicked()));
 
+	//m_ui->Display->addWidget(&m_lists_page);
+
 	AddListSubPage("Some list 1", 1);
 }
 

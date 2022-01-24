@@ -8,6 +8,7 @@ using HTTPMethod = std::string;
 
 const HTTPMethod HTTP_METHOD_GET = "GET";
 const HTTPMethod HTTP_METHOD_POST = "POST";
+const HTTPMethod HTTP_METHOD_DELETE = "DELETE";
 
 using ContentType = std::string;
 
