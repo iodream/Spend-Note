@@ -54,7 +54,7 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 				w.quote(product.add_date) + ", " +
 				w.quote(product.purchase_date) + ", " +
 				w.quote(product.buy_until_date) + ") " +
-				"RETURNING " + ID_FIELD + ";");
+			"RETURNING " + ID_FIELD + ";");
 		w.commit();
 		auto id_row = id_rows.front();
 		return id_row[ID_FIELD].as<IdType>();
