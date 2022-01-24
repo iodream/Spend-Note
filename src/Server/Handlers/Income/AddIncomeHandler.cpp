@@ -52,12 +52,6 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 				NetError::Status::HTTP_CONFLICT,
 				"Unable to create resource");
 		}
-		catch (const DatabaseFailure& e)
-		{
-			throw FormErrorResponse(
-				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-				"Failed to retrieve data from database");
-		}
 
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
