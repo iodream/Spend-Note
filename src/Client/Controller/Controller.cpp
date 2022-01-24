@@ -15,6 +15,11 @@ Controller::Controller()
 		&MainPage::Logout,
 		this,
 		&Controller::OnLogout);
+//	QObject::connect(
+//		&m_main_window.m_main_page.m_lists_page,
+//		&ListsPage::GetLists,
+//		this,
+//		&Controller::OnGetLists);
 }
 
 void Controller::Start(UIPages at_page)
@@ -65,6 +70,39 @@ void Controller::OnLogin(LoginInDTO in_dto)
 	// there i could set new data to the page
 
 	m_main_window.SetCurrentPage(UIPages::MAIN);
+}
+
+void Controller::OnGetLists()
+{
+	ListsModel model;
+	ListInDTO in_dto;
+	auto request  = model.FormRequest(in_dto);
+	auto response = m_http_client.Request(request);
+
+	// checking response status
+	// check if status ok
+	// errorstatus
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
+		{
+			m_main_window.m_login_page.ChangeLoginErrorLabel(
+					"Login and password do not match");
+		}
+		else
+		{
+			QMessageBox::information(&m_main_window
+					, QString::fromStdString("Login failed!")
+					, QString::fromStdString(response.reason));
+		}
+		return;
+	}
+
+	auto out_dto = model.ParseResponse(response);
+//ok
+//use alias to make shorter
+
+	//m_main_window.m_main_page.m_lists_page.UpdateData(out_dto);
 }
 
 void Controller::OnLogout()

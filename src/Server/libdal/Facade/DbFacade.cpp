@@ -13,9 +13,9 @@ DbFacade::DbFacade(const std::string& connection_string)
 {
 }
 
-void DbFacade::AddUser(const User &user)
+std::optional<IdType> DbFacade::AddUser(const User &user)
 {
-	m_users.Add(user);
+	return m_users.Add(user);
 }
 
 std::optional<User> DbFacade::GetUserById(IdType id)

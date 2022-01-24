@@ -5,5 +5,9 @@ list(APPEND Spend-Note-Client_SOURCES
 )
 
 add_subdirectory(ListSubPage)
+add_subdirectory(ListsPage)
+add_subdirectory(ListCreateSubPage)
+
+
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
