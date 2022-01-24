@@ -7,7 +7,7 @@ class MockDbFacade : public IDbFacade
 public:
 	using Ptr = std::unique_ptr<MockDbFacade>;
 
-	MOCK_METHOD(void, AddUser, (const User&), (override));
+	MOCK_METHOD(std::optional<IdType>, AddUser, (const User&), (override));
 	MOCK_METHOD(std::optional<User>, GetUserById, (IdType), (override));
 	MOCK_METHOD(std::optional<User>, GetUserByLogin, (const std::string&), (override));
 	MOCK_METHOD(void, UpdateUser, (const User&), (override));
