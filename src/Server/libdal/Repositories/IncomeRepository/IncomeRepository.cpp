@@ -1,5 +1,4 @@
 #include "IncomeRepository.h"
-#include <iostream>
 
 namespace
 {
@@ -24,21 +23,21 @@ std::optional<IdType> IncomeRepository::Add(const Income& income)
 	{
 		pqxx::work w{m_db_connection};
 		auto id_rows = w.exec(
-				"INSERT INTO " + TABLE_NAME + " (" +
-				USER_ID + ", " +
-				INCOME_NAME + ", " +
-				AMOUNT + ", " +
-				CATEGORY_ID + ", " +
-				ADD_TIME + ", " +
-				EXPIRATION_TIME+ ") " +
-				"VALUES (" +
-				w.quote(income.user_id) + ", " +
-				w.quote(income.name)+ ", " +
-				w.quote(income.amount) + ", " 	+
-				w.quote(income.category_id) + ", " 	+
-				w.quote(income.add_time) + ", " +
-				w.quote(income.expiration_time) + ")" +
-				" RETURNING " + ID_FIELD + ";");
+			"INSERT INTO " + TABLE_NAME + " (" +
+			USER_ID + ", " +
+			INCOME_NAME + ", " +
+			AMOUNT + ", " +
+			CATEGORY_ID + ", " +
+			ADD_TIME + ", " +
+			EXPIRATION_TIME+ ") " +
+			"VALUES (" +
+			w.quote(income.user_id) + ", " +
+			w.quote(income.name)+ ", " +
+			w.quote(income.amount) + ", " 	+
+			w.quote(income.category_id) + ", " 	+
+			w.quote(income.add_time) + ", " +
+			w.quote(income.expiration_time) + ")" +
+			" RETURNING " + ID_FIELD + ";");
 
 		w.commit();
 
@@ -70,11 +69,16 @@ std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
     return std::nullopt;
 }
 
-void IncomeRepository::Update(const Income& income)
+bool IncomeRepository::Update(const Income& income)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(income.income_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + INCOME_NAME + " = " + w.quote(income.name) + ", "
 				+ AMOUNT + " = " + w.quote(income.amount) + ", " + CATEGORY_ID + " = " + w.quote(income.category_id) + ", "
 				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPIRATION_TIME+ " = " + w.quote(income.expiration_time)
@@ -86,6 +90,7 @@ void IncomeRepository::Update(const Income& income)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 bool IncomeRepository::Remove(const IdType& id)
@@ -134,13 +139,13 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 {
 	Income income;
 
-    income.income_id = row[ID_FIELD].as<IdType>();
-    income.user_id = row[USER_ID].as<IdType>();
-    income.name = row[INCOME_NAME].as<std::string>();
-    income.amount = row[AMOUNT].as<double>();
-    income.category_id = row[CATEGORY_ID].as<IdType>();
-    income.add_time = row[ADD_TIME].as<std::string>();
-    income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
+	income.income_id = row[ID_FIELD].as<IdType>();
+	income.user_id = row[USER_ID].as<IdType>();
+	income.name = row[INCOME_NAME].as<std::string>();
+	income.amount = row[AMOUNT].as<Money>();
+	income.category_id = row[CATEGORY_ID].as<IdType>();
+	income.add_time = row[ADD_TIME].as<std::string>();
+	income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
 
-    return income;
+	return income;
 }

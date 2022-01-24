@@ -17,16 +17,15 @@ ProductCategoryRepository::ProductCategoryRepository(pqxx::connection& db_connec
 
 std::optional<ProductCategory> ProductCategoryRepository::GetById(IdType id)
 {
-	pqxx::nontransaction w(m_database_connection);
-
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-				"SELECT " +
-					ID_FIELD + ", " +
-					NAME_FIELD +
-				" FROM " + TABLE_NAME +
-				" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+			"SELECT " +
+				ID_FIELD + ", " +
+				NAME_FIELD +
+			" FROM " + TABLE_NAME +
+			" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 
 		if (!product_category_rows.empty())
 		{
@@ -43,16 +42,16 @@ std::optional<ProductCategory> ProductCategoryRepository::GetById(IdType id)
 
 std::vector<ProductCategory> ProductCategoryRepository::GetAll()
 {
-	pqxx::nontransaction w(m_database_connection);
 	std::vector<ProductCategory> product_categories;
 
 	try
 	{
+		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-				"SELECT " +
-					ID_FIELD + ", " +
-					NAME_FIELD +
-				" FROM " + TABLE_NAME + ";");
+			"SELECT " +
+				ID_FIELD + ", " +
+				NAME_FIELD +
+			" FROM " + TABLE_NAME + ";");
 
 		product_categories.resize(product_category_rows.size());
 		std::transform(

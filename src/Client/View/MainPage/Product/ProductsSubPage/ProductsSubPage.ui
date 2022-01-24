@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListSubPage</class>
- <widget class="QWidget" name="ListSubPage">
+ <class>ProductsSubPage</class>
+ <widget class="QWidget" name="ProductsSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -104,17 +104,11 @@
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+       <widget class="QPushButton" name="EditList">
+        <property name="text">
+         <string>Edit</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
+       </widget>
       </item>
       <item>
        <widget class="Line" name="line">
@@ -130,7 +124,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>26</width>
           <height>20</height>
          </size>
         </property>
@@ -166,7 +160,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="AddProductButton">
+          <widget class="QPushButton" name="AddItemButton">
            <property name="minimumSize">
             <size>
              <width>40</width>

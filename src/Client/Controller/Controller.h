@@ -2,8 +2,6 @@
 
 #include <QMessageBox>
 
-#include "Models/LoginModel.h"
-
 #include "View/MainWindow.h"
 #include "View/MainPage/MainPage.h"
 
@@ -20,10 +18,23 @@ public:
 	void StartTest();
 
 private:
+	std::string m_hostname{"http://localhost:8080/"};
+
 	HTTPClient m_http_client;
 	MainWindow m_main_window;
+
+	void UpdateMainListsSubPage();
+	void SetMainSubPage(MainSubPages page);
+
+	void ConnectLoginPage();
+	void ConnectMainPage();
 
 public slots:
 	void OnLogin(LoginInDTO loginInDTO);
 	void OnLogout();
+	void OnChangeMainSubPage(MainSubPages page);
+//	void OnMoveBack();
+//	void OnLoadLists();
+//	void OnLoadProducts();
+//	void OnLoadProducts();
 };
