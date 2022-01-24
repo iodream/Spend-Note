@@ -10,8 +10,6 @@ class AddIncomeHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		Income dto;
-
 		Income Parse(const QJsonDocument& json_doc);
 	};
 

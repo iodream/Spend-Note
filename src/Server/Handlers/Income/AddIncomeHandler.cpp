@@ -23,7 +23,7 @@ Income AddIncomeHandler::JSONParser::Parse(
 
 	try
 	{
-		ParseIncome(json);
+		dto = ParseIncome(json);
 	}
 	catch(const ParsingError& ex)
 	{
