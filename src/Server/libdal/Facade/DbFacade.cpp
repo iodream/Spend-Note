@@ -9,6 +9,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_lists(m_connection)
 		, m_list_states(m_connection)
 		, m_income_categories(m_connection)
+		, m_balance_repository(m_connection)
 {
 }
 
@@ -142,4 +143,15 @@ std::optional<ListState> DbFacade::GetListStateById(const IdType& list_state_id)
 std::vector<ListState> DbFacade::GetAllListStates()
 {
 	return m_list_states.GetAll();
+}
+
+
+Money DbFacade::CalculateBalanceForUser(IdType user_id)
+{
+	return m_balance_repository.CalculateBalance(user_id);
+}
+
+Money DbFacade::CalculatePlannedBalanceForUser(IdType user_id)
+{
+	return m_balance_repository.CalculatePlannedBalance(user_id);
 }

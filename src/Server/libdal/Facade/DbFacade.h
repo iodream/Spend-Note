@@ -7,8 +7,9 @@
 #include "Repositories/ProductCategoryRepository/ProductCategoryRepository.h"
 #include "Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h"
 #include "Repositories/IncomeRepository/IncomeRepository.h"
-#include"Repositories/ListRepository/ListRepository.h"
+#include "Repositories/ListRepository/ListRepository.h"
 #include "Repositories/ListStateRepository/ListStateRepository.h"
+#include "Repositories/BalanceRepository/BalanceRepository.h"
 
 class DbFacade : public IDbFacade
 {
@@ -49,6 +50,9 @@ public:
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;
 
+	Money CalculateBalanceForUser(IdType user_id) override;
+	Money CalculatePlannedBalanceForUser(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -59,4 +63,5 @@ private:
 	IncomeCategoryRepository m_income_categories;
 	ListRepository m_lists;
 	ListStateRepository m_list_states;
+	BalanceRepository m_balance_repository;
 };

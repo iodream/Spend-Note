@@ -39,4 +39,7 @@ public:
 
 	MOCK_METHOD(std::optional<ListState>, GetListStateById, (const IdType&), (override));
 	MOCK_METHOD(std::vector<ListState>, GetAllListStates, (), (override));
+
+	MOCK_METHOD(Money, CalculateBalanceForUser, (IdType), (override));
+	MOCK_METHOD(Money, CalculatePlannedBalanceForUser, (IdType), (override));
 };
