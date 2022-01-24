@@ -105,6 +105,7 @@ bool ListRepository::Update(const List& list)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 List ListRepository::ParseSQLRow(const pqxx::row &row)

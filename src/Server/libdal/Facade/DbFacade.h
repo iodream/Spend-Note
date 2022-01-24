@@ -7,8 +7,9 @@
 #include "Repositories/ProductCategoryRepository/ProductCategoryRepository.h"
 #include "Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h"
 #include "Repositories/IncomeRepository/IncomeRepository.h"
-#include"Repositories/ListRepository/ListRepository.h"
+#include "Repositories/ListRepository/ListRepository.h"
 #include "Repositories/ListStateRepository/ListStateRepository.h"
+#include "Repositories/BalanceRepository/BalanceRepository.h"
 
 class DbFacade : public IDbFacade
 {
@@ -16,7 +17,7 @@ public:
 	DbFacade(const std::string& connection_string);
 	virtual ~DbFacade() override {}
 
-	void AddUser(const User &user) override;
+	std::optional<IdType> AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
 	std::optional<User> GetUserByLogin(const std::string& login) override;
 	bool UpdateUser(const User &user) override;
@@ -49,6 +50,9 @@ public:
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;
 
+	Money CalculateBalanceForUser(IdType user_id) override;
+	Money CalculatePlannedBalanceForUser(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -59,4 +63,5 @@ private:
 	IncomeCategoryRepository m_income_categories;
 	ListRepository m_lists;
 	ListStateRepository m_list_states;
+	BalanceRepository m_balance_repository;
 };
