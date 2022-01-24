@@ -178,9 +178,13 @@ bool ProductRepository::Remove(IdType id)
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::sql_error& e)
 	{
-		throw DatabaseFailure();
+		throw SQLFailure(e.what());
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
