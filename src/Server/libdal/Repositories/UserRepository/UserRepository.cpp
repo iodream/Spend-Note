@@ -85,11 +85,18 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 	return std::nullopt;
 }
 
-void UserRepository::Update(const User &user)
+bool UserRepository::Update(const User &user)
 {
 	try
 	{
 		pqxx::work w(m_database_connection);
+
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(user.id));
+		if (result.empty())
+		{
+			return false;
+		}
+
 		w.exec0(
 			"UPDATE " + TABLE_NAME +
 			" SET " +
@@ -102,6 +109,7 @@ void UserRepository::Update(const User &user)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 bool UserRepository::Remove(IdType id)

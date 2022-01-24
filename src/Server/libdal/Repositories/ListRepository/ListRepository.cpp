@@ -86,11 +86,16 @@ std::optional<List> ListRepository::GetList(const IdType& list_id)
 }
 
 
-void ListRepository::Update(const List& list)
+bool ListRepository::Update(const List& list)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + LIST_STATE_ID + " = " + w.quote(list.state_id) + ", "
 				+ LIST_NAME + " = " + w.quote(list.name) + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id) + ";");
 
@@ -100,6 +105,7 @@ void ListRepository::Update(const List& list)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 List ListRepository::ParseSQLRow(const pqxx::row &row)

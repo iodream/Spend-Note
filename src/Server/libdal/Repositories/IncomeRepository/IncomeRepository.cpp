@@ -69,11 +69,16 @@ std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
     return std::nullopt;
 }
 
-void IncomeRepository::Update(const Income& income)
+bool IncomeRepository::Update(const Income& income)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(income.income_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + INCOME_NAME + " = " + w.quote(income.name) + ", "
 				+ AMOUNT + " = " + w.quote(income.amount) + ", " + CATEGORY_ID + " = " + w.quote(income.category_id) + ", "
 				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPIRATION_TIME+ " = " + w.quote(income.expiration_time)
@@ -85,6 +90,7 @@ void IncomeRepository::Update(const Income& income)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 bool IncomeRepository::Remove(const IdType& id)
