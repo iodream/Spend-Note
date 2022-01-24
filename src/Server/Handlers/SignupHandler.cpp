@@ -9,6 +9,7 @@
 #include "Server/Utils.h"
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
+#include <iostream>
 
 SignupHandler::SignupHandler(IDbFacade::Ptr facade)
 	: ICommandHandler(std::move(facade))
@@ -54,11 +55,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 
 		try
 		{
-			// Replace when libdal merged
-			//auto id = m_facade->AddUser(User {0, dto.login, dto.passwd_hash});
-			//JSONFormatter::DTO out_dto{id.value()};
-			m_facade->AddUser(User {0, dto.login, dto.passwd_hash});
-			IdType id = 1;
+			IdType id = m_facade->AddUser(User {0, dto.login, dto.passwd_hash}).value();
 			JSONFormatter::DTO out_dto{id};
 			return FormJSONResponse(m_formatter.Format(out_dto));
 		}
@@ -66,7 +63,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 		{
 			return FormErrorResponse(
 				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-				"User not registered");
+				"User not created because database error occured");
 		}
 	}
 	return FormErrorResponse(

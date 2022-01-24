@@ -2,7 +2,7 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "List";
+    const std::string& TABLE_NAME = "List";
 	const std::string& ID_FIELD = "id";
 	const std::string& USER_ID = "userId";
 	const std::string& LIST_NAME = "name";
@@ -16,28 +16,45 @@ ListRepository::ListRepository(pqxx::connection& db_connection) : m_db_connectio
 }
 
 
-void ListRepository::AddList(const List& list)
+std::optional<IdType> ListRepository::AddList(const List& list)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
-		w.exec0("INSERT INTO " + TABLE_NAME + " ( " +  USER_ID + ", " + LIST_STATE_ID + ", " + LIST_NAME + ") "
-				+ "VALUES (" + w.quote(list.owner_id) + ", " + w.quote(list.state_id) + ", " + w.quote(list.name) + ");");
+		pqxx::result id_rows = w.exec(
+					"INSERT INTO " + TABLE_NAME + " ( " +
+					USER_ID + ", " +
+					LIST_STATE_ID + ", " +
+					LIST_NAME + ") " +
+					"VALUES (" +
+					w.quote(list.owner_id) + ", " +
+					w.quote(list.state_id) + ", " +
+					w.quote(list.name) + ")" +
+					" RETURNING " + ID_FIELD + ";");
 
 		w.commit();
+
+		auto id_row = id_rows.front();
+		return id_row[ID_FIELD].as<IdType>();
 	}
 	catch(const pqxx::pqxx_exception& e)
 	{
 		throw DatabaseFailure();
 	}
+	return std::nullopt;
 }
 
 
-void ListRepository::Remove(const IdType& list_id)
+bool ListRepository::Remove(const IdType& list_id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id) + ";");
 		w.commit();
 	}
@@ -45,6 +62,7 @@ void ListRepository::Remove(const IdType& list_id)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 
@@ -53,11 +71,11 @@ std::optional<List> ListRepository::GetList(const IdType& list_id)
 	try
 	{
 		pqxx::work w{m_db_connection};
-		pqxx::row list =  w.exec1("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id));
+		pqxx::result list =  w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id) + ";");
 
 		if(!list.empty())
 		{
-			return ParseSQLRow(list);
+			return ParseSQLRow(list.front());
 		}
 	}
 	catch(const pqxx::pqxx_exception& e)
@@ -68,11 +86,16 @@ std::optional<List> ListRepository::GetList(const IdType& list_id)
 }
 
 
-void ListRepository::Update(const List& list)
+bool ListRepository::Update(const List& list)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id));
+		if (result.empty())
+		{
+			return false;
+		}
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + LIST_STATE_ID + " = " + w.quote(list.state_id) + ", "
 				+ LIST_NAME + " = " + w.quote(list.name) + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id) + ";");
 
@@ -82,6 +105,7 @@ void ListRepository::Update(const List& list)
 	{
 		throw DatabaseFailure();
 	}
+	return true;
 }
 
 List ListRepository::ParseSQLRow(const pqxx::row &row)
@@ -96,26 +120,23 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 	return list;
 }
 
-std::optional<std::vector<List>> ListRepository::GetAllLists(const IdType& user_id)
+std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 {
-	try
-	{
+    std::vector<List> list;
+    try
+	  {
 		pqxx::work w{m_db_connection};
-		std::vector<List> list;
 
-		auto number_of_rows = w.exec("SELECT FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
-		pqxx::result r = w.exec_n(number_of_rows.size(),
-									"SELEC * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
 
 		for(const auto& row : r)
 		{
 			list.push_back(ParseSQLRow(row));
 		}
-		return list;
 	}
-	catch(const pqxx::pqxx_exception& e)
-	{
-		throw DatabaseFailure();
-	}
-	return std::nullopt;
+    catch(const pqxx::pqxx_exception& e)
+    {
+        throw DatabaseFailure();
+    }
+    return list;
 }

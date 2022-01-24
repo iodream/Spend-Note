@@ -9,3 +9,7 @@ Net::Response FormJSONResponse(
 	QJsonDocument&& json_doc,
 	Poco::Net::HTTPServerResponse::HTTPStatus status=
 	Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
+
+Net::Response FormEmptyResponse(
+	Poco::Net::HTTPServerResponse::HTTPStatus status=
+	Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);

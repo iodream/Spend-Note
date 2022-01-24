@@ -10,12 +10,12 @@ class ProductRepository
 public:
 	ProductRepository(pqxx::connection& db_connection);
 
-	void Add(const Product& product);
+	std::optional<IdType> Add(const Product& product);
 	std::optional<Product> GetById(IdType id);
 	std::vector<Product> GetByListId(IdType list_id);
 
-	void Update(const Product& product);
-	void Remove(IdType id);
+	bool Update(const Product& product);
+	bool Remove(IdType id);
 private:
 	static Product ProductFromRow(const pqxx::row& row);
 

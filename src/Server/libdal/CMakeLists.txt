@@ -27,7 +27,6 @@ add_library(libdal STATIC
   DTOs/Product.h
   DTOs/ProductCategory.h
 
-
   Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
   Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
   Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h Repositories/IncomeCategoryRepository/IncomeCategoryRepository.cpp
@@ -35,12 +34,14 @@ add_library(libdal STATIC
   Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
   Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
   Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
+  Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
 
   Facade/IDbFacade.h
   Facade/DbFacade.h
   Facade/DbFacade.cpp
 
-  Exceptions/DatabaseFailure.h Exceptions/DatabaseFailure.cpp
+  Exceptions/DatabaseFailure.h
+  Exceptions/SQLFailure.h
 
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
