@@ -4,7 +4,7 @@
 #include <QJsonObject>
 
 #include "MockDbFacade.h"
-#include "Server/Handlers/AddIncomeHandler.h"
+#include "Server/Handlers/Income/AddIncomeHandler.h"
 #include "Net/Parsing.h"
 
 using ::testing::Return;
@@ -12,31 +12,34 @@ using ::testing::_;
 
 namespace {
 
-Income income
+QJsonDocument FormatJSON()
 {
-  1,
-  1,
-  "income 1",
-  1,
-  1,
-  "some time",
-  "some time 2"
-};
+	QJsonObject json;
+
+	json["income_id"] = "";
+	json["user_id"] = "1";
+	json["name"] = "some_name";
+	json["amount"] = 1;
+	json["category_id"] = "1";
+	json["add_time"] = "";
+	json["expiration_time"] = "";
+
+	return QJsonDocument{json};
+}
 
 }
 
 TEST(AddIncomeHandler, ADD_INCOME)
 {
   auto facade = std::make_unique<MockDbFacade>();
-  EXPECT_CALL(*facade, AddIncome(_)).WillOnce(Return(std::optional<IdType>{}));
+  EXPECT_CALL(*facade, AddIncome(_))
+	  .WillOnce(Return(std::optional<IdType>{1}));
   auto handler = std::make_unique<AddIncomeHandler>(std::move(facade));
 
   Net::Request request;
   request.method = Net::HTTP_METHOD_POST;
   {
-	QJsonObject json;
-	json["income_id"] = "1";
-	request.json_payload = QJsonDocument(json);
+	request.json_payload = FormatJSON();
   }
 
   auto response = handler->AuthHandle(request);
