@@ -22,6 +22,28 @@ void SafeReadString(
     }
 }
 
+void SafeReadQString(
+	const QJsonObject& json,
+	const std::string& label,
+	QString& dest)
+{
+	return SafeReadQString(json, label.c_str(), dest);
+}
+
+void SafeReadQString(
+	const QJsonObject& json,
+	const char* label,
+	QString& dest)
+{
+	if (json.contains(label) && json[label].isString()) {
+		dest = json[label].toString();
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
