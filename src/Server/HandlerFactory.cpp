@@ -3,6 +3,7 @@
 #include "Handlers/EchoHandler.h"
 #include "Handlers/SignupHandler.h"
 #include "Handlers/FakeGetListsHandler.h"
+#include "Handlers/Income/GetIncomesHandler.h"
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
 #include "Handlers/Product/RemoveProductHandler.h"
@@ -31,6 +32,8 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new SignupHandler(std::move(facade));
 	if (uri == std::string("/fake_get_lists"))
 		return new FakeGetListsHandler(std::move(facade));
+	if (uri == std::string("/income/get"))
+		return new GetIncomesHandler(std::move(facade));
 	if (uri == std::string("/product/get_by_list_id"))
 		return new GetProductsHandler(std::move(facade));
 	if (uri == std::string("/product/add"))
@@ -41,11 +44,11 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new GetListsHandler(std::move(facade));
 	if (uri == std::string("/income/add"))
 		return new AddIncomeHandler(std::move(facade));
-  if (uri == std::string("/list/remove"))
-    return new RemoveListHandler(std::move(facade));
-  if (uri == std::string("/income/remove"))
-    return new RemoveIncomeHandler(std::move(facade));
-  if (uri == std::string("/income/update"))
-    return new UpdateIncomeHandler(std::move(facade));
-  return nullptr;
+	if (uri == std::string("/list/remove"))
+		return new RemoveListHandler(std::move(facade));
+	if (uri == std::string("/income/remove"))
+		return new RemoveIncomeHandler(std::move(facade));
+	if (uri == std::string("/income/update"))
+		return new UpdateIncomeHandler(std::move(facade));
+	return nullptr;
 }
