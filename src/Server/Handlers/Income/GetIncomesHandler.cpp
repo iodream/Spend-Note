@@ -3,7 +3,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
-#include "../libdal/Exceptions/DatabaseFailure.h"
+#include "../libdal/Exceptions/SQLFailure.h"
 
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -24,7 +24,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 			JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(request.uid))};
 			return FormJSONResponse(m_formatter.Format(response_dto));
 		}
-		catch (const DatabaseFailure& e)
+		catch (const SQLFailure& e)
 		{
 			return FormErrorResponse(
 				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,

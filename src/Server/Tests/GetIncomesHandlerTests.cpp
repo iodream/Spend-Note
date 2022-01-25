@@ -6,7 +6,7 @@
 #include "MockDbFacade.h"
 #include "Server/Handlers/Income/GetIncomesHandler.h"
 #include "Net/Parsing.h"
-#include "../libdal/Exceptions/DatabaseFailure.h"
+#include "../libdal/Exceptions/SQLFailure.h"
 
 
 using ::testing::Return;
@@ -79,12 +79,12 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	ASSERT_EQ(income_json["expiration_time"].toString(), QString::fromStdString(i.expiration_time.value_or("")));
 }
 
-TEST(GetIncomesHandlerTest, DATABASE_FAILURE)
+TEST(GetIncomesHandlerTest, SQL_FAILURE)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Throw(DatabaseFailure()));
+		.WillOnce(Throw(SQLFailure("")));
 
 	auto handler = std::make_unique<GetIncomesHandler>(std::move(facade));
 
