@@ -78,11 +78,10 @@ Net::Request HTTPRequestHandler::ParseRequest(HTTPRequest& http_req)
 
 QJsonDocument HTTPRequestHandler::ReadJSON(std::istream& is)
 {
-	std::vector<char> json_doc_raw{
-		std::istreambuf_iterator<char>{is},
-		std::istreambuf_iterator<char>{}};
+	std::string json_doc_raw(std::istreambuf_iterator<char>(is), {});
+
 	return QJsonDocument::fromJson(
-		QByteArray::fromRawData(json_doc_raw.data(), json_doc_raw.size())
+		QByteArray::fromRawData(json_doc_raw.c_str(), json_doc_raw.size())
 	);
 }
 

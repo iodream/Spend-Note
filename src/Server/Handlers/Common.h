@@ -13,3 +13,4 @@ Net::Response FormJSONResponse(
 Net::Response FormEmptyResponse(
 	Poco::Net::HTTPServerResponse::HTTPStatus status=
 	Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_NO_CONTENT);
+
