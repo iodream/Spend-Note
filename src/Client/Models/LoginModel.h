@@ -14,28 +14,28 @@ public:
 	class JSONFormatter
 	{
 	public:
-		struct LoginInDTO
+		struct Credentials
 		{
 			std::string login;
 			std::string password;
 		};
 
-		QJsonDocument Format(const LoginInDTO& dto);
+		QJsonDocument Format(const Credentials& credentials);
 	};
 
 	class JSONParser
 	{
 	public:
-		struct LoginOutDTO
+		struct Token
 		{
 			std::string token;
 		};
 
-		void Parse(QJsonObject json, LoginOutDTO& dto);
+		void Parse(QJsonObject json, Token& dto);
 	};
 
-	Net::Request FormRequest(JSONFormatter::LoginInDTO dto);
-	JSONParser::LoginOutDTO ParseResponse(const Net::Response& response);
+	Net::Request FormRequest(JSONFormatter::Credentials credentials);
+	JSONParser::Token ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;

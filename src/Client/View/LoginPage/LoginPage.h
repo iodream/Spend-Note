@@ -23,7 +23,7 @@ private:
 
 
 signals:
-	void Login(LoginModel::JSONFormatter::LoginInDTO);
+	void Login(LoginModel::JSONFormatter::Credentials credentials);
 
 private slots:
 	void OnLoginSubmitButtonClicked();

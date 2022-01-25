@@ -32,7 +32,7 @@ private:
 	void ConnectMainPage();
 
 public slots:
-	void OnLogin(LoginModel::JSONFormatter::LoginInDTO loginInDTO);
+	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnLogout();
 	void OnChangeMainSubPage(MainSubPages page);
 //	void OnMoveBack();
