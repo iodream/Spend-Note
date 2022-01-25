@@ -9,6 +9,7 @@ Controller::Controller()
 {
 	ConnectLoginPage();
 	ConnectMainPage();
+	ConnectSignupPage();
 }
 
 void Controller::ConnectLoginPage()
@@ -20,6 +21,12 @@ void Controller::ConnectLoginPage()
 		&LoginPage::Login,
 		this,
 		&Controller::OnLogin);
+
+	QObject::connect(
+		&page,
+		&LoginPage::GotoSignup,
+		this,
+		&Controller::OnGotoSignupPage);
 }
 
 void Controller::ConnectMainPage()
@@ -43,6 +50,23 @@ void Controller::ConnectMainPage()
 //		&ListsSubPage::OnListClicked,
 //		this,
 //		&Controller::OnChangeMainSubPage);
+}
+
+void Controller::ConnectSignupPage()
+{
+	auto& page = m_main_window.get_signup_page();
+
+	QObject::connect(
+		&page,
+		&SignupPage::Signup,
+		this,
+		&Controller::OnSignup);
+
+	QObject::connect(
+		&page,
+		&SignupPage::GotoLoginPage,
+		this,
+		&Controller::OnGotoLoginPage);
 }
 
 void Controller::Start(UIPages at_page)
@@ -113,6 +137,11 @@ void Controller::SetMainSubPage(MainSubPages page)
 	m_main_window.get_main_page().SetCurrentSubPage(page);
 }
 
+void Controller::OnGotoLoginPage()
+{
+	m_main_window.SetCurrentPage(UIPages::LOGIN);
+}
+
 void Controller::OnChangeMainSubPage(MainSubPages page)
 {
 	SetMainSubPage(page);
@@ -135,4 +164,45 @@ void Controller::UpdateMainListsSubPage()
 
 	auto& lists_spage = m_main_window.get_main_page().get_lists_spage();
 	lists_spage.Update(lists);
+}
+
+void Controller::OnGotoSignupPage()
+{
+	m_main_window.SetCurrentPage(UIPages::SIGNUP);
+}
+
+void Controller::OnSignup(const SignupInDTO& in_dto)
+{
+	SignupModel model{m_hostname};
+	if (!model.CheckPassRepeat(in_dto))
+	{
+		QMessageBox::warning(&m_main_window
+			, QString::fromStdString("Error")
+			, QString::fromStdString("Passwords must match!"));
+		return;
+	}
+
+	if (!model.CheckData(in_dto))
+	{
+		QMessageBox::warning(&m_main_window
+			, QString::fromStdString("Error")
+			, QString::fromStdString("Username or password can't be empty!"));
+		return;
+	}
+
+	auto request  = model.FormRequest(in_dto);
+	auto response = m_http_client.Request(request);
+
+	// checking response status
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		if(response.status == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT)
+		{
+			QMessageBox::warning(&m_main_window
+				, QString::fromStdString("Error")
+				, QString::fromStdString("User already exists!"));
+			return;
+		}
+	}
+	m_main_window.SetCurrentPage(UIPages::LOGIN);
 }

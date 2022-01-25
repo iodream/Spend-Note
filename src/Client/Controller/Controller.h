@@ -4,16 +4,17 @@
 
 #include "View/MainWindow.h"
 #include "View/MainPage/MainPage.h"
+#include "Models/SignupModel.h"
 #include "View/Constants.h"
-
 #include "Models/LoginModel.h"
-
 #include "HTTPClient.h"
 
 class Controller : public QObject
 {
 	Q_OBJECT
 public:
+	using SignupInDTO = SignupModel::SignupInDTO;
+
 	Controller();
 	void Start(UIPages at_page=UIPages::LOGIN);
 
@@ -30,11 +31,17 @@ private:
 
 	void ConnectLoginPage();
 	void ConnectMainPage();
+	void ConnectSignupPage();
 
 public slots:
+
+	void OnGotoLoginPage();
+
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnLogout();
 	void OnChangeMainSubPage(MainSubPages page);
+	void OnGotoSignupPage();
+	void OnSignup(const SignupInDTO& in_dto);
 //	void OnMoveBack();
 //	void OnLoadLists();
 //	void OnLoadProducts();
