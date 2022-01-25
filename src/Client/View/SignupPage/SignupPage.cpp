@@ -6,6 +6,11 @@ SignupPage::SignupPage(QWidget *parent)
 	, m_ui(new Ui::SignupPage)
 {
 	m_ui->setupUi(this);
+	connect(m_ui->signupSubmitButton, SIGNAL(clicked())
+		, this, SLOT(OnSignupSubmitButtonClicked()));
+
+	connect(m_ui->GoBackButton, SIGNAL(clicked())
+		, this, SLOT(OnGoBackButtonClicked()));
 }
 
 SignupPage::~SignupPage()
@@ -13,7 +18,7 @@ SignupPage::~SignupPage()
 	delete m_ui;
 }
 
-void SignupPage::on_signupSubmitButton_clicked()
+void SignupPage::OnSignupSubmitButtonClicked()
 {
 	SignupModel::SignupInDTO dto;
 	dto.login = m_ui->usernameLineEdit->text().toStdString();
@@ -22,7 +27,7 @@ void SignupPage::on_signupSubmitButton_clicked()
 	emit Signup(dto);
 }
 
-void SignupPage::on_GoBackButton_clicked()
+void SignupPage::OnGoBackButtonClicked()
 {
 	emit GotoLoginPage();
 }

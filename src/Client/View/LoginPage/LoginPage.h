@@ -27,8 +27,8 @@ signals:
 
 private slots:
 	void OnLoginSubmitButtonClicked();
-	void on_signupButton_clicked();
-	void on_passwordLineEdit_textChanged(const QString& arg1);
-	void on_loginLineEdit_textChanged(const QString& arg1);
+	void OnSignupButtonClicked();
+	void OnPasswordTextChanged(const QString& arg1);
+	void OnLoginTextChanged(const QString& arg1);
 };
 

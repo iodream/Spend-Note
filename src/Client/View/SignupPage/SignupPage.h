@@ -21,8 +21,8 @@ signals:
 	void GotoLoginPage();
 
 private slots:
-	void on_signupSubmitButton_clicked();
-	void on_GoBackButton_clicked();
+	void OnSignupSubmitButtonClicked();
+	void OnGoBackButtonClicked();
 
 private:
 	Ui::SignupPage *m_ui;
