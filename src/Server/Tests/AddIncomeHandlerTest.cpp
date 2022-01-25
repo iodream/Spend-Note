@@ -31,21 +31,21 @@ QJsonDocument FormatJSON()
 
 TEST(AddIncomeHandler, ADD_INCOME)
 {
-  auto facade = std::make_unique<MockDbFacade>();
-  EXPECT_CALL(*facade, AddIncome(_))
-	  .WillOnce(Return(std::optional<IdType>{1}));
-  auto handler = std::make_unique<AddIncomeHandler>(std::move(facade));
+	auto facade = std::make_unique<MockDbFacade>();
+	EXPECT_CALL(*facade, AddIncome(_))
+		.WillOnce(Return(std::optional<IdType>{1}));
+	auto handler = std::make_unique<AddIncomeHandler>(std::move(facade));
 
-  Net::Request request;
-  request.method = Net::HTTP_METHOD_POST;
-  {
-	request.json_payload = FormatJSON();
-  }
+	Net::Request request;
+	request.method = Net::HTTP_METHOD_POST;
+	{
+		request.json_payload = FormatJSON();
+	}
 
-  auto response = handler->AuthHandle(request);
-  ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
+	auto response = handler->AuthHandle(request);
+	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
 
-  std::string income_id;
-  SafeReadString(response.json_payload.object(), "id", income_id);
-  EXPECT_EQ(income_id, "1");
+	std::string income_id;
+	SafeReadString(response.json_payload.object(), "id", income_id);
+	EXPECT_EQ(income_id, "1");
 }

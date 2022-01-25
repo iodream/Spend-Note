@@ -30,7 +30,7 @@ Income AddIncomeHandler::JSONParser::Parse(
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
 
-  return dto;
+	return dto;
 }
 
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
