@@ -18,7 +18,7 @@ public:
     class JSONParser
     {
     public:
-        List Parser(const QJsonDocument& payload);
+        List Parser(const QJsonObject& payload);
     };
 
 private:

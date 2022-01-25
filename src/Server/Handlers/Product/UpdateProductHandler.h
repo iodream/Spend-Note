@@ -7,7 +7,6 @@
 #include "../libdal/DTOs/Product.h"
 #include "../libdal/Facade/IDbFacade.h"
 
-using IdType= long long int;
 
 class ChangeProductHandler : public AuthorizedHandler
 {

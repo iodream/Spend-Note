@@ -5,27 +5,20 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
-#include "../Utils.h"
+#include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
-List UpdateListHandler::JSONParser::Parser(const QJsonDocument &payload)
+List UpdateListHandler::JSONParser::Parser(const QJsonObject& payload)
 {
-    List list;
-
-    SafeReadId(payload.object(), "list_id", list.list_id);
-    SafeReadId(payload.object(), "owner_id", list.owner_id);
-    SafeReadId(payload.object(), "state_id", list.state_id);
-    SafeReadString(payload.object(), "name", list.name);
-
-    return list;
+    return ListParser(payload);
 }
 
 Net::Response UpdateListHandler::AuthHandle(const Net::Request &request)
 {
     if(request.method == Net::HTTP_METHOD_PUT)
     {
-        auto json = request.json_payload;
+        auto json = request.json_payload.object();
         try
         {
             if(m_facade->UpdateList(m_parser.Parser(json)))
