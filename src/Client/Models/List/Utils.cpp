@@ -12,3 +12,16 @@ List ParseList(const QJsonObject& json)
 
 	return list;
 }
+
+QJsonDocument FormatList(const List& list)
+{
+	QJsonObject json;
+
+	json["list_id"] = std::to_string(list.list_id).c_str();
+	json["owner_id"] = std::to_string(list.owner_id).c_str();
+	json["state_id"] = std::to_string(list.state_id).c_str();
+	json["name"] = list.name.toStdString().c_str();
+	json["state"] = list.state.toStdString().c_str();
+
+	return QJsonDocument{json};
+}

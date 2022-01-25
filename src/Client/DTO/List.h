@@ -4,7 +4,8 @@
 
 #include "../Common.h"
 
-struct List {
+struct List
+{
 	IdType list_id;
 	IdType owner_id;
 	IdType state_id;
