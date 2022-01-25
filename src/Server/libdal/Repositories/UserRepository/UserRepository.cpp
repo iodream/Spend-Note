@@ -1,5 +1,6 @@
 #include "UserRepository.h"
 #include "Exceptions/DatabaseFailure.h"
+#include <iostream>
 
 namespace
 {
@@ -19,7 +20,7 @@ std::optional<IdType> UserRepository::Add(const User &user)
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto id_rows = w.exec0(
+		auto id_rows = w.exec(
 			"INSERT INTO " + TABLE_NAME + " (" +
 				LOGIN_FIELD + ", " +
 				PASSWORD_FIELD +
@@ -33,10 +34,13 @@ std::optional<IdType> UserRepository::Add(const User &user)
 		auto id_row = id_rows.front();
 		return id_row[ID_FIELD].as<IdType>();
 	}
+
 	catch(const pqxx::pqxx_exception& e)
 	{
 		throw DatabaseFailure();
 	}
+
+	return std::nullopt;
 }
 
 std::optional<User> UserRepository::GetById(IdType id)

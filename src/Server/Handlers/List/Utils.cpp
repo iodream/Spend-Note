@@ -2,9 +2,12 @@
 
 #include "Net/Parsing.h"
 
-List ListParser(const QJsonObject& json)
+Product ParseList(const QJsonObject& json)
 {
     List list;
+
+    double tmp_number;
+    std::string tmp_date;
 
     SafeReadId(json, "list_id", list.list_id);
     SafeReadId(json, "owner_id", list.owner_id);

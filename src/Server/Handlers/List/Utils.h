@@ -1,7 +1,8 @@
 #pragma once
 
-#include <QJniObject>
+#include <QJsonObject>
 
 #include "../libdal/Facade/IDbFacade.h"
 
-List ListParser(const QJsonObject& json);
+List ParseList(const QJsonObject& json);
+

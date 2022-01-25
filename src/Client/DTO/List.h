@@ -1,14 +1,13 @@
 #pragma once
 
-#include <string>
-#include <QJsonArray>
+#include <QString>
 
-struct ListInDTO
-{
+#include "../Common.h"
 
-};
-
-struct ListOutDTO
-{
-	QJsonArray data;
+struct List {
+	IdType list_id;
+	IdType owner_id;
+	IdType state_id;
+	QString name;
+	QString state;
 };

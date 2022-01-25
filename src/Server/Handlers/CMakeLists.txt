@@ -10,11 +10,14 @@ list(APPEND Spend-Note-Server_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/AuthorizedHandler.h
 	${CMAKE_CURRENT_SOURCE_DIR}/FakeGetListsHandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/FakeGetListsHandler.h
+	${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.h
 	${CMAKE_CURRENT_SOURCE_DIR}/ChangeProductHandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/ChangeProductHandler.h
 )
 
 add_subdirectory(Product)
 add_subdirectory(List)
+add_subdirectory(Income)
 
 set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
