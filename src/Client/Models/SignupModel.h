@@ -24,7 +24,7 @@ public:
 	};
 
 	SignupModel(const std::string& hostname) : m_hostname{hostname} {}
-	Net::Request FormRequest(SignupInDTO dto);
+	Net::Request FormRequest(const SignupInDTO& dto);
 
 	bool CheckPassRepeat(const SignupInDTO& dto) const;
 	bool CheckData(const SignupInDTO& dto) const;

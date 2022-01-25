@@ -1,7 +1,7 @@
 #include "SignupModel.h"
 #include "Net/Parsing.h"
 
-Net::Request SignupModel::FormRequest(SignupInDTO dto)
+Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 {
 	Net::Request request;
 	request.uri = m_hostname + "signup";
