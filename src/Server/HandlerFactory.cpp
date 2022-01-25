@@ -6,6 +6,7 @@
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
 #include "Handlers/Product/RemoveProductHandler.h"
+#include "Handlers/List/AddListHandler.h"
 #include "Handlers/List/GetListsHandler.h"
 #include "Handlers/List/RemoveListHandler.h"
 #include "Handlers/Income/RemoveIncomeHandler.h"
@@ -35,6 +36,8 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new AddProductHandler(std::move(facade));
 	if (uri == std::string("/product/remove"))
 		return new RemoveProductHandler(std::move(facade));
+	if (uri == std::string("/list/add"))
+		return new AddListHandler(std::move(facade));
 	if (uri == std::string("/list/get_lists"))
 		return new GetListsHandler(std::move(facade));
     if (uri == std::string("/list/remove"))
