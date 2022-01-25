@@ -210,7 +210,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QToolButton" name="mainToolButton">
+       <widget class="QToolButton" name="GoToListsButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -345,7 +345,7 @@ background-color: black;</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="logoutToolButton">
+       <widget class="QToolButton" name="LogoutButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>

@@ -3,6 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QString>
 
 #include "../Exception.h"
 #include "Server/libdal/Types.h"
@@ -28,6 +29,16 @@ void SafeReadString(
     const QJsonObject& json,
     const char* label,
     std::string& dest);
+
+void SafeReadQString(
+	const QJsonObject& json,
+	const std::string& label,
+	QString& dest);
+
+void SafeReadQString(
+	const QJsonObject& json,
+	const char* label,
+	QString& dest);
 
 void SafeReadId(
 	const QJsonObject& json,

@@ -5,8 +5,11 @@
 #include <QString>
 #include <QWidget>
 
-#include "ListSubPage/ListSubPage.h"
-#include "ListsPage/ListsPage.h"
+#include "List/ListsSubPage/ListsSubPage.h"
+#include "List/ListCreateSubPage/ListCreateSubPage.h"
+
+#include "Product/ProductsSubPage/ProductsSubPage.h"
+
 #include "View/Constants.h"
 
 
@@ -23,26 +26,32 @@ public:
 	~MainPage();
 
 	void SetCurrentSubPage(MainSubPages page);
-
-	// next functions probably should be reimplemented when m_lists_page will be ready
-	void SetCurrentSubPageList(ListSubPage::IdType id);
-	void AddListSubPage(const QString& name, ListSubPage::IdType id);
-	void RemoveListSubPage(ListSubPage::IdType id);
 	void SetCurrentSubPage(int idx);
 
+private:
+	void InitListsSubPage();
+	void InitCreateListSubPage();
 
-	ListsPage m_lists_page;
+public:
 
+	ListsSubPage& get_lists_spage() { return m_lists_spage; }
+	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
+
+private:
 	Ui::MainPage *m_ui;
-//	IncomesPage m_incomes_page;
 
-	// probably should be removed when m_lists_page will be ready
-	std::map<ListSubPage::IdType, ListSubPage*> m_list_sub_pages;
+	ListsSubPage m_lists_spage;
+	ListCreateSubPage m_list_create_spage;
+
+//	IncomesSubPage m_incomes_spage;
 
 signals:
+	void ChangeSubPage(MainSubPages page);
 	void Logout();
 
 public slots:
-	void OnLogoutToolButtonClicked();
-	void OnMainToolButtonClicked();
+	void OnGoToListsClicked();
+	void OnLogoutClicked();
+
+	void OnAddList();
 };

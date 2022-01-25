@@ -8,6 +8,8 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/EchoHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AuthorizedHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AuthorizedHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.h
 )
 
 add_subdirectory(Product)

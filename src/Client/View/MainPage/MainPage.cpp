@@ -10,20 +10,36 @@ MainPage::MainPage(QWidget *parent)
 	m_ui->setupUi(this);
 
 	connect(
-		m_ui->mainToolButton,
+		m_ui->GoToListsButton,
 		SIGNAL(clicked()),
 		this,
-		SLOT(OnMainToolButtonClicked()));
+		SLOT(OnGoToListsClicked()));
 
 	connect(
-		m_ui->logoutToolButton,
+		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
-		SLOT(OnLogoutToolButtonClicked()));
+		SLOT(OnLogoutClicked()));
 
-	//m_ui->Display->addWidget(&m_lists_page);
+	InitListsSubPage();
+	InitCreateListSubPage();
+}
 
-	AddListSubPage("Some list 1", 1);
+void MainPage::InitListsSubPage()
+{
+	m_ui->Display->addWidget(&m_lists_spage);
+
+	connect(
+		&m_lists_spage,
+		&ListsSubPage::AddItem,
+		this,
+		&MainPage::OnAddList);
+}
+
+void MainPage::InitCreateListSubPage()
+{
+	m_ui->Display->addWidget(&m_list_create_spage);
+
 }
 
 MainPage::~MainPage()
@@ -41,44 +57,17 @@ void MainPage::SetCurrentSubPage(MainSubPages page)
 	m_ui->Display->setCurrentIndex(static_cast<int>(page));
 }
 
-void MainPage::AddListSubPage(const QString& name, ListSubPage::IdType id)
+void MainPage::OnGoToListsClicked()
 {
-	ListSubPage* page = new ListSubPage(name, id);
-	auto insert_res = m_list_sub_pages.insert({id, page});
-	if (!insert_res.second)
-		throw Exception("List page with specified id already exists");
-	m_ui->Display->addWidget(page);
+	emit ChangeSubPage(MainSubPages::LISTS);
 }
 
-void MainPage::RemoveListSubPage(ListSubPage::IdType id)
-{
-	auto it = m_list_sub_pages.find(id);
-	if (it == m_list_sub_pages.end())
-		throw Exception("No page with such id");
-	ListSubPage* page = it->second;
-	m_ui->Display->removeWidget(page);
-	delete page;
-	m_list_sub_pages.erase(it);
-}
-
-void MainPage::SetCurrentSubPageList(ListSubPage::IdType id)
-{
-	try {
-		ListSubPage* page = m_list_sub_pages.at(id);
-		auto idx = m_ui->Display->indexOf(page);
-		SetCurrentSubPage(idx);
-	}  catch (const std::out_of_range& ex) {
-		throw Exception(ex.what());
-	}
-}
-
-void MainPage::OnMainToolButtonClicked()
-{
-	SetCurrentSubPage(MainSubPages::LISTS); // currently 0
-	// but value should be changed to MainSubPages::LISTS later
-}
-
-void MainPage::OnLogoutToolButtonClicked()
+void MainPage::OnLogoutClicked()
 {
 	emit Logout();
+}
+
+void MainPage::OnAddList()
+{
+	emit ChangeSubPage(MainSubPages::CREATE_LIST);
 }

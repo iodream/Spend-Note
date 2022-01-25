@@ -1,6 +1,7 @@
 #include "HandlerFactory.h"
 #include "Handlers/LoginHandler.h"
 #include "Handlers/EchoHandler.h"
+#include "Handlers/SignupHandler.h"
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
 #include "Handlers/Product/RemoveProductHandler.h"
@@ -23,6 +24,8 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new EchoHandler(std::move(facade));
 	if (uri == std::string("/login"))
 		return new LoginHandler(std::move(facade));
+	if (uri == std::string("/signup"))
+		return new SignupHandler(std::move(facade));
 	if (uri == std::string("/product/get_by_list_id"))
 		return new GetProductsHandler(std::move(facade));
 	if (uri == std::string("/product/add"))
