@@ -1,5 +1,4 @@
 list(APPEND Spend-Note-Client_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Login.h
     ${CMAKE_CURRENT_SOURCE_DIR}/List.h
 )
 
