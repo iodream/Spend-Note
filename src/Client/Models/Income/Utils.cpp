@@ -10,7 +10,7 @@ Income ParseIncome(const QJsonObject& json)
 	SafeReadQString(json, "name", income.name);
 
 	SafeReadId(json, "amount", tmp); //currently reading amount as Money (long long)
-	income.amount = tmp/100;
+	income.amount = tmp/100 + (tmp%100)/100.0;
 
 	SafeReadId(json, "category_id", income.category_id);
 	SafeReadQString(json, "add_time", income.add_time);
