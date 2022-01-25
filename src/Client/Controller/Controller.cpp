@@ -57,7 +57,7 @@ void Controller::StartTest()
 	m_main_window.get_main_page().SetCurrentSubPage(MainSubPages::LISTS);
 }
 
-void Controller::OnLogin(LoginInDTO in_dto)
+void Controller::OnLogin(LoginModel::JSONFormatter::LoginInDTO in_dto)
 {
 	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(in_dto);

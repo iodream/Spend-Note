@@ -3,7 +3,7 @@
 #include "LoginModel.h"
 #include "Net/Parsing.h"
 
-Net::Request LoginModel::FormRequest(LoginInDTO dto)
+Net::Request LoginModel::FormRequest(JSONFormatter::LoginInDTO dto)
 {
 	Net::Request request;
 	request.uri = m_hostname + "login";
@@ -30,9 +30,9 @@ void LoginModel::JSONParser::Parse(QJsonObject json, LoginOutDTO& dto)
 	SafeReadString(json, "token", dto.token);
 }
 
-LoginOutDTO LoginModel::ParseResponse(const Net::Response& response)
+LoginModel::JSONParser::LoginOutDTO LoginModel::ParseResponse(const Net::Response& response)
 {
-	LoginOutDTO dto;
+	JSONParser::LoginOutDTO dto;
 
 	m_parser.Parse(response.json_payload.object(), dto);
 

@@ -23,7 +23,7 @@ void LoginPage::ChangeLoginErrorLabel(std::string reason)
 
 void LoginPage::OnLoginSubmitButtonClicked()
 {
-	LoginInDTO login_in_dto;
+	LoginModel::JSONFormatter::LoginInDTO login_in_dto;
 	login_in_dto.login = m_ui->loginLineEdit->text().toStdString();
 	login_in_dto.password = m_ui->passwordLineEdit->text().toStdString();
 	emit Login(login_in_dto);
