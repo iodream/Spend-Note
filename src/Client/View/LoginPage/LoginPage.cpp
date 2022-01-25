@@ -29,3 +29,19 @@ void LoginPage::OnLoginSubmitButtonClicked()
 	emit Login(login_in_dto);
 }
 
+
+void LoginPage::on_signupButton_clicked()
+{
+	emit GotoSignup();
+}
+
+void LoginPage::on_passwordLineEdit_textChanged(const QString& arg1)
+{
+	m_ui->loginErrorLabel->setText("");
+}
+
+void LoginPage::on_loginLineEdit_textChanged(const QString& arg1)
+{
+	m_ui->loginErrorLabel->setText("");
+}
+
