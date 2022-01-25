@@ -9,18 +9,18 @@
 
 class UpdateListHandler : public AuthorizedHandler
 {
-    UpdateListHandler(IDbFacade::Ptr facade);
-    virtual ~UpdateListHandler(){};
-
-    Net::Response AuthHandle(const Net::Request& request) override;
-
 public:
-    class JSONParser
-    {
-    public:
-        List Parser(const QJsonObject& payload);
-    };
+	UpdateListHandler(IDbFacade::Ptr facade);
+	virtual ~UpdateListHandler(){};
+
+	Net::Response AuthHandle(const Net::Request& request) override;
+
+	class JSONParser
+	{
+	public:
+		List Parser(const QJsonObject& payload);
+	};
 
 private:
-    JSONParser m_parser;
+	JSONParser m_parser;
 };

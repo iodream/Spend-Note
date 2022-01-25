@@ -8,18 +8,18 @@
 #include "../libdal/Facade/IDbFacade.h"
 
 
-class ChangeProductHandler : public AuthorizedHandler
+class UpdateProductHandler : public AuthorizedHandler
 {
-	ChangeProductHandler(IDbFacade::Ptr facade);
-	virtual ~ChangeProductHandler() override {}
+public:
+	UpdateProductHandler(IDbFacade::Ptr facade);
+	virtual ~UpdateProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 
-public:
 	class JSONParser
 	{
 	public:
-        Product Parse(const QJsonObject& payload);
+		Product Parse(const QJsonObject& payload);
 	};
 
 private:

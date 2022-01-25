@@ -11,7 +11,8 @@
 #include "Handlers/Income/AddIncomeHandler.h"
 #include "Handlers/Income/RemoveIncomeHandler.h"
 #include "Handlers/Income/UpdateIncomeHandler.h"
-
+#include "Handlers/Product/UpdateProductHandler.h"
+#include "Handlers/List/UpdateListHandler.h"
 
 #include "libdal/Facade/DbFacade.h"
 
@@ -41,11 +42,15 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new GetListsHandler(std::move(facade));
 	if (uri == std::string("/income/add"))
 		return new AddIncomeHandler(std::move(facade));
-  if (uri == std::string("/list/remove"))
-    return new RemoveListHandler(std::move(facade));
-  if (uri == std::string("/income/remove"))
-    return new RemoveIncomeHandler(std::move(facade));
-  if (uri == std::string("/income/update"))
-    return new UpdateIncomeHandler(std::move(facade));
-  return nullptr;
+	if (uri == std::string("/list/remove"))
+		return new RemoveListHandler(std::move(facade));
+	if (uri == std::string("/income/remove"))
+		return new RemoveIncomeHandler(std::move(facade));
+	if (uri == std::string("/income/update"))
+		return new UpdateIncomeHandler(std::move(facade));
+	if (uri == std::string("/product/update"))
+		return new UpdateProductHandler(std::move(facade));
+	if (uri == std::string("/list/update"))
+		return new UpdateListHandler(std::move(facade));
+	return nullptr;
 }

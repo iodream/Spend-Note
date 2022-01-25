@@ -9,32 +9,32 @@
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
-ChangeProductHandler::ChangeProductHandler(IDbFacade::Ptr facade)
+UpdateProductHandler::UpdateProductHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
 {
 }
 
-Product ChangeProductHandler::JSONParser::Parse(const QJsonObject &payload)
+Product UpdateProductHandler::JSONParser::Parse(const QJsonObject &payload)
 {
-    return ParseProduct(payload);
+	return ParseProduct(payload);
 }
 
-Net::Response  ChangeProductHandler::AuthHandle(const Net::Request &request)
+Net::Response UpdateProductHandler::AuthHandle(const Net::Request &request)
 {
 	if(request.method == Net::HTTP_METHOD_PUT)
 	{
-        auto json = request.json_payload.object();
-        try
+		auto json = request.json_payload.object();
+		try
 		{
-            if(m_facade->UpdateProduct(m_parser.Parse(json)))
-            {
+			if(m_facade->UpdateProduct(m_parser.Parse(json)))
+			{
 				return FormEmptyResponse();
 			}
 			else
-            {
-                return FormErrorResponse(
-                    NetError::Status::HTTP_NOT_FOUND,
-                    "Resource not found");
+			{
+				return FormErrorResponse(
+					NetError::Status::HTTP_NOT_FOUND,
+					"Resource not found");
 			}
 		}
 		catch (const SQLFailure& ex) {

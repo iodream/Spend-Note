@@ -45,7 +45,7 @@ list(APPEND Spend-Note-Server_SOURCES
 
 add_executable(
     Spend-Note-Server
-    ${CMAKE_CURRENT_SOURCE_DIR}/Server.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Server.cpp
     ${Spend-Note-Server_SOURCES})
 
 target_include_directories(Spend-Note-Server PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
