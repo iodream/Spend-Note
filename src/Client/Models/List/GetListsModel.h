@@ -5,7 +5,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "DTO/Login.h"
 #include "Net/Constants.h"
 #include "Net/Message.h"
 

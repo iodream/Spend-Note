@@ -4,8 +4,10 @@
 
 #include "View/MainWindow.h"
 #include "View/MainPage/MainPage.h"
-
 #include "View/Constants.h"
+
+#include "Models/LoginModel.h"
+
 #include "HTTPClient.h"
 
 class Controller : public QObject
@@ -30,7 +32,7 @@ private:
 	void ConnectMainPage();
 
 public slots:
-	void OnLogin(LoginInDTO loginInDTO);
+	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnLogout();
 	void OnChangeMainSubPage(MainSubPages page);
 //	void OnMoveBack();

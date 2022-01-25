@@ -57,10 +57,10 @@ void Controller::StartTest()
 	m_main_window.get_main_page().SetCurrentSubPage(MainSubPages::LISTS);
 }
 
-void Controller::OnLogin(LoginInDTO in_dto)
+void Controller::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 {
 	LoginModel model{m_hostname};
-	auto request  = model.FormRequest(in_dto);
+	auto request  = model.FormRequest(credentials);
 	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
@@ -79,10 +79,10 @@ void Controller::OnLogin(LoginInDTO in_dto)
 		return;
 	}
 
-	auto out_dto = model.ParseResponse(response);
+	auto token = model.ParseResponse(response);
 
 	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
-	m_http_client.set_token(out_dto.token);
+	m_http_client.set_token(token.token);
 
 	SetMainSubPage(MainSubPages::LISTS);
 	m_main_window.SetCurrentPage(UIPages::MAIN);
