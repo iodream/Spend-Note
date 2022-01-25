@@ -11,7 +11,7 @@ GetProductsHandler::GetProductsHandler(IDbFacade::Ptr facade)
 {
 }
 
-QJsonDocument GetProductsHandler::JSONFormatter::Format(const DTO& dto)
+QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 {
 	QJsonObject json;
 
@@ -42,10 +42,10 @@ QJsonDocument GetProductsHandler::JSONFormatter::Format(const DTO& dto)
 	return QJsonDocument{json};
 }
 
-GetProductsHandler::JSONParser::DTO GetProductsHandler::JSONParser::Parse(
+GetProductsHandler::JSONParser::Product GetProductsHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
-	DTO dto;
+	Product dto;
 	auto json = payload.object();
 
 	try {
@@ -64,7 +64,7 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 
 		auto products = m_facade->GetProductsForList(in_dto.list_id);
 
-		JSONFormatter::DTO out_dto;
+		JSONFormatter::Products out_dto;
 		for (const Product& product : products) {
 			auto category = m_facade->GetProductCategoryById(product.category_id);
 			std::string category_name = (category) ? category->name : EMPTY_STD_STRING;

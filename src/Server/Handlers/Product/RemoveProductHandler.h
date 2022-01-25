@@ -12,11 +12,11 @@ class RemoveProductHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		struct DTO {
+		struct Product{
 			IdType id;
 		};
 
-		DTO Parse(const QJsonDocument& payload);
+		Product Parse(const QJsonDocument& payload);
 	};
 public:
 	RemoveProductHandler(IDbFacade::Ptr facade);

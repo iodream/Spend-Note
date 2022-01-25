@@ -14,10 +14,10 @@ RemoveListHandler::RemoveListHandler(IDbFacade::Ptr facade)
 {
 }
 
-RemoveListHandler::JSONParser::ListDTO RemoveListHandler::JSONParser::Parse(
+RemoveListHandler::JSONParser::List RemoveListHandler::JSONParser::Parse(
     const QJsonDocument& payload)
 {
-	ListDTO dto;
+	List dto;
     auto json = payload.object();
     SafeReadId(json, "list_id", dto.id);
     return dto;

@@ -14,10 +14,10 @@ RemoveProductHandler::RemoveProductHandler(IDbFacade::Ptr facade)
 {
 }
 
-RemoveProductHandler::JSONParser::DTO RemoveProductHandler::JSONParser::Parse(
+RemoveProductHandler::JSONParser::Product RemoveProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
-	DTO dto;
+	Product dto;
 	auto json = payload.object();
 	SafeReadId(json, "id", dto.id);
 	return dto;

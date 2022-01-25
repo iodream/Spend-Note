@@ -5,18 +5,18 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
-#include "../libdal/DTOs/Product.h"
+#include "../libdal/DTOs/List.h"
 
 class RemoveListHandler : public AuthorizedHandler
 {
     class JSONParser
     {
     public:
-		struct ListDTO {
+		struct List {
             IdType id;
         };
 
-		ListDTO Parse(const QJsonDocument& payload);
+		List Parse(const QJsonDocument& payload);
     };
 public:
     RemoveListHandler(IDbFacade::Ptr facade);

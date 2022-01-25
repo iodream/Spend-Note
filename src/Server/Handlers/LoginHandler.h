@@ -10,20 +10,20 @@ class LoginHandler : public ICommandHandler
 	class JSONFormatter
 	{
 	public:
-		struct LoginDTO {
+		struct Token {
 			std::string token;
 		};
 
-		QJsonDocument Format(const LoginDTO& dto);
+		QJsonDocument Format(const Token& dto);
 	};
 	class JSONParser
 	{
 	public:
-		struct LoginDTO {
+		struct Login{
 			std::string login;
 			std::string passwd_hash;
 		};
-	LoginDTO Parse(const QJsonDocument& payload);
+	Login Parse(const QJsonDocument& payload);
 
 	};
 public:

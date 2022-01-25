@@ -54,10 +54,10 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 	return QJsonDocument::fromJson(raw_token_body);
 }
 
-AuthorizedHandler::JSONParser::UserDTO AuthorizedHandler::JSONParser::Parse(
+AuthorizedHandler::JSONParser::Token AuthorizedHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
-	UserDTO dto;
+	Token dto;
 	auto json = payload.object();
 
 	try {

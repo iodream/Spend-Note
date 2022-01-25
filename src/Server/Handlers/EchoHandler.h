@@ -9,21 +9,21 @@ class EchoHandler : public ICommandHandler
 	class JSONParser
     {		
     public:
-		struct DTO {
+		struct Message {
 			std::string msg;
 		};
 
-		DTO Parse(const QJsonDocument& payload);
+		Message Parse(const QJsonDocument& payload);
     };
 
 	class JSONFormatter
     {
 	public:
-		struct DTO {
+		struct Message {
 			std::string msg;
 		};
 
-		QJsonDocument Format(const DTO& dto);
+		QJsonDocument Format(const Message& dto);
     };
 
 public:
