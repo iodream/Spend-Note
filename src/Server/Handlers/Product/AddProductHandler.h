@@ -12,18 +12,17 @@ class AddProductHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		using DTO = Product;
-		DTO Parse(const QJsonDocument& payload);
+		Product Parse(const QJsonDocument& payload);
 	};
 
 	class JSONFormatter
 	{
 	public:
-		struct DTO {
+		struct Product {
 			IdType id;
 		};
 
-		QJsonDocument Format(const DTO& dto);
+		QJsonDocument Format(const Product& dto);
 	};
 public:
 	AddProductHandler(IDbFacade::Ptr facade);

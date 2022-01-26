@@ -5,25 +5,25 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
-#include "../libdal/DTOs/Product.h"
+#include "../libdal/DTOs/List.h"
 
 class RemoveListHandler : public AuthorizedHandler
 {
-    class JSONParser
-    {
-    public:
-        struct DTO {
-            IdType id;
-        };
+	class JSONParser
+	{
+	public:
+		struct List {
+			IdType id;
+		};
 
-        DTO Parse(const QJsonDocument& payload);
-    };
+		List Parse(const QJsonDocument& payload);
+	};
 public:
-    RemoveListHandler(IDbFacade::Ptr facade);
-    virtual ~RemoveListHandler() override {}
+	RemoveListHandler(IDbFacade::Ptr facade);
+	virtual ~RemoveListHandler() override {}
 
-    Net::Response AuthHandle(const Net::Request& request) override;
+	Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-    JSONParser m_parser{};
+	JSONParser m_parser{};
 };
