@@ -2,13 +2,16 @@
 #include "Handlers/LoginHandler.h"
 #include "Handlers/EchoHandler.h"
 #include "Handlers/SignupHandler.h"
+#include "Handlers/Income/GetIncomesHandler.h"
 #include "Handlers/Product/GetProductsHandler.h"
 #include "Handlers/Product/AddProductHandler.h"
 #include "Handlers/Product/RemoveProductHandler.h"
 #include "Handlers/List/GetListsHandler.h"
 #include "Handlers/List/RemoveListHandler.h"
+#include "Handlers/Income/AddIncomeHandler.h"
 #include "Handlers/Income/RemoveIncomeHandler.h"
 #include "Handlers/Income/UpdateIncomeHandler.h"
+
 
 #include "libdal/Facade/DbFacade.h"
 
@@ -26,6 +29,8 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new LoginHandler(std::move(facade));
 	if (uri == std::string("/signup"))
 		return new SignupHandler(std::move(facade));
+	if (uri == std::string("/income/get"))
+		return new GetIncomesHandler(std::move(facade));
 	if (uri == std::string("/product/get_by_list_id"))
 		return new GetProductsHandler(std::move(facade));
 	if (uri == std::string("/product/add"))
@@ -34,6 +39,8 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new RemoveProductHandler(std::move(facade));
 	if (uri == std::string("/list/get_lists"))
 		return new GetListsHandler(std::move(facade));
+	if (uri == std::string("/income/add"))
+		return new AddIncomeHandler(std::move(facade));
 	if (uri == std::string("/list/remove"))
 		return new RemoveListHandler(std::move(facade));
 	if (uri == std::string("/income/remove"))

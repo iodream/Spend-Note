@@ -9,6 +9,15 @@ LoginPage::LoginPage(QWidget *parent)
 
 	connect(m_ui->loginSubmitButton, SIGNAL(clicked())
 			, this, SLOT(OnLoginSubmitButtonClicked()));
+
+	connect(m_ui->signupButton, SIGNAL(clicked())
+			, this, SLOT(OnSignupButtonClicked()));
+
+	connect(m_ui->loginLineEdit, SIGNAL(textChanged(QString))
+			, this, SLOT(OnLoginTextChanged(QString)));
+
+	connect(m_ui->passwordLineEdit, SIGNAL(textChanged(QString))
+			, this, SLOT(OnPasswordTextChanged(QString)));
 }
 
 LoginPage::~LoginPage()
@@ -23,9 +32,25 @@ void LoginPage::ChangeLoginErrorLabel(std::string reason)
 
 void LoginPage::OnLoginSubmitButtonClicked()
 {
-	LoginInDTO login_in_dto;
-	login_in_dto.login = m_ui->loginLineEdit->text().toStdString();
-	login_in_dto.password = m_ui->passwordLineEdit->text().toStdString();
-	emit Login(login_in_dto);
+	LoginModel::JSONFormatter::Credentials credentials;
+	credentials.login = m_ui->loginLineEdit->text().toStdString();
+	credentials.password = m_ui->passwordLineEdit->text().toStdString();
+	emit Login(credentials);
 }
+
+void LoginPage::OnSignupButtonClicked()
+{
+	emit GotoSignup();
+}
+
+void LoginPage::OnLoginTextChanged(const QString& arg1)
+{
+	m_ui->loginErrorLabel->setText("");
+}
+
+void LoginPage::OnPasswordTextChanged(const QString& arg1)
+{
+	m_ui->loginErrorLabel->setText("");
+}
+
 

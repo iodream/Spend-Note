@@ -2,7 +2,7 @@
 
 #include <QWidget>
 
-#include "DTO/Login.h"
+#include "Models/LoginModel.h"
 
 namespace Ui {
 class LoginPage;
@@ -21,11 +21,15 @@ public:
 private:
 	Ui::LoginPage *m_ui;
 
-
 signals:
-	void Login(LoginInDTO);
+	void GotoSignup();
+	void Login(LoginModel::JSONFormatter::Credentials credentials);
+
 
 private slots:
 	void OnLoginSubmitButtonClicked();
+	void OnSignupButtonClicked();
+	void OnPasswordTextChanged(const QString& arg1);
+	void OnLoginTextChanged(const QString& arg1);
 };
 
