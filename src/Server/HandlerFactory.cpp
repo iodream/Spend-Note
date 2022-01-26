@@ -34,11 +34,11 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new RemoveProductHandler(std::move(facade));
 	if (uri == std::string("/list/get_lists"))
 		return new GetListsHandler(std::move(facade));
-    if (uri == std::string("/list/remove"))
-        return new RemoveListHandler(std::move(facade));
-    if (uri == std::string("/income/remove"))
-        return new RemoveIncomeHandler(std::move(facade));
-    if (uri == std::string("/income/update"))
-        return new UpdateIncomeHandler(std::move(facade));
-    return nullptr;
+	if (uri == std::string("/list/remove"))
+		return new RemoveListHandler(std::move(facade));
+	if (uri == std::string("/income/remove"))
+		return new RemoveIncomeHandler(std::move(facade));
+	if (uri == std::string("/income/update"))
+		return new UpdateIncomeHandler(std::move(facade));
+	return nullptr;
 }

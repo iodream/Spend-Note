@@ -9,21 +9,21 @@
 
 class RemoveIncomeHandler : public AuthorizedHandler
 {
-    class JSONParser
-    {
-    public:
-		struct Income{
-            IdType id;
-        };
+	class JSONParser
+	{
+	public:
+			struct Income{
+			IdType id;
+		};
 
 		Income Parse(const QJsonDocument& payload);
-    };
+	};
 public:
-    RemoveIncomeHandler(IDbFacade::Ptr facade);
-    virtual ~RemoveIncomeHandler() override {}
+	RemoveIncomeHandler(IDbFacade::Ptr facade);
+	virtual ~RemoveIncomeHandler() override {}
 
-    Net::Response AuthHandle(const Net::Request& request) override;
+	Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-    JSONParser m_parser{};
+	JSONParser m_parser{};
 };

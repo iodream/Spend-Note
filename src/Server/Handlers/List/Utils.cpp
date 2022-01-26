@@ -4,12 +4,12 @@
 
 List ParseList(const QJsonObject& json)
 {
-    List list;
+	List list;
 
-    std::string tmp_date;
-    SafeReadId(json, "list_id", list.list_id);
-    SafeReadId(json, "owner_id", list.owner_id);
-    SafeReadId(json, "state_id", list.state_id);
-    SafeReadString(json, "name", list.name);
-    return list;
+	std::string tmp_date;
+	SafeReadId(json, "list_id", list.list_id);
+	SafeReadId(json, "owner_id", list.owner_id);
+	SafeReadId(json, "state_id", list.state_id);
+	SafeReadString(json, "name", list.name);
+	return list;
 }
