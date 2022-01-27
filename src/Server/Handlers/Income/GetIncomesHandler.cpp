@@ -52,7 +52,7 @@ GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Inco
 	JSONFormatter::Income income_out;
 
 	income_out.income_id = income.income_id;
-	income_out.user_id = income.income_id;
+	income_out.user_id = income.user_id;
 	income_out.name = income.name;
 	income_out.amount = income.amount;
 	auto category_name = m_facade->GetIncomeCategoryById(income.category_id);
