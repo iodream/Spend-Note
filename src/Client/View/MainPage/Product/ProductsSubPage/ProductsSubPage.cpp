@@ -31,18 +31,6 @@ void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 	UpdateProductNumbers(idx + 1);
 }
 
-//void ProductsSubPage::OnAddProduct()
-//{
-//	int id = get_list_size();
-//	ProductItem* product = new ProductItem(id);
-//	product->set_name(QString("product %1").arg(id));
-//	product->set_buy_until(QString("date? Ok it is %1").arg(id));
-//	product->set_price(QString("price"));
-//	product->set_is_purchased(false);
-//	product->Update();
-////	AppendProduct(product);
-//}
-
 ProductItem* ProductsSubPage::SafeGetProduct(int idx)
 {
 	QLayoutItem *layout = m_ui->ItemsLayout->itemAt(idx);

@@ -20,9 +20,9 @@ std::optional<IncomeCategory> IncomeCategoryRepository::GetById(const IdType& ca
 
 		return ParseSQLRow(income_category.front());
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return std::nullopt;
 }
@@ -52,8 +52,8 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 		}
 		return income_categories;
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }
