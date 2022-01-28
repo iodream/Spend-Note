@@ -32,9 +32,9 @@ std::optional<ProductCategory> ProductCategoryRepository::GetById(IdType id)
 			return ProductCategoryFromRow(product_category_rows.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return std::nullopt;
@@ -60,9 +60,9 @@ std::vector<ProductCategory> ProductCategoryRepository::GetAll()
 				product_categories.begin(),
 				ProductCategoryFromRow);
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return product_categories;

@@ -20,9 +20,9 @@ std::optional<ListState> ListStateRepository::GetById(const IdType &list_state_i
 
 		return ParseSQLRow(list_state);
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return std::nullopt;
 }
@@ -52,8 +52,8 @@ std::vector<ListState> ListStateRepository::GetAll()
 		}
 		return list_states;
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }

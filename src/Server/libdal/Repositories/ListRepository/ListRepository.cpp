@@ -37,9 +37,9 @@ std::optional<IdType> ListRepository::AddList(const List& list)
 		auto id_row = id_rows.front();
 		return id_row[ID_FIELD].as<IdType>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return std::nullopt;
 }
@@ -58,9 +58,9 @@ bool ListRepository::Remove(const IdType& list_id)
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list_id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
@@ -78,9 +78,9 @@ std::optional<List> ListRepository::GetList(const IdType& list_id)
 			return ParseSQLRow(list.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return std::nullopt;
 }
@@ -101,9 +101,9 @@ bool ListRepository::Update(const List& list)
 
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
@@ -134,9 +134,9 @@ std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 			list.push_back(ParseSQLRow(row));
 		}
 	}
-    catch(const pqxx::pqxx_exception& e)
-    {
-        throw DatabaseFailure();
-    }
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
     return list;
 }
