@@ -41,9 +41,9 @@ Money BalanceRepository::CalculateBalance(IdType user_id)
 
 		return total_income_row.front().as<Money>() + total_outcome_row.front().as<Money>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }
 
@@ -67,8 +67,8 @@ Money BalanceRepository::CalculatePlannedBalance(IdType user_id)
 
 		return total_income_row.front().as<Money>() + total_outcome_row.front().as<Money>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }
