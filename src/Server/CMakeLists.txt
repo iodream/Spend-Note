@@ -25,6 +25,8 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
 )
 
 list(APPEND Spend-Note-Server_LIBS

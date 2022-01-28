@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "HandlerFactory.h"
 #include "Handlers/LoginHandler.h"
 #include "Handlers/EchoHandler.h"
@@ -19,8 +21,21 @@ const std::string DB_CONN_STRING =
 	"user=test_user host=127.0.0.1 "
 	"password=test_pass dbname=SpendAndNote";
 
-ICommandHandler* HandlerFactory::GetHandler(std::string uri)
+Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)
 {
+	try{
+		return new HTTPRequestHandler{GetCommandHandler(http_req)};
+	}
+	catch(const std::exception& exception){
+		std::cout << exception.what() << std::endl;
+	}
+	return nullptr;
+}
+
+ICommandHandler* HandlerFactory::GetCommandHandler(
+		const Poco::Net::HTTPServerRequest& http_req)
+{
+	auto uri = http_req.getURI();
 	IDbFacade::Ptr facade = std::make_unique<DbFacade>(DB_CONN_STRING);
 
 	if (uri == std::string("/echo"))
@@ -49,3 +64,5 @@ ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 		return new UpdateIncomeHandler(std::move(facade));
 	return nullptr;
 }
+
+//getPathSegments
