@@ -47,6 +47,8 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, c
 		stream <<  "CRIT: " << " " << msg << " " << context.file << " " <<  context.line << " "
 			 <<  context.function << "\n";
 		break;
+	case QtFatalMsg:
+		break;
 	}
 }
 
