@@ -18,6 +18,7 @@ ScopedLogger::ScopedLogger(const std::string& fileName, const std::string& funcN
 
 void ScopedLogger::Init(const std::string& logFileName)
 {
+	std::remove(m_logFileName.c_str());
 	m_logFileName=logFileName;
 	m_logger.close();
 }

@@ -17,6 +17,7 @@
 #include "HandlerFactory.h"
 #include "SpendNoteServer_Config.h"
 #include "Logger/ScopedLogger.h"
+#include "Logger/Logger.h"
 
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
 {
@@ -164,6 +165,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 	int main(const std::vector<std::string>&)
 	{
 		SCOPED_LOGGER;
+		Logger::Init("Server.log");
 		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
 
 		auto* params = new Poco::Net::HTTPServerParams();
@@ -175,9 +177,9 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 		Poco::Net::HTTPServer srv(new HTTPRequestHandlerFactory, port);
 		srv.start();
-		std::cout << "HTTP Server started on port " << port << "\n";
+		qDebug() << "HTTP Server started on port " << port << "\n";
 		waitForTerminationRequest();
-		std::cout << "Stopping HTTP Server..." << "\n";
+		qDebug() << "Stopping HTTP Server..." << "\n";
 		srv.stop();
 
 		return Application::EXIT_OK;
