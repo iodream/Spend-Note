@@ -4,6 +4,8 @@
 #include <fstream>
 #include <thread>
 
+#define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__, __LINE__, std::this_thread::get_id())
+
 class ScopedLogger
 {
 public:
