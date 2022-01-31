@@ -1,7 +1,9 @@
-#include "Logger.h"
 #include <fstream>
 #include <QTime>
 #include <mutex>
+
+#include "Logger.h"
+
 
 QMutex Logger::m_logmutex;
 QFile* Logger::m_logging_file;
