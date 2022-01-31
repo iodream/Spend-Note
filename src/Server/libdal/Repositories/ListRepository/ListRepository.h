@@ -13,6 +13,7 @@ public:
 	std::vector<List> GetAllLists(const IdType& user_id);
 	bool Update(const List& list);
 	bool Remove(const IdType& list_id);
+	bool CanUserEditList(IdType user_id, IdType list_id);
 
 private:
 	List ParseSQLRow(const pqxx::row& row);

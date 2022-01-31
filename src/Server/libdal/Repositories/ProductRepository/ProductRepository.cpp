@@ -19,6 +19,10 @@ namespace
 	const std::string ADD_DATE_FIELD = "addDate";
 	const std::string PURCHASE_DATE_FIELD = "purchaseDate";
 	const std::string BUY_UNTIL_DATE_FIELD = "buyUntilDate";
+
+	const std::string LIST_TABLE_NAME = "List";
+	const std::string LIST_ID = "id";
+	const std::string LIST_OWNER_ID = "userId";
 }
 
 ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
@@ -193,6 +197,33 @@ bool ProductRepository::Remove(IdType id)
 	{
 		throw DatabaseFailure(e.what());
 	}
+	return true;
+}
+
+bool ProductRepository::CanUserEditProduct(IdType user_id, IdType product_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_database_connection};
+
+		auto result = w.exec(
+			"SELECT " + ID_FIELD +
+			" FROM " + TABLE_NAME + " JOIN " + LIST_TABLE_NAME +
+			" ON " + LIST_ID_FIELD + " = " + LIST_ID +
+			" WHERE " +
+				ID_FIELD +" = "  + w.quote(product_id) + " AND " +
+				LIST_OWNER_ID +" = "  + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
 	return true;
 }
 

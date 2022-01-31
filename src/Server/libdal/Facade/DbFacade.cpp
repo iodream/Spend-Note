@@ -155,3 +155,19 @@ Money DbFacade::CalculatePlannedBalanceForUser(IdType user_id)
 {
 	return m_balance_repository.CalculatePlannedBalance(user_id);
 }
+
+
+bool DbFacade::CanUserEditList(IdType user_id, IdType list_id)
+{
+	return m_lists.CanUserEditList(user_id, list_id);
+}
+
+bool DbFacade::CanUserEditProduct(IdType user_id, IdType product_id)
+{
+	return m_products.CanUserEditProduct(user_id, product_id);
+}
+
+bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
+{
+	return m_products.CanUserEditProduct(user_id, income_id);
+}

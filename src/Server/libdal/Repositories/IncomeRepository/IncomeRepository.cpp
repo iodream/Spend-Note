@@ -2,15 +2,15 @@
 
 namespace
 {
-	const std::string& TABLE_NAME = "Income";
-	const std::string& ID_FIELD = "id";
-	const std::string& INCOME_NAME = "name";
-	const std::string& USER_ID = "userId";
-	const std::string& AMOUNT = "amount";
-	const std::string& CATEGORY_ID = "categoryId";
-	const std::string& ADD_TIME = "addTime";
-	const std::string& EXPIRATION_TIME= "expirationTime";
-	const std::string& TABLE_WITH_CATEGORY = "IncomeCategory";
+	const std::string TABLE_NAME = "Income";
+	const std::string ID_FIELD = "id";
+	const std::string INCOME_NAME = "name";
+	const std::string USER_ID = "userId";
+	const std::string AMOUNT = "amount";
+	const std::string CATEGORY_ID = "categoryId";
+	const std::string ADD_TIME = "addTime";
+	const std::string EXPIRATION_TIME= "expirationTime";
+	const std::string TABLE_WITH_CATEGORY = "IncomeCategory";
 }
 
 IncomeRepository::IncomeRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
@@ -110,6 +110,32 @@ bool IncomeRepository::Remove(const IdType& id)
 	{
 		throw DatabaseFailure(e.what());
 	}
+	return true;
+}
+
+bool IncomeRepository::CanUserEditIncome(IdType user_id, IdType income_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_db_connection};
+
+		auto result = w.exec(
+			"SELECT " + ID_FIELD +
+			" FROM " + TABLE_NAME +
+			" WHERE " +
+				ID_FIELD +" = "  + w.quote(income_id) + " AND " +
+				USER_ID +" = "  + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
 	return true;
 }
 

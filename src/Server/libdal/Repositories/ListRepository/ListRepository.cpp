@@ -65,6 +65,32 @@ bool ListRepository::Remove(const IdType& list_id)
 	return true;
 }
 
+bool ListRepository::CanUserEditList(IdType user_id, IdType list_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_db_connection};
+
+		auto result = w.exec(
+			"SELECT " + ID_FIELD +
+			" FROM " + TABLE_NAME +
+			" WHERE " +
+				ID_FIELD +" = "  + w.quote(list_id) + " AND " +
+				USER_ID +" = "  + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return true;
+}
+
 
 std::optional<List> ListRepository::GetList(const IdType& list_id)
 {

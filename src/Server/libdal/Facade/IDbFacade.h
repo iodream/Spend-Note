@@ -56,4 +56,8 @@ public:
 
 	virtual Money CalculateBalanceForUser(IdType user_id) = 0;
 	virtual Money CalculatePlannedBalanceForUser(IdType user_id) = 0;
+
+	virtual bool CanUserEditList(IdType user_id, IdType list_id);
+	virtual bool CanUserEditProduct(IdType user_id, IdType product_id);
+	virtual bool CanUserEditIncome(IdType user_id, IdType income_id);
 };
