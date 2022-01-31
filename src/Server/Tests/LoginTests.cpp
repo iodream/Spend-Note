@@ -11,6 +11,7 @@
 using ::testing::Return;
 using ::testing::_;
 
+//checks for invalid login
 TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 {
 	auto facade = std::make_unique<MockDbFacade>();
@@ -25,7 +26,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto handler = std::make_unique<LoginHandler>(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;
+	request.method = Net::HTTP_METHOD_POST;	//login data on the request mismatches
 	{
 		QJsonObject json;
 		json["login"] = "Test user2";
@@ -38,6 +39,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_UNAUTHORIZED);
 }
 
+//checks for good login
 TEST(LoginHandlerTest, USER_LOGIN_OK)
 {
 	auto facade = std::make_unique<MockDbFacade>();
@@ -55,7 +57,7 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	request.method = Net::HTTP_METHOD_POST;
 	{
 		QJsonObject json;
-		json["login"] = "Test user";
+		json["login"] = "Test user"; // login data is the same
 		json["password"] = "Test password hash";
 		request.json_payload = QJsonDocument(json);
 	}
