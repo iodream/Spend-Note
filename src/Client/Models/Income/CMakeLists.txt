@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Client_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncomeUtils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncomeUtils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoryUtils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoryUtils.cpp
 )
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)

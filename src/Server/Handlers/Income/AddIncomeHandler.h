@@ -2,34 +2,18 @@
 
 #include <string>
 
-#include "../AuthorizedHandler.h"
 #include "../libdal/Facade/IDbFacade.h"
+#include "ParsersAndFormatters/IncomeJSONParser.h"
+#include "ParsersAndFormatters/IncomeJSONFormatter.h"
 
 class AddIncomeHandler : public AuthorizedHandler
 {
-	class JSONParser
-	{
-	public:
-		Income Parse(const QJsonDocument& json_doc);
-	};
-
-	class JSONFormatter
-	{
-	public:
-		struct DTO
-		{
-			IdType income_id;
-		};
-
-		QJsonDocument Format(const DTO& dto);
-	};
-
 public:
 	AddIncomeHandler(IDbFacade::Ptr facade);
 	virtual ~AddIncomeHandler() override {};
 
 	Net::Response AuthHandle(const Net::Request& request) override;
-
-	JSONParser m_parser{};
-	JSONFormatter m_formatter{};
+private:
+	IncomeJSONParser m_parser{};
+	IncomeJSONFormatter m_formatter{};
 };

@@ -5,7 +5,7 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
-#include "Utils.h"
+#include "Utils/IncomeUtils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
@@ -19,7 +19,7 @@ RemoveIncomeHandler::JSONParser::Income RemoveIncomeHandler::JSONParser::Parse(
 {
 	Income dto;
 	auto json = payload.object();
-	SafeReadId(json, "income_id", dto.id);
+	SafeReadId(json, "id", dto.id);
 	return dto;
 }
 

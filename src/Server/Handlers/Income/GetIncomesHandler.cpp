@@ -21,7 +21,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	{
 		try
 		{
-			JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(request.uid))};
+			Incomes response_dto {Map(m_facade->GetAllIncomes(request.uid))};
 			return FormJSONResponse(m_formatter.Format(response_dto));
 		}
 		catch (const SQLFailure& e)
@@ -36,9 +36,9 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 		"Unsupported method");
 }
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
+Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
 {
-	JSONFormatter::Incomes incomes_out;
+	Incomes incomes_out;
 	incomes_out.reserve(incomes.size());
 	for (const auto& income : incomes)
 	{
@@ -47,12 +47,12 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vect
 	return incomes_out;
 }
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
+IncomeOut GetIncomesHandler::MapIncome(const Income& income)
 {
-	JSONFormatter::Income income_out;
+	IncomeOut income_out;
 
-	income_out.income_id = income.income_id;
-	income_out.user_id = income.user_id;
+	income_out.id = income.income_id;
+	// income_out.user_id = income.user_id; user id will come form uri
 	income_out.name = income.name;
 	income_out.amount = income.amount;
 	auto category_name = m_facade->GetIncomeCategoryById(income.category_id);
@@ -68,34 +68,4 @@ GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Inco
 	income_out.expiration_time = income.expiration_time.value_or("");
 
 	return income_out;
-}
-
-QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
-{
-	QJsonObject income_json;
-	income_json["id"] = std::to_string(income.income_id).c_str();
-	income_json["user_id"] = std::to_string(income.user_id).c_str();
-	income_json["name"] = income.name.c_str();
-	income_json["amount"] = income.amount;
-	income_json["category_name"] = income.category_name.c_str();
-	income_json["add_time"] = income.add_time.c_str();
-	income_json["expiration_time"] = income.expiration_time.c_str();
-	return income_json;
-}
-
-QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
-{
-	QJsonArray incomes_json;
-	for (const Income& income : incomes)
-	{
-		incomes_json.append(Format(income));
-	}
-	return incomes_json;
-}
-
-QJsonDocument GetIncomesHandler::JSONFormatter::Format(const DTO& dto)
-{
-	QJsonObject json;
-	json["incomes"] = Format(dto.incomes);
-	return QJsonDocument{json};
 }

@@ -12,7 +12,7 @@ class RemoveIncomeHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-			struct Income{
+		struct Income{
 			IdType id;
 		};
 

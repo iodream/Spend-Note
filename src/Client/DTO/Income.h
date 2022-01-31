@@ -3,14 +3,14 @@
 #include <QString>
 
 #include "../Common.h"
+#include "IncomeCategory.h"
 
 struct Income
 {
-	IdType income_id;
-	IdType owner_id;
+	IdType id;
+	IncomeCategory category;
 	QString name;
 	double amount;
-	IdType category_id;
 	QString add_time;
 	QString expiration_time;
 };
