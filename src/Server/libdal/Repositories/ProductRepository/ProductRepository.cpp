@@ -96,9 +96,9 @@ std::optional<Product> ProductRepository::GetById(IdType id)
 			return ProductFromRow(product_rows.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return std::nullopt;
@@ -130,9 +130,9 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return products;
@@ -165,9 +165,9 @@ bool ProductRepository::Update(const Product& product)
 				" WHERE " + ID_FIELD + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
