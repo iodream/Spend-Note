@@ -30,9 +30,11 @@ Income IncomeJSONParser::ToIncome(const IncomeIn &income_in)
 
 	income.income_id = income_in.id;
 	income.category_id = income_in.category.id;
+	income.name = income_in.name;
 	income.amount = income_in.amount;
 	income.add_time = income_in.add_time;
-	income.expiration_time = income_in.expiration_time;
+	income.expiration_time = (income_in.expiration_time != "")
+			? std::optional<Timestamp>{income_in.expiration_time} : std::nullopt;
 
 	return income;
 }
