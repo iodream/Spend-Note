@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 RemoveListHandler::RemoveListHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
@@ -17,6 +18,7 @@ RemoveListHandler::RemoveListHandler(IDbFacade::Ptr facade)
 RemoveListHandler::JSONParser::List RemoveListHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	List dto;
 	auto json = payload.object();
 	SafeReadId(json, "list_id", dto.id);
@@ -25,6 +27,7 @@ RemoveListHandler::JSONParser::List RemoveListHandler::JSONParser::Parse(
 
 Net::Response RemoveListHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.method == Net::HTTP_METHOD_DELETE) {
 		auto in_dto = m_parser.Parse(request.json_payload);
 

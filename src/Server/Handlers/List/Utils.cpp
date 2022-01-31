@@ -1,9 +1,11 @@
 #include "Utils.h"
 
 #include "Net/Parsing.h"
+#include "Logger/ScopedLogger.h"
 
 List ParseList(const QJsonObject& json)
 {
+	SCOPED_LOGGER;
 	List list;
 
 	std::string tmp_date;

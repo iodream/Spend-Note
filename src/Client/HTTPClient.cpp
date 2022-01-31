@@ -8,7 +8,7 @@
 
 #include "Exception.h"
 #include "HTTPClient.h"
-
+#include "../Logger/ScopedLogger.h"
 void HTTPClient::set_token(const std::string& str_token)
 {
     m_token = str_token;
@@ -21,6 +21,7 @@ void HTTPClient::set_auth_scheme(const std::string& str_auth_scheme)
 
 void HTTPClient::ReleaseToken()
 {
+	SCOPED_LOGGER;
 	set_token("");
 	set_auth_scheme("");
 }
@@ -30,6 +31,7 @@ void HTTPClient::SendRequest(
 	Poco::Net::HTTPClientSession& session,
 	const Net::Request& net_request)
 {
+	SCOPED_LOGGER;
     AddCredentials(request);
     request.setContentType(net_request.content_type);
     if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
@@ -57,6 +59,7 @@ Net::Response HTTPClient::FormResponse(
     const Poco::Net::HTTPResponse& response,
 	std::istream& received_stream)
 {
+	SCOPED_LOGGER;
     Net::Response net_response;
     net_response.content_type = response.getContentType();
     net_response.status = response.getStatus();
@@ -84,6 +87,7 @@ Net::Response HTTPClient::FormResponse(
 
 Net::Response HTTPClient::Request(const Net::Request& net_request)
 {
+	SCOPED_LOGGER;
     Poco::URI uri(net_request.uri);
     Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
     std::string path(uri.getPathAndQuery());

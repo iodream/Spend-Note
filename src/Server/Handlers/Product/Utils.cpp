@@ -1,9 +1,11 @@
 #include "Utils.h"
 
 #include "Net/Parsing.h"
+#include "Logger/ScopedLogger.h"
 
 Product ParseProduct(const QJsonObject& json)
 {
+	SCOPED_LOGGER;
 	Product product;
 
 	double tmp_number;

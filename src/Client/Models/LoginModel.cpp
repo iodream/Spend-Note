@@ -2,9 +2,10 @@
 
 #include "LoginModel.h"
 #include "Net/Parsing.h"
-
+#include "../Logger/ScopedLogger.h"
 Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 {
+	SCOPED_LOGGER;
 	Net::Request request;
 	request.uri = m_hostname + "login";
 	request.method = Net::HTTP_METHOD_POST;
@@ -15,6 +16,7 @@ Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 
 QJsonDocument LoginModel::JSONFormatter::Format(const Credentials& credentials)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	QByteArray password = QByteArray::fromStdString(credentials.password);
 
@@ -27,11 +29,13 @@ QJsonDocument LoginModel::JSONFormatter::Format(const Credentials& credentials)
 
 void LoginModel::JSONParser::Parse(QJsonObject json, Token& dto)
 {
+	SCOPED_LOGGER;
 	SafeReadString(json, "token", dto.token);
 }
 
 LoginModel::JSONParser::Token LoginModel::ParseResponse(const Net::Response& response)
 {
+	SCOPED_LOGGER;
 	JSONParser::Token token;
 
 	m_parser.Parse(response.json_payload.object(), token);

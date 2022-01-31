@@ -5,7 +5,7 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
-
+#include "Logger/ScopedLogger.h"
 GetListsHandler::GetListsHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
 {
@@ -13,6 +13,7 @@ GetListsHandler::GetListsHandler(IDbFacade::Ptr facade)
 
 QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 
 	QJsonArray lists;
@@ -34,6 +35,7 @@ QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
 
 Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.method == Net::HTTP_METHOD_GET) {
 
 		auto lists = m_facade->GetAllLists(request.uid);

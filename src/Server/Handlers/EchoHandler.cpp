@@ -5,10 +5,12 @@
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
+#include "Logger/ScopedLogger.h"
 
 EchoHandler::JSONParser::Message EchoHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Message dto;
 	auto json = payload.object();
 
@@ -24,6 +26,7 @@ EchoHandler::JSONParser::Message EchoHandler::JSONParser::Parse(
 QJsonDocument EchoHandler::JSONFormatter::Format(
 		const EchoHandler::JSONFormatter::Message& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	json["msg"] = dto.msg.c_str();
 	return QJsonDocument{json};
@@ -31,6 +34,7 @@ QJsonDocument EchoHandler::JSONFormatter::Format(
 
 Net::Response EchoHandler::Handle(Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.method == Net::HTTP_METHOD_POST) {
 		Net::Response response;
 		auto in_dto = m_parser.Parse(request.json_payload);

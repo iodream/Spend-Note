@@ -11,7 +11,7 @@
 #include "Handlers/Income/AddIncomeHandler.h"
 #include "Handlers/Income/RemoveIncomeHandler.h"
 #include "Handlers/Income/UpdateIncomeHandler.h"
-
+#include "Logger/ScopedLogger.h"
 
 #include "libdal/Facade/DbFacade.h"
 
@@ -21,6 +21,7 @@ const std::string DB_CONN_STRING =
 
 ICommandHandler* HandlerFactory::GetHandler(std::string uri)
 {
+	SCOPED_LOGGER;
 	IDbFacade::Ptr facade = std::make_unique<DbFacade>(DB_CONN_STRING);
 
 	if (uri == std::string("/echo"))

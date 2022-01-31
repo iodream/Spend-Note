@@ -5,6 +5,7 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
 GetProductsHandler::GetProductsHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
@@ -13,6 +14,7 @@ GetProductsHandler::GetProductsHandler(IDbFacade::Ptr facade)
 
 QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 
 	QJsonArray products;
@@ -45,6 +47,7 @@ QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 GetProductsHandler::JSONParser::Product GetProductsHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Product dto;
 	auto json = payload.object();
 
@@ -59,6 +62,7 @@ GetProductsHandler::JSONParser::Product GetProductsHandler::JSONParser::Parse(
 
 Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.method == Net::HTTP_METHOD_POST) {
 		auto in_dto = m_parser.Parse(request.json_payload);
 

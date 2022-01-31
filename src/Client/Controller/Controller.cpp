@@ -4,9 +4,10 @@
 #include "Models/List/GetListsModel.h"
 
 #include "Net/Constants.h"
-
+#include "Logger/ScopedLogger.h"
 Controller::Controller()
 {
+	SCOPED_LOGGER;
 	ConnectLoginPage();
 	ConnectMainPage();
 	ConnectSignupPage();
@@ -14,6 +15,7 @@ Controller::Controller()
 
 void Controller::ConnectLoginPage()
 {
+	SCOPED_LOGGER;
 	auto& page = m_main_window.get_login_page();
 
 	QObject::connect(
@@ -31,6 +33,7 @@ void Controller::ConnectLoginPage()
 
 void Controller::ConnectMainPage()
 {
+	SCOPED_LOGGER;
 	auto& page = m_main_window.get_main_page();
 
 	QObject::connect(
@@ -54,6 +57,7 @@ void Controller::ConnectMainPage()
 
 void Controller::ConnectSignupPage()
 {
+	SCOPED_LOGGER;
 	auto& page = m_main_window.get_signup_page();
 
 	QObject::connect(
@@ -71,18 +75,21 @@ void Controller::ConnectSignupPage()
 
 void Controller::Start(UIPages at_page)
 {
+	SCOPED_LOGGER;
 	m_main_window.show();
 	m_main_window.SetCurrentPage(at_page);
 }
 
 void Controller::StartTest()
 {
+	SCOPED_LOGGER;
 	Start(UIPages::MAIN);
 	m_main_window.get_main_page().SetCurrentSubPage(MainSubPages::LISTS);
 }
 
 void Controller::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 {
+	SCOPED_LOGGER;
 	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(credentials);
 	auto response = m_http_client.Request(request);
@@ -114,12 +121,14 @@ void Controller::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 
 void Controller::OnLogout()
 {
+	SCOPED_LOGGER;
 	m_http_client.ReleaseToken();
 	m_main_window.SetCurrentPage(UIPages::LOGIN);
 }
 
 void Controller::SetMainSubPage(MainSubPages page)
 {
+	SCOPED_LOGGER;
 	switch(page) {
 	case MainSubPages::LISTS:
 		UpdateMainListsSubPage();
@@ -149,6 +158,7 @@ void Controller::OnChangeMainSubPage(MainSubPages page)
 
 void Controller::UpdateMainListsSubPage()
 {
+	SCOPED_LOGGER;
 	GetListsModel model{m_hostname};
 	auto request  = model.FormRequest();
 	auto response = m_http_client.Request(request);
@@ -173,6 +183,7 @@ void Controller::OnGotoSignupPage()
 
 void Controller::OnSignup(const SignupInDTO& in_dto)
 {
+	SCOPED_LOGGER;
 	SignupModel model{m_hostname};
 	if (!model.CheckPassRepeat(in_dto))
 	{

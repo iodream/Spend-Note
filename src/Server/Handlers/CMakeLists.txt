@@ -10,6 +10,10 @@ list(APPEND Spend-Note-Server_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/AuthorizedHandler.h
 	${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/SignupHandler.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/Logger.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/Logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/ScopedLogger.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/ScopedLogger.cpp
 )
 
 add_subdirectory(Product)

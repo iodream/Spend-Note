@@ -25,6 +25,11 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.cpp
+
 )
 
 list(APPEND Spend-Note-Server_LIBS
@@ -38,10 +43,11 @@ list(APPEND Spend-Note-Server_LIBS
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libdal ${CMAKE_CURRENT_BINARY_DIR}/libdal)
 
-
 list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
 )
+
+
 
 add_executable(
     Spend-Note-Server

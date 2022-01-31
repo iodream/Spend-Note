@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 AddProductHandler::AddProductHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
@@ -16,6 +17,7 @@ AddProductHandler::AddProductHandler(IDbFacade::Ptr facade)
 Product AddProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	auto json = payload.object();
 	return ParseProduct(json);
 }
@@ -31,6 +33,7 @@ QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 
 Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.method == Net::HTTP_METHOD_POST) {
 		auto in_dto = m_parser.Parse(request.json_payload);
 

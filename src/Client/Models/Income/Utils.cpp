@@ -1,7 +1,8 @@
 #include "Utils.h"
-
+#include "../Logger/ScopedLogger.h"
 Income ParseIncome(const QJsonObject& json)
 {
+	SCOPED_LOGGER;
 	long long tmp;
 	Income income;
 

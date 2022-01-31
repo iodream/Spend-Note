@@ -1,0 +1,220 @@
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: line 7: main() started with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectLoginPage() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectMainPage() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectSignupPage() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Controller() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Start() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Format() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: FormRequest() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Parse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: ParseResponse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: FormRequest() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: Parse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: ParseResponse() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: UpdateMainListsSubPage() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: SetMainSubPage() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogin() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: main() finished with threadid 140537547081856
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: line 7: main() started with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectLoginPage() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectMainPage() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectSignupPage() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Controller() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Start() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Format() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: FormRequest() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Parse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: ParseResponse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: FormRequest() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: Parse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: ParseResponse() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: UpdateMainListsSubPage() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: SetMainSubPage() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogin() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: ReleaseToken() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogout() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: main() finished with threadid 139682722306176
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: line 7: main() started with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectLoginPage() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectMainPage() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectSignupPage() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Controller() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Start() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Format() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: FormRequest() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Parse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: ParseResponse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: FormRequest() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: Parse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: ParseResponse() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: UpdateMainListsSubPage() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: SetMainSubPage() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogin() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: ReleaseToken() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogout() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: main() finished with threadid 139771540052096
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: line 7: main() started with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectLoginPage() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectMainPage() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: ConnectSignupPage() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Controller() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: Start() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Format() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: FormRequest() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: Parse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/LoginModel.cpp: ParseResponse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: FormRequest() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: SendRequest() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: FormResponse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: Request() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/Utils.cpp: ParseList() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: Parse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Models/List/GetListsModel.cpp: ParseResponse() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: UpdateMainListsSubPage() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: SetMainSubPage() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogin() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/HTTPClient.cpp: ReleaseToken() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/Controller/Controller.cpp: OnLogout() finished with threadid 140561801427072
+
+/home/iod/Documents/it academy/Spend-Note/src/Client/main.cpp: main() finished with threadid 140561801427072

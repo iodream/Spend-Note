@@ -1,8 +1,9 @@
 #include "SignupModel.h"
 #include "Net/Parsing.h"
-
+#include "../Logger/ScopedLogger.h"
 Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 {
+	SCOPED_LOGGER;
 	Net::Request request;
 	request.uri = m_hostname + "signup";
 	request.method = Net::HTTP_METHOD_POST;
@@ -13,6 +14,7 @@ Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 
 QJsonDocument SignupModel::JSONFormatter::Format(const SignupInDTO& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	QByteArray password = QByteArray::fromStdString(dto.password);
 
@@ -26,12 +28,14 @@ QJsonDocument SignupModel::JSONFormatter::Format(const SignupInDTO& dto)
 //these functions return true if checks pass
 bool SignupModel::CheckPassRepeat(const SignupInDTO& dto) const
 {
+	SCOPED_LOGGER;
 	return (dto.password == dto.pass_repeat);
 }
 
 //checks data for presence of any characters at all
 bool SignupModel::CheckData(const SignupInDTO& dto) const
 {
+	SCOPED_LOGGER;
 	auto username = dto.login;
 	auto pass = dto.password;
 	username.erase(std::remove_if(username.begin(), username.end(), ::isspace)

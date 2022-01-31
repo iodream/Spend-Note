@@ -20,6 +20,10 @@ set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Common.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.cpp
 )
 
 list(APPEND Spend-Note-Client_LIBS

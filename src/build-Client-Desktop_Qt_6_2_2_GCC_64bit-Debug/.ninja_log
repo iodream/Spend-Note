@@ -1,0 +1,79 @@
+# ninja log v5
+0	13	0	CMakeFiles/clean.additional	75f9fb6908575da6
+11785	21645	1643625428229132788	CMakeFiles/Spend-Note-Client.dir/View/SignupPage/SignupPage.cpp.o	91e8a05b34a9d6ae
+11878	20319	1643580652565470222	CMakeFiles/Spend-Note-Client.dir/Models/List/Utils.cpp.o	29cad637d6e90f4f
+4	507	1643625407084942159	Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+13514	22914	1643580655157511742	CMakeFiles/Spend-Note-Client.dir/Models/List/GetListsModel.cpp.o	5b81149956736f79
+13785	22051	1643625428633136430	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListsSubPage.cpp.o	3b648c04973ce0ce
+31767	36841	1643580669085735023	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Net/Parsing.cpp.o	8680243748438b5f
+508	13810	1643625420385062067	CMakeFiles/Spend-Note-Client.dir/Controller/Controller.cpp.o	25c37b444ae3ce2
+1303	11106	1643580643353322741	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/Logger.cpp.o	523142a12fd5c68a
+0	720	1643645749429781247	build.ninja	d972c516624a8dd5
+508	14294	1643625420873066467	CMakeFiles/Spend-Note-Client.dir/main.cpp.o	41c70b7ea01c7b5f
+48	2652	1643580785515612005	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/ScopedLogger.cpp.o	6a07a7ce830836ae
+13810	21823	1643625428409134411	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListItem.cpp.o	e7d34935ce7050c0
+508	13785	1643625420361061851	CMakeFiles/Spend-Note-Client.dir/View/MainWindow.cpp.o	40528465946798c3
+1303	11877	1643580644121335031	CMakeFiles/Spend-Note-Client.dir/HTTPClient.cpp.o	5bfcfca9671f24f9
+507	14800	1643625421381071047	CMakeFiles/Spend-Note-Client.dir/Spend-Note-Client_autogen/mocs_compilation.cpp.o	ccbbc7210f4d012b
+4025	13514	1643580645757361216	CMakeFiles/Spend-Note-Client.dir/Models/LoginModel.cpp.o	fd8c56cf1c2b2b10
+13395	21548	1643625428133131922	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListCreateSubPage/ListCreateSubPage.cpp.o	48cf2d02e792fcce
+509	13395	1643625419977058389	CMakeFiles/Spend-Note-Client.dir/View/MainPage/MainPage.cpp.o	eb71e55411a657d3
+13699	23231	1643580655477516869	CMakeFiles/Spend-Note-Client.dir/Models/Product/Utils.cpp.o	768925261ce41e40
+11106	20595	1643580652841474642	CMakeFiles/Spend-Note-Client.dir/Models/SignupModel.cpp.o	e339a12c9f986185
+13	40	0	clean	58d0a343436f10f2
+509	11785	1643625418369043891	CMakeFiles/Spend-Note-Client.dir/View/LoginPage/LoginPage.cpp.o	6fd49262ba1bfcc4
+4	507	1643625407084942159	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+4	507	1643625407084942159	Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+22052	23048	1643625429625145375	Spend-Note-Client	ed1eee6f289e42b5
+13101	22892	1643580655137511421	CMakeFiles/Spend-Note-Client.dir/Models/Income/Utils.cpp.o	d3764be1a6ecd23f
+4	507	1643625407084942159	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+62	895	1643645755153871810	Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+62	895	1643645755153871810	Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+62	895	1643645755153871810	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+62	895	1643645755153871810	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+897	3529	1643645757793913457	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/ScopedLogger.cpp.o	6a07a7ce830836ae
+897	10636	1643645764898025153	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/Logger.cpp.o	523142a12fd5c68a
+896	11829	1643645766090043842	CMakeFiles/Spend-Note-Client.dir/HTTPClient.cpp.o	5bfcfca9671f24f9
+899	12425	1643645766686053180	CMakeFiles/Spend-Note-Client.dir/Controller/Controller.cpp.o	25c37b444ae3ce2
+3529	13454	1643645767714069279	CMakeFiles/Spend-Note-Client.dir/Models/LoginModel.cpp.o	fd8c56cf1c2b2b10
+896	14017	1643645768278078107	CMakeFiles/Spend-Note-Client.dir/Spend-Note-Client_autogen/mocs_compilation.cpp.o	ccbbc7210f4d012b
+896	14239	1643645768502081611	CMakeFiles/Spend-Note-Client.dir/main.cpp.o	41c70b7ea01c7b5f
+10636	20956	1643645775218186455	CMakeFiles/Spend-Note-Client.dir/Models/SignupModel.cpp.o	e339a12c9f986185
+12426	21601	1643645775862196484	CMakeFiles/Spend-Note-Client.dir/Models/Income/Utils.cpp.o	d3764be1a6ecd23f
+11829	21793	1643645776054199473	CMakeFiles/Spend-Note-Client.dir/Models/List/Utils.cpp.o	29cad637d6e90f4f
+14017	23565	1643645777826227040	CMakeFiles/Spend-Note-Client.dir/Models/Product/Utils.cpp.o	768925261ce41e40
+13454	23835	1643645778098231270	CMakeFiles/Spend-Note-Client.dir/Models/List/GetListsModel.cpp.o	5b81149956736f79
+14240	25595	1643645779858258613	CMakeFiles/Spend-Note-Client.dir/View/MainWindow.cpp.o	40528465946798c3
+21601	32984	1643645787246373046	CMakeFiles/Spend-Note-Client.dir/View/MainPage/MainPage.cpp.o	eb71e55411a657d3
+20956	33290	1643645787550377742	CMakeFiles/Spend-Note-Client.dir/View/LoginPage/LoginPage.cpp.o	6fd49262ba1bfcc4
+21793	33819	1643645788078385898	CMakeFiles/Spend-Note-Client.dir/View/SignupPage/SignupPage.cpp.o	91e8a05b34a9d6ae
+23565	34269	1643645788530392876	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListCreateSubPage/ListCreateSubPage.cpp.o	48cf2d02e792fcce
+23835	34342	1643645788602393988	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListsSubPage.cpp.o	3b648c04973ce0ce
+25595	34652	1643645788914398805	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListItem.cpp.o	e7d34935ce7050c0
+34653	36124	1643645790378421388	Spend-Note-Client	928cf716ec8f3fe2
+7	41	1643646370346151329	Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+7	41	1643646370346151329	Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+7	41	1643646370346151329	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+7	41	1643646370346151329	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+43	2654	1643646372950182281	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/ScopedLogger.cpp.o	6a07a7ce830836ae
+44	11086	1643646381390282452	CMakeFiles/Spend-Note-Client.dir/View/MainWindow.cpp.o	40528465946798c3
+45	12163	1643646382466295206	CMakeFiles/Spend-Note-Client.dir/View/LoginPage/LoginPage.cpp.o	6fd49262ba1bfcc4
+45	12184	1643646382486295443	CMakeFiles/Spend-Note-Client.dir/View/SignupPage/SignupPage.cpp.o	91e8a05b34a9d6ae
+45	12526	1643646382826299473	CMakeFiles/Spend-Note-Client.dir/View/MainPage/MainPage.cpp.o	eb71e55411a657d3
+48	12740	1643646383042302033	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListCreateSubPage/ListCreateSubPage.cpp.o	48cf2d02e792fcce
+2654	13400	1643646383702309852	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListsSubPage.cpp.o	3b648c04973ce0ce
+11087	16282	1643646386582343960	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListItem.cpp.o	e7d34935ce7050c0
+16282	17359	1643646387658356696	Spend-Note-Client	928cf716ec8f3fe2
+7	38	1643646456415163265	Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+7	38	1643646456415163265	Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+7	38	1643646456415163265	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/timestamp	ec1278d819e7766b
+7	38	1643646456415163265	/home/iod/Documents/it academy/Spend-Note/src/build-Client-Desktop_Qt_6_2_2_GCC_64bit-Debug/Spend-Note-Client_autogen/mocs_compilation.cpp	ec1278d819e7766b
+41	2762	1643646459139194939	CMakeFiles/Spend-Note-Client.dir/home/iod/Documents/it_academy/Spend-Note/src/Logger/ScopedLogger.cpp.o	6a07a7ce830836ae
+41	11651	1643646468023298099	CMakeFiles/Spend-Note-Client.dir/View/MainWindow.cpp.o	40528465946798c3
+42	12168	1643646468543304130	CMakeFiles/Spend-Note-Client.dir/View/MainPage/MainPage.cpp.o	eb71e55411a657d3
+44	12228	1643646468603304826	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListCreateSubPage/ListCreateSubPage.cpp.o	48cf2d02e792fcce
+43	12435	1643646468807307192	CMakeFiles/Spend-Note-Client.dir/View/SignupPage/SignupPage.cpp.o	91e8a05b34a9d6ae
+42	12488	1643646468863307842	CMakeFiles/Spend-Note-Client.dir/View/LoginPage/LoginPage.cpp.o	6fd49262ba1bfcc4
+2763	13550	1643646469927320179	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListsSubPage.cpp.o	3b648c04973ce0ce
+11651	16511	1643646472883354441	CMakeFiles/Spend-Note-Client.dir/View/MainPage/List/ListsSubPage/ListItem.cpp.o	e7d34935ce7050c0
+16511	17573	1643646473943366722	Spend-Note-Client	928cf716ec8f3fe2
