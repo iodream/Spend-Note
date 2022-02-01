@@ -11,7 +11,7 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 {
 	SCOPED_LOGGER;
 	qDebug() << "Request from " <<
-				QString::fromStdString(http_req.clientAddress().toString()) << "\n";
+		QString::fromStdString(http_req.clientAddress().toString()) << "\n";
 
 	try {
 		if (!m_command_handler) {
