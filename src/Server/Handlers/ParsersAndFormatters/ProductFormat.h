@@ -6,7 +6,7 @@
 
 #include "../Entities/Product.h"
 #include "../Entities/ProductCategory.h"
-#include "ProductCategoryFormatter.h"
+#include "ProductCategoryFormat.h"
 #include "Net/Parsing.h"
 #include "../Handlers/Common.h"
 
