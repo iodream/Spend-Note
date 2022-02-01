@@ -79,3 +79,23 @@ void SafeReadBool(
 	const QJsonObject& json,
 	const std::string& label,
 	bool& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const char* label,
+	QJsonObject& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const std::string& label,
+	QJsonObject& dest);
+
+void SafeWriteId(
+	QJsonObject& json,
+	const char* label,
+	IdType& dest);
+
+void SafeWriteId(
+	QJsonObject& json,
+	const std::string& label,
+	IdType& dest);

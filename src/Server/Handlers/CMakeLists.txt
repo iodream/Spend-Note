@@ -15,5 +15,7 @@ list(APPEND Spend-Note-Server_SOURCES
 add_subdirectory(Product)
 add_subdirectory(List)
 add_subdirectory(Income)
+add_subdirectory(Entities)
+add_subdirectory(ParsersAndFormatters)
 
 set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)

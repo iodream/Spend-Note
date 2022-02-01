@@ -49,8 +49,11 @@ void SafeReadId(
 	const char* label,
 	IdType& dest)
 {
-	if (json.contains(label) && json[label].isString()) {
-		dest = json[label].toString().toLongLong();
+	if (json.contains(label) && json[label].isDouble()) {
+		double id = json[label].toDouble();
+		double* ptr = &id;
+		IdType* value = reinterpret_cast<IdType*>(ptr);
+		dest = *value;
 	}
 	else {
 		throw ParsingError{
@@ -132,3 +135,42 @@ void SafeReadBool(
 	return SafeReadBool(json, label.c_str(), dest);
 }
 
+void SafeReadObject(
+	const QJsonObject& json,
+	const char* label,
+	QJsonObject& dest)
+{
+	if (json.contains(label) && json[label].isObject()) {
+		dest = json[label].toObject();
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const std::string& label,
+	QJsonObject& dest)
+{
+	return SafeReadObject(json, label.c_str(), dest);
+}
+
+void SafeWriteId(
+	QJsonObject& json,
+	const char* label,
+	IdType& dest)
+{
+	double* id = reinterpret_cast<double*>(dest);
+	json[label] = *id;
+
+}
+
+void SafeWriteId(
+	QJsonObject& json,
+	const std::string& label,
+	IdType& dest)
+{
+	return SafeReadId(json, label.c_str(), dest);
+}
