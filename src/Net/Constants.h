@@ -10,7 +10,6 @@ const HTTPMethod HTTP_METHOD_GET = "GET";
 const HTTPMethod HTTP_METHOD_POST = "POST";
 const HTTPMethod HTTP_METHOD_PUT = "PUT";
 const HTTPMethod HTTP_METHOD_DELETE = "DELETE";
-const HTTPMethod HTTP_METHOD_PUT = "PUT";
 
 using ContentType = std::string;
 
