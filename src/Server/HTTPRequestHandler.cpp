@@ -27,7 +27,7 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 	}
 	catch (const ClientError& ex) {
 		qWarning() << ex.what() << "(URI: " <<
-		QString::fromStdString(http_req.getURI()) << ")" << "\n";
+			QString::fromStdString(http_req.getURI()) << ")" << "\n";
 		SendResponse(FormErrorResponse(ex), http_res);
 	}
 	catch (const ServerError& ex) {
