@@ -25,7 +25,7 @@ class AddProductHandler : public AuthorizedHandler
 		QJsonDocument Format(const Product& dto);
 	};
 public:
-	AddProductHandler(IDbFacade::Ptr facade);
+	AddProductHandler();
 	virtual ~AddProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;

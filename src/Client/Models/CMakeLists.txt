@@ -3,10 +3,6 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/LoginModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/SignupModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignupModel.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/Logger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/Logger.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/ScopedLogger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../Logger/ScopedLogger.cpp
 )
 
 add_subdirectory(List)

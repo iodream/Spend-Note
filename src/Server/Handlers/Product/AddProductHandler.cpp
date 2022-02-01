@@ -10,8 +10,7 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-AddProductHandler::AddProductHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+AddProductHandler::AddProductHandler()
 {
 }
 Product AddProductHandler::JSONParser::Parse(
@@ -24,6 +23,7 @@ Product AddProductHandler::JSONParser::Parse(
 
 QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 
 	json["id"] = std::to_string(dto.id).c_str();
@@ -34,25 +34,22 @@ QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	if (request.method == Net::HTTP_METHOD_POST) {
-		auto in_dto = m_parser.Parse(request.json_payload);
+	auto product = m_parser.Parse(request.json_payload);
+	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
+	product.list_id = list_id;
 
-		JSONFormatter::Product out_dto;
+	JSONFormatter::Product out_dto;
 
-		try {
-			out_dto.id = m_facade->AddProduct(in_dto).value();
-		}
-		catch (const SQLFailure& ex) {
-			return FormErrorResponse(
-				NetError::Status::HTTP_CONFLICT,
-				"Unable to create resource");
-		}
-
-		return FormJSONResponse(
-			m_formatter.Format(out_dto),
-			Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CREATED);
+	try {
+		out_dto.id = m_facade->AddProduct(product).value();
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+	catch (const SQLFailure& ex) {
+		return FormErrorResponse(
+			NetError::Status::HTTP_CONFLICT,
+			"Unable to create resource");
+	}
+
+	return FormJSONResponse(
+		m_formatter.Format(out_dto),
+		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CREATED);
 }

@@ -31,7 +31,7 @@ ListState ListStateRepository::ParseSQLRow(const pqxx::row &row)
 {
 	ListState list_state;
 
-	list_state.list_state_id = row[ID_FIELD].as<IdType>();
+	list_state.id = row[ID_FIELD].as<IdType>();
 	list_state.name = row[NAME_FIELD].as<std::string>();
 
 	return list_state;

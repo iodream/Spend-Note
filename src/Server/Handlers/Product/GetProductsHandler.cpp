@@ -7,8 +7,7 @@
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
 
-GetProductsHandler::GetProductsHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+GetProductsHandler::GetProductsHandler()
 {
 }
 
@@ -44,40 +43,20 @@ QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 	return QJsonDocument{json};
 }
 
-GetProductsHandler::JSONParser::Product GetProductsHandler::JSONParser::Parse(
-	const QJsonDocument& payload)
-{
-	SCOPED_LOGGER;
-	Product dto;
-	auto json = payload.object();
-
-	try {
-		SafeReadId(json, "list_id", dto.list_id);
-	}  catch (const ParsingError& ex) {
-		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
-	}
-
-	return dto;
-}
-
 Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	if (request.method == Net::HTTP_METHOD_POST) {
-		auto in_dto = m_parser.Parse(request.json_payload);
+	Q_UNUSED(request);
+	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
 
-		auto products = m_facade->GetProductsForList(in_dto.list_id);
+	auto products = m_facade->GetProductsForList(list_id);
 
-		JSONFormatter::Products out_dto;
-		for (const Product& product : products) {
-			auto category = m_facade->GetProductCategoryById(product.category_id);
-			std::string category_name = (category) ? category->name : EMPTY_STD_STRING;
-			out_dto.push_back({product, category_name});
-		}
-
-		return FormJSONResponse(m_formatter.Format(out_dto));
+	JSONFormatter::Products out_dto;
+	for (const Product& product : products) {
+		auto category = m_facade->GetProductCategoryById(product.category_id);
+		std::string category_name = (category) ? category->name : EMPTY_STD_STRING;
+		out_dto.push_back({product, category_name});
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+
+	return FormJSONResponse(m_formatter.Format(out_dto));
 }

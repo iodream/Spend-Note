@@ -20,10 +20,6 @@ set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Common.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.cpp
 )
 
 list(APPEND Spend-Note-Client_LIBS
@@ -38,9 +34,12 @@ add_subdirectory(Models)
 add_subdirectory(View)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Logger ${CMAKE_CURRENT_BINARY_DIR}/Logger)
 
 list(APPEND Spend-Note-Client_SOURCES
     ${Spend-Note-Net_SOURCES}
+    ${Spend-Note-Logger_SOURCES}
+
 )
 
 

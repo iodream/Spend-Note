@@ -17,8 +17,7 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-AuthorizedHandler::AuthorizedHandler(IDbFacade::Ptr facade)
-	: ICommandHandler(std::move(facade))
+AuthorizedHandler::AuthorizedHandler()
 {
 
 }
