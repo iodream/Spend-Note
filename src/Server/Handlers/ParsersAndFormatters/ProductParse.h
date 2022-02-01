@@ -11,17 +11,16 @@
 #include "Net/Parsing.h"
 #include "../Handlers/Common.h"
 
-Product ProductParser(QJsonObject& json)
+Product ProductParse(QJsonObject& json)
 {
 	Product product;
 	double tmp_number;
-	ProductCategory category;
 	QJsonObject json_for_category;
 
 	SafeReadId(json, "id", product.id);
 	SafeReadId(json, "list_id", product.list_id);
 	SafeReadObject(json, "category", json_for_category);
-	product.category = ProductCategoryParser(json_for_category);
+	product.category = ProductCategoryParse(json_for_category);
 	SafeReadBool(json, "is_bought", product.is_bought);
 	SafeReadString(json, "name", product.name);
 	SafeReadAmount(json, "amount", product.amount);

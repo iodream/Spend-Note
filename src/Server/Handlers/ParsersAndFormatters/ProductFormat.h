@@ -10,13 +10,13 @@
 #include "Net/Parsing.h"
 #include "../Handlers/Common.h"
 
-QJsonDocument GetProductsFormatter(Product& product)
+QJsonDocument ProductsFormat(Product& product)
 {
 	QJsonObject json;
 	ProductCategory category = product.category;
 	SafeWriteId(json, "id", product.id);
 	SafeWriteId(json, "list_id", product.list_id);
-	json["category"] = ProductCategoryFormatter(category);
+	json["category"] = ProductCategoryFormat(category).object();
 	json["is_bought"] = product.is_bought;
 	json["name"] = product.name.c_str();
 	SafeWriteAmount(json, "amount", product.amount);

@@ -8,8 +8,9 @@
 #include "Net/Parsing.h"
 #include "../Handlers/Common.h"
 
-QJsonObject ProductCategoryFormatter(ProductId& product_id)
+QJsonDocument ProductIdFormat(ProductId& product_id)
 {
 	QJsonObject json;
 	SafeWriteId(json, "id", product_id.id);
+	return QJsonDocument{json};
 }

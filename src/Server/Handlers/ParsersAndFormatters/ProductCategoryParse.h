@@ -8,7 +8,7 @@
 #include "Net/Parsing.h"
 #include "../Handlers/Common.h"
 
-ProductCategory ProductCategoryParser(QJsonObject& json)
+ProductCategory ProductCategoryParse(QJsonObject& json)
 {
 	ProductCategory category;
 	SafeReadId(json, "id", category.id);
