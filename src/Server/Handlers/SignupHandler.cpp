@@ -50,6 +50,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 	try
 	{
 		m_facade->AddUser(User {0, dto.login, dto.passwd_hash}).value();
+		qDebug() << "Registered new user: " << QString::fromStdString(dto.login) << "\n";
 		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 	}
 	catch(const DatabaseFailure& e)

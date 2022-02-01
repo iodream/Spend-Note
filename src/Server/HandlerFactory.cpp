@@ -28,7 +28,7 @@ Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::
 		return new HTTPRequestHandler{GetCommandHandler(http_req)};
 	}
 	catch(const std::exception& exception){
-		std::cout << exception.what() << std::endl;
+		qCritical() << exception.what() << "\n";
 	}
 	return nullptr;
 }
