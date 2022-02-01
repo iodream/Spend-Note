@@ -19,8 +19,8 @@ QJsonDocument GetProductsFormatter(Product& product)
 	json["category"] = ProductCategoryFormatter(category);
 	json["is_bought"] = product.is_bought;
 	json["name"] = product.name.c_str();
-	SafeWriteId(json, "amount", product.amount);
-	SafeWriteId(json, "price", product.price);
+	SafeWriteAmount(json, "amount", product.amount);
+	SafeWritePrice(json, "price", product.price);
 	json["priority"] = product.priority;
 	json["add_date"] = product.add_date.c_str();
 	json["purchase_date"] = product.purchase_date.c_str();

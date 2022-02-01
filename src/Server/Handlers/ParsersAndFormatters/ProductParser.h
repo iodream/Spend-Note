@@ -24,8 +24,8 @@ Product ProductParser(QJsonObject& json)
 	product.category = ProductCategoryParser(json_for_category);
 	SafeReadBool(json, "is_bought", product.is_bought);
 	SafeReadString(json, "name", product.name);
-	SafeReadId(json, "amount", product.amount);
-	SafeReadId(json, "price", product.price);
+	SafeReadAmount(json, "amount", product.amount);
+	SafeReadPrice(json, "price", product.price);
 	SafeReadNumber(json, "priority", tmp_number);
 	product.priority = tmp_number;
 	SafeReadString(json, "add_date", product.add_date);

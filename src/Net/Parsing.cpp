@@ -69,6 +69,56 @@ void SafeReadId(
 	return SafeReadId(json, label.c_str(), dest);
 }
 
+void SafeReadAmount(
+	const QJsonObject& json,
+	const char* label,
+	BigInt& dest)
+{
+	if (json.contains(label) && json[label].isDouble()) {
+		double amount = json[label].toDouble();
+		double* ptr = &amount;
+		BigInt* value = reinterpret_cast<BigInt*>(ptr);
+		dest = *value;
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadAmount(
+	const QJsonObject& json,
+	const std::string& label,
+	IdType& dest)
+{
+	return SafeReadAmount(json, label.c_str(), dest);
+}
+
+void SafeReadPrice(
+	const QJsonObject& json,
+	const char* label,
+	Money& dest)
+{
+	if (json.contains(label) && json[label].isDouble()) {
+		double price = json[label].toDouble();
+		double* ptr = &price;
+		Money* value = reinterpret_cast<Money*>(ptr);
+		dest = *value;
+	}
+	else {
+		throw ParsingError{
+			std::string{"Failed to parse \""}.append(label).append("\" field")};
+	}
+}
+
+void SafeReadPrice(
+	const QJsonObject& json,
+	const std::string& label,
+	IdType& dest)
+{
+	return SafeReadPrice(json, label.c_str(), dest);
+}
+
 void SafeReadNumber(
 	const QJsonObject& json,
 	const char* label,
@@ -171,6 +221,42 @@ void SafeWriteId(
 	QJsonObject& json,
 	const std::string& label,
 	IdType& dest)
+{
+	return SafeReadId(json, label.c_str(), dest);
+}
+
+void SafeWriteAmount(
+	QJsonObject& json,
+	const char* label,
+	BigInt& dest)
+{
+	double* amount = reinterpret_cast<double*>(dest);
+	json[label] = *amount;
+
+}
+
+void SafeWriteAmount(
+	QJsonObject& json,
+	const std::string& label,
+	BigInt& dest)
+{
+	return SafeReadId(json, label.c_str(), dest);
+}
+
+void SafeWritePrice(
+	QJsonObject& json,
+	const char* label,
+	Money& dest)
+{
+	double* price = reinterpret_cast<double*>(dest);
+	json[label] = *price;
+
+}
+
+void SafeWritePrice(
+	QJsonObject& json,
+	const std::string& label,
+	Money& dest)
 {
 	return SafeReadId(json, label.c_str(), dest);
 }
