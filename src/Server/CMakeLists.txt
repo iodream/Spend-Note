@@ -27,10 +27,6 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/Logger.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/../Logger/ScopedLogger.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
 )
@@ -50,6 +46,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Logger ${CMAKE_CURRENT_BINARY_DI
 list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
     ${Spend-Note-Logger_SOURCES}
+
 )
 
 
