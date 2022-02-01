@@ -1,6 +1,7 @@
 #include "Params.h"
 
 #include "Error.h"
+#include "Logger/ScopedLogger.h"
 
 const std::string Params::USER_ID = "user-id";
 const std::string Params::LIST_ID = "list-id";
@@ -10,6 +11,7 @@ const std::string Params::INCOME_ID = "income-id";
 
 void Params::Insert(const std::string& key, Value&& value)
 {
+	SCOPED_LOGGER;
 	auto preventer = m_data.find(key);
 
 	if (preventer != m_data.end()) {
@@ -23,6 +25,7 @@ void Params::Insert(const std::string& key, Value&& value)
 
 Params::Value Params::Get(const std::string& key)
 {
+	SCOPED_LOGGER;
 	auto value = m_data.find(key);
 
 	if (value == m_data.end()) {

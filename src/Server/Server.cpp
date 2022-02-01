@@ -21,6 +21,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 {
 	void initialize(Application& self)
 	{
+		SCOPED_LOGGER;
 		loadConfiguration();
 		ServerApplication::initialize(self);
 	}
