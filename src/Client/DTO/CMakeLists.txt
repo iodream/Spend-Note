@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/List.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Product.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ProductId.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Income.h
 )
 
