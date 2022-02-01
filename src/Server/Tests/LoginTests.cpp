@@ -23,7 +23,8 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
-	auto handler = std::make_unique<LoginHandler>(std::move(facade));
+	auto handler = std::make_unique<LoginHandler>();
+	handler->set_facade(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;	//login data on the request mismatches
@@ -51,7 +52,8 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
-	auto handler = std::make_unique<LoginHandler>(std::move(facade));
+	auto handler = std::make_unique<LoginHandler>();
+	handler->set_facade(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
