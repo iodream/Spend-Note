@@ -1,4 +1,4 @@
-list(APPEND Spend-Note-Client_SOURCES
+list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryJSONFormatter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryJSONFormatter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryJSONParser.h
@@ -13,4 +13,4 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductJSONParser.cpp
 )
 
-set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
+set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)

@@ -51,8 +51,7 @@ void SafeReadId(
 {
 	if (json.contains(label) && json[label].isDouble()) {
 		double id = json[label].toDouble();
-		double* ptr = &id;
-		IdType* value = reinterpret_cast<IdType*>(ptr);
+		IdType* value = reinterpret_cast<IdType*>(&id);
 		dest = *value;
 	}
 	else {
@@ -69,7 +68,7 @@ void SafeReadId(
 	return SafeReadId(json, label.c_str(), dest);
 }
 
-void SafeReadAmount(
+void SafeReadBigInt(
 	const QJsonObject& json,
 	const char* label,
 	BigInt& dest)
@@ -86,15 +85,15 @@ void SafeReadAmount(
 	}
 }
 
-void SafeReadAmount(
+void SafeReadBigInt(
 	const QJsonObject& json,
 	const std::string& label,
 	IdType& dest)
 {
-	return SafeReadAmount(json, label.c_str(), dest);
+	return SafeReadBigInt(json, label.c_str(), dest);
 }
 
-void SafeReadPrice(
+void SafeReadMoney(
 	const QJsonObject& json,
 	const char* label,
 	Money& dest)
@@ -111,12 +110,12 @@ void SafeReadPrice(
 	}
 }
 
-void SafeReadPrice(
+void SafeReadMoney(
 	const QJsonObject& json,
 	const std::string& label,
 	IdType& dest)
 {
-	return SafeReadPrice(json, label.c_str(), dest);
+	return SafeReadMoney(json, label.c_str(), dest);
 }
 
 void SafeReadNumber(
@@ -207,7 +206,7 @@ void SafeReadObject(
 	return SafeReadObject(json, label.c_str(), dest);
 }
 
-void SafeWriteId(
+void WriteId(
 	QJsonObject& json,
 	const char* label,
 	IdType& dest)
@@ -217,15 +216,15 @@ void SafeWriteId(
 
 }
 
-void SafeWriteId(
+void WriteId(
 	QJsonObject& json,
 	const std::string& label,
 	IdType& dest)
 {
-	return SafeReadId(json, label.c_str(), dest);
+	return WriteId(json, label.c_str(), dest);
 }
 
-void SafeWriteAmount(
+void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
 	BigInt& dest)
@@ -235,15 +234,15 @@ void SafeWriteAmount(
 
 }
 
-void SafeWriteAmount(
+void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
 	BigInt& dest)
 {
-	return SafeReadId(json, label.c_str(), dest);
+	return WriteBigInt(json, label.c_str(), dest);
 }
 
-void SafeWritePrice(
+void WriteMoney(
 	QJsonObject& json,
 	const char* label,
 	Money& dest)
@@ -253,10 +252,10 @@ void SafeWritePrice(
 
 }
 
-void SafeWritePrice(
+void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
 	Money& dest)
 {
-	return SafeReadId(json, label.c_str(), dest);
+	return WriteMoney(json, label.c_str(), dest);
 }
