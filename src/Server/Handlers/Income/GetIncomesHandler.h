@@ -31,7 +31,7 @@ public:
 		QJsonDocument Format(const DTO& dto);
 	};
 
-	GetIncomesHandler(IDbFacade::Ptr facade);
+	GetIncomesHandler();
 	virtual Net::Response AuthHandle(const Net::Request& request) override;
 
 private:

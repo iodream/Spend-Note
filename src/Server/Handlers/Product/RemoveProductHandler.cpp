@@ -9,35 +9,21 @@
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
-RemoveProductHandler::RemoveProductHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+RemoveProductHandler::RemoveProductHandler()
 {
-}
-
-RemoveProductHandler::JSONParser::Product RemoveProductHandler::JSONParser::Parse(
-	const QJsonDocument& payload)
-{
-	Product dto;
-	auto json = payload.object();
-	SafeReadId(json, "id", dto.id);
-	return dto;
 }
 
 Net::Response RemoveProductHandler::AuthHandle(const Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_DELETE) {
-		auto in_dto = m_parser.Parse(request.json_payload);
+	Q_UNUSED(request);
+	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
 
-		if (m_facade->RemoveProduct(in_dto.id)) {
-			return FormEmptyResponse();
-		}
-		else {
-			return FormErrorResponse(
-				NetError::Status::HTTP_NOT_FOUND,
-				"Resource not found");
-		}
+	if (m_facade->RemoveProduct(product_id)) {
+		return FormEmptyResponse();
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+	else {
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"Resource not found");
+	}
 }

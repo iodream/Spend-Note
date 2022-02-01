@@ -5,7 +5,7 @@
 
 struct List
 {
-	IdType list_id;
+	IdType id;
 	IdType owner_id;
 	IdType state_id;
 	std::string name;
