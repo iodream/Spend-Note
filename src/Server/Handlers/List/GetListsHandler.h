@@ -12,11 +12,11 @@ class GetListsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using DTOItem = std::pair<const List&, std::string>;
+		using ListItem = std::pair<const List&, std::string>;
 
-		using DTO = std::vector<DTOItem>;
+		using Lists = std::vector<ListItem>;
 
-		QJsonDocument Format(const DTO& dto);
+		QJsonDocument Format(const Lists& dto);
 	};
 public:
 	GetListsHandler(IDbFacade::Ptr facade);

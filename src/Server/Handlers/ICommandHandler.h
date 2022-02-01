@@ -9,7 +9,7 @@ class ICommandHandler
 {
 public:
 	ICommandHandler(IDbFacade::Ptr facade) : m_facade{std::move(facade)} {}
-    virtual ~ICommandHandler() {}
+	virtual ~ICommandHandler() {}
 
 	virtual Net::Response Handle(Net::Request& request) = 0;
 

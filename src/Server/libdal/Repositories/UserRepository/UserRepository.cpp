@@ -35,9 +35,9 @@ std::optional<IdType> UserRepository::Add(const User &user)
 		return id_row[ID_FIELD].as<IdType>();
 	}
 
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return std::nullopt;
@@ -58,9 +58,9 @@ std::optional<User> UserRepository::GetById(IdType id)
 			return UserFromRow(user_rows.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return std::nullopt;
@@ -81,9 +81,9 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 			return UserFromRow(user_rows.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 
 	return std::nullopt;
@@ -109,9 +109,9 @@ bool UserRepository::Update(const User &user)
 			" WHERE " + ID_FIELD + " = " + w.quote(user.id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
@@ -129,9 +129,9 @@ bool UserRepository::Remove(IdType id)
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }

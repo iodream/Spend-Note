@@ -14,12 +14,12 @@ private:
 	class JSONParser
 	{
 	public:
-		struct DTO {
+		struct Token{
 			IdType id;
 			std::string login;
 			double iat;
 		};
-	DTO Parse(const QJsonDocument& payload);
+	Token Parse(const QJsonDocument& payload);
 
 	};
 

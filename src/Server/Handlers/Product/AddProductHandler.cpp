@@ -13,15 +13,14 @@ AddProductHandler::AddProductHandler(IDbFacade::Ptr facade)
 	: AuthorizedHandler(std::move(facade))
 {
 }
-
-AddProductHandler::JSONParser::DTO AddProductHandler::JSONParser::Parse(
+Product AddProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
 	auto json = payload.object();
 	return ParseProduct(json);
 }
 
-QJsonDocument AddProductHandler::JSONFormatter::Format(const DTO& dto)
+QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 {
 	QJsonObject json;
 
@@ -35,7 +34,7 @@ Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 	if (request.method == Net::HTTP_METHOD_POST) {
 		auto in_dto = m_parser.Parse(request.json_payload);
 
-		JSONFormatter::DTO out_dto;
+		JSONFormatter::Product out_dto;
 
 		try {
 			out_dto.id = m_facade->AddProduct(in_dto).value();

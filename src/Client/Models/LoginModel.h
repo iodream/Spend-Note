@@ -3,7 +3,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "DTO/Login.h"
 #include "Net/Constants.h"
 #include "Net/Message.h"
 
@@ -15,17 +14,28 @@ public:
 	class JSONFormatter
 	{
 	public:
-		QJsonDocument Format(const LoginInDTO& dto);
+		struct Credentials
+		{
+			std::string login;
+			std::string password;
+		};
+
+		QJsonDocument Format(const Credentials& credentials);
 	};
 
 	class JSONParser
 	{
 	public:
-		void Parse(QJsonObject json, LoginOutDTO& dto);
+		struct Token
+		{
+			std::string token;
+		};
+
+		void Parse(QJsonObject json, Token& dto);
 	};
 
-	Net::Request FormRequest(LoginInDTO dto);
-	LoginOutDTO  ParseResponse(const Net::Response& response);
+	Net::Request FormRequest(JSONFormatter::Credentials credentials);
+	JSONParser::Token ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;

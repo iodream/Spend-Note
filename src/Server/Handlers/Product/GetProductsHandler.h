@@ -12,20 +12,20 @@ class GetProductsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using DTOItem = std::pair<const Product&, std::string>;
+		using ProductItem = std::pair<const Product&, std::string>;
 
-		using DTO = std::vector<DTOItem>;
+		using Products = std::vector<ProductItem>;
 
-		QJsonDocument Format(const DTO& dto);
+		QJsonDocument Format(const Products& dto);
 	};
 
 	class JSONParser
 	{
 	public:
-		struct DTO {
+		struct Product {
 			IdType list_id;
 		};
-		DTO Parse(const QJsonDocument& payload);
+		Product Parse(const QJsonDocument& payload);
 	};
 
 public:

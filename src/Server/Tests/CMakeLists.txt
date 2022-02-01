@@ -1,10 +1,13 @@
 list(APPEND Tests_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/MockDbFacade.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsHandler.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AddProductHandler.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/AddIncomeHandlerTest.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductHandler.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/MockDbFacade.h
+	${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsHandlerTests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductHandlerTests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/GetListsHandlerTests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/AddProductHandlerTests.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandlerTests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/AddIncomeHandlerTests.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/SignupTests.cpp
 )
 

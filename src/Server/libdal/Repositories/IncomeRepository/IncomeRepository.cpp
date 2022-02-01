@@ -44,9 +44,9 @@ std::optional<IdType> IncomeRepository::Add(const Income& income)
 		auto id_row = id_rows.front();
 		return id_row[ID_FIELD].as<IdType>();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }
 
@@ -62,9 +62,9 @@ std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
 			return ParseSQLRow(income.front());
 		}
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
     return std::nullopt;
 }
@@ -86,9 +86,9 @@ bool IncomeRepository::Update(const Income& income)
 		w.commit();
 
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
@@ -106,9 +106,9 @@ bool IncomeRepository::Remove(const IdType& id)
 		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
 		w.commit();
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 	return true;
 }
@@ -128,9 +128,9 @@ std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &id)
 		}
 		return incomes;
 	}
-	catch(const pqxx::pqxx_exception& e)
+	catch(const pqxx::failure& e)
 	{
-		throw DatabaseFailure();
+		throw DatabaseFailure(e.what());
 	}
 }
 
@@ -145,7 +145,14 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 	income.amount = row[AMOUNT].as<Money>();
 	income.category_id = row[CATEGORY_ID].as<IdType>();
 	income.add_time = row[ADD_TIME].as<std::string>();
-	income.expiration_time = row[EXPIRATION_TIME].get<std::string, std::optional>();
+	if (row[EXPIRATION_TIME].is_null())
+	{
+		income.expiration_time = std::nullopt;
+	}
+	else
+	{
+		income.expiration_time = row[EXPIRATION_TIME].as<std::string>();
+	}
 
 	return income;
 }

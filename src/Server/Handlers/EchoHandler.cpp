@@ -6,10 +6,10 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 
-EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
+EchoHandler::JSONParser::Message EchoHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
-	DTO dto;
+	Message dto;
 	auto json = payload.object();
 
 	try {
@@ -22,7 +22,7 @@ EchoHandler::JSONParser::DTO EchoHandler::JSONParser::Parse(
 }
 
 QJsonDocument EchoHandler::JSONFormatter::Format(
-		const EchoHandler::JSONFormatter::DTO& dto)
+		const EchoHandler::JSONFormatter::Message& dto)
 {
 	QJsonObject json;
 	json["msg"] = dto.msg.c_str();
@@ -34,7 +34,7 @@ Net::Response EchoHandler::Handle(Net::Request& request)
 	if (request.method == Net::HTTP_METHOD_POST) {
 		Net::Response response;
 		auto in_dto = m_parser.Parse(request.json_payload);
-		JSONFormatter::DTO out_dto{in_dto.msg};
+		JSONFormatter::Message out_dto{in_dto.msg};
 		return FormJSONResponse(m_formatter.Format(out_dto));
 	}
 	return FormErrorResponse(

@@ -11,7 +11,7 @@ GetListsHandler::GetListsHandler(IDbFacade::Ptr facade)
 {
 }
 
-QJsonDocument GetListsHandler::JSONFormatter::Format(const DTO& dto)
+QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
 {
 	QJsonObject json;
 
@@ -38,7 +38,7 @@ Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 
 		auto lists = m_facade->GetAllLists(request.uid);
 
-		JSONFormatter::DTO out_dto;
+		JSONFormatter::Lists out_dto;
 		for (const List& list : lists) {
 			auto state = m_facade->GetListStateById(list.state_id);
 			std::string state_name = (state) ? state->name : EMPTY_STD_STRING;
