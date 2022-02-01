@@ -8,7 +8,7 @@ Income ParseIncome(const QJsonObject& json)
 
 	double tmp_number;
 	std::string tmp_date;
-	SafeReadId(json, "income_id", income.income_id);
+	SafeReadId(json, "income_id", income.id);
 	SafeReadId(json, "user_id", income.user_id);
 	SafeReadId(json, "category_id", income.category_id);
 	SafeReadString(json, "name", income.name);

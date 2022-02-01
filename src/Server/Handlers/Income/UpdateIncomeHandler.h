@@ -16,7 +16,7 @@ class UpdateIncomeHandler : public AuthorizedHandler
 	};
 
 public:
-	UpdateIncomeHandler(IDbFacade::Ptr facade);
+	UpdateIncomeHandler();
 	virtual ~UpdateIncomeHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;

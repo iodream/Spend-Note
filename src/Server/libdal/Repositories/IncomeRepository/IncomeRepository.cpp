@@ -74,7 +74,7 @@ bool IncomeRepository::Update(const Income& income)
 	try
 	{
 		pqxx::work w{m_db_connection};
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(income.income_id));
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(income.id));
 		if (result.empty())
 		{
 			return false;
@@ -82,7 +82,7 @@ bool IncomeRepository::Update(const Income& income)
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + INCOME_NAME + " = " + w.quote(income.name) + ", "
 				+ AMOUNT + " = " + w.quote(income.amount) + ", " + CATEGORY_ID + " = " + w.quote(income.category_id) + ", "
 				+ ADD_TIME + " = " + w.quote(income.add_time) + ", " + EXPIRATION_TIME+ " = " + w.quote(income.expiration_time)
-				+ " WHERE " + ID_FIELD + " = " + w.quote(income.income_id) + ";");
+				+ " WHERE " + ID_FIELD + " = " + w.quote(income.id) + ";");
 		w.commit();
 
 	}
@@ -139,7 +139,7 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 {
 	Income income;
 
-	income.income_id = row[ID_FIELD].as<IdType>();
+	income.id = row[ID_FIELD].as<IdType>();
 	income.user_id = row[USER_ID].as<IdType>();
 	income.name = row[INCOME_NAME].as<std::string>();
 	income.amount = row[AMOUNT].as<Money>();

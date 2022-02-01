@@ -22,7 +22,8 @@ TEST(SignupHandlerTest, USER_ALREADY_EXISTS)
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
-	auto handler = std::make_unique<SignupHandler>(std::move(facade));
+	auto handler = std::make_unique<SignupHandler>();
+	handler->set_facade(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
@@ -49,7 +50,8 @@ TEST(SignupHandlerTest, USER_DOES_NOT_EXIST)
 	EXPECT_CALL(*facade, AddUser(_))
 		.WillOnce(Return(std::optional{id}));
 
-	auto handler = std::make_unique<SignupHandler>(std::move(facade));
+	auto handler = std::make_unique<SignupHandler>();
+	handler->set_facade(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
