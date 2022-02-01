@@ -6,7 +6,7 @@
 
 struct Income
 {
-	IdType income_id;
+	IdType id;
 	IdType user_id;
 	std::string name;
 	Money amount;

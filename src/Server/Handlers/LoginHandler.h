@@ -27,7 +27,7 @@ class LoginHandler : public ICommandHandler
 
 	};
 public:
-	LoginHandler(IDbFacade::Ptr facade);
+	LoginHandler();
 	virtual ~LoginHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;

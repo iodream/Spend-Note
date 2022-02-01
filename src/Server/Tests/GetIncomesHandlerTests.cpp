@@ -20,7 +20,12 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 	EXPECT_CALL(*facade, GetAllIncomes(_))
 		.WillOnce(Return(std::vector<Income>{}));
 
-	auto handler = std::make_unique<GetIncomesHandler>(std::move(facade));
+	auto handler = std::make_unique<GetIncomesHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::USER_ID, Params::Value{1});
+	handler->set_params(std::move(params));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
@@ -37,7 +42,7 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 {
 	Income i;
-	i.income_id = 1;
+	i.id = 1;
 	i.user_id = 1;
 	i.name = "Test income";
 	i.amount = 100;
@@ -46,7 +51,7 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	i.expiration_time = "2022-01-30 20:00:00";
 
 	IncomeCategory c;
-	c.income_category_id = 1;
+	c.id = 1;
 	c.name = "Test category";
 
 	auto facade = std::make_unique<MockDbFacade>();
@@ -56,7 +61,12 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	EXPECT_CALL(*facade, GetIncomeCategoryById(1))
 		.WillOnce(Return(std::optional<IncomeCategory>{c}));
 
-	auto handler = std::make_unique<GetIncomesHandler>(std::move(facade));
+	auto handler = std::make_unique<GetIncomesHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::USER_ID, Params::Value{1});
+	handler->set_params(std::move(params));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
@@ -70,7 +80,7 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	EXPECT_EQ(incomes.size(), 1);
 
 	auto income_json = incomes[0].toObject();
-	ASSERT_EQ(income_json["id"].toString(), QString::number(i.income_id));
+	ASSERT_EQ(income_json["id"].toString(), QString::number(i.id));
 	ASSERT_EQ(income_json["user_id"].toString(), QString::number(i.user_id));
 	ASSERT_EQ(income_json["name"].toString(), QString::fromStdString(i.name));
 	ASSERT_EQ(income_json["amount"].toDouble(), i.amount);
@@ -86,7 +96,12 @@ TEST(GetIncomesHandlerTest, SQL_FAILURE)
 	EXPECT_CALL(*facade, GetAllIncomes(_))
 		.WillOnce(Throw(SQLFailure("")));
 
-	auto handler = std::make_unique<GetIncomesHandler>(std::move(facade));
+	auto handler = std::make_unique<GetIncomesHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::USER_ID, Params::Value{1});
+	handler->set_params(std::move(params));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;

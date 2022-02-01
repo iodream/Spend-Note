@@ -13,14 +13,16 @@ option(ENABLE_SPEND_NOTE_TESTS "Enables unit tests building" ON)
 find_package(Qt6 COMPONENTS Core REQUIRED)
 
 add_subdirectory(Handlers)
+add_subdirectory(Resolvers)
 
 if(ENABLE_SPEND_NOTE_TESTS)
     add_subdirectory(Tests)
 endif()
 
 list(APPEND Spend-Note-Server_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Server.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Error.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Params.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Params.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
