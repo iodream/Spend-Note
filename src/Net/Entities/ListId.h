@@ -4,5 +4,5 @@
 
 struct ListId
 {
-    IdType id;
+	IdType id;
 };

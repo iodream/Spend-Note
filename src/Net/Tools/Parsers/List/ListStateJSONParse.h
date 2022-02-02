@@ -4,17 +4,17 @@
 #include "../Net/Entities/ListState.h"
 #include "../Net/Parsing.h"
 
-template<class T>
+template<typename Entity>
 class ListStateJSONParser
 {
 public:
-    T Parser(const QJsonObject& obj)
-    {
-        T state;
+	Entity Parser(const QJsonObject& obj)
+	{
+		Entity state;
 
-        SafeReadId(obj, "id", state.id);
-        SafeReadString(obj, "name", state.name);
+		SafeReadId(obj, "id", state.id);
+		SafeReadString(obj, "name", state.name);
 
-        return state;
-    }
+		return state;
+	}
 };

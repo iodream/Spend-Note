@@ -4,14 +4,14 @@
 #include "../Net/Entities/List.h"
 #include "../Net/Parsing.h"
 
-template<class T>
+template<class Entity> // rename
 class ListIdJSONFormatter
 {
 public:
-    QJsonDocument Format(const ListEntity<T>& list)
-    {
-        QJsonObject json;
-        WriteId(json, "id", list.id);
-        return QJsonDocument{json};
-    };
+	QJsonDocument Format(const List<Entity>& list)
+	{
+		QJsonObject json;
+		WriteId(json, "id", list.id);
+		return QJsonDocument{json};
+	};
 };

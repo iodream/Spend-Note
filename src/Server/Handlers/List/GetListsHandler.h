@@ -4,7 +4,6 @@
 #include <memory>
 #include <utility>
 
-#include "ParserAndFormatter/ListJSONFormatter.h"
 #include "../AuthorizedHandler.h"
 #include "../libdal/DTOs/List.h"
 

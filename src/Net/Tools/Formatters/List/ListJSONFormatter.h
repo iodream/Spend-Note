@@ -5,23 +5,22 @@
 #include "../Net/Parsing.h"
 #include "ListStateJSONFormatter.h"
 
-template<class T>
+template<class Entity> // rename
 class ListJSONFormatter
 {
+	using ListStateType = ListState<typename Entity::StringType>;
 public:
-    QJsonDocument Format(const ListEntity<T>& list)
-    {
-        QJsonObject json, tmp_json;
+	QJsonDocument Format(const List<Entity>& list)
+	{
+		QJsonObject json, tmp_json;
+		ListStateJSONFormatter<ListStateType> state_formatter{}; // delete
 
-        WriteId(json, "id", list.id);
-        WriteId(json, "owner_id", list.owner_id);
-        WriteString(json, "name", list.name);
+		WriteId(json, "id", list.id);
+		WriteId(json, "owner_id", list.owner_id);
+		WriteString(json, "name", list.name);
 
-        json["state"] = m_formatter.Format(list.state).object();
+		json["state"] = state_formatter.Format(list.state).object();
 
-        return  QJsonDocument{json};
-    }
-
-private:
-    ListStateJSONFormatter<T> m_formatter{};
+		return QJsonDocument{json};
+	}
 };

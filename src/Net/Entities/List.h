@@ -4,10 +4,12 @@
 #include "ListState.h"
 
 template<typename T>
-struct ListEntity
+struct List
 {
-    IdType id;
-    T name;
-    IdType owner_id;
-    ListStatetEntity<T> state;
+	using StringType = T;
+
+	IdType id;
+	T name;
+	IdType owner_id;
+	ListState<T> state;
 };

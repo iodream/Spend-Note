@@ -3,8 +3,8 @@
 #include "Types.h"
 
 template<typename  T>
-struct ListStatetEntity
+struct ListState
 {
-    IdType id;
-    T name;
+	IdType id;
+	T name;
 };
