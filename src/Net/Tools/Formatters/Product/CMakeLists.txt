@@ -3,6 +3,7 @@ list(APPEND Spend-Note-Net_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONFormatter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONFormatter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductJSONFormatter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ProductsJSONFormatter.h
 )
 
 set(Spend-Note-Net_SOURCES "${Spend-Note-Net_SOURCES}" PARENT_SCOPE)

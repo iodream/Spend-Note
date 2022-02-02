@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Handlers/Common.h"
+#include "../libdal/Types.h"
 
 struct ProductId
 {

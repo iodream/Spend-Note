@@ -6,15 +6,15 @@
 #include "../../../Entities/Product.h"
 #include "ProductCategoryJSONParser.h"
 
-template <typename T>
+template <typename Entity>
 class ProductJSONParser
 {
-	using ProductCategoryType = ProductCategory<typename T::StringType>;
+	using ProductCategoryType = ProductCategory<typename Entity::StringType>;
 public:
-	T Parse(const QJsonObject& json)
+	Entity Parse(const QJsonDocument& json_doc)
 	{
-		T product;
-		double tmp_number;
+		Entity product;
+		QJsonObject json = json_doc.object();
 		QJsonObject category_json;
 		ProductCategoryJSONParser<ProductCategoryType> category_parser;
 
@@ -26,8 +26,7 @@ public:
 		SafeReadString(json, "name", product.name);
 		SafeReadBigInt(json, "amount", product.amount);
 		SafeReadMoney(json, "price", product.price);
-		SafeReadNumber(json, "priority", tmp_number);
-		product.priority = tmp_number;
+		SafeReadBigInt(json, "priority", product.priority);
 		SafeReadString(json, "add_date", product.add_date);
 		SafeReadString(json, "purchase_date", product.purchase_date);
 		SafeReadString(json, "buy_until_date", product.buy_until_date);

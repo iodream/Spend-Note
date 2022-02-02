@@ -6,5 +6,5 @@
 class ProductIdJSONParser
 {
 public:
-	ProductId Parse(const QJsonObject& json);
+	ProductId Parse(const QJsonDocument& json_doc);
 };

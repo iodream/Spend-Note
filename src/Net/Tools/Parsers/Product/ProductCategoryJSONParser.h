@@ -6,13 +6,14 @@
 #include "Net/Parsing.h"
 #include "../../../Entities/ProductCategory.h"
 
-template <typename T>
+template <typename Entity>
 class ProductCategoryJSONParser
 {
 public:
-	T Parse(const QJsonObject& json)
+	Entity Parse(const QJsonDocument& json_doc)
 	{
-		T category;
+		Entity category;
+		QJsonObject json = json_doc.object();
 		SafeReadId(json, "id", category.id);
 		SafeReadString(json, "name", category.name);
 		return category;
