@@ -2,31 +2,31 @@
 
 #include "ScopedLogger.h"
 
-std::string ScopedLogger::m_logFileName("ScopedLogger.log");
-std::ofstream ScopedLogger::m_logger(m_logFileName, std::ios_base::app);
+std::string ScopedLogger::m_logfilename("ScopedLogger.log");
+std::ofstream ScopedLogger::m_stream(m_logfilename, std::ios_base::app);
 
-ScopedLogger::ScopedLogger(const std::string& fileName, const std::string& funcName
-	, const int& lineNr, const std::thread::id& threadId)
-	: m_fileName(fileName)
-	, m_funcName(funcName)
-	, m_threadId(threadId)
+ScopedLogger::ScopedLogger(const std::string& filename, const std::string& funcname
+	, const int& linenr, const std::thread::id& threadid)
+	: m_filename(filename)
+	, m_funcname(funcname)
+	, m_threadid(threadid)
 {
-	m_logger << "\n" << fileName <<": line "<<lineNr <<": "<< funcName
-		<< "() started with threadid " << threadId <<"\n" << std::flush;
-	m_logger.close();
+	m_stream << "\n" << filename <<": line "<<linenr <<": "<< funcname
+		<< "() started with threadid " << threadid <<"\n" << std::flush;
+	m_stream.close();
 }
 
-void ScopedLogger::Init(const std::string& logFileName)
+void ScopedLogger::Init(const std::string& logfilename)
 {
-	std::remove(m_logFileName.c_str());
-	m_logFileName=logFileName;
-	m_logger.close();
+	std::remove(m_logfilename.c_str());
+	m_logfilename=logfilename;
+	m_stream.close();
 }
 
 ScopedLogger::~ScopedLogger()
 {
-	m_logger.open(m_logFileName.c_str(), std::ios_base::app);
-	m_logger << "\n" << m_fileName<<": "<< m_funcName
-		<< "() finished with threadid " << m_threadId <<"\n" << std::flush;
-	m_logger.close();
+	m_stream.open(m_logfilename.c_str(), std::ios_base::app);
+	m_stream << "\n" << m_filename<<": "<< m_funcname
+		<< "() finished with threadid " << m_threadid <<"\n" << std::flush;
+	m_stream.close();
 }
