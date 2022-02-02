@@ -7,7 +7,7 @@
 class AuthorizedHandler : public ICommandHandler
 {
 public:
-	AuthorizedHandler(IDbFacade::Ptr facade);
+	AuthorizedHandler();
 	virtual ~AuthorizedHandler() override {}
 
 private:

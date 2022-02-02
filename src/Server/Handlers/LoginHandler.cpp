@@ -1,16 +1,18 @@
 #include <memory>
+
 #include <QJsonObject>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
+
 #include "LoginHandler.h"
+
 #include "Common.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 
-LoginHandler::LoginHandler(IDbFacade::Ptr facade)
-	: ICommandHandler(std::move(facade))
+LoginHandler::LoginHandler()
 {
 
 }
@@ -40,30 +42,25 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_POST) {
-		auto dto = m_parser.Parse(request.json_payload);
-		auto user = m_facade->GetUserByLogin(dto.login);
+	auto dto = m_parser.Parse(request.json_payload);
+	auto user = m_facade->GetUserByLogin(dto.login);
 
-		if(!user || dto.passwd_hash != user->password) {
-			return FormErrorResponse(
-			NetError::Status::HTTP_UNAUTHORIZED,
-			"Invalid login data");
-		}
-
-		Poco::JWT::Token token;
-		token.setType("JWT");
-
-		token.payload().set("id", std::to_string(user->id));
-		token.payload().set("login", std::string(user->login));
-
-		token.setIssuedAt(Poco::Timestamp());
-
-		Poco::JWT::Signer signer(user->password);
-		std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
-		JSONFormatter::Token out_dto{jwt};
-		return FormJSONResponse(m_formatter.Format(out_dto));
+	if(!user || dto.passwd_hash != user->password) {
+		return FormErrorResponse(
+		NetError::Status::HTTP_UNAUTHORIZED,
+		"Invalid login data");
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+
+	Poco::JWT::Token token;
+	token.setType("JWT");
+
+	token.payload().set("id", std::to_string(user->id));
+	token.payload().set("login", std::string(user->login));
+
+	token.setIssuedAt(Poco::Timestamp());
+
+	Poco::JWT::Signer signer(user->password);
+	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
+	JSONFormatter::Token out_dto{jwt};
+	return FormJSONResponse(m_formatter.Format(out_dto));
 }

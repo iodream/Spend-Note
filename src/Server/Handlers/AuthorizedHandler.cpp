@@ -16,8 +16,7 @@
 #include "Common.h"
 #include "Net/Parsing.h"
 
-AuthorizedHandler::AuthorizedHandler(IDbFacade::Ptr facade)
-	: ICommandHandler(std::move(facade))
+AuthorizedHandler::AuthorizedHandler()
 {
 
 }

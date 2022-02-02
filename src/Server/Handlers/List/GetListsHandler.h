@@ -20,7 +20,7 @@ class GetListsHandler : public AuthorizedHandler
 		QJsonDocument Format(const Lists& dto);
 	};
 public:
-	GetListsHandler(IDbFacade::Ptr facade);
+	GetListsHandler();
 	virtual ~GetListsHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
