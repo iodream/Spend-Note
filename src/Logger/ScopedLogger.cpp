@@ -13,20 +13,16 @@ ScopedLogger::ScopedLogger(const std::string& filename, const std::string& funcn
 {
 	m_stream << "\n" << filename <<": line "<<linenr <<": "<< funcname
 		<< "() started with threadid " << threadid <<"\n" << std::flush;
-	m_stream.close();
 }
 
 void ScopedLogger::Init(const std::string& logfilename)
 {
 	std::remove(m_logfilename.c_str());
 	m_logfilename=logfilename;
-	m_stream.close();
 }
 
 ScopedLogger::~ScopedLogger()
 {
-	m_stream.open(m_logfilename.c_str(), std::ios_base::app);
 	m_stream << "\n" << m_filename<<": "<< m_funcname
 		<< "() finished with threadid " << m_threadid <<"\n" << std::flush;
-	m_stream.close();
 }
