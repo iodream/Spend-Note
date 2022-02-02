@@ -5,6 +5,9 @@ list(APPEND Spend-Note-Net_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Parsing.h
 )
 
+add_subdirectory(Entities)
+add_subdirectory(Tools)
+
 list(APPEND Spend-Note-Net_LIBS
    QJsonObject
 )
