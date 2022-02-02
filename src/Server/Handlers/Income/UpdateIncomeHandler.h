@@ -6,10 +6,14 @@
 
 #include "../AuthorizedHandler.h"
 #include "../libdal/DTOs/Income.h"
-#include "ParsersAndFormatters/IncomeJSONParser.h"
 
 class UpdateIncomeHandler : public AuthorizedHandler
 {
+	class JSONParser
+	{
+	public:
+		Income Parse(const QJsonDocument& payload);
+	};
 
 public:
 	UpdateIncomeHandler();
@@ -18,5 +22,5 @@ public:
 	Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-	IncomeJSONParser m_parser{};
+	JSONParser m_parser{};
 };

@@ -4,11 +4,17 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
-#include "Utils/IncomeUtils.h"
+#include "Utils.h"
 #include "../libdal/Exceptions/SQLFailure.h"
 
 UpdateIncomeHandler::UpdateIncomeHandler()
 {
+}
+Income UpdateIncomeHandler::JSONParser::Parse(
+	const QJsonDocument& payload)
+{
+	auto json = payload.object();
+	return ParseIncome(json);
 }
 
 Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)

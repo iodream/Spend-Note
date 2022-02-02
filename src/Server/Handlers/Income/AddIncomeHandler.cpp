@@ -5,12 +5,31 @@
 
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "Utils/IncomeUtils.h"
+#include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
 AddIncomeHandler::AddIncomeHandler()
 {
+}
+
+Income AddIncomeHandler::JSONParser::Parse(
+	const QJsonDocument& json_doc)
+{
+	Income dto;
+
+	auto json = json_doc.object();
+
+	try
+	{
+		dto = ParseIncome(json);
+	}
+	catch(const ParsingError& ex)
+	{
+		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
+	}
+
+	return dto;
 }
 
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
@@ -34,4 +53,11 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 	}
 
 	return FormJSONResponse(m_formatter.Format(out_dto));
+}
+
+QJsonDocument AddIncomeHandler::JSONFormatter::Format(const DTO& dto)
+{
+	QJsonObject json;
+	json["id"] = std::to_string(dto.income_id).c_str();
+	return QJsonDocument{json};
 }

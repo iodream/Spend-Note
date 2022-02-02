@@ -9,7 +9,6 @@
 
 class RemoveIncomeHandler : public AuthorizedHandler
 {
-
 public:
 	RemoveIncomeHandler();
 	virtual ~RemoveIncomeHandler() override {}
