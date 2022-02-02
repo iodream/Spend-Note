@@ -13,18 +13,19 @@
 class HTTPRequestHandler: public Poco::Net::HTTPRequestHandler
 {
 public:
-	HTTPRequestHandler(ICommandHandler* handler) : m_handler{handler} {}
+	HTTPRequestHandler(ICommandHandler* command_handler)
+		: m_command_handler{command_handler} {}
 private:
 	using HTTPResponse = Poco::Net::HTTPServerResponse;
 	using HTTPRequest = Poco::Net::HTTPServerRequest;
 
 	void handleRequest(HTTPRequest& http_req, HTTPResponse& http_res);
-    QJsonDocument ReadJSON(std::istream& is);
+	QJsonDocument ReadJSON(std::istream& is);
 	void SendResponse(const Net::Response& response, HTTPResponse& http_res);
 	Net::Request ParseRequest(HTTPRequest& http_req);
 	Net::Response FormErrorResponse(const ClientError& ex);
 	Net::Response FormErrorResponse(const ServerError& ex);
 	Net::Response FormErrorResponse();
 private:
-	std::unique_ptr<ICommandHandler> m_handler;
+	std::unique_ptr<ICommandHandler> m_command_handler;
 };

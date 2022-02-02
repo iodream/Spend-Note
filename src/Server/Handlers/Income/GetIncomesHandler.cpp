@@ -9,31 +9,28 @@
 #include "Server/Utils.h"
 #include "../Common.h"
 
-GetIncomesHandler::GetIncomesHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+GetIncomesHandler::GetIncomesHandler()
 {
 
 }
 
 Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_GET)
+	Q_UNUSED(request);
+	try
 	{
-		try
-		{
-			Incomes response_dto {Map(m_facade->GetAllIncomes(request.uid))};
-			return FormJSONResponse(m_formatter.Format(response_dto));
-		}
-		catch (const SQLFailure& e)
-		{
-			return FormErrorResponse(
-				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-				"Failed to retrieve incomes from database");
-		}
+
+		auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+		JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(user_id))};
+		return FormJSONResponse(m_formatter.Format(response_dto));
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+	catch (const SQLFailure& e)
+	{
+		return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Failed to retrieve incomes from database");
+
+	}
 }
 
 Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
@@ -51,8 +48,10 @@ IncomeOut GetIncomesHandler::MapIncome(const Income& income)
 {
 	IncomeOut income_out;
 
-	income_out.id = income.income_id;
-	// income_out.user_id = income.user_id; user id will come form uri
+
+	income_out.income_id = income.id;
+	income_out.user_id = income.user_id;
+
 	income_out.name = income.name;
 	income_out.amount = income.amount;
 	auto category_name = m_facade->GetIncomeCategoryById(income.category_id);

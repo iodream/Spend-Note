@@ -31,7 +31,7 @@ IncomeCategory IncomeCategoryRepository::ParseSQLRow(const pqxx::row& row)
 {
 	IncomeCategory income_category;
 
-	income_category.income_category_id = row[ID_FIELD].as<IdType>();
+	income_category.id = row[ID_FIELD].as<IdType>();
 	income_category.name = row[NAME_FIELD].as<std::string>();
 
 	return income_category;

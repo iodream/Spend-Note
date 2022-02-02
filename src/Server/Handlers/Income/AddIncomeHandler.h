@@ -9,7 +9,7 @@
 class AddIncomeHandler : public AuthorizedHandler
 {
 public:
-	AddIncomeHandler(IDbFacade::Ptr facade);
+	AddIncomeHandler();
 	virtual ~AddIncomeHandler() override {};
 
 	Net::Response AuthHandle(const Net::Request& request) override;
