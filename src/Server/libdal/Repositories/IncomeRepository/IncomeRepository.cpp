@@ -1,16 +1,21 @@
 #include "IncomeRepository.h"
 
+#include "Exceptions/NonexistentResource.h"
+
 namespace
 {
-	const std::string& TABLE_NAME = "Income";
-	const std::string& ID_FIELD = "id";
-	const std::string& INCOME_NAME = "name";
-	const std::string& USER_ID = "userId";
-	const std::string& AMOUNT = "amount";
-	const std::string& CATEGORY_ID = "categoryId";
-	const std::string& ADD_TIME = "addTime";
-	const std::string& EXPIRATION_TIME= "expirationTime";
-	const std::string& TABLE_WITH_CATEGORY = "IncomeCategory";
+	const std::string TABLE_NAME = "Income";
+	const std::string ID_FIELD = "id";
+	const std::string INCOME_NAME = "name";
+	const std::string USER_ID = "userId";
+	const std::string AMOUNT = "amount";
+	const std::string CATEGORY_ID = "categoryId";
+	const std::string ADD_TIME = "addTime";
+	const std::string EXPIRATION_TIME= "expirationTime";
+	const std::string TABLE_WITH_CATEGORY = "IncomeCategory";
+
+	const std::string USER_TABLE_NAME = "id";
+	const std::string USER_ID_FIELD = "User";
 }
 
 IncomeRepository::IncomeRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
@@ -66,7 +71,7 @@ std::optional<Income> IncomeRepository::GetIncome(const IdType& income_id)
 	{
 		throw DatabaseFailure(e.what());
 	}
-    return std::nullopt;
+	return std::nullopt;
 }
 
 bool IncomeRepository::Update(const Income& income)
@@ -113,14 +118,25 @@ bool IncomeRepository::Remove(const IdType& id)
 	return true;
 }
 
-std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &id)
+std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &user_id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
 		std::vector<Income> incomes;
 
-		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(id) + ";");
+		pqxx::result user_ids = w.exec(
+			"SELECT " + USER_ID_FIELD +
+			" FROM " + USER_TABLE_NAME +
+			" WHERE " +
+				USER_ID_FIELD + " = " + w.quote(user_id) + ";");
+		if (user_ids.empty())
+		{
+			auto message = "User with id = " + std::to_string(user_id) + " not found";
+			throw NonexistentResource(message);
+		}
+
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
 
 		for(const auto& row : r)
 		{

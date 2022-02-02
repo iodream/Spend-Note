@@ -1,13 +1,18 @@
 #include "ListRepository.h"
 
+#include "Exceptions/NonexistentResource.h"
+
 namespace
 {
-    const std::string& TABLE_NAME = "List";
-	const std::string& ID_FIELD = "id";
-	const std::string& USER_ID = "userId";
-	const std::string& LIST_NAME = "name";
-	const std::string& LIST_STATE_ID = "stateId";
-	const std::string& TABLE_WITH_CATEGORY = "ListState";
+	const std::string TABLE_NAME = "List";
+	const std::string ID_FIELD = "id";
+	const std::string USER_ID = "userId";
+	const std::string LIST_NAME = "name";
+	const std::string LIST_STATE_ID = "stateId";
+	const std::string TABLE_WITH_CATEGORY = "ListState";
+
+	const std::string USER_TABLE_NAME = "id";
+	const std::string USER_ID_FIELD = "User";
 }
 
 
@@ -127,8 +132,18 @@ std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 	  {
 		pqxx::work w{m_db_connection};
 
-		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
+		pqxx::result user_ids = w.exec(
+			"SELECT " + USER_ID_FIELD +
+			" FROM " + USER_TABLE_NAME +
+			" WHERE " +
+				USER_ID_FIELD + " = " + w.quote(user_id) + ";");
+		if (user_ids.empty())
+		{
+			auto message = "User with id = " + std::to_string(user_id) + " not found";
+			throw NonexistentResource(message);
+		}
 
+		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + USER_ID + " = " + w.quote(user_id) + ";");
 		for(const auto& row : r)
 		{
 			list.push_back(ParseSQLRow(row));

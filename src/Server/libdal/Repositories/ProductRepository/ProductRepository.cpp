@@ -4,6 +4,7 @@
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
 #include "Exceptions/SQLFailure.h"
+#include "Exceptions/NonexistentResource.h"
 
 namespace
 {
@@ -19,6 +20,9 @@ namespace
 	const std::string ADD_DATE_FIELD = "addDate";
 	const std::string PURCHASE_DATE_FIELD = "purchaseDate";
 	const std::string BUY_UNTIL_DATE_FIELD = "buyUntilDate";
+
+	const std::string LIST_TABLE_NAME = "List";
+	const std::string LIST_ID = "id";
 }
 
 ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
@@ -111,21 +115,33 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 	try
 	{
 		pqxx::nontransaction w(m_database_connection);
+
+		pqxx::result list_ids = w.exec(
+			"SELECT " + LIST_ID +
+			" FROM " + LIST_TABLE_NAME +
+			" WHERE " +
+				LIST_ID + " = " + w.quote(list_id) + ";");
+		if (list_ids.empty())
+		{
+			auto message = "List with id = " + std::to_string(list_id) + " not found";
+			throw NonexistentResource(message);
+		}
+
 		pqxx::result product_rows = w.exec(
-				"SELECT " +
-					ID_FIELD + ", " +
-					LIST_ID_FIELD + ", " +
-					CATEGORY_ID_FIELD + ", " +
-					NAME_FIELD + ", " +
-					PRICE_FIELD + ", " +
-					AMOUNT_FIELD + ", " +
-					PRODUCT_PRIORITY_FIELD + ", " +
-					IS_BOUGHT_FIELD + ", " +
-					ADD_DATE_FIELD + ", " +
-					PURCHASE_DATE_FIELD + ", " +
-					BUY_UNTIL_DATE_FIELD +
-				" FROM " + TABLE_NAME +
-				" WHERE " + LIST_ID_FIELD + " = " + w.quote(list_id) + ";");
+			"SELECT " +
+				ID_FIELD + ", " +
+				LIST_ID_FIELD + ", " +
+				CATEGORY_ID_FIELD + ", " +
+				NAME_FIELD + ", " +
+				PRICE_FIELD + ", " +
+				AMOUNT_FIELD + ", " +
+				PRODUCT_PRIORITY_FIELD + ", " +
+				IS_BOUGHT_FIELD + ", " +
+				ADD_DATE_FIELD + ", " +
+				PURCHASE_DATE_FIELD + ", " +
+				BUY_UNTIL_DATE_FIELD +
+			" FROM " + TABLE_NAME +
+			" WHERE " + LIST_ID_FIELD + " = " + w.quote(list_id) + ";");
 
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
