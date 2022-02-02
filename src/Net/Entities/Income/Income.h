@@ -6,6 +6,7 @@
 template <typename T>
 struct Income
 {
+	using StringType = T;
 	IdType id;
 	IncomeCategory<T> category;
 	T name;

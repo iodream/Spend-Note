@@ -9,10 +9,5 @@
 class IncomeIdJSONParser
 {
 public:
-	IncomeId Parse(const QJsonObject& json)
-	{
-		IncomeId income_id;
-		SafeReadId(json, "id", income_id.id);
-		return income_id;
-	}
+	IncomeId Parse(const QJsonObject& json);
 };

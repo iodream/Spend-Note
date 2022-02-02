@@ -7,10 +7,6 @@
 
 class IncomeIdJSONFormatter
 {
-	QJsonDocument Format(IncomeId& income_id)
-	{
-		QJsonObject json;
-		WriteId(json, "id", income_id.id);
-		return QJsonDocument{json};
-	}
+public:
+	QJsonDocument Format(IncomeId& income_id);
 };

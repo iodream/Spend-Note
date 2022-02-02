@@ -4,10 +4,11 @@
 
 #include "Net/Entities/Income/IncomeCategory.h"
 
-template <typename T>
+template <typename Entity>
 class IncomeCategoryJSONFormatter
 {
-	QJsonObject Format(IncomeCategory<T>& income_category)
+public:
+	QJsonObject Format(Entity& income_category)
 	{
 		QJsonObject json;
 		WriteId(json, "id", income_category.id);

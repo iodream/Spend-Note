@@ -5,17 +5,20 @@
 #include "Net/Parsing.h"
 #include "Net/Entities/Income/Income.h"
 #include "Net/Entities/Income/IncomeCategory.h"
+#include "Net/Tools/Formatters/Income/IncomeCategoryJSONFormatter.h"
 
-template <typename T>
+template <typename Entity>
 class IncomeJSONFormatter
 {
+	using IncomeCategoryType = IncomeCategory<typename Entity::StringType>;
 public:
-	QJsonDocument Format(Income<T>& income)
+	QJsonDocument Format(Entity& income)
 	{
-		QJsonObject json, category;
+		IncomeCategoryJSONFormatter<IncomeCategoryType> category_formatter;
+		QJsonObject json;
 
 		WriteId(json, "id", income.id);
-		json["category"] = FormatIncomeCategory(income.category);
+		json["category"] = category_formatter.Format(income.category);
 
 		WriteString(json, "name",  income.name);
 		WriteMoney(json, "amount", income.amount);

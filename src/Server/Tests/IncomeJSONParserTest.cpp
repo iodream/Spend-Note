@@ -3,22 +3,22 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
-#include "Server/Handlers/Income/AddIncomeHandler.h"
 #include "Net/Parsing.h"
-//#include "../Handlers/Income/DTO/IncomeIn.h"
+#include "Net/Entities/Income/Income.h"
+#include "Net/Tools/Parsers/Income/IncomeJSONParser.h"
 
 namespace {
 
-Income FormIncome()
+Income<std::string> FormIncome()
 {
-	Income income;
-	IncomeCategoryIn category;
+	Income<std::string> income;
+	IncomeCategory<std::string> category;
 
-	income.income_id = 0;
+	income.id = 0;
 
 	category.id = 0;
-	income.category_id = category.id;
+	category.name = "name";
+	income.category= category;
 
 	income.name = "name";
 	income.amount = 0;
@@ -47,16 +47,16 @@ TEST(ParseIncomesJSON, PARSE)
 
 	auto json = QJsonDocument{json_object};
 
-	IncomeJSONParser parser;
+	IncomeJSONParser<Income<std::string>> parser;
 
+	auto result = parser.Parse(json.object());
+	auto suggested_result = FormIncome();
 
-	Income result = parser.Parse(json);
-	Income suggested_result = FormIncome();
-
-	EXPECT_EQ(result.income_id, suggested_result.income_id);
-	EXPECT_EQ(result.category_id, suggested_result.category_id);
+	EXPECT_EQ(result.id, suggested_result.id);
+	EXPECT_EQ(result.category.id, suggested_result.category.id);
+	EXPECT_EQ(result.category.name, suggested_result.category.name);
 	EXPECT_EQ(result.name, suggested_result.name);
 	EXPECT_EQ(result.amount, suggested_result.amount);
 	EXPECT_EQ(result.add_time, suggested_result.add_time);
-	EXPECT_EQ(result.expiration_time.value_or(""), suggested_result.expiration_time.value_or(""));
+	EXPECT_EQ(result.expiration_time, suggested_result.expiration_time);
 }

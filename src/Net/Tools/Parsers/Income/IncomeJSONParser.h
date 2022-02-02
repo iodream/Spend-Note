@@ -7,20 +7,21 @@
 #include "Net/Parsing.h"
 #include "IncomeCategoryJSONParser.h"
 
-template <typename T>
+template <typename Entity>
 class IncomeJSONParser
 {
+	using IncomeCategoryType = IncomeCategory<typename Entity::StringType>;
 public:
-	T Parse(const QJsonObject& json)
+	Entity Parse(const QJsonObject& json)
 	{
-		T income;
+		Entity income;
 		QJsonObject category_json;
-		IncomeCategoryJSONParser<T> category_json_parser;
+		IncomeCategoryJSONParser<IncomeCategoryType> category_json_parser;
 
 		SafeReadId(json, "id", income.id);
 
 		SafeReadObject(json, "category", category_json);
-		category_json_parser.Parse(category_json);
+		income.category = category_json_parser.Parse(category_json);
 
 		SafeReadMoney(json, "amount", income.amount);
 		SafeReadString(json, "name", income.name);

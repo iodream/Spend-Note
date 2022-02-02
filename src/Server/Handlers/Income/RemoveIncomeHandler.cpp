@@ -1,4 +1,4 @@
-#include "UpdateIncomeHandler.h"
+#include "RemoveIncomeHandler.h"
 
 #include "Net/Parsing.h"
 #include "Server/Error.h"
@@ -7,23 +7,16 @@
 #include "Utils.h"
 #include "../libdal/Exceptions/SQLFailure.h"
 
-UpdateIncomeHandler::UpdateIncomeHandler()
+RemoveIncomeHandler::RemoveIncomeHandler()
 {
-}
-Income UpdateIncomeHandler::JSONParser::Parse(
-	const QJsonDocument& payload)
-{
-	auto json = payload.object();
-	return ParseIncome(json);
 }
 
-Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
+Net::Response RemoveIncomeHandler::AuthHandle(const Net::Request& request)
 {
-	auto income = m_parser.Parse(request.json_payload);
+	Q_UNUSED(request);
 	auto income_id = std::get<long long>(m_params.Get(Params::INCOME_ID));
-	income.id = income_id;
 
-	if (m_facade->UpdateIncome(income)) {
+	if (m_facade->RemoveIncome(income_id)) {
 		return FormEmptyResponse();
 	}
 	else {
