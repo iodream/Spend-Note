@@ -20,7 +20,7 @@ Logger::Logger()
 
 void Logger::Init(const std::string& filename)
 {
-	m_filename=filename;
+	m_filename = filename;
 	m_logger = new Logger;
 }
 

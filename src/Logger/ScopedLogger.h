@@ -6,14 +6,14 @@
 #include <mutex>
 
 //use this macro to create logger
-#define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__ \
-	, __LINE__, std::this_thread::get_id())
+#define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__, \
+	__LINE__, std::this_thread::get_id())
 
 class ScopedLogger
 {
 public:
-	ScopedLogger(const std::string& filename, const std::string& funcname
-	, const int& linenr, const std::thread::id& threadid);
+	ScopedLogger(const std::string& filename, const std::string& funcname,
+		const int& linenr, const std::thread::id& threadid);
 	~ScopedLogger();
 	static void Init(const std::string& logfilename);
 
