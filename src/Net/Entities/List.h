@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Types.h"
+#include "ListState.h"
 
+template<typename T>
 struct ListEntity
 {
     IdType id;
-    std::string name;
+    T name;
     IdType owner_id;
-    std::pair<IdType, std::string> state;
+    ListStatetEntity<T> state;
 };
