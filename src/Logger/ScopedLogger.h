@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream>
 #include <thread>
+#include <mutex>
+#include <QMutex>
 
 //use this macro to create logger
 #define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__ \
@@ -22,5 +24,6 @@ private:
 	std::string m_funcname;
 	static std::string m_logfilename;
 	std::thread::id m_threadid;
+	static QMutex m_logmutex;
 };
 
