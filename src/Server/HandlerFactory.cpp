@@ -12,7 +12,6 @@
 #include "Handlers/Income/RemoveIncomeHandler.h"
 #include "Handlers/Income/UpdateIncomeHandler.h"
 #include "Handlers/Product/UpdateProductHandler.h"
-#include "Handlers/List/UpdateListHandler.h"
 
 #include "libdal/Facade/DbFacade.h"
 

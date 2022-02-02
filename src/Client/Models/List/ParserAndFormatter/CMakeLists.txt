@@ -1,0 +1,9 @@
+list(APPEND Spend-Note-Server_SOURCES
+	${CMAKE_CURRENT_SOURCE_DIR}/ListEntity.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONFormatter.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONFormatter.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParser.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParser.h
+)
+
+set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
