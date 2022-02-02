@@ -20,8 +20,10 @@ ScopedLogger::ScopedLogger(const std::string& filename, const std::string& funcn
 
 void ScopedLogger::Init(const std::string& logfilename)
 {
-	std::remove(m_logfilename.c_str());
+	m_stream.close();	// close previous file if we are changing logs mid-app execution
+	std::remove(m_logfilename.c_str()); // remove previous file
 	m_logfilename = logfilename;
+	m_stream.open(m_logfilename, std::ios_base::app); // open new file
 }
 
 ScopedLogger::~ScopedLogger()
