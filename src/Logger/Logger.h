@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <QMutex>
 #include <QFile>
 #include <QtGlobal>
 #include <mutex>
@@ -19,6 +18,6 @@ private:
 
 	static QFile* m_logging_file;
 	static Logger* m_logger;
-	static QMutex m_log_mutex;
+	static std::mutex m_log_mutex;
 	static std::string m_file_name;
 };

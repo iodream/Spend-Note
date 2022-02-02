@@ -1,11 +1,10 @@
 #include <fstream>
 #include <QTime>
-#include <mutex>
 
 #include "Logger.h"
 
 
-QMutex Logger::m_log_mutex;
+std::mutex Logger::m_log_mutex;
 QFile* Logger::m_logging_file;
 Logger* Logger::m_logger = nullptr;
 std::string Logger::m_file_name("logfile.log");
@@ -28,7 +27,7 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext& context, c
 {
 	using namespace std;
 
-	std::lock_guard<QMutex> lock(m_log_mutex);
+	std::lock_guard<std::mutex> lock(m_log_mutex);
 	QTextStream stream(m_logging_file);
 
 	switch (type)
