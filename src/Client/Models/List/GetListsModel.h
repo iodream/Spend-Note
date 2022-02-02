@@ -3,10 +3,12 @@
 #include <vector>
 
 #include <QJsonDocument>
-#include <QJsonObject>
+#include <QJsonArray>
 
 #include "Net/Constants.h"
 #include "Net/Message.h"
+
+#include "Client/Common.h"
 
 #include "DTO/List.h"
 
@@ -18,10 +20,10 @@ public:
 	class JSONParser
 	{
 	public:
-		void Parse(QJsonObject json, std::vector<List>& lists);
+		void Parse(QJsonArray json, std::vector<List>& lists);
 	};
 
-	Net::Request FormRequest();
+	Net::Request FormRequest(IdType user_id);
 	std::vector<List> ParseResponse(const Net::Response& response);
 
 private:

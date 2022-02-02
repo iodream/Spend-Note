@@ -4,7 +4,7 @@
 Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 {
 	Net::Request request;
-	request.uri = m_hostname + "signup";
+	request.uri = m_hostname + "/signup";
 	request.method = Net::HTTP_METHOD_POST;
 	request.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
 	request.json_payload = m_formatter.Format(dto);

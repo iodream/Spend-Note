@@ -40,6 +40,11 @@ void MainPage::InitCreateListSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
 
+	connect(
+		&m_list_create_spage,
+		&ListCreateSubPage::GoBack,
+		this,
+		&MainPage::GoBack);
 }
 
 MainPage::~MainPage()

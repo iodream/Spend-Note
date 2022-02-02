@@ -6,7 +6,7 @@
 Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 {
 	Net::Request request;
-	request.uri = m_hostname + "login";
+	request.uri = m_hostname + "/login";
 	request.method = Net::HTTP_METHOD_POST;
 	request.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
 	request.json_payload = m_formatter.Format(credentials);

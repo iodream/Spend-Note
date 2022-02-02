@@ -26,7 +26,7 @@ void Controller::ConnectLoginPage()
 		&page,
 		&LoginPage::GotoSignup,
 		this,
-		&Controller::OnGotoSignupPage);
+		&Controller::OnGoToSignupPage);
 }
 
 void Controller::ConnectMainPage()
@@ -44,6 +44,12 @@ void Controller::ConnectMainPage()
 		&MainPage::ChangeSubPage,
 		this,
 		&Controller::OnChangeMainSubPage);
+
+	QObject::connect(
+		&page,
+		&MainPage::GoBack,
+		this,
+		&Controller::OnGoBack);
 
 //	QObject::connect(
 //		&page.get_list_create_spage(),
@@ -118,11 +124,20 @@ void Controller::OnLogout()
 	m_main_window.SetCurrentPage(UIPages::LOGIN);
 }
 
+void Controller::OnGoBack()
+{
+	m_history.ForgetLastPage();
+	auto page = m_history.GetLastPage();
+	SetMainSubPage(page);
+}
+
 void Controller::SetMainSubPage(MainSubPages page)
 {
+	bool update_succeeded{true};
+
 	switch(page) {
 	case MainSubPages::LISTS:
-		UpdateMainListsSubPage();
+		update_succeeded = UpdateMainListsSubPage();
 		break;
 	case MainSubPages::CREATE_LIST:
 		break;
@@ -134,7 +149,13 @@ void Controller::SetMainSubPage(MainSubPages page)
 		break;
 	}
 
-	m_main_window.get_main_page().SetCurrentSubPage(page);
+	if (update_succeeded) {
+		m_main_window.get_main_page().SetCurrentSubPage(page);
+		m_history.Update(page);
+	}
+	else {
+		// go to error page;
+	}
 }
 
 void Controller::OnGotoLoginPage()
@@ -147,10 +168,10 @@ void Controller::OnChangeMainSubPage(MainSubPages page)
 	SetMainSubPage(page);
 }
 
-void Controller::UpdateMainListsSubPage()
+bool Controller::UpdateMainListsSubPage()
 {
 	GetListsModel model{m_hostname};
-	auto request  = model.FormRequest();
+	auto request  = model.FormRequest(m_user_id);
 	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
@@ -158,15 +179,17 @@ void Controller::UpdateMainListsSubPage()
 		QMessageBox::information(&m_main_window
 			, QString("Error occured")
 			, QString::fromStdString(response.reason));
+		return false;
 	}
 
 	auto lists = model.ParseResponse(response);
 
 	auto& lists_spage = m_main_window.get_main_page().get_lists_spage();
 	lists_spage.Update(lists);
+	return true;
 }
 
-void Controller::OnGotoSignupPage()
+void Controller::OnGoToSignupPage()
 {
 	m_main_window.SetCurrentPage(UIPages::SIGNUP);
 }
