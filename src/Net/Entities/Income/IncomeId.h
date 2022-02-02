@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../AuthorizedHandler.h"
+#include "Server/libdal/Types.h"
 
 struct IncomeId
 {

@@ -22,15 +22,15 @@ void SafeReadString(
     }
 }
 
-void SafeReadQString(
+void SafeReadString(
 	const QJsonObject& json,
 	const std::string& label,
 	QString& dest)
 {
-	return SafeReadQString(json, label.c_str(), dest);
+	return SafeReadString(json, label.c_str(), dest);
 }
 
-void SafeReadQString(
+void SafeReadString(
 	const QJsonObject& json,
 	const char* label,
 	QString& dest)
@@ -258,4 +258,36 @@ void WriteMoney(
 	Money& dest)
 {
 	return WriteMoney(json, label.c_str(), dest);
+}
+
+void WriteString(
+	QJsonObject& json,
+	const char* label,
+	QString& dest)
+{
+	json[label] = dest.toStdString().c_str();
+}
+
+void WriteString(
+	QJsonObject& json,
+	const std::string label,
+	QString& dest)
+{
+	return WriteString(json, label.c_str(), dest);
+}
+
+void WriteString(
+	QJsonObject& json,
+	const char* label,
+	std::string& dest)
+{
+	json[label] = dest.c_str();
+}
+
+void WriteString(
+	QJsonObject& json,
+	const std::string label,
+	std::string& dest)
+{
+	return WriteString(json, label.c_str(), dest);
 }
