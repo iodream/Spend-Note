@@ -1,9 +1,8 @@
 #pragma once
 
-#include <QString>
+#include <string>
 
-#include "../Common.h"
-
+#include "Types.h"
 #include "ProductCategory.h"
 
 struct Product
@@ -12,11 +11,11 @@ struct Product
 	IdType list_id;
 	ProductCategory category;
 	bool is_bought;
-	QString name;
+	std::string name;
 	BigInt amount;
 	Money price;
 	int priority;
-	QString add_date;
-	QString purchase_date;
-	QString buy_until_date;
+	std::string add_date;
+	std::string purchase_date;
+	std::string buy_until_date;
 };

@@ -50,6 +50,26 @@ void SafeReadId(
 	const std::string& label,
 	IdType& dest);
 
+void SafeReadBigInt(
+	const QJsonObject& json,
+	const char* label,
+	BigInt& dest);
+
+void SafeReadiBgInt(
+	const QJsonObject& json,
+	const std::string& label,
+	BigInt& dest);
+
+void SafeReadMoney(
+	const QJsonObject& json,
+	const char* label,
+	Money& dest);
+
+void SafeReadMoney(
+	const QJsonObject& json,
+	const std::string& label,
+	Money& dest);
+
 void SafeReadNumber(
 	const QJsonObject& json,
 	const char* label,
@@ -79,3 +99,43 @@ void SafeReadBool(
 	const QJsonObject& json,
 	const std::string& label,
 	bool& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const char* label,
+	QJsonObject& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const std::string& label,
+	QJsonObject& dest);
+
+void WriteId(
+	QJsonObject& json,
+	const char* label,
+	IdType& dest);
+
+void WriteId(
+	QJsonObject& json,
+	const std::string& label,
+	IdType& dest);
+
+void WriteBigInt(
+	QJsonObject& json,
+	const char* label,
+	BigInt& dest);
+
+void WriteBigInt(
+	QJsonObject& json,
+	const std::string& label,
+	BigInt& dest);
+
+void WriteMoney(
+	QJsonObject& json,
+	const char* label,
+	Money& dest);
+
+void WriteMoney(
+	QJsonObject& json,
+	const std::string& label,
+	Money& dest);
