@@ -15,7 +15,7 @@ Logger::Logger()
 	qInstallMessageHandler(MessageHandler);
 	m_logging_file = new QFile(QString(m_file_name.c_str()));
 	m_logging_file->open(QIODevice::WriteOnly | QIODevice::Append);
-	qDebug() << "Logger created at:\n" << QTime::currentTime().toString()<<"\n";
+	qDebug() << "Logger created at: " << QTime::currentTime().toString()<<"\n";
 }
 
 void Logger::Init(const std::string& file_name)
