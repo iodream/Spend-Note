@@ -1,8 +1,6 @@
 #include "Utils.h"
-#include "../Logger/ScopedLogger.h"
 Product ParseProduct(const QJsonObject& json)
 {
-	SCOPED_LOGGER;
 	double tmp_number;
 	Product product;
 
