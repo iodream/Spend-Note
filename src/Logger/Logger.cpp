@@ -5,30 +5,30 @@
 #include "Logger.h"
 
 
-QMutex Logger::m_logmutex;
+QMutex Logger::m_log_mutex;
 QFile* Logger::m_logging_file;
 Logger* Logger::m_logger = nullptr;
-std::string Logger::m_filename("logfile.log");
+std::string Logger::m_file_name("logfile.log");
 
 Logger::Logger()
 {
 	qInstallMessageHandler(MessageHandler);
-	m_logging_file = new QFile(QString(m_filename.c_str()));
+	m_logging_file = new QFile(QString(m_file_name.c_str()));
 	m_logging_file->open(QIODevice::WriteOnly | QIODevice::Append);
-	qDebug() << "Logger created\n" << "Time created:" << QTime::currentTime().toString()<<"\n";
+	qDebug() << "Logger created at:\n" << QTime::currentTime().toString()<<"\n";
 }
 
-void Logger::Init(const std::string& filename)
+void Logger::Init(const std::string& file_name)
 {
-	m_filename = filename;
+	m_file_name = file_name;
 	m_logger = new Logger;
 }
 
-void Logger::MessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void Logger::MessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg)
 {
 	using namespace std;
 
-	std::lock_guard<QMutex> lock(m_logmutex);
+	std::lock_guard<QMutex> lock(m_log_mutex);
 	QTextStream stream(m_logging_file);
 
 	switch (type)

@@ -2,32 +2,31 @@
 
 #include "ScopedLogger.h"
 
-std::string ScopedLogger::m_logfilename("ScopedLogger.log");
-std::ofstream ScopedLogger::m_stream(m_logfilename, std::ios_base::app);
-std::mutex ScopedLogger::m_logmutex;
+std::string ScopedLogger::m_log_file_name;
+std::ofstream ScopedLogger::m_stream;
+std::mutex ScopedLogger::m_log_mutex;
 
 
-ScopedLogger::ScopedLogger(const std::string& filename, const std::string& funcname
-	, const int& linenr, const std::thread::id& threadid)
-	: m_filename(filename)
-	, m_funcname(funcname)
-	, m_threadid(threadid)
+ScopedLogger::ScopedLogger(const std::string& file_name, const std::string& func_name
+	, const int& line_nr, const std::thread::id& thread_id)
+	: m_file_name(file_name)
+	, m_func_name(func_name)
+	, m_thread_id(thread_id)
 {
-	std::lock_guard<std::mutex> lock(m_logmutex);
-	m_stream << "\n" << filename <<": line "<<linenr <<": "<< funcname
-		<< "() started with threadid " << threadid <<"\n" << std::flush;
+	std::lock_guard<std::mutex> lock(m_log_mutex);
+	m_stream << "\n" << file_name <<": line "<< line_nr <<": "<< func_name
+		<< "() started with threadid " << thread_id << "\n" << std::flush;
 }
 
-void ScopedLogger::Init(const std::string& logfilename)
+void ScopedLogger::Init(const std::string& log_file_name)
 {
-	m_stream.close();	// close previous file if we are changing logs mid-app execution
-	m_logfilename = logfilename;
-	m_stream.open(m_logfilename, std::ios_base::app); // open new file
+	m_log_file_name = log_file_name;
+	m_stream.open(m_log_file_name, std::ios_base::app);
 }
 
 ScopedLogger::~ScopedLogger()
 {
-	std::lock_guard<std::mutex> lock(m_logmutex);
-	m_stream << "\n" << m_filename<<": "<< m_funcname
-		<< "() finished with threadid " << m_threadid <<"\n" << std::flush;
+	std::lock_guard<std::mutex> lock(m_log_mutex);
+	m_stream << "\n" << m_file_name<<": " << m_func_name
+		<< "() finished with threadid " << m_thread_id << "\n" << std::flush;
 }

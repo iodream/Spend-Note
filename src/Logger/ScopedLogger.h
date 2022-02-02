@@ -12,17 +12,17 @@
 class ScopedLogger
 {
 public:
-	ScopedLogger(const std::string& filename, const std::string& funcname,
-		const int& linenr, const std::thread::id& threadid);
+	ScopedLogger(const std::string& file_name, const std::string& func_name,
+		const int& line_nr, const std::thread::id& thread_id);
 	~ScopedLogger();
-	static void Init(const std::string& logfilename);
+	static void Init(const std::string& log_file_name);
 
 private:
 	static std::ofstream m_stream;
-	std::string m_filename;
-	std::string m_funcname;
-	static std::string m_logfilename;
-	std::thread::id m_threadid;
-	static std::mutex m_logmutex;
+	std::string m_file_name;
+	std::string m_func_name;
+	static std::string m_log_file_name;
+	std::thread::id m_thread_id;
+	static std::mutex m_log_mutex;
 };
 
