@@ -4,7 +4,7 @@
 #include "../Net/Entities/List.h"
 #include "../Net/Parsing.h"
 
-template<class Entity> // rename
+template<class Entity>
 class ListIdJSONFormatter
 {
 public:
