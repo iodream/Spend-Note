@@ -209,7 +209,7 @@ void SafeReadObject(
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	IdType& dest)
+	const IdType& dest)
 {
 	double* id = reinterpret_cast<double*>(dest);
 	json[label] = *id;
@@ -219,7 +219,7 @@ void WriteId(
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	const IdType& dest)
 {
 	return WriteId(json, label.c_str(), dest);
 }
@@ -227,7 +227,7 @@ void WriteId(
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	BigInt& dest)
+	const BigInt& dest)
 {
 	double* amount = reinterpret_cast<double*>(dest);
 	json[label] = *amount;
@@ -237,7 +237,7 @@ void WriteBigInt(
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	BigInt& dest)
+	const BigInt& dest)
 {
 	return WriteBigInt(json, label.c_str(), dest);
 }
@@ -245,7 +245,7 @@ void WriteBigInt(
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	Money& dest)
+	const Money& dest)
 {
 	double* price = reinterpret_cast<double*>(dest);
 	json[label] = *price;
@@ -255,7 +255,7 @@ void WriteMoney(
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	Money& dest)
+	const Money& dest)
 {
 	return WriteMoney(json, label.c_str(), dest);
 }
@@ -263,15 +263,15 @@ void WriteMoney(
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	QString& dest)
+	const std::string& dest)
 {
-	json[label] = dest.toStdString().c_str();
+	json[label] = dest.c_str();
 }
 
 void WriteString(
 	QJsonObject& json,
-	const std::string label,
-	QString& dest)
+	const std::string& label,
+	const std::string& dest)
 {
 	return WriteString(json, label.c_str(), dest);
 }
@@ -279,15 +279,15 @@ void WriteString(
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	std::string& dest)
+	const QString& dest)
 {
-	json[label] = dest.c_str();
+	json[label] = dest.toStdString().c_str();
 }
 
 void WriteString(
 	QJsonObject& json,
-	const std::string label,
-	std::string& dest)
+	const std::string& label,
+	const QString& dest)
 {
 	return WriteString(json, label.c_str(), dest);
 }

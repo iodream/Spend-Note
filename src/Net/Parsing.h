@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -113,39 +114,49 @@ void SafeReadObject(
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	IdType& dest);
+	const IdType& dest);
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	IdType& dest);
+	const IdType& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	BigInt& dest);
+	const BigInt& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	BigInt& dest);
+	const BigInt& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	Money& dest);
+	const Money& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	Money& dest);
+	const Money& dest);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	std::string& dest);
+	const std::string& dest);
 
 void WriteString(
 	QJsonObject& json,
-	const std::string label,
-	std::string& dest);
+	const std::string& label,
+	const std::string& dest);
+
+void WriteString(
+	QJsonObject& json,
+	const char* label,
+	const QString& dest);
+
+void WriteString(
+	QJsonObject& json,
+	const std::string& label,
+	const QString& dest);
