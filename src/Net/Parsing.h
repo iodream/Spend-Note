@@ -146,15 +146,18 @@ void WriteString(
 	const char* label,
 	const std::string& dest);
 
+
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
 	const std::string& dest);
 
+
 void WriteString(
 	QJsonObject& json,
 	const char* label,
 	const QString& dest);
+
 
 void WriteString(
 	QJsonObject& json,
