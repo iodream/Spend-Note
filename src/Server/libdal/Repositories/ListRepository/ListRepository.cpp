@@ -1,5 +1,8 @@
 #include "ListRepository.h"
 
+namespace db
+{
+
 namespace
 {
     const std::string& TABLE_NAME = "List";
@@ -139,4 +142,6 @@ std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 		throw DatabaseFailure(e.what());
 	}
     return list;
+}
+
 }

@@ -1,5 +1,8 @@
 #include "BalanceRepository.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string INCOME_TABLE_NAME = "Income";
@@ -71,4 +74,6 @@ Money BalanceRepository::CalculatePlannedBalance(IdType user_id)
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

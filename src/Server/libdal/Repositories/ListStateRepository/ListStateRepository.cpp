@@ -1,5 +1,8 @@
 #include "ListStateRepository.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string& TABLE_NAME = "ListState";
@@ -56,4 +59,6 @@ std::vector<ListState> ListStateRepository::GetAll()
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

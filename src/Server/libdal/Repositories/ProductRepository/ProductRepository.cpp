@@ -5,6 +5,9 @@
 #include "Exceptions/DatabaseFailure.h"
 #include "Exceptions/SQLFailure.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string TABLE_NAME = "Product";
@@ -228,4 +231,6 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	}
 
 	return product;
+}
+
 }

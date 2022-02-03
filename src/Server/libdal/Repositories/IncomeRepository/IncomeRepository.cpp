@@ -1,5 +1,7 @@
 #include "IncomeRepository.h"
 
+namespace db
+{
 namespace
 {
 	const std::string& TABLE_NAME = "Income";
@@ -155,4 +157,5 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 	}
 
 	return income;
+}
 }

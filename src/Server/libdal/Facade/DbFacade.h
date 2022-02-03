@@ -11,6 +11,8 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 
+namespace db
+{
 class DbFacade : public IDbFacade
 {
 public:
@@ -65,3 +67,4 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 };
+}

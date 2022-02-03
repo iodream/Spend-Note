@@ -3,8 +3,12 @@
 #include <string>
 #include "Types.h"
 
-struct IncomeCategory
+namespace db
 {
-	IdType id;
-	std::string name;
-};
+	struct IncomeCategory
+	{
+		IdType id;
+		std::string name;
+	};
+}
+
