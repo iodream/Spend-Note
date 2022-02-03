@@ -17,8 +17,6 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPClient.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Common.h
 )
 
