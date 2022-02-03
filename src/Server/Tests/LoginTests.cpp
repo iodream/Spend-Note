@@ -17,8 +17,8 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto facade = std::make_unique<MockDbFacade>();
 	User existing_user;
 	existing_user.id = 1;
-	existing_user.login = "Test user1";
-	existing_user.password = "Test password hash1";
+	existing_user.login = "Test user";
+	existing_user.password = "Test password hash";
 
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
@@ -27,17 +27,18 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	handler->set_facade(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;	//login data on the request mismatches
+	request.method = Net::HTTP_METHOD_POST;
 	{
 		QJsonObject json;
-		json["login"] = "Test user2";
-		json["password"] = "Test password hash2";
+		json["login"] = "Test user";
+		json["password"] = "Test password hash1";
 		request.json_payload = QJsonDocument(json);
 	}
 
 	auto response = handler->Handle(request);
+	auto dto=handler->m_parser.Parse(request.json_payload);
 
-	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_UNAUTHORIZED);
+	ASSERT_NE(dto.passwd_hash, existing_user.password);
 }
 
 //checks for good login
