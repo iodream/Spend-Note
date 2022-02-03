@@ -10,13 +10,6 @@ Net::Request GetListsModel::FormRequest(IdType user_id)
 	return request;
 }
 
-void GetListsModel::JSONParser::Parse(QJsonArray json, std::vector<List>& lists)
-{
-	for (auto it = json.begin(); it != json.end(); it++) {
-		lists.push_back(ParseList((*it).toObject()));
-	}
-}
-
 std::vector<List> GetListsModel::ParseResponse(const Net::Response& response)
 {
 	std::vector<List> lists;

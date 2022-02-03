@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 RemoveIncomeHandler::RemoveIncomeHandler()
 {
@@ -15,6 +16,7 @@ RemoveIncomeHandler::RemoveIncomeHandler()
 
 Net::Response RemoveIncomeHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 	auto income_id = std::get<long long>(m_params.Get(Params::INCOME_ID));
 

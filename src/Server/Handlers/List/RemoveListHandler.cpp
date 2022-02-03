@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 RemoveListHandler::RemoveListHandler()
 {
@@ -15,6 +16,7 @@ RemoveListHandler::RemoveListHandler()
 
 Net::Response RemoveListHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
 

@@ -11,6 +11,7 @@
 #include "Server/Utils.h"
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
+#include "Logger/ScopedLogger.h"
 
 LoginHandler::LoginHandler()
 {
@@ -19,6 +20,7 @@ LoginHandler::LoginHandler()
 
 QJsonDocument LoginHandler::JSONFormatter::Format(const Token& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	json["token"] = dto.token.c_str();
 	return QJsonDocument{json};
@@ -27,6 +29,7 @@ QJsonDocument LoginHandler::JSONFormatter::Format(const Token& dto)
 LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Login dto;
 	auto json = payload.object();
 
@@ -42,6 +45,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByLogin(dto.login);
 

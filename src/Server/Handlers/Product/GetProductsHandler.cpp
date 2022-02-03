@@ -5,6 +5,7 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
 GetProductsHandler::GetProductsHandler()
 {
@@ -12,6 +13,7 @@ GetProductsHandler::GetProductsHandler()
 
 QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 
 	QJsonArray products;
@@ -43,6 +45,7 @@ QJsonDocument GetProductsHandler::JSONFormatter::Format(const Products& dto)
 
 Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
 

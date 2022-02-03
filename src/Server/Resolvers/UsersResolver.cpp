@@ -7,6 +7,7 @@
 
 #include "Utils.h"
 #include "../Error.h"
+#include "Logger/ScopedLogger.h"
 
 namespace {
 
@@ -21,6 +22,7 @@ ICommandHandler* UsersResolver::Resolve(
 	std::string::size_type pos,
 	Params& params)
 {
+	SCOPED_LOGGER;
 	if (pos == std::string::npos) {
 		return ResolveLastSegment(method);
 	}

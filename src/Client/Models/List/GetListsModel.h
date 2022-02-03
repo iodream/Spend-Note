@@ -10,7 +10,7 @@
 
 #include "Client/Common.h"
 
-#include "DTO/List.h"
+#include "../../DTO/List.h"
 
 class GetListsModel
 {
