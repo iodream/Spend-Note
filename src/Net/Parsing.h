@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -10,25 +11,25 @@
 
 class ParsingError : public Exception {
 public:
-    explicit ParsingError(const char* message)
-        : Exception(message) {}
+	explicit ParsingError(const char* message)
+		: Exception(message) {}
 
-    explicit ParsingError(const std::string& message)
-        : Exception(message) {}
+	explicit ParsingError(const std::string& message)
+		: Exception(message) {}
 
-    virtual ~ParsingError() noexcept {}
+	virtual ~ParsingError() noexcept {}
 };
 
 
 void SafeReadString(
-    const QJsonObject& json,
-    const std::string& label,
-    std::string& dest);
+	const QJsonObject& json,
+	const std::string& label,
+	std::string& dest);
 
 void SafeReadString(
-    const QJsonObject& json,
-    const char* label,
-    std::string& dest);
+	const QJsonObject& json,
+	const char* label,
+	std::string& dest);
 
 void SafeReadString(
 	const QJsonObject& json,
@@ -113,49 +114,52 @@ void SafeReadObject(
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	IdType& dest);
+	const IdType& dest);
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	IdType& dest);
+	const IdType& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	BigInt& dest);
+	const BigInt& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	BigInt& dest);
+	const BigInt& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	Money& dest);
+	const Money& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	Money& dest);
+	const Money& dest);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	QString& dest);
+	const std::string& dest);
+
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	QString& dest);
+	const std::string& dest);
+
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	std::string& dest);
+	const QString& dest);
+
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	std::string& dest);
+	const QString& dest);
