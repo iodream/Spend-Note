@@ -1,11 +1,12 @@
 #include "Controller/Controller.h"
-#include "../Logger/ScopedLogger.h"
 #include <QApplication>
 #include "Logger/Logger.h"
+#include "Logger/ScopedLogger.h"
 int main(int argc, char *argv[])
 {
-	SCOPED_LOGGER;
 	Logger::Init("Client.log");
+	ScopedLogger::Init("ClientScopedLogger.log"); // mandatory
+	SCOPED_LOGGER;
 	QApplication a(argc, argv);
 	Controller controller;
 

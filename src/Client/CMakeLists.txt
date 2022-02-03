@@ -29,7 +29,6 @@ list(APPEND Spend-Note-Client_LIBS
 )
 
 add_subdirectory(Controller)
-add_subdirectory(DTO)
 add_subdirectory(Models)
 add_subdirectory(View)
 

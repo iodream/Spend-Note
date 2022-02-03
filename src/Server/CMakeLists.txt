@@ -46,6 +46,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Logger ${CMAKE_CURRENT_BINARY_DI
 list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
     ${Spend-Note-Logger_SOURCES}
+
 )
 
 

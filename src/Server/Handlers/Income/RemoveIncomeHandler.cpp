@@ -1,12 +1,10 @@
-#include <QJsonArray>
-
 #include "RemoveIncomeHandler.h"
+
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
 #include "Utils.h"
-
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 

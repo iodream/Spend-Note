@@ -28,8 +28,10 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 	int main(const std::vector<std::string>&)
 	{
-		SCOPED_LOGGER;
 		Logger::Init("Server.log");
+		ScopedLogger::Init("ServerScopedLogger.log"); // mandatory
+		SCOPED_LOGGER;
+
 		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
 
 		auto* params = new Poco::Net::HTTPServerParams();

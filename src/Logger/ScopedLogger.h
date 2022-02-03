@@ -3,24 +3,26 @@
 #include <string>
 #include <fstream>
 #include <thread>
+#include <mutex>
 
 //use this macro to create logger
-#define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__ \
-	, __LINE__, std::this_thread::get_id())
+#define SCOPED_LOGGER ScopedLogger log(__FILE__, __func__, \
+	__LINE__, std::this_thread::get_id())
 
 class ScopedLogger
 {
 public:
-	ScopedLogger(const std::string& fileName, const std::string& funcName
-	, const int& lineNr, const std::thread::id& threadId);
+	ScopedLogger(const std::string& file_name, const std::string& func_name,
+		const int& line_nr, const std::thread::id& thread_id);
 	~ScopedLogger();
-	static void Init(const std::string& logFileName);
+	static void Init(const std::string& log_file_name);
 
 private:
-	static std::ofstream m_logger;
-	std::string m_fileName;
-	std::string m_funcName;
-	static std::string m_logFileName;
-	std::thread::id m_threadId;
+	static std::ofstream m_stream;
+	std::string m_file_name;
+	std::string m_func_name;
+	static std::string m_log_file_name;
+	std::thread::id m_thread_id;
+	static std::mutex m_log_mutex;
 };
 

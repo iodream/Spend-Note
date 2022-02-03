@@ -1,8 +1,6 @@
 #include "Utils.h"
-#include "../Logger/ScopedLogger.h"
 List ParseList(const QJsonObject& json)
 {
-	SCOPED_LOGGER;
 	List list;
 
 	SafeReadId(json, "list_id", list.list_id);
@@ -16,7 +14,6 @@ List ParseList(const QJsonObject& json)
 
 QJsonDocument FormatList(const List& list)
 {
-	SCOPED_LOGGER;
 	QJsonObject json;
 
 	json["list_id"] = std::to_string(list.list_id).c_str();

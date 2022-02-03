@@ -1,3 +1,4 @@
+
 #include "GetIncomesHandler.h"
 
 #include <QJsonArray>
