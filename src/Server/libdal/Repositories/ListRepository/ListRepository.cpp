@@ -91,13 +91,13 @@ bool ListRepository::Update(const List& list)
 	try
 	{
 		pqxx::work w{m_db_connection};
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id));
+		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(list.id));
 		if (result.empty())
 		{
 			return false;
 		}
 		w.exec0("UPDATE " + TABLE_NAME + " SET " + LIST_STATE_ID + " = " + w.quote(list.state_id) + ", "
-				+ LIST_NAME + " = " + w.quote(list.name) + " WHERE " + ID_FIELD + " = " + w.quote(list.list_id) + ";");
+				+ LIST_NAME + " = " + w.quote(list.name) + " WHERE " + ID_FIELD + " = " + w.quote(list.id) + ";");
 
 		w.commit();
 	}
@@ -112,7 +112,7 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 {
 	List list;
 
-	list.list_id = row[ID_FIELD].as<IdType>();
+	list.id = row[ID_FIELD].as<IdType>();
 	list.owner_id = row[USER_ID].as<IdType>();
 	list.state_id = row[LIST_STATE_ID].as<IdType>();
 	list.name = row[LIST_NAME].as<std::string>();
