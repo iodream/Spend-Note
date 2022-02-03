@@ -1,9 +1,11 @@
 #include "Utils.h"
 
 #include "Net/Parsing.h"
+#include "Logger/ScopedLogger.h"
 
 Income ParseIncome(const QJsonObject& json)
 {
+	SCOPED_LOGGER;
 	Income income;
 
 	double tmp_number;

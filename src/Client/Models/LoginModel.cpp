@@ -2,7 +2,6 @@
 
 #include "LoginModel.h"
 #include "Net/Parsing.h"
-
 Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 {
 	Net::Request request;

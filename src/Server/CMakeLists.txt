@@ -41,11 +41,15 @@ list(APPEND Spend-Note-Server_LIBS
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libdal ${CMAKE_CURRENT_BINARY_DIR}/libdal)
-
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Logger ${CMAKE_CURRENT_BINARY_DIR}/Logger)
 
 list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Net_SOURCES}
+    ${Spend-Note-Logger_SOURCES}
+
 )
+
+
 
 add_executable(
     Spend-Note-Server

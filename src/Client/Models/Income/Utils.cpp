@@ -1,5 +1,4 @@
 #include "Utils.h"
-
 Income ParseIncome(const QJsonObject& json)
 {
 	long long tmp;

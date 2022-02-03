@@ -5,6 +5,7 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
 GetListsHandler::GetListsHandler()
 {
@@ -12,6 +13,7 @@ GetListsHandler::GetListsHandler()
 
 QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
 {
+	SCOPED_LOGGER;
 	QJsonArray json_array;
 	for (const auto& dto_item : dto) {
 		QJsonObject list;
@@ -29,6 +31,7 @@ QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
 
 Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));

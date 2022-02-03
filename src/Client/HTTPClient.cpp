@@ -8,7 +8,6 @@
 
 #include "Exception.h"
 #include "HTTPClient.h"
-
 void HTTPClient::set_token(const std::string& str_token)
 {
     m_token = str_token;

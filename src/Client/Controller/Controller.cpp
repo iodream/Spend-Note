@@ -4,7 +4,6 @@
 #include "Models/List/GetListsModel.h"
 
 #include "Net/Constants.h"
-
 Controller::Controller()
 {
 	ConnectLoginPage();
