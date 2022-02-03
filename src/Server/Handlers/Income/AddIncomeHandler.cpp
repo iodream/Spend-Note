@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 AddIncomeHandler::AddIncomeHandler()
 {
@@ -16,6 +17,7 @@ AddIncomeHandler::AddIncomeHandler()
 Income AddIncomeHandler::JSONParser::Parse(
 	const QJsonDocument& json_doc)
 {
+	SCOPED_LOGGER;
 	Income dto;
 
 	auto json = json_doc.object();
@@ -34,6 +36,7 @@ Income AddIncomeHandler::JSONParser::Parse(
 
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
 
 	auto dto = m_parser.Parse(request.json_payload);
@@ -57,6 +60,7 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 
 QJsonDocument AddIncomeHandler::JSONFormatter::Format(const DTO& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	json["id"] = std::to_string(dto.income_id).c_str();
 	return QJsonDocument{json};

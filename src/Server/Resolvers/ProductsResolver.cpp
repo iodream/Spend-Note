@@ -5,6 +5,7 @@
 
 #include "Utils.h"
 #include "../Error.h"
+#include "Logger/ScopedLogger.h"
 
 ICommandHandler* ProductsResolver::Resolve(
 	const std::string& path,
@@ -12,6 +13,7 @@ ICommandHandler* ProductsResolver::Resolve(
 	std::string::size_type pos,
 	Params& params)
 {
+	SCOPED_LOGGER;
 	if (pos == std::string::npos) {
 		return ResolveLastSegment(method);
 	}
@@ -31,6 +33,7 @@ ICommandHandler* ProductsResolver::Resolve(
 ICommandHandler* ProductsResolver::ResolveLastSegment(
 	const std::string& method)
 {
+	SCOPED_LOGGER;
 	if (method == Net::HTTP_METHOD_PUT)
 		throw NotImplementedError("Update product not yet implemented");
 	else if (method == Net::HTTP_METHOD_DELETE)

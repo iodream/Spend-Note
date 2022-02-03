@@ -1,7 +1,6 @@
 #include "GetListsModel.h"
 #include "Net/Parsing.h"
 #include "Utils.h"
-
 Net::Request GetListsModel::FormRequest()
 {
 	Net::Request request;

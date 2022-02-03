@@ -29,14 +29,16 @@ list(APPEND Spend-Note-Client_LIBS
 )
 
 add_subdirectory(Controller)
-add_subdirectory(DTO)
 add_subdirectory(Models)
 add_subdirectory(View)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Logger ${CMAKE_CURRENT_BINARY_DIR}/Logger)
 
 list(APPEND Spend-Note-Client_SOURCES
     ${Spend-Note-Net_SOURCES}
+    ${Spend-Note-Logger_SOURCES}
+
 )
 
 

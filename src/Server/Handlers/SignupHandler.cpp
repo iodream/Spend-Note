@@ -10,6 +10,7 @@
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 #include <iostream>
+#include "Logger/ScopedLogger.h"
 
 SignupHandler::SignupHandler()
 {
@@ -19,6 +20,7 @@ SignupHandler::SignupHandler()
 SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Credentials dto;
 	auto json = payload.object();
 
@@ -34,6 +36,7 @@ SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 
 Net::Response SignupHandler::Handle(Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByLogin(dto.login);
 

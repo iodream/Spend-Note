@@ -1,3 +1,4 @@
+
 #include "GetIncomesHandler.h"
 
 #include <QJsonArray>
@@ -8,14 +9,15 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
 GetIncomesHandler::GetIncomesHandler()
 {
-
 }
 
 Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 	try
 	{
@@ -33,6 +35,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 
 GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
 {
+	SCOPED_LOGGER;
 	JSONFormatter::Incomes incomes_out;
 	incomes_out.reserve(incomes.size());
 	for (const auto& income : incomes)
@@ -44,6 +47,7 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vect
 
 GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
 {
+	SCOPED_LOGGER;
 	JSONFormatter::Income income_out;
 
 	income_out.income_id = income.id;
@@ -67,6 +71,7 @@ GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Inco
 
 QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
 {
+	SCOPED_LOGGER;
 	QJsonObject income_json;
 	income_json["id"] = std::to_string(income.income_id).c_str();
 	income_json["user_id"] = std::to_string(income.user_id).c_str();
@@ -80,6 +85,7 @@ QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
 
 QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
 {
+	SCOPED_LOGGER;
 	QJsonArray incomes_json;
 	for (const Income& income : incomes)
 	{
@@ -90,6 +96,7 @@ QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
 
 QJsonDocument GetIncomesHandler::JSONFormatter::Format(const DTO& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	json["incomes"] = Format(dto.incomes);
 	return QJsonDocument{json};

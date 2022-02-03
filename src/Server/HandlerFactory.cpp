@@ -9,6 +9,7 @@
 #include "Handlers/List/RemoveListHandler.h"
 #include "Handlers/Income/RemoveIncomeHandler.h"
 #include "Handlers/Income/UpdateIncomeHandler.h"
+#include "Logger/ScopedLogger.h"
 
 const std::string DB_CONN_STRING =
 	"user=test_user host=127.0.0.1 "
@@ -17,10 +18,12 @@ const std::string DB_CONN_STRING =
 HandlerFactory::HandlerFactory()
 {
 
+
 }
 
 Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)
 {
+	SCOPED_LOGGER;
 	try{
 		return new HTTPRequestHandler{GetCommandHandler(http_req)};
 	}
@@ -33,6 +36,7 @@ Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::
 ICommandHandler* HandlerFactory::GetCommandHandler(
 		const Poco::Net::HTTPServerRequest& http_req)
 {
+	SCOPED_LOGGER;
 	auto uri = http_req.getURI();
 	Params params;
 	ICommandHandler* handler = m_resolver.Resolve(uri, http_req.getMethod(), params);

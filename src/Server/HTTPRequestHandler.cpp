@@ -5,9 +5,11 @@
 
 #include "HTTPRequestHandler.h"
 #include "Utils.h"
+#include "Logger/ScopedLogger.h"
 
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
 {
+	SCOPED_LOGGER;
 	std::cout << "Request from " << http_req.clientAddress() << "\n";
 
 	try {
@@ -44,6 +46,7 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 
 Net::Request HTTPRequestHandler::ParseRequest(HTTPRequest& http_req)
 {
+	SCOPED_LOGGER;
 	Net::Request request;
 	request.method = http_req.getMethod();
 	request.content_type = http_req.getContentType();
@@ -66,6 +69,7 @@ Net::Request HTTPRequestHandler::ParseRequest(HTTPRequest& http_req)
 
 QJsonDocument HTTPRequestHandler::ReadJSON(std::istream& is)
 {
+	SCOPED_LOGGER;
 	std::string json_doc_raw(std::istreambuf_iterator<char>(is), {});
 
 	return QJsonDocument::fromJson(
@@ -77,6 +81,7 @@ void HTTPRequestHandler::SendResponse(
 	const Net::Response& response,
 	HTTPResponse& http_res)
 {
+	SCOPED_LOGGER;
 	http_res.setChunkedTransferEncoding(true);
 	http_res.setContentType(response.content_type);
 
@@ -102,16 +107,19 @@ void HTTPRequestHandler::SendResponse(
 
 Net::Response HTTPRequestHandler::FormErrorResponse(const ClientError& ex)
 {
+	SCOPED_LOGGER;
 	return ::FormErrorResponse(ex.get_status(), ex.what());
 }
 
 Net::Response HTTPRequestHandler::FormErrorResponse(const ServerError& ex)
 {
+	SCOPED_LOGGER;
 	return ::FormErrorResponse(ex.get_status());
 }
 
 Net::Response HTTPRequestHandler::FormErrorResponse()
 {
+	SCOPED_LOGGER;
 	return ::FormErrorResponse(
 		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR);
 }
