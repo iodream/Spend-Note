@@ -47,6 +47,7 @@ private:
 signals:
 	void ChangeSubPage(MainSubPages page);
 	void Logout();
+	void GoBack();
 
 public slots:
 	void OnGoToListsClicked();
