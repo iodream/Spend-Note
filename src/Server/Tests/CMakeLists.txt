@@ -8,6 +8,7 @@ list(APPEND Tests_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/AddIncomeHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductHandlerTests.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/UpdateListHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/SignupTests.cpp
 
 )
