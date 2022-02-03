@@ -4,6 +4,7 @@
 #include <QJsonObject>
 
 #include "MockDbFacade.h"
+
 #include "Server/Handlers/List/GetListsHandler.h"
 #include "Server/Handlers/List/Utils.h"
 #include "Net/Parsing.h"

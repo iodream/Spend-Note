@@ -92,7 +92,18 @@ void Controller::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 	SCOPED_LOGGER;
 	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(credentials);
-	auto response = m_http_client.Request(request);
+	Net::Response response;
+	try {
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exception)
+	{
+		qCritical() << "Connection exception: " << exception.what();
+		QMessageBox::warning(&m_main_window
+			, QString("Error!")
+			, QString("Couldn't connect to server:\n %1").arg(exception.what()));
+		return;
+	}
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{

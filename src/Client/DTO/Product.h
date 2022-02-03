@@ -4,16 +4,18 @@
 
 #include "../Common.h"
 
+#include "ProductCategory.h"
+
 struct Product
 {
 	IdType id;
 	IdType list_id;
-	IdType category_id;
-	QString name;
-	double price;
-	BigInt amount;
-	int product_priority;
+	ProductCategory category;
 	bool is_bought;
+	QString name;
+	BigInt amount;
+	Money price;
+	int priority;
 	QString add_date;
 	QString purchase_date;
 	QString buy_until_date;

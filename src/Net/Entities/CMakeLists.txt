@@ -1,0 +1,9 @@
+list(APPEND Spend-Note-Server_SOURCES
+	${CMAKE_CURRENT_SOURCE_DIR}/List.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ListId.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ListState.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/Product.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/ProductId.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategory.h
+)
+set(Spend-Note-Net_SOURCES "${Spend-Note-Net_SOURCES}" PARENT_SCOPE)
