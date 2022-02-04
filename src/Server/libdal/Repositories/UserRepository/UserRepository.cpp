@@ -5,6 +5,9 @@
 #include "Exceptions/DatabaseFailure.h"
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)
 {
 
@@ -141,4 +144,6 @@ User UserRepository::UserFromRow(const pqxx::row& row)
 	user.login = row[db::user::LOGIN].as<std::string>();
 	user.password = row[db::user::PASSWORD].as<std::string>();
 	return user;
+}
+
 }

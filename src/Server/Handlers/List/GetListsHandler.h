@@ -12,14 +12,14 @@ class GetListsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using ListItem = std::pair<const List&, std::string>;
+		using ListItem = std::pair<const db::List&, std::string>;
 
 		using Lists = std::vector<ListItem>;
 
 		QJsonDocument Format(const Lists& dto);
 	};
 public:
-	GetListsHandler(IDbFacade::Ptr facade);
+	GetListsHandler();
 	virtual ~GetListsHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;

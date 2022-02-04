@@ -4,6 +4,9 @@
 #include "Exceptions/DatabaseFailure.h"
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 ProductCategoryRepository::ProductCategoryRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
 {
 
@@ -68,4 +71,6 @@ ProductCategory ProductCategoryRepository::ProductCategoryFromRow(const pqxx::ro
 	product_category.id = row[db::productCategory::ID].as<IdType>();
 	product_category.name = row[db::productCategory::NAME].as<std::string>();
 	return product_category;
+}
+
 }

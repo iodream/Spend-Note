@@ -7,4 +7,4 @@
 #include "../libdal/Facade/IDbFacade.h"
 
 
-Income ParseIncome(const QJsonObject& json);
+db::Income ParseIncome(const QJsonObject& json);

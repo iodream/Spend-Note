@@ -1,5 +1,4 @@
 #include "Utils.h"
-
 Income ParseIncome(const QJsonObject& json)
 {
 	long long tmp;
@@ -7,14 +6,14 @@ Income ParseIncome(const QJsonObject& json)
 
 	SafeReadId(json, "income_id", income.income_id);
 	SafeReadId(json, "owner_id", income.owner_id);
-	SafeReadQString(json, "name", income.name);
+	SafeReadString(json, "name", income.name);
 
 	SafeReadId(json, "amount", tmp); //currently reading amount as Money (long long)
 	income.amount = tmp/100 + (tmp%100)/100.0;
 
 	SafeReadId(json, "category_id", income.category_id);
-	SafeReadQString(json, "add_time", income.add_time);
-	SafeReadQString(json, "expiration_time", income.expiration_time);
+	SafeReadString(json, "add_time", income.add_time);
+	SafeReadString(json, "expiration_time", income.expiration_time);
 
 	return income;
 }

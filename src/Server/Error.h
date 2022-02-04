@@ -48,6 +48,21 @@ public:
     virtual ~BadRequestError() noexcept {}
 };
 
+class MethodNotAllowedError : public ClientError
+{
+public:
+	explicit MethodNotAllowedError()
+		: ClientError("Method not allowed", Status::HTTP_METHOD_NOT_ALLOWED) {}
+
+	explicit MethodNotAllowedError(const char* message)
+		: ClientError(message, Status::HTTP_METHOD_NOT_ALLOWED) {}
+
+	explicit MethodNotAllowedError(const std::string& message)
+		: ClientError(message, Status::HTTP_METHOD_NOT_ALLOWED) {}
+
+	virtual ~MethodNotAllowedError() noexcept {}
+};
+
 class ForbiddenError : public ClientError
 {
 public:

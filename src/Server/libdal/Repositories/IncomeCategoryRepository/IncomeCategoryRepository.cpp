@@ -2,6 +2,9 @@
 
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 IncomeCategoryRepository::IncomeCategoryRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
 }
@@ -28,7 +31,7 @@ IncomeCategory IncomeCategoryRepository::ParseSQLRow(const pqxx::row& row)
 {
 	IncomeCategory income_category;
 
-	income_category.income_category_id = row[db::incomeCategory::ID].as<IdType>();
+	income_category.id = row[db::incomeCategory::ID].as<IdType>();
 	income_category.name = row[db::incomeCategory::NAME].as<std::string>();
 
 	return income_category;
@@ -53,4 +56,6 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

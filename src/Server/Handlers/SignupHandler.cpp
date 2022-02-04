@@ -10,9 +10,9 @@
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 #include <iostream>
+#include "Logger/ScopedLogger.h"
 
-SignupHandler::SignupHandler(IDbFacade::Ptr facade)
-	: ICommandHandler(std::move(facade))
+SignupHandler::SignupHandler()
 {
 
 }
@@ -20,6 +20,7 @@ SignupHandler::SignupHandler(IDbFacade::Ptr facade)
 SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Credentials dto;
 	auto json = payload.object();
 
@@ -35,30 +36,26 @@ SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 
 Net::Response SignupHandler::Handle(Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_POST) {
-		auto dto = m_parser.Parse(request.json_payload);
-		auto user = m_facade->GetUserByLogin(dto.login);
+	SCOPED_LOGGER;
+	auto dto = m_parser.Parse(request.json_payload);
+	auto user = m_facade->GetUserByLogin(dto.login);
 
-		if (user)
-		{
-			return FormErrorResponse(
-				Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT,
-				"Login already exists");
-		}
-
-		try
-		{
-			m_facade->AddUser(User {0, dto.login, dto.passwd_hash}).value();
-			return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
-		}
-		catch(const DatabaseFailure& e)
-		{
-			return FormErrorResponse(
-				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-				"User not created because database error occured");
-		}
+	if (user)
+	{
+		return FormErrorResponse(
+			Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT,
+			"Login already exists");
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+
+	try
+	{
+		m_facade->AddUser(db::User {0, dto.login, dto.passwd_hash}).value();
+		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
+	}
+	catch(const db::DatabaseFailure& e)
+	{
+		return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"User not created because database error occured");
+	}
 }

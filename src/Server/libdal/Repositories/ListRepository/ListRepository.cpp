@@ -1,8 +1,10 @@
 #include "ListRepository.h"
 
 #include "Exceptions/NonexistentResource.h"
-
 #include "DatabaseNames.h"
+
+namespace db
+{
 
 ListRepository::ListRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
@@ -91,20 +93,23 @@ bool ListRepository::Update(const List& list)
 	try
 	{
 		pqxx::work w{m_db_connection};
+
 		auto result = w.exec(
 			"SELECT " + db::list::ID +
 			" FROM  " + db::list::TABLE_NAME +
-			" WHERE " + db::list::ID + " = " + w.quote(list.list_id));
+			" WHERE " + db::list::ID + " = " + w.quote(list.id));
+
 		if (result.empty())
 		{
 			return false;
 		}
+
 		w.exec0(
 			"UPDATE " + db::list::TABLE_NAME +
 			" SET " +
 				db::list::STATE_ID + " = " + w.quote(list.state_id) + ", " +
 				db::list::NAME + " = " + w.quote(list.name) +
-			" WHERE " + db::list::ID + " = " + w.quote(list.list_id) + ";");
+			" WHERE " + db::list::ID + " = " + w.quote(list.id) + ";");
 
 		w.commit();
 	}
@@ -119,7 +124,7 @@ List ListRepository::ParseSQLRow(const pqxx::row &row)
 {
 	List list;
 
-	list.list_id = row[db::list::ID].as<IdType>();
+	list.id = row[db::list::ID].as<IdType>();
 	list.owner_id = row[db::list::USER_ID].as<IdType>();
 	list.state_id = row[db::list::STATE_ID].as<IdType>();
 	list.name = row[db::list::NAME].as<std::string>();
@@ -157,4 +162,6 @@ std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 		throw DatabaseFailure(e.what());
 	}
 	return list;
+}
+
 }

@@ -7,6 +7,9 @@
 #include "Exceptions/NonexistentResource.h"
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
 {
 
@@ -226,4 +229,6 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	}
 
 	return product;
+}
+
 }

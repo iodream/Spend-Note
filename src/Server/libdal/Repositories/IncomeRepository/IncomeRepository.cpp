@@ -3,6 +3,9 @@
 #include "Exceptions/NonexistentResource.h"
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 IncomeRepository::IncomeRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
 }
@@ -70,7 +73,8 @@ bool IncomeRepository::Update(const Income& income)
 		auto result = w.exec(
 			"SELECT " + db::income::ID +
 			" FROM  " + db::income::TABLE_NAME +
-			" WHERE " + db::income::ID + " = " + w.quote(income.income_id));
+			" WHERE " + db::income::ID + " = " + w.quote(income.id));
+
 		if (result.empty())
 		{
 			return false;
@@ -85,7 +89,8 @@ bool IncomeRepository::Update(const Income& income)
 				db::income::ADD_TIME + " = " + w.quote(income.add_time) + ", " +
 				db::income::EXPIRATION_TIME + " = " + w.quote(income.expiration_time) +
 			" WHERE " +
-				db::income::ID + " = " + w.quote(income.income_id) + ";");
+				db::income::ID + " = " + w.quote(income.id) + ";");
+
 		w.commit();
 
 	}
@@ -159,7 +164,7 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 {
 	Income income;
 
-	income.income_id = row[db::income::ID].as<IdType>();
+	income.id = row[db::income::ID].as<IdType>();
 	income.user_id = row[db::income::USER_ID].as<IdType>();
 	income.name = row[db::income::NAME].as<std::string>();
 	income.amount = row[db::income::AMOUNT].as<Money>();
@@ -175,4 +180,5 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 	}
 
 	return income;
+}
 }

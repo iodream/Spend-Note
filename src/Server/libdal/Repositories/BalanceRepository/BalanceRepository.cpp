@@ -2,6 +2,9 @@
 
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 BalanceRepository::BalanceRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
 }
@@ -56,4 +59,6 @@ Money BalanceRepository::CalculatePlannedBalance(IdType user_id)
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

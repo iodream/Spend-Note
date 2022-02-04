@@ -3,9 +3,12 @@
 #include <string>
 #include "Types.h"
 
-struct User
+namespace db
 {
-	IdType id;
-	std::string login;
-	std::string password;
-};
+	struct User
+	{
+		IdType id;
+		std::string login;
+		std::string password;
+	};
+}

@@ -2,6 +2,9 @@
 
 #include "DatabaseNames.h"
 
+namespace db
+{
+
 ListStateRepository::ListStateRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
 }
@@ -28,7 +31,7 @@ ListState ListStateRepository::ParseSQLRow(const pqxx::row &row)
 {
 	ListState list_state;
 
-	list_state.list_state_id = row[db::listState::ID].as<IdType>();
+	list_state.id = row[db::listState::ID].as<IdType>();
 	list_state.name = row[db::listState::NAME].as<std::string>();
 
 	return list_state;
@@ -53,4 +56,6 @@ std::vector<ListState> ListStateRepository::GetAll()
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }
