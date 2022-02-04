@@ -14,11 +14,11 @@ AddIncomeHandler::AddIncomeHandler()
 {
 }
 
-Income AddIncomeHandler::JSONParser::Parse(
+db::Income AddIncomeHandler::JSONParser::Parse(
 	const QJsonDocument& json_doc)
 {
 	SCOPED_LOGGER;
-	Income dto;
+	db::Income dto;
 
 	auto json = json_doc.object();
 

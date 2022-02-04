@@ -38,7 +38,7 @@ Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 	auto lists = m_facade->GetAllLists(user_id);
 
 	JSONFormatter::Lists out_dto;
-	for (const List& list : lists) {
+	for (const db::List& list : lists) {
 		auto state = m_facade->GetListStateById(list.state_id);
 		std::string state_name = (state) ? state->name : EMPTY_STD_STRING;
 		out_dto.push_back({list, state_name});

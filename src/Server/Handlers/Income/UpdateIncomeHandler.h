@@ -12,7 +12,7 @@ class UpdateIncomeHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		Income Parse(const QJsonDocument& payload);
+		db::Income Parse(const QJsonDocument& payload);
 	};
 
 public:

@@ -7,10 +7,10 @@ template <typename T>
 struct Income
 {
 	using StringType = T;
-	IdType id;
+	db::IdType id;
 	IncomeCategory<T> category;
 	T name;
-	Money amount;
+	db::Money amount;
 	T add_time;
 	T expiration_time;
 };

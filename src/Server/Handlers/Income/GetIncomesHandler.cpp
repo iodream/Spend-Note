@@ -33,7 +33,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	}
 }
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
+GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<db::Income>& incomes)
 {
 	SCOPED_LOGGER;
 	JSONFormatter::Incomes incomes_out;
@@ -45,7 +45,7 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vect
 	return incomes_out;
 }
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
+GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const db::Income& income)
 {
 	SCOPED_LOGGER;
 	JSONFormatter::Income income_out;

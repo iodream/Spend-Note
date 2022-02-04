@@ -44,32 +44,32 @@ void SafeReadString(
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
-	IdType& dest);
+	db::IdType& dest);
 
 void SafeReadId(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest);
+	db::IdType& dest);
 
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const char* label,
-	BigInt& dest);
+	db::BigInt& dest);
 
 void SafeReadiBgInt(
 	const QJsonObject& json,
 	const std::string& label,
-	BigInt& dest);
+	db::BigInt& dest);
 
 void SafeReadMoney(
 	const QJsonObject& json,
 	const char* label,
-	Money& dest);
+	db::Money& dest);
 
 void SafeReadMoney(
 	const QJsonObject& json,
 	const std::string& label,
-	Money& dest);
+	db::Money& dest);
 
 void SafeReadNumber(
 	const QJsonObject& json,
@@ -114,32 +114,32 @@ void SafeReadObject(
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	const IdType& dest);
+	const db::IdType& dest);
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	const IdType& dest);
+	const db::IdType& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	const BigInt& dest);
+	const db::BigInt& dest);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	const BigInt& dest);
+	const db::BigInt& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	const Money& dest);
+	const db::Money& dest);
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	const Money& dest);
+	const db::Money& dest);
 
 void WriteString(
 	QJsonObject& json,

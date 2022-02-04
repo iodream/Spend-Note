@@ -33,7 +33,7 @@ TEST(AddIncomeHandler, ADD_INCOME)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 	EXPECT_CALL(*facade, AddIncome(_))
-		.WillOnce(Return(std::optional<IdType>{1}));
+		.WillOnce(Return(std::optional<db::IdType>{1}));
 
 	auto handler = std::make_unique<AddIncomeHandler>();
 	handler->set_facade(std::move(facade));

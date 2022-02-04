@@ -13,7 +13,8 @@
 AddProductHandler::AddProductHandler()
 {
 }
-Product AddProductHandler::JSONParser::Parse(
+
+db::Product AddProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
 	SCOPED_LOGGER;
