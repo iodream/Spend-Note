@@ -25,7 +25,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 		JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(user_id))};
 		return FormJSONResponse(m_formatter.Format(response_dto));
 	}
-	catch (const SQLFailure& e)
+	catch (const db::SQLFailure& e)
 	{
 		return FormErrorResponse(
 			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,

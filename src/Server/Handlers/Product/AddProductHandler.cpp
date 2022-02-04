@@ -44,7 +44,7 @@ Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 	try {
 		out_dto.id = m_facade->AddProduct(product).value();
 	}
-	catch (const SQLFailure& ex) {
+	catch (const db::SQLFailure& ex) {
 		return FormErrorResponse(
 			NetError::Status::HTTP_CONFLICT,
 			"Unable to create resource");

@@ -47,7 +47,7 @@ std::unique_ptr<AddProductHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& f
 
 ACTION(ThrowSQLFailure)
 {
-	throw SQLFailure("");
+	throw db::SQLFailure("");
 }
 
 TEST(AddProductHandlerTest, SUCCESS)

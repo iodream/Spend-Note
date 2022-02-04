@@ -94,7 +94,7 @@ TEST(GetIncomesHandlerTest, SQL_FAILURE)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Throw(SQLFailure("")));
+		.WillOnce(Throw(db::SQLFailure("")));
 
 	auto handler = std::make_unique<GetIncomesHandler>();
 	handler->set_facade(std::move(facade));

@@ -52,7 +52,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 		m_facade->AddUser(db::User {0, dto.login, dto.passwd_hash}).value();
 		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 	}
-	catch(const DatabaseFailure& e)
+	catch(const db::DatabaseFailure& e)
 	{
 		return FormErrorResponse(
 			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,

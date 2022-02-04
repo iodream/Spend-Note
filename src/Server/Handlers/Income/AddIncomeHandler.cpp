@@ -48,7 +48,7 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 	{
 		out_dto.income_id = m_facade->AddIncome(dto).value();
 	}
-	catch (const SQLFailure& e)
+	catch (const db::SQLFailure& e)
 	{
 		throw FormErrorResponse(
 			NetError::Status::HTTP_CONFLICT,
