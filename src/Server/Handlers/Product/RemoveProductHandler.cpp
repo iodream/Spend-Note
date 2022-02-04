@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 RemoveProductHandler::RemoveProductHandler()
 {
@@ -15,6 +16,7 @@ RemoveProductHandler::RemoveProductHandler()
 
 Net::Response RemoveProductHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	Q_UNUSED(request);
 	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
 

@@ -13,6 +13,7 @@
 
 #include "Utils.h"
 #include "../Error.h"
+#include "Logger/ScopedLogger.h"
 
 namespace {
 
@@ -27,12 +28,13 @@ const std::string USERS    = "/users";
 
 RootResolver::RootResolver()
 {
-//	m_resolvers[INCOMES] =
-//		std::unique_ptr<ISubDomainResolver>(new IncomesResolver());
-//	m_resolvers[LISTS] =
-//		std::unique_ptr<ISubDomainResolver>(new ListsResolver());
-//	m_resolvers[PRODUCTS] =
-//		std::unique_ptr<ISubDomainResolver>(new ProductsResolver());
+	SCOPED_LOGGER;
+	m_resolvers[INCOMES] =
+		std::unique_ptr<ISubDomainResolver>(new IncomesResolver());
+	m_resolvers[LISTS] =
+		std::unique_ptr<ISubDomainResolver>(new ListsResolver());
+	m_resolvers[PRODUCTS] =
+		std::unique_ptr<ISubDomainResolver>(new ProductsResolver());
 	m_resolvers[USERS] =
 		std::unique_ptr<ISubDomainResolver>(new UsersResolver());
 }
@@ -42,6 +44,7 @@ ICommandHandler* RootResolver::Resolve(
 	const std::string& method,
 	Params& params)
 {
+	SCOPED_LOGGER;
 	std::string::size_type next_pos;
 	auto segment = GetSegment(path, 0, next_pos);
 

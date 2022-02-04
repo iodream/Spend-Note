@@ -40,4 +40,3 @@ private:
 
 	JSONFormatter m_formatter{};
 };
-

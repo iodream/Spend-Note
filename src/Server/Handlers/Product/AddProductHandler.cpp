@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
+#include "Logger/ScopedLogger.h"
 
 AddProductHandler::AddProductHandler()
 {
@@ -15,12 +16,14 @@ AddProductHandler::AddProductHandler()
 Product AddProductHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	auto json = payload.object();
 	return ParseProduct(json);
 }
 
 QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 
 	json["id"] = std::to_string(dto.id).c_str();
@@ -30,6 +33,7 @@ QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
 
 Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto product = m_parser.Parse(request.json_payload);
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
 	product.list_id = list_id;

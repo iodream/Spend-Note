@@ -272,6 +272,7 @@ void WriteString(
 	QJsonObject& json,
 	const std::string& label,
 	const std::string& dest)
+
 {
 	return WriteString(json, label.c_str(), dest);
 }

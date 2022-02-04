@@ -1,5 +1,4 @@
 #include "Utils.h"
-
 List ParseList(const QJsonObject& json)
 {
 	List list;
