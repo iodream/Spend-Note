@@ -10,7 +10,7 @@ class AddIncomeHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		Income Parse(const QJsonDocument& json_doc);
+		db::Income Parse(const QJsonDocument& json_doc);
 	};
 
 	class JSONFormatter
@@ -18,7 +18,7 @@ class AddIncomeHandler : public AuthorizedHandler
 	public:
 		struct DTO
 		{
-			IdType income_id;
+			db::IdType income_id;
 		};
 
 		QJsonDocument Format(const DTO& dto);

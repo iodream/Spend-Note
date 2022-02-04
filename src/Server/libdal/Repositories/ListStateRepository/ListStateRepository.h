@@ -6,6 +6,8 @@
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
 class ListStateRepository
 {
 public:
@@ -19,3 +21,4 @@ private:
 
 	ListState ParseSQLRow(const pqxx::row& row);
 };
+}

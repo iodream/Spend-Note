@@ -47,11 +47,11 @@ void SafeReadString(
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	if (json.contains(label) && json[label].isDouble()) {
 		double id = json[label].toDouble();
-		IdType* value = reinterpret_cast<IdType*>(&id);
+		db::IdType* value = reinterpret_cast<db::IdType*>(&id);
 		dest = *value;
 	}
 	else {
@@ -63,7 +63,7 @@ void SafeReadId(
 void SafeReadId(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadId(json, label.c_str(), dest);
 }
@@ -71,12 +71,13 @@ void SafeReadId(
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const char* label,
-	BigInt& dest)
+	db::BigInt& dest)
 {
-	if (json.contains(label) && json[label].isDouble()) {
+	if (json.contains(label) && json[label].isDouble())
+	{
 		double amount = json[label].toDouble();
 		double* ptr = &amount;
-		BigInt* value = reinterpret_cast<BigInt*>(ptr);
+		db::BigInt* value = reinterpret_cast<db::BigInt*>(ptr);
 		dest = *value;
 	}
 	else {
@@ -88,7 +89,7 @@ void SafeReadBigInt(
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadBigInt(json, label.c_str(), dest);
 }
@@ -96,15 +97,16 @@ void SafeReadBigInt(
 void SafeReadMoney(
 	const QJsonObject& json,
 	const char* label,
-	Money& dest)
+	db::Money& dest)
 {
 	if (json.contains(label) && json[label].isDouble()) {
 		double price = json[label].toDouble();
 		double* ptr = &price;
-		Money* value = reinterpret_cast<Money*>(ptr);
+		db::Money* value = reinterpret_cast<db::Money*>(ptr);
 		dest = *value;
 	}
-	else {
+	else
+	{
 		throw ParsingError{
 			std::string{"Failed to parse \""}.append(label).append("\" field")};
 	}
@@ -113,7 +115,7 @@ void SafeReadMoney(
 void SafeReadMoney(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadMoney(json, label.c_str(), dest);
 }
@@ -209,7 +211,7 @@ void SafeReadObject(
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	const IdType& dest)
+	const db::IdType& dest)
 {
 	double* id = reinterpret_cast<double*>(dest);
 	json[label] = *id;
@@ -219,7 +221,7 @@ void WriteId(
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	const IdType& dest)
+	const db::IdType& dest)
 {
 	return WriteId(json, label.c_str(), dest);
 }
@@ -227,7 +229,7 @@ void WriteId(
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	const BigInt& dest)
+	const db::BigInt& dest)
 {
 	double* amount = reinterpret_cast<double*>(dest);
 	json[label] = *amount;
@@ -237,7 +239,7 @@ void WriteBigInt(
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	const BigInt& dest)
+	const db::BigInt& dest)
 {
 	return WriteBigInt(json, label.c_str(), dest);
 }
@@ -245,7 +247,7 @@ void WriteBigInt(
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	const Money& dest)
+	const db::Money& dest)
 {
 	double* price = reinterpret_cast<double*>(dest);
 	json[label] = *price;
@@ -255,7 +257,7 @@ void WriteMoney(
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	const Money& dest)
+	const db::Money& dest)
 {
 	return WriteMoney(json, label.c_str(), dest);
 }

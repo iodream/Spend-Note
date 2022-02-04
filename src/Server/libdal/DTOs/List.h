@@ -3,10 +3,13 @@
 #include <string>
 #include "Types.h"
 
-struct List
+namespace db
 {
-	IdType id;
-	IdType owner_id;
-	IdType state_id;
-	std::string name;
-};
+	struct List
+	{
+		IdType id;
+		IdType owner_id;
+		IdType state_id;
+		std::string name;
+	};
+}

@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include "pqxx/pqxx"
 
+namespace db
+{
 class DatabaseFailure : public std::runtime_error
 {
 public:
@@ -11,4 +13,4 @@ public:
 	DatabaseFailure(std::string& msg) : std::runtime_error(msg) {}
 	DatabaseFailure(const char* msg) : std::runtime_error(msg) {}
 };
-
+}

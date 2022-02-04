@@ -18,7 +18,7 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Return(std::vector<Income>{}));
+		.WillOnce(Return(std::vector<db::Income>{}));
 
 	auto handler = std::make_unique<GetIncomesHandler>();
 	handler->set_facade(std::move(facade));
@@ -41,7 +41,7 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 
 TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 {
-	Income i;
+	db::Income i;
 	i.id = 1;
 	i.user_id = 1;
 	i.name = "Test income";
@@ -50,16 +50,16 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	i.add_time = "2022-01-23 20:00:00";
 	i.expiration_time = "2022-01-30 20:00:00";
 
-	IncomeCategory c;
+	db::IncomeCategory c;
 	c.id = 1;
 	c.name = "Test category";
 
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Return(std::vector<Income>{i}));
+		.WillOnce(Return(std::vector<db::Income>{i}));
 	EXPECT_CALL(*facade, GetIncomeCategoryById(1))
-		.WillOnce(Return(std::optional<IncomeCategory>{c}));
+		.WillOnce(Return(std::optional<db::IncomeCategory>{c}));
 
 	auto handler = std::make_unique<GetIncomesHandler>();
 	handler->set_facade(std::move(facade));
@@ -94,7 +94,7 @@ TEST(GetIncomesHandlerTest, SQL_FAILURE)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Throw(SQLFailure("")));
+		.WillOnce(Throw(db::SQLFailure("")));
 
 	auto handler = std::make_unique<GetIncomesHandler>();
 	handler->set_facade(std::move(facade));

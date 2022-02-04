@@ -5,6 +5,8 @@
 #include "DTOs/IncomeCategory.h"
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
 class IncomeCategoryRepository
 {
 public:
@@ -18,3 +20,4 @@ private:
 
 	IncomeCategory ParseSQLRow(const pqxx::row& row);
 };
+}

@@ -12,14 +12,14 @@ class AddProductHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		Product Parse(const QJsonDocument& payload);
+		db::Product Parse(const QJsonDocument& payload);
 	};
 
 	class JSONFormatter
 	{
 	public:
 		struct Product {
-			IdType id;
+			db::IdType id;
 		};
 
 		QJsonDocument Format(const Product& dto);

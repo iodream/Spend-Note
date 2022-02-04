@@ -14,7 +14,7 @@ using ::testing::_;
 TEST(SignupHandlerTest, USER_ALREADY_EXISTS)
 {
 	auto facade = std::make_unique<MockDbFacade>();
-	User existing_user;
+	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
 	existing_user.password = "Test password hash";
@@ -44,9 +44,9 @@ TEST(SignupHandlerTest, USER_DOES_NOT_EXIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetUserByLogin(_))
-		.WillOnce(Return(std::optional<User>{}));
+		.WillOnce(Return(std::optional<db::User>{}));
 
-	IdType id;
+	db::IdType id;
 	EXPECT_CALL(*facade, AddUser(_))
 		.WillOnce(Return(std::optional{id}));
 

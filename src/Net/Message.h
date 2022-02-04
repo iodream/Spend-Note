@@ -24,7 +24,7 @@ struct Request : public Message
 	AuthSchemeType auth_scheme;
 	std::string auth_info;
 	QJsonDocument jwt_token_body;
-	IdType uid;
+	db::IdType uid;
 };
 
 struct Response : public Message

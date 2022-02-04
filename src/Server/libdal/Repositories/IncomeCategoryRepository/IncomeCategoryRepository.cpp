@@ -1,5 +1,8 @@
 #include "IncomeCategoryRepository.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string& TABLE_NAME = "IncomeCategory";
@@ -56,4 +59,6 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

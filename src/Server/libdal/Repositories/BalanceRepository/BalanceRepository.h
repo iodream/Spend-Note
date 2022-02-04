@@ -5,6 +5,8 @@
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
 class BalanceRepository
 {
 public:
@@ -15,3 +17,4 @@ public:
 private:
 	pqxx::connection& m_db_connection;
 };
+}
