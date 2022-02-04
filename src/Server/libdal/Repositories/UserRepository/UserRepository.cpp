@@ -1,17 +1,12 @@
 #include "UserRepository.h"
-#include "Exceptions/DatabaseFailure.h"
+
 #include <iostream>
+
+#include "Exceptions/DatabaseFailure.h"
+#include "DatabaseNames.h"
 
 namespace db
 {
-
-namespace
-{
-	const std::string TABLE_NAME = "User_";
-	const std::string ID_FIELD = "id";
-	const std::string LOGIN_FIELD = "login";
-	const std::string PASSWORD_FIELD = "password";
-}
 
 UserRepository::UserRepository(pqxx::connection &db_connection) : m_database_connection(db_connection)
 {
@@ -24,18 +19,18 @@ std::optional<IdType> UserRepository::Add(const User &user)
 	{
 		pqxx::work w(m_database_connection);
 		auto id_rows = w.exec(
-			"INSERT INTO " + TABLE_NAME + " (" +
-				LOGIN_FIELD + ", " +
-				PASSWORD_FIELD +
+			"INSERT INTO " + db::user::TABLE_NAME + " (" +
+				db::user::LOGIN + ", " +
+				db::user::PASSWORD +
 			") VALUES (" +
 				w.quote(user.login) + ", " +
 				w.quote(user.password) + ")" +
-			" RETURNING " + ID_FIELD + ";");
+			" RETURNING " + db::user::ID + ";");
 
 		w.commit();
 
 		auto id_row = id_rows.front();
-		return id_row[ID_FIELD].as<IdType>();
+		return id_row[db::user::ID].as<IdType>();
 	}
 
 	catch(const pqxx::failure& e)
@@ -52,9 +47,9 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
-			" FROM " + TABLE_NAME +
-			" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD +
+			" FROM " + db::user::TABLE_NAME +
+			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 
 		if (!user_rows.empty())
 		{
@@ -75,9 +70,9 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + ID_FIELD + ", " + LOGIN_FIELD + ", " + PASSWORD_FIELD +
-			" FROM " + TABLE_NAME +
-			" WHERE " + LOGIN_FIELD + " = " + w.quote(login) + ";");
+			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD +
+			" FROM " + db::user::TABLE_NAME +
+			" WHERE " + db::user::LOGIN + " = " + w.quote(login) + ";");
 
 		if (!user_rows.empty())
 		{
@@ -98,18 +93,18 @@ bool UserRepository::Update(const User &user)
 	{
 		pqxx::work w(m_database_connection);
 
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(user.id));
+		auto result = w.exec("SELECT " + db::user::ID + " FROM  " + db::user::TABLE_NAME + " WHERE " + db::user::ID + " = " + w.quote(user.id));
 		if (result.empty())
 		{
 			return false;
 		}
 
 		w.exec0(
-			"UPDATE " + TABLE_NAME +
+			"UPDATE " + db::user::TABLE_NAME +
 			" SET " +
-				LOGIN_FIELD + " = " + w.quote(user.login) + ", " +
-				PASSWORD_FIELD + " = " + w.quote(user.password) +
-			" WHERE " + ID_FIELD + " = " + w.quote(user.id) + ";");
+				db::user::LOGIN + " = " + w.quote(user.login) + ", " +
+				db::user::PASSWORD + " = " + w.quote(user.password) +
+			" WHERE " + db::user::ID + " = " + w.quote(user.id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::failure& e)
@@ -124,12 +119,15 @@ bool UserRepository::Remove(IdType id)
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
+		auto result = w.exec(
+			"SELECT " + db::user::ID +
+			" FROM  " + db::user::TABLE_NAME +
+			" WHERE " + db::user::ID + " = " + w.quote(id));
 		if (result.empty())
 		{
 			return false;
 		}
-		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+		w.exec0("DELETE FROM " + db::user::TABLE_NAME + " WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::failure& e)
@@ -142,9 +140,9 @@ bool UserRepository::Remove(IdType id)
 User UserRepository::UserFromRow(const pqxx::row& row)
 {
 	User user;
-	user.id = row[ID_FIELD].as<int>();
-	user.login = row[LOGIN_FIELD].as<std::string>();
-	user.password = row[PASSWORD_FIELD].as<std::string>();
+	user.id = row[db::user::ID].as<int>();
+	user.login = row[db::user::LOGIN].as<std::string>();
+	user.password = row[db::user::PASSWORD].as<std::string>();
 	return user;
 }
 

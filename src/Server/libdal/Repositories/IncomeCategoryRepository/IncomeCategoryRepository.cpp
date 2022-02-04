@@ -1,14 +1,9 @@
 #include "IncomeCategoryRepository.h"
 
+#include "DatabaseNames.h"
+
 namespace db
 {
-
-namespace
-{
-	const std::string& TABLE_NAME = "IncomeCategory";
-	const std::string& ID_FIELD = "id";
-	const std::string& NAME_FIELD = "name";
-}
 
 IncomeCategoryRepository::IncomeCategoryRepository(pqxx::connection& db_connection) : m_db_connection(db_connection)
 {
@@ -19,7 +14,9 @@ std::optional<IncomeCategory> IncomeCategoryRepository::GetById(const IdType& ca
 	try
 	{
 		pqxx::work w{m_db_connection};
-		pqxx::result income_category = w.exec("SELECT * FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(category_id) + ";");
+		pqxx::result income_category = w.exec(
+			"SELECT * FROM " + db::incomeCategory::TABLE_NAME +
+			" WHERE " + db::incomeCategory::ID + " = " + w.quote(category_id) + ";");
 
 		return ParseSQLRow(income_category.front());
 	}
@@ -34,8 +31,8 @@ IncomeCategory IncomeCategoryRepository::ParseSQLRow(const pqxx::row& row)
 {
 	IncomeCategory income_category;
 
-	income_category.id = row[ID_FIELD].as<IdType>();
-	income_category.name = row[NAME_FIELD].as<std::string>();
+	income_category.id = row[db::incomeCategory::ID].as<IdType>();
+	income_category.name = row[db::incomeCategory::NAME].as<std::string>();
 
 	return income_category;
 }
@@ -47,7 +44,7 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 		pqxx::work w{m_db_connection};
 		std::vector<IncomeCategory> income_categories;
 
-		pqxx::result r = w.exec("SELECT * FROM " + TABLE_NAME + ";");
+		pqxx::result r = w.exec("SELECT * FROM " + db::incomeCategory::TABLE_NAME + ";");
 
 		for(const auto& row : r)
 		{
