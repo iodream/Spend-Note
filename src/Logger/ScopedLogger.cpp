@@ -11,11 +11,12 @@ ScopedLogger::ScopedLogger(const std::string& file_name, const std::string& func
 	, const int& line_nr, const std::thread::id& thread_id)
 	: m_file_name(file_name)
 	, m_func_name(func_name)
+	, m_line_nr(line_nr)
 	, m_thread_id(thread_id)
 {
 	std::lock_guard<std::mutex> lock(m_log_mutex);
-	m_stream << "\n" << file_name <<": line "<< line_nr <<": "<< func_name
-		<< "() started with threadid " << thread_id << "\n" << std::flush;
+	m_stream << m_file_name << ":" << m_line_nr << "\n"
+	<< "[" << m_thread_id << "] " << m_func_name << "() started\n" << std::flush;
 }
 
 void ScopedLogger::Init(const std::string& log_file_name)
@@ -27,6 +28,6 @@ void ScopedLogger::Init(const std::string& log_file_name)
 ScopedLogger::~ScopedLogger()
 {
 	std::lock_guard<std::mutex> lock(m_log_mutex);
-	m_stream << "\n" << m_file_name<<": " << m_func_name
-		<< "() finished with threadid " << m_thread_id << "\n" << std::flush;
+	m_stream << m_file_name << ":" << m_line_nr << "\n"
+	<< "[" << m_thread_id << "] " << m_func_name << "() finished\n" << std::flush;
 }

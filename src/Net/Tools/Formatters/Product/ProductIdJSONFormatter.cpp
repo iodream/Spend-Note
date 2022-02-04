@@ -1,11 +1,11 @@
 #include <QJsonObject>
 
-#include "Net/Parsing.h"
 #include "ProductIdJSONFormatter.h"
+#include "Net/Parsing.h"
 
-QJsonDocument ProductIdJSONFormatter::Format(const ProductId &product_id)
+QJsonObject ProductIdJSONFormatter::Format(const ProductId& product_id)
 {
 	QJsonObject json;
 	WriteId(json, "id", product_id.id);
-	return QJsonDocument{json};
+	return json;
 }
