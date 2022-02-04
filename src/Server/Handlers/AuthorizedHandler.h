@@ -7,7 +7,7 @@
 class AuthorizedHandler : public ICommandHandler
 {
 public:
-	AuthorizedHandler(IDbFacade::Ptr facade);
+	AuthorizedHandler();
 	virtual ~AuthorizedHandler() override {}
 
 private:
@@ -15,7 +15,7 @@ private:
 	{
 	public:
 		struct Token{
-			IdType id;
+			db::IdType id;
 			std::string login;
 			double iat;
 		};

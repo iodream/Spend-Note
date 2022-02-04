@@ -19,7 +19,7 @@ class SignupHandler : public ICommandHandler
 		Credentials Parse(const QJsonDocument& payload);
 	};
 public:
-	SignupHandler(IDbFacade::Ptr facade);
+	SignupHandler();
 	virtual ~SignupHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;

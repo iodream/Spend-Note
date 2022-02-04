@@ -2,12 +2,14 @@
 
 #include <QMessageBox>
 
+#include "HTTPClient.h"
+#include "NavHistory.h"
+
 #include "View/MainWindow.h"
 #include "View/MainPage/MainPage.h"
 #include "Models/SignupModel.h"
 #include "View/Constants.h"
 #include "Models/LoginModel.h"
-#include "HTTPClient.h"
 
 class Controller : public QObject
 {
@@ -21,12 +23,16 @@ public:
 	void StartTest();
 
 private:
-	std::string m_hostname{"http://localhost:8080/"};
+	std::string m_hostname{"http://localhost:8080"};
 
 	HTTPClient m_http_client;
+
+	NavHistory m_history;
 	MainWindow m_main_window;
 
-	void UpdateMainListsSubPage();
+	IdType m_user_id{1};
+
+	bool UpdateMainListsSubPage();
 	void SetMainSubPage(MainSubPages page);
 
 	void ConnectLoginPage();
@@ -40,9 +46,9 @@ public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnLogout();
 	void OnChangeMainSubPage(MainSubPages page);
-	void OnGotoSignupPage();
+	void OnGoToSignupPage();
 	void OnSignup(const SignupInDTO& in_dto);
-//	void OnMoveBack();
+	void OnGoBack();
 //	void OnLoadLists();
 //	void OnLoadProducts();
 //	void OnLoadProducts();

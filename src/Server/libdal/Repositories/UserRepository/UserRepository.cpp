@@ -2,6 +2,9 @@
 #include "Exceptions/DatabaseFailure.h"
 #include <iostream>
 
+namespace db
+{
+
 namespace
 {
 	const std::string TABLE_NAME = "User_";
@@ -143,4 +146,6 @@ User UserRepository::UserFromRow(const pqxx::row& row)
 	user.login = row[LOGIN_FIELD].as<std::string>();
 	user.password = row[PASSWORD_FIELD].as<std::string>();
 	return user;
+}
+
 }

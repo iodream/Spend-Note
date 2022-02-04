@@ -12,29 +12,19 @@ class GetProductsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using ProductItem = std::pair<const Product&, std::string>;
+		using ProductItem = std::pair<const db::Product&, std::string>;
 
 		using Products = std::vector<ProductItem>;
 
 		QJsonDocument Format(const Products& dto);
 	};
 
-	class JSONParser
-	{
-	public:
-		struct Product {
-			IdType list_id;
-		};
-		Product Parse(const QJsonDocument& payload);
-	};
-
 public:
-	GetProductsHandler(IDbFacade::Ptr facade);
+	GetProductsHandler();
 	virtual ~GetProductsHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
 	JSONFormatter m_formatter{};
-	JSONParser m_parser{};
 };

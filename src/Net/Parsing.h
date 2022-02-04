@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -10,32 +11,32 @@
 
 class ParsingError : public Exception {
 public:
-    explicit ParsingError(const char* message)
-        : Exception(message) {}
+	explicit ParsingError(const char* message)
+		: Exception(message) {}
 
-    explicit ParsingError(const std::string& message)
-        : Exception(message) {}
+	explicit ParsingError(const std::string& message)
+		: Exception(message) {}
 
-    virtual ~ParsingError() noexcept {}
+	virtual ~ParsingError() noexcept {}
 };
 
 
 void SafeReadString(
-    const QJsonObject& json,
-    const std::string& label,
-    std::string& dest);
+	const QJsonObject& json,
+	const std::string& label,
+	std::string& dest);
 
 void SafeReadString(
-    const QJsonObject& json,
-    const char* label,
-    std::string& dest);
+	const QJsonObject& json,
+	const char* label,
+	std::string& dest);
 
-void SafeReadQString(
+void SafeReadString(
 	const QJsonObject& json,
 	const std::string& label,
 	QString& dest);
 
-void SafeReadQString(
+void SafeReadString(
 	const QJsonObject& json,
 	const char* label,
 	QString& dest);
@@ -43,12 +44,32 @@ void SafeReadQString(
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
-	IdType& dest);
+	db::IdType& dest);
 
 void SafeReadId(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest);
+	db::IdType& dest);
+
+void SafeReadBigInt(
+	const QJsonObject& json,
+	const char* label,
+	db::BigInt& dest);
+
+void SafeReadiBgInt(
+	const QJsonObject& json,
+	const std::string& label,
+	db::BigInt& dest);
+
+void SafeReadMoney(
+	const QJsonObject& json,
+	const char* label,
+	db::Money& dest);
+
+void SafeReadMoney(
+	const QJsonObject& json,
+	const std::string& label,
+	db::Money& dest);
 
 void SafeReadNumber(
 	const QJsonObject& json,
@@ -79,3 +100,65 @@ void SafeReadBool(
 	const QJsonObject& json,
 	const std::string& label,
 	bool& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const char* label,
+	QJsonObject& dest);
+
+void SafeReadObject(
+	const QJsonObject& json,
+	const std::string& label,
+	QJsonObject& dest);
+
+double FormatId(db::IdType id);
+
+void WriteId(
+	QJsonObject& json,
+	const char* label,
+	const db::IdType& value);
+
+void WriteId(
+	QJsonObject& json,
+	const std::string& label,
+	const db::IdType& value);
+
+void WriteBigInt(
+	QJsonObject& json,
+	const char* label,
+	const db::BigInt& value);
+
+void WriteBigInt(
+	QJsonObject& json,
+	const std::string& label,
+	const db::BigInt& value);
+
+void WriteMoney(
+	QJsonObject& json,
+	const char* label,
+	const db::Money& value);
+
+void WriteMoney(
+	QJsonObject& json,
+	const std::string& label,
+	const db::Money& value);
+
+void WriteString(
+	QJsonObject& json,
+	const char* label,
+	const std::string& value);
+
+void WriteString(
+	QJsonObject& json,
+	const std::string& label,
+	const std::string& value);
+
+void WriteString(
+	QJsonObject& json,
+	const char* label,
+	const QString& value);
+
+void WriteString(
+	QJsonObject& json,
+	const std::string& label,
+	const QString& value);

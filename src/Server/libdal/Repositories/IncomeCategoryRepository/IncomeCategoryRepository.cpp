@@ -1,5 +1,8 @@
 #include "IncomeCategoryRepository.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string& TABLE_NAME = "IncomeCategory";
@@ -31,7 +34,7 @@ IncomeCategory IncomeCategoryRepository::ParseSQLRow(const pqxx::row& row)
 {
 	IncomeCategory income_category;
 
-	income_category.income_category_id = row[ID_FIELD].as<IdType>();
+	income_category.id = row[ID_FIELD].as<IdType>();
 	income_category.name = row[NAME_FIELD].as<std::string>();
 
 	return income_category;
@@ -56,4 +59,6 @@ std::vector<IncomeCategory> IncomeCategoryRepository::GetAll()
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
 }

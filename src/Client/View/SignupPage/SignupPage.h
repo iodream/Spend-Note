@@ -17,7 +17,7 @@ public:
 	~SignupPage();
 
 signals:
-	void Signup(SignupModel::SignupInDTO& dto);
+	void Signup(const SignupModel::SignupInDTO& dto);
 	void GotoLoginPage();
 
 private slots:

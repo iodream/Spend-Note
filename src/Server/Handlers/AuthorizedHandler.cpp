@@ -15,15 +15,16 @@
 #include "../libdal/Facade/DbFacade.h"
 #include "Common.h"
 #include "Net/Parsing.h"
+#include "Logger/ScopedLogger.h"
 
-AuthorizedHandler::AuthorizedHandler(IDbFacade::Ptr facade)
-	: ICommandHandler(std::move(facade))
+AuthorizedHandler::AuthorizedHandler()
 {
 
 }
 
 QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 {
+	SCOPED_LOGGER;
 	std::stringstream body_encoded;
 	auto body_begin_pos = token.find(".");
 	if (body_begin_pos == std::string::npos)
@@ -57,6 +58,7 @@ QJsonDocument AuthorizedHandler::DecodeJWTTokenBody(const std::string& token)
 AuthorizedHandler::JSONParser::Token AuthorizedHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
+	SCOPED_LOGGER;
 	Token dto;
 	auto json = payload.object();
 
@@ -73,6 +75,7 @@ AuthorizedHandler::JSONParser::Token AuthorizedHandler::JSONParser::Parse(
 
 bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.auth_scheme != Net::AUTH_SCHEME_TYPE_BEARER)
 		return false;
 	auto parsed_token = m_parser.Parse(request.jwt_token_body);
@@ -93,6 +96,7 @@ bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 
 Net::Response AuthorizedHandler::Handle(Net::Request& request)
 {
+	SCOPED_LOGGER;
 	if (request.auth_scheme == Net::AUTH_SCHEME_TYPE_BEARER) {
 		if (!request.auth_info.size()) {
 			return FormErrorResponse(

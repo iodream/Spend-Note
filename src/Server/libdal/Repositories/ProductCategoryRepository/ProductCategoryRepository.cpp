@@ -3,6 +3,9 @@
 #include <algorithm>
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
+
 namespace
 {
 	const std::string TABLE_NAME = "ProductCategory";
@@ -74,4 +77,6 @@ ProductCategory ProductCategoryRepository::ProductCategoryFromRow(const pqxx::ro
 	product_category.id = row[ID_FIELD].as<IdType>();
 	product_category.name = row[NAME_FIELD].as<std::string>();
 	return product_category;
+}
+
 }

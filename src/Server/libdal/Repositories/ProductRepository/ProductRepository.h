@@ -5,6 +5,8 @@
 #include <pqxx/pqxx>
 #include "DTOs/Product.h"
 
+namespace db
+{
 class ProductRepository
 {
 public:
@@ -21,4 +23,4 @@ private:
 
 	pqxx::connection& m_database_connection;
 };
-
+}
