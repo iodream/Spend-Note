@@ -14,43 +14,52 @@ AddProductHandler::AddProductHandler()
 {
 }
 
-db::Product AddProductHandler::JSONParser::Parse(
-	const QJsonDocument& payload)
+db::Product AddProductHandler::ToDBProduct(const Product& product)
 {
-	SCOPED_LOGGER;
-	auto json = payload.object();
-	return ParseProduct(json);
-}
-
-QJsonDocument AddProductHandler::JSONFormatter::Format(const Product& dto)
-{
-	SCOPED_LOGGER;
-	QJsonObject json;
-
-	json["id"] = std::to_string(dto.id).c_str();
-
-	return QJsonDocument{json};
+	db::Product db_product;
+	db_product.id = product.id;
+	db_product.list_id = product.list_id;
+	db_product.category_id = product.category.id;
+	db_product.name = product.name;
+	db_product.price = product.price;
+	db_product.amount = product.amount;
+	db_product.product_priority = product.priority;
+	db_product.is_bought = product.is_bought;
+	db_product.add_date = product.add_date;
+	if (product.purchase_date != "")
+	{
+		db_product.purchase_date = product.purchase_date;
+	}
+	else
+	{
+		db_product.purchase_date = std::nullopt;
+	}
+	if (product.buy_until_date != "")
+	{
+		db_product.buy_until_date = product.buy_until_date;
+	}
+	else
+	{
+		db_product.buy_until_date = std::nullopt;
+	}
+	return db_product;
 }
 
 Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 {
-	SCOPED_LOGGER;
-	auto product = m_parser.Parse(request.json_payload);
-	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
-	product.list_id = list_id;
-
-	JSONFormatter::Product out_dto;
-
+	auto json_payload = request.json_payload.object();
+	auto product = m_parser.Parse(json_payload);
+	auto product_db = ToDBProduct(product);
+	ProductId product_id;
 	try {
-		out_dto.id = m_facade->AddProduct(product).value();
+		product_id.id = m_facade->AddProduct(product_db).value();
 	}
 	catch (const db::SQLFailure& ex) {
 		return FormErrorResponse(
 			NetError::Status::HTTP_CONFLICT,
 			"Unable to create resource");
 	}
-
 	return FormJSONResponse(
-		m_formatter.Format(out_dto),
+		m_formatter.Format(product_id),
 		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CREATED);
 }

@@ -111,55 +111,54 @@ void SafeReadObject(
 	const std::string& label,
 	QJsonObject& dest);
 
+double FormatId(db::IdType id);
+
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	const db::IdType& dest);
+	const db::IdType& value);
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	const db::IdType& dest);
+	const db::IdType& value);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	const db::BigInt& dest);
+	const db::BigInt& value);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	const db::BigInt& dest);
+	const db::BigInt& value);
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	const db::Money& dest);
+	const db::Money& value);
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	const db::Money& dest);
+	const db::Money& value);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const std::string& dest);
-
+	const std::string& value);
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const std::string& dest);
-
+	const std::string& value);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const QString& dest);
-
+	const QString& value);
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const QString& dest);
+	const QString& value);
