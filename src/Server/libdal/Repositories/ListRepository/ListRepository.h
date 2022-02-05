@@ -3,6 +3,8 @@
 
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
 class ListRepository
 {
 public:
@@ -19,3 +21,4 @@ private:
 
 	pqxx::connection& m_db_connection;
 };
+}

@@ -15,19 +15,19 @@ using ::testing::_;
 
 namespace  {
 
-List l1 {
+db::List l1 {
 	1,
 	1,
 	1,
 	"List 1",
 };
 
-ListState s1 {
+db::ListState s1 {
 	1,
 	"State 1"
 };
 
-void CheckProductsEquality(const List& l1, const List& l2)
+void CheckProductsEquality(const db::List& l1, const db::List& l2)
 {
 	EXPECT_EQ(l1.id, l2.id);
 	EXPECT_EQ(l1.owner_id, l2.owner_id);
@@ -54,7 +54,7 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllLists(_))
-		.WillOnce(Return(std::vector<List>{}));
+		.WillOnce(Return(std::vector<db::List>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -74,9 +74,9 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllLists(_))
-		.WillOnce(Return(std::vector<List>{l1}));
+		.WillOnce(Return(std::vector<db::List>{l1}));
 	EXPECT_CALL(*facade, GetListStateById(1))
-		.WillOnce(Return(std::optional<ListState>{s1}));
+		.WillOnce(Return(std::optional<db::ListState>{s1}));
 
 	auto handler = MakeHandler(std::move(facade));
 

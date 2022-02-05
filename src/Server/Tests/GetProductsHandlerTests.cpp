@@ -14,7 +14,7 @@ using ::testing::_;
 
 namespace  {
 
-Product p1 {
+db::Product p1 {
 	1,
 	1,
 	1,
@@ -24,16 +24,16 @@ Product p1 {
 	0,
 	false,
 	"some_date",
-	std::optional<Timestamp>{},
-	std::optional<Timestamp>{}
+	std::optional<db::Timestamp>{},
+	std::optional<db::Timestamp>{}
 };
 
-ProductCategory c1 {
+db::ProductCategory c1 {
 	1,
 	"Category 1"
 };
 
-void CheckProductsEquality(const Product& p1, const Product& p2)
+void CheckProductsEquality(const db::Product& p1, const db::Product& p2)
 {
 	EXPECT_EQ(p1.id, p2.id);
 	EXPECT_EQ(p1.list_id, p2.list_id);
@@ -66,7 +66,7 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetProductsForList(_))
-		.WillOnce(Return(std::vector<Product>{}));
+		.WillOnce(Return(std::vector<db::Product>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -88,9 +88,9 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetProductsForList(_))
-		.WillOnce(Return(std::vector<Product>{p1}));
+		.WillOnce(Return(std::vector<db::Product>{p1}));
 	EXPECT_CALL(*facade, GetProductCategoryById(1))
-		.WillOnce(Return(std::optional<ProductCategory>{c1}));
+		.WillOnce(Return(std::optional<db::ProductCategory>{c1}));
 
 	auto handler = MakeHandler(std::move(facade));
 

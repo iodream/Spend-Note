@@ -47,7 +47,7 @@ std::unique_ptr<AddProductHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& f
 
 ACTION(ThrowSQLFailure)
 {
-	throw SQLFailure("");
+	throw db::SQLFailure("");
 }
 
 TEST(AddProductHandlerTest, SUCCESS)
@@ -55,7 +55,7 @@ TEST(AddProductHandlerTest, SUCCESS)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, AddProduct(_))
-		.WillOnce(Return(std::optional<IdType>{1}));
+		.WillOnce(Return(std::optional<db::IdType>{1}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -70,7 +70,7 @@ TEST(AddProductHandlerTest, SUCCESS)
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_CREATED);
 
 	QJsonObject json = response.json_payload.object();
-	IdType id;
+	db::IdType id;
 	SafeReadId(json, "id", id);
 	EXPECT_EQ(id, 1);
 }

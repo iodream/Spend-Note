@@ -12,7 +12,7 @@ class GetProductsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using ProductItem = std::pair<const Product&, std::string>;
+		using ProductItem = std::pair<const db::Product&, std::string>;
 
 		using Products = std::vector<ProductItem>;
 

@@ -5,6 +5,8 @@
 #include <pqxx/pqxx>
 #include "DTOs/User.h"
 
+namespace db
+{
 class UserRepository
 {
 public:
@@ -20,3 +22,4 @@ private:
 
 	pqxx::connection& m_database_connection;
 };
+}

@@ -52,7 +52,7 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 	auto products = m_facade->GetProductsForList(list_id);
 
 	JSONFormatter::Products out_dto;
-	for (const Product& product : products) {
+	for (const db::Product& product : products) {
 		auto category = m_facade->GetProductCategoryById(product.category_id);
 		std::string category_name = (category) ? category->name : EMPTY_STD_STRING;
 		out_dto.push_back({product, category_name});

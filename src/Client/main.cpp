@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "Logger/Logger.h"
 #include "Logger/ScopedLogger.h"
+
 int main(int argc, char *argv[])
 {
 	Logger::Init("Client.log");

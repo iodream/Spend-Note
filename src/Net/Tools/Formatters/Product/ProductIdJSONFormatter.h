@@ -1,10 +1,11 @@
 #pragma once
 
-#include "QJsonDocument"
-#include "../../../Entities/ProductId.h"
+#include <QJsonDocument>
+
+#include "Net/Entities/Product/ProductId.h"
 
 class ProductIdJSONFormatter
 {
 public:
-	QJsonDocument Format(const ProductId& product_id);
+	QJsonObject Format(const ProductId& product_id);
 };

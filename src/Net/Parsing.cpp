@@ -47,12 +47,10 @@ void SafeReadString(
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	if (json.contains(label) && json[label].isDouble()) {
-		double id = json[label].toDouble();
-		IdType* value = reinterpret_cast<IdType*>(&id);
-		dest = *value;
+		dest = json[label].toDouble();
 	}
 	else {
 		throw ParsingError{
@@ -63,7 +61,7 @@ void SafeReadId(
 void SafeReadId(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadId(json, label.c_str(), dest);
 }
@@ -71,13 +69,11 @@ void SafeReadId(
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const char* label,
-	BigInt& dest)
+	db::BigInt& dest)
 {
-	if (json.contains(label) && json[label].isDouble()) {
-		double amount = json[label].toDouble();
-		double* ptr = &amount;
-		BigInt* value = reinterpret_cast<BigInt*>(ptr);
-		dest = *value;
+	if (json.contains(label) && json[label].isDouble())
+	{
+		dest = json[label].toDouble();
 	}
 	else {
 		throw ParsingError{
@@ -88,7 +84,7 @@ void SafeReadBigInt(
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadBigInt(json, label.c_str(), dest);
 }
@@ -96,15 +92,13 @@ void SafeReadBigInt(
 void SafeReadMoney(
 	const QJsonObject& json,
 	const char* label,
-	Money& dest)
+	db::Money& dest)
 {
 	if (json.contains(label) && json[label].isDouble()) {
-		double price = json[label].toDouble();
-		double* ptr = &price;
-		Money* value = reinterpret_cast<Money*>(ptr);
-		dest = *value;
+		dest = json[label].toDouble();
 	}
-	else {
+	else
+	{
 		throw ParsingError{
 			std::string{"Failed to parse \""}.append(label).append("\" field")};
 	}
@@ -113,7 +107,7 @@ void SafeReadMoney(
 void SafeReadMoney(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest)
+	db::IdType& dest)
 {
 	return SafeReadMoney(json, label.c_str(), dest);
 }
@@ -206,89 +200,90 @@ void SafeReadObject(
 	return SafeReadObject(json, label.c_str(), dest);
 }
 
+double FormatId(db::IdType id)
+{
+	return id;
+}
+
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	const IdType& dest)
+	const db::IdType& value)
 {
-	double* id = reinterpret_cast<double*>(dest);
-	json[label] = *id;
-
+	json[label] = FormatId(value);
 }
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	const IdType& dest)
+	const db::IdType& value)
 {
-	return WriteId(json, label.c_str(), dest);
+	return WriteId(json, label.c_str(), value);
 }
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	const BigInt& dest)
+	const db::BigInt& value)
 {
-	double* amount = reinterpret_cast<double*>(dest);
-	json[label] = *amount;
+	json[label] = value;
 
 }
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	const BigInt& dest)
+	const db::BigInt& value)
 {
-	return WriteBigInt(json, label.c_str(), dest);
+	return WriteBigInt(json, label.c_str(), value);
 }
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	const Money& dest)
+	const db::Money& value)
 {
-	double* price = reinterpret_cast<double*>(dest);
-	json[label] = *price;
+	json[label] = value;
 
 }
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	const Money& dest)
+	const db::Money& value)
 {
-	return WriteMoney(json, label.c_str(), dest);
+	return WriteMoney(json, label.c_str(), value);
 }
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const std::string& dest)
+	const std::string& value)
 {
-	json[label] = dest.c_str();
+	json[label] = value.c_str();
 }
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const std::string& dest)
+	const std::string& value)
 
 {
-	return WriteString(json, label.c_str(), dest);
+	return WriteString(json, label.c_str(), value);
 }
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const QString& dest)
+	const QString& value)
 {
-	json[label] = dest.toStdString().c_str();
+	json[label] = value.toStdString().c_str();
 }
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const QString& dest)
+	const QString& value)
 {
-	return WriteString(json, label.c_str(), dest);
+	return WriteString(json, label.c_str(), value);
 }

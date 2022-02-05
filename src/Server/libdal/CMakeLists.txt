@@ -42,7 +42,9 @@ add_library(libdal STATIC
 
   Exceptions/DatabaseFailure.h
   Exceptions/SQLFailure.h
+  Exceptions/NonexistentResource.h
 
+  DatabaseNames.h
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)

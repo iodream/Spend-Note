@@ -12,7 +12,7 @@ class GetListsHandler : public AuthorizedHandler
 	class JSONFormatter
 	{
 	public:
-		using ListItem = std::pair<const List&, std::string>;
+		using ListItem = std::pair<const db::List&, std::string>;
 
 		using Lists = std::vector<ListItem>;
 

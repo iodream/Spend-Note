@@ -3,8 +3,7 @@
 #include <QString>
 #include <QWidget>
 
-#include "ListItem.h"
-#include "DTO/List.h"
+#include "Client/Entities/Entities.h"
 #include <QJsonObject>
 
 #include "ListItem.h"

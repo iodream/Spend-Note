@@ -5,32 +5,23 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
+
+#include "../Entities/Entities.h"
+#include "../Entities/Parsers.h"
+#include "../Entities/Formatters.h"
+
 #include "../libdal/DTOs/Product.h"
 
 class AddProductHandler : public AuthorizedHandler
 {
-	class JSONParser
-	{
-	public:
-		Product Parse(const QJsonDocument& payload);
-	};
-
-	class JSONFormatter
-	{
-	public:
-		struct Product {
-			IdType id;
-		};
-
-		QJsonDocument Format(const Product& dto);
-	};
 public:
 	AddProductHandler();
 	virtual ~AddProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
-
 private:
-	JSONFormatter m_formatter{};
-	JSONParser m_parser{};
+	db::Product ToDBProduct(const Product& product);
+private:
+	ProductJSONParser m_parser{};
+	ProductIdJSONFormatter m_formatter{};
 };

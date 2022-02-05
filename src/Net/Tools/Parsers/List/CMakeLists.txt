@@ -1,8 +1,8 @@
 list(APPEND Spend-Note-Server_SOURCES
-	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParser.h
-	${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParser.h
-	${CMAKE_CURRENT_SOURCE_DIR}/ListStateJSONParser.h
-	${CMAKE_CURRENT_SOURCE_DIR}/ListsJSONParser.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParserBase.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParser.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParser.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ListStateJSONParserBase.h
 )
 
-set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
+set(Spend-Note-Net_SOURCES "${Spend-Note-Net_SOURCES}" PARENT_SCOPE)

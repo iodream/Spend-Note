@@ -96,7 +96,7 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 {
 	Clear();
 	for (auto it = lists.begin(); it != lists.end(); it++) {
-		ListItem* item = new ListItem(it->list_id);
+		ListItem* item = new ListItem(it->id);
 		item->set_name(it->name);
 		// currently ignoring other fields
 		item->Update();

@@ -3,10 +3,10 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-Income ParseIncome(const QJsonObject& json)
+db::Income ParseIncome(const QJsonObject& json)
 {
 	SCOPED_LOGGER;
-	Income income;
+	db::Income income;
 
 	double tmp_number;
 	std::string tmp_date;
@@ -22,7 +22,7 @@ Income ParseIncome(const QJsonObject& json)
 
 	SafeReadString(json, "expiration_time", tmp_date);
 	income.expiration_time = (tmp_date != "")
-		? std::optional<Timestamp>{tmp_date} : std::nullopt;
+		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
 
 	return income;
 }
