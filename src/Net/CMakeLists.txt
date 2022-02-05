@@ -3,6 +3,7 @@ list(APPEND Spend-Note-Net_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Message.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Parsing.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Parsing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Types.h
 )
 
 add_subdirectory(Entities)

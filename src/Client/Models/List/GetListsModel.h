@@ -10,25 +10,16 @@
 
 #include "Client/Common.h"
 
-#include "../../DTO/List.h"
+#include "Client/Entities/Entities.h"
 
 class GetListsModel
 {
 public:
 	GetListsModel(const std::string& hostname) : m_hostname{hostname} {}
-
-	class JSONParser
-	{
-	public:
-		void Parse(QJsonArray json, std::vector<List>& lists);
-	};
-
 	Net::Request FormRequest(IdType user_id);
 	std::vector<List> ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;
-
-	JSONParser m_parser{};
 };
 
