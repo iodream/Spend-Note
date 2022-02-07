@@ -15,7 +15,7 @@ public:
 	Net::Request FormRequest(IdType user_id);
 	std::vector<Income> ParseResponse(const Net::Response response);
 private:
-	std::string m_hostname{};
+	const std::string& m_hostname{};
 
 	IncomesJSONParser m_parser{};
 };
