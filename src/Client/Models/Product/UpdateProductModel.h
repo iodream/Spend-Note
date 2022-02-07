@@ -15,7 +15,7 @@ public:
 
 	Net::Request FormRequest(const Product& product);
 private:
-	std::string m_hostname{};
+	const std::string& m_hostname{};
 
 	ProductJSONFormatter m_formatter{};
 };
