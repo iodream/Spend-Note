@@ -43,4 +43,3 @@ private:
 	JSONParser m_parser{};
 	JSONFormatter m_formatter{};
 };
-
