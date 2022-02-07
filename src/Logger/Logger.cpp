@@ -14,7 +14,7 @@ Logger::Logger()
 	qInstallMessageHandler(MessageHandler);
 	m_logging_file = new QFile(QString(m_file_name.c_str()));
 	m_logging_file->open(QIODevice::WriteOnly | QIODevice::Append);
-	qDebug() << "Logger created at: " << QTime::currentTime().toString()<<"\n";
+	qInfo() << "Logger created at: " << QTime::currentTime().toString();
 }
 
 void Logger::Init(const std::string& file_name)
@@ -37,8 +37,7 @@ void Logger::MessageHandler(QtMsgType type, const QMessageLogContext& context, c
 			 <<  context.function << "\n";
 		break;
 	case QtInfoMsg:
-		stream <<  "INF: "<< " " << msg << " " << context.file << " " <<  context.line << " "
-			 <<  context.function << "\n";
+		stream <<  "INF: "<< " " << msg << "\n";
 		break;
 	case QtWarningMsg:
 		stream << "WRN: " << msg << " " << context.file << " " <<  context.line << " "

@@ -12,7 +12,7 @@ UpdateIncomeHandler::UpdateIncomeHandler()
 {
 }
 
-Income UpdateIncomeHandler::JSONParser::Parse(
+db::Income UpdateIncomeHandler::JSONParser::Parse(
 	const QJsonDocument& payload)
 {
 	SCOPED_LOGGER;

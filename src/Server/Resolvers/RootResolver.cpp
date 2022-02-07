@@ -29,12 +29,12 @@ const std::string USERS    = "/users";
 RootResolver::RootResolver()
 {
 	SCOPED_LOGGER;
-//	m_resolvers[INCOMES] =
-//		std::unique_ptr<ISubDomainResolver>(new IncomesResolver());
-//	m_resolvers[LISTS] =
-//		std::unique_ptr<ISubDomainResolver>(new ListsResolver());
-//	m_resolvers[PRODUCTS] =
-//		std::unique_ptr<ISubDomainResolver>(new ProductsResolver());
+	m_resolvers[INCOMES] =
+		std::unique_ptr<ISubDomainResolver>(new IncomesResolver());
+	m_resolvers[LISTS] =
+		std::unique_ptr<ISubDomainResolver>(new ListsResolver());
+	m_resolvers[PRODUCTS] =
+		std::unique_ptr<ISubDomainResolver>(new ProductsResolver());
 	m_resolvers[USERS] =
 		std::unique_ptr<ISubDomainResolver>(new UsersResolver());
 }

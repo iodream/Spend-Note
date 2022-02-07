@@ -25,7 +25,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 		JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(user_id))};
 		return FormJSONResponse(m_formatter.Format(response_dto));
 	}
-	catch (const SQLFailure& e)
+	catch (const db::SQLFailure& e)
 	{
 		return FormErrorResponse(
 			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
@@ -33,7 +33,7 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	}
 }
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
+GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<db::Income>& incomes)
 {
 	SCOPED_LOGGER;
 	JSONFormatter::Incomes incomes_out;
@@ -45,7 +45,7 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vect
 	return incomes_out;
 }
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
+GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const db::Income& income)
 {
 	SCOPED_LOGGER;
 	JSONFormatter::Income income_out;

@@ -4,22 +4,11 @@
 #include "Types.h"
 #include "Exceptions/DatabaseFailure.h"
 #include "Exceptions/SQLFailure.h"
+#include "Exceptions/NonexistentResource.h"
+#include "DatabaseNames.h"
 
-namespace
+namespace db
 {
-	const std::string TABLE_NAME = "Product";
-	const std::string ID_FIELD = "id";
-	const std::string LIST_ID_FIELD = "listId";
-	const std::string CATEGORY_ID_FIELD = "categoryId";
-	const std::string NAME_FIELD = "name";
-	const std::string PRICE_FIELD = "price";
-	const std::string AMOUNT_FIELD = "amount";
-	const std::string PRODUCT_PRIORITY_FIELD = "productPriority";
-	const std::string IS_BOUGHT_FIELD = "isBought";
-	const std::string ADD_DATE_FIELD = "addDate";
-	const std::string PURCHASE_DATE_FIELD = "purchaseDate";
-	const std::string BUY_UNTIL_DATE_FIELD = "buyUntilDate";
-}
 
 ProductRepository::ProductRepository(pqxx::connection& db_connection) : m_database_connection(db_connection)
 {
@@ -32,17 +21,17 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 	{
 		pqxx::work w(m_database_connection);
 		pqxx::result id_rows = w.exec(
-			"INSERT INTO " + TABLE_NAME + " (" +
-				LIST_ID_FIELD + ", " +
-				CATEGORY_ID_FIELD + ", " +
-				NAME_FIELD + ", " +
-				PRICE_FIELD + ", " +
-				AMOUNT_FIELD + ", " +
-				PRODUCT_PRIORITY_FIELD + ", " +
-				IS_BOUGHT_FIELD + ", " +
-				ADD_DATE_FIELD + ", " +
-				PURCHASE_DATE_FIELD + ", " +
-				BUY_UNTIL_DATE_FIELD +
+			"INSERT INTO " + db::product::TABLE_NAME + " (" +
+				db::product::LIST_ID + ", " +
+				db::product::CATEGORY_ID + ", " +
+				db::product::NAME + ", " +
+				db::product::PRICE + ", " +
+				db::product::AMOUNT + ", " +
+				db::product::PRIORITY + ", " +
+				db::product::IS_BOUGHT + ", " +
+				db::product::ADD_DATE + ", " +
+				db::product::PURCHASE_DATE + ", " +
+				db::product::BUY_UNTIL_DATE +
 			") VALUES (" +
 				w.quote(product.list_id) + ", " +
 				w.quote(product.category_id) + ", " +
@@ -54,10 +43,10 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 				w.quote(product.add_date) + ", " +
 				w.quote(product.purchase_date) + ", " +
 				w.quote(product.buy_until_date) + ") " +
-			"RETURNING " + ID_FIELD + ";");
+			"RETURNING " + db::product::ID + ";");
 		w.commit();
 		auto id_row = id_rows.front();
-		return id_row[ID_FIELD].as<IdType>();
+		return id_row[db::product::ID].as<IdType>();
 	}
 	catch(const pqxx::sql_error& e)
 	{
@@ -77,19 +66,19 @@ std::optional<Product> ProductRepository::GetById(IdType id)
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_rows = w.exec(
 				"SELECT " +
-					ID_FIELD + ", " +
-					LIST_ID_FIELD + ", " +
-					CATEGORY_ID_FIELD + ", " +
-					NAME_FIELD + ", " +
-					PRICE_FIELD + ", " +
-					AMOUNT_FIELD + ", " +
-					PRODUCT_PRIORITY_FIELD + ", " +
-					IS_BOUGHT_FIELD + ", " +
-					ADD_DATE_FIELD + ", " +
-					PURCHASE_DATE_FIELD + ", " +
-					BUY_UNTIL_DATE_FIELD +
-				" FROM " + TABLE_NAME +
-				" WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+					db::product::ID + ", " +
+					db::product::LIST_ID + ", " +
+					db::product::CATEGORY_ID + ", " +
+					db::product::NAME + ", " +
+					db::product::PRICE + ", " +
+					db::product::AMOUNT + ", " +
+					db::product::PRIORITY + ", " +
+					db::product::IS_BOUGHT + ", " +
+					db::product::ADD_DATE + ", " +
+					db::product::PURCHASE_DATE + ", " +
+					db::product::BUY_UNTIL_DATE +
+				" FROM " + db::product::TABLE_NAME +
+				" WHERE " + db::product::ID + " = " + w.quote(id) + ";");
 
 		if (!product_rows.empty())
 		{
@@ -111,21 +100,33 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 	try
 	{
 		pqxx::nontransaction w(m_database_connection);
+
+		pqxx::result list_ids = w.exec(
+			"SELECT " + db::list::ID +
+			" FROM " + db::list::TABLE_NAME +
+			" WHERE " +
+				db::list::ID + " = " + w.quote(list_id) + ";");
+		if (list_ids.empty())
+		{
+			auto message = "List with id = " + std::to_string(list_id) + " not found";
+			throw NonexistentResource(message);
+		}
+
 		pqxx::result product_rows = w.exec(
-				"SELECT " +
-					ID_FIELD + ", " +
-					LIST_ID_FIELD + ", " +
-					CATEGORY_ID_FIELD + ", " +
-					NAME_FIELD + ", " +
-					PRICE_FIELD + ", " +
-					AMOUNT_FIELD + ", " +
-					PRODUCT_PRIORITY_FIELD + ", " +
-					IS_BOUGHT_FIELD + ", " +
-					ADD_DATE_FIELD + ", " +
-					PURCHASE_DATE_FIELD + ", " +
-					BUY_UNTIL_DATE_FIELD +
-				" FROM " + TABLE_NAME +
-				" WHERE " + LIST_ID_FIELD + " = " + w.quote(list_id) + ";");
+			"SELECT " +
+				db::product::ID + ", " +
+				db::product::LIST_ID + ", " +
+				db::product::CATEGORY_ID + ", " +
+				db::product::NAME + ", " +
+				db::product::PRICE + ", " +
+				db::product::AMOUNT + ", " +
+				db::product::PRIORITY + ", " +
+				db::product::IS_BOUGHT + ", " +
+				db::product::ADD_DATE + ", " +
+				db::product::PURCHASE_DATE + ", " +
+				db::product::BUY_UNTIL_DATE +
+			" FROM " + db::product::TABLE_NAME +
+			" WHERE " + db::product::LIST_ID + " = " + w.quote(list_id) + ";");
 
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
@@ -143,26 +144,26 @@ bool ProductRepository::Update(const Product& product)
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(product.id));
+		auto result = w.exec("SELECT " + db::product::ID + " FROM  " + db::product::TABLE_NAME + " WHERE " + db::product::ID + " = " + w.quote(product.id));
 		if (result.empty())
 		{
 			return false;
 		}
 
 		w.exec0(
-				"UPDATE " + TABLE_NAME +
+				"UPDATE " + db::product::TABLE_NAME +
 				" SET " +
-					LIST_ID_FIELD + " = " + w.quote(product.list_id) + ", " +
-					CATEGORY_ID_FIELD + " = " + w.quote(product.category_id) + ", " +
-					NAME_FIELD + " = " + w.quote(product.name) + ", " +
-					PRICE_FIELD + " = " + w.quote(product.price) + ", " +
-					AMOUNT_FIELD + " = " + w.quote(product.amount) + ", " +
-					PRODUCT_PRIORITY_FIELD + " = " + w.quote(product.product_priority) + ", " +
-					IS_BOUGHT_FIELD + " = " + w.quote(product.is_bought) + ", " +
-					ADD_DATE_FIELD + " = " + w.quote(product.add_date) + ", " +
-					PURCHASE_DATE_FIELD + " = " + w.quote(product.purchase_date) + ", " +
-					BUY_UNTIL_DATE_FIELD +  + " = " + w.quote(product.buy_until_date) + ", " +
-				" WHERE " + ID_FIELD + " = " + w.quote(product.id) + ";");
+					db::product::LIST_ID + " = " + w.quote(product.list_id) + ", " +
+					db::product::CATEGORY_ID + " = " + w.quote(product.category_id) + ", " +
+					db::product::NAME + " = " + w.quote(product.name) + ", " +
+					db::product::PRICE + " = " + w.quote(product.price) + ", " +
+					db::product::AMOUNT + " = " + w.quote(product.amount) + ", " +
+					db::product::PRIORITY + " = " + w.quote(product.product_priority) + ", " +
+					db::product::IS_BOUGHT + " = " + w.quote(product.is_bought) + ", " +
+					db::product::ADD_DATE + " = " + w.quote(product.add_date) + ", " +
+					db::product::PURCHASE_DATE + " = " + w.quote(product.purchase_date) + ", " +
+					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) + ", " +
+				" WHERE " + db::product::ID + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::failure& e)
@@ -177,12 +178,12 @@ bool ProductRepository::Remove(IdType id)
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto result = w.exec("SELECT " + ID_FIELD + " FROM  " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id));
+		auto result = w.exec("SELECT " + db::product::ID + " FROM  " + db::product::TABLE_NAME + " WHERE " + db::product::ID + " = " + w.quote(id));
 		if (result.empty())
 		{
 			return false;
 		}
-		w.exec0("DELETE FROM " + TABLE_NAME + " WHERE " + ID_FIELD + " = " + w.quote(id) + ";");
+		w.exec0("DELETE FROM " + db::product::TABLE_NAME + " WHERE " + db::product::ID + " = " + w.quote(id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::sql_error& e)
@@ -199,33 +200,35 @@ bool ProductRepository::Remove(IdType id)
 Product ProductRepository::ProductFromRow(const pqxx::row& row)
 {
 	Product product;
-	product.id = row[ID_FIELD].as<IdType>();
-	product.list_id = row[LIST_ID_FIELD].as<IdType>();
-	product.category_id = row[CATEGORY_ID_FIELD].as<IdType>();
-	product.name = row[NAME_FIELD].as<std::string>();
-	product.price = row[PRICE_FIELD].as<Money>();
-	product.amount = row[AMOUNT_FIELD].as<int>();
-	product.product_priority = row[PRODUCT_PRIORITY_FIELD].as<int>();
-	product.is_bought = row[IS_BOUGHT_FIELD].as<bool>();
-	product.add_date = row[ADD_DATE_FIELD].as<Timestamp>();
+	product.id = row[db::product::ID].as<IdType>();
+	product.list_id = row[db::product::LIST_ID].as<IdType>();
+	product.category_id = row[db::product::CATEGORY_ID].as<IdType>();
+	product.name = row[db::product::NAME].as<std::string>();
+	product.price = row[db::product::PRICE].as<Money>();
+	product.amount = row[db::product::AMOUNT].as<int>();
+	product.product_priority = row[db::product::PRIORITY].as<int>();
+	product.is_bought = row[db::product::IS_BOUGHT].as<bool>();
+	product.add_date = row[db::product::ADD_DATE].as<Timestamp>();
 
-	if (row[PURCHASE_DATE_FIELD].is_null())
+	if (row[db::product::PURCHASE_DATE].is_null())
 	{
 		product.purchase_date = std::nullopt;
 	}
 	else
 	{
-		product.purchase_date = row[PURCHASE_DATE_FIELD].as<Timestamp>();
+		product.purchase_date = row[db::product::PURCHASE_DATE].as<Timestamp>();
 	}
 
-	if (row[BUY_UNTIL_DATE_FIELD].is_null())
+	if (row[db::product::BUY_UNTIL_DATE].is_null())
 	{
 		product.purchase_date = std::nullopt;
 	}
 	else
 	{
-		product.purchase_date = row[BUY_UNTIL_DATE_FIELD].as<Timestamp>();
+		product.purchase_date = row[db::product::BUY_UNTIL_DATE].as<Timestamp>();
 	}
 
 	return product;
+}
+
 }

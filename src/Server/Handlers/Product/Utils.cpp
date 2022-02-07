@@ -3,10 +3,10 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-Product ParseProduct(const QJsonObject& json)
+db::Product ParseProduct(const QJsonObject& json)
 {
 	SCOPED_LOGGER;
-	Product product;
+	db::Product product;
 
 	double tmp_number;
 	std::string tmp_date;
@@ -27,10 +27,10 @@ Product ParseProduct(const QJsonObject& json)
 
 	SafeReadString(json, "purchase_date", tmp_date);
 	product.purchase_date = (tmp_date != "")
-		? std::optional<Timestamp>{tmp_date} : std::nullopt;
+		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
 	SafeReadString(json, "buy_until_date", tmp_date);
 	product.buy_until_date = (tmp_date != "")
-		? std::optional<Timestamp>{tmp_date} : std::nullopt;
+		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
 
 	return product;
 }

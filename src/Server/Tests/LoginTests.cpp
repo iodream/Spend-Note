@@ -5,8 +5,9 @@
 
 #include "MockDbFacade.h"
 #include "Server/Handlers/LoginHandler.h"
-
+#include "Types.h"
 #include <QDebug>
+#include "Net/Parsing.h"
 
 using ::testing::Return;
 using ::testing::_;
@@ -15,7 +16,7 @@ using ::testing::_;
 TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 {
 	auto facade = std::make_unique<MockDbFacade>();
-	User existing_user;
+	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
 	existing_user.password = "Test password hash";
@@ -36,7 +37,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	}
 
 	auto response = handler->Handle(request);
-	auto dto=handler->m_parser.Parse(request.json_payload);
+	auto dto = handler->m_parser.Parse(request.json_payload);
 
 	ASSERT_NE(dto.passwd_hash, existing_user.password);
 }
@@ -45,7 +46,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 TEST(LoginHandlerTest, USER_LOGIN_OK)
 {
 	auto facade = std::make_unique<MockDbFacade>();
-	User existing_user;
+	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
 	existing_user.password = "Test password hash";
@@ -66,6 +67,8 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	}
 
 	auto response = handler->Handle(request);
-
+	db::BigInt returned_id = response.json_payload["id"].toInt();
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
+	ASSERT_EQ(returned_id, existing_user.id);
+
 }

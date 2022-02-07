@@ -3,6 +3,8 @@
 #include <pqxx/pqxx>
 #include "DTOs/ProductCategory.h"
 
+namespace db
+{
 class ProductCategoryRepository
 {
 public:
@@ -15,3 +17,4 @@ private:
 
 	pqxx::connection& m_database_connection;
 };
+}

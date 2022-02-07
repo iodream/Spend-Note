@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include "Types.h"
 
 #include "ICommandHandler.h"
 
@@ -12,7 +13,7 @@ class LoginHandler : public ICommandHandler
 	public:
 		struct OutDto {
 			std::string token;
-			IdType id;
+			db::IdType id;
 		};
 
 		QJsonDocument Format(const OutDto& dto);
