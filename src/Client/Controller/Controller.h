@@ -1,15 +1,17 @@
 #pragma once
 
+#include <memory>
+
 #include <QMessageBox>
 
 #include "HTTPClient.h"
-#include "NavHistory.h"
+
+#include "LoginPageController.h"
+#include "SignupPageController.h"
+#include "MainPage/MainPageController.h"
 
 #include "View/MainWindow.h"
-#include "View/MainPage/MainPage.h"
-#include "Models/SignupModel.h"
 #include "View/Constants.h"
-#include "Models/LoginModel.h"
 
 class Controller : public QObject
 {
@@ -20,36 +22,25 @@ public:
 	Controller();
 	void Start(UIPages at_page=UIPages::LOGIN);
 
-	void StartTest();
+private:
+	void SetPage(UIPages page);
+
+	void InitLoginPageController();
+	void InitSignupPageController();
+	void InitMainPageController();
 
 private:
 	std::string m_hostname{"http://localhost:8080"};
-
 	HTTPClient m_http_client;
-
-	NavHistory m_history;
-	MainWindow m_main_window;
-
 	IdType m_user_id{1};
+	MainWindow m_main_window{};
 
-	bool UpdateMainListsSubPage();
-	void SetMainSubPage(MainSubPages page);
-
-	void ConnectLoginPage();
-	void ConnectMainPage();
-	void ConnectSignupPage();
+private:
+	std::unique_ptr<LoginPageController>  m_login_page_controller;
+	std::unique_ptr<SignupPageController> m_signup_page_controller;
+	std::unique_ptr<MainPageController>   m_main_page_controller;
 
 public slots:
-
-	void OnGotoLoginPage();
-
-	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
-	void OnLogout();
-	void OnChangeMainSubPage(MainSubPages page);
-	void OnGoToSignupPage();
-	void OnSignup(const SignupInDTO& in_dto);
-	void OnGoBack();
-//	void OnLoadLists();
-//	void OnLoadProducts();
-//	void OnLoadProducts();
+	void OnMessage(const QString& window_name, const QString& message);
+	void OnChangePage(UIPages page);
 };
