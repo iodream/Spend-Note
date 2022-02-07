@@ -54,10 +54,12 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 		return;
 	}
 
-	auto token = model.ParseResponse(response);
+	auto user_data = model.ParseResponse(response);
+
+	m_user_id = user_data.id; // setting user id
 
 	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
-	m_http_client.set_token(token.token);
+	m_http_client.set_token(user_data.token);
 
 	emit ChangePage(UIPages::MAIN);
 }

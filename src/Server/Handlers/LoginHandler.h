@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include "Types.h"
 
 #include "ICommandHandler.h"
 
@@ -10,11 +11,12 @@ class LoginHandler : public ICommandHandler
 	class JSONFormatter
 	{
 	public:
-		struct Token {
+		struct OutDto {
 			std::string token;
+			db::IdType id;
 		};
 
-		QJsonDocument Format(const Token& dto);
+		QJsonDocument Format(const OutDto& dto);
 	};
 	class JSONParser
 	{
