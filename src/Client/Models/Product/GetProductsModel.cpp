@@ -3,7 +3,7 @@
 Net::Request GetProductsModel::FormRequest(IdType list_id)
 {
 	Net::Request request;
-	request.uri = m_hostname + "lists/" + std::to_string(list_id) + "/products";
+	request.uri = m_hostname + "/lists/" + std::to_string(list_id) + "/products";
 	request.method = Net::HTTP_METHOD_GET;
 	request.content_type = Net::CONTENT_TYPE_EMPTY;
 	return request;

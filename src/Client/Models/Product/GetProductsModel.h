@@ -15,7 +15,7 @@ public:
 	Net::Request FormRequest(IdType list_id);
 	std::vector<Product> ParseResponse(const Net::Response response);
 private:
-	std::string m_hostname{};
+	const std::string& m_hostname{};
 
 	ProductsJSONParser m_parser{};
 };
