@@ -1,6 +1,5 @@
 #include "GetListsModel.h"
 #include "Net/Parsing.h"
-#include "Utils.h"
 
 Net::Request GetListsModel::FormRequest(IdType user_id)
 {
@@ -14,7 +13,7 @@ std::vector<List> GetListsModel::ParseResponse(const Net::Response& response)
 {
 	std::vector<List> lists;
 
-	m_parser.Parse(response.json_payload.array(), lists);
+//	m_parser.Parse(response.json_payload.array(), lists);
 
 	return lists;
 }

@@ -8,8 +8,8 @@ const char* EMPTY_C_STRING = "";
 const std::string EMPTY_STD_STRING = std::string{};
 
 Net::Response FormJSONResponse(
-		QJsonDocument&& json_doc,
-		Poco::Net::HTTPServerResponse::HTTPStatus status)
+	QJsonDocument&& json_doc,
+	Poco::Net::HTTPServerResponse::HTTPStatus status)
 {
 	SCOPED_LOGGER;
 	Net::Response response;
@@ -18,6 +18,23 @@ Net::Response FormJSONResponse(
 	response.status = status;
 	return response;
 }
+
+Net::Response FormJSONResponse(
+	QJsonObject&& json,
+	Poco::Net::HTTPServerResponse::HTTPStatus status)
+{
+	SCOPED_LOGGER;
+	return FormJSONResponse(QJsonDocument(json), status);
+}
+
+Net::Response FormJSONResponse(
+	QJsonArray&& array,
+	Poco::Net::HTTPServerResponse::HTTPStatus status)
+{
+	SCOPED_LOGGER;
+	return FormJSONResponse(QJsonDocument(array), status);
+}
+
 
 Net::Response FormEmptyResponse(
 	Poco::Net::HTTPServerResponse::HTTPStatus status)

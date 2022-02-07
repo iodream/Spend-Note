@@ -29,7 +29,8 @@ class HTTPServer: public Poco::Util::ServerApplication
 	int main(const std::vector<std::string>&)
 	{
 		Logger::Init("Server.log");
-		ScopedLogger::Init("ServerScopedLogger.log"); // mandatory
+		ScopedLogger::Init("ServerScopedLogger.log");
+
 		SCOPED_LOGGER;
 
 		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
@@ -43,9 +44,9 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 		Poco::Net::HTTPServer srv(new HandlerFactory, port);
 		srv.start();
-		qDebug() << "HTTP Server started on port " << port << "\n";
+		qInfo() << "HTTP Server started on port " << port;
 		waitForTerminationRequest();
-		qDebug() << "Stopping HTTP Server..." << "\n";
+		qInfo() << "Stopping HTTP Server...";
 		srv.stop();
 
 		return Application::EXIT_OK;

@@ -58,7 +58,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	Poco::JWT::Token token;
 	token.setType("JWT");
 
-	token.payload().set("id", std::to_string(user->id));
+	token.payload().set("id", FormatId(user->id));
 	token.payload().set("login", std::string(user->login));
 
 	token.setIssuedAt(Poco::Timestamp());

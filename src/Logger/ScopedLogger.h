@@ -21,6 +21,7 @@ private:
 	static std::ofstream m_stream;
 	std::string m_file_name;
 	std::string m_func_name;
+	int m_line_nr;
 	static std::string m_log_file_name;
 	std::thread::id m_thread_id;
 	static std::mutex m_log_mutex;

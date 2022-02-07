@@ -3,8 +3,7 @@
 #include <QString>
 #include <QWidget>
 
-#include "ListItem.h"
-#include "DTO/List.h"
+#include "Client/Entities/Entities.h"
 #include <QJsonObject>
 
 #include "ListItem.h"
@@ -36,7 +35,7 @@ public:
 	int get_list_size();
 
 signals:
-	void AddItem();
+	void GoToCreateList();
 
 private slots:
 	void OnListClicked(ListItem* list);

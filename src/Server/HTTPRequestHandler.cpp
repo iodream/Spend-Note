@@ -10,7 +10,7 @@
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
 {
 	SCOPED_LOGGER;
-	std::cout << "Request from " << http_req.clientAddress() << "\n";
+	qInfo() << "Request from " << http_req.clientAddress().toString().c_str();
 
 	try {
 		if (!m_command_handler) {

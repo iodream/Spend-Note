@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Server/libdal/Types.h"
+#include "Net/Types.h"
 
 struct IncomeId
 {
