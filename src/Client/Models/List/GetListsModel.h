@@ -18,7 +18,7 @@ public:
 	std::vector<List> ParseResponse(const Net::Response& response);
 
 private:
-	std::string m_hostname;
+	const std::string& m_hostname;
 
 	ListsJSONParser m_parser{};
 };
