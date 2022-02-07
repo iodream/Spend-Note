@@ -1,4 +1,6 @@
 list(APPEND Spend-Note-Client_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpdateListModel.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpdateListModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListsModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListsModel.cpp
 )
