@@ -17,7 +17,7 @@ public:
 		WriteId(json, "id", product.id);
 		WriteId(json, "list_id", product.list_id);
 
-		json["category"] = category_formatter.FormatProductCategory(category);
+		json["category"] = category_formatter.Format(category);
 
 		json["is_bought"] = product.is_bought;
 		WriteString(json, "name", product.name);

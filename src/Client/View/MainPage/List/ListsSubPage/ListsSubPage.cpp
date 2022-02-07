@@ -13,7 +13,7 @@ ListsSubPage::ListsSubPage(QWidget *parent)
 		m_ui->AddItemButton,
 		&QPushButton::released,
 		this,
-		&ListsSubPage::AddItem);
+		&ListsSubPage::GoToCreateList);
 }
 
 void ListsSubPage::AppendList(ListItem* list)
@@ -45,6 +45,7 @@ void ListsSubPage::UpdateListNumbers(int idx)
 
 void ListsSubPage::OnListClicked(ListItem* list)
 {
+	// should emit some signal to be handled on controller
 }
 
 ListItem* ListsSubPage::SafeGetList(int idx)
