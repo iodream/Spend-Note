@@ -11,22 +11,20 @@ GetListsHandler::GetListsHandler()
 {
 }
 
-QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
+std::vector<List> GetListsHandler::ToNetLists(const Lists &lists)
 {
-	SCOPED_LOGGER;
-	QJsonArray json_array;
-	for (const auto& dto_item : dto) {
-		QJsonObject list;
-
-		list["list_id"] = std::to_string(dto_item.first.id).c_str();
-		list["owner_id"] = std::to_string(dto_item.first.owner_id).c_str();
-		list["state_id"] = std::to_string(dto_item.first.state_id).c_str();
-		list["name"] = dto_item.first.name.c_str();
-		list["state"] = dto_item.second.c_str();
-
-		json_array.append(list);
+	std::vector<List> net_lists;
+	List list;
+	for (const auto db_list : lists)
+	{
+		list.id = db_list.first.id;
+		list.name = db_list.first.name;
+		list.owner_id = db_list.first.owner_id;
+		list.state.id = db_list.second.id;
+		list.state.name = db_list.second.name;
+		net_lists.push_back(list);
 	}
-	return QJsonDocument{json_array};
+	return net_lists;
 }
 
 Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
@@ -37,12 +35,11 @@ Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
 	auto lists = m_facade->GetAllLists(user_id);
 
-	JSONFormatter::Lists out_dto;
+	Lists out_dto;
 	for (const db::List& list : lists) {
 		auto state = m_facade->GetListStateById(list.state_id);
-		std::string state_name = (state) ? state->name : EMPTY_STD_STRING;
-		out_dto.push_back({list, state_name});
+		out_dto.push_back({list, state.value()});
 	}
-
-	return FormJSONResponse(m_formatter.Format(out_dto));
+	auto net_lists = ToNetLists(out_dto);
+	return FormJSONResponse(m_formatter.Format(net_lists));
 }
