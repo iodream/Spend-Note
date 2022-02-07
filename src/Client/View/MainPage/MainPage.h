@@ -52,6 +52,4 @@ signals:
 public slots:
 	void OnGoToListsClicked();
 	void OnLogoutClicked();
-
-	void OnAddList();
 };
