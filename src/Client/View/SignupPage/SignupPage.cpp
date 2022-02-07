@@ -6,11 +6,17 @@ SignupPage::SignupPage(QWidget *parent)
 	, m_ui(new Ui::SignupPage)
 {
 	m_ui->setupUi(this);
-	connect(m_ui->signupSubmitButton, SIGNAL(clicked())
-		, this, SLOT(OnSignupSubmitButtonClicked()));
+	connect(
+		m_ui->SignupSubmitButton,
+		&QPushButton::released,
+		this,
+		&SignupPage::OnSignupSubmitButtonClicked);
 
-	connect(m_ui->GoBackButton, SIGNAL(clicked())
-		, this, SLOT(OnGoBackButtonClicked()));
+	connect(
+		m_ui->GoBackButton,
+		&QPushButton::released,
+		this,
+		&SignupPage::GoToLoginPage);
 }
 
 SignupPage::~SignupPage()
@@ -26,9 +32,3 @@ void SignupPage::OnSignupSubmitButtonClicked()
 	dto.pass_repeat = m_ui->passwordRepeatLineEdit->text().toStdString();
 	emit Signup(dto);
 }
-
-void SignupPage::OnGoBackButtonClicked()
-{
-	emit GotoLoginPage();
-}
-
