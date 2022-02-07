@@ -169,5 +169,5 @@ bool DbFacade::CanUserEditProduct(IdType user_id, IdType product_id)
 
 bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
 {
-	return m_products.CanUserEditProduct(user_id, income_id);
+	return m_incomes.CanUserEditIncome(user_id, income_id);
 }
