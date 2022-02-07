@@ -14,7 +14,7 @@ class AddNewListsModel
 {
 public:
 	AddNewListsModel(const std::string& hostname) : m_hostname{hostname} {}
-	Net::Request FormRequest(const List& list);
+	Net::Request FormRequest(const List& list, const IdType& user_id);
 	ListId ParseResponse(const Net::Response& response);
 
 private:
