@@ -14,7 +14,7 @@ public:
 
 	Net::Request FormRequest(const List& list);
 private:
-	std::string m_hostname{};
+	const std::string& m_hostname{};
 
 	ListJSONFormatter m_formatter{};
 };
