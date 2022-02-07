@@ -5,6 +5,7 @@
 
 #include "Net/Constants.h"
 #include "Net/Message.h"
+#include "Net/Types.h"
 
 class LoginModel
 {
@@ -26,16 +27,17 @@ public:
 	class JSONParser
 	{
 	public:
-		struct Token
+		struct UserData
 		{
 			std::string token;
+			IdType id;
 		};
 
-		void Parse(QJsonObject json, Token& dto);
+		void Parse(QJsonObject json, UserData& dto);
 	};
 
 	Net::Request FormRequest(JSONFormatter::Credentials credentials);
-	JSONParser::Token ParseResponse(const Net::Response& response);
+	JSONParser::UserData ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;
