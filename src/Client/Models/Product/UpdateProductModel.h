@@ -11,7 +11,7 @@
 class UpdateProductModel
 {
 public:
-	UpdateProductModel(std::string hostname) : m_hostname{hostname} {};
+	UpdateProductModel(const std::string& hostname) : m_hostname{hostname} {};
 
 	Net::Request FormRequest(const Product& product);
 private:
