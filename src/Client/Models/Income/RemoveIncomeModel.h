@@ -14,7 +14,7 @@ public:
 
 	Net::Request FormRequest(const IncomeId& income_id);
 private:
-	std::string m_hostname{};
+	const std::string& m_hostname{};
 
 };
 
