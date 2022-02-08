@@ -14,6 +14,7 @@ UpdateListHandler::UpdateListHandler()
 
 db::List UpdateListHandler::ToDBList(const List& list)
 {
+	SCOPED_LOGGER;
 	db::List db_list;
 	db_list.id = list.id;
 	db_list.name = list.name;
@@ -24,6 +25,7 @@ db::List UpdateListHandler::ToDBList(const List& list)
 
 Net::Response UpdateListHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto json_payload = request.json_payload.object();
 	auto list = m_parser.Parse(json_payload);
 	auto list_db = ToDBList(list);

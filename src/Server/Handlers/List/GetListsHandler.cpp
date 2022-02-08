@@ -13,6 +13,7 @@ GetListsHandler::GetListsHandler()
 
 List GetListsHandler::ToNetList(const db::List &db_list, const db::ListState& state)
 {
+	SCOPED_LOGGER;
 	List list;
 	list.id = db_list.id;
 	list.name = db_list.name;
