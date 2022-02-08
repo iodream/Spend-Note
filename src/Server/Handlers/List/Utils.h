@@ -1,7 +1,6 @@
 #pragma once
 
-#include <QJsonObject>
-
 #include "../libdal/Facade/IDbFacade.h"
+#include "../Entities/Entities.h"
 
-db::List ParseList(const QJsonObject& json);
+db::List ToDBList(const List& list);

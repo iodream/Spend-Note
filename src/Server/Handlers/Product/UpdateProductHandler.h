@@ -20,7 +20,5 @@ public:
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	db::Product ToDBProduct(const Product& product);
-private:
 	ProductJSONParser m_parser{};
 };

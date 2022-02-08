@@ -20,8 +20,6 @@ public:
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	db::List ToDBList(const List& list);
-private:
 	ListJSONParser m_parser{};
 	ListIdJSONFormatter m_formatter{};
 };

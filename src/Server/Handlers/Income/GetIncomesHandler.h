@@ -1,42 +1,24 @@
 #pragma once
 
-#include "Server/Handlers/AuthorizedHandler.h"
+#include <string>
+#include <memory>
+#include <utility>
+
+#include "../AuthorizedHandler.h"
+
+#include "../Entities/Entities.h"
+#include "../Entities/Formatters.h"
+
+#include "../libdal/DTOs/Income.h"
 
 class GetIncomesHandler : public AuthorizedHandler
 {
 public:
-	class JSONFormatter
-	{
-	public:
-		struct Income
-		{
-			db::IdType income_id;
-			db::IdType user_id;
-			std::string name;
-			double amount;
-			std::string category_name;
-			std::string add_time;
-			std::string expiration_time;
-		};
-
-		using Incomes = std::vector<Income>;
-
-		struct DTO
-		{
-			Incomes incomes;
-		};
-
-		QJsonObject Format(const Income& income);
-		QJsonArray Format(const Incomes& incomes);
-		QJsonDocument Format(const DTO& dto);
-	};
-
 	GetIncomesHandler();
-	virtual Net::Response AuthHandle(const Net::Request& request) override;
+	virtual ~GetIncomesHandler() override {}
 
+	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	JSONFormatter::Incomes Map(const std::vector<db::Income>& incomes);
-	JSONFormatter::Income MapIncome(const db::Income& income);
-
-	JSONFormatter m_formatter{};
+	IncomesJSONFormatter m_formatter;
+	Income ToNetIncome(const db::Income& db_income, const db::IncomeCategory& category);
 };

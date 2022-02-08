@@ -1,36 +1,25 @@
 #include "Utils.h"
 
-#include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-db::Product ParseProduct(const QJsonObject& json)
+db::Product ToDBProduct(const Product& product)
 {
 	SCOPED_LOGGER;
-	db::Product product;
+	db::Product db_product;
+	db_product.id = product.id;
+	db_product.list_id = product.list_id;
+	db_product.category_id = product.category.id;
+	db_product.name = product.name;
+	db_product.price = product.price;
+	db_product.amount = product.amount;
+	db_product.product_priority = product.priority;
+	db_product.is_bought = product.is_bought;
+	db_product.add_date = product.add_date;
+	db_product.add_date = product.add_date;
+	db_product.purchase_date = (product.purchase_date != "")
+			? std::optional<db::Timestamp>{product.purchase_date} : std::nullopt;
+	db_product.buy_until_date = (product.buy_until_date != "")
+			? std::optional<db::Timestamp>{product.buy_until_date} : std::nullopt;
 
-	double tmp_number;
-	std::string tmp_date;
-	SafeReadId(json, "id", product.id);
-	SafeReadId(json, "list_id", product.list_id);
-	SafeReadId(json, "category_id", product.category_id);
-	SafeReadString(json, "name", product.name);
-
-	SafeReadNumber(json, "price", tmp_number);
-	product.price = tmp_number;
-	SafeReadNumber(json, "amount", tmp_number);
-	product.amount = tmp_number;
-	SafeReadNumber(json, "priority", tmp_number);
-	product.product_priority = tmp_number;
-
-	SafeReadBool(json, "is_bought", product.is_bought);
-	SafeReadString(json, "add_date", product.add_date);
-
-	SafeReadString(json, "purchase_date", tmp_date);
-	product.purchase_date = (tmp_date != "")
-		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
-	SafeReadString(json, "buy_until_date", tmp_date);
-	product.buy_until_date = (tmp_date != "")
-		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
-
-	return product;
+	return db_product;
 }
