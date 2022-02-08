@@ -197,6 +197,33 @@ bool ProductRepository::Remove(IdType id)
 	return true;
 }
 
+bool ProductRepository::CanUserEditProduct(IdType user_id, IdType product_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_database_connection};
+
+		auto result = w.exec(
+			"SELECT " + db::product::ID +
+			" FROM " + db::product::TABLE_NAME + " JOIN " + db::list::TABLE_NAME +
+			" ON " + db::product::LIST_ID + " = " + db::list::ID +
+			" WHERE " +
+				db::product::ID +" = "  + w.quote(product_id) + " AND " +
+				db::list::USER_ID +" = "  + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return true;
+}
+
 Product ProductRepository::ProductFromRow(const pqxx::row& row)
 {
 	Product product;
