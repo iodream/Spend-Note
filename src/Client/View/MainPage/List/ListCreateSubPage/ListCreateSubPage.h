@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "Common.h"
+#include "Entities/Entities.h"
 
 namespace Ui {
 class ListCreateSubPage;
@@ -16,7 +17,7 @@ class ListCreateSubPage : public QWidget
 public:
 	explicit ListCreateSubPage(QWidget *parent=nullptr);
 	~ListCreateSubPage();
-
+	QString GetListName();
 signals:
 	void GoBack();
 	void CreateList();

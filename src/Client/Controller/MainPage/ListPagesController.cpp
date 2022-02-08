@@ -1,6 +1,7 @@
 #include "ListPagesController.h"
 
 #include "Models/List/GetListsModel.h"
+#include "Models/List/AddNewListModel.h"
 
 #include "Net/Constants.h"
 
@@ -18,6 +19,18 @@ ListPagesController::ListPagesController(
 {
 	ConnectListPage();
 	ConnectCreatePage();
+	InitCreatePageController();
+}
+
+void ListPagesController::InitCreatePageController()
+{
+	m_list_create_page_controller =
+		std::make_unique<ListCreatePageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_list_page,
+			m_create_page);
 }
 
 void ListPagesController::ConnectListPage()
@@ -63,3 +76,31 @@ void ListPagesController::OnGoToCreateList()
 	emit ChangeSubPage(MainSubPages::CREATE_LIST);
 }
 
+//void ListPagesController::OnCreateList()
+//{
+//	AddNewListsModel model{m_hostname};
+//	List list;
+//	list.name = m_create_page.GetListName();
+//	list.id = m_list_page.get_list_size()+1;
+//	list.owner_id = m_user_id;
+
+//	ListState temp;
+//	temp.id=1;
+//	temp.name = QString("active");
+//	list.state=temp;
+
+//	auto request  = model.FormRequest(list, m_user_id);
+//	auto response = m_http_client.Request(request);
+
+//	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+//	{
+//		emit Message(
+//			QString("Error occured"),
+//			QString::fromStdString(response.reason));
+//		return ;
+//	}
+
+//	auto lists = model.ParseResponse(response);
+
+//	emit Message("CreateNewListPage", "New list added");
+//}
