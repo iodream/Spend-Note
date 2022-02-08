@@ -14,11 +14,11 @@ class ProductCreateSubPage : public QWidget
 	Q_OBJECT
 
 public:
-	explicit ProductPage(QWidget *parent = nullptr);
-	~ProductPage();
+	explicit ProductCreateSubPage(QWidget *parent = nullptr);
+	~ProductCreateSubPage();
 signals:
 	void GoBack();
-	void CreateList();
+	void CreateProduct();
 
 private:
 	Ui::ProductCreateSubPage *m_ui;

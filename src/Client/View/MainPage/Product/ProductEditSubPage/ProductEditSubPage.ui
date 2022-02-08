@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProductCreateSubPage</class>
- <widget class="QWidget" name="ProductCreateSubPage">
+ <class>ProductEditSubPage</class>
+ <widget class="QWidget" name="ProductEditSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="Title">
      <property name="text">
-      <string>New product</string>
+      <string>Edit product</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

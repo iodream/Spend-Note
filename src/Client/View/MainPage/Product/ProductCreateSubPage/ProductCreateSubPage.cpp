@@ -9,18 +9,18 @@ ProductCreateSubPage::ProductCreateSubPage(QWidget *parent) :
 
 	connect(
 		m_ui->SaveButton,
-		&QPushButton::released,
+		&QPushButton::clicked,
 		this,
-		&ProductCreateSubPage::CreateList);
+		&ProductCreateSubPage::CreateProduct);
 
 	connect(
 		m_ui->GoBackButton,
-		&QPushButton::released,
+		&QPushButton::clicked,
 		this,
 		&ProductCreateSubPage::GoBack);
 }
 
-ProductPage::~ProductPage()
+ProductCreateSubPage::~ProductCreateSubPage()
 {
 	delete m_ui;
 }

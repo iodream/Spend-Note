@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProductCreateSubPage</class>
- <widget class="QWidget" name="ProductCreateSubPage">
+ <class>ProductViewSubPage</class>
+ <widget class="QWidget" name="ProductViewSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,16 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="Title">
-     <property name="text">
-      <string>New product</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
       <widget class="QLabel" name="NameLabel">
@@ -34,7 +24,11 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="Name"/>
+      <widget class="QLineEdit" name="Name">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="PriceLabel">
@@ -44,7 +38,11 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="Price"/>
+      <widget class="QLineEdit" name="Price">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="AmountLabel">
@@ -54,7 +52,11 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="Amount"/>
+      <widget class="QLineEdit" name="Amount">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="BuyUntilLabel">
@@ -64,7 +66,11 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="BuyUntil"/>
+      <widget class="QLineEdit" name="BuyUntil">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="PriorityLabel">
@@ -74,7 +80,11 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QLineEdit" name="Priority"/>
+      <widget class="QLineEdit" name="Priority">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="IsBoughtLabel">
@@ -88,6 +98,9 @@
        <property name="text">
         <string/>
        </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item row="5" column="0">
@@ -98,7 +111,11 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="QComboBox" name="Category"/>
+      <widget class="QLineEdit" name="Category">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -125,9 +142,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="SaveButton">
+      <widget class="QPushButton" name="EditButton">
        <property name="text">
-        <string>Save</string>
+        <string>Edit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="DeleteButton">
+       <property name="text">
+        <string>Delete</string>
        </property>
       </widget>
      </item>
