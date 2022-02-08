@@ -126,6 +126,32 @@ bool IncomeRepository::Remove(const IdType& id)
 	return true;
 }
 
+bool IncomeRepository::CanUserEditIncome(IdType user_id, IdType income_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_db_connection};
+
+		auto result = w.exec(
+			"SELECT " + db::income::ID +
+			" FROM " + db::income::TABLE_NAME +
+			" WHERE " +
+				db::income::ID +" = "  + w.quote(income_id) + " AND " +
+				db::income::USER_ID +" = "  + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return true;
+}
+
 std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &user_id)
 {
 	try
