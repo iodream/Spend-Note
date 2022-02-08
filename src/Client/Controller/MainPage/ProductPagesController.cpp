@@ -4,44 +4,29 @@
 
 #include "Net/Constants.h"
 
-ListPagesController::ListPagesController(
+ProductPagesController::ProductPagesController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	ListsSubPage& list_page,
-	ListCreateSubPage& create_page)
+	ProductsSubPage& list_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
 	, m_list_page{list_page}
-	, m_create_page{create_page}
 {
 	ConnectListPage();
-	ConnectCreatePage();
 }
 
-void ListPagesController::ConnectListPage()
+void ProductPagesController::ConnectListPage()
 {
-	connect(
-		&m_list_page,
-		&ListsSubPage::GoToCreateList,
-		this,
-		&ListPagesController::OnGoToCreateList);
+	// connect something here
 }
 
-void ListPagesController::ConnectCreatePage()
+bool ProductPagesController::UpdateListPage()
 {
-	connect(
-		&m_create_page,
-		&ListCreateSubPage::GoBack,
-		this,
-		&ListPagesController::GoBack);
-}
-
-bool ListPagesController::UpdateListPage()
-{
-	GetListsModel model{m_hostname};
-	auto request  = model.FormRequest(m_user_id);
+	GetProductsModel model{m_hostname};
+	List list = m_list_page.get_list();
+	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
@@ -52,21 +37,30 @@ bool ListPagesController::UpdateListPage()
 		return false;
 	}
 
-	auto lists = model.ParseResponse(response);
+	auto products = model.ParseResponse(response);
 
-	m_list_page.Update(lists);
+	m_list_page.Update(products);
 	return true;
 }
 
-void ListPagesController::OnGoToCreateList()
+bool ProductPagesController::UpdateListPage(List list)
 {
-	emit ChangeSubPage(MainSubPages::CREATE_LIST);
-}
+	GetProductsModel model{m_hostname};
+	m_list_page.set_list(list);
+	auto request  = model.FormRequest(list.id);
+	auto response = m_http_client.Request(request);
 
-void ListPagesController::OnGoToProducts(const List& list)
-{
-	PageData data{};
-	data.setValue(list);
-	emit ChangeSubPage(MainSubPages::PRODUCTS, data);
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return false;
+	}
+
+	auto products = model.ParseResponse(response);
+
+	m_list_page.Update(products);
+	return true;
 }
 

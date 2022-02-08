@@ -8,23 +8,23 @@
 
 #include "View/Constants.h"
 
-class ListPagesController : public QObject
+class ProductPagesController : public QObject
 {
 	Q_OBJECT
 public:
-	ListPagesController(
+	ProductPagesController(
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
 		ProductsSubPage& list_page);
 
-	virtual ~ListPagesController() override {};
+	virtual ~ProductPagesController() override {};
 
 	bool UpdateListPage();
+	bool UpdateListPage(List list);
 
 private:
 	void ConnectListPage();
-	void ConnectCreatePage();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;

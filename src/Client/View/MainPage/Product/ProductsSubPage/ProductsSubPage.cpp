@@ -90,16 +90,25 @@ int ProductsSubPage::get_list_size()
 	return m_list_size;
 }
 
+void ProductsSubPage::set_list(List list)
+{
+	m_list = list;
+}
+
+List ProductsSubPage::get_list()
+{
+	return m_list;
+}
+
 ProductsSubPage::~ProductsSubPage()
 {
 	delete m_ui;
 }
 
 void ProductsSubPage::Update(
-	const List& list,
 	const std::vector<Product>& products)
 {
-	m_ui->ListName->setText(list.name);
+	m_ui->ListName->setText(m_list.name);
 	Clear();
 	for (auto it = products.begin(); it != products.end(); it++) {
 		ProductItem* item = new ProductItem(*it);

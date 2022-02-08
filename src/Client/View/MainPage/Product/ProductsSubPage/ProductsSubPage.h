@@ -26,11 +26,14 @@ public:
 
 	ProductItem* SafeGetProduct(int idx);
 
-	void Update(const List& list, const std::vector<Product>& products);
+	void Update(const std::vector<Product>& products);
 	void Clear();
 
 	void set_list_size(int size);
 	int get_list_size();
+
+	void set_list(List list);
+	List get_list();
 
 signals:
 	void GoToCreateProduct();

@@ -40,6 +40,8 @@ public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
 
+	ProductsSubPage& get_products_spage() { return m_products_spage; }
+
 private:
 	Ui::MainPage *m_ui;
 
