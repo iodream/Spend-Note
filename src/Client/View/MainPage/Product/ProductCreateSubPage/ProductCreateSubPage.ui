@@ -15,72 +15,76 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
+    <widget class="QLabel" name="Title">
+     <property name="text">
+      <string>New product</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="NameLabel">
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
-      <widget class="QLabel" name="name">
-       <property name="text">
-        <string>name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="id">
-       <property name="text">
-        <string>id</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="productBuyUntil">
-       <property name="text">
-        <string>&quot;Buy until&quot; date</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="buyUntil">
-       <property name="text">
-        <string>buy until</string>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="Name"/>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="productId">
-       <property name="text">
-        <string>Product Id</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="productName">
-       <property name="text">
-        <string>Product Name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="price">
-       <property name="text">
-        <string>price</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="productPrice">
+      <widget class="QLabel" name="PriceLabel">
        <property name="text">
         <string>Price</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="productIsPurchased">
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="Price"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="AmountLabel">
        <property name="text">
-        <string>Is purchased</string>
+        <string>Amount</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="Amount"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="BuyUntilLabel">
+       <property name="text">
+        <string>Buy until</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="BuyUntil"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="PriorityLabel">
+       <property name="text">
+        <string>Priority</string>
        </property>
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QRadioButton" name="isPurchased">
+      <widget class="QLineEdit" name="Priority"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="IsBoughtLabel">
+       <property name="text">
+        <string>Is bought</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QRadioButton" name="IsBought">
        <property name="text">
         <string/>
        </property>
@@ -104,16 +108,16 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="goBackButton">
+      <widget class="QPushButton" name="GoBackButton">
        <property name="text">
-        <string>go back</string>
+        <string>Go back</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="deleteProductButton">
+      <widget class="QPushButton" name="SaveButton">
        <property name="text">
-        <string>delete product</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
