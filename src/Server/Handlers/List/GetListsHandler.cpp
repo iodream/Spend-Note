@@ -5,49 +5,43 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
-GetListsHandler::GetListsHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+GetListsHandler::GetListsHandler()
 {
 }
 
-QJsonDocument GetListsHandler::JSONFormatter::Format(const Lists& dto)
+List GetListsHandler::ToNetList(const db::List &db_list, const db::ListState& state)
 {
-	QJsonObject json;
+	List list;
+	list.id = db_list.id;
+	list.name = db_list.name;
+	list.owner_id = db_list.owner_id;
+	list.state.id = state.id;
+	list.state.name = state.name;
 
-	QJsonArray lists;
-	for (const auto& dto_item : dto) {
-		QJsonObject list;
+	return list;
 
-		list["list_id"] = std::to_string(dto_item.first.list_id).c_str();
-		list["owner_id"] = std::to_string(dto_item.first.owner_id).c_str();
-		list["state_id"] = std::to_string(dto_item.first.state_id).c_str();
-		list["name"] = dto_item.first.name.c_str();
-		list["state"] = dto_item.second.c_str();
-
-		lists.append(list);
-	}
-	json["lists"] = lists;
-
-	return QJsonDocument{json};
 }
 
 Net::Response GetListsHandler::AuthHandle(const Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_GET) {
+	SCOPED_LOGGER;
+	Q_UNUSED(request);
 
-		auto lists = m_facade->GetAllLists(request.uid);
+	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+	auto db_lists = m_facade->GetAllLists(user_id);
 
-		JSONFormatter::Lists out_dto;
-		for (const List& list : lists) {
-			auto state = m_facade->GetListStateById(list.state_id);
-			std::string state_name = (state) ? state->name : EMPTY_STD_STRING;
-			out_dto.push_back({list, state_name});
+	std::vector<List> lists;
+	for (const db::List& db_list : db_lists) {
+		auto state = m_facade->GetListStateById(db_list.state_id);
+		if (!state.has_value())
+		{
+			throw InternalError(std::string("No list state with id:") + std::to_string(db_list.state_id));
 		}
-
-		return FormJSONResponse(m_formatter.Format(out_dto));
+		auto list = ToNetList(db_list, state.value());
+		lists.push_back(list);
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+
+	return FormJSONResponse(m_formatter.Format(lists));
 }

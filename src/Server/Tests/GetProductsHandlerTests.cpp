@@ -14,7 +14,7 @@ using ::testing::_;
 
 namespace  {
 
-Product p1 {
+db::Product p1 {
 	1,
 	1,
 	1,
@@ -24,16 +24,16 @@ Product p1 {
 	0,
 	false,
 	"some_date",
-	std::optional<Timestamp>{},
-	std::optional<Timestamp>{}
+	std::optional<db::Timestamp>{},
+	std::optional<db::Timestamp>{}
 };
 
-ProductCategory c1 {
+db::ProductCategory c1 {
 	1,
 	"Category 1"
 };
 
-void CheckProductsEquality(const Product& p1, const Product& p2)
+void CheckProductsEquality(const db::Product& p1, const db::Product& p2)
 {
 	EXPECT_EQ(p1.id, p2.id);
 	EXPECT_EQ(p1.list_id, p2.list_id);
@@ -48,6 +48,17 @@ void CheckProductsEquality(const Product& p1, const Product& p2)
 	EXPECT_EQ(p1.buy_until_date, p2.buy_until_date);
 }
 
+std::unique_ptr<GetProductsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+{
+	auto handler = std::make_unique<GetProductsHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::LIST_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+	return std::move(handler);
+}
+
 }
 
 TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
@@ -55,17 +66,12 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetProductsForList(_))
-		.WillOnce(Return(std::vector<Product>{}));
+		.WillOnce(Return(std::vector<db::Product>{}));
 
-	auto handler = std::make_unique<GetProductsHandler>(std::move(facade));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
-	{
-		QJsonObject json;
-		json["list_id"] = "1";
-		request.json_payload = QJsonDocument(json);
-	}
 
 	auto response = handler->AuthHandle(request);
 
@@ -82,19 +88,14 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetProductsForList(_))
-		.WillOnce(Return(std::vector<Product>{p1}));
+		.WillOnce(Return(std::vector<db::Product>{p1}));
 	EXPECT_CALL(*facade, GetProductCategoryById(1))
-		.WillOnce(Return(std::optional<ProductCategory>{c1}));
+		.WillOnce(Return(std::optional<db::ProductCategory>{c1}));
 
-	auto handler = std::make_unique<GetProductsHandler>(std::move(facade));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
-	{
-		QJsonObject json;
-		json["list_id"] = "1";
-		request.json_payload = QJsonDocument(json);
-	}
 
 	auto response = handler->AuthHandle(request);
 

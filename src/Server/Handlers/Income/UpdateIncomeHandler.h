@@ -12,11 +12,11 @@ class UpdateIncomeHandler : public AuthorizedHandler
 	class JSONParser
 	{
 	public:
-		Income Parse(const QJsonDocument& payload);
+		db::Income Parse(const QJsonDocument& payload);
 	};
 
 public:
-	UpdateIncomeHandler(IDbFacade::Ptr facade);
+	UpdateIncomeHandler();
 	virtual ~UpdateIncomeHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;

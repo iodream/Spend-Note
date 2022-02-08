@@ -32,11 +32,22 @@ QJsonDocument FormTestJSON() {
 	return QJsonDocument(json);
 }
 
+std::unique_ptr<AddProductHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+{
+	auto handler = std::make_unique<AddProductHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::LIST_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+	return std::move(handler);
+}
+
 }
 
 ACTION(ThrowSQLFailure)
 {
-	throw SQLFailure("");
+	throw db::SQLFailure("");
 }
 
 TEST(AddProductHandlerTest, SUCCESS)
@@ -44,9 +55,9 @@ TEST(AddProductHandlerTest, SUCCESS)
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, AddProduct(_))
-		.WillOnce(Return(std::optional<IdType>{1}));
+		.WillOnce(Return(std::optional<db::IdType>{1}));
 
-	auto handler = std::make_unique<AddProductHandler>(std::move(facade));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
@@ -59,7 +70,7 @@ TEST(AddProductHandlerTest, SUCCESS)
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_CREATED);
 
 	QJsonObject json = response.json_payload.object();
-	IdType id;
+	db::IdType id;
 	SafeReadId(json, "id", id);
 	EXPECT_EQ(id, 1);
 }
@@ -72,7 +83,7 @@ TEST(AddProductHandlerTest, FAILURE)
 		.Times(1)
 		.WillRepeatedly(ThrowSQLFailure());
 
-	auto handler = std::make_unique<AddProductHandler>(std::move(facade));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;

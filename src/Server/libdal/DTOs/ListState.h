@@ -3,8 +3,11 @@
 #include <string>
 #include "Types.h"
 
-struct ListState
+namespace db
 {
-	IdType list_state_id;
-	std::string name;
-};
+	struct ListState
+	{
+		IdType id;
+		std::string name;
+	};
+}

@@ -1,3 +1,4 @@
+
 #include "GetIncomesHandler.h"
 
 #include <QJsonArray>
@@ -8,36 +9,33 @@
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
+#include "Logger/ScopedLogger.h"
 
-GetIncomesHandler::GetIncomesHandler(IDbFacade::Ptr facade)
-	: AuthorizedHandler(std::move(facade))
+GetIncomesHandler::GetIncomesHandler()
 {
-
 }
 
 Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 {
-	if (request.method == Net::HTTP_METHOD_GET)
+	SCOPED_LOGGER;
+	Q_UNUSED(request);
+	try
 	{
-		try
-		{
-			JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(request.uid))};
-			return FormJSONResponse(m_formatter.Format(response_dto));
-		}
-		catch (const SQLFailure& e)
-		{
-			return FormErrorResponse(
-				InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-				"Failed to retrieve incomes from database");
-		}
+		auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+		JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(user_id))};
+		return FormJSONResponse(m_formatter.Format(response_dto));
 	}
-	return FormErrorResponse(
-		NetError::Status::HTTP_BAD_REQUEST,
-		"Unsupported method");
+	catch (const db::SQLFailure& e)
+	{
+		return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Failed to retrieve incomes from database");
+	}
 }
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<Income>& incomes)
+GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<db::Income>& incomes)
 {
+	SCOPED_LOGGER;
 	JSONFormatter::Incomes incomes_out;
 	incomes_out.reserve(incomes.size());
 	for (const auto& income : incomes)
@@ -47,11 +45,12 @@ GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vect
 	return incomes_out;
 }
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Income& income)
+GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const db::Income& income)
 {
+	SCOPED_LOGGER;
 	JSONFormatter::Income income_out;
 
-	income_out.income_id = income.income_id;
+	income_out.income_id = income.id;
 	income_out.user_id = income.user_id;
 	income_out.name = income.name;
 	income_out.amount = income.amount;
@@ -72,6 +71,7 @@ GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const Inco
 
 QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
 {
+	SCOPED_LOGGER;
 	QJsonObject income_json;
 	income_json["id"] = std::to_string(income.income_id).c_str();
 	income_json["user_id"] = std::to_string(income.user_id).c_str();
@@ -85,6 +85,7 @@ QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
 
 QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
 {
+	SCOPED_LOGGER;
 	QJsonArray incomes_json;
 	for (const Income& income : incomes)
 	{
@@ -95,6 +96,7 @@ QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
 
 QJsonDocument GetIncomesHandler::JSONFormatter::Format(const DTO& dto)
 {
+	SCOPED_LOGGER;
 	QJsonObject json;
 	json["incomes"] = Format(dto.incomes);
 	return QJsonDocument{json};

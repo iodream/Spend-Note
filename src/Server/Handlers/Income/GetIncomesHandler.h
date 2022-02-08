@@ -10,8 +10,8 @@ public:
 	public:
 		struct Income
 		{
-			IdType income_id;
-			IdType user_id;
+			db::IdType income_id;
+			db::IdType user_id;
 			std::string name;
 			double amount;
 			std::string category_name;
@@ -31,13 +31,12 @@ public:
 		QJsonDocument Format(const DTO& dto);
 	};
 
-	GetIncomesHandler(IDbFacade::Ptr facade);
+	GetIncomesHandler();
 	virtual Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-	JSONFormatter::Incomes Map(const std::vector<Income>& incomes);
-	JSONFormatter::Income MapIncome(const Income& income);
+	JSONFormatter::Incomes Map(const std::vector<db::Income>& incomes);
+	JSONFormatter::Income MapIncome(const db::Income& income);
 
 	JSONFormatter m_formatter{};
 };
-

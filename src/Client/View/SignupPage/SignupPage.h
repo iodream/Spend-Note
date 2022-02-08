@@ -17,12 +17,11 @@ public:
 	~SignupPage();
 
 signals:
-	void Signup(SignupModel::SignupInDTO& dto);
-	void GotoLoginPage();
+	void Signup(const SignupModel::SignupInDTO& dto);
+	void GoToLoginPage();
 
 private slots:
 	void OnSignupSubmitButtonClicked();
-	void OnGoBackButtonClicked();
 
 private:
 	Ui::SignupPage *m_ui;
