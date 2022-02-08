@@ -1,6 +1,7 @@
 #include "ProductsResolver.h"
 
 #include "../Handlers/Product/RemoveProductHandler.h"
+#include "../Handlers/Product/UpdateProductHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
@@ -35,7 +36,7 @@ ICommandHandler* ProductsResolver::ResolveLastSegment(
 {
 	SCOPED_LOGGER;
 	if (method == Net::HTTP_METHOD_PUT)
-		throw NotImplementedError("Update product not yet implemented");
+		return new UpdateProductHandler();
 	else if (method == Net::HTTP_METHOD_DELETE)
 		return new RemoveProductHandler();
 	return new MethodNotAllowedHandler();

@@ -30,24 +30,7 @@ db::Product AddProductHandler::ToDBProduct(const Product& product)
 	db_product.add_date = product.add_date;
 	db_product.purchase_date = product.purchase_date;
 	db_product.buy_until_date = product.buy_until_date;
-	/*
-	if (product.purchase_date != "")
-	{
-		db_product.purchase_date = product.purchase_date;
-	}
-	else
-	{
-		db_product.purchase_date = std::nullopt;
-	}
-	if (product.buy_until_date != "")
-	{
-		db_product.buy_until_date = product.buy_until_date;
-	}
-	else
-	{
-		db_product.buy_until_date = std::nullopt;
-	}
-	*/
+
 	return db_product;
 }
 
