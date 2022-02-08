@@ -1,6 +1,7 @@
 #include "UsersResolver.h"
 
 #include "../Handlers/List/GetListsHandler.h"
+#include "../Handlers/List/AddListHandler.h"
 #include "../Handlers/Income/GetIncomesHandler.h"
 #include "../Handlers/Income/AddIncomeHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
@@ -39,6 +40,8 @@ ICommandHandler* UsersResolver::Resolve(
 	if (segment == LISTS) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetListsHandler();
+		else if (method == Net::HTTP_METHOD_POST)
+			return new AddListHandler();
 		return new MethodNotAllowedHandler();;
 	}
 	else if (segment == INCOMES) {
