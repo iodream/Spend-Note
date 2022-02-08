@@ -14,9 +14,9 @@ public:
 		QJsonObject state_json;
 		StateParser<ListState> state_parser{};
 
-		SafeReadNumber(obj, "id", list.id);
+		SafeReadId(obj, "id", list.id);
 		SafeReadString(obj, "name", list.name);
-		SafeReadNumber(obj, "owner_id", list.owner_id);
+		SafeReadId(obj, "owner_id", list.owner_id);
 
 		SafeReadObject(obj, "state", state_json);
 		list.state = state_parser.Parse(state_json);

@@ -9,6 +9,8 @@
 #include "Common.h"
 #include "View/Constants.h"
 
+#include "Entities/PageData.h"
+
 class MainPageController : public QObject
 {
 	Q_OBJECT
@@ -21,7 +23,7 @@ public:
 
 	virtual ~MainPageController() override {};
 
-	void ChangeSubPage(MainSubPages page);
+	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
 private:
 	void ConnectPage();
@@ -44,7 +46,7 @@ signals:
 	void ChangePage(UIPages page);
 
 public slots:
-	void OnChangeSubPage(MainSubPages page);
+	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnGoBack();
 
 	void OnLogout();

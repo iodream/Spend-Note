@@ -2,8 +2,7 @@
 
 #include "Controller/HTTPClient.h"
 
-#include "View/MainPage/List/ListsSubPage/ListsSubPage.h"
-#include "View/MainPage/List/ListCreateSubPage/ListCreateSubPage.h"
+#include "View/MainPage/Product/ProductsSubPage/ProductsSubPage.h"
 
 #include "Entities/PageData.h"
 
@@ -17,8 +16,7 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		ListsSubPage& list_page,
-		ListCreateSubPage& create_page);
+		ProductsSubPage& list_page);
 
 	virtual ~ListPagesController() override {};
 
@@ -32,8 +30,7 @@ private:
 	std::string& m_hostname;
 	IdType& m_user_id;
 
-	ListsSubPage& m_list_page;
-	ListCreateSubPage& m_create_page;
+	ProductsSubPage& m_list_page;
 
 signals:
 	void Message(const QString& window_name, const QString& message);
@@ -41,6 +38,5 @@ signals:
 	void GoBack();
 
 public slots:
-	void OnGoToCreateList();
-	void OnGoToProducts(const List& list);
+//	void OnGoToCreateProduct();
 };

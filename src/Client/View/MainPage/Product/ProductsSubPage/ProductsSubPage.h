@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "ProductItem.h"
+#include "Client/Entities/Entities.h"
 
 namespace Ui {
 class ProductsSubPage;
@@ -14,8 +15,6 @@ class ProductsSubPage : public QWidget
 	Q_OBJECT
 
 public:
-	using IdType = int;
-
 	explicit ProductsSubPage(QWidget *parent=nullptr);
 	~ProductsSubPage();
 
@@ -26,16 +25,21 @@ public:
 	void UpdateProductNumbers(int idx);
 
 	ProductItem* SafeGetProduct(int idx);
-private:
-	void OnProductClicked(ProductItem* product);
+
+	void Update(const List& list, const std::vector<Product>& products);
+	void Clear();
 
 	void set_list_size(int size);
 	int get_list_size();
 
+signals:
+	void GoToCreateProduct();
+
+private slots:
+	void OnProductClicked(ProductItem* product);
+
+private:
 	Ui::ProductsSubPage *m_ui;
-
-	QString m_name;
-	IdType m_id;
-
+	List m_list;
 	int m_list_size;
 };

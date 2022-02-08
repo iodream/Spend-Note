@@ -79,7 +79,7 @@ void MainPageController::OnGoBack()
 	ChangeSubPage(page);
 }
 
-void MainPageController::ChangeSubPage(MainSubPages page)
+void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
@@ -106,7 +106,7 @@ void MainPageController::ChangeSubPage(MainSubPages page)
 	}
 }
 
-void MainPageController::OnChangeSubPage(MainSubPages page)
+void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 {
-	ChangeSubPage(page);
+	ChangeSubPage(page, data);
 }

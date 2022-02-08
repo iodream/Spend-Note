@@ -12,6 +12,8 @@
 
 #include "View/Constants.h"
 
+#include "Entities/PageData.h"
+
 
 namespace Ui {
 class MainPage;
@@ -32,6 +34,8 @@ private:
 	void InitListsSubPage();
 	void InitCreateListSubPage();
 
+	void InitProductsSubPage();
+
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
@@ -42,10 +46,12 @@ private:
 	ListsSubPage m_lists_spage;
 	ListCreateSubPage m_list_create_spage;
 
+	ProductsSubPage m_products_spage;
+
 //	IncomesSubPage m_incomes_spage;
 
 signals:
-	void ChangeSubPage(MainSubPages page);
+	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack();
 

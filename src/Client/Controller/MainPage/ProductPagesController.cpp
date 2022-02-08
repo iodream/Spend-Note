@@ -1,6 +1,6 @@
-#include "ListPagesController.h"
+#include "ProductPagesController.h"
 
-#include "Models/List/GetListsModel.h"
+#include "Models/Product/GetProductsModel.h"
 
 #include "Net/Constants.h"
 
