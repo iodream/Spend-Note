@@ -20,5 +20,4 @@ public:
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
 	IncomesJSONFormatter m_formatter;
-	Income ToNetIncome(const db::Income& db_income, const db::IncomeCategory& category);
 };

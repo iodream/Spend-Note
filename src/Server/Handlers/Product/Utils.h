@@ -4,3 +4,5 @@
 #include "../Entities/Entities.h"
 
 db::Product ToDBProduct(const Product& product);
+
+Product ToNetProduct(const db::Product& db_product, const db::ProductCategory& category);

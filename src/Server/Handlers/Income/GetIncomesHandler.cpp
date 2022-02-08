@@ -6,25 +6,10 @@
 #include "Server/Utils.h"
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
+#include "Utils.h"
 
 GetIncomesHandler::GetIncomesHandler()
 {
-}
-
-Income GetIncomesHandler::ToNetIncome(const db::Income &db_income, const db::IncomeCategory& category)
-{
-	SCOPED_LOGGER;
-	Income income;
-	income.id = db_income.id;
-	income.user_id = db_income.id;
-	income.name = db_income.name;
-	income.category.id = category.id;
-	income.category.name = category.name;
-	income.amount = db_income.amount;
-	income.add_time = db_income.add_time;
-	income.expiration_time = (db_income.expiration_time.has_value()) ? db_income.expiration_time.value() : EMPTY_STD_STRING;
-
-	return income;
 }
 
 Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
