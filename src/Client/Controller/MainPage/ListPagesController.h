@@ -46,5 +46,4 @@ signals:
 
 public slots:
 	void OnGoToCreateList();
-	//void OnCreateList();
 };
