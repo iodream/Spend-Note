@@ -4,32 +4,39 @@
 #include <QJsonObject>
 
 #include "MockDbFacade.h"
+#include "Facade/DbFacade.h"
 #include "Server/Handlers/Product/AddProductHandler.h"
 #include "Net/Parsing.h"
+
 
 #include "../libdal/Exceptions/SQLFailure.h"
 
 using ::testing::Return;
 using ::testing::_;
-
+using ::testing::Throw;
 namespace {
 
-QJsonDocument FormTestJSON() {
-	QJsonObject json;
+QJsonObject FormObject(int id)
+{
+	QJsonObject product, tmp_product;
 
-	json["id"] = "";
-	json["list_id"] = "1";
-	json["category_id"] = "1";
-	json["name"] = "Name?";
-	json["price"] = 123;
-	json["amount"] = 123;
-	json["priority"] = 0;
-	json["is_bought"] = false;
-	json["add_date"] = "today";
+	product["id"] = id;
+	product["list_id"] = 1;
 
-	json["purchase_date"] = "";
-	json["buy_until_date"] = "";
-	return QJsonDocument(json);
+	tmp_product["id"] = 1;
+	tmp_product["name"] = "test_name";
+
+	product["category"] = tmp_product;
+	product["name"] = "test_name";
+	product["is_bought"] = true;
+	product["amount"] = 1;
+	product["price"] = 1;
+	product["priority"] = 1;
+	product["add_date"] = "test_date";
+	product["purchase_date"] = "test_date";
+	product["buy_until_date"] = "test_date";
+
+	return product;
 }
 
 std::unique_ptr<AddProductHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
@@ -52,6 +59,7 @@ ACTION(ThrowSQLFailure)
 
 TEST(AddProductHandlerTest, SUCCESS)
 {
+
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, AddProduct(_))
@@ -60,10 +68,9 @@ TEST(AddProductHandlerTest, SUCCESS)
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
+	request.json_payload = QJsonDocument{FormObject(1)};
 	request.method = Net::HTTP_METHOD_POST;
-	{
-		request.json_payload = FormTestJSON();
-	}
+
 
 	auto response = handler->AuthHandle(request);
 
@@ -77,19 +84,17 @@ TEST(AddProductHandlerTest, SUCCESS)
 
 TEST(AddProductHandlerTest, FAILURE)
 {
+
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, AddProduct(_))
-		.Times(1)
-		.WillRepeatedly(ThrowSQLFailure());
+		.WillOnce(Throw(db::SQLFailure("")));
 
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
+	request.json_payload = QJsonDocument{FormObject(123)};
 	request.method = Net::HTTP_METHOD_POST;
-	{
-		request.json_payload = FormTestJSON();
-	}
 
 	auto response = handler->AuthHandle(request);
 

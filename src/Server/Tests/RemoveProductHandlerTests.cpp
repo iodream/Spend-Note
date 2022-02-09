@@ -5,7 +5,7 @@
 
 #include "MockDbFacade.h"
 #include "Server/Handlers/Product/RemoveProductHandler.h"
-#include "Server/Handlers/Product/Utils.h"
+#include "Server/Handlers/Entities/Entities.h"
 #include "Net/Parsing.h"
 
 using ::testing::Return;
