@@ -82,7 +82,6 @@ void ListPagesController::OnGoToCreateList()
 	emit ChangeSubPage(MainSubPages::CREATE_LIST);
 }
 
-//checks data and sends request
 void ListPagesController::OnCreateList()
 {
 	AddNewListsModel model{m_hostname};
@@ -119,7 +118,7 @@ void ListPagesController::OnCreateList()
 
 	auto lists = model.ParseResponse(response);
 
-	emit GoBack(); //immediately go to previous page
+	emit GoBack();
 }
 
 void ListPagesController::OnGoToProducts(const List& list)
