@@ -20,8 +20,7 @@ public:
 		ListsSubPage& list_page,
 		ListCreateSubPage& create_page);
 
-	virtual ~ListPagesController() override {};
-
+	virtual ~ListPagesController() override {}
 	bool UpdateListPage();
 
 private:
@@ -35,12 +34,15 @@ private:
 	ListsSubPage& m_list_page;
 	ListCreateSubPage& m_create_page;
 
+
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void GoBack();
+	void CreateList();
 
 public slots:
 	void OnGoToCreateList();
+	void OnCreateList();
 	void OnGoToProducts(const List& list);
 };

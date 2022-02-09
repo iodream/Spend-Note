@@ -10,6 +10,14 @@ Net::Request  AddNewListsModel::FormRequest(const List& list, const IdType& user
 	return request;
 }
 
+bool AddNewListsModel::CheckName(QString name)
+{
+	std::string str = name.toStdString();
+	str.erase(std::remove_if(str.begin(), str.end(), ::isspace)
+				   , str.end());
+	return (!str.empty());
+}
+
 ListId AddNewListsModel::ParseResponse(const Net::Response& response)
 {
 	return m_parser.Parse(response.json_payload.object());
