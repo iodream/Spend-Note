@@ -26,10 +26,11 @@ public:
 		ProductsSubPage& product_page);
 
 	virtual ~ListPagesController() override {}
+
 	bool UpdateListPage();
 	bool UpdateListCreatePage();
-	bool UpdateListViewPage(const List& list);
-	bool UpdateListEditPage(const List& list);
+	bool UpdateListViewPage(PageData& data);
+	bool UpdateListEditPage(PageData& data);
 
 private:
 	void ConnectListPage();

@@ -132,14 +132,16 @@ bool ListPagesController::UpdateListCreatePage()
 	return true;
 }
 
-bool ListPagesController::UpdateListViewPage(const List& list)
+bool ListPagesController::UpdateListViewPage(PageData& data)
 {
+	auto list = qvariant_cast<List>(data);
 	m_list_view_page.Update(list);
 	return true;
 }
 
-bool ListPagesController::UpdateListEditPage(const List& list)
+bool ListPagesController::UpdateListEditPage(PageData& data)
 {
+	auto list = qvariant_cast<List>(data);
 	m_list_edit_page.Update(list);
 	return true;
 }

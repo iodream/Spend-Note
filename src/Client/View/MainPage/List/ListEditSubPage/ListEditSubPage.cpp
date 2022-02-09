@@ -19,7 +19,7 @@ ListEditSubPage::ListEditSubPage(QWidget *parent)
 	connect(
 		m_ui->GoBackButton,
 		&QPushButton::released,
-		[this](){ emit GoBack();});
+		[this](){ emit GoBack(3);});
 }
 
 ListEditSubPage::~ListEditSubPage()

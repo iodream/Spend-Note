@@ -38,7 +38,7 @@ public:
 signals:
 	void GoToCreateProduct();
 	void GoToViewList();
-
+	void ProductClicked(const Product& product);
 
 private slots:
 	void OnProductClicked(ProductItem* product);
