@@ -14,6 +14,7 @@ MainPageController::MainPageController(
 {
 	ConnectPage();
 	InitListPagesController();
+	InitProductPagesController();
 }
 
 void MainPageController::ConnectPage()
@@ -78,6 +79,34 @@ void MainPageController::InitListPagesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitProductPagesController()
+{
+	m_product_pages_controller =
+		std::make_unique<ProductPagesController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_products_spage());
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductPagesController::Message,
+		this,
+		&MainPageController::Message);
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductPagesController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductPagesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -91,25 +120,9 @@ void MainPageController::OnGoBack()
 	ChangeSubPage(page);
 }
 
-void MainPageController::ChangeSubPage(MainSubPages page)
+void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 {
-	bool update_succeeded{true};
-
-	switch(page) {
-	case MainSubPages::LISTS:
-		update_succeeded = m_list_pages_controller->UpdateListPage();
-		break;
-	case MainSubPages::CREATE_LIST:
-		break;
-	case MainSubPages::PRODUCTS:
-		break;
-	case MainSubPages::ICOMES:
-		break;
-	case MainSubPages::SETTINGS:
-		break;
-	}
-
-	if (update_succeeded) {
+	if (UpdateSubPage(page, data)) {
 		m_page.SetCurrentSubPage(page);
 		m_history.Update(page);
 	}
@@ -118,7 +131,35 @@ void MainPageController::ChangeSubPage(MainSubPages page)
 	}
 }
 
-void MainPageController::OnChangeSubPage(MainSubPages page)
+bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
-	ChangeSubPage(page);
+	bool update_succeeded{true};
+
+	switch(page) {
+	case MainSubPages::LISTS:
+		return m_list_pages_controller->UpdateListPage();
+	case MainSubPages::CREATE_LIST:
+		break;
+	case MainSubPages::PRODUCTS:
+		return UpdateProductsSubPage(data);
+	case MainSubPages::ICOMES:
+		break;
+	case MainSubPages::SETTINGS:
+		break;
+	}
+
+	return update_succeeded;
+}
+
+bool MainPageController::UpdateProductsSubPage(PageData data)
+{
+	if (!data.canConvert<List>()) {
+		return m_product_pages_controller->UpdateListPage();
+	}
+	return m_product_pages_controller->UpdateListPage(qvariant_cast<List>(data));
+}
+
+void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
+{
+	ChangeSubPage(page, data);
 }

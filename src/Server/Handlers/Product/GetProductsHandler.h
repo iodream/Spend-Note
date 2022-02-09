@@ -20,5 +20,4 @@ public:
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
 	ProductsJSONFormatter m_formatter;
-	Product ToNetProduct(const db::Product& db_product, const db::ProductCategory& category);
 };

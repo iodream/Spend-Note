@@ -40,6 +40,11 @@ void ListPagesController::ConnectListPage()
 		&ListsSubPage::GoToCreateList,
 		this,
 		&ListPagesController::OnGoToCreateList);
+//	connect(
+//		&m_list_page,
+//		&ListsSubPage::GoToProducts,
+//		this,
+//		&ListPagesController::OnGoToProducts);
 }
 
 void ListPagesController::ConnectCreatePage()

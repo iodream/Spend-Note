@@ -4,7 +4,9 @@
 
 #include "View/MainPage/List/ListsSubPage/ListsSubPage.h"
 #include "View/MainPage/List/ListCreateSubPage/ListCreateSubPage.h"
-#include "Common.h"
+
+#include "Entities/PageData.h"
+
 #include "View/Constants.h"
 #include "Controller/MainPage/ListCreatePageController.h"
 
@@ -38,10 +40,11 @@ private:
 
 signals:
 	void Message(const QString& window_name, const QString& message);
-	void ChangeSubPage(MainSubPages page);
+	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void GoBack();
 	void CreateList();
 
 public slots:
 	void OnGoToCreateList();
+	//void OnGoToProducts(const List& list);
 };
