@@ -27,6 +27,11 @@ void ListPagesController::ConnectListPage()
 		&ListsSubPage::GoToCreateList,
 		this,
 		&ListPagesController::OnGoToCreateList);
+	connect(
+		&m_list_page,
+		&ListsSubPage::GoToProducts,
+		this,
+		&ListPagesController::OnGoToProducts);
 }
 
 void ListPagesController::ConnectCreatePage()
@@ -68,5 +73,12 @@ bool ListPagesController::UpdateListPage()
 void ListPagesController::OnGoToCreateList()
 {
 	emit ChangeSubPage(MainSubPages::CREATE_LIST);
+}
+
+void ListPagesController::OnGoToProducts(const List& list)
+{
+	PageData data{};
+	data.setValue(list);
+	emit ChangeSubPage(MainSubPages::PRODUCTS, data);
 }
 

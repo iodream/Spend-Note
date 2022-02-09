@@ -1,10 +1,8 @@
 #include "AddIncomeHandler.h"
-
-#include "../Common.h"
 #include "Net/Parsing.h"
-
 #include "Server/Error.h"
 #include "Server/Utils.h"
+#include "../Common.h"
 #include "Utils.h"
 
 #include "../libdal/Exceptions/SQLFailure.h"
@@ -14,54 +12,23 @@ AddIncomeHandler::AddIncomeHandler()
 {
 }
 
-db::Income AddIncomeHandler::JSONParser::Parse(
-	const QJsonDocument& json_doc)
-{
-	SCOPED_LOGGER;
-	db::Income dto;
-
-	auto json = json_doc.object();
-
-	try
-	{
-		dto = ParseIncome(json);
-	}
-	catch(const ParsingError& ex)
-	{
-		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
-	}
-
-	return dto;
-}
-
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
-
-	auto dto = m_parser.Parse(request.json_payload);
-	dto.user_id = user_id;
-
-	AddIncomeHandler::JSONFormatter::DTO out_dto;
-
-	try
-	{
-		out_dto.income_id = m_facade->AddIncome(dto).value();
+	auto json_payload = request.json_payload.object();
+	auto income = m_parser.Parse(json_payload);
+	auto income_db = ToDBIncome(income);
+	IncomeId income_id;
+	try {
+		income_id.id = m_facade->AddIncome(income_db).value();
 	}
-	catch (const db::SQLFailure& e)
-	{
-		throw FormErrorResponse(
+	catch (const db::SQLFailure& ex) {
+		return FormErrorResponse(
 			NetError::Status::HTTP_CONFLICT,
 			"Unable to create resource");
 	}
-
-	return FormJSONResponse(m_formatter.Format(out_dto));
+	return FormJSONResponse(
+		m_formatter.Format(income_id),
+		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CREATED);
 }
 
-QJsonDocument AddIncomeHandler::JSONFormatter::Format(const DTO& dto)
-{
-	SCOPED_LOGGER;
-	QJsonObject json;
-	json["id"] = std::to_string(dto.income_id).c_str();
-	return QJsonDocument{json};
-}
