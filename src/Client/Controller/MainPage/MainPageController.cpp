@@ -124,7 +124,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
-	switch(page) {
+	switch(page)
+	{
 	case MainSubPages::LISTS:
 		return m_list_pages_controller->UpdateListPage();
 	case MainSubPages::CREATE_LIST:
@@ -135,10 +136,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		return m_product_pages_controller->UpdateViewProductSubPage(data);
 	case MainSubPages::CREATE_PRODUCT:
 		return false;
-//		return UpdateCreateProductSubPage(data);
 	case MainSubPages::EDIT_PRODUCT:
 		return false;
-//		return UpdateEditProductSubPage(data);
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:

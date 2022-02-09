@@ -32,7 +32,6 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
 		return false;
-		//return m_product_pages_controller->UpdateListPage();
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
@@ -55,9 +54,6 @@ void ProductPagesController::ConnectViewPage()
 		&ProductViewSubPage::GoBack,
 		this,
 		&ProductPagesController::GoBack);
-
-//	void EditProduct();
-	//	void DeleteProduct();
 }
 
 void ProductPagesController::OnProductClicked(const Product& product)
