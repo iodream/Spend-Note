@@ -10,8 +10,8 @@
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
 {
 	SCOPED_LOGGER;
-	qDebug() << "Request from " <<
-		QString::fromStdString(http_req.clientAddress().toString()) << "\n";
+
+	qInfo() << "Request from " << http_req.clientAddress().toString().c_str();
 
 	try {
 		if (!m_command_handler) {

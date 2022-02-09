@@ -14,6 +14,8 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 
+namespace db
+{
 class IDbFacade
 {
 public:
@@ -56,4 +58,9 @@ public:
 
 	virtual Money CalculateBalanceForUser(IdType user_id) = 0;
 	virtual Money CalculatePlannedBalanceForUser(IdType user_id) = 0;
+
+	virtual bool CanUserEditList(IdType user_id, IdType list_id) = 0;
+	virtual bool CanUserEditProduct(IdType user_id, IdType product_id) = 0;
+	virtual bool CanUserEditIncome(IdType user_id, IdType income_id) = 0;
 };
+}

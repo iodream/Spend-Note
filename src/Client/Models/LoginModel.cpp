@@ -21,17 +21,18 @@ QJsonDocument LoginModel::JSONFormatter::Format(const Credentials& credentials)
 	auto digest = QString(QCryptographicHash::hash(
 			password, QCryptographicHash::Sha1).toHex());
 	json["password"] = digest.toStdString().c_str();
-    return QJsonDocument(json);
+	return QJsonDocument(json);
 }
 
-void LoginModel::JSONParser::Parse(QJsonObject json, Token& dto)
+void LoginModel::JSONParser::Parse(QJsonObject json, UserData& dto)
 {
 	SafeReadString(json, "token", dto.token);
+	SafeReadId(json, "id", dto.id);
 }
 
-LoginModel::JSONParser::Token LoginModel::ParseResponse(const Net::Response& response)
+LoginModel::JSONParser::UserData LoginModel::ParseResponse(const Net::Response& response)
 {
-	JSONParser::Token token;
+	JSONParser::UserData token;
 
 	m_parser.Parse(response.json_payload.object(), token);
 

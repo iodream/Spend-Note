@@ -8,6 +8,7 @@
 
 #include "Exception.h"
 #include "HTTPClient.h"
+
 void HTTPClient::set_token(const std::string& str_token)
 {
     m_token = str_token;
@@ -38,11 +39,9 @@ void HTTPClient::SendRequest(
         std::ostream& out_stream = session.sendRequest(request);
 		out_stream << net_request.json_payload.toJson().constData();
     }
-    else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-    {
-		session.sendRequest(request);
-    }
-    else if (net_request.content_type == Net::CONTENT_TYPE_EMPTY)
+	else if (
+		net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT ||
+		net_request.content_type == Net::CONTENT_TYPE_EMPTY)
     {
 		session.sendRequest(request);
     }
@@ -68,13 +67,9 @@ Net::Response HTTPClient::FormResponse(
         QJsonDocument json_doc = QJsonDocument::fromJson(br);
 		net_response.json_payload = json_doc;
     }
-    else if (net_response.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-    {
-    }
-    else if (net_response.content_type == Net::CONTENT_TYPE_EMPTY)
-    {
-    }
-    else
+	else if (
+		net_response.content_type != Net::CONTENT_TYPE_PLAIN_TEXT &&
+		net_response.content_type != Net::CONTENT_TYPE_EMPTY)
     {
         throw Exception("Unsupported content type");
     }

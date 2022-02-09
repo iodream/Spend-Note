@@ -11,6 +11,8 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 
+namespace db
+{
 class DbFacade : public IDbFacade
 {
 public:
@@ -53,6 +55,10 @@ public:
 	Money CalculateBalanceForUser(IdType user_id) override;
 	Money CalculatePlannedBalanceForUser(IdType user_id) override;
 
+	bool CanUserEditList(IdType user_id, IdType list_id) override;
+	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
+	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -65,3 +71,4 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 };
+}

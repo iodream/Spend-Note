@@ -5,6 +5,8 @@
 #include "DTOs/Income.h"
 #include "Exceptions/DatabaseFailure.h"
 
+namespace db
+{
 class IncomeRepository
 {
 public:
@@ -16,8 +18,11 @@ public:
 	bool Update(const Income& income);
 	bool Remove(const IdType& income_id);
 
+	bool CanUserEditIncome(IdType user_id, IdType income_id);
+
 private:
 	pqxx::connection& m_db_connection;
 
 	Income ParseSQLRow(const pqxx::row& row);
 };
+}

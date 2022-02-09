@@ -3,10 +3,10 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-List ParseList(const QJsonObject& json)
+db::List ParseList(const QJsonObject& json)
 {
 	SCOPED_LOGGER;
-	List list;
+	db::List list;
 
 	std::string tmp_date;
 	SafeReadId(json, "list_id", list.id);

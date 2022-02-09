@@ -1,17 +1,12 @@
 #pragma once
 #include <QJsonObject>
 
-#include "../Net/Entities/List.h"
-#include "../Net/Parsing.h"
+#include "Net/Entities/List/ListId.h"
 
-template<class Entity>
+#include "Net/Parsing.h"
+
 class ListIdJSONFormatter
 {
 public:
-	QJsonDocument Format(const List<Entity>& list)
-	{
-		QJsonObject json;
-		WriteId(json, "id", list.id);
-		return QJsonDocument{json};
-	};
+	QJsonObject Format(const ListId& list_id);
 };

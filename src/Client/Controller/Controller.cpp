@@ -4,74 +4,78 @@
 #include "Models/List/GetListsModel.h"
 
 #include "Net/Constants.h"
+
 Controller::Controller()
 {
-	ConnectLoginPage();
-	ConnectMainPage();
-	ConnectSignupPage();
+	InitLoginPageController();
+	InitSignupPageController();
+	InitMainPageController();
 }
 
-void Controller::ConnectLoginPage()
+void Controller::InitLoginPageController()
 {
-	auto& page = m_main_window.get_login_page();
+	m_login_page_controller =
+		std::make_unique<LoginPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_main_window.get_login_page());
 
-	QObject::connect(
-		&page,
-		&LoginPage::Login,
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::Message,
 		this,
-		&Controller::OnLogin);
+		&Controller::OnMessage);
 
-	QObject::connect(
-		&page,
-		&LoginPage::GotoSignup,
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::ChangePage,
 		this,
-		&Controller::OnGoToSignupPage);
+		&Controller::OnChangePage);
 }
 
-void Controller::ConnectMainPage()
+void Controller::InitSignupPageController()
 {
-	auto& page = m_main_window.get_main_page();
+	m_signup_page_controller =
+		std::make_unique<SignupPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_main_window.get_signup_page());
 
-	QObject::connect(
-		&page,
-		&MainPage::Logout,
+	connect(
+		m_signup_page_controller.get(),
+		&SignupPageController::Message,
 		this,
-		&Controller::OnLogout);
+		&Controller::OnMessage);
 
-	QObject::connect(
-		&page,
-		&MainPage::ChangeSubPage,
+	connect(
+		m_signup_page_controller.get(),
+		&SignupPageController::ChangePage,
 		this,
-		&Controller::OnChangeMainSubPage);
-
-	QObject::connect(
-		&page,
-		&MainPage::GoBack,
-		this,
-		&Controller::OnGoBack);
-
-//	QObject::connect(
-//		&page.get_list_create_spage(),
-//		&ListsSubPage::OnListClicked,
-//		this,
-//		&Controller::OnChangeMainSubPage);
+		&Controller::OnChangePage);
 }
 
-void Controller::ConnectSignupPage()
+void Controller::InitMainPageController()
 {
-	auto& page = m_main_window.get_signup_page();
+	m_main_page_controller =
+		std::make_unique<MainPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_main_window.get_main_page());
 
-	QObject::connect(
-		&page,
-		&SignupPage::Signup,
+	connect(
+		m_main_page_controller.get(),
+		&MainPageController::Message,
 		this,
-		&Controller::OnSignup);
+		&Controller::OnMessage);
 
-	QObject::connect(
-		&page,
-		&SignupPage::GotoLoginPage,
+	connect(
+		m_main_page_controller.get(),
+		&MainPageController::ChangePage,
 		this,
-		&Controller::OnGotoLoginPage);
+		&Controller::OnChangePage);
 }
 
 void Controller::Start(UIPages at_page)
@@ -80,162 +84,29 @@ void Controller::Start(UIPages at_page)
 	m_main_window.SetCurrentPage(at_page);
 }
 
-void Controller::StartTest()
+void Controller::SetPage(UIPages page)
 {
-	Start(UIPages::MAIN);
-	m_main_window.get_main_page().SetCurrentSubPage(MainSubPages::LISTS);
-}
-
-void Controller::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
-{
-	LoginModel model{m_hostname};
-	auto request  = model.FormRequest(credentials);
-	Net::Response response;
-	try {
-		response = m_http_client.Request(request);
-	}
-	catch(Poco::Exception& exception)
-	{
-		qCritical() << "Connection exception: " << exception.what();
-		QMessageBox::warning(&m_main_window
-			, QString("Error!")
-			, QString("Couldn't connect to server:\n %1").arg(exception.what()));
-		return;
-	}
-
-	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-	{
-		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
-		{
-			m_main_window.get_login_page().ChangeLoginErrorLabel(
-				"Login or password is incorrect");
-		}
-		else
-		{
-			QMessageBox::information(&m_main_window
-				, QString("Login failed!")
-				, QString::fromStdString(response.reason));
-		}
-		return;
-	}
-
-	auto token = model.ParseResponse(response);
-
-	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
-	m_http_client.set_token(token.token);
-
-	SetMainSubPage(MainSubPages::LISTS);
-	m_main_window.SetCurrentPage(UIPages::MAIN);
-}
-
-void Controller::OnLogout()
-{
-	m_http_client.ReleaseToken();
-	m_main_window.SetCurrentPage(UIPages::LOGIN);
-}
-
-void Controller::OnGoBack()
-{
-	m_history.ForgetLastPage();
-	auto page = m_history.GetLastPage();
-	SetMainSubPage(page);
-}
-
-void Controller::SetMainSubPage(MainSubPages page)
-{
-	bool update_succeeded{true};
-
-	switch(page) {
-	case MainSubPages::LISTS:
-		update_succeeded = UpdateMainListsSubPage();
+	switch (page) {
+	case UIPages::MAIN:
+		m_main_page_controller->ChangeSubPage(MainSubPages::LISTS);
 		break;
-	case MainSubPages::CREATE_LIST:
+	case UIPages::LOGIN:
 		break;
-	case MainSubPages::PRODUCTS:
-		break;
-	case MainSubPages::ICOMES:
-		break;
-	case MainSubPages::SETTINGS:
+	case UIPages::SIGNUP:
 		break;
 	}
 
-	if (update_succeeded) {
-		m_main_window.get_main_page().SetCurrentSubPage(page);
-		m_history.Update(page);
-	}
-	else {
-		// go to error page;
-	}
+	m_main_window.SetCurrentPage(page);
 }
 
-void Controller::OnGotoLoginPage()
+void Controller::OnChangePage(UIPages page)
 {
-	m_main_window.SetCurrentPage(UIPages::LOGIN);
+	SetPage(page);
 }
 
-void Controller::OnChangeMainSubPage(MainSubPages page)
+void Controller::OnMessage(const QString& window_name, const QString& message)
 {
-	SetMainSubPage(page);
-}
-
-bool Controller::UpdateMainListsSubPage()
-{
-	GetListsModel model{m_hostname};
-	auto request  = model.FormRequest(m_user_id);
-	auto response = m_http_client.Request(request);
-
-	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-	{
-		QMessageBox::information(&m_main_window
-			, QString("Error occured")
-			, QString::fromStdString(response.reason));
-		return false;
-	}
-
-	auto lists = model.ParseResponse(response);
-
-	auto& lists_spage = m_main_window.get_main_page().get_lists_spage();
-	lists_spage.Update(lists);
-	return true;
-}
-
-void Controller::OnGoToSignupPage()
-{
-	m_main_window.SetCurrentPage(UIPages::SIGNUP);
-}
-
-void Controller::OnSignup(const SignupInDTO& in_dto)
-{
-	SignupModel model{m_hostname};
-	if (!model.CheckPassRepeat(in_dto))
-	{
-		QMessageBox::warning(&m_main_window
-			, QString::fromStdString("Error")
-			, QString::fromStdString("Passwords must match!"));
-		return;
-	}
-
-	if (!model.CheckData(in_dto))
-	{
-		QMessageBox::warning(&m_main_window
-			, QString::fromStdString("Error")
-			, QString::fromStdString("Username or password can't be empty!"));
-		return;
-	}
-
-	auto request  = model.FormRequest(in_dto);
-	auto response = m_http_client.Request(request);
-
-	// checking response status
-	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-	{
-		if(response.status == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT)
-		{
-			QMessageBox::warning(&m_main_window
-				, QString::fromStdString("Error")
-				, QString::fromStdString("User already exists!"));
-			return;
-		}
-	}
-	m_main_window.SetCurrentPage(UIPages::LOGIN);
+	QMessageBox::warning(&m_main_window
+		, window_name
+		, message);
 }

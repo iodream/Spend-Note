@@ -44,32 +44,32 @@ void SafeReadString(
 void SafeReadId(
 	const QJsonObject& json,
 	const char* label,
-	IdType& dest);
+	db::IdType& dest);
 
 void SafeReadId(
 	const QJsonObject& json,
 	const std::string& label,
-	IdType& dest);
+	db::IdType& dest);
 
 void SafeReadBigInt(
 	const QJsonObject& json,
 	const char* label,
-	BigInt& dest);
+	db::BigInt& dest);
 
 void SafeReadiBgInt(
 	const QJsonObject& json,
 	const std::string& label,
-	BigInt& dest);
+	db::BigInt& dest);
 
 void SafeReadMoney(
 	const QJsonObject& json,
 	const char* label,
-	Money& dest);
+	db::Money& dest);
 
 void SafeReadMoney(
 	const QJsonObject& json,
 	const std::string& label,
-	Money& dest);
+	db::Money& dest);
 
 void SafeReadNumber(
 	const QJsonObject& json,
@@ -111,55 +111,54 @@ void SafeReadObject(
 	const std::string& label,
 	QJsonObject& dest);
 
+double FormatId(db::IdType id);
+
 void WriteId(
 	QJsonObject& json,
 	const char* label,
-	const IdType& dest);
+	const db::IdType& value);
 
 void WriteId(
 	QJsonObject& json,
 	const std::string& label,
-	const IdType& dest);
+	const db::IdType& value);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const char* label,
-	const BigInt& dest);
+	const db::BigInt& value);
 
 void WriteBigInt(
 	QJsonObject& json,
 	const std::string& label,
-	const BigInt& dest);
+	const db::BigInt& value);
 
 void WriteMoney(
 	QJsonObject& json,
 	const char* label,
-	const Money& dest);
+	const db::Money& value);
 
 void WriteMoney(
 	QJsonObject& json,
 	const std::string& label,
-	const Money& dest);
+	const db::Money& value);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const std::string& dest);
-
+	const std::string& value);
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const std::string& dest);
-
+	const std::string& value);
 
 void WriteString(
 	QJsonObject& json,
 	const char* label,
-	const QString& dest);
-
+	const QString& value);
 
 void WriteString(
 	QJsonObject& json,
 	const std::string& label,
-	const QString& dest);
+	const QString& value);

@@ -1,6 +1,7 @@
 #include "ListsResolver.h"
 
 #include "../Handlers/List/RemoveListHandler.h"
+#include "../Handlers/List/UpdateListHandler.h"
 #include "../Handlers/Product/GetProductsHandler.h"
 #include "../Handlers/Product/AddProductHandler.h"
 
@@ -52,7 +53,7 @@ ICommandHandler* ListsResolver::ResolveLastSegment(
 {
 	SCOPED_LOGGER;
 	if (method == Net::HTTP_METHOD_PUT)
-		throw NotImplementedError("Update list not yet implemented");
+		return new UpdateListHandler();
 	else if (method == Net::HTTP_METHOD_DELETE)
 		return new RemoveListHandler();
 	return new MethodNotAllowedHandler();

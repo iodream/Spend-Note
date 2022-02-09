@@ -43,7 +43,7 @@ ICommandHandler* HandlerFactory::GetCommandHandler(
 
 
 	if (handler) {
-		IDbFacade::Ptr facade = std::make_unique<DbFacade>(DB_CONN_STRING);
+		db::IDbFacade::Ptr facade = std::make_unique<db::DbFacade>(DB_CONN_STRING);
 		handler->set_facade(std::move(facade));
 		handler->set_params(std::move(params));
 	}

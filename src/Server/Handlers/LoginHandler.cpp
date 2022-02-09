@@ -18,11 +18,12 @@ LoginHandler::LoginHandler()
 
 }
 
-QJsonDocument LoginHandler::JSONFormatter::Format(const Token& dto)
+QJsonDocument LoginHandler::JSONFormatter::Format(const OutDto& dto)
 {
 	SCOPED_LOGGER;
 	QJsonObject json;
 	json["token"] = dto.token.c_str();
+	json["id"] = dto.id;
 	return QJsonDocument{json};
 }
 
@@ -58,13 +59,13 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	Poco::JWT::Token token;
 	token.setType("JWT");
 
-	token.payload().set("id", std::to_string(user->id));
+	token.payload().set("id", FormatId(user->id));
 	token.payload().set("login", std::string(user->login));
 
 	token.setIssuedAt(Poco::Timestamp());
 
 	Poco::JWT::Signer signer(user->password);
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
-	JSONFormatter::Token out_dto{jwt};
+	JSONFormatter::OutDto out_dto{jwt, user->id};
 	return FormJSONResponse(m_formatter.Format(out_dto));
 }
