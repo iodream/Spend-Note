@@ -15,7 +15,6 @@ public:
 		QJsonObject json;
 
 		WriteId(json, "id", income.id);
-		WriteId(json, "user_id", income.user_id);
 		json["category"] = category_formatter.Format(income.category);
 
 		WriteString(json, "name",  income.name);
