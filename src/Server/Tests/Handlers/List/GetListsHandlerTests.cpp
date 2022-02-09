@@ -111,8 +111,5 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	auto list = m_parser.Parse(lists[0].toObject());
 
 	CheckListsEquality(list, ::list);
-
-	//EXPECT_EQ(s1.id, list_dto.state_id);
-	//EXPECT_EQ(s1.name, list["state"].toString().toStdString());
 }
 
