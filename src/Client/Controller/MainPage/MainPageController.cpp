@@ -130,9 +130,9 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::CREATE_LIST:
 		break;
 	case MainSubPages::PRODUCTS:
-		return UpdateProductsSubPage(data);
+		return m_product_pages_controller->UpdateProductsPage(data);
 	case MainSubPages::VIEW_PRODUCT:
-		return UpdateViewProductSubPage(data);
+		return m_product_pages_controller->UpdateViewProductSubPage(data);
 	case MainSubPages::CREATE_PRODUCT:
 		return false;
 //		return UpdateCreateProductSubPage(data);
@@ -146,23 +146,6 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	}
 
 	return update_succeeded;
-}
-
-bool MainPageController::UpdateProductsSubPage(PageData data)
-{
-	if (!data.canConvert<List>()) {
-		return m_product_pages_controller->UpdateListPage();
-	}
-	return m_product_pages_controller->UpdateListPage(qvariant_cast<List>(data));
-}
-
-bool MainPageController::UpdateViewProductSubPage(PageData data)
-{
-	if (!data.canConvert<Product>()) {
-		return false;
-		//return m_product_pages_controller->UpdateListPage();
-	}
-	return m_product_pages_controller->UpdateViewPage(qvariant_cast<Product>(data));
 }
 
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)

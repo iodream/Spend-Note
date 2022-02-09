@@ -22,8 +22,13 @@ public:
 
 	virtual ~ProductPagesController() override {}
 
-	bool UpdateListPage();
-	bool UpdateListPage(List list);
+	bool UpdateProductsPage();
+	bool UpdateProductsPage(List list);
+
+	bool UpdateProductsPage(PageData data);
+	bool UpdateViewProductSubPage(PageData data);
+	//bool UpdateCreateProductSubPage(PageData data);
+	//bool UpdateViewProductSubPage(PageData data);
 
 	bool UpdateViewPage(Product product);
 

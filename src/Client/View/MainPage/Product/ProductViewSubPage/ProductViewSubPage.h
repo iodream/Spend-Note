@@ -18,7 +18,10 @@ public:
 	explicit ProductViewSubPage(QWidget *parent = nullptr);
 	~ProductViewSubPage();
 
-	void Update(const Product& product);
+	void Update();
+
+	void set_product(const Product& product);
+	Product get_product();
 signals:
 	void GoBack();
 	void EditProduct();
@@ -26,4 +29,5 @@ signals:
 
 private:
 	Ui::ProductViewSubPage *m_ui;
+	Product m_product;
 };

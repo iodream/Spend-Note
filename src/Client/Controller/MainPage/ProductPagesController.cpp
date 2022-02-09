@@ -20,6 +20,25 @@ ProductPagesController::ProductPagesController(
 	ConnectViewPage();
 }
 
+bool ProductPagesController::UpdateProductsPage(PageData data)
+{
+	if (!data.canConvert<List>()) {
+		return UpdateProductsPage();
+	}
+	return UpdateProductsPage(qvariant_cast<List>(data));
+}
+
+bool ProductPagesController::UpdateViewProductSubPage(PageData data)
+{
+	if (!data.canConvert<Product>()) {
+		return false;
+		//return m_product_pages_controller->UpdateListPage();
+	}
+	return UpdateViewPage(qvariant_cast<Product>(data));
+}
+
+
+
 void ProductPagesController::ConnectProductsPage()
 {
 	connect(
@@ -48,7 +67,7 @@ void ProductPagesController::OnProductClicked(const Product& product)
 	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
 }
 
-bool ProductPagesController::UpdateListPage()
+bool ProductPagesController::UpdateProductsPage()
 {
 	GetProductsModel model{m_hostname};
 	List list = m_products_page.get_list();
@@ -69,7 +88,7 @@ bool ProductPagesController::UpdateListPage()
 	return true;
 }
 
-bool ProductPagesController::UpdateListPage(List list)
+bool ProductPagesController::UpdateProductsPage(List list)
 {
 	GetProductsModel model{m_hostname};
 	m_products_page.set_list(list);
@@ -92,6 +111,7 @@ bool ProductPagesController::UpdateListPage(List list)
 
 bool ProductPagesController::UpdateViewPage(Product product)
 {
-	m_view_page.Update(product);
+	m_view_page.set_product(product);
+	m_view_page.Update();
 	return true;
 }
