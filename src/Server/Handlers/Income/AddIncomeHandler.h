@@ -1,35 +1,25 @@
 #pragma once
 
 #include <string>
+#include <memory>
+#include <utility>
 
 #include "../AuthorizedHandler.h"
-#include "../libdal/Facade/IDbFacade.h"
+
+#include "../Entities/Entities.h"
+#include "../Entities/Parsers.h"
+#include "../Entities/Formatters.h"
+
+#include "../libdal/DTOs/Income.h"
 
 class AddIncomeHandler : public AuthorizedHandler
 {
-	class JSONParser
-	{
-	public:
-		db::Income Parse(const QJsonDocument& json_doc);
-	};
-
-	class JSONFormatter
-	{
-	public:
-		struct DTO
-		{
-			db::IdType income_id;
-		};
-
-		QJsonDocument Format(const DTO& dto);
-	};
-
 public:
 	AddIncomeHandler();
-	virtual ~AddIncomeHandler() override {};
+	virtual ~AddIncomeHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
-
-	JSONParser m_parser{};
-	JSONFormatter m_formatter{};
+private:
+	IncomeJSONParser m_parser{};
+	IncomeIdJSONFormatter m_formatter{};
 };

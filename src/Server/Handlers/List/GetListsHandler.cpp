@@ -6,23 +6,10 @@
 #include "Server/Utils.h"
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
+#include "Utils.h"
 
 GetListsHandler::GetListsHandler()
 {
-}
-
-List GetListsHandler::ToNetList(const db::List &db_list, const db::ListState& state)
-{
-	SCOPED_LOGGER;
-	List list;
-	list.id = db_list.id;
-	list.name = db_list.name;
-	list.owner_id = db_list.owner_id;
-	list.state.id = state.id;
-	list.state.name = state.name;
-
-	return list;
-
 }
 
 Net::Response GetListsHandler::AuthHandle(const Net::Request& request)

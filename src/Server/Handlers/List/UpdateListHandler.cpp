@@ -12,17 +12,6 @@ UpdateListHandler::UpdateListHandler()
 {
 }
 
-db::List UpdateListHandler::ToDBList(const List& list)
-{
-	SCOPED_LOGGER;
-	db::List db_list;
-	db_list.id = list.id;
-	db_list.name = list.name;
-	db_list.owner_id = list.owner_id;
-	db_list.state_id = list.state.id;
-	return db_list;
-}
-
 Net::Response UpdateListHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;

@@ -9,6 +9,7 @@ struct IncomeBase
 	using CategoryType = Category<T>;
 
 	IdType id;
+	IdType user_id;
 	Category<T> category;
 	T name;
 	Money amount;

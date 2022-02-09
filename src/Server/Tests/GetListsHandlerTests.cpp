@@ -68,7 +68,7 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 	QJsonArray lists = response.json_payload.array();
 	EXPECT_EQ(lists.size(), 0);
 }
-
+/*
 TEST(GetListsHandlerTest, ONE_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
@@ -98,3 +98,4 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	EXPECT_EQ(s1.id, list_dto.state_id);
 	EXPECT_EQ(s1.name, list["state"].toString().toStdString());
 }
+*/

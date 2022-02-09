@@ -1,7 +1,8 @@
 #pragma once
 
-#include <QJsonObject>
-
 #include "../libdal/Facade/IDbFacade.h"
+#include "../Entities/Entities.h"
 
-db::Product ParseProduct(const QJsonObject& json);
+db::Product ToDBProduct(const Product& product);
+
+Product ToNetProduct(const db::Product& db_product, const db::ProductCategory& category);
