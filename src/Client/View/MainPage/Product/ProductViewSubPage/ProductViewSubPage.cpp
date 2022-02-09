@@ -30,3 +30,24 @@ ProductViewSubPage::~ProductViewSubPage()
 {
 	delete m_ui;
 }
+
+void ProductViewSubPage::Update()
+{
+	m_ui->Name->setText(m_product.name);
+	m_ui->Price->setText(QString::number(m_product.price));
+	m_ui->Amount->setText(QString::number(m_product.amount));
+	m_ui->BuyUntil->setText(m_product.buy_until_date);
+	m_ui->Priority->setText(QString::number(m_product.priority));
+	m_ui->Category->setText(m_product.category.name);
+	m_ui->IsBought->setText(m_product.is_bought ? "Yes" : "No");
+}
+
+void ProductViewSubPage::set_product(const Product& product)
+{
+	m_product = product;
+}
+
+Product ProductViewSubPage::get_product()
+{
+	return m_product;
+}

@@ -13,6 +13,7 @@ enum class MainSubPages
 {
 	LISTS = 0,
 	CREATE_LIST,
+
 	EDIT_LIST,
 	VIEW_LIST,
 

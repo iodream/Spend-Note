@@ -47,7 +47,7 @@ void ProductsSubPage::UpdateProductNumbers(int idx)
 
 void ProductsSubPage::OnProductClicked(ProductItem* product)
 {
-	// should emit some signal to be handled on controller
+	emit ProductClicked(product->get_product());
 }
 
 ProductItem* ProductsSubPage::SafeGetProduct(int idx)
