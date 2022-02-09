@@ -9,7 +9,7 @@
 
 namespace  {
 
-IncomeId FormIncome()
+IncomeId FormExpectedResult()
 {
 	IncomeId income_id;
 	income_id.id = 1;
@@ -26,7 +26,7 @@ TEST(IncomeIdJSONParserTest, PARSE)
 	IncomeIdJSONParser parser{};
 
 	auto result = parser.Parse(json);
-	auto expected_result = FormIncome();
+	auto expected_result = FormExpectedResult();
 
 	EXPECT_EQ(result.id, expected_result.id);
 }

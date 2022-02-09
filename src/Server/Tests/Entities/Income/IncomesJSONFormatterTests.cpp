@@ -9,7 +9,7 @@
 
 namespace  {
 
-QJsonArray FormJSONArray()
+QJsonArray FormExpectedJSONArray()
 {
 	QJsonObject json, category;
 
@@ -69,7 +69,7 @@ TEST(IncomesJSONFormatterTest, ONE_INCOME)
 	IncomesJSONFormatter formatter{};
 
 	auto result = formatter.Format(incomes);
-	auto expected_result = FormJSONArray();
+	auto expected_result = FormExpectedJSONArray();
 
 	QJsonObject result_item, expected_result_item;
 	for(const QJsonValue& item : result)

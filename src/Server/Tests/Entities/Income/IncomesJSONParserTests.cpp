@@ -9,7 +9,7 @@
 
 namespace  {
 
-std::vector<Income> FormIncomeVector()
+std::vector<Income> FormExpectedIncomeVector()
 {
 	Income income;
 	IncomeCategory category;
@@ -71,7 +71,7 @@ TEST(IncomesJSONParser, ONE_INCOME)
 	IncomesJSONParser parser{};
 
 	auto result = parser.Parse(array);
-	auto expected_result = FormIncomeVector();
+	auto expected_result = FormExpectedIncomeVector();
 
 	Income result_income, expected_result_income;
 	for(auto& item : result)

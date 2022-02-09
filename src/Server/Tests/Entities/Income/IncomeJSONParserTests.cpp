@@ -9,7 +9,7 @@
 
 namespace  {
 
-Income FormIncome()
+Income FormExpectedResult()
 {
 	Income income;
 	IncomeCategory category;
@@ -59,7 +59,7 @@ TEST(IncomeJSONParser, PARSE)
 	IncomeJSONParser parser{};
 
 	auto result = parser.Parse(json);
-	auto expected_result = FormIncome();
+	auto expected_result = FormExpectedResult();
 
 	Compare(result, expected_result);
 }

@@ -9,7 +9,7 @@
 
 namespace  {
 
-QJsonObject FormJSON()
+QJsonObject FormExpectedJSON()
 {
 	QJsonObject json;
 
@@ -28,7 +28,7 @@ TEST(IncomeIdJSONFormatterTest, FORMAT)
 	IncomeIdJSONFormatter formatter{};
 
 	auto result = formatter.Format(income_id);
-	auto expected_result = FormJSON();
+	auto expected_result = FormExpectedJSON();
 
 	EXPECT_EQ(result["id"], expected_result["id"]);
 }
