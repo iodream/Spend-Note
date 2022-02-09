@@ -32,7 +32,7 @@ QJsonDocument FormatJSON()
 
 }
 
-TEST(UpdateIncomeHandler, UPDATE_INCOME)
+TEST(UpdateIncomeHandler, UPDATE_INCOME_SUCCESS)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 	EXPECT_CALL(*facade, UpdateIncome(_))
@@ -52,3 +52,25 @@ TEST(UpdateIncomeHandler, UPDATE_INCOME)
 	auto response = handler->AuthHandle(request);
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_NO_CONTENT);
 }
+
+TEST(UpdateIncomeHandler, UPDATE_INCOME_FAILURE)
+{
+	auto facade = std::make_unique<MockDbFacade>();
+	EXPECT_CALL(*facade, UpdateIncome(_))
+		.WillOnce(Return(false));
+
+	auto handler = std::make_unique<UpdateIncomeHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::INCOME_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+
+	Net::Request request;
+	request.method = Net::HTTP_METHOD_PUT;
+	request.json_payload = FormatJSON();
+
+	auto response = handler->AuthHandle(request);
+	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
+}
+

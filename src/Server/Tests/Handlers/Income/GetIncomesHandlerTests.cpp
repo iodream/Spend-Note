@@ -5,6 +5,7 @@
 
 #include "../../MockDbFacade.h"
 #include "Server/Handlers/Income/GetIncomesHandler.h"
+#include "Server/Handlers/Entities/Parsers.h"
 #include "Net/Parsing.h"
 #include "../libdal/Exceptions/SQLFailure.h"
 
@@ -46,6 +47,17 @@ std::unique_ptr<GetIncomesHandler> CreateHandler(std::unique_ptr<MockDbFacade>&&
 	return std::move(handler);
 }
 
+void Compare(const Income& income, const db::Income& dbIncome, const db::IncomeCategory category)
+{
+	EXPECT_EQ(income.id, dbIncome.id);
+	EXPECT_EQ(income.name, dbIncome.name);
+	EXPECT_EQ(income.amount, dbIncome.amount);
+	EXPECT_EQ(income.category.id, category.id);
+	EXPECT_EQ(income.category.name, category.name);
+	EXPECT_EQ(income.add_time, dbIncome.add_time);
+	EXPECT_EQ(income.expiration_time, dbIncome.expiration_time.value_or(""));
+}
+
 }
 
 TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
@@ -69,7 +81,7 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
 
 	QJsonArray array = response.json_payload.array();
-	EXPECT_EQ(array.size(), 0);
+	ASSERT_EQ(array.size(), 0);
 }
 
 TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
@@ -93,36 +105,13 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
 
 	QJsonArray array= response.json_payload.array();
-	EXPECT_EQ(array.size(), 1);
+	ASSERT_EQ(array.size(), 1);
 
 	auto income_json = array[0].toObject();
 	auto category_json = income_json["category"].toObject();
-	ASSERT_EQ(income_json["id"], income.id);
-	ASSERT_EQ(income_json["name"].toString(), QString::fromStdString(income.name));
-	ASSERT_EQ(income_json["amount"].toDouble(), income.amount);
-	ASSERT_EQ(category_json["id"], category.id);
-	ASSERT_EQ(category_json["name"].toString(), QString::fromStdString(category.name));
-	ASSERT_EQ(income_json["add_time"].toString(), QString::fromStdString(income.add_time));
-	ASSERT_EQ(income_json["expiration_time"].toString(), QString::fromStdString(income.expiration_time.value_or("")));
-}
 
-TEST(GetIncomesHandlerTest, SQL_FAILURE)
-{
-	auto facade = std::make_unique<MockDbFacade>();
+	IncomeJSONParser parser{};
+	auto result = parser.Parse(income_json);
 
-	EXPECT_CALL(*facade, GetAllIncomes(_))
-		.WillOnce(Throw(db::SQLFailure("")));
-
-	auto handler = std::make_unique<GetIncomesHandler>();
-	handler->set_facade(std::move(facade));
-
-	Params params;
-	params.Insert(Params::USER_ID, Params::Value{1});
-	handler->set_params(std::move(params));
-
-	Net::Request request;
-	request.method = Net::HTTP_METHOD_GET;
-	auto response = handler->AuthHandle(request);
-
-	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_INTERNAL_SERVER_ERROR);
+	Compare(result, income, category);
 }
