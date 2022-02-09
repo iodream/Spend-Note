@@ -7,6 +7,7 @@
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
 #include "Utils.h"
+#include "../libdal/Exceptions/NonexistentResource.h"
 
 GetProductsHandler::GetProductsHandler()
 {
@@ -18,7 +19,16 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 	Q_UNUSED(request);
 
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
-	auto db_products = m_facade->GetProductsForList(list_id);
+	std::vector<db::Product> db_products;
+	try
+	{
+		db_products = m_facade->GetProductsForList(list_id);
+	}
+	catch (const db::NonexistentResource& ex) {
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"List with id = " + std::to_string(list_id) + " not found");
+	}
 
 	std::vector<Product> products;
 	for (const db::Product& db_product : db_products) {
