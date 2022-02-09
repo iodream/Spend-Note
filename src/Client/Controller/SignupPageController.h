@@ -25,6 +25,7 @@ private:
 	IdType& m_user_id;
 
 	SignupPage& m_page;
+
 	void ConnectPage();
 
 signals:

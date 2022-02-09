@@ -1,12 +1,8 @@
 #include "LoginPageController.h"
 
-#include <chrono>
-#include <thread>
-
 #include "Models/LoginModel.h"
 
 #include "Net/Constants.h"
-
 
 LoginPageController::LoginPageController(
 	HTTPClient& http_client,
@@ -40,25 +36,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 {
 	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(credentials);
-	Net::Response response;
-	int Retries = 0;
-		retry:
-			try{
-			Retries++;
-			response = m_http_client.Request(request);
-		}
-		catch(Poco::Exception& exc)
-		{
-			if(Retries < Net::CONN_RETRY_MAX)
-			{
-				std::this_thread::sleep_for(std::chrono::seconds(1));
-				goto retry;
-			}
-			emit Message(
-					QString("Connection failed!"),
-					QString("Connection failed after %1 retries").arg(Retries));
-			return;
-		}
+	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{

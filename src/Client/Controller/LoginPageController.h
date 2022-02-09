@@ -23,7 +23,9 @@ private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
 	IdType& m_user_id;
+
 	LoginPage& m_page;
+
 	void ConnectPage();
 
 signals:
