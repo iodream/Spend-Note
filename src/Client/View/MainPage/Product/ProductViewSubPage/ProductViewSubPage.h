@@ -17,7 +17,7 @@ public:
 	explicit ProductViewSubPage(QWidget *parent = nullptr);
 	~ProductViewSubPage();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void EditProduct();
 	void DeleteProduct();
 

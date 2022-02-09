@@ -11,6 +11,12 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 	set_list_size(0);
+
+	connect(
+		m_ui->ViewList,
+		&QPushButton::released,
+		this,
+		&ProductsSubPage::GoToViewList);
 }
 
 void ProductsSubPage::AppendProduct(ProductItem* product)

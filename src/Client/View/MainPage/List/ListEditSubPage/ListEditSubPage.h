@@ -17,13 +17,13 @@ public:
 	explicit ListEditSubPage(QWidget *parent=nullptr);
 	~ListEditSubPage();
 
-	void Update();
+	void Update(const List& list);
 
 	void set_list(const List& list);
 	List get_list() const;
 
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void UpdateList(List);
 
 private:

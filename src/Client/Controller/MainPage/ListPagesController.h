@@ -4,10 +4,12 @@
 
 #include "View/MainPage/List/ListsSubPage/ListsSubPage.h"
 #include "View/MainPage/List/ListCreateSubPage/ListCreateSubPage.h"
+#include "View/MainPage/List/ListViewSubPage/ListViewSubPage.h"
+#include "View/MainPage/List/ListEditSubPage/ListEditSubPage.h"
+#include "View/MainPage/Product/ProductsSubPage/ProductsSubPage.h"
+#include "View/Constants.h"
 
 #include "Entities/PageData.h"
-
-#include "View/Constants.h"
 
 class ListPagesController : public QObject
 {
@@ -18,14 +20,22 @@ public:
 		std::string& hostname,
 		IdType& user_id,
 		ListsSubPage& list_page,
-		ListCreateSubPage& create_page);
+		ListCreateSubPage& create_page,
+		ListViewSubPage& list_view_page,
+		ListEditSubPage& list_edit_page,
+		ProductsSubPage& product_page);
 
 	virtual ~ListPagesController() override {}
 	bool UpdateListPage();
+	bool UpdateListCreatePage();
+	bool UpdateListViewPage(const List& list);
+	bool UpdateListEditPage(const List& list);
 
 private:
 	void ConnectListPage();
 	void ConnectCreatePage();
+	void ConnectViewListPage();
+	void ConnectEditListPage();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -33,16 +43,22 @@ private:
 
 	ListsSubPage& m_list_page;
 	ListCreateSubPage& m_create_page;
-
+	ListViewSubPage& m_list_view_page;
+	ListEditSubPage& m_list_edit_page;
+	ProductsSubPage& m_product_page;
 
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void GoBack();
+	void GoBack(int n=1);
 	void CreateList();
 
 public slots:
+	void OnGoToProducts(const List& list);
+	void OnUpdateList(const List& list);
+	void OnDeleteList(const List& list);
+	void OnGoToViewList();
+	void OnGoToEditList();
 	void OnGoToCreateList();
 	void OnCreateList();
-	void OnGoToProducts(const List& list);
 };

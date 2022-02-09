@@ -19,7 +19,10 @@ ProductPagesController::ProductPagesController(
 
 void ProductPagesController::ConnectListPage()
 {
-	// connect something here
+
+
+
+
 }
 
 bool ProductPagesController::UpdateListPage()
@@ -63,4 +66,5 @@ bool ProductPagesController::UpdateListPage(List list)
 	m_list_page.Update(products);
 	return true;
 }
+
 

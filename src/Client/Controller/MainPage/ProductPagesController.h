@@ -17,8 +17,7 @@ public:
 		std::string& hostname,
 		IdType& user_id,
 		ProductsSubPage& list_page);
-
-	virtual ~ProductPagesController() override {};
+	virtual ~ProductPagesController() override {}
 
 	bool UpdateListPage();
 	bool UpdateListPage(List list);
@@ -35,8 +34,10 @@ private:
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void GoBack();
+	void GoBack(int n=1);
 
 public slots:
 //	void OnGoToCreateProduct();
+
+
 };

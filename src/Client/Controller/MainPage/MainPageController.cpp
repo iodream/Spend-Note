@@ -46,7 +46,10 @@ void MainPageController::InitListPagesController()
 			m_hostname,
 			m_user_id,
 			m_page.get_lists_spage(),
-			m_page.get_list_create_spage());
+			m_page.get_list_create_spage(),
+			m_page.get_list_view_spage(),
+			m_page.get_list_edit_spage(),
+			m_page.get_products_spage());
 
 	connect(
 		m_list_pages_controller.get(),
@@ -101,9 +104,13 @@ void MainPageController::OnLogout()
 	emit ChangePage(UIPages::LOGIN);
 }
 
-void MainPageController::OnGoBack()
+void MainPageController::OnGoBack(int n)
 {
-	m_history.ForgetLastPage();
+	while(n)
+	{
+		m_history.ForgetLastPage();
+		--n;
+	}
 	auto page = m_history.GetLastPage();
 	ChangeSubPage(page);
 }
@@ -126,10 +133,19 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	switch(page) {
 	case MainSubPages::LISTS:
 		return m_list_pages_controller->UpdateListPage();
+		break;
 	case MainSubPages::CREATE_LIST:
+		return m_list_pages_controller->UpdateListCreatePage();
+		break;
+	case MainSubPages::EDIT_LIST:
+		return m_list_pages_controller->UpdateListEditPage(qvariant_cast<List>(data));
+		break;
+	case MainSubPages::VIEW_LIST:
+		return m_list_pages_controller->UpdateListViewPage(qvariant_cast<List>(data));
 		break;
 	case MainSubPages::PRODUCTS:
 		return UpdateProductsSubPage(data);
+		break;
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:
