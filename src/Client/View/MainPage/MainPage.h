@@ -9,6 +9,7 @@
 #include "List/ListCreateSubPage/ListCreateSubPage.h"
 
 #include "Product/ProductsSubPage/ProductsSubPage.h"
+#include "Product/ProductViewSubPage/ProductViewSubPage.h"
 
 #include "View/Constants.h"
 
@@ -49,6 +50,7 @@ private:
 	ListCreateSubPage m_list_create_spage;
 
 	ProductsSubPage m_products_spage;
+	ProductViewSubPage m_product_view_spage;
 
 //	IncomesSubPage m_incomes_spage;
 

@@ -8,24 +8,50 @@ ProductPagesController::ProductPagesController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	ProductsSubPage& list_page)
+	ProductsSubPage& products_page,
+	ProductViewSubPage& view_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
-	, m_list_page{list_page}
+	, m_products_page{products_page}
+	, m_view_page{view_page}
 {
-	ConnectListPage();
+	ConnectProductsPage();
+	ConnectViewPage();
 }
 
-void ProductPagesController::ConnectListPage()
+void ProductPagesController::ConnectProductsPage()
 {
-	// connect something here
+	connect(
+		&m_products_page,
+		&ProductsSubPage::ProductClicked,
+		this,
+		&ProductPagesController::OnProductClicked);
+}
+
+void ProductPagesController::ConnectViewPage()
+{
+	connect(
+		&m_view_page,
+		&ProductViewSubPage::GoBack,
+		this,
+		&ProductPagesController::GoBack);
+
+//	void EditProduct();
+	//	void DeleteProduct();
+}
+
+void ProductPagesController::OnProductClicked(const Product& product)
+{
+	PageData data{};
+	data.setValue(product);
+	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
 }
 
 bool ProductPagesController::UpdateListPage()
 {
 	GetProductsModel model{m_hostname};
-	List list = m_list_page.get_list();
+	List list = m_products_page.get_list();
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
@@ -39,14 +65,14 @@ bool ProductPagesController::UpdateListPage()
 
 	auto products = model.ParseResponse(response);
 
-	m_list_page.Update(products);
+	m_products_page.Update(products);
 	return true;
 }
 
 bool ProductPagesController::UpdateListPage(List list)
 {
 	GetProductsModel model{m_hostname};
-	m_list_page.set_list(list);
+	m_products_page.set_list(list);
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
@@ -60,7 +86,12 @@ bool ProductPagesController::UpdateListPage(List list)
 
 	auto products = model.ParseResponse(response);
 
-	m_list_page.Update(products);
+	m_products_page.Update(products);
 	return true;
 }
 
+bool ProductPagesController::UpdateViewPage(Product product)
+{
+	m_view_page.Update(product);
+	return true;
+}

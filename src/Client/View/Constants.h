@@ -13,7 +13,12 @@ enum class MainSubPages
 {
 	LISTS = 0,
 	CREATE_LIST,
+
 	PRODUCTS,
+	VIEW_PRODUCT,
+	CREATE_PRODUCT,
+	EDIT_PRODUCT,
+
 	ICOMES,
 	SETTINGS,
 };

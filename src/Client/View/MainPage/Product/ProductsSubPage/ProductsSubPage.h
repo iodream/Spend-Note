@@ -36,7 +36,8 @@ public:
 	List get_list();
 
 signals:
-	void GoToCreateProduct();
+//	void GoToCreateProduct();
+	void ProductClicked(const Product& product);
 
 private slots:
 	void OnProductClicked(ProductItem* product);

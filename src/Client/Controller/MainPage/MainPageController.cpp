@@ -74,7 +74,8 @@ void MainPageController::InitProductPagesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_products_spage());
+			m_page.get_products_spage(),
+			m_page.get_product_view_spage());
 
 	connect(
 		m_product_pages_controller.get(),
@@ -130,6 +131,12 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		break;
 	case MainSubPages::PRODUCTS:
 		return UpdateProductsSubPage(data);
+	case MainSubPages::VIEW_PRODUCT:
+		return UpdateViewProductSubPage(data);
+	case MainSubPages::CREATE_PRODUCT:
+		return UpdateCreateProductSubPage(data);
+	case MainSubPages::EDIT_PRODUCT:
+		return UpdateEditProductSubPage(data);
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:
@@ -145,6 +152,15 @@ bool MainPageController::UpdateProductsSubPage(PageData data)
 		return m_product_pages_controller->UpdateListPage();
 	}
 	return m_product_pages_controller->UpdateListPage(qvariant_cast<List>(data));
+}
+
+bool MainPageController::UpdateViewProductSubPage(PageData data)
+{
+	if (!data.canConvert<Product>()) {
+		return false;
+		//return m_product_pages_controller->UpdateListPage();
+	}
+	return m_product_pages_controller->UpdateViewPage(qvariant_cast<Product>(data));
 }
 
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)

@@ -16,6 +16,8 @@ class ProductViewSubPage : public QWidget
 public:
 	explicit ProductViewSubPage(QWidget *parent = nullptr);
 	~ProductViewSubPage();
+
+	void Update(const Product& product);
 signals:
 	void GoBack();
 	void EditProduct();

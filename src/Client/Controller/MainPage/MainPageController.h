@@ -22,7 +22,7 @@ public:
 		IdType& user_id,
 		MainPage& page);
 
-	virtual ~MainPageController() override {};
+	virtual ~MainPageController() override {}
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
@@ -33,7 +33,11 @@ private:
 	void InitProductPagesController();
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
+
 	bool UpdateProductsSubPage(PageData data);
+	bool UpdateViewProductSubPage(PageData data);
+	bool UpdateCreateProductSubPage(PageData data);
+	bool UpdateEditProductSubPage(PageData data);
 
 private:
 	HTTPClient& m_http_client;

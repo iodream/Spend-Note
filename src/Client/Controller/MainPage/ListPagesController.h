@@ -20,7 +20,7 @@ public:
 		ListsSubPage& list_page,
 		ListCreateSubPage& create_page);
 
-	virtual ~ListPagesController() override {};
+	virtual ~ListPagesController() override {}
 
 	bool UpdateListPage();
 
