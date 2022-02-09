@@ -12,6 +12,8 @@ list(APPEND Tests_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/LoginTests.cpp
 )
 
+
 add_subdirectory(Handlers)
+add_subdirectory(Entities)
 
 set(Tests_SOURCES "${Tests_SOURCES}" PARENT_SCOPE)

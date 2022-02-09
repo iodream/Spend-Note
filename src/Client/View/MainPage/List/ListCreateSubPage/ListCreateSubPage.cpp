@@ -27,3 +27,8 @@ ListCreateSubPage::~ListCreateSubPage()
 {
 	delete m_ui;
 }
+
+QString ListCreateSubPage::GetListName()
+{
+	return m_ui->lineEdit->text();
+}
