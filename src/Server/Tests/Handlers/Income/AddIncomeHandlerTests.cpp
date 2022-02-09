@@ -3,8 +3,10 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 #include "Server/Handlers/Income/AddIncomeHandler.h"
+#include "Server/Handlers/Entities/Entities.h"
+#include "Server/Handlers/Entities/Parsers.h"
 #include "Net/Parsing.h"
 
 using ::testing::Return;
@@ -14,13 +16,14 @@ namespace {
 
 QJsonDocument FormatJSON()
 {
-	QJsonObject json;
+	QJsonObject json, category;
 
-	json["income_id"] = "";
-	json["user_id"] = "1";
-	json["name"] = "some_name";
+	json["id"] = 1;
+	category["id"] = 1;
+	category["name"] = "name";
+	json["category"] = category;
+	json["name"] = "name";
 	json["amount"] = 1;
-	json["category_id"] = "1";
 	json["add_time"] = "";
 	json["expiration_time"] = "";
 
@@ -44,14 +47,14 @@ TEST(AddIncomeHandler, ADD_INCOME)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
-	{
-		request.json_payload = FormatJSON();
-	}
+
+	request.json_payload = FormatJSON();
+
 
 	auto response = handler->AuthHandle(request);
-	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
+	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_CREATED);
 
-	std::string income_id;
-	SafeReadString(response.json_payload.object(), "id", income_id);
-	EXPECT_EQ(income_id, "1");
+	IncomeIdJSONParser parser{};
+	auto income_id = parser.Parse(response.json_payload.object());
+	EXPECT_EQ(income_id.id, 1);
 }

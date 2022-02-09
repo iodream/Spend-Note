@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 
 #include "Server/Handlers/List/GetListsHandler.h"
 #include "Server/Handlers/List/Utils.h"
@@ -68,7 +68,7 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 	QJsonArray lists = response.json_payload.array();
 	EXPECT_EQ(lists.size(), 0);
 }
-/*
+
 TEST(GetListsHandlerTest, ONE_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
@@ -91,11 +91,10 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	EXPECT_EQ(lists.size(), 1);
 
 	auto list = lists.at(0).toObject();
-	auto list_dto = ParseList(list);
+	//auto list_dto = ParseList(list);
 
-	CheckProductsEquality(l1, list_dto);
+	//CheckProductsEquality(l1, list_dto);
 
-	EXPECT_EQ(s1.id, list_dto.state_id);
+	//EXPECT_EQ(s1.id, list_dto.state_id);
 	EXPECT_EQ(s1.name, list["state"].toString().toStdString());
 }
-*/
