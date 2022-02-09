@@ -52,7 +52,14 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	}
 
 	auto request  = model.FormRequest(in_dto);
-	auto response = m_http_client.Request(request);
+	Net::Response response;
+	try{
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		return;
+	}
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{

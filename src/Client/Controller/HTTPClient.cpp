@@ -95,7 +95,7 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 					QString("Connection error to server")
 					);
 		qCritical() << "Can't send request: " << exc.what();
-//		return Net::Response{Poco::Net::HTTPResponse::HTTPStatus::, "Error"};
+		throw exc;
 	}
     Poco::Net::HTTPResponse response;
 	std::istream& received_stream = session.receiveResponse(response);

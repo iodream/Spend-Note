@@ -36,6 +36,7 @@ private:
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page);
+
 	void GoBack();
 
 public slots:
