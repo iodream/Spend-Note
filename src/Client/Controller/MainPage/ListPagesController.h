@@ -44,6 +44,5 @@ signals:
 public slots:
 	void OnGoToCreateList();
 	void OnCreateList();
-
-	//void OnGoToProducts(const List& list);
+	void OnGoToProducts(const List& list);
 };

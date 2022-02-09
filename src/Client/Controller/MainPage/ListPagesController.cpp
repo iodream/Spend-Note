@@ -28,11 +28,11 @@ void ListPagesController::ConnectListPage()
 		&ListsSubPage::GoToCreateList,
 		this,
 		&ListPagesController::OnGoToCreateList);
-//	connect(
-//		&m_list_page,
-//		&ListsSubPage::GoToProducts,
-//		this,
-//		&ListPagesController::OnGoToProducts);
+	connect(
+		&m_list_page,
+		&ListsSubPage::GoToProducts,
+		this,
+		&ListPagesController::OnGoToProducts);
 }
 
 void ListPagesController::ConnectCreatePage()
@@ -89,7 +89,7 @@ void ListPagesController::OnCreateList()
 
 	List new_list;
 	new_list.name = m_create_page.GetListName();
-	new_list.id = m_list_page.get_list_size() + 1;
+	new_list.id = 0;
 	new_list.owner_id = m_user_id;
 
 	ListState state;
@@ -103,7 +103,7 @@ void ListPagesController::OnCreateList()
 				QString("Error!"),
 				QString("List name can't be empty")
 				);
-		return; //abort
+		return;
 	}
 
 	auto request  = model.FormRequest(new_list, m_user_id);
@@ -120,4 +120,11 @@ void ListPagesController::OnCreateList()
 	auto lists = model.ParseResponse(response);
 
 	emit GoBack(); //immediately go to previous page
+}
+
+void ListPagesController::OnGoToProducts(const List& list)
+{
+	PageData data{};
+	data.setValue(list);
+	emit ChangeSubPage(MainSubPages::PRODUCTS, data);
 }
