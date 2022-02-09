@@ -1,0 +1,10 @@
+list(APPEND Tests_SOURCES
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONFormatterTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParserTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListsJSONFormatterTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListsJSONParserTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONFormatterTest.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParserTest.cpp
+)
+
+set(Tests_SOURCES "${Tests_SOURCES}" PARENT_SCOPE)
