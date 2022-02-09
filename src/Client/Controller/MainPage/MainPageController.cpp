@@ -134,9 +134,11 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::VIEW_PRODUCT:
 		return UpdateViewProductSubPage(data);
 	case MainSubPages::CREATE_PRODUCT:
-		return UpdateCreateProductSubPage(data);
+		return false;
+//		return UpdateCreateProductSubPage(data);
 	case MainSubPages::EDIT_PRODUCT:
-		return UpdateEditProductSubPage(data);
+		return false;
+//		return UpdateEditProductSubPage(data);
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:

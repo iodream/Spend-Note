@@ -1,8 +1,6 @@
 #include "ProductViewSubPage.h"
 #include "ui_ProductViewSubPage.h"
 
-#include "Entities/Entities.h"
-
 ProductViewSubPage::ProductViewSubPage(QWidget *parent) :
 	QWidget(parent),
 	m_ui(new Ui::ProductViewSubPage)
@@ -36,10 +34,10 @@ ProductViewSubPage::~ProductViewSubPage()
 void ProductViewSubPage::Update(const Product& product)
 {
 	m_ui->Name->setText(product.name);
-	m_ui->Price->setText(product.price);
-	m_ui->Amount->setText(product.amount);
+	m_ui->Price->setText(QString::number(product.price));
+	m_ui->Amount->setText(QString::number(product.amount));
 	m_ui->BuyUntil->setText(product.buy_until_date);
-	m_ui->Priority->setText(product.priority);
+	m_ui->Priority->setText(QString::number(product.priority));
 	m_ui->Category->setText(product.category.name);
-	m_ui->IsBought->setChecked(product.is_bought);
+	m_ui->IsBought->setText(product.is_bought ? "Yes" : "No");
 }

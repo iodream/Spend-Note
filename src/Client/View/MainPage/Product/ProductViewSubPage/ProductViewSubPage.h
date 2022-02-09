@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "Common.h"
+#include "Entities/Entities.h"
 
 namespace Ui {
 class ProductViewSubPage;
