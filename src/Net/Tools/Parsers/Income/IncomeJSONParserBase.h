@@ -17,7 +17,6 @@ public:
 		CategoryParser<IncomeCategory> category_json_parser;
 
 		SafeReadId(json, "id", income.id);
-		SafeReadId(json, "user_id", income.user_id);
 
 		SafeReadObject(json, "category", category_json);
 		income.category = category_json_parser.Parse(category_json);
