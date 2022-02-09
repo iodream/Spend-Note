@@ -1,4 +1,4 @@
-#add_subdirectory(Income)
+add_subdirectory(Income)
 add_subdirectory(List)
 add_subdirectory(Product)
 

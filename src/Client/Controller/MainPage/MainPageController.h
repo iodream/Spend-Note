@@ -3,11 +3,14 @@
 #include "Controller/HTTPClient.h"
 
 #include "ListPagesController.h"
+#include "ProductPagesController.h"
 #include "NavHistory.h"
 
 #include "View/MainPage/MainPage.h"
 #include "Common.h"
 #include "View/Constants.h"
+
+#include "Entities/PageData.h"
 
 class MainPageController : public QObject
 {
@@ -19,15 +22,17 @@ public:
 		IdType& user_id,
 		MainPage& page);
 
-	virtual ~MainPageController() override {};
+	virtual ~MainPageController() override {}
 
-	void ChangeSubPage(MainSubPages page);
+	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
 private:
 	void ConnectPage();
 
 	void InitListPagesController();
+	void InitProductPagesController();
 
+	bool UpdateSubPage(MainSubPages page, PageData data);
 private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -38,13 +43,14 @@ private:
 
 private:
 	std::unique_ptr<ListPagesController> m_list_pages_controller;
+	std::unique_ptr<ProductPagesController> m_product_pages_controller;
 
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangePage(UIPages page);
 
 public slots:
-	void OnChangeSubPage(MainSubPages page);
+	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnGoBack();
 
 	void OnLogout();

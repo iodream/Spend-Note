@@ -7,10 +7,17 @@
 
 #include "List/ListsSubPage/ListsSubPage.h"
 #include "List/ListCreateSubPage/ListCreateSubPage.h"
+#include "List/ListEditSubPage/ListEditSubPage.h"
+#include "List/ListViewSubPage/ListViewSubPage.h"
 
 #include "Product/ProductsSubPage/ProductsSubPage.h"
+#include "Product/ProductCreateSubPage/ProductCreateSubPage.h"
+#include "Product/ProductEditSubPage/ProductEditSubPage.h"
+#include "Product/ProductViewSubPage/ProductViewSubPage.h"
 
 #include "View/Constants.h"
+
+#include "Entities/PageData.h"
 
 
 namespace Ui {
@@ -30,22 +37,43 @@ public:
 
 private:
 	void InitListsSubPage();
-	void InitCreateListSubPage();
+	void InitListCreateSubPage();
+	void InitListEditSubPage();
+	void InitListViewSubPage();
+
+	void InitProductsSubPage();
+	void InitProductCreateSubPage();
+	void InitProductEditSubPage();
+	void InitProductViewSubPage();
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
+	ListEditSubPage& get_list_edit_spage() { return m_list_edit_spage; }
+	ListViewSubPage& get_list_view_spage() { return m_list_view_spage; }
+
+	ProductsSubPage& get_products_spage() { return m_products_spage; }
+	ProductCreateSubPage& get_product_create_spage() { return m_product_create_spage; }
+	ProductEditSubPage& get_product_edit_spage() { return m_product_edit_spage; }
+	ProductViewSubPage& get_product_view_spage() { return m_product_view_spage; }
 
 private:
 	Ui::MainPage *m_ui;
 
 	ListsSubPage m_lists_spage;
 	ListCreateSubPage m_list_create_spage;
+	ListEditSubPage m_list_edit_spage;
+	ListViewSubPage m_list_view_spage;
+
+	ProductsSubPage m_products_spage;
+	ProductCreateSubPage m_product_create_spage;
+	ProductEditSubPage m_product_edit_spage;
+	ProductViewSubPage m_product_view_spage;
 
 //	IncomesSubPage m_incomes_spage;
 
 signals:
-	void ChangeSubPage(MainSubPages page);
+	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack();
 

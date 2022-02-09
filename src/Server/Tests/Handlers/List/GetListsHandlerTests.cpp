@@ -3,8 +3,10 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 
+#include "Server/Handlers/Entities/Entities.h"
+#include "Server/Handlers/Entities/Parsers.h"
 #include "Server/Handlers/List/GetListsHandler.h"
 #include "Server/Handlers/List/Utils.h"
 #include "Net/Parsing.h"
@@ -15,24 +17,37 @@ using ::testing::_;
 
 namespace  {
 
-db::List l1 {
+ListState list_state{
+	1,
+	"State 1"
+};
+
+List list{
+	1,
+	"List 1",
+	1,
+	list_state
+};
+
+db::List db_list{
 	1,
 	1,
 	1,
 	"List 1",
 };
 
-db::ListState s1 {
+db::ListState db_list_state {
 	1,
 	"State 1"
 };
 
-void CheckProductsEquality(const db::List& l1, const db::List& l2)
+void CheckListsEquality(const List& list1, const List& list2)
 {
-	EXPECT_EQ(l1.id, l2.id);
-	EXPECT_EQ(l1.owner_id, l2.owner_id);
-	EXPECT_EQ(l1.state_id, l2.state_id);
-	EXPECT_EQ(l1.name, l2.name);
+	EXPECT_EQ(list1.id, list2.id);
+	EXPECT_EQ(list1.owner_id, list2.owner_id);
+	EXPECT_EQ(list1.state.id, list2.state.id);
+	EXPECT_EQ(list1.state.name, list2.state.name);
+	EXPECT_EQ(list1.name, list2.name);
 }
 
 std::unique_ptr<GetListsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
@@ -48,6 +63,7 @@ std::unique_ptr<GetListsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& fac
 
 
 }
+
 
 TEST(GetListsHandlerTest, EMPTY_LIST)
 {
@@ -71,12 +87,14 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 
 TEST(GetListsHandlerTest, ONE_LIST)
 {
+	ListJSONParser m_parser;
+
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, GetAllLists(_))
-		.WillOnce(Return(std::vector<db::List>{l1}));
+		.WillOnce(Return(std::vector<db::List>{db_list}));
 	EXPECT_CALL(*facade, GetListStateById(1))
-		.WillOnce(Return(std::optional<db::ListState>{s1}));
+		.WillOnce(Return(std::optional<db::ListState>{db_list_state}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -90,11 +108,8 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	QJsonArray lists = response.json_payload.array();
 	EXPECT_EQ(lists.size(), 1);
 
-	auto list = lists.at(0).toObject();
-	auto list_dto = ParseList(list);
+	auto list = m_parser.Parse(lists[0].toObject());
 
-	CheckProductsEquality(l1, list_dto);
-
-	EXPECT_EQ(s1.id, list_dto.state_id);
-	EXPECT_EQ(s1.name, list["state"].toString().toStdString());
+	CheckListsEquality(list, ::list);
 }
+

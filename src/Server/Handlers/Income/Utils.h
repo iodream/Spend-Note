@@ -1,10 +1,10 @@
 #pragma once
 
-#include <QJsonObject>
-
-
-#include "../Income/AddIncomeHandler.h"
 #include "../libdal/Facade/IDbFacade.h"
+#include "../Entities/Entities.h"
 
+db::Income ToDBIncome(const Income& income, const IdType& user_id);
 
-db::Income ParseIncome(const QJsonObject& json);
+db::Income ToDBIncome(const Income& income);
+
+Income ToNetIncome(const db::Income& db_income, const db::IncomeCategory& category);
