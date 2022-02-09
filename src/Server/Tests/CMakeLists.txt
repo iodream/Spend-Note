@@ -10,18 +10,7 @@ list(APPEND Tests_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/SignupTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/LoginTests.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONFormatterTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParserTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ListsJSONFormatterTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ListsJSONParserTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONFormatterTest.cpp
-	#${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParserTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductJSONFormatterTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductJSONParserTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductsJSONFormatterTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductsJSONParserTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONFormatterTest.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONParserTest.cpp
 )
+add_subdirectory(Entities)
 
 set(Tests_SOURCES "${Tests_SOURCES}" PARENT_SCOPE)

@@ -54,8 +54,23 @@ std::vector<Product> FormProduct()
 	return vect;
 }
 
+void Testing(const Product product_obj1, const Product& product_obj2)
+{
+	EXPECT_EQ(product_obj1.id, product_obj2.id);
+	EXPECT_EQ(product_obj1.list_id, product_obj2.list_id);
+	EXPECT_EQ(product_obj1.category.id, product_obj2.category.id);
+	EXPECT_EQ(product_obj1.category.name, product_obj2.category.name);
+	EXPECT_EQ(product_obj1.name, product_obj2.name);
+	EXPECT_EQ(product_obj1.is_bought, product_obj2.is_bought);
+	EXPECT_EQ(product_obj1.amount, product_obj2.amount);
+	EXPECT_EQ(product_obj1.price, product_obj2.price);
+	EXPECT_EQ(product_obj1.priority, product_obj2.priority);
+	EXPECT_EQ(product_obj1.add_date, product_obj2.add_date);
+	EXPECT_EQ(product_obj1.purchase_date, product_obj2.purchase_date);
+	EXPECT_EQ(product_obj1.buy_until_date, product_obj2.buy_until_date);
 }
 
+}
 TEST(ProductsJSONParser, PARSING)
 {
 	auto objects = FormProduct();
@@ -73,16 +88,5 @@ TEST(ProductsJSONParser, PARSING)
 		product_obj2 = el;
 	}
 
-	EXPECT_EQ(product_obj1.id, product_obj2.id);
-	EXPECT_EQ(product_obj1.list_id, product_obj2.list_id);
-	EXPECT_EQ(product_obj1.category.id, product_obj2.category.id);
-	EXPECT_EQ(product_obj1.category.name, product_obj2.category.name);
-	EXPECT_EQ(product_obj1.name, product_obj2.name);
-	EXPECT_EQ(product_obj1.is_bought, product_obj2.is_bought);
-	EXPECT_EQ(product_obj1.amount, product_obj2.amount);
-	EXPECT_EQ(product_obj1.price, product_obj2.price);
-	EXPECT_EQ(product_obj1.priority, product_obj2.priority);
-	EXPECT_EQ(product_obj1.add_date, product_obj2.add_date);
-	EXPECT_EQ(product_obj1.purchase_date, product_obj2.purchase_date);
-	EXPECT_EQ(product_obj1.buy_until_date, product_obj2.buy_until_date);
+	Testing(product_obj1, product_obj2);
 }

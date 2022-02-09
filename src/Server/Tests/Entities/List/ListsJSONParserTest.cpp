@@ -37,6 +37,16 @@ std::vector<List> FormLists()
 	lists.push_back(list);
 	return lists;
 }
+
+void Testing(const List& list_obj1, const List& list_obj2)
+{
+	EXPECT_EQ(list_obj1.id, list_obj2.id);
+	EXPECT_EQ(list_obj1.owner_id, list_obj2.owner_id);
+	EXPECT_EQ(list_obj1.name, list_obj2.name);
+	EXPECT_EQ(list_obj1.state.id, list_obj2.state.id);
+	EXPECT_EQ(list_obj1.state.name, list_obj2.state.name);
+}
+
 }
 
 TEST(ListsJSONParser, PARSING)
@@ -56,17 +66,6 @@ TEST(ListsJSONParser, PARSING)
 	{
 		list_obj2 = el;
 	}
-	EXPECT_EQ(list_obj1.id, list_obj2.id);
-	EXPECT_EQ(list_obj1.owner_id, list_obj2.owner_id);
-	EXPECT_EQ(list_obj1.name, list_obj2.name);
-	EXPECT_EQ(list_obj1.state.id, list_obj2.state.id);
-	EXPECT_EQ(list_obj1.state.name, list_obj2.state.name);
+
+	Testing(list_obj1, list_obj2);
 }
-
-
-
-
-
-
-
-

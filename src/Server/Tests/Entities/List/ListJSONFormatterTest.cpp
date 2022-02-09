@@ -3,7 +3,7 @@
 #include <QJsonDocument>
 
 #include "Server/Handlers/Entities/Entities.h"
-#include "Server/Handlers/Entities/Parsers.h"
+#include "Server/Handlers/Entities/Formatters.h"
 
 
 namespace
@@ -36,17 +36,22 @@ List FormList()
 
 	return list;
 }
-}
-TEST(ListJSONParser, PARSING)
+
+void Testing(const QJsonObject& object, const QJsonObject& list)
 {
-	auto list = FormList();
-	ListJSONParser m_parser{};
-	auto object = m_parser.Parse(FormObject());
+	EXPECT_EQ(object["id"], list["id"]);
+	EXPECT_EQ(object["owner_id"], list["owner_id"]);
+	EXPECT_EQ(object["name"], list["name"]);
+	EXPECT_EQ(object["state"], list["state"]);
+}
 
+}
+TEST(ListJSONFormatter, FORMATTER)
+{
+	auto object = FormObject();
 
-	EXPECT_EQ(object.id, list.id);
-	EXPECT_EQ(object.owner_id, list.owner_id);
-	EXPECT_EQ(object.name, list.name);
-	EXPECT_EQ(object.state.id, list.state.id);
-	EXPECT_EQ(object.state.name, list.state.name);
+	ListJSONFormatter m_formatter{};
+	auto list = m_formatter.Format(FormList());
+
+	Testing(object, list);
 }
