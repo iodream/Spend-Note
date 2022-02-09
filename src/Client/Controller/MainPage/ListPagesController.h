@@ -20,14 +20,13 @@ public:
 		ListCreateSubPage& create_page);
 
 	virtual ~ListPagesController() override {}
-
 	bool UpdateListPage();
 
 	std::unique_ptr<ListCreatePageController> m_list_create_page_controller;
-
 private:
 	void ConnectListPage();
 	void ConnectCreatePage();
+	void InitCreatePageController();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -35,7 +34,6 @@ private:
 
 	ListsSubPage& m_list_page;
 	ListCreateSubPage& m_create_page;
-	void InitCreatePageController();
 
 
 signals:

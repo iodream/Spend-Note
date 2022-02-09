@@ -55,6 +55,12 @@ void MainPageController::InitListPagesController()
 
 	connect(
 		m_list_pages_controller->m_list_create_page_controller.get(),
+		&ListCreatePageController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+
+	connect(
+		m_list_pages_controller->m_list_create_page_controller.get(),
 		&ListCreatePageController::Message,
 		this,
 		&MainPageController::Message);

@@ -1,9 +1,6 @@
 #include "ListCreatePageController.h"
-
 #include "Models/List/AddNewListModel.h"
-
 #include "Net/Constants.h"
-
 #include "View/MainPage/List/ListCreateSubPage/ListCreateSubPage.h"
 
 ListCreatePageController::ListCreatePageController(
@@ -18,6 +15,7 @@ ListCreatePageController::ListCreatePageController(
 	, m_list_page{list_page}
 	, m_create_page{create_page}
 {
+
 	ConnectCreatePage();
 }
 
@@ -30,6 +28,7 @@ void ListCreatePageController::ConnectCreatePage()
 	&ListCreatePageController::OnCreateList);
 }
 
+//checks data and sends request
 void ListCreatePageController::OnCreateList()
 {
 	AddNewListsModel model{m_hostname};
@@ -39,10 +38,19 @@ void ListCreatePageController::OnCreateList()
 	new_list.id = m_list_page.get_list_size() + 1;
 	new_list.owner_id = m_user_id;
 
-	ListState temp;
-	temp.id = 1;
-	temp.name = QString("active");
-	new_list.state = temp;
+	ListState state;
+	state.id = 1;
+	state.name = QString("active");
+	new_list.state = state;
+
+	if(!model.CheckName(new_list.name))
+	{
+		emit Message(
+				QString("Error!"),
+				QString("List name cannot be empty")
+				);
+		return; //abort
+	}
 
 	auto request  = model.FormRequest(new_list, m_user_id);
 	auto response = m_http_client.Request(request);
@@ -50,13 +58,12 @@ void ListCreatePageController::OnCreateList()
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
 		emit Message(
-			QString("Error occured"),
+			QString("Error!"),
 			QString::fromStdString(response.reason));
 		return ;
 	}
 
 	auto lists = model.ParseResponse(response);
 
-	emit Message("CreateNewListPage", "New list added");
+	emit GoBack(); //immediately go to previous page
 }
-
