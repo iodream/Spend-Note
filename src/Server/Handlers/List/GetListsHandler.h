@@ -20,5 +20,4 @@ public:
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
 	ListsJSONFormatter m_formatter;
-	List ToNetList(const db::List& db_list, const db::ListState& state);
 };

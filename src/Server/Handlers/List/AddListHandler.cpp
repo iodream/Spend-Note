@@ -1,4 +1,4 @@
-#include "AddIncomeHandler.h"
+#include "AddListHandler.h"
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -8,19 +8,19 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-AddIncomeHandler::AddIncomeHandler()
+AddListHandler::AddListHandler()
 {
 }
 
-Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
+Net::Response AddListHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto json_payload = request.json_payload.object();
-	auto income = m_parser.Parse(json_payload);
-	auto income_db = ToDBIncome(income);
-	IncomeId income_id;
+	auto list = m_parser.Parse(json_payload);
+	auto list_db = ToDBList(list);
+	ListId list_id;
 	try {
-		income_id.id = m_facade->AddIncome(income_db).value();
+		list_id.id = m_facade->AddList(list_db).value();
 	}
 	catch (const db::SQLFailure& ex) {
 		return FormErrorResponse(
@@ -28,7 +28,7 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 			"Unable to create resource");
 	}
 	return FormJSONResponse(
-		m_formatter.Format(income_id),
+		m_formatter.Format(list_id),
 		Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CREATED);
 }
 

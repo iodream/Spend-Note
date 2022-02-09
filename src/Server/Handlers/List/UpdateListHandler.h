@@ -10,16 +10,15 @@
 #include "../Entities/Parsers.h"
 #include "../Entities/Formatters.h"
 
-#include "../libdal/DTOs/Income.h"
+#include "../libdal/DTOs/List.h"
 
-class AddIncomeHandler : public AuthorizedHandler
+class UpdateListHandler : public AuthorizedHandler
 {
 public:
-	AddIncomeHandler();
-	virtual ~AddIncomeHandler() override {}
+	UpdateListHandler();
+	virtual ~UpdateListHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	IncomeJSONParser m_parser{};
-	IncomeIdJSONFormatter m_formatter{};
+	ListJSONParser m_parser{};
 };

@@ -1,28 +1,36 @@
 #include "Utils.h"
 
-#include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
+#include "../Common.h"
 
-db::Income ParseIncome(const QJsonObject& json)
+db::Income ToDBIncome(const Income& income)
 {
 	SCOPED_LOGGER;
-	db::Income income;
+	db::Income db_income;
+	db_income.id = income.id;
+	db_income.user_id = income.user_id;
+	db_income.name = income.name;
+	db_income.amount = income.amount;
+	db_income.category_id = income.category.id;
+	db_income.add_time = income.add_time;
+	db_income.expiration_time = (income.expiration_time != "")
+		? std::optional<db::Timestamp>{income.expiration_time} : std::nullopt;
 
-	double tmp_number;
-	std::string tmp_date;
-	SafeReadId(json, "income_id", income.id);
-	SafeReadId(json, "user_id", income.user_id);
-	SafeReadId(json, "category_id", income.category_id);
-	SafeReadString(json, "name", income.name);
+	return db_income;
+}
 
-	SafeReadNumber(json, "amount", tmp_number);
-	income.amount = tmp_number;
-
-	SafeReadString(json, "add_time", income.add_time);
-
-	SafeReadString(json, "expiration_time", tmp_date);
-	income.expiration_time = (tmp_date != "")
-		? std::optional<db::Timestamp>{tmp_date} : std::nullopt;
+Income ToNetIncome(const db::Income &db_income, const db::IncomeCategory& category)
+{
+	SCOPED_LOGGER;
+	Income income;
+	income.id = db_income.id;
+	income.user_id = db_income.id;
+	income.name = db_income.name;
+	income.category.id = category.id;
+	income.category.name = category.name;
+	income.amount = db_income.amount;
+	income.add_time = db_income.add_time;
+	income.expiration_time = (db_income.expiration_time.has_value()) ? db_income.expiration_time.value() : EMPTY_STD_STRING;
 
 	return income;
 }

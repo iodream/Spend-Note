@@ -1,4 +1,4 @@
-#include "UpdateIncomeHandler.h"
+#include "UpdateListHandler.h"
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -8,18 +8,18 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-UpdateIncomeHandler::UpdateIncomeHandler()
+UpdateListHandler::UpdateListHandler()
 {
 }
 
-Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
+Net::Response UpdateListHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto json_payload = request.json_payload.object();
-	auto income = m_parser.Parse(json_payload);
-	auto income_db = ToDBIncome(income);
+	auto list = m_parser.Parse(json_payload);
+	auto list_db = ToDBList(list);
 
-	if (m_facade->UpdateIncome(income_db)) {
+	if (m_facade->UpdateList(list_db)) {
 		return FormEmptyResponse();
 	}
 	else {

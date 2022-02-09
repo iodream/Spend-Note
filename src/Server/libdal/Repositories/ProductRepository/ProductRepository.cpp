@@ -162,7 +162,7 @@ bool ProductRepository::Update(const Product& product)
 					db::product::IS_BOUGHT + " = " + w.quote(product.is_bought) + ", " +
 					db::product::ADD_DATE + " = " + w.quote(product.add_date) + ", " +
 					db::product::PURCHASE_DATE + " = " + w.quote(product.purchase_date) + ", " +
-					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) + ", " +
+					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) +
 				" WHERE " + db::product::ID + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}
