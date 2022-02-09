@@ -8,7 +8,7 @@
 namespace
 {
 
-QJsonObject FormObject()
+QJsonObject FormExepectedJSON()
 {
 	QJsonObject object;
 
@@ -33,7 +33,7 @@ TEST(ListIdJSONParser, PARSING)
 {
 	auto list_id = FormId();
 	ListIdJSONParser m_parser;
-	auto object =  m_parser.Parse(FormObject());
+	auto object =  m_parser.Parse(FormExepectedJSON());
 
 	EXPECT_EQ(list_id.id, object.id);
 }

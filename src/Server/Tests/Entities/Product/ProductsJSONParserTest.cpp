@@ -8,7 +8,7 @@
 namespace
 {
 
-QJsonArray FormObjects()
+QJsonArray FormExpectedJSON()
 {
 	QJsonObject object, tmp_object;
 
@@ -54,7 +54,7 @@ std::vector<Product> FormProduct()
 	return vect;
 }
 
-void Testing(const Product product_obj1, const Product& product_obj2)
+void Compare(const Product product_obj1, const Product& product_obj2)
 {
 	EXPECT_EQ(product_obj1.id, product_obj2.id);
 	EXPECT_EQ(product_obj1.list_id, product_obj2.list_id);
@@ -75,7 +75,7 @@ TEST(ProductsJSONParser, PARSING)
 {
 	auto objects = FormProduct();
 	ProductsJSONParser m_parser{};
-	auto products = m_parser.Parse(FormObjects());
+	auto products = m_parser.Parse(FormExpectedJSON());
 
 	Product product_obj1, product_obj2;
 
@@ -88,5 +88,5 @@ TEST(ProductsJSONParser, PARSING)
 		product_obj2 = el;
 	}
 
-	Testing(product_obj1, product_obj2);
+	Compare(product_obj1, product_obj2);
 }

@@ -8,7 +8,7 @@
 
 namespace
 {
-QJsonObject FormObject()
+QJsonObject FormExpectedJSON()
 {
 	QJsonObject obj, tmp_obj;
 
@@ -37,7 +37,7 @@ List FormList()
 	return list;
 }
 
-void Testing(const List& list_obj1, const List& list_obj2)
+void Compare(const List& list_obj1, const List& list_obj2)
 {
 	EXPECT_EQ(list_obj1.id, list_obj2.id);
 	EXPECT_EQ(list_obj1.owner_id, list_obj2.owner_id);
@@ -51,7 +51,7 @@ TEST(ListJSONParser, PARSING)
 {
 	auto list = FormList();
 	ListJSONParser m_parser{};
-	auto object = m_parser.Parse(FormObject());
+	auto object = m_parser.Parse(FormExpectedJSON());
 
-	Testing(list, object);
+	Compare(list, object);
 }

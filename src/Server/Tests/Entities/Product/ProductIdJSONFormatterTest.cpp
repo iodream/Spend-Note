@@ -8,7 +8,7 @@
 namespace
 {
 
-QJsonObject FormObject()
+QJsonObject FormExpectedJSON()
 {
 	QJsonObject object;
 
@@ -31,7 +31,7 @@ ProductId FormProduct()
 
 TEST(ProductIdJSONFormatter, FORMATTER)
 {
-	auto object = FormObject();
+	auto object = FormExpectedJSON();
 	ProductIdJSONFormatter m_formatter{};
 	auto product_id = m_formatter.Format(FormProduct());
 

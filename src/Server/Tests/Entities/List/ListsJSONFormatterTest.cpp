@@ -38,7 +38,7 @@ std::vector<List> FormLists()
 	return lists;
 }
 
-void Testing(const QJsonObject& list_obj1, const QJsonObject& list_obj2)
+void Compare(const QJsonObject& list_obj1, const QJsonObject& list_obj2)
 {
 	EXPECT_EQ(list_obj1["id"], list_obj2["id"]);
 	EXPECT_EQ(list_obj1["owner_id"], list_obj2["owner_id"]);
@@ -65,5 +65,5 @@ TEST(ListsJSONFormatter, FORMATTER)
 		list_obj2 = el.toObject();
 	}
 
-	Testing(list_obj1, list_obj2);
+	Compare(list_obj1, list_obj2);
 }

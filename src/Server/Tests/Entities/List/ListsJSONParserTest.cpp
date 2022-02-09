@@ -7,7 +7,7 @@
 
 namespace
 {
-QJsonArray FormObjects()
+QJsonArray FormExpectedJSON()
 {
 	QJsonObject object, tmp_object;
 
@@ -38,7 +38,7 @@ std::vector<List> FormLists()
 	return lists;
 }
 
-void Testing(const List& list_obj1, const List& list_obj2)
+void Compare(const List& list_obj1, const List& list_obj2)
 {
 	EXPECT_EQ(list_obj1.id, list_obj2.id);
 	EXPECT_EQ(list_obj1.owner_id, list_obj2.owner_id);
@@ -53,7 +53,7 @@ TEST(ListsJSONParser, PARSING)
 {
 	auto lists = FormLists();
 	ListsJSONParser m_parser{};
-	auto objects = m_parser.Parse(FormObjects());
+	auto objects = m_parser.Parse(FormExpectedJSON());
 
 	List list_obj1, list_obj2;
 
@@ -67,5 +67,5 @@ TEST(ListsJSONParser, PARSING)
 		list_obj2 = el;
 	}
 
-	Testing(list_obj1, list_obj2);
+	Compare(list_obj1, list_obj2);
 }

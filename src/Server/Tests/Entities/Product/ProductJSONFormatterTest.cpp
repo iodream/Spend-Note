@@ -8,7 +8,7 @@
 namespace
 {
 
-QJsonObject FormObject()
+QJsonObject FormExpectedJSON()
 {
 	QJsonObject object, tmp_object;
 
@@ -52,7 +52,7 @@ Product FormProduct()
 	return product;
 }
 
-void Testing(const QJsonObject& object, const QJsonObject& product)
+void Compare(const QJsonObject& object, const QJsonObject& product)
 {
 	EXPECT_EQ(object["id"], product["id"]);
 	EXPECT_EQ(object["list_id"], product["list_id"]);
@@ -70,9 +70,9 @@ void Testing(const QJsonObject& object, const QJsonObject& product)
 
 TEST(ProductJSONFormatter, FORMAT)
 {
-	auto object = FormObject();
+	auto object = FormExpectedJSON();
 	ProductJSONFormatter m_formatter{};
 	auto product = m_formatter.Format(FormProduct());
 
-	Testing(object, product);
+	Compare(object, product);
 }
