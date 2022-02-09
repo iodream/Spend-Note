@@ -8,7 +8,6 @@
 #include "Entities/PageData.h"
 
 #include "View/Constants.h"
-#include "Controller/MainPage/ListCreatePageController.h"
 
 class ListPagesController : public QObject
 {
@@ -24,11 +23,9 @@ public:
 	virtual ~ListPagesController() override {}
 	bool UpdateListPage();
 
-	std::unique_ptr<ListCreatePageController> m_list_create_page_controller;
 private:
 	void ConnectListPage();
 	void ConnectCreatePage();
-	void InitCreatePageController();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -46,5 +43,7 @@ signals:
 
 public slots:
 	void OnGoToCreateList();
+	void OnCreateList();
+
 	//void OnGoToProducts(const List& list);
 };

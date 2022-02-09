@@ -5,8 +5,6 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/NavHistory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ListCreatePageController.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/ListCreatePageController.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.h
 )

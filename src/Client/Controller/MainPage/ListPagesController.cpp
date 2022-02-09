@@ -19,18 +19,6 @@ ListPagesController::ListPagesController(
 {
 	ConnectListPage();
 	ConnectCreatePage();
-	InitCreatePageController();
-}
-
-void ListPagesController::InitCreatePageController()
-{
-	m_list_create_page_controller =
-		std::make_unique<ListCreatePageController>(
-			m_http_client,
-			m_hostname,
-			m_user_id,
-			m_list_page,
-			m_create_page);
 }
 
 void ListPagesController::ConnectListPage()
@@ -54,6 +42,12 @@ void ListPagesController::ConnectCreatePage()
 		&ListCreateSubPage::GoBack,
 		this,
 		&ListPagesController::GoBack);
+
+	connect(
+	&m_create_page,
+	&ListCreateSubPage::CreateList,
+	this,
+	&ListPagesController::OnCreateList);
 }
 
 bool ListPagesController::UpdateListPage()
@@ -79,4 +73,44 @@ bool ListPagesController::UpdateListPage()
 void ListPagesController::OnGoToCreateList()
 {
 	emit ChangeSubPage(MainSubPages::CREATE_LIST);
+}
+
+//checks data and sends request
+void ListPagesController::OnCreateList()
+{
+	AddNewListsModel model{m_hostname};
+
+	List new_list;
+	new_list.name = m_create_page.GetListName();
+	new_list.id = m_list_page.get_list_size() + 1;
+	new_list.owner_id = m_user_id;
+
+	ListState state;
+	state.id = 1;
+	state.name = QString("");
+	new_list.state = state;
+
+	if(!model.CheckName(new_list.name))
+	{
+		emit Message(
+				QString("Error!"),
+				QString("List name can't be empty")
+				);
+		return; //abort
+	}
+
+	auto request  = model.FormRequest(new_list, m_user_id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error!"),
+			QString::fromStdString(response.reason));
+		return ;
+	}
+
+	auto lists = model.ParseResponse(response);
+
+	emit GoBack(); //immediately go to previous page
 }
