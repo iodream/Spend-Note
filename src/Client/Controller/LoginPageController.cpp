@@ -36,7 +36,14 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 {
 	LoginModel model{m_hostname};
 	auto request  = model.FormRequest(credentials);
-	auto response = m_http_client.Request(request);
+	Net::Response response;
+	try{
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		return;
+	}
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{

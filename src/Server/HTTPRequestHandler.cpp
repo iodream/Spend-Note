@@ -10,6 +10,7 @@
 void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http_res)
 {
 	SCOPED_LOGGER;
+
 	qInfo() << "Request from " << http_req.clientAddress().toString().c_str();
 
 	try {
@@ -25,21 +26,23 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 		SendResponse(response, http_res);
 	}
 	catch (const ClientError& ex) {
-		std::cout << ex.what() << "(URI: " << http_req.getURI() << ")" << "\n";
+		qWarning() << ex.what() << "(URI: " <<
+			QString::fromStdString(http_req.getURI()) << ")" << "\n";
 		SendResponse(FormErrorResponse(ex), http_res);
 	}
 	catch (const ServerError& ex) {
-		std::cout << ex.what() << "(URI: " << http_req.getURI() << ")" << "\n";
+		qWarning() << ex.what() << "(URI: " <<
+			QString::fromStdString(http_req.getURI()) << ")" << "\n";
 		SendResponse(FormErrorResponse(ex), http_res);
 	}
 	catch (const std::exception& ex) {
-		std::cout << "Unhandled exception \"" << ex.what() << "\""
-		<< "(URI: " << http_req.getURI() << ")" << "\n";
+		qCritical() << "Unhandled exception \"" << ex.what() << "\""
+			<< "(URI: " << QString::fromStdString(http_req.getURI()) << ")" << "\n";
 		SendResponse(FormErrorResponse(), http_res);
 	}
 	catch (...) {
-		std::cout << "Unhandled exception"
-		<< "(URI: " << http_req.getURI() << ")" << "\n";
+		qCritical() << "Unhandled exception"
+			<< "(URI: " << QString::fromStdString(http_req.getURI()) << ")" << "\n";
 		SendResponse(FormErrorResponse(), http_res);
 	}
 }
