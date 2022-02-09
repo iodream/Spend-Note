@@ -1,5 +1,5 @@
 #include "ProductViewSubPage.h"
-#include "ui_ProductEditSubPage.h"
+#include "ui_ProductViewSubPage.h"
 
 ProductViewSubPage::ProductViewSubPage(QWidget *parent) :
 	QWidget(parent),

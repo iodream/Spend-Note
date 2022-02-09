@@ -12,18 +12,9 @@ AddListHandler::AddListHandler()
 {
 }
 
-db::List AddListHandler::ToDBList(const List& list)
-{
-	db::List db_list;
-	db_list.id = list.id;
-	db_list.name = list.name;
-	db_list.owner_id = list.owner_id;
-	db_list.state_id = list.state.id;
-	return db_list;
-}
-
 Net::Response AddListHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	auto json_payload = request.json_payload.object();
 	auto list = m_parser.Parse(json_payload);
 	auto list_db = ToDBList(list);

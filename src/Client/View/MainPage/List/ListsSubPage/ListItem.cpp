@@ -12,9 +12,9 @@ const QString DEFAULT_COLOR_EVEN = "rgba(235, 235, 235, 50%)";
 
 }
 
-ListItem::ListItem(IdType id, QWidget *parent)
+ListItem::ListItem(List list, QWidget *parent)
 	: QPushButton(parent)
-	, m_id(id)
+	, m_list(list)
 	, m_ui(new Ui::ListItem)
 {
 	m_ui->setupUi(this);
@@ -38,7 +38,7 @@ void ListItem::UpdateColor()
 
 void ListItem::Update()
 {
-	m_ui->ListName->setText(m_name);
+	m_ui->ListName->setText(m_list.name);
 	m_ui->Number->setText(QString("%1").arg(m_number));
 	UpdateColor();
 	m_ui->Holder->setStyleSheet(
@@ -55,11 +55,6 @@ void ListItem::set_number(int number)
 int ListItem::get_number() const
 {
 	return m_number;
-}
-
-void ListItem::set_name(const QString& name)
-{
-	m_name = name;
 }
 
 QString ListItem::get_color()

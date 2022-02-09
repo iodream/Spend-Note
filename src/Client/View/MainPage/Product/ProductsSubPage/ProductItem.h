@@ -4,6 +4,9 @@
 #include <QPushButton>
 #include <QString>
 
+#include "Client/Common.h"
+#include "Client/Entities/Entities.h"
+
 namespace Ui {
 class ProductItem;
 }
@@ -15,34 +18,22 @@ class ProductItem : public QPushButton
 public:
 	using IdType = int;
 
-	explicit ProductItem(IdType id, QWidget *parent = nullptr);
+	explicit ProductItem(Product product, QWidget *parent = nullptr);
 	~ProductItem();
 
 	void Update();
 
-	void set_name(const QString& name);
-	void set_buy_until(const QString& buy_until);
-	void set_price(const QString& price);
-	void set_is_purchased(bool is_purchased);
-
-	QString get_name() { return m_name; };
-	QString get_buy_until() { return m_buy_until; };
-	QString get_price() { return m_price; };
-	bool get_is_purchased() { return m_is_purchased; };
-	IdType get_id() { return m_id; };
+	Product get_product() const { return m_product; };
 
 	void set_number(int number);
 	int get_number();
 
 	QString get_color();
+
 private:
 	void UpdateColor();
 
-	IdType m_id;
-	QString m_name;
-	QString m_buy_until;
-	QString m_price;
-	bool m_is_purchased;
+	Product m_product;
 
 	int m_number{1};
 	QString m_color;

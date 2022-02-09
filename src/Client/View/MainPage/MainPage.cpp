@@ -23,6 +23,7 @@ MainPage::MainPage(QWidget *parent)
 
 	InitListsSubPage();
 	InitCreateListSubPage();
+	InitProductsSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -33,6 +34,11 @@ void MainPage::InitListsSubPage()
 void MainPage::InitCreateListSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
+}
+
+void MainPage::InitProductsSubPage()
+{
+	m_ui->Display->addWidget(&m_products_spage);
 }
 
 MainPage::~MainPage()

@@ -82,7 +82,7 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 	SafeReadArray(json, "products", products);
 	EXPECT_EQ(products.size(), 0);
 }
-
+/*
 TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
@@ -114,3 +114,4 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 	EXPECT_EQ(c1.id, product_dto.category_id);
 	EXPECT_EQ(c1.name, product["category"].toString().toStdString());
 }
+*/

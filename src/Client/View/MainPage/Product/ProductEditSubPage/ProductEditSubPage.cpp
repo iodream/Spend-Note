@@ -18,12 +18,6 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&ProductEditSubPage::GoBack);
-
-	connect(
-		m_ui->DeleteButton,
-		&QPushButton::clicked,
-		this,
-		&ProductEditSubPage::DeleteProduct);
 }
 
 ProductEditSubPage::~ProductEditSubPage()
