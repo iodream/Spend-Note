@@ -75,7 +75,7 @@ private:
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
-	void GoBack();
+	void GoBack(int n=1);
 
 public slots:
 	void OnGoToListsClicked();

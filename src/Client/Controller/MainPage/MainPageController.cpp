@@ -46,7 +46,10 @@ void MainPageController::InitListPagesController()
 			m_hostname,
 			m_user_id,
 			m_page.get_lists_spage(),
-			m_page.get_list_create_spage());
+			m_page.get_list_create_spage(),
+			m_page.get_list_view_spage(),
+			m_page.get_list_edit_spage(),
+			m_page.get_products_spage());
 
 	connect(
 		m_list_pages_controller.get(),
@@ -65,6 +68,12 @@ void MainPageController::InitListPagesController()
 		&ListPagesController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		m_list_pages_controller.get(),
+		&ListPagesController::UpdatePage,
+		this,
+		&MainPageController::OnUpdateSubPage);
 }
 
 void MainPageController::InitProductPagesController()
@@ -75,7 +84,9 @@ void MainPageController::InitProductPagesController()
 			m_hostname,
 			m_user_id,
 			m_page.get_products_spage(),
-			m_page.get_product_view_spage());
+			m_page.get_product_view_spage(),
+			m_page.get_product_edit_spage(),
+			m_page.get_product_create_spage());
 
 	connect(
 		m_product_pages_controller.get(),
@@ -102,9 +113,13 @@ void MainPageController::OnLogout()
 	emit ChangePage(UIPages::LOGIN);
 }
 
-void MainPageController::OnGoBack()
+void MainPageController::OnGoBack(int n)
 {
-	m_history.ForgetLastPage();
+	while(n)
+	{
+		m_history.ForgetLastPage();
+		--n;
+	}
 	auto page = m_history.GetLastPage();
 	ChangeSubPage(page);
 }
@@ -129,15 +144,19 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::LISTS:
 		return m_list_pages_controller->UpdateListPage();
 	case MainSubPages::CREATE_LIST:
-		break;
+		return m_list_pages_controller->UpdateListCreatePage();
+	case MainSubPages::EDIT_LIST:
+		return m_list_pages_controller->UpdateListEditPage(data);
+	case MainSubPages::VIEW_LIST:
+		return m_list_pages_controller->UpdateListViewPage(data);
 	case MainSubPages::PRODUCTS:
 		return m_product_pages_controller->UpdateProductsPage(data);
 	case MainSubPages::VIEW_PRODUCT:
 		return m_product_pages_controller->UpdateViewProductSubPage(data);
 	case MainSubPages::CREATE_PRODUCT:
-		return false;
+		break;
 	case MainSubPages::EDIT_PRODUCT:
-		return false;
+		break;
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:
@@ -145,6 +164,11 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	}
 
 	return update_succeeded;
+}
+
+void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
+{
+	UpdateSubPage(page, data);
 }
 
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)

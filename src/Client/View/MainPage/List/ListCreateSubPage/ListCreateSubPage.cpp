@@ -19,8 +19,7 @@ ListCreateSubPage::ListCreateSubPage(QWidget *parent)
 	connect(
 		m_ui->GoBackButton,
 		&QPushButton::released,
-		this,
-		&ListCreateSubPage::GoBack);
+		[this](){ emit GoBack();});
 }
 
 ListCreateSubPage::~ListCreateSubPage()
@@ -31,4 +30,9 @@ ListCreateSubPage::~ListCreateSubPage()
 QString ListCreateSubPage::GetListName()
 {
 	return m_ui->lineEdit->text();
+}
+
+void ListCreateSubPage::Update()
+{
+	m_ui->lineEdit->setText("");
 }
