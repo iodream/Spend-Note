@@ -7,6 +7,7 @@
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
 #include "Utils.h"
+#include "../libdal/Exceptions/NonexistentResource.h"
 
 GetIncomesHandler::GetIncomesHandler()
 {
@@ -18,7 +19,15 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	Q_UNUSED(request);
 
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
-	auto db_incomes = m_facade->GetAllIncomes(user_id);
+	std::vector<db::Income> db_incomes;
+	try {
+		db_incomes = m_facade->GetAllIncomes(user_id);
+	}
+	catch (const db::NonexistentResource& ex) {
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"User with id = " + std::to_string(user_id) + " not found");
+	}
 
 	std::vector<Income> incomes;
 	for (const db::Income& db_income : db_incomes) {
