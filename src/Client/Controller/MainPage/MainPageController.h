@@ -51,7 +51,7 @@ signals:
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void OnGoBack();
+	void OnGoBack(int n=1);
 
 	void OnLogout();
 };

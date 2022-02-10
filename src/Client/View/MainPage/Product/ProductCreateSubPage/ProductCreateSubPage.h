@@ -17,7 +17,7 @@ public:
 	explicit ProductCreateSubPage(QWidget *parent = nullptr);
 	~ProductCreateSubPage();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void CreateProduct();
 
 private:

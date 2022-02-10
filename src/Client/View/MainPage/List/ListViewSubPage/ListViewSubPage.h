@@ -17,14 +17,14 @@ public:
 	explicit ListViewSubPage(QWidget *parent=nullptr);
 	~ListViewSubPage();
 
-	void Update();
+	void Update(const List& list);
 
 	void set_list(const List& list);
 	List get_list() const;
 
 signals:
-	void GoBack();
-	void EditList(List);
+	void GoBack(int n=1);
+	void GoToEditList(List list);
 	void DeleteList(List);
 
 private:
