@@ -16,7 +16,7 @@ using ::testing::Throw;
 
 namespace {
 
-QJsonDocument FormatJSON()
+QJsonDocument FormJSON()
 {
   QJsonObject json, state;
 
@@ -32,6 +32,17 @@ QJsonDocument FormatJSON()
   return QJsonDocument{json};
 }
 
+std::unique_ptr<AddListHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+{
+	auto handler = std::make_unique<AddListHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::USER_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+	return std::move(handler);
+}
+
 }
 TEST(AddListHandler, ADD_LIST_SUCCESS)
 {
@@ -39,17 +50,12 @@ TEST(AddListHandler, ADD_LIST_SUCCESS)
   EXPECT_CALL(*facade, AddList(_))
 	.WillOnce(Return(std::optional<db::IdType>{1}));
 
-  auto handler = std::make_unique<AddListHandler>();
-  handler->set_facade(std::move(facade));
-
-  Params params;
-  params.Insert(Params::USER_ID, Params::Value{1});
-  handler->set_params(std::move(params));
+  auto handler = MakeHandler(std::move(facade));
 
   Net::Request request;
   request.method = Net::HTTP_METHOD_POST;
 
-  request.json_payload = FormatJSON();
+  request.json_payload = FormJSON();
 
 
   auto response = handler->AuthHandle(request);
@@ -66,17 +72,12 @@ TEST(AddListHandler, ADD_LIST_FAILURE)
   EXPECT_CALL(*facade, AddList(_))
 	.WillOnce(Throw(db::SQLFailure("")));
 
-  auto handler = std::make_unique<AddListHandler>();
-  handler->set_facade(std::move(facade));
-
-  Params params;
-  params.Insert(Params::USER_ID, Params::Value{1});
-  handler->set_params(std::move(params));
+  auto handler = MakeHandler(std::move(facade));
 
   Net::Request request;
   request.method = Net::HTTP_METHOD_POST;
 
-  request.json_payload = FormatJSON();
+  request.json_payload = FormJSON();
 
 
   auto response = handler->AuthHandle(request);

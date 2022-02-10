@@ -14,7 +14,7 @@ using ::testing::Throw;
 
 namespace {
 
-QJsonDocument FormatJSON()
+QJsonDocument FormJSON()
 {
   QJsonObject json, state;
 
@@ -30,6 +30,17 @@ QJsonDocument FormatJSON()
   return QJsonDocument{json};
 }
 
+std::unique_ptr<UpdateListHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+{
+	auto handler = std::make_unique<UpdateListHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::LIST_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+	return std::move(handler);
+}
+
 }
 
 TEST(UpdateListHandler, UPDATE_LIST_SUCCESS)
@@ -38,16 +49,11 @@ TEST(UpdateListHandler, UPDATE_LIST_SUCCESS)
 	EXPECT_CALL(*facade, UpdateList(_))
 		.WillOnce(Return(true));
 
-	auto handler = std::make_unique<UpdateListHandler>();
-	handler->set_facade(std::move(facade));
-
-	Params params;
-	params.Insert(Params::LIST_ID, Params::Value{1});
-	handler->set_params(std::move(params));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_PUT;
-	request.json_payload = FormatJSON();
+	request.json_payload = FormJSON();
 
 	auto response = handler->AuthHandle(request);
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_NO_CONTENT);
@@ -59,16 +65,11 @@ TEST(UpdateListHandler, UPDATE_LIST_FAILURE)
 	EXPECT_CALL(*facade, UpdateList(_))
 		.WillOnce(Return(false));
 
-	auto handler = std::make_unique<UpdateListHandler>();
-	handler->set_facade(std::move(facade));
-
-	Params params;
-	params.Insert(Params::LIST_ID, Params::Value{1});
-	handler->set_params(std::move(params));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_PUT;
-	request.json_payload = FormatJSON();
+	request.json_payload = FormJSON();
 
 	auto response = handler->AuthHandle(request);
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_NOT_FOUND);
