@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 #include "Facade/DbFacade.h"
 #include "Server/Handlers/Product/AddProductHandler.h"
 #include "Net/Parsing.h"

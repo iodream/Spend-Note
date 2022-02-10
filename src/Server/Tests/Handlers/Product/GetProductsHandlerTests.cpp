@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 #include "Server/Handlers/Product/GetProductsHandler.h"
 #include "Server/Handlers/Entities/Parsers.h"
 #include "Net/Parsing.h"
@@ -44,8 +44,8 @@ void CheckProductsEquality(const db::Product& p1, const Product& p2)
 	EXPECT_EQ(p1.product_priority, p2.priority);
 	EXPECT_EQ(p1.is_bought, p2.is_bought);
 	EXPECT_EQ(p1.add_date, p2.add_date);
-	EXPECT_EQ(p1.purchase_date, p2.purchase_date);
-	EXPECT_EQ(p1.buy_until_date, p2.buy_until_date);
+	EXPECT_EQ("", p2.purchase_date);
+	EXPECT_EQ("", p2.buy_until_date);
 }
 
 std::unique_ptr<GetProductsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
@@ -86,11 +86,10 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	auto vect = std::vector<db::Product>{p1};
-	EXPECT_CALL(*facade, GetProductsForList(_))
-		.WillOnce(Return(vect));
-	//EXPECT_CALL(*facade, GetProductCategoryById(1))
-		//.WillOnce(Return(std::optional<db::ProductCategory>{c1}));
+	EXPECT_CALL(*facade, GetProductsForList(1))
+		.WillOnce(Return(std::vector<db::Product>{p1}));
+	EXPECT_CALL(*facade, GetProductCategoryById(1))
+		.WillOnce(Return(std::optional<db::ProductCategory>{c1}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -103,7 +102,7 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 
 	{
 	ProductsJSONParser m_parser;
-	auto procucts = m_parser.Parse(request.json_payload.array());
+	auto procucts = m_parser.Parse(response.json_payload.array());
 	ASSERT_EQ(procucts.size(), 1);
 
 	CheckProductsEquality(p1, procucts.at(0));
