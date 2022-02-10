@@ -16,8 +16,17 @@ class ProductCreateSubPage : public QWidget
 public:
 	explicit ProductCreateSubPage(QWidget *parent = nullptr);
 	~ProductCreateSubPage();
+
+	QString GetName();
+	Money GetPrice();
+	BigInt GetAmount();
+	bool GetIsBought();
+	QString GetBuyUntil();
+	BigInt GetPriority();
+
+	void Clear();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void CreateProduct();
 
 private:
