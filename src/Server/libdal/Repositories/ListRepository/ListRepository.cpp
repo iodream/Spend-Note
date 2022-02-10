@@ -162,7 +162,7 @@ std::vector<List> ListRepository::GetAllLists(const IdType& user_id)
 {
 	std::vector<List> list;
 	try
-	  {
+	{
 		pqxx::work w{m_db_connection};
 
 		pqxx::result user_ids = w.exec(

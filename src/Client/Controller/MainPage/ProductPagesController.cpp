@@ -2,6 +2,8 @@
 
 #include "Models/Product/GetProductsModel.h"
 #include "Models/Product/UpdateProductModel.h"
+#include "Models/Product/AddProductModel.h"
+#include "Models/Product/RemoveProductModel.h"
 
 #include "Net/Constants.h"
 
@@ -11,17 +13,20 @@ ProductPagesController::ProductPagesController(
 	IdType& user_id,
 	ProductsSubPage& products_page,
 	ProductViewSubPage& view_page,
-	ProductEditSubPage& edit_page)
+	ProductEditSubPage& edit_page,
+	ProductCreateSubPage& create_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
 	, m_products_page{products_page}
 	, m_view_page{view_page}
 	, m_edit_page{edit_page}
+	, m_create_page{create_page}
 {
 	ConnectProductsPage();
 	ConnectViewPage();
 	ConnectEditPage();
+	ConnectCreatePage();
 }
 
 bool ProductPagesController::UpdateProductsPage(PageData data)
@@ -40,8 +45,6 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
 
-
-
 void ProductPagesController::ConnectProductsPage()
 {
 	connect(
@@ -49,6 +52,12 @@ void ProductPagesController::ConnectProductsPage()
 		&ProductsSubPage::ProductClicked,
 		this,
 		&ProductPagesController::OnProductClicked);
+
+	connect(
+		&m_products_page,
+		&ProductsSubPage::GoToCreateProduct,
+		this,
+		&ProductPagesController::OnGoToCreateProduct);
 }
 
 void ProductPagesController::ConnectViewPage()
@@ -64,7 +73,14 @@ void ProductPagesController::ConnectViewPage()
 		&ProductViewSubPage::EditProduct,
 		this,
 		&ProductPagesController::OnEditProduct);
+
+	connect(
+		&m_view_page,
+		&ProductViewSubPage::DeleteProduct,
+		this,
+		&ProductPagesController::OnDeleteProduct);
 }
+
 
 void ProductPagesController::ConnectEditPage()
 {
@@ -79,6 +95,21 @@ void ProductPagesController::ConnectEditPage()
 		&ProductEditSubPage::UpdateProduct,
 		this,
 		&ProductPagesController::OnUpdateProduct);
+}
+
+void ProductPagesController::ConnectCreatePage()
+{
+	connect(
+		&m_create_page,
+		&ProductCreateSubPage::GoBack,
+		this,
+		&ProductPagesController::GoBack);
+
+	connect(
+		&m_create_page,
+		&ProductCreateSubPage::CreateProduct,
+		this,
+		&ProductPagesController::OnCreateProduct);
 }
 
 void ProductPagesController::OnProductClicked(const Product& product)
@@ -115,9 +146,73 @@ void ProductPagesController::OnUpdateProduct()
 		emit Message(
 			QString("Error occured"),
 			QString::fromStdString(response.reason));
+		return;
 	}
 
+	emit GoBack(2);
+}
+
+void ProductPagesController::OnGoToCreateProduct(IdType list_id)
+{
+	m_list_id = list_id;
+	m_create_page.Clear();
+	emit ChangeSubPage(MainSubPages::CREATE_PRODUCT);
+}
+
+void ProductPagesController::OnCreateProduct()
+{
+	AddProductModel model{m_hostname};
+
+	ProductCategory category;
+	category.id = 1;
+	category.name = "";
+
+	Product new_product;
+	new_product.id = 0;
+	new_product.name = m_create_page.GetName();
+	new_product.price = m_create_page.GetPrice();
+	new_product.amount = m_create_page.GetAmount();
+	new_product.priority = m_create_page.GetPriority();
+	new_product.is_bought = m_create_page.GetIsBought();
+	new_product.category = category;
+	new_product.buy_until_date = m_create_page.GetBuyUntil();
+	QDateTime date = QDateTime::currentDateTime();
+	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
+	new_product.purchase_date = "";
+	new_product.list_id = m_list_id;
+
+	auto request  = model.FormRequest(new_product);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+		QString("Error!"),
+			QString::fromStdString(response.reason));
+		return ;
+	}
+
+	auto product_id = model.ParseResponse(response);
+	Q_UNUSED(product_id);
+
 	emit GoBack();
+}
+
+void ProductPagesController::OnDeleteProduct()
+{
+	RemoveProductModel model{m_hostname};
+	ProductId id{m_view_page.get_product().id};
+	auto request = model.FormRequest(id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return;
+	}
+
 	emit GoBack();
 }
 

@@ -18,8 +18,9 @@ public:
 	explicit ListCreateSubPage(QWidget *parent=nullptr);
 	~ListCreateSubPage();
 	QString GetListName();
+	void Update();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void CreateList();
 
 private:

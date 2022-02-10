@@ -23,7 +23,7 @@ public:
 	void set_product(const Product& product);
 	Product get_product();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void EditProduct();
 	void DeleteProduct();
 

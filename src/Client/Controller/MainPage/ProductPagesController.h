@@ -4,6 +4,7 @@
 
 #include "View/MainPage/Product/ProductsSubPage/ProductsSubPage.h"
 #include "View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.h"
+#include "View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.h"
 #include "View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.h"
 
 #include "Entities/PageData.h"
@@ -20,7 +21,8 @@ public:
 		IdType& user_id,
 		ProductsSubPage& products_page,
 		ProductViewSubPage& view_page,
-		ProductEditSubPage& edit_page);
+		ProductEditSubPage& edit_page,
+		ProductCreateSubPage& create_page);
 
 	virtual ~ProductPagesController() override {}
 
@@ -36,23 +38,28 @@ private:
 	void ConnectProductsPage();
 	void ConnectViewPage();
 	void ConnectEditPage();
+	void ConnectCreatePage();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
 	IdType& m_user_id;
+	IdType m_list_id;
 
 	ProductsSubPage& m_products_page;
 	ProductViewSubPage& m_view_page;
 	ProductEditSubPage& m_edit_page;
+	ProductCreateSubPage& m_create_page;
 
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void GoBack();
+	void GoBack(int n=1);
 
 public slots:
-//	void OnGoToCreateProduct();
 	void OnProductClicked(const Product& product);
 	void OnEditProduct();
 	void OnUpdateProduct();
+	void OnGoToCreateProduct(IdType list_id);
+	void OnCreateProduct();
+	void OnDeleteProduct();
 };
