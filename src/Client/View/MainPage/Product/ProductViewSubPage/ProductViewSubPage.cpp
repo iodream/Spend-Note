@@ -16,8 +16,7 @@ ProductViewSubPage::ProductViewSubPage(QWidget *parent) :
 	connect(
 		m_ui->GoBackButton,
 		&QPushButton::clicked,
-		this,
-		&ProductViewSubPage::GoBack);
+		[this](){ emit GoBack(); });
 
 	connect(
 		m_ui->DeleteButton,

@@ -17,7 +17,7 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 		&QPushButton::clicked,
 		[this](bool ignored){ GoToCreateProduct(m_list.id); });
 
-  connect(
+	connect(
 		m_ui->ViewList,
 		&QPushButton::released,
 		this,

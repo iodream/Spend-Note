@@ -79,6 +79,7 @@ void MainPageController::InitProductPagesController()
 			m_user_id,
 			m_page.get_products_spage(),
 			m_page.get_product_view_spage(),
+			m_page.get_product_edit_spage(),
 			m_page.get_product_create_spage());
 
 	connect(
@@ -149,7 +150,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::CREATE_PRODUCT:
 		break;
 	case MainSubPages::EDIT_PRODUCT:
-		return false;
+		break;
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:

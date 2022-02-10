@@ -21,8 +21,9 @@ public:
 		IdType& user_id,
 		ProductsSubPage& products_page,
 		ProductViewSubPage& view_page,
+		ProductEditSubPage& edit_page,
 		ProductCreateSubPage& create_page);
-    
+
 	virtual ~ProductPagesController() override {}
 
 	bool UpdateProductsPage();
@@ -30,14 +31,13 @@ public:
 
 	bool UpdateProductsPage(PageData data);
 	bool UpdateViewProductSubPage(PageData data);
-	//bool UpdateCreateProductSubPage(PageData data);
-	//bool UpdateViewProductSubPage(PageData data);
 
 	bool UpdateViewPage(Product product);
 
 private:
 	void ConnectProductsPage();
 	void ConnectViewPage();
+	void ConnectEditPage();
 	void ConnectCreatePage();
 
 	HTTPClient& m_http_client;
@@ -47,6 +47,7 @@ private:
 
 	ProductsSubPage& m_products_page;
 	ProductViewSubPage& m_view_page;
+	ProductEditSubPage& m_edit_page;
 	ProductCreateSubPage& m_create_page;
 
 signals:
@@ -56,6 +57,8 @@ signals:
 
 public slots:
 	void OnProductClicked(const Product& product);
+	void OnEditProduct();
+	void OnUpdateProduct();
 	void OnGoToCreateProduct(IdType list_id);
 	void OnCreateProduct();
 	void OnDeleteProduct();

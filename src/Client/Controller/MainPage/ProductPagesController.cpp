@@ -1,6 +1,7 @@
 #include "ProductPagesController.h"
 
 #include "Models/Product/GetProductsModel.h"
+#include "Models/Product/UpdateProductModel.h"
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
 
@@ -12,16 +13,19 @@ ProductPagesController::ProductPagesController(
 	IdType& user_id,
 	ProductsSubPage& products_page,
 	ProductViewSubPage& view_page,
+	ProductEditSubPage& edit_page,
 	ProductCreateSubPage& create_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
 	, m_products_page{products_page}
 	, m_view_page{view_page}
+	, m_edit_page{edit_page}
 	, m_create_page{create_page}
 {
 	ConnectProductsPage();
 	ConnectViewPage();
+	ConnectEditPage();
 	ConnectCreatePage();
 }
 
@@ -66,9 +70,31 @@ void ProductPagesController::ConnectViewPage()
 
 	connect(
 		&m_view_page,
+		&ProductViewSubPage::EditProduct,
+		this,
+		&ProductPagesController::OnEditProduct);
+
+	connect(
+		&m_view_page,
 		&ProductViewSubPage::DeleteProduct,
 		this,
 		&ProductPagesController::OnDeleteProduct);
+}
+
+
+void ProductPagesController::ConnectEditPage()
+{
+	connect(
+		&m_edit_page,
+		&ProductEditSubPage::GoBack,
+		this,
+		&ProductPagesController::GoBack);
+
+	connect(
+		&m_edit_page,
+		&ProductEditSubPage::UpdateProduct,
+		this,
+		&ProductPagesController::OnUpdateProduct);
 }
 
 void ProductPagesController::ConnectCreatePage()
@@ -91,6 +117,39 @@ void ProductPagesController::OnProductClicked(const Product& product)
 	PageData data{};
 	data.setValue(product);
 	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
+}
+
+void ProductPagesController::OnEditProduct()
+{
+	m_edit_page.set_product(m_view_page.get_product());
+	m_edit_page.Update();
+	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
+}
+
+void ProductPagesController::OnUpdateProduct()
+{
+	UpdateProductModel model{m_hostname};
+
+	Product product = m_edit_page.get_product();
+
+	if (!m_view_page.get_product().is_bought && product.is_bought)
+	{
+		QDateTime date = QDateTime::currentDateTime();
+		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
+	}
+
+	auto request = model.FormRequest(product);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return;
+	}
+
+	emit GoBack(2);
 }
 
 void ProductPagesController::OnGoToCreateProduct(IdType list_id)
@@ -134,6 +193,7 @@ void ProductPagesController::OnCreateProduct()
 	}
 
 	auto product_id = model.ParseResponse(response);
+	Q_UNUSED(product_id);
 
 	emit GoBack();
 }
