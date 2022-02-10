@@ -51,4 +51,5 @@ signals:
 public slots:
 //	void OnGoToCreateProduct();
 	void OnProductClicked(const Product& product);
+	void OnDeleteProduct();
 };
