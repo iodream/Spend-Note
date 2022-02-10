@@ -17,7 +17,7 @@ public:
 	explicit ProductEditSubPage(QWidget *parent = nullptr);
 	~ProductEditSubPage();
 signals:
-	void GoBack();
+	void GoBack(int n=1);
 	void UpdateProduct();
 
 private:

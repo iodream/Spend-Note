@@ -41,8 +41,6 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
 
-
-
 void ProductPagesController::ConnectProductsPage()
 {
 	connect(

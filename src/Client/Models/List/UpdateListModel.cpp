@@ -9,3 +9,11 @@ Net::Request UpdateListModel::FormRequest(const List& list)
 	request.json_payload = QJsonDocument(m_formatter.Format(list));
 	return request;
 }
+
+bool UpdateListModel::CheckName(QString name)
+{
+	std::string str = name.toStdString();
+	str.erase(std::remove_if(str.begin(), str.end(), ::isspace)
+				   , str.end());
+	return (!str.empty());
+}

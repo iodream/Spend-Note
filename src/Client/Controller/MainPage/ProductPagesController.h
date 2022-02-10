@@ -22,7 +22,7 @@ public:
 		ProductsSubPage& products_page,
 		ProductViewSubPage& view_page,
 		ProductCreateSubPage& create_page);
-
+    
 	virtual ~ProductPagesController() override {}
 
 	bool UpdateProductsPage();
@@ -52,7 +52,7 @@ private:
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void GoBack();
+	void GoBack(int n=1);
 
 public slots:
 	void OnProductClicked(const Product& product);
