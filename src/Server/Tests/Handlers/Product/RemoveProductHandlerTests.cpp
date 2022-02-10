@@ -3,7 +3,7 @@
 #include "gtest/gtest.h"
 #include <QJsonObject>
 
-#include "MockDbFacade.h"
+#include "../../MockDbFacade.h"
 #include "Server/Handlers/Product/RemoveProductHandler.h"
 #include "Server/Handlers/Entities/Entities.h"
 #include "Net/Parsing.h"
@@ -35,7 +35,7 @@ TEST(RemoveProductsHandlerTest, PRODUCT_PRESENT)
 
 	auto handler = MakeHandler(std::move(facade));
 
-	Net::Request request;
+	 Net::Request request;
 	request.method = Net::HTTP_METHOD_DELETE;
 
 	auto response = handler->AuthHandle(request);

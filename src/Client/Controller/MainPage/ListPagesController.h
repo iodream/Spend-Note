@@ -21,6 +21,7 @@ public:
 		ListCreateSubPage& create_page);
 
 	virtual ~ListPagesController() override {}
+
 	bool UpdateListPage();
 
 private:

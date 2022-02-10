@@ -74,7 +74,8 @@ void MainPageController::InitProductPagesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_products_spage());
+			m_page.get_products_spage(),
+			m_page.get_product_view_spage());
 
 	connect(
 		m_product_pages_controller.get(),
@@ -123,13 +124,20 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
-	switch(page) {
+	switch(page)
+	{
 	case MainSubPages::LISTS:
 		return m_list_pages_controller->UpdateListPage();
 	case MainSubPages::CREATE_LIST:
 		break;
 	case MainSubPages::PRODUCTS:
-		return UpdateProductsSubPage(data);
+		return m_product_pages_controller->UpdateProductsPage(data);
+	case MainSubPages::VIEW_PRODUCT:
+		return m_product_pages_controller->UpdateViewProductSubPage(data);
+	case MainSubPages::CREATE_PRODUCT:
+		return false;
+	case MainSubPages::EDIT_PRODUCT:
+		return false;
 	case MainSubPages::ICOMES:
 		break;
 	case MainSubPages::SETTINGS:
@@ -137,14 +145,6 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	}
 
 	return update_succeeded;
-}
-
-bool MainPageController::UpdateProductsSubPage(PageData data)
-{
-	if (!data.canConvert<List>()) {
-		return m_product_pages_controller->UpdateListPage();
-	}
-	return m_product_pages_controller->UpdateListPage(qvariant_cast<List>(data));
 }
 
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
