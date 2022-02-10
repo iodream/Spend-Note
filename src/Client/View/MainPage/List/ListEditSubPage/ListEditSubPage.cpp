@@ -13,13 +13,12 @@ ListEditSubPage::ListEditSubPage(QWidget *parent)
 	connect(
 		m_ui->SaveButton,
 		&QPushButton::clicked,
-		[this](){ m_list.name = m_ui->ListName->text(); emit UpdateList(m_list); });
-
+		[this](){m_list.name = m_ui->ListName->text(); emit UpdateList(m_list); });
 
 	connect(
 		m_ui->GoBackButton,
 		&QPushButton::released,
-		[this](){ emit GoBack(3); });
+		[this](){PageData data; data.setValue(m_list); emit UpdateListView(data); emit GoBack();});
 }
 
 ListEditSubPage::~ListEditSubPage()
