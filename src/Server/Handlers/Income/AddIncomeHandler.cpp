@@ -15,9 +15,10 @@ AddIncomeHandler::AddIncomeHandler()
 Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
+	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
 	auto json_payload = request.json_payload.object();
 	auto income = m_parser.Parse(json_payload);
-	auto income_db = ToDBIncome(income);
+	auto income_db = ToDBIncome(income, user_id);
 	IncomeId income_id;
 	try {
 		income_id.id = m_facade->AddIncome(income_db).value();

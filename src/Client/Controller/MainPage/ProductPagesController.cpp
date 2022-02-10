@@ -2,6 +2,7 @@
 
 #include "Models/Product/GetProductsModel.h"
 #include "Models/Product/AddProductModel.h"
+#include "Models/Product/RemoveProductModel.h"
 
 #include "Net/Constants.h"
 
@@ -36,7 +37,6 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
 		return false;
-		//return m_product_pages_controller->UpdateListPage();
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
@@ -66,8 +66,11 @@ void ProductPagesController::ConnectViewPage()
 		this,
 		&ProductPagesController::GoBack);
 
-//	void EditProduct();
-	//	void DeleteProduct();
+	connect(
+		&m_view_page,
+		&ProductViewSubPage::DeleteProduct,
+		this,
+		&ProductPagesController::OnDeleteProduct);
 }
 
 void ProductPagesController::ConnectCreatePage()
@@ -127,12 +130,30 @@ void ProductPagesController::OnCreateProduct()
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
 		emit Message(
-			QString("Error!"),
+		QString("Error!"),
 			QString::fromStdString(response.reason));
 		return ;
 	}
 
 	auto product_id = model.ParseResponse(response);
+
+	emit GoBack();
+}
+
+void ProductPagesController::OnDeleteProduct()
+{
+	RemoveProductModel model{m_hostname};
+	ProductId id{m_view_page.get_product().id};
+	auto request = model.FormRequest(id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return;
+	}
 
 	emit GoBack();
 }

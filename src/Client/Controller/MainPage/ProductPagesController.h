@@ -58,4 +58,5 @@ public slots:
 	void OnProductClicked(const Product& product);
 	void OnGoToCreateProduct(IdType list_id);
 	void OnCreateProduct();
+	void OnDeleteProduct();
 };
