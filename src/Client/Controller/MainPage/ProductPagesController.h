@@ -52,7 +52,7 @@ private:
 
 signals:
 	void Message(const QString& window_name, const QString& message);
-	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
+	void ChangeSubPage(MainSubPages page, PageData data = PageData{});
 	void GoBack(int n=1);
 
 public slots:
