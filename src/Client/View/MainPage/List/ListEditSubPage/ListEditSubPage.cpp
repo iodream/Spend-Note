@@ -15,11 +15,10 @@ ListEditSubPage::ListEditSubPage(QWidget *parent)
 		&QPushButton::clicked,
 		[this](){ m_list.name = m_ui->ListName->text(); emit UpdateList(m_list); });
 
-
 	connect(
 		m_ui->GoBackButton,
 		&QPushButton::released,
-		[this](){ emit GoBack(3); });
+		[this](){ emit GoBack();});
 }
 
 ListEditSubPage::~ListEditSubPage()

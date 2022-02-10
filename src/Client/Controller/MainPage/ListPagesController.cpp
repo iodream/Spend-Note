@@ -279,5 +279,5 @@ void ListPagesController::OnUpdateList(const List& list)
 			QString::fromStdString(response.reason));
 		return ;
 	}
-	emit GoBack(3);
+	emit GoBack();
 }
