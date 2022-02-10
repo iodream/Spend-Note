@@ -13,6 +13,11 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 	set_list_size(0);
 
 	connect(
+		m_ui->AddItemButton,
+		&QPushButton::clicked,
+		[this](bool ignored){ GoToCreateProduct(m_list.id); });
+
+  connect(
 		m_ui->ViewList,
 		&QPushButton::released,
 		this,
