@@ -97,6 +97,11 @@ void ListPagesController::ConnectEditListPage()
 		&ListEditSubPage::GoBack,
 		this,
 		&ListPagesController::GoBack);
+	connect(
+		&m_list_edit_page,
+		&ListEditSubPage::UpdateListView,
+		this,
+		&ListPagesController::UpdateListViewPage);
 }
 
 bool ListPagesController::UpdateListPage()
@@ -134,6 +139,9 @@ bool ListPagesController::UpdateListCreatePage()
 
 bool ListPagesController::UpdateListViewPage(PageData& data)
 {
+	if (!data.canConvert<List>()) {
+		return true;
+	}
 	auto list = qvariant_cast<List>(data);
 	m_list_view_page.Update(list);
 	return true;
@@ -141,6 +149,9 @@ bool ListPagesController::UpdateListViewPage(PageData& data)
 
 bool ListPagesController::UpdateListEditPage(PageData& data)
 {
+	if (!data.canConvert<List>()) {
+		return true;
+	}
 	auto list = qvariant_cast<List>(data);
 	m_list_edit_page.Update(list);
 	return true;
@@ -279,5 +290,11 @@ void ListPagesController::OnUpdateList(const List& list)
 			QString::fromStdString(response.reason));
 		return ;
 	}
+
+	PageData data;
+	data.setValue(list);
+	emit UpdatePage(MainSubPages::PRODUCTS, data);
+	emit UpdatePage(MainSubPages::VIEW_LIST, data);
+
 	emit GoBack();
 }

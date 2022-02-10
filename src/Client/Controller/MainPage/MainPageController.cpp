@@ -68,6 +68,12 @@ void MainPageController::InitListPagesController()
 		&ListPagesController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		m_list_pages_controller.get(),
+		&ListPagesController::UpdatePage,
+		this,
+		&MainPageController::OnUpdateSubPage);
 }
 
 void MainPageController::InitProductPagesController()
@@ -158,6 +164,11 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	}
 
 	return update_succeeded;
+}
+
+void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
+{
+	UpdateSubPage(page, data);
 }
 
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)

@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "Entities/Entities.h"
+#include "Entities/PageData.h"
 
 namespace Ui {
 class ListEditSubPage;
@@ -24,6 +25,8 @@ public:
 
 signals:
 	void GoBack(int n=1);
+	void UpdateListView(PageData& data);
+
 	void UpdateList(List);
 
 private:
