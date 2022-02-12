@@ -6,6 +6,8 @@ IncomeCreateSubPage::IncomeCreateSubPage(QWidget *parent) :
 	ui(new Ui::IncomeCreateSubPage)
 {
 	ui->setupUi(this);
+
+	ui->ExpirationDateEdit->setDate(QDate::currentDate());
 }
 
 IncomeCreateSubPage::~IncomeCreateSubPage()
