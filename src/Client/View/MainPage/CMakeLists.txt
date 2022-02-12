@@ -6,6 +6,6 @@ list(APPEND Spend-Note-Client_SOURCES
 
 add_subdirectory(List)
 add_subdirectory(Product)
-#add_subdirectory(Income)
+add_subdirectory(Income)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
