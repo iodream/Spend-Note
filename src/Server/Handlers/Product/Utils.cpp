@@ -44,3 +44,11 @@ Product ToNetProduct(const db::Product& db_product, const db::ProductCategory& c
 
 	return product;
 }
+
+ProductCategory ToNetProductCategory(const db::ProductCategory& db_product_category)
+{
+	ProductCategory product_category;
+	product_category.id = db_product_category.id;
+	product_category.name = db_product_category.name;
+	return product_category;
+}

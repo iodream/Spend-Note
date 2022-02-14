@@ -38,4 +38,6 @@ using ProductJSONParser =
 	ProductJSONParserBase<ProductCategoryJSONParserBase, Product>;
 using ProductsJSONParser =
 	ArrayJSONParserBase<ProductJSONParser, Product>;
+using ProductCategoriesJSONParser =
+	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;
 

@@ -14,6 +14,7 @@
 namespace {
 
 const std::string PRODUCTS = "/products";
+const std::string CATEGORIES = "/categories";
 
 }
 
