@@ -14,6 +14,8 @@
 #include "Net/Tools/Formatters/Product/ProductJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Product/ProductIdJSONFormatter.h"
 
+#include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
+
 #include "Net/Tools/Formatters/ArrayJSONFormatterBase.h"
 
 using IncomeCategoryJSONFormatter =
