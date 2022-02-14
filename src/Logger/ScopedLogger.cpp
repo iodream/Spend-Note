@@ -1,6 +1,8 @@
 #include <fstream>
 
 #include "ScopedLogger.h"
+#include <QTime>
+#include <QDate>
 
 std::string ScopedLogger::m_log_file_name;
 std::ofstream ScopedLogger::m_stream;
@@ -15,8 +17,9 @@ ScopedLogger::ScopedLogger(const std::string& file_name, const std::string& func
 	, m_thread_id(thread_id)
 {
 	std::lock_guard<std::mutex> lock(m_log_mutex);
-	m_stream << m_file_name << ":" << m_line_nr << "\n"
-	<< "[" << m_thread_id << "] " << m_func_name << "() started\n" << std::flush;
+	m_stream << QDate::currentDate().toString().toStdString() << " " << QTime::currentTime().toString().toStdString()
+			<< " "<< m_file_name << ":" << m_line_nr << "\n"
+			<< "[" << m_thread_id << "] " << m_func_name << "() started\n" << std::flush;
 }
 
 void ScopedLogger::Init(const std::string& log_file_name)
@@ -28,6 +31,7 @@ void ScopedLogger::Init(const std::string& log_file_name)
 ScopedLogger::~ScopedLogger()
 {
 	std::lock_guard<std::mutex> lock(m_log_mutex);
-	m_stream << m_file_name << ":" << m_line_nr << "\n"
-	<< "[" << m_thread_id << "] " << m_func_name << "() finished\n" << std::flush;
+	m_stream << QDate::currentDate().toString().toStdString() << " " << QTime::currentTime().toString().toStdString()
+			<< " " << m_file_name << ":" << m_line_nr << "\n"
+			<< "[" << m_thread_id << "] " << m_func_name << "() finished\n" << std::flush;
 }

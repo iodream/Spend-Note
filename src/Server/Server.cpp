@@ -28,7 +28,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 	int main(const std::vector<std::string>&)
 	{
-		Logger::Init("Server.log");
+		Logger::Init("Server.log", "ServerScopedLogger.log");
 		ScopedLogger::Init("ServerScopedLogger.log");
 
 		SCOPED_LOGGER;

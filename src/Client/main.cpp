@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-	Logger::Init("Client.log");
+	Logger::Init("Client.log", "ClientScopedLogger.log");
 	ScopedLogger::Init("ClientScopedLogger.log"); // mandatory
 	SCOPED_LOGGER;
 	QApplication a(argc, argv);
