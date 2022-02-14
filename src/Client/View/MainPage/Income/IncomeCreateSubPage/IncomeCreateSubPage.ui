@@ -86,22 +86,11 @@
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="GoBackButton">
-       <property name="text">
-        <string>Go Back</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="SaveButton">
-       <property name="text">
-        <string>Save</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QPushButton" name="SaveButton">
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
