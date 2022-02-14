@@ -14,6 +14,8 @@
 #include "Net/Tools/Formatters/Product/ProductJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Product/ProductIdJSONFormatter.h"
 
+#include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
+
 #include "Net/Tools/Formatters/ArrayJSONFormatterBase.h"
 
 using IncomeCategoryJSONFormatter =
@@ -29,6 +31,8 @@ using ListJSONFormatter =
 	ListJSONFormatterBase<ListStateJSONFormatterBase, List>;
 using ListsJSONFormatter =
 	ArrayJSONFormatterBase<ListJSONFormatter, List>;
+using ListStatesJSONFormatter =
+	ArrayJSONFormatterBase<ListStateJSONFormatter, ListState>;
 
 using ProductCategoryJSONFormatter =
 	ProductCategoryJSONFormatterBase<ProductCategory>;
