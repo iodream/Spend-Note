@@ -121,6 +121,7 @@ void MainPageController::OnGoBack(int n)
 		--n;
 	}
 	auto page = m_history.GetLastPage();
+
 	ChangeSubPage(page);
 }
 

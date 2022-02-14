@@ -20,7 +20,6 @@ public:
 	QString GetListName();
 	void Update();
 signals:
-	void GoBack(int n=1);
 	void CreateList();
 
 private:

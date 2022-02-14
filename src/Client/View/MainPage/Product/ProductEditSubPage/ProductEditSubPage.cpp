@@ -12,11 +12,6 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&ProductEditSubPage::UpdateProduct);
-
-	connect(
-		m_ui->GoBackButton,
-		&QPushButton::clicked,
-		[this](){ emit GoBack(); });
 }
 
 ProductEditSubPage::~ProductEditSubPage()
