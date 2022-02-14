@@ -7,6 +7,9 @@
 
 Controller::Controller()
 {
+	Poco::Util::JSONConfiguration m_json_configuration("Client/Config.json");
+	m_hostname = m_json_configuration.getString("hostname");
+
 	InitLoginPageController();
 	InitSignupPageController();
 	InitMainPageController();

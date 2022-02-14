@@ -4,6 +4,8 @@
 
 #include <QMessageBox>
 
+#include "Poco/Util/JSONConfiguration.h"
+
 #include "HTTPClient.h"
 
 #include "LoginPageController.h"
@@ -30,7 +32,7 @@ private:
 	void InitMainPageController();
 
 private:
-	std::string m_hostname{"http://localhost:8080"};
+	std::string m_hostname;
 	HTTPClient m_http_client;
 	IdType m_user_id{1};
 	MainWindow m_main_window{};
