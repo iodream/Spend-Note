@@ -31,6 +31,8 @@ using ListJSONParser =
 	ListJSONParserBase<ListStateJSONParserBase, List>;
 using ListsJSONParser =
 	ArrayJSONParserBase<ListJSONParser, List>;
+using ListStatesJSONParser =
+	ArrayJSONParserBase<ListStateJSONParser, ListState>;
 
 using ProductCategoryJSONParser =
 	ProductCategoryJSONParserBase<ProductCategory>;
