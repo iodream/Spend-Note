@@ -31,6 +31,8 @@ using ListJSONFormatter =
 	ListJSONFormatterBase<ListStateJSONFormatterBase, List>;
 using ListsJSONFormatter =
 	ArrayJSONFormatterBase<ListJSONFormatter, List>;
+using ListStatesJSONFormatter =
+	ArrayJSONFormatterBase<ListStateJSONFormatter, ListState>;
 
 using ProductCategoryJSONFormatter =
 	ProductCategoryJSONFormatterBase<ProductCategory>;

@@ -4,6 +4,7 @@
 #include "../Handlers/List/UpdateListHandler.h"
 #include "../Handlers/Product/GetProductsHandler.h"
 #include "../Handlers/Product/AddProductHandler.h"
+#include "../Handlers/List/GetListStatesHandler.h"
 
 #include "../Handlers/MethodNotAllowedHandler.h"
 
@@ -14,7 +15,7 @@
 namespace {
 
 const std::string PRODUCTS = "/products";
-const std::string CATEGORIES = "/categories";
+const std::string STATES = "/states";
 
 }
 
@@ -43,6 +44,11 @@ ICommandHandler* ListsResolver::Resolve(
 			return new GetProductsHandler();
 		else if (method == Net::HTTP_METHOD_POST)
 			return new AddProductHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == STATES){
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetListStatesHandler();
 		return new MethodNotAllowedHandler();
 	}
 
