@@ -16,6 +16,12 @@ MainPage::MainPage(QWidget *parent)
 		SLOT(OnGoToListsClicked()));
 
 	connect(
+		m_ui->GoToIncomesButton,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToIncomesClicked);
+
+	connect(
 		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
@@ -30,6 +36,8 @@ MainPage::MainPage(QWidget *parent)
 	InitProductCreateSubPage();
 	InitProductEditSubPage();
 	InitProductViewSubPage();
+
+	InitIncomesSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -72,6 +80,11 @@ void MainPage::InitProductViewSubPage()
 	m_ui->Display->addWidget(&m_product_view_spage);
 }
 
+void MainPage::InitIncomesSubPage()
+{
+	m_ui->Display->addWidget(&m_incomes_spage);
+}
+
 MainPage::~MainPage()
 {
 	delete m_ui;
@@ -90,6 +103,11 @@ void MainPage::SetCurrentSubPage(MainSubPages page)
 void MainPage::OnGoToListsClicked()
 {
 	emit ChangeSubPage(MainSubPages::LISTS);
+}
+
+void MainPage::OnGoToIncomesClicked()
+{
+	emit ChangeSubPage(MainSubPages::INCOMES);
 }
 
 void MainPage::OnLogoutClicked()

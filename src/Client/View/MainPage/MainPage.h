@@ -15,6 +15,8 @@
 #include "Product/ProductEditSubPage/ProductEditSubPage.h"
 #include "Product/ProductViewSubPage/ProductViewSubPage.h"
 
+#include "Income/IncomesSubPage/IncomeListSubPage.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -46,6 +48,8 @@ private:
 	void InitProductEditSubPage();
 	void InitProductViewSubPage();
 
+	void InitIncomesSubPage();
+
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
@@ -56,6 +60,8 @@ public:
 	ProductCreateSubPage& get_product_create_spage() { return m_product_create_spage; }
 	ProductEditSubPage& get_product_edit_spage() { return m_product_edit_spage; }
 	ProductViewSubPage& get_product_view_spage() { return m_product_view_spage; }
+
+	IncomeListSubPage& get_incomes_spage() { return m_incomes_spage; }
 
 private:
 	Ui::MainPage *m_ui;
@@ -70,7 +76,7 @@ private:
 	ProductEditSubPage m_product_edit_spage;
 	ProductViewSubPage m_product_view_spage;
 
-//	IncomesSubPage m_incomes_spage;
+	IncomeListSubPage m_incomes_spage;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -79,5 +85,6 @@ signals:
 
 public slots:
 	void OnGoToListsClicked();
+	void OnGoToIncomesClicked();
 	void OnLogoutClicked();
 };

@@ -237,7 +237,7 @@ background-color: #2ca89e;</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_5">
+       <widget class="QToolButton" name="GoToIncomesButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -259,7 +259,7 @@ color: rgb(243, 243, 243);
 background-color: #2ca89e;</string>
         </property>
         <property name="text">
-         <string>...</string>
+         <string>My Incomes</string>
         </property>
        </widget>
       </item>

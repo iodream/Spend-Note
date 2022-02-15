@@ -15,6 +15,7 @@ MainPageController::MainPageController(
 	ConnectPage();
 	InitListPagesController();
 	InitProductPagesController();
+	InitIncomePagesController();
 }
 
 void MainPageController::ConnectPage()
@@ -107,6 +108,34 @@ void MainPageController::InitProductPagesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitIncomePagesController()
+{
+	m_income_pages_controller =
+		std::make_unique<IncomePagesController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_incomes_spage());
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::Message,
+		this,
+		&MainPageController::Message);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -157,7 +186,11 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		break;
 	case MainSubPages::EDIT_PRODUCT:
 		break;
-	case MainSubPages::ICOMES:
+	case MainSubPages::INCOMES:
+		return m_income_pages_controller->UpdateIncomesPage();
+	case MainSubPages::VIEW_INCOME:
+		break;
+	case MainSubPages::CREATE_INCOME:
 		break;
 	case MainSubPages::SETTINGS:
 		break;

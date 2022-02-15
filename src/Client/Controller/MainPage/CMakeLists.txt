@@ -7,6 +7,8 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.h
+	${CMAKE_CURRENT_SOURCE_DIR}/IncomePagesController.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/IncomePagesController.h
 )
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
