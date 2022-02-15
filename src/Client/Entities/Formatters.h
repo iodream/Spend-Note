@@ -40,3 +40,5 @@ using ProductJSONFormatter =
 	ProductJSONFormatterBase<ProductCategoryJSONFormatterBase, Product>;
 using ProductsJSONFormatter =
 	ArrayJSONFormatterBase<ProductJSONFormatter, Product>;
+using ProductCategoriesJSONFormatter =
+	ArrayJSONFormatterBase<ProductCategoryJSONFormatter, ProductCategory>;
