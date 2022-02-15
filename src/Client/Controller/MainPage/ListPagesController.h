@@ -48,6 +48,9 @@ private:
 	ListEditSubPage& m_list_edit_page;
 	ProductsSubPage& m_product_page;
 
+	void FillBoxOfStates();
+	static bool already_added;
+
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});

@@ -40,4 +40,13 @@ void ListEditSubPage::Update(const List& list)
 {
 	set_list(list);
 	m_ui->ListName->setText(m_list.name);
+	m_ui->ListState->setPlaceholderText(m_list.state.name);
+}
+
+void ListEditSubPage::FillStateBox(const std::vector<ListState> &states)
+{
+	for(const auto& el : states)
+	{
+		m_ui->ListState->addItem(el.name, el.id);
+	}
 }

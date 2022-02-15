@@ -19,6 +19,8 @@ public:
 	~ListCreateSubPage();
 	QString GetListName();
 	void Update();
+	void FillStateBox(const std::vector<ListState>& states);
+
 signals:
 	void GoBack(int n=1);
 	void CreateList();

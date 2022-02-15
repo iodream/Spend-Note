@@ -36,3 +36,11 @@ void ListCreateSubPage::Update()
 {
 	m_ui->lineEdit->setText("");
 }
+
+void ListCreateSubPage::FillStateBox(const std::vector<ListState> &states)
+{
+	for(const auto& el : states)
+	{
+		m_ui->ListState->addItem(el.name, el.id);
+	}
+}

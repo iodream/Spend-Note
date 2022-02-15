@@ -40,6 +40,7 @@ void ListItem::Update()
 {
 	m_ui->ListName->setText(m_list.name);
 	m_ui->Number->setText(QString("%1").arg(m_number));
+	m_ui->State->setText(m_list.state.name);
 	UpdateColor();
 	m_ui->Holder->setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));

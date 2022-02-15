@@ -19,6 +19,7 @@ public:
 	~ListEditSubPage();
 
 	void Update(const List& list);
+	void FillStateBox(const std::vector<ListState>& states);
 
 	void set_list(const List& list);
 	List get_list() const;
