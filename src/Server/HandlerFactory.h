@@ -13,7 +13,7 @@
 class HandlerFactory: public Poco::Net::HTTPRequestHandlerFactory
 {
 public:
-	HandlerFactory();
+	HandlerFactory(const Poco::Util::JSONConfiguration& config);
 	~HandlerFactory() override {}
 
 	Poco::Net::HTTPRequestHandler* createRequestHandler(
@@ -21,11 +21,12 @@ public:
 
 	std::string_view GetPathSegment(std::string& path, std::string::size_type pos);
 
+	static Poco::Util::JSONConfiguration GetConfig();
+
 private:
 	ICommandHandler* GetCommandHandler(const Poco::Net::HTTPServerRequest& http_req);
 
-	std::string FormConnectionString() const;
-
+	std::string FormConnectionString(const Poco::Util::JSONConfiguration& config) const;
 	const std::string m_db_connection_string;
 
 	RootResolver m_resolver;

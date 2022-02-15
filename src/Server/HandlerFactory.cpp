@@ -11,24 +11,24 @@
 #include "Handlers/Income/UpdateIncomeHandler.h"
 #include "Logger/ScopedLogger.h"
 
-HandlerFactory::HandlerFactory() : m_db_connection_string(FormConnectionString()) {}
+HandlerFactory::HandlerFactory(const Poco::Util::JSONConfiguration& config)
+	: m_db_connection_string(FormConnectionString(config)) {}
 
-std::string HandlerFactory::FormConnectionString() const
+std::string HandlerFactory::FormConnectionString(const Poco::Util::JSONConfiguration& config) const
 {
-	const std::string config_filename =
-		std::string(std::filesystem::current_path())
-		+ std::string("/Config.json");
-
-	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
-
 	return "user=" +
-		m_json_configuration.getString("user") +
+		config.getString("user") +
 		" host=" +
-		m_json_configuration.getString("host") +
+		config.getString("host") +
 		" password=" +
-		m_json_configuration.getString("password") +
+		config.getString("password") +
 		" dbname=" +
-		m_json_configuration.getString("dbname");
+		config.getString("dbname");
+}
+
+Poco::Util::JSONConfiguration HandlerFactory::GetConfig()
+{
+	return Poco::Util::JSONConfiguration("Config.json");
 }
 
 Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)

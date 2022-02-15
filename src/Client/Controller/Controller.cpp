@@ -17,11 +17,9 @@ Controller::Controller()
 
 void Controller::InitConfig()
 {
-	const std::string config_filename =
-		std::string(std::filesystem::current_path())
-		+ std::string("/Config.json");
-
+	const std::string config_filename = "Config.json";
 	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
+
 	m_hostname = m_json_configuration.getString("hostname");
 }
 
