@@ -1,5 +1,6 @@
 #include <sstream>
 #include <QJsonObject>
+#include <QMessageBox>
 
 #include <Poco/URI.h>
 #include <Poco/Net/HTTPResponse.h>
@@ -8,7 +9,6 @@
 
 #include "Exception.h"
 #include "HTTPClient.h"
-#include <QMessageBox>
 
 void HTTPClient::set_token(const std::string& str_token)
 {
@@ -74,7 +74,7 @@ Net::Response HTTPClient::FormResponse(
 		net_response.content_type != Net::CONTENT_TYPE_PLAIN_TEXT &&
 		net_response.content_type != Net::CONTENT_TYPE_EMPTY)
     {
-        throw Exception("Unsupported content type");
+		throw Exception("Unsupported content type");
     }
     return net_response;
 }
@@ -85,21 +85,32 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
     std::string path(uri.getPathAndQuery());
     Poco::Net::HTTPRequest request(net_request.method, path, Poco::Net::HTTPMessage::HTTP_1_1);
-	try{
-		SendRequest(request, session, net_request);
+
+	while(true){
+		try{
+			SendRequest(request, session, net_request);
+			break;
+		}
+		catch(const Poco::Exception& exc)
+		{
+			qCritical() << "Can't send request: " << exc.what();
+			if(QMessageBox::Yes == QMessageBox::question(nullptr,QString("Retry?"),
+				QString("No connection to server. Retry?")))
+				continue;
+			else
+				break;
+			throw exc;
+		}
+		catch(const std::exception& exc)
+		{
+			qCritical() << "Can't send request: " << exc.what();
+			throw exc;
+		}
 	}
-	catch(Poco::Exception& exc)
-	{
-		QMessageBox::warning(nullptr,
-					QString("Error!"),
-					QString("Connection error to server")
-					);
-		qCritical() << "Can't send request: " << exc.what();
-		throw exc;
-	}
-    Poco::Net::HTTPResponse response;
+
+	Poco::Net::HTTPResponse response;
 	std::istream& received_stream = session.receiveResponse(response);
-    return FormResponse(response, received_stream);
+	return FormResponse(response, received_stream);
 }
 
 void HTTPClient::AddCredentials(Poco::Net::HTTPRequest& request)
