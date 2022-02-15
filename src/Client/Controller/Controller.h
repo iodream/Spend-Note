@@ -27,6 +27,7 @@ public:
 private:
 	void SetPage(UIPages page);
 
+	void InitConfig();
 	void InitLoginPageController();
 	void InitSignupPageController();
 	void InitMainPageController();

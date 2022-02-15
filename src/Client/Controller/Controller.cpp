@@ -1,5 +1,7 @@
 #include "Controller.h"
 
+#include <filesystem>
+
 #include "Models/LoginModel.h"
 #include "Models/List/GetListsModel.h"
 
@@ -7,12 +9,20 @@
 
 Controller::Controller()
 {
-	Poco::Util::JSONConfiguration m_json_configuration("Client/Config.json");
-	m_hostname = m_json_configuration.getString("hostname");
-
+	InitConfig();
 	InitLoginPageController();
 	InitSignupPageController();
 	InitMainPageController();
+}
+
+void Controller::InitConfig()
+{
+	const std::string config_filename =
+		std::string(std::filesystem::current_path())
+		+ std::string("/Config.json");
+
+	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
+	m_hostname = m_json_configuration.getString("hostname");
 }
 
 void Controller::InitLoginPageController()

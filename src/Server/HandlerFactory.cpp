@@ -11,14 +11,24 @@
 #include "Handlers/Income/UpdateIncomeHandler.h"
 #include "Logger/ScopedLogger.h"
 
-const std::string DB_CONN_STRING =
-	"user=test_user host=127.0.0.1 "
-	"password=test_pass dbname=SpendAndNote";
+HandlerFactory::HandlerFactory() : m_db_connection_string(FormConnectionString()) {}
 
-HandlerFactory::HandlerFactory()
+std::string HandlerFactory::FormConnectionString() const
 {
+	const std::string config_filename =
+		std::string(std::filesystem::current_path())
+		+ std::string("/Config.json");
 
+	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
 
+	return "user=" +
+		m_json_configuration.getString("user") +
+		" host=" +
+		m_json_configuration.getString("host") +
+		" password=" +
+		m_json_configuration.getString("password") +
+		" dbname=" +
+		m_json_configuration.getString("dbname");
 }
 
 Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)
@@ -43,7 +53,7 @@ ICommandHandler* HandlerFactory::GetCommandHandler(
 
 
 	if (handler) {
-		db::IDbFacade::Ptr facade = std::make_unique<db::DbFacade>(DB_CONN_STRING);
+		db::IDbFacade::Ptr facade = std::make_unique<db::DbFacade>(m_db_connection_string);
 		handler->set_facade(std::move(facade));
 		handler->set_params(std::move(params));
 	}

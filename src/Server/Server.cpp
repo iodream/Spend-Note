@@ -26,14 +26,25 @@ class HTTPServer: public Poco::Util::ServerApplication
 		ServerApplication::initialize(self);
 	}
 
+	Poco::Util::JSONConfiguration GetCfg()
+	{
+		const std::string config_filename =
+			std::string(std::filesystem::current_path())
+			+ std::string("/Config.json");
+
+		return Poco::Util::JSONConfiguration(config_filename);
+
+	}
+
 	int main(const std::vector<std::string>&)
 	{
-		Logger::Init("Server.log", "ServerScopedLogger.log");
-		ScopedLogger::Init("ServerScopedLogger.log");
+
+		Logger::Init(GetCfg().getString("server_logger_name"), GetCfg().getString("server_scoped_logger_name"));
+		ScopedLogger::Init(GetCfg().getString("server_scoped_logger_name"));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
+		Poco::UInt16 port = GetCfg().getUInt("port", 8080);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
@@ -42,7 +53,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 			append(std::string{"."}).
 			append(std::string{SpendNoteServer_VERSION_MINOR}));
 
-		Poco::Net::HTTPServer srv(new HandlerFactory, port);
+		Poco::Net::HTTPServer srv(new HandlerFactory(), port);
 		srv.start();
 		qInfo() << "HTTP Server started on port " << port;
 		waitForTerminationRequest();

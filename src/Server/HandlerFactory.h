@@ -5,6 +5,7 @@
 
 #include "Poco/Net/HTTPRequestHandlerFactory.h"
 #include "Poco/Net/HTTPServerRequest.h"
+#include "Poco/Util/JSONConfiguration.h"
 
 #include "HTTPRequestHandler.h"
 #include "Resolvers/RootResolver.h"
@@ -22,6 +23,10 @@ public:
 
 private:
 	ICommandHandler* GetCommandHandler(const Poco::Net::HTTPServerRequest& http_req);
+
+	std::string FormConnectionString() const;
+
+	const std::string m_db_connection_string;
 
 	RootResolver m_resolver;
 };

@@ -20,16 +20,19 @@ if(ENABLE_SPEND_NOTE_TESTS)
 endif()
 
 list(APPEND Spend-Note-Server_SOURCES
-	${CMAKE_CURRENT_SOURCE_DIR}/Error.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Params.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Params.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
-	${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
-	${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Error.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Params.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Params.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Config.json
 )
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.json ${CMAKE_CURRENT_BINARY_DIR}/Config.json COPYONLY)
 
 list(APPEND Spend-Note-Server_LIBS
     PocoNet
