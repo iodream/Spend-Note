@@ -29,10 +29,7 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Config.json
 )
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.json ${CMAKE_CURRENT_BINARY_DIR}/Config.json COPYONLY)
 
 list(APPEND Spend-Note-Server_LIBS
     PocoNet
@@ -51,8 +48,6 @@ list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Logger_SOURCES}
 
 )
-
-
 
 add_executable(
     Spend-Note-Server

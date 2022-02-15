@@ -17,10 +17,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Common.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Config.json
 )
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.json ${CMAKE_CURRENT_BINARY_DIR}/Config.json COPYONLY)
 
 list(APPEND Spend-Note-Client_LIBS
     PocoNet

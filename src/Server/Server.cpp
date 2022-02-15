@@ -26,7 +26,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 		ServerApplication::initialize(self);
 	}
 
-	Poco::Util::JSONConfiguration GetCfg()
+	Poco::Util::JSONConfiguration GetConfig()
 	{
 		const std::string config_filename =
 			std::string(std::filesystem::current_path())
@@ -38,14 +38,14 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 	int main(const std::vector<std::string>&)
 	{
-		auto json_cfg = GetCfg();
+		auto json_config = GetConfig();
 
-		Logger::Init(json_cfg.getString("server_logger_name"), json_cfg.getString("server_scoped_logger_name"));
-		ScopedLogger::Init(json_cfg.getString("server_scoped_logger_name"));
+		Logger::Init(json_config.getString("server_logger_name"), json_config.getString("server_scoped_logger_name"));
+		ScopedLogger::Init(json_config.getString("server_scoped_logger_name"));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = json_cfg.getUInt("port", 8080);
+		Poco::UInt16 port = json_config.getUInt("port", 8080);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
