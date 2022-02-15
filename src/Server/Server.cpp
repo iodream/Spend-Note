@@ -38,13 +38,14 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 	int main(const std::vector<std::string>&)
 	{
+		auto json_cfg = GetCfg();
 
-		Logger::Init(GetCfg().getString("server_logger_name"), GetCfg().getString("server_scoped_logger_name"));
-		ScopedLogger::Init(GetCfg().getString("server_scoped_logger_name"));
+		Logger::Init(json_cfg.getString("server_logger_name"), json_cfg.getString("server_scoped_logger_name"));
+		ScopedLogger::Init(json_cfg.getString("server_scoped_logger_name"));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = GetCfg().getUInt("port", 8080);
+		Poco::UInt16 port = json_cfg.getUInt("port", 8080);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
