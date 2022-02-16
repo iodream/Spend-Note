@@ -181,9 +181,9 @@ void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 
 Balance MainPageController::UpdateUserBalance(const IdType &id)
 {
-	//GetBalanceModel model{m_hostname};
-	//auto request = model.FormRequest(id);
-	//auto response = m_http_client.Request(request);
+	GetBalanceModel model{m_hostname};
+	auto request = model.FormRequest(id);
+	auto response = m_http_client.Request(request);
 
-	//return model.ParseResponse(response);
+	return model.ParseResponse(response);
 }
