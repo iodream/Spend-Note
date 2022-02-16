@@ -33,7 +33,7 @@ private:
 	void InitProductPagesController();
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
-	Balance	UpdateUserBalance(const IdType& id);
+	std::optional<Balance> UpdateUserBalance(const IdType& id);
 
 private:
 	HTTPClient& m_http_client;

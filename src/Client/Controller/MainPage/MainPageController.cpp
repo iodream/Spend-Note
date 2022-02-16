@@ -141,7 +141,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
-	m_page.ShowBalacne(UpdateUserBalance(m_user_id));
+	m_page.ShowBalacne(*UpdateUserBalance(m_user_id));
 
 	switch(page)
 	{
@@ -179,11 +179,19 @@ void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 	ChangeSubPage(page, data);
 }
 
-Balance MainPageController::UpdateUserBalance(const IdType &id)
+std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 {
 	GetBalanceModel model{m_hostname};
 	auto request = model.FormRequest(id);
 	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return std::nullopt;
+	}
 
 	return model.ParseResponse(response);
 }

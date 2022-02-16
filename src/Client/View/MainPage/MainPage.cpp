@@ -99,6 +99,6 @@ void MainPage::OnLogoutClicked()
 
 void MainPage::ShowBalacne(const Balance& money)
 {
-	m_ui->CurrentBalance->setText(QString::number(money.balance));
-	m_ui->ProjectedBalance->setText(QString::number(money.planned_balance));
+	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
+	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
