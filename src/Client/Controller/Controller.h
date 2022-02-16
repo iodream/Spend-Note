@@ -15,6 +15,10 @@
 #include "View/MainWindow.h"
 #include "View/Constants.h"
 
+namespace{
+const std::string config_filename = "Config.json";
+};
+
 class Controller : public QObject
 {
 	Q_OBJECT

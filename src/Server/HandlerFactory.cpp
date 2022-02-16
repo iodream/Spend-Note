@@ -12,19 +12,7 @@
 #include "Logger/ScopedLogger.h"
 
 HandlerFactory::HandlerFactory(const Poco::Util::JSONConfiguration& config)
-	: m_db_connection_string(FormConnectionString(config)) {}
-
-std::string HandlerFactory::FormConnectionString(const Poco::Util::JSONConfiguration& config) const
-{
-	return "user=" +
-		config.getString("user") +
-		" host=" +
-		config.getString("host") +
-		" password=" +
-		config.getString("password") +
-		" dbname=" +
-		config.getString("dbname");
-}
+	: m_db_connection_string(m_db_connection_helper.FormConnectionString(config)) {}
 
 Poco::Util::JSONConfiguration HandlerFactory::GetConfig()
 {

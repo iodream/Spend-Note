@@ -9,6 +9,7 @@
 
 #include "HTTPRequestHandler.h"
 #include "Resolvers/RootResolver.h"
+#include "DbConnectionHelper.h"
 
 class HandlerFactory: public Poco::Net::HTTPRequestHandlerFactory
 {
@@ -26,7 +27,7 @@ public:
 private:
 	ICommandHandler* GetCommandHandler(const Poco::Net::HTTPServerRequest& http_req);
 
-	std::string FormConnectionString(const Poco::Util::JSONConfiguration& config) const;
+	DbConnectionHelper m_db_connection_helper{};
 	const std::string m_db_connection_string;
 
 	RootResolver m_resolver;
