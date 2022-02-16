@@ -96,13 +96,16 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 		catch(const Poco::Exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
-			if(Controller::AskUser(QString("Retry?"),
-								   QString("No connection to server. Retry?")))
+			if(Controller::AskUser(
+						QString("Retry?"),
+						QString("No connection to server. Retry?")))
 			{
 				Retry = true;
-				continue;
 			}
-			throw;	// rethrow here because we are done sending the request
+			else
+			{
+				throw;	// rethrow here because we are done sending the request
+			}
 		}
 		catch(const std::exception& exc)
 		{
