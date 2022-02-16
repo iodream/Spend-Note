@@ -17,8 +17,13 @@ RemoveListHandler::RemoveListHandler()
 Net::Response RemoveListHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	Q_UNUSED(request);
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
+
+	if (!m_facade->CanUserEditList(request.uid, list_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"Remove list with id " + std::to_string(list_id) + " is forbidden");
+	}
 
 	if (m_facade->RemoveList(list_id)) {
 		return FormEmptyResponse();
