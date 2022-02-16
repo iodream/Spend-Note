@@ -18,6 +18,7 @@ public:
 	explicit ListCreateSubPage(QWidget *parent=nullptr);
 	~ListCreateSubPage();
 	QString GetListName();
+	IdType GetListState();
 	void Update();
 	void FillStateBox(const std::vector<ListState>& states);
 

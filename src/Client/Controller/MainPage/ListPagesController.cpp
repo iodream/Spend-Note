@@ -189,6 +189,7 @@ void ListPagesController::OnCreateList()
 
 	List new_list;
 	new_list.name = m_create_page.GetListName();
+	new_list.state.id = m_create_page.GetListState();
 	new_list.id = 0;
 	new_list.owner_id = m_user_id;
 

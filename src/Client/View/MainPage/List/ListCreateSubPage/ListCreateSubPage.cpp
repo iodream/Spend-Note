@@ -32,6 +32,11 @@ QString ListCreateSubPage::GetListName()
 	return m_ui->lineEdit->text();
 }
 
+IdType ListCreateSubPage::GetListState()
+{
+	return m_ui->ListState->currentIndex();
+}
+
 void ListCreateSubPage::Update()
 {
 	m_ui->lineEdit->setText("");
