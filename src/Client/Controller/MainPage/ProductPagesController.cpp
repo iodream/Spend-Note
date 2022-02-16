@@ -64,12 +64,6 @@ void ProductPagesController::ConnectViewPage()
 {
 	connect(
 		&m_view_page,
-		&ProductViewSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
-	connect(
-		&m_view_page,
 		&ProductViewSubPage::EditProduct,
 		this,
 		&ProductPagesController::OnEditProduct);
@@ -86,12 +80,6 @@ void ProductPagesController::ConnectEditPage()
 {
 	connect(
 		&m_edit_page,
-		&ProductEditSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
-	connect(
-		&m_edit_page,
 		&ProductEditSubPage::UpdateProduct,
 		this,
 		&ProductPagesController::OnUpdateProduct);
@@ -99,12 +87,6 @@ void ProductPagesController::ConnectEditPage()
 
 void ProductPagesController::ConnectCreatePage()
 {
-	connect(
-		&m_create_page,
-		&ProductCreateSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
 	connect(
 		&m_create_page,
 		&ProductCreateSubPage::CreateProduct,

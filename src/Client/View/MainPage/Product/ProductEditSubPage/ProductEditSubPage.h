@@ -23,7 +23,6 @@ public:
 
 	void Update();
 signals:
-	void GoBack(int n=1);
 	void UpdateProduct();
 
 private:
