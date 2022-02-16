@@ -7,6 +7,7 @@
 #include <Poco/StreamCopier.h>
 #include <Poco/Message.h>
 
+#include "Controller.h"
 #include "Exception.h"
 #include "HTTPClient.h"
 
@@ -94,7 +95,7 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 		catch(const Poco::Exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
-			if(QMessageBox::Yes == QMessageBox::question(nullptr, QString("Retry?"),
+			if(Controller::AskUser(QString("Retry?"),
 				QString("No connection to server. Retry?")))
 			{
 				continue;
