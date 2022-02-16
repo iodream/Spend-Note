@@ -94,17 +94,15 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 		catch(const Poco::Exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
-			if(QMessageBox::Yes == QMessageBox::question(nullptr,QString("Retry?"),
+			if(QMessageBox::Yes == QMessageBox::question(nullptr, QString("Retry?"),
 				QString("No connection to server. Retry?")))
 				continue;
-			else
-				break;
-			throw exc;
+			throw;
 		}
 		catch(const std::exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
-			throw exc;
+			throw;
 		}
 	}
 
