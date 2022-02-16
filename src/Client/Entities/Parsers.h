@@ -24,6 +24,8 @@ using IncomeJSONParser =
 	IncomeJSONParserBase<IncomeCategoryJSONParserBase, Income>;
 using IncomesJSONParser =
 	ArrayJSONParserBase<IncomeJSONParser, Income>;
+using IncomeCategoriesJSONParser =
+	ArrayJSONParserBase<IncomeCategoryJSONParser, IncomeCategory>;
 
 using ListStateJSONParser =
 	ListStateJSONParserBase<ListState>;
