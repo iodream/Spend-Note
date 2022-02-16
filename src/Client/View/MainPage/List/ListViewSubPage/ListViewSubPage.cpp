@@ -16,12 +16,6 @@ ListViewSubPage::ListViewSubPage(QWidget *parent)
 		m_ui->EditButton,
 		&QPushButton::released,
 		[this](){ emit GoToEditList(m_list); });
-
-	connect(
-		m_ui->GoBackButton,
-		&QPushButton::released,
-		[this](){ emit GoBack();});
-
 	connect(
 		m_ui->DeleteButton,
 		&QPushButton::clicked,

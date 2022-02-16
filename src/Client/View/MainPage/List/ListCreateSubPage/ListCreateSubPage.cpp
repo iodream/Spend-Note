@@ -15,11 +15,6 @@ ListCreateSubPage::ListCreateSubPage(QWidget *parent)
 		&QPushButton::released,
 		this,
 		&ListCreateSubPage::CreateList);
-
-	connect(
-		m_ui->GoBackButton,
-		&QPushButton::released,
-		[this](){ emit GoBack();});
 }
 
 ListCreateSubPage::~ListCreateSubPage()

@@ -67,13 +67,6 @@
    <item row="3" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QPushButton" name="GoBackButton">
-       <property name="text">
-        <string>Go Back</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="EditButton">
        <property name="text">
         <string>Edit</string>

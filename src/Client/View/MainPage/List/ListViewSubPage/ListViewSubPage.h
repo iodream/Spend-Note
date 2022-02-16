@@ -23,7 +23,6 @@ public:
 	List get_list() const;
 
 signals:
-	void GoBack(int n=1);
 	void GoToEditList(List list);
 	void DeleteList(List);
 

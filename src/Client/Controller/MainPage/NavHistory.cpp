@@ -1,5 +1,5 @@
 #include "NavHistory.h"
-
+#include <exception>
 
 void NavHistory::Update(MainSubPages page)
 {
@@ -16,6 +16,8 @@ void NavHistory::Clear()
 
 MainSubPages NavHistory::GetLastPage()
 {
+	if(m_storage.empty())
+		throw std::out_of_range("goback top lvl reached"); // don't go further up than top level
 	return m_storage.top();
 }
 

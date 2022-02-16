@@ -47,19 +47,5 @@ ICommandHandler* HandlerFactory::GetCommandHandler(
 		handler->set_facade(std::move(facade));
 		handler->set_params(std::move(params));
 	}
-//	if (uri == std::string("/product/get_by_list_id"))
-//		return new GetProductsHandler(std::move(facade));
-//	if (uri == std::string("/product/add"))
-//		return new AddProductHandler(std::move(facade));
-//	if (uri == std::string("/product/remove"))
-//		return new RemoveProductHandler(std::move(facade));
-//	if (uri == std::string("/list/get_lists"))
-//		return new GetListsHandler(std::move(facade));
-//	if (uri == std::string("/list/remove"))
-//		return new RemoveListHandler(std::move(facade));
-//	if (uri == std::string("/income/remove"))
-//		return new RemoveIncomeHandler(std::move(facade));
-//	if (uri == std::string("/income/update"))
-//		return new UpdateIncomeHandler(std::move(facade));
 	return handler;
 }

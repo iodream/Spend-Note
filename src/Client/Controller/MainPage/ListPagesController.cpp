@@ -40,7 +40,6 @@ void ListPagesController::ConnectListPage()
 		&ListsSubPage::GoToCreateList,
 		this,
 		&ListPagesController::OnGoToCreateList);
-
 	connect(
 		&m_list_page,
 		&ListsSubPage::GoToProducts,
@@ -50,12 +49,6 @@ void ListPagesController::ConnectListPage()
 
 void ListPagesController::ConnectCreatePage()
 {
-	connect(
-		&m_create_page,
-		&ListCreateSubPage::GoBack,
-		this,
-		&ListPagesController::GoBack);
-
 	connect(
 		&m_create_page,
 		&ListCreateSubPage::CreateList,
@@ -70,13 +63,6 @@ void ListPagesController::ConnectViewListPage()
 		&ProductsSubPage::GoToViewList,
 		this,
 		&ListPagesController::OnGoToViewList);
-
-	connect(
-		&m_list_view_page,
-		&ListViewSubPage::GoBack,
-		this,
-		&ListPagesController::GoBack);
-
 	connect(
 		&m_list_view_page,
 		&ListViewSubPage::DeleteList,
@@ -91,19 +77,11 @@ void ListPagesController::ConnectEditListPage()
 		&ListViewSubPage::GoToEditList,
 		this,
 		&ListPagesController::OnGoToEditList);
-
 	connect(
 		&m_list_edit_page,
 		&ListEditSubPage::UpdateList,
 		this,
 		&ListPagesController::OnUpdateList);
-
-	connect(
-		&m_list_edit_page,
-		&ListEditSubPage::GoBack,
-		this,
-		&ListPagesController::GoBack);
-
 	connect(
 		&m_list_edit_page,
 		&ListEditSubPage::UpdateListView,

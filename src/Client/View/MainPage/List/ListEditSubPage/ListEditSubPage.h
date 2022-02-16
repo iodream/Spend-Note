@@ -25,7 +25,6 @@ public:
 	List get_list() const;
 
 signals:
-	void GoBack(int n=1);
 	void UpdateListView(PageData& data);
 
 	void UpdateList(List);
