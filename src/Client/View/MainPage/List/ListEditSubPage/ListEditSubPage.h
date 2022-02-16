@@ -23,6 +23,7 @@ public:
 
 	void set_list(const List& list);
 	List get_list() const;
+	IdType get_state_id() const;
 
 signals:
 	void UpdateListView(PageData& data);

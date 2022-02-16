@@ -143,6 +143,15 @@ void ListPagesController::FillBoxOfStates()
 		GetListStatesModel model{m_hostname};
 		const auto request = model.FormRequest();
 		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		{
+			emit Message(
+				QString("Error!"),
+				QString::fromStdString(response.reason));
+			return ;
+		}
+
 		auto states = model.ParseResponse(response);
 		m_list_edit_page.FillStateBox(states);
 		m_create_page.FillStateBox(states);
@@ -167,14 +176,9 @@ void ListPagesController::OnCreateList()
 
 	List new_list;
 	new_list.name = m_create_page.GetListName();
-	new_list.state.id = m_create_page.GetListState();
+	new_list.state.id = 1 + m_create_page.GetListState();
 	new_list.id = 0;
 	new_list.owner_id = m_user_id;
-
-	ListState state;
-	state.id = 1;
-	state.name = QString("");
-	new_list.state = state;
 
 	if(!model.CheckName(new_list.name))
 	{

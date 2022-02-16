@@ -31,6 +31,11 @@ List ListEditSubPage::get_list() const
 	return m_list;
 }
 
+IdType ListEditSubPage::get_state_id() const
+{
+	return m_list.state.id;
+}
+
 void ListEditSubPage::Update(const List& list)
 {
 	set_list(list);
