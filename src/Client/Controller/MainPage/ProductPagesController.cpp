@@ -4,6 +4,7 @@
 #include "Models/Product/UpdateProductModel.h"
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
+#include "Models/Product/GetProductCategoriesModel.h"
 
 #include "Net/Constants.h"
 
@@ -145,10 +146,6 @@ void ProductPagesController::OnCreateProduct()
 {
 	AddProductModel model{m_hostname};
 
-	ProductCategory category;
-	category.id = 1;
-	category.name = "";
-
 	Product new_product;
 	new_product.id = 0;
 	new_product.name = m_create_page.GetName();
@@ -156,7 +153,8 @@ void ProductPagesController::OnCreateProduct()
 	new_product.amount = m_create_page.GetAmount();
 	new_product.priority = m_create_page.GetPriority();
 	new_product.is_bought = m_create_page.GetIsBought();
-	new_product.category = category;
+	new_product.category.id = m_create_page.GetCategoryId();
+	new_product.category.name = m_create_page.GetCategoryName();
 	new_product.buy_until_date = m_create_page.GetBuyUntil();
 	QDateTime date = QDateTime::currentDateTime();
 	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
@@ -235,7 +233,8 @@ bool ProductPagesController::UpdateProductsPage(List list)
 	}
 
 	auto products = model.ParseResponse(response);
-
+	UpadeteCategoryBox();
+	SetRangeOfSpinBoxes();
 	m_products_page.Update(products);
 	return true;
 }
@@ -245,4 +244,34 @@ bool ProductPagesController::UpdateViewPage(Product product)
 	m_view_page.set_product(product);
 	m_view_page.Update();
 	return true;
+}
+
+bool ProductPagesController::already_added = false;
+
+void ProductPagesController::UpadeteCategoryBox()
+{
+	if(!already_added)
+	{
+		GetProductCategoriesModel model{m_hostname};
+		auto request = model.FormRequest();
+		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		{
+			emit Message(
+				QString("Error occured"),
+				QString::fromStdString(response.reason));
+			return ;
+		}
+
+		m_edit_page.FillCategoryBox(model.ParseResponse(response));
+		m_create_page.FillCategoryBox(model.ParseResponse(response));
+		already_added = true;
+	}
+}
+
+void ProductPagesController::SetRangeOfSpinBoxes()
+{
+	m_edit_page.SetRangeOfSpinBox();
+	m_create_page.SetRangeOfSpinBox();
 }
