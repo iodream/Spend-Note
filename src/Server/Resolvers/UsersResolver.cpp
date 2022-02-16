@@ -5,6 +5,7 @@
 #include "../Handlers/Income/GetIncomesHandler.h"
 #include "../Handlers/Income/AddIncomeHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
+#include "../Handlers/Statistics/GetBalanceHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -14,6 +15,7 @@ namespace {
 
 const std::string LISTS   = "/lists";
 const std::string INCOMES = "/incomes";
+const std::string BALANCE = "/balance";
 
 }
 
@@ -49,6 +51,11 @@ ICommandHandler* UsersResolver::Resolve(
 			return new GetIncomesHandler();
 		else if (method == Net::HTTP_METHOD_POST)
 			return new AddIncomeHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == BALANCE) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetBalanceHandler();
 		return new MethodNotAllowedHandler();
 	}
 
