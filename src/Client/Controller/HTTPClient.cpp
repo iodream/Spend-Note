@@ -87,27 +87,29 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     std::string path(uri.getPathAndQuery());
     Poco::Net::HTTPRequest request(net_request.method, path, Poco::Net::HTTPMessage::HTTP_1_1);
 
-	while(true){
+	bool Retry = false;
+	do
+	{
 		try{
 			SendRequest(request, session, net_request);
-			break;
 		}
 		catch(const Poco::Exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
 			if(Controller::AskUser(QString("Retry?"),
-				QString("No connection to server. Retry?")))
+								   QString("No connection to server. Retry?")))
 			{
+				Retry = true;
 				continue;
 			}
-			throw;
+			throw;	// rethrow here because we are done sending the request
 		}
 		catch(const std::exception& exc)
 		{
 			qCritical() << "Can't send request: " << exc.what();
-			throw;
+			throw;	// same rethrow
 		}
-	}
+	} while(Retry);
 
 	Poco::Net::HTTPResponse response;
 	std::istream& received_stream = session.receiveResponse(response);
