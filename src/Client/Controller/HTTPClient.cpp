@@ -96,7 +96,9 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 			qCritical() << "Can't send request: " << exc.what();
 			if(QMessageBox::Yes == QMessageBox::question(nullptr, QString("Retry?"),
 				QString("No connection to server. Retry?")))
+			{
 				continue;
+			}
 			throw;
 		}
 		catch(const std::exception& exc)
