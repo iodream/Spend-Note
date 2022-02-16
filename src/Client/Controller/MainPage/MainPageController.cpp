@@ -120,7 +120,7 @@ void MainPageController::OnGoBack(int n)
 		m_history.ForgetLastPage();
 		--n;
 	}
-	MainSubPages page ;
+	MainSubPages page;
 	try{
 		page = m_history.GetLastPage();
 	}
