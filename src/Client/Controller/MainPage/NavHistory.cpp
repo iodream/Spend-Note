@@ -16,7 +16,7 @@ void NavHistory::Clear()
 
 MainSubPages NavHistory::GetLastPage()
 {
-	if(m_storage.size() == 0)
+	if(m_storage.empty())
 		return MainSubPages::LISTS; // don't go further up than top level
 	return m_storage.top();
 }
