@@ -96,3 +96,9 @@ void MainPage::OnLogoutClicked()
 {
 	emit Logout();
 }
+
+void MainPage::ShowBalacne(const Balance& money)
+{
+ m_ui->CurrentBalance->setText(QString::number(money.balance));
+ m_ui->ProjectedBalance->setText(QString::number(money.planned_balance));
+}

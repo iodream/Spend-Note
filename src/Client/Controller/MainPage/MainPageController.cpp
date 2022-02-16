@@ -2,6 +2,8 @@
 
 #include "Net/Constants.h"
 
+#include "Models/Statistics/GetBalanceModel.h"
+
 MainPageController::MainPageController(
 	HTTPClient& http_client,
 	std::string& hostname,
@@ -139,6 +141,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
+	m_page.ShowBalacne(UpdateUserBalance(m_user_id));
+
 	switch(page)
 	{
 	case MainSubPages::LISTS:
@@ -162,7 +166,6 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::SETTINGS:
 		break;
 	}
-
 	return update_succeeded;
 }
 
@@ -174,4 +177,13 @@ void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 {
 	ChangeSubPage(page, data);
+}
+
+Balance MainPageController::UpdateUserBalance(const IdType &id)
+{
+	//GetBalanceModel model{m_hostname};
+	//auto request = model.FormRequest(id);
+	//auto response = m_http_client.Request(request);
+
+	//return model.ParseResponse(response);
 }
