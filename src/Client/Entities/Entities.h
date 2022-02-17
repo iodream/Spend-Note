@@ -14,6 +14,8 @@
 #include "Net/Entities/Product/ProductId.h"
 #include "Net/Entities/Product/ProductCategoryBase.h"
 
+#include "Net/Entities/Statistics/Balance.h"
+
 using String = QString;
 
 using Income = IncomeBase<IncomeCategoryBase, String>;

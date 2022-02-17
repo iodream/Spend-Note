@@ -48,3 +48,11 @@ Income ToNetIncome(const db::Income &db_income, const db::IncomeCategory& catego
 
 	return income;
 }
+
+IncomeCategory ToNetIncomeCategory(const db::IncomeCategory& db_income_category)
+{
+	IncomeCategory income_category;
+	income_category.id = db_income_category.id;
+	income_category.name = db_income_category.name;
+	return income_category;
+}
