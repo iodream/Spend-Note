@@ -183,15 +183,24 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 {
 	GetBalanceModel model{m_hostname};
 	auto request = model.FormRequest(id);
-	auto response = m_http_client.Request(request);
 
-	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	try
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		{
+			emit Message(
+				QString("Error occured"),
+				QString::fromStdString(response.reason));
+			return std::nullopt;
+		}
+
+		return model.ParseResponse(response);
+	}
+	catch(const Poco::Exception& ex)
+	{
 		return std::nullopt;
 	}
 
-	return model.ParseResponse(response);
 }
