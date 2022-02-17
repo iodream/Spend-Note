@@ -36,12 +36,12 @@ class HTTPServer: public Poco::Util::ServerApplication
 			return Application::EXIT_CONFIG;
 		}
 
-		Logger::Init(json_config.getString("server_logger_name"), json_config.getString("server_scoped_logger_name"));
-		ScopedLogger::Init(json_config.getString("server_scoped_logger_name"));
+		Logger::Init(json_config.getString(SERVER_LOGGER_NAME), json_config.getString(SERVER_SCOPED_LOGGER_NAME));
+		ScopedLogger::Init(json_config.getString(SERVER_SCOPED_LOGGER_NAME));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = json_config.getUInt("port");
+		Poco::UInt16 port = json_config.getUInt(PORT);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
