@@ -122,7 +122,16 @@ void MainPageController::OnGoBack(int n)
 		m_history.ForgetLastPage();
 		--n;
 	}
-	auto page = m_history.GetLastPage();
+	MainSubPages page;
+	try{
+		page = m_history.GetLastPage();
+	}
+	catch(const std::out_of_range& exc)
+	{
+		qDebug() << exc.what();
+		page = MainSubPages::LISTS;
+	}
+
 	ChangeSubPage(page);
 }
 

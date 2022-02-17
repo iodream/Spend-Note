@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Server_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/GetIncomesHandler.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/GetIncomeCategoriesHandler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/GetIncomeCategoriesHandler.h
         ${CMAKE_CURRENT_SOURCE_DIR}/AddIncomeHandler.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/AddIncomeHandler.h
         ${CMAKE_CURRENT_SOURCE_DIR}/RemoveIncomeHandler.cpp
@@ -12,4 +14,3 @@ list(APPEND Spend-Note-Server_SOURCES
 )
 
 set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
-

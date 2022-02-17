@@ -26,7 +26,6 @@ public:
 
 	void Clear();
 signals:
-	void GoBack(int n=1);
 	void CreateProduct();
 
 private:

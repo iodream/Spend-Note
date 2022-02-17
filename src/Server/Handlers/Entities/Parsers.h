@@ -24,6 +24,8 @@ using IncomeJSONParser =
 	IncomeJSONParserBase<IncomeCategoryJSONParserBase, Income>;
 using IncomesJSONParser =
 	ArrayJSONParserBase<IncomeJSONParser, Income>;
+using IncomeCategoriesJSONParser =
+	ArrayJSONParserBase<IncomeCategoryJSONParser, IncomeCategory>;
 
 using ListStateJSONParser =
 	ListStateJSONParserBase<ListState>;
@@ -40,4 +42,5 @@ using ProductJSONParser =
 	ProductJSONParserBase<ProductCategoryJSONParserBase, Product>;
 using ProductsJSONParser =
 	ArrayJSONParserBase<ProductJSONParser, Product>;
-
+using ProductCategoriesJSONParser =
+	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;

@@ -20,6 +20,11 @@ MainPage::MainPage(QWidget *parent)
 		SIGNAL(clicked()),
 		this,
 		SLOT(OnLogoutClicked()));
+	connect(
+		m_ui->GoBackButton,
+		SIGNAL(clicked()),
+		this,
+		SIGNAL(GoBack()));
 
 	InitListsSubPage();
 	InitListCreateSubPage();

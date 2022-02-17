@@ -24,6 +24,8 @@ using IncomeJSONFormatter =
 	IncomeJSONFormatterBase<IncomeCategoryJSONFormatterBase, Income>;
 using IncomesJSONFormatter =
 	ArrayJSONFormatterBase<IncomeJSONFormatter, Income>;
+using IncomeCategoriesJSONFormatter =
+	ArrayJSONFormatterBase<IncomeCategoryJSONFormatter, IncomeCategory>;
 
 using ListStateJSONFormatter =
 	ListStateJSONFormatterBase<ListState>;
@@ -40,3 +42,5 @@ using ProductJSONFormatter =
 	ProductJSONFormatterBase<ProductCategoryJSONFormatterBase, Product>;
 using ProductsJSONFormatter =
 	ArrayJSONFormatterBase<ProductJSONFormatter, Product>;
+using ProductCategoriesJSONFormatter =
+	ArrayJSONFormatterBase<ProductCategoryJSONFormatter, ProductCategory>;
