@@ -174,4 +174,9 @@ bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
 	return m_incomes.CanUserEditIncome(user_id, income_id);
 }
 
+std::vector<Product> DbFacade::GetDailyList(IdType user_id)
+{
+	return m_products.GetDailyList(user_id);
+}
+
 }

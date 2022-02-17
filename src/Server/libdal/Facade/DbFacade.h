@@ -59,6 +59,8 @@ public:
 	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
 	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
 
+	std::vector<Product> GetDailyList(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
