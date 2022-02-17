@@ -56,48 +56,66 @@
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="Name">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="Amount">
+      <widget class="QLabel" name="AmountLabel">
        <property name="text">
         <string>Amount</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLabel" name="AmountLabel">
+      <widget class="QLabel" name="Amount">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="Category">
+      <widget class="QLabel" name="CategoryLabel">
        <property name="text">
         <string>Category</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLabel" name="CategoryLabel">
+      <widget class="QLabel" name="Category">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="Expires">
+      <widget class="QLabel" name="ExpiresLabel">
        <property name="text">
         <string>Expires</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLabel" name="ExpiresLabel">
+      <widget class="QLabel" name="Expires">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
        <property name="text">
         <string/>
        </property>
