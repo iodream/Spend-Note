@@ -14,11 +14,6 @@
 HandlerFactory::HandlerFactory(const Poco::Util::JSONConfiguration& config)
 	: m_db_connection_string(m_db_connection_helper.FormConnectionString(config)) {}
 
-Poco::Util::JSONConfiguration HandlerFactory::GetConfig()
-{
-	return Poco::Util::JSONConfiguration("Config.json");
-}
-
 Poco::Net::HTTPRequestHandler* HandlerFactory::createRequestHandler(const Poco::Net::HTTPServerRequest& http_req)
 {
 	SCOPED_LOGGER;

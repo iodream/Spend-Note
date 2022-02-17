@@ -26,22 +26,11 @@ class HTTPServer: public Poco::Util::ServerApplication
 		ServerApplication::initialize(self);
 	}
 
-	bool isConfigOK(const Poco::Util::JSONConfiguration& config)
-	{
-		if(!config.has("user") || !config.has("host")
-			|| !config.has("password") || !config.has("dbname")
-			|| !config.has("port") || !config.has("server_logger_name")
-			|| !config.has("server_scoped_logger_name")
-			|| !config.has("config_directory")) return false;
-
-		return true;
-	}
-
 	int main(const std::vector<std::string>&)
 	{
-		auto json_config = HandlerFactory::GetConfig();
+		auto json_config = ConfigManager::GetConfig();
 
-		if(!isConfigOK(json_config))
+		if(!ConfigManager::isConfigFull(json_config))
 		{
 			qCritical() << "Config invalid!";
 			return Application::EXIT_CONFIG;

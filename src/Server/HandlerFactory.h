@@ -22,8 +22,6 @@ public:
 
 	std::string_view GetPathSegment(std::string& path, std::string::size_type pos);
 
-	static Poco::Util::JSONConfiguration GetConfig();
-
 private:
 	ICommandHandler* GetCommandHandler(const Poco::Net::HTTPServerRequest& http_req);
 
