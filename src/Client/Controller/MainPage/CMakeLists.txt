@@ -1,12 +1,12 @@
 list(APPEND Spend-Note-Client_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/MainPageController.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/MainPageController.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/NavHistory.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/NavHistory.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.h
+	${CMAKE_CURRENT_SOURCE_DIR}/MainPageController.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/MainPageController.h
+	${CMAKE_CURRENT_SOURCE_DIR}/NavHistory.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/NavHistory.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ListPagesController.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ProductPagesController.h
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomePagesController.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomePagesController.h
 )
