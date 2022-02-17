@@ -1,3 +1,4 @@
+add_subdirectory(IncomesSubPage)
 add_subdirectory(IncomeCreateSubPage)
 add_subdirectory(IncomeEditSubPage)
 
