@@ -141,7 +141,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
-	m_page.ShowBalacne(*UpdateUserBalance(m_user_id));
+	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
 
 	switch(page)
 	{
