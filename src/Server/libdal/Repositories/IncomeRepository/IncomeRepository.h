@@ -18,6 +18,8 @@ public:
 	bool Update(const Income& income);
 	bool Remove(const IdType& income_id);
 
+	bool CanUserEditIncome(IdType user_id, IdType income_id);
+
 private:
 	pqxx::connection& m_db_connection;
 

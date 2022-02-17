@@ -13,7 +13,7 @@ ListsSubPage::ListsSubPage(QWidget *parent)
 		m_ui->AddItemButton,
 		&QPushButton::released,
 		this,
-		&ListsSubPage::AddItem);
+		&ListsSubPage::GoToCreateList);
 }
 
 void ListsSubPage::AppendList(ListItem* list)
@@ -27,7 +27,12 @@ void ListsSubPage::InsertList(ListItem* list, int idx)
 		throw Exception("Trying to insert a widget out of range");
 	}
 	m_ui->ItemsLayout->insertWidget(idx, list);
-	connect(list, &ListItem::released, [this, list](){ emit OnListClicked(list); });
+
+	connect(
+		list,
+		&ListItem::released,
+		[this, list](){ OnListClicked(list); });
+
 	list->set_number(idx + 1);
 	set_list_size(get_list_size() + 1);
 	UpdateListNumbers(idx + 1);
@@ -45,6 +50,7 @@ void ListsSubPage::UpdateListNumbers(int idx)
 
 void ListsSubPage::OnListClicked(ListItem* list)
 {
+	emit GoToProducts(list->get_list());
 }
 
 ListItem* ListsSubPage::SafeGetList(int idx)
@@ -96,9 +102,7 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 {
 	Clear();
 	for (auto it = lists.begin(); it != lists.end(); it++) {
-		ListItem* item = new ListItem(it->id);
-		item->set_name(it->name);
-		// currently ignoring other fields
+		ListItem* item = new ListItem(*it);
 		item->Update();
 		AppendList(item);
 	}

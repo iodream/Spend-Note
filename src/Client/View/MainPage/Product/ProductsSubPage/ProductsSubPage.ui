@@ -104,9 +104,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="EditList">
+       <widget class="QPushButton" name="ViewList">
         <property name="text">
-         <string>Edit</string>
+         <string>View</string>
         </property>
        </widget>
       </item>

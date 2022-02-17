@@ -42,4 +42,8 @@ public:
 
 	MOCK_METHOD(db::Money, CalculateBalanceForUser, (db::IdType), (override));
 	MOCK_METHOD(db::Money, CalculatePlannedBalanceForUser, (db::IdType), (override));
+
+	MOCK_METHOD(bool, CanUserEditList, (db::IdType, db::IdType), (override));
+	MOCK_METHOD(bool, CanUserEditProduct, (db::IdType, db::IdType), (override));
+	MOCK_METHOD(bool, CanUserEditIncome, (db::IdType, db::IdType), (override));
 };

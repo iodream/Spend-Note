@@ -5,22 +5,20 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
+
+#include "../Entities/Entities.h"
+#include "../Entities/Parsers.h"
+#include "../Entities/Formatters.h"
+
 #include "../libdal/DTOs/Income.h"
 
 class UpdateIncomeHandler : public AuthorizedHandler
 {
-	class JSONParser
-	{
-	public:
-		db::Income Parse(const QJsonDocument& payload);
-	};
-
 public:
 	UpdateIncomeHandler();
 	virtual ~UpdateIncomeHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
-
 private:
-	JSONParser m_parser{};
+	IncomeJSONParser m_parser{};
 };

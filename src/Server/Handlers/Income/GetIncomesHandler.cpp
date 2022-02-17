@@ -1,15 +1,13 @@
+#include <QJsonArray>
 
 #include "GetIncomesHandler.h"
-
-#include <QJsonArray>
-#include <QJsonObject>
-
-#include "../libdal/Exceptions/SQLFailure.h"
-
+#include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
 #include "../Common.h"
 #include "Logger/ScopedLogger.h"
+#include "Utils.h"
+#include "../libdal/Exceptions/NonexistentResource.h"
 
 GetIncomesHandler::GetIncomesHandler()
 {
@@ -19,85 +17,28 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
-	try
-	{
-		auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
-		JSONFormatter::DTO response_dto {Map(m_facade->GetAllIncomes(user_id))};
-		return FormJSONResponse(m_formatter.Format(response_dto));
+
+	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+	std::vector<db::Income> db_incomes;
+	try {
+		db_incomes = m_facade->GetAllIncomes(user_id);
 	}
-	catch (const db::SQLFailure& e)
-	{
+	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(
-			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-			"Failed to retrieve incomes from database");
+			NetError::Status::HTTP_NOT_FOUND,
+			"User with id = " + std::to_string(user_id) + " not found");
 	}
-}
 
-GetIncomesHandler::JSONFormatter::Incomes GetIncomesHandler::Map(const std::vector<db::Income>& incomes)
-{
-	SCOPED_LOGGER;
-	JSONFormatter::Incomes incomes_out;
-	incomes_out.reserve(incomes.size());
-	for (const auto& income : incomes)
-	{
-		incomes_out.push_back(MapIncome(income));
+	std::vector<Income> incomes;
+	for (const db::Income& db_income : db_incomes) {
+		auto category = m_facade->GetIncomeCategoryById(db_income.category_id);
+		if (!category.has_value())
+		{
+			throw InternalError(std::string("No income category with id:") + std::to_string(db_income.category_id));
+		}
+		auto income = ToNetIncome(db_income, category.value());
+		incomes.push_back(income);
 	}
-	return incomes_out;
-}
 
-GetIncomesHandler::JSONFormatter::Income GetIncomesHandler::MapIncome(const db::Income& income)
-{
-	SCOPED_LOGGER;
-	JSONFormatter::Income income_out;
-
-	income_out.income_id = income.id;
-	income_out.user_id = income.user_id;
-	income_out.name = income.name;
-	income_out.amount = income.amount;
-	auto category_name = m_facade->GetIncomeCategoryById(income.category_id);
-	if (category_name)
-	{
-		income_out.category_name = category_name.value().name;
-	}
-	else
-	{
-		throw BadRequestError{std::string{"Referenced nonexistent category with id "} + std::to_string(income.category_id)};
-	}
-	income_out.add_time = income.add_time;
-	income_out.expiration_time = income.expiration_time.value_or("");
-
-	return income_out;
-}
-
-QJsonObject GetIncomesHandler::JSONFormatter::Format(const Income& income)
-{
-	SCOPED_LOGGER;
-	QJsonObject income_json;
-	income_json["id"] = std::to_string(income.income_id).c_str();
-	income_json["user_id"] = std::to_string(income.user_id).c_str();
-	income_json["name"] = income.name.c_str();
-	income_json["amount"] = income.amount;
-	income_json["category_name"] = income.category_name.c_str();
-	income_json["add_time"] = income.add_time.c_str();
-	income_json["expiration_time"] = income.expiration_time.c_str();
-	return income_json;
-}
-
-QJsonArray GetIncomesHandler::JSONFormatter::Format(const Incomes& incomes)
-{
-	SCOPED_LOGGER;
-	QJsonArray incomes_json;
-	for (const Income& income : incomes)
-	{
-		incomes_json.append(Format(income));
-	}
-	return incomes_json;
-}
-
-QJsonDocument GetIncomesHandler::JSONFormatter::Format(const DTO& dto)
-{
-	SCOPED_LOGGER;
-	QJsonObject json;
-	json["incomes"] = Format(dto.incomes);
-	return QJsonDocument{json};
+	return FormJSONResponse(m_formatter.Format(incomes));
 }

@@ -35,7 +35,8 @@ public:
 	int get_list_size();
 
 signals:
-	void AddItem();
+	void GoToCreateList();
+	void GoToProducts(const List& list);
 
 private slots:
 	void OnListClicked(ListItem* list);

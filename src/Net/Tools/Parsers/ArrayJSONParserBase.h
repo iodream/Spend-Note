@@ -16,7 +16,7 @@ public:
 
 		for (const QJsonValue& item : array)
 		{
-			items.push_back(parser.Parse(item));
+			items.push_back(parser.Parse(item.toObject()));
 		}
 
 		return items;

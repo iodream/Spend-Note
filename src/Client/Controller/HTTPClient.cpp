@@ -8,6 +8,8 @@
 
 #include "Exception.h"
 #include "HTTPClient.h"
+#include <QMessageBox>
+
 void HTTPClient::set_token(const std::string& str_token)
 {
     m_token = str_token;
@@ -31,25 +33,25 @@ void HTTPClient::SendRequest(
 {
     AddCredentials(request);
     request.setContentType(net_request.content_type);
-    if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
-    {
-		QByteArray byte_array = net_request.json_payload.toJson();
-        request.setContentLength(byte_array.size());
-        std::ostream& out_stream = session.sendRequest(request);
-		out_stream << net_request.json_payload.toJson().constData();
-    }
-    else if (net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-    {
-		session.sendRequest(request);
-    }
-    else if (net_request.content_type == Net::CONTENT_TYPE_EMPTY)
-    {
-		session.sendRequest(request);
-    }
-    else
-    {
-        throw Exception("Unsupported content type");
-    }
+
+		if (net_request.content_type == Net::CONTENT_TYPE_APPLICATION_JSON)
+		{
+			QByteArray byte_array = net_request.json_payload.toJson();
+			request.setContentLength(byte_array.size());
+
+			std::ostream& out_stream = session.sendRequest(request);
+			out_stream << net_request.json_payload.toJson().constData();
+		}
+		else if (
+			net_request.content_type == Net::CONTENT_TYPE_PLAIN_TEXT ||
+			net_request.content_type == Net::CONTENT_TYPE_EMPTY)
+		{
+			session.sendRequest(request);
+		}
+		else
+		{
+			throw Exception("Unsupported content type");
+		}
 }
 
 Net::Response HTTPClient::FormResponse(
@@ -68,13 +70,9 @@ Net::Response HTTPClient::FormResponse(
         QJsonDocument json_doc = QJsonDocument::fromJson(br);
 		net_response.json_payload = json_doc;
     }
-    else if (net_response.content_type == Net::CONTENT_TYPE_PLAIN_TEXT)
-    {
-    }
-    else if (net_response.content_type == Net::CONTENT_TYPE_EMPTY)
-    {
-    }
-    else
+	else if (
+		net_response.content_type != Net::CONTENT_TYPE_PLAIN_TEXT &&
+		net_response.content_type != Net::CONTENT_TYPE_EMPTY)
     {
         throw Exception("Unsupported content type");
     }
@@ -87,7 +85,18 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
     Poco::Net::HTTPClientSession session(uri.getHost(), uri.getPort());
     std::string path(uri.getPathAndQuery());
     Poco::Net::HTTPRequest request(net_request.method, path, Poco::Net::HTTPMessage::HTTP_1_1);
-    SendRequest(request, session, net_request);
+	try{
+		SendRequest(request, session, net_request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		QMessageBox::warning(nullptr,
+					QString("Error!"),
+					QString("Connection error to server")
+					);
+		qCritical() << "Can't send request: " << exc.what();
+		throw exc;
+	}
     Poco::Net::HTTPResponse response;
 	std::istream& received_stream = session.receiveResponse(response);
     return FormResponse(response, received_stream);

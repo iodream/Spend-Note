@@ -1,4 +1,4 @@
-list(APPEND Spend-Note-Server_SOURCES
+list(APPEND Spend-Note-Net_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ListJSONParserBase.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ListIdJSONParser.h

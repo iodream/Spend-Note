@@ -7,7 +7,7 @@ template<class State>
 class ListStateJSONParserBase
 {
 public:
-	State Parser(const QJsonObject& obj)
+	State Parse(const QJsonObject& obj)
 	{
 		State state;
 

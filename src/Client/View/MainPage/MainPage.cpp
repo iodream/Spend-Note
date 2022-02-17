@@ -22,29 +22,54 @@ MainPage::MainPage(QWidget *parent)
 		SLOT(OnLogoutClicked()));
 
 	InitListsSubPage();
-	InitCreateListSubPage();
+	InitListCreateSubPage();
+	InitListEditSubPage();
+	InitListViewSubPage();
+
+	InitProductsSubPage();
+	InitProductCreateSubPage();
+	InitProductEditSubPage();
+	InitProductViewSubPage();
 }
 
 void MainPage::InitListsSubPage()
 {
 	m_ui->Display->addWidget(&m_lists_spage);
-
-	connect(
-		&m_lists_spage,
-		&ListsSubPage::AddItem,
-		this,
-		&MainPage::OnAddList);
 }
 
-void MainPage::InitCreateListSubPage()
+void MainPage::InitListCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
+}
 
-	connect(
-		&m_list_create_spage,
-		&ListCreateSubPage::GoBack,
-		this,
-		&MainPage::GoBack);
+void MainPage::InitListEditSubPage()
+{
+	m_ui->Display->addWidget(&m_list_edit_spage);
+}
+
+void MainPage::InitListViewSubPage()
+{
+	m_ui->Display->addWidget(&m_list_view_spage);
+}
+
+void MainPage::InitProductsSubPage()
+{
+	m_ui->Display->addWidget(&m_products_spage);
+}
+
+void MainPage::InitProductCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_product_create_spage);
+}
+
+void MainPage::InitProductEditSubPage()
+{
+	m_ui->Display->addWidget(&m_product_edit_spage);
+}
+
+void MainPage::InitProductViewSubPage()
+{
+	m_ui->Display->addWidget(&m_product_view_spage);
 }
 
 MainPage::~MainPage()
@@ -70,9 +95,4 @@ void MainPage::OnGoToListsClicked()
 void MainPage::OnLogoutClicked()
 {
 	emit Logout();
-}
-
-void MainPage::OnAddList()
-{
-	emit ChangeSubPage(MainSubPages::CREATE_LIST);
 }
