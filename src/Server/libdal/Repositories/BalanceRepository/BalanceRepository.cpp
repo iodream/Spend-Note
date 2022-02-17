@@ -27,7 +27,7 @@ Money BalanceRepository::CalculateBalance(IdType user_id)
 
 		w.commit();
 
-		return total_income_row.front().as<Money>() + total_outcome_row.front().as<Money>();
+		return total_income_row.front().as<Money>() - total_outcome_row.front().as<Money>();
 	}
 	catch(const pqxx::failure& e)
 	{
@@ -53,7 +53,7 @@ Money BalanceRepository::CalculatePlannedBalance(IdType user_id)
 
 		w.commit();
 
-		return total_income_row.front().as<Money>() + total_outcome_row.front().as<Money>();
+		return total_income_row.front().as<Money>() - total_outcome_row.front().as<Money>();
 	}
 	catch(const pqxx::failure& e)
 	{

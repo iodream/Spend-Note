@@ -36,6 +36,7 @@ public:
 
 	void SetCurrentSubPage(MainSubPages page);
 	void SetCurrentSubPage(int idx);
+	void ShowBalance(const Balance& money);
 
 private:
 	void InitListsSubPage();

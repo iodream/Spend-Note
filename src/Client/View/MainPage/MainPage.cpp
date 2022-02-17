@@ -26,6 +26,11 @@ MainPage::MainPage(QWidget *parent)
 		SIGNAL(clicked()),
 		this,
 		SLOT(OnLogoutClicked()));
+	connect(
+		m_ui->GoBackButton,
+		SIGNAL(clicked()),
+		this,
+		SIGNAL(GoBack()));
 
 	InitListsSubPage();
 	InitListCreateSubPage();
@@ -113,4 +118,10 @@ void MainPage::OnGoToIncomesClicked()
 void MainPage::OnLogoutClicked()
 {
 	emit Logout();
+}
+
+void MainPage::ShowBalance(const Balance& money)
+{
+	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
+	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }

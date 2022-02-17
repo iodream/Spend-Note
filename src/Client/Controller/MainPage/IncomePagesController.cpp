@@ -61,7 +61,7 @@ bool IncomePagesController::UpdateIncomesPage()
 
 void IncomePagesController::OnGoToCreateIncome()
 {
-	emit ChangeSubPage(MainSubPages::CREATE_INCOME);
+	//emit ChangeSubPage(MainSubPages::CREATE_INCOME);
 }
 
 void IncomePagesController::OnGoToViewIncome(const Income& income)
