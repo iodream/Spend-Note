@@ -142,20 +142,27 @@ void ListPagesController::FillBoxOfStates()
 	{
 		GetListStatesModel model{m_hostname};
 		const auto request = model.FormRequest();
-		auto response = m_http_client.Request(request);
-
-		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		try
 		{
-			emit Message(
-				QString("Error!"),
-				QString::fromStdString(response.reason));
-			return ;
-		}
+			auto response = m_http_client.Request(request);
 
-		auto states = model.ParseResponse(response);
-		m_list_edit_page.FillStateBox(states);
-		m_create_page.FillStateBox(states);
-		already_added = true;
+			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+			{
+				emit Message(
+					QString("Error!"),
+					QString::fromStdString(response.reason));
+				return ;
+			}
+
+			auto states = model.ParseResponse(response);
+			m_list_edit_page.FillStateBox(states);
+			m_create_page.FillStateBox(states);
+			already_added = true;
+		}
+		catch(const Poco::Exception& ex)
+		{
+			return;
+		}
 	}
 }
 
@@ -176,7 +183,7 @@ void ListPagesController::OnCreateList()
 
 	List new_list;
 	new_list.name = m_create_page.GetListName();
-	new_list.state.id = 1 + m_create_page.GetListState();
+	new_list.state.id = 11 + m_create_page.GetListState();
 	new_list.id = 0;
 	new_list.owner_id = m_user_id;
 
@@ -268,9 +275,11 @@ void ListPagesController::OnDeleteList(const List& list)
 	emit GoBack(2); // go back 2 pages to avoid sending another request to the server
 }
 
-void ListPagesController::OnUpdateList(const List& list)
+void ListPagesController::OnUpdateList()
 {
 	UpdateListModel model{m_hostname};
+
+	List list = m_list_edit_page.get_list();
 
 	if(!model.CheckName(list.name))
 	{

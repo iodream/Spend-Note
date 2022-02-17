@@ -61,7 +61,7 @@ signals:
 
 public slots:
 	void OnGoToProducts(const List& list);
-	void OnUpdateList(const List& list);
+	void OnUpdateList();
 	void OnDeleteList(const List& list);
 	void OnGoToViewList();
 	void OnGoToEditList();
