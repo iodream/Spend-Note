@@ -5,6 +5,8 @@
 #include "Controller/HTTPClient.h"
 
 #include "View/MainPage/Income/IncomesSubPage/IncomeListSubPage.h"
+#include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -17,7 +19,8 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		IncomeListSubPage& incomes_page);
+		IncomeListSubPage& incomes_page,
+		IncomeCreateSubPage& income_create_page);
 
 	virtual ~IncomePagesController() override {}
 
@@ -30,6 +33,8 @@ private:
 	IdType& m_user_id;
 
 	IncomeListSubPage& m_incomes_page;
+	IncomeCreateSubPage& m_income_create_page;
+
 
 signals:
 	void Message(const QString& window_name, const QString& message);
@@ -41,4 +46,6 @@ signals:
 public slots:
 	void OnGoToCreateIncome();
 	void OnGoToViewIncome(const Income& income);
+	void OnCreateIncome(Income& income);
+
 };

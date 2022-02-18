@@ -43,6 +43,8 @@ MainPage::MainPage(QWidget *parent)
 	InitProductViewSubPage();
 
 	InitIncomesSubPage();
+	InitIncomesCreateSubPage();
+
 }
 
 void MainPage::InitListsSubPage()
@@ -88,6 +90,11 @@ void MainPage::InitProductViewSubPage()
 void MainPage::InitIncomesSubPage()
 {
 	m_ui->Display->addWidget(&m_incomes_spage);
+}
+
+void MainPage::InitIncomesCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_incomes_create_spage);
 }
 
 MainPage::~MainPage()
