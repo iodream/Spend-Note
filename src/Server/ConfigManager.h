@@ -2,7 +2,7 @@
 
 #include "Poco/Util/JSONConfiguration.h"
 
-namespace{
+namespace Config{
 const std::string USER = "user";
 const std::string HOST = "host";
 const std::string PASSWORD = "password";

@@ -13,6 +13,7 @@
 
 #include "Net/Constants.h"
 #include "HandlerFactory.h"
+#include "ConfigManager.h"
 #include "SpendNoteServer_Config.h"
 #include "Logger/ScopedLogger.h"
 #include "Logger/Logger.h"
@@ -36,12 +37,12 @@ class HTTPServer: public Poco::Util::ServerApplication
 			return Application::EXIT_CONFIG;
 		}
 
-		Logger::Init(json_config.getString(SERVER_LOGGER_NAME), json_config.getString(SERVER_SCOPED_LOGGER_NAME));
-		ScopedLogger::Init(json_config.getString(SERVER_SCOPED_LOGGER_NAME));
+		Logger::Init(json_config.getString(Config::SERVER_LOGGER_NAME), json_config.getString(Config::SERVER_SCOPED_LOGGER_NAME));
+		ScopedLogger::Init(json_config.getString(Config::SERVER_SCOPED_LOGGER_NAME));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = json_config.getUInt(PORT);
+		Poco::UInt16 port = json_config.getUInt(Config::PORT);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
