@@ -14,3 +14,22 @@ IncomeEditSubPage::~IncomeEditSubPage()
 {
 	delete ui;
 }
+
+IncomeCategory IncomeEditSubPage::get_category()
+{
+	IncomeCategory category;
+
+	category.id = 1 + ui->Category->currentIndex();
+	category.name = ui->Category->currentText();
+
+	return category;
+}
+
+
+void IncomeEditSubPage::FillCategoryBox(const std::vector<IncomeCategory>& income)
+{
+	for(const auto& el : income)
+	{
+		ui->Category->addItem(el.name, el.id);
+	}
+}
