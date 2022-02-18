@@ -16,6 +16,13 @@ Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto income_id = std::get<long long>(m_params.Get(Params::INCOME_ID));
+
+	if (!m_facade->GetIncomeById(income_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"Resource not found");
+	}
+
 	auto json_payload = request.json_payload.object();
 	auto income = m_parser.Parse(json_payload);
 
@@ -33,12 +40,6 @@ Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
 
 	auto income_db = ToDBIncome(income);
 
-	if (m_facade->UpdateIncome(income_db)) {
-		return FormEmptyResponse();
-	}
-	else {
-		return FormErrorResponse(
-			NetError::Status::HTTP_NOT_FOUND,
-			"Resource not found");
-	}
+	m_facade->UpdateIncome(income_db);
+	return FormEmptyResponse();
 }

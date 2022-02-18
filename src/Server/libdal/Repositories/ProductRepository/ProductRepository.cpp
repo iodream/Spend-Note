@@ -204,11 +204,11 @@ bool ProductRepository::CanUserEditProduct(IdType user_id, IdType product_id)
 		pqxx::nontransaction w{m_database_connection};
 
 		auto result = w.exec(
-			"SELECT " + db::product::ID +
+			"SELECT " + db::product::TABLE_NAME + "." + db::product::ID +
 			" FROM " + db::product::TABLE_NAME + " JOIN " + db::list::TABLE_NAME +
-			" ON " + db::product::LIST_ID + " = " + db::list::ID +
+			" ON " + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
 			" WHERE " +
-				db::product::ID +" = "  + w.quote(product_id) + " AND " +
+				db::product::TABLE_NAME + "." + db::product::ID +" = "  + w.quote(product_id) + " AND " +
 				db::list::USER_ID +" = "  + w.quote(user_id));
 
 		if (result.empty())

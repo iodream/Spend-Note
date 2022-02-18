@@ -16,6 +16,13 @@ Net::Response UpdateProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
+
+	if (!m_facade->GetProductById(product_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"Resource not found");
+	}
+
 	auto json_payload = request.json_payload.object();
 	auto product = m_parser.Parse(json_payload);
 
@@ -33,12 +40,6 @@ Net::Response UpdateProductHandler::AuthHandle(const Net::Request& request)
 
 	auto product_db = ToDBProduct(product);
 
-	if (m_facade->UpdateProduct(product_db)) {
-		return FormEmptyResponse();
-	}
-	else {
-		return FormErrorResponse(
-			NetError::Status::HTTP_NOT_FOUND,
-			"Resource not found");
-	}
+	m_facade->UpdateProduct(product_db);
+	return FormEmptyResponse();
 }

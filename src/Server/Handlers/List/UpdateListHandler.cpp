@@ -16,6 +16,13 @@ Net::Response UpdateListHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
+
+	if (!m_facade->GetListById(list_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_NOT_FOUND,
+			"Resource not found");
+	}
+
 	auto json_payload = request.json_payload.object();
 	auto list = m_parser.Parse(json_payload);
 
@@ -33,12 +40,6 @@ Net::Response UpdateListHandler::AuthHandle(const Net::Request& request)
 
 	auto list_db = ToDBList(list);
 
-	if (m_facade->UpdateList(list_db)) {
-		return FormEmptyResponse();
-	}
-	else {
-		return FormErrorResponse(
-			NetError::Status::HTTP_NOT_FOUND,
-			"Resource not found");
-	}
+	m_facade->UpdateList(list_db);
+	return FormEmptyResponse();
 }
