@@ -2,6 +2,8 @@
 
 #include "Net/Constants.h"
 
+#include "Models/Statistics/GetBalanceModel.h"
+
 MainPageController::MainPageController(
 	HTTPClient& http_client,
 	std::string& hostname,
@@ -120,7 +122,16 @@ void MainPageController::OnGoBack(int n)
 		m_history.ForgetLastPage();
 		--n;
 	}
-	auto page = m_history.GetLastPage();
+	MainSubPages page;
+	try{
+		page = m_history.GetLastPage();
+	}
+	catch(const std::out_of_range& exc)
+	{
+		qDebug() << exc.what();
+		page = MainSubPages::LISTS;
+	}
+
 	ChangeSubPage(page);
 }
 
@@ -138,6 +149,8 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
+
+	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
 
 	switch(page)
 	{
@@ -162,7 +175,6 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::SETTINGS:
 		break;
 	}
-
 	return update_succeeded;
 }
 
@@ -174,4 +186,30 @@ void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 {
 	ChangeSubPage(page, data);
+}
+
+std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
+{
+	GetBalanceModel model{m_hostname};
+	auto request = model.FormRequest(id);
+
+	try
+	{
+		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		{
+			emit Message(
+				QString("Error occured"),
+				QString::fromStdString(response.reason));
+			return std::nullopt;
+		}
+
+		return model.ParseResponse(response);
+	}
+	catch(const Poco::Exception& ex)
+	{
+		return std::nullopt;
+	}
+
 }

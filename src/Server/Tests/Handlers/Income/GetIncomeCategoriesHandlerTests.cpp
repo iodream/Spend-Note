@@ -7,7 +7,7 @@
 
 #include "Server/Handlers/Entities/Entities.h"
 #include "Server/Handlers/Entities/Parsers.h"
-#include "Server/Handlers/Product/GetProductCategoriesHandler.h"
+#include "Server/Handlers/Income/GetIncomeCategoriesHandler.h"
 
 
 using ::testing::Return;
@@ -15,26 +15,26 @@ using ::testing::_;
 
 namespace  {
 
-ProductCategory category {
+IncomeCategory category {
 	1,
 	"Category 1"
 };
 
-db::ProductCategory db_category{
+db::IncomeCategory db_category{
 	1,
 	"Category 1"
 };
 
-void CheckProductCategoryEquality(const ProductCategory& category1, const ProductCategory& category2)
+void CheckIncomeCategoryEquality(const IncomeCategory& category1, const IncomeCategory& category2)
 {
 	EXPECT_EQ(category1.id, category2.id);
 	EXPECT_EQ(category1.name, category2.name);
 
 }
 
-std::unique_ptr<GetProductCategoriesHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+std::unique_ptr<GetIncomeCategoriesHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
 {
-	auto handler = std::make_unique<GetProductCategoriesHandler>();
+	auto handler = std::make_unique<GetIncomeCategoriesHandler>();
 	handler->set_facade(std::move(facade));
 
 	return std::move(handler);
@@ -42,12 +42,12 @@ std::unique_ptr<GetProductCategoriesHandler> MakeHandler(std::unique_ptr<MockDbF
 
 }
 
-TEST(GetProductCategoriesHandlerTest, EMPTY_LIST)
+TEST(GetIncomeCategoriesHandlerTest, EMPTY_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllProductCategories())
-		.WillOnce(Return(std::vector<db::ProductCategory>{}));
+	EXPECT_CALL(*facade, GetAllIncomeCategories())
+		.WillOnce(Return(std::vector<db::IncomeCategory>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -62,14 +62,14 @@ TEST(GetProductCategoriesHandlerTest, EMPTY_LIST)
 	EXPECT_EQ(categories.size(), 0);
 }
 
-TEST(GetProductCategoriesHandlerTest, ONE_PRODUCT_CATEGORY)
+TEST(GetIncomeCategoriesHandlerTest, ONE_INCOME_CATEGORY)
 {
-	ProductCategoryJSONParser m_parser;
+	IncomeCategoryJSONParser m_parser;
 
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllProductCategories())
-		.WillOnce(Return(std::vector<db::ProductCategory>{db_category}));
+	EXPECT_CALL(*facade, GetAllIncomeCategories())
+		.WillOnce(Return(std::vector<db::IncomeCategory>{db_category}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -85,5 +85,5 @@ TEST(GetProductCategoriesHandlerTest, ONE_PRODUCT_CATEGORY)
 
 	auto category = m_parser.Parse(categories[0].toObject());
 
-	CheckProductCategoryEquality(category, ::category);
+	CheckIncomeCategoryEquality(category, ::category);
 }
