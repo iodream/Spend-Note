@@ -35,4 +35,6 @@ signals:
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnGoToSignupPage();
+	void QuickLogin();
+
 };

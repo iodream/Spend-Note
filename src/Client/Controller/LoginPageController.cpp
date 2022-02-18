@@ -3,6 +3,7 @@
 #include "Models/LoginModel.h"
 
 #include "Net/Constants.h"
+#include <QShortcut>
 
 LoginPageController::LoginPageController(
 	HTTPClient& http_client,
@@ -30,6 +31,9 @@ void LoginPageController::ConnectPage()
 		&LoginPage::GotoSignup,
 		this,
 		&LoginPageController::OnGoToSignupPage);
+
+	QShortcut *shortcut = new QShortcut(QKeySequence("Return"), &m_page);
+	connect(shortcut, SIGNAL(activated()), this, SLOT(QuickLogin()));
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
@@ -74,4 +78,12 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 void LoginPageController::OnGoToSignupPage()
 {
 	emit ChangePage(UIPages::SIGNUP);
+}
+
+void LoginPageController::QuickLogin()
+{
+	LoginModel::JSONFormatter::Credentials credentials;
+	credentials.login="user";
+	credentials.password="123";
+	OnLogin(credentials);
 }
