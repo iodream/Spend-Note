@@ -99,7 +99,7 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 
 	try
 	{
-		pqxx::nontransaction w(m_database_connection);
+		pqxx::work w(m_database_connection);
 
 		pqxx::result list_ids = w.exec(
 			"SELECT " + db::list::ID +
@@ -127,6 +127,54 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 				db::product::BUY_UNTIL_DATE +
 			" FROM " + db::product::TABLE_NAME +
 			" WHERE " + db::product::LIST_ID + " = " + w.quote(list_id) + ";");
+
+		products.resize(product_rows.size());
+		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return products;
+}
+
+std::vector<Product> ProductRepository::GetDailyList(IdType user_id)
+{
+	std::vector<Product> products;
+
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		pqxx::result user_ids = w.exec(
+			"SELECT " + db::user::ID +
+			" FROM " + db::user::TABLE_NAME +
+			" WHERE " +
+				db::user::ID + " = " + w.quote(user_id) + ";");
+		if (user_ids.empty())
+		{
+			auto message = "User with id = " + std::to_string(user_id) + " not found";
+			throw NonexistentResource(message);
+		}
+
+		pqxx::result product_rows = w.exec(
+			"SELECT " +
+				db::product::TABLE_NAME + "." + db::product::ID + ", " +
+				db::product::TABLE_NAME + "." + db::product::LIST_ID + ", " +
+				db::product::TABLE_NAME + "." + db::product::CATEGORY_ID + ", " +
+				db::product::TABLE_NAME + "." + db::product::NAME + ", " +
+				db::product::TABLE_NAME + "." + db::product::PRICE + ", " +
+				db::product::TABLE_NAME + "." + db::product::AMOUNT + ", " +
+				db::product::TABLE_NAME + "." + db::product::PRIORITY + ", " +
+				db::product::TABLE_NAME + "." + db::product::IS_BOUGHT + ", " +
+				db::product::TABLE_NAME + "." + db::product::ADD_DATE + ", " +
+				db::product::TABLE_NAME + "." + db::product::PURCHASE_DATE + ", " +
+				db::product::TABLE_NAME + "." + db::product::BUY_UNTIL_DATE +
+			" FROM " + db::product::TABLE_NAME +
+			" JOIN " + db::list::TABLE_NAME +
+			" ON " + db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
+			" WHERE DATE(" + db::product::BUY_UNTIL_DATE + ") = current_date AND " + db::list::USER_ID + " = " + w.quote(user_id) + ";");
 
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
