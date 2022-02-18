@@ -15,12 +15,14 @@ Money BalanceRepository::CalculateBalance(IdType user_id)
 	{
 		pqxx::work w{m_db_connection};
 		auto total_income_row = w.exec1(
-			"SELECT SUM(" + db::income::AMOUNT + ")" +
-			" FROM " + db::income::TABLE_NAME +
-			" WHERE " + db::income::USER_ID + " = " + w.quote(user_id) + ";");
+			"SELECT COALESCE(SUM(" + db::income::AMOUNT + "), 0) " +
+			"FROM " + db::income::TABLE_NAME +
+			" WHERE " +
+				db::income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				db::income::EXPIRATION_TIME + " > LOCALTIMESTAMP" + ";");
 
 		auto total_outcome_row = w.exec1(
-			"SELECT SUM(" + db::product::AMOUNT + " * " + db::product::PRICE + ") " +
+			"SELECT COALESCE(SUM(" + db::product::AMOUNT + " * " + db::product::PRICE + "), 0) " +
 			"FROM " + db::product::TABLE_NAME + " JOIN " + db::list::TABLE_NAME +
 			" ON " + db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
 			" WHERE " + db::list::USER_ID + " = " + w.quote(user_id) + " AND " + db::product::IS_BOUGHT + ";");
@@ -41,12 +43,14 @@ Money BalanceRepository::CalculatePlannedBalance(IdType user_id)
 	{
 		pqxx::work w{m_db_connection};
 		auto total_income_row = w.exec1(
-			"SELECT SUM(" + db::income::AMOUNT + ")" +
-			" FROM " + db::income::TABLE_NAME +
-			" WHERE " + db::income::USER_ID + " = " + w.quote(user_id) + ";");
+			"SELECT COALESCE(SUM(" + db::income::AMOUNT + "), 0) " +
+			"FROM " + db::income::TABLE_NAME +
+			" WHERE " +
+				db::income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				db::income::EXPIRATION_TIME + " > LOCALTIMESTAMP" + ";");
 
 		auto total_outcome_row = w.exec1(
-			"SELECT SUM(" + db::product::AMOUNT + " * " + db::product::PRICE + ") " +
+			"SELECT COALESCE(SUM(" + db::product::AMOUNT + " * " + db::product::PRICE + "), 0) " +
 			"FROM " + db::product::TABLE_NAME + " JOIN " + db::list::TABLE_NAME +
 			" ON " + db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
 			" WHERE " + db::list::USER_ID + " = " + w.quote(user_id) + ";");
