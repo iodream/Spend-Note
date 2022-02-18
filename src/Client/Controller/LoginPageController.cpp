@@ -54,9 +54,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 		}
 		else
 		{
-			emit Message(
-				QString("Login failed!"),
-				QString::fromStdString(response.reason));
+			m_page.SetErrorBanner(response.status, response.reason);
 		}
 		return;
 	}

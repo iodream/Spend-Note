@@ -7,6 +7,8 @@ LoginPage::LoginPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
+	m_ui->ErrorWidget->setVisible(false); // making our banner invisible
+
 	connect(m_ui->loginSubmitButton, SIGNAL(clicked())
 			, this, SLOT(OnLoginSubmitButtonClicked()));
 
@@ -18,6 +20,12 @@ LoginPage::LoginPage(QWidget *parent)
 
 	connect(m_ui->passwordLineEdit, SIGNAL(textChanged(QString))
 			, this, SLOT(OnPasswordTextChanged(QString)));
+
+	connect(
+		m_ui->CloseErrorBannerToolButton,
+		&QToolButton::clicked,
+		this,
+		&LoginPage::CloseErrorBanner);
 }
 
 LoginPage::~LoginPage()
@@ -28,6 +36,18 @@ LoginPage::~LoginPage()
 void LoginPage::ChangeLoginErrorLabel(std::string reason)
 {
 	m_ui->loginErrorLabel->setText(QString::fromStdString(reason));
+}
+
+void LoginPage::SetErrorBanner(const int code, const std::string& description)
+{
+	m_ui->ErrorWidget->setVisible(true);
+	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void LoginPage::CloseErrorBanner()
+{
+	m_ui->ErrorWidget->setVisible(false);
 }
 
 void LoginPage::OnLoginSubmitButtonClicked()

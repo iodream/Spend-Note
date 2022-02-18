@@ -65,9 +65,7 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	{
 		if(response.status == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT)
 		{
-			emit Message(
-				QString("Error"),
-				QString("User already exists!"));
+			m_page.SetErrorBanner(response.status, response.reason);
 			return;
 		}
 	}

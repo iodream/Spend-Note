@@ -38,6 +38,9 @@ public:
 	void SetCurrentSubPage(int idx);
 	void ShowBalance(const Balance& money);
 
+	void SetErrorBanner(const int code, const std::string& description);
+	void CloseErrorBanner();
+
 private:
 	void InitListsSubPage();
 	void InitListCreateSubPage();
@@ -89,3 +92,4 @@ public slots:
 	void OnGoToIncomesClicked();
 	void OnLogoutClicked();
 };
+

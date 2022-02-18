@@ -16,6 +16,9 @@ public:
 	explicit SignupPage(QWidget *parent = nullptr);
 	~SignupPage();
 
+	void SetErrorBanner(const int code, const std::string& description);
+	void CloseErrorBanner();
+
 signals:
 	void Signup(const SignupModel::SignupInDTO& dto);
 	void GoToLoginPage();

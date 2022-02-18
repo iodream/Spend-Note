@@ -171,7 +171,7 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		// go to error page;
+		m_page.SetErrorBanner(1, "Error in updating page"); // go to error page
 	}
 }
 
