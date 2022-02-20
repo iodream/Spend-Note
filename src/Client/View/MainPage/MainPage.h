@@ -17,6 +17,8 @@
 
 #include "Income/IncomesSubPage/IncomeListSubPage.h"
 
+#include "DailyList/DailyListSubPage/DailyListSubPage.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -51,6 +53,8 @@ private:
 
 	void InitIncomesSubPage();
 
+	void InitDailyListSubPage();
+
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
@@ -79,6 +83,8 @@ private:
 
 	IncomeListSubPage m_incomes_spage;
 
+	DailyListSubPage m_dailylist_spage;
+
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
@@ -88,4 +94,5 @@ public slots:
 	void OnGoToListsClicked();
 	void OnGoToIncomesClicked();
 	void OnLogoutClicked();
+	void OnGoToDailyListClicked();
 };

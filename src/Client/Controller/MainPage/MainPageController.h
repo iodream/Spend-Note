@@ -50,6 +50,7 @@ private:
 	std::unique_ptr<ProductPagesController> m_product_pages_controller;
 	std::unique_ptr<IncomePagesController> m_income_pages_controller;
 
+
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangePage(UIPages page);

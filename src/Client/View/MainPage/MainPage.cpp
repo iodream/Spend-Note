@@ -22,6 +22,12 @@ MainPage::MainPage(QWidget *parent)
 		&MainPage::OnGoToIncomesClicked);
 
 	connect(
+		m_ui->GoToDailyList,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToDailyListClicked);
+
+	connect(
 		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
@@ -31,6 +37,7 @@ MainPage::MainPage(QWidget *parent)
 		SIGNAL(clicked()),
 		this,
 		SIGNAL(GoBack()));
+
 
 	InitListsSubPage();
 	InitListCreateSubPage();
@@ -43,6 +50,8 @@ MainPage::MainPage(QWidget *parent)
 	InitProductViewSubPage();
 
 	InitIncomesSubPage();
+
+	InitDailyListSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -90,6 +99,11 @@ void MainPage::InitIncomesSubPage()
 	m_ui->Display->addWidget(&m_incomes_spage);
 }
 
+void MainPage::InitDailyListSubPage()
+{
+	m_ui->Display->addWidget(&m_dailylist_spage);
+}
+
 MainPage::~MainPage()
 {
 	delete m_ui;
@@ -120,8 +134,15 @@ void MainPage::OnLogoutClicked()
 	emit Logout();
 }
 
+void MainPage::OnGoToDailyListClicked()
+{
+	emit ChangeSubPage(MainSubPages::DAILY_LIST);
+}
+
 void MainPage::ShowBalance(const Balance& money)
 {
 	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
+
+

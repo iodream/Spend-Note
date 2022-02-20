@@ -205,6 +205,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		break;
 	case MainSubPages::SETTINGS:
 		break;
+	case MainSubPages::DAILY_LIST:
+		break;
 	}
 	return update_succeeded;
 }
