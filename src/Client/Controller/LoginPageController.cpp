@@ -71,5 +71,6 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 
 void LoginPageController::OnGoToSignupPage()
 {
+	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::SIGNUP);
 }

@@ -23,12 +23,6 @@ void Controller::InitLoginPageController()
 
 	connect(
 		m_login_page_controller.get(),
-		&LoginPageController::Message,
-		this,
-		&Controller::OnMessage);
-
-	connect(
-		m_login_page_controller.get(),
 		&LoginPageController::ChangePage,
 		this,
 		&Controller::OnChangePage);
@@ -45,12 +39,6 @@ void Controller::InitSignupPageController()
 
 	connect(
 		m_signup_page_controller.get(),
-		&SignupPageController::Message,
-		this,
-		&Controller::OnMessage);
-
-	connect(
-		m_signup_page_controller.get(),
 		&SignupPageController::ChangePage,
 		this,
 		&Controller::OnChangePage);
@@ -64,12 +52,6 @@ void Controller::InitMainPageController()
 			m_hostname,
 			m_user_id,
 			m_main_window.get_main_page());
-
-	connect(
-		m_main_page_controller.get(),
-		&MainPageController::Message,
-		this,
-		&Controller::OnMessage);
 
 	connect(
 		m_main_page_controller.get(),
@@ -102,11 +84,4 @@ void Controller::SetPage(UIPages page)
 void Controller::OnChangePage(UIPages page)
 {
 	SetPage(page);
-}
-
-void Controller::OnMessage(const QString& window_name, const QString& message)
-{
-	QMessageBox::warning(&m_main_window
-		, window_name
-		, message);
 }

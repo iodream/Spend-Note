@@ -56,9 +56,9 @@ void MainPageController::InitListPagesController()
 
 	connect(
 		m_list_pages_controller.get(),
-		&ListPagesController::Message,
+		&ListPagesController::Error,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnError);
 
 	connect(
 		m_list_pages_controller.get(),
@@ -93,9 +93,9 @@ void MainPageController::InitProductPagesController()
 
 	connect(
 		m_product_pages_controller.get(),
-		&ProductPagesController::Message,
+		&ProductPagesController::Error,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnError);
 
 	connect(
 		m_product_pages_controller.get(),
@@ -121,9 +121,9 @@ void MainPageController::InitIncomePagesController()
 
 	connect(
 		m_income_pages_controller.get(),
-		&IncomePagesController::Message,
+		&IncomePagesController::Error,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnError);
 
 	connect(
 		m_income_pages_controller.get(),
@@ -171,8 +171,13 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		m_page.SetErrorBanner(1, "Error in updating page"); // go to error page
+		m_page.SetErrorBanner(1, "Error in updating page");
 	}
+}
+
+void MainPageController::OnError(const int code, const std::string& desc)
+{
+	m_page.SetErrorBanner(code, desc);
 }
 
 bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
@@ -230,9 +235,7 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 
 		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 		{
-			emit Message(
-				QString("Error occured"),
-				QString::fromStdString(response.reason));
+			m_page.SetErrorBanner(response.status, response.reason);
 			return std::nullopt;
 		}
 

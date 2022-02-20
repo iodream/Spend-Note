@@ -103,9 +103,7 @@ bool ListPagesController::UpdateListPage()
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit Error(response.status, response.reason);
 		return false;
 	}
 
@@ -157,10 +155,9 @@ void ListPagesController::OnCreateList()
 
 	if(!model.CheckName(new_list.name))
 	{
-		emit Message(
-				QString("Error!"),
-				QString("List name can't be empty")
-				);
+		emit Error(
+			static_cast<int>(ErrorCodes::EMPTY_FIELD),
+			"List name can't be empty");
 		return;
 	}
 
@@ -177,9 +174,7 @@ void ListPagesController::OnCreateList()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error!"),
-			QString::fromStdString(response.reason));
+		emit Error(response.status, response.reason);
 		return ;
 	}
 
@@ -234,9 +229,7 @@ void ListPagesController::OnDeleteList(const List& list)
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error!"),
-			QString::fromStdString(response.reason));
+		emit Error(response.status, response.reason);
 		return ;
 	}
 
@@ -249,10 +242,9 @@ void ListPagesController::OnUpdateList(const List& list)
 
 	if(!model.CheckName(list.name))
 	{
-		emit Message(
-				QString("Error!"),
-				QString("List name can't be empty")
-				);
+		emit Error(
+			static_cast<int>(ErrorCodes::EMPTY_FIELD),
+			"List name can't be empty");
 		return;
 	}
 
@@ -269,9 +261,7 @@ void ListPagesController::OnUpdateList(const List& list)
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error!"),
-			QString::fromStdString(response.reason));
+		emit Error(response.status, response.reason);
 		return ;
 	}
 

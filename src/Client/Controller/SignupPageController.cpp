@@ -37,17 +37,17 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	SignupModel model{m_hostname};
 	if (!model.CheckPassRepeat(in_dto))
 	{
-		emit Message(
-			QString("Error"),
-			QString("Passwords must match!"));
+		m_page.SetErrorBanner(
+			static_cast<int>(ErrorCodes::PASSWORDS_MISMATCH),
+			"Passwords must match!");
 		return;
 	}
 
 	if (!model.CheckData(in_dto))
 	{
-		emit Message(
-			QString("Error"),
-			QString("Username or password can't be empty!"));
+		m_page.SetErrorBanner(
+			static_cast<int>(ErrorCodes::EMPTY_FIELD),
+			"Username or password can't be empty!");
 		return;
 	}
 
@@ -75,5 +75,6 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 
 void SignupPageController::OnGoToLoginPage()
 {
+	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::LOGIN);
 }

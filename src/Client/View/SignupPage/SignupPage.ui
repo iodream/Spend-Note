@@ -55,6 +55,10 @@
    </item>
    <item row="3" column="0" colspan="3">
     <widget class="QWidget" name="ErrorWidget" native="true">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(239, 41, 41);
+color: rgb(255, 255, 255);</string>
+     </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <spacer name="verticalSpacer_3">
@@ -89,13 +93,6 @@
          <widget class="QLabel" name="ErrorCodeLabel">
           <property name="text">
            <string>*code*</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Error description:</string>
           </property>
          </widget>
         </item>

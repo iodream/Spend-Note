@@ -51,7 +51,7 @@ private:
 	ProductCreateSubPage& m_create_page;
 
 signals:
-	void Message(const QString& window_name, const QString& message);
+	void Error(const int code, const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void GoBack(int n=1);
 

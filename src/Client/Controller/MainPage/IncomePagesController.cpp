@@ -47,9 +47,7 @@ bool IncomePagesController::UpdateIncomesPage()
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit Error(response.status, response.reason);
 		return false;
 	}
 

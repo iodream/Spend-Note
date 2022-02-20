@@ -423,6 +423,10 @@ background-color: #2ca89e;</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(239, 41, 41);
+color: rgb(255, 255, 255);</string>
+       </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label_3">
@@ -442,13 +446,6 @@ background-color: #2ca89e;</string>
          <widget class="QLabel" name="ErrorCodeLabel">
           <property name="text">
            <string>*code*</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Error Description:</string>
           </property>
          </widget>
         </item>
