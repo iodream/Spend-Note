@@ -2,6 +2,8 @@
 
 #include "Net/Constants.h"
 
+#include "Models/Statistics/GetBalanceModel.h"
+
 MainPageController::MainPageController(
 	HTTPClient& http_client,
 	std::string& hostname,
@@ -15,6 +17,7 @@ MainPageController::MainPageController(
 	ConnectPage();
 	InitListPagesController();
 	InitProductPagesController();
+	InitIncomePagesController();
 }
 
 void MainPageController::ConnectPage()
@@ -107,6 +110,34 @@ void MainPageController::InitProductPagesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitIncomePagesController()
+{
+	m_income_pages_controller =
+		std::make_unique<IncomePagesController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_incomes_spage());
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::Message,
+		this,
+		&MainPageController::Message);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -148,6 +179,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
+	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
+
 	switch(page)
 	{
 	case MainSubPages::LISTS:
@@ -166,12 +199,13 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		break;
 	case MainSubPages::EDIT_PRODUCT:
 		break;
-	case MainSubPages::ICOMES:
+	case MainSubPages::INCOMES:
+		return m_income_pages_controller->UpdateIncomesPage();
+	case MainSubPages::VIEW_INCOME:
 		break;
 	case MainSubPages::SETTINGS:
 		break;
 	}
-
 	return update_succeeded;
 }
 
@@ -183,4 +217,30 @@ void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
 void MainPageController::OnChangeSubPage(MainSubPages page, PageData data)
 {
 	ChangeSubPage(page, data);
+}
+
+std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
+{
+	GetBalanceModel model{m_hostname};
+	auto request = model.FormRequest(id);
+
+	try
+	{
+		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+		{
+			emit Message(
+				QString("Error occured"),
+				QString::fromStdString(response.reason));
+			return std::nullopt;
+		}
+
+		return model.ParseResponse(response);
+	}
+	catch(const Poco::Exception& ex)
+	{
+		return std::nullopt;
+	}
+
 }

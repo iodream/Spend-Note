@@ -4,6 +4,7 @@
 
 #include "ListPagesController.h"
 #include "ProductPagesController.h"
+#include "IncomePagesController.h"
 #include "NavHistory.h"
 
 #include "View/MainPage/MainPage.h"
@@ -31,8 +32,11 @@ private:
 
 	void InitListPagesController();
 	void InitProductPagesController();
+	void InitIncomePagesController();
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
+	std::optional<Balance> UpdateUserBalance(const IdType& id);
+
 private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -44,6 +48,7 @@ private:
 private:
 	std::unique_ptr<ListPagesController> m_list_pages_controller;
 	std::unique_ptr<ProductPagesController> m_product_pages_controller;
+	std::unique_ptr<IncomePagesController> m_income_pages_controller;
 
 signals:
 	void Message(const QString& window_name, const QString& message);

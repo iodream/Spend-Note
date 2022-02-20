@@ -22,7 +22,10 @@ enum class MainSubPages
 	EDIT_PRODUCT,
 	VIEW_PRODUCT,
 
-	ICOMES,
+	INCOMES,
+	//CREATE_INCOME,
+	VIEW_INCOME,
+
 	SETTINGS,
 };
 

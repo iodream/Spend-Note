@@ -15,6 +15,7 @@ public:
 	std::optional<IdType> Add(const Product& product);
 	std::optional<Product> GetById(IdType id);
 	std::vector<Product> GetByListId(IdType list_id);
+	std::vector<Product> GetDailyList(IdType user_id);
 
 	bool Update(const Product& product);
 	bool Remove(IdType id);

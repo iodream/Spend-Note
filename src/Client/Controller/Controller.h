@@ -27,6 +27,7 @@ public:
 
 	Controller();
 	void Start(UIPages at_page=UIPages::LOGIN);
+	static bool AskUser(const QString& title, const QString& text);
 
 private:
 	void SetPage(UIPages page);
@@ -35,7 +36,6 @@ private:
 	void InitLoginPageController();
 	void InitSignupPageController();
 	void InitMainPageController();
-
 private:
 	std::string m_hostname;
 	HTTPClient m_http_client;
