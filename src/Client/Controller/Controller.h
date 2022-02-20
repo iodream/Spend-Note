@@ -4,6 +4,8 @@
 
 #include <QMessageBox>
 
+#include "Poco/Util/JSONConfiguration.h"
+
 #include "HTTPClient.h"
 
 #include "LoginPageController.h"
@@ -12,6 +14,10 @@
 
 #include "View/MainWindow.h"
 #include "View/Constants.h"
+
+namespace{
+const std::string config_filename = "Config.json";
+};
 
 class Controller : public QObject
 {
@@ -26,11 +32,12 @@ public:
 private:
 	void SetPage(UIPages page);
 
+	void InitConfig();
 	void InitLoginPageController();
 	void InitSignupPageController();
 	void InitMainPageController();
 private:
-	std::string m_hostname{"http://34.116.252.213:8080"};
+	std::string m_hostname;
 	HTTPClient m_http_client;
 	IdType m_user_id{1};
 	MainWindow m_main_window{};

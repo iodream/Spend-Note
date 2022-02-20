@@ -29,6 +29,10 @@ list(APPEND Spend-Note-Server_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/HandlerFactory.h
 	${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/HTTPRequestHandler.h
+	${CMAKE_CURRENT_SOURCE_DIR}/DbConnectionHelper.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/DbConnectionHelper.h
+	${CMAKE_CURRENT_SOURCE_DIR}/ConfigManager.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/ConfigManager.h
 )
 
 list(APPEND Spend-Note-Server_LIBS
@@ -48,8 +52,6 @@ list(APPEND Spend-Note-Server_SOURCES
     ${Spend-Note-Logger_SOURCES}
 
 )
-
-
 
 add_executable(
     Spend-Note-Server
