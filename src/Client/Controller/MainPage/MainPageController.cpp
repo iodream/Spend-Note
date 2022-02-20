@@ -118,7 +118,8 @@ void MainPageController::InitIncomePagesController()
 			m_hostname,
 			m_user_id,
 			m_page.get_incomes_spage(),
-			m_page.get_incomes_create_spage());
+			//m_page.get_incomes_create_spage());
+			m_page.get_income_view_spage());
 
 	connect(
 		m_income_pages_controller.get(),
@@ -203,7 +204,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::INCOMES:
 		return m_income_pages_controller->UpdateIncomesPage();
 	case MainSubPages::VIEW_INCOME:
-		break;
+		return m_income_pages_controller->UpdateIncomeViewPage(data);
 	case MainSubPages::SETTINGS:
 		break;
 	}

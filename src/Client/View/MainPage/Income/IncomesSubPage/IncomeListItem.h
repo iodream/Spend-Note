@@ -22,7 +22,7 @@ public:
 
 	void Update();
 
-	Income get_income() const { return m_income; };
+	Income get_income() const { return m_income; }
 
 	void set_number(int number);
 	int get_number();
