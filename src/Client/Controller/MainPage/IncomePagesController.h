@@ -51,7 +51,7 @@ signals:
 public slots:
 	void OnGoToCreateIncome();
 	void OnGoToViewIncome(const Income& income);
-//	void OnCreateIncome(Income& income);
+	void OnCreateIncome(Income& income);
 
 	void OnGoToEditIncome(const Income& income);
 	void OnGoToDeleteIncome(const Income& income);

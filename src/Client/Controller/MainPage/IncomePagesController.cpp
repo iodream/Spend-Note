@@ -11,20 +11,14 @@ IncomePagesController::IncomePagesController(
 	std::string& hostname,
 	IdType& user_id,
 	IncomeListSubPage& incomes_page,
-<<<<<<< HEAD
-	IncomeCreateSubPage& income_create_page)
-=======
+//	IncomeCreateSubPage& income_create_page)
 	IncomeViewSubPage& income_view_page)
->>>>>>> origin/dev
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
 	, m_incomes_page{incomes_page}
-<<<<<<< HEAD
-	, m_income_create_page{income_create_page}
-=======
+	//, m_income_create_page{income_create_page}
 	, m_income_view_page{income_view_page}
->>>>>>> origin/dev
 {
 	ConnectIncomesPage();
 	ConnectIncomeViewPage();
@@ -44,11 +38,11 @@ void IncomePagesController::ConnectIncomesPage()
 		this,
 		&IncomePagesController::OnGoToViewIncome);
 
-	connect(
-		&m_income_create_page,
-		&IncomeCreateSubPage::CreateIncome,
-		this,
-		&IncomePagesController::OnCreateIncome);
+//	connect(
+//		&m_income_create_page,
+//		&IncomeCreateSubPage::CreateIncome,
+//		this,
+//		&IncomePagesController::OnCreateIncome);
 }
 
 void IncomePagesController::ConnectIncomeViewPage()
@@ -106,7 +100,7 @@ bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 
 void IncomePagesController::OnGoToCreateIncome()
 {
-	emit ChangeSubPage(MainSubPages::CREATE_INCOME);
+	//emit ChangeSubPage(MainSubPages::CREATE_INCOME);
 }
 
 void IncomePagesController::OnGoToViewIncome(const Income& income)
@@ -116,7 +110,6 @@ void IncomePagesController::OnGoToViewIncome(const Income& income)
 	emit ChangeSubPage(MainSubPages::VIEW_INCOME, data);
 }
 
-<<<<<<< HEAD
 void IncomePagesController::OnCreateIncome(Income& income)
 {
 	AddIncomeModel model{m_hostname};
@@ -141,7 +134,8 @@ void IncomePagesController::OnCreateIncome(Income& income)
 
 	//auto incomes = model.ParseResponse(response);
 	//m_incomes_page.Update(incomes);
-=======
+
+}
 void IncomePagesController::OnGoToEditIncome(const Income& income)
 {
 
@@ -150,5 +144,4 @@ void IncomePagesController::OnGoToEditIncome(const Income& income)
 void IncomePagesController::OnGoToDeleteIncome(const Income& income)
 {
 
->>>>>>> origin/dev
 }
