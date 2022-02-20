@@ -17,3 +17,6 @@ DailyListPagesController::DailyListPagesController(
 	ConnectDailyListPage();
 }
 
+void DailyListPagesController::ConnectDailyListPage()
+{
+}
