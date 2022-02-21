@@ -23,7 +23,6 @@ enum class MainSubPages
 	VIEW_PRODUCT,
 
 	INCOMES,
-	//CREATE_INCOME,
 	VIEW_INCOME,
 
 	SETTINGS,
