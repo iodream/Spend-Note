@@ -16,7 +16,7 @@
 #include "Product/ProductViewSubPage/ProductViewSubPage.h"
 
 #include "Income/IncomesSubPage/IncomeListSubPage.h"
-//#include "Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
+#include "Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
 #include "Income/IncomeViewSubPage/IncomeViewSubPage.h"
 
 #include "View/Constants.h"
@@ -52,7 +52,7 @@ private:
 	void InitProductViewSubPage();
 
 	void InitIncomesSubPage();
-//	void InitIncomesCreateSubPage();
+	void InitIncomesCreateSubPage();
 
 	void InitIncomeViewSubPage();
 
@@ -68,7 +68,7 @@ public:
 	ProductViewSubPage& get_product_view_spage() { return m_product_view_spage; }
 
 	IncomeListSubPage& get_incomes_spage() { return m_incomes_spage; }
-//	IncomeCreateSubPage& get_incomes_create_spage() { return m_incomes_create_spage; }
+	IncomeCreateSubPage& get_incomes_create_spage() { return m_incomes_create_spage; }
 
 	IncomeViewSubPage& get_income_view_spage() { return m_income_view_spage; }
 
@@ -86,7 +86,7 @@ private:
 	ProductViewSubPage m_product_view_spage;
 
 	IncomeListSubPage m_incomes_spage;
-//	IncomeCreateSubPage m_incomes_create_spage;
+	IncomeCreateSubPage m_incomes_create_spage;
 
 	IncomeViewSubPage m_income_view_spage;
 

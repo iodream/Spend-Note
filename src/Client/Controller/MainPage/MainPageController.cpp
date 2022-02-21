@@ -118,7 +118,7 @@ void MainPageController::InitIncomePagesController()
 			m_hostname,
 			m_user_id,
 			m_page.get_incomes_spage(),
-			//m_page.get_incomes_create_spage());
+			m_page.get_incomes_create_spage(),
 			m_page.get_income_view_spage());
 
 	connect(

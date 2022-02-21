@@ -1,4 +1,5 @@
 #include "AddIncomeModel.h"
+#include "Utils.h"
 
 Net::Request AddIncomeModel::FormRequest(const Income& income)
 {
@@ -18,4 +19,24 @@ IncomeId AddIncomeModel::ParseResponse(const Net::Response& response)
 
 	return income_id;
 }
+
+bool AddIncomeModel::CheckExpDate(const Income& income)
+{
+	return (QDate::fromString(income.expiration_time) < QDate::currentDate());
+}
+
+bool AddIncomeModel::CheckFields(const Income& income)
+{
+	std::string str = EraseWhitespace(income.name.toStdString());
+	if(str.empty())
+		return false;
+	str = income.amount;
+	if(str.empty())
+		return false;
+	str = EraseWhitespace(income.category.name.toStdString());
+	if(str.empty())
+		return false;
+	return true;
+}
+
 

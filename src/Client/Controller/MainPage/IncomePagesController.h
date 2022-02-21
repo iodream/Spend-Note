@@ -5,7 +5,7 @@
 #include "Controller/HTTPClient.h"
 
 #include "View/MainPage/Income/IncomesSubPage/IncomeListSubPage.h"
-//#include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
+#include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
 
 #include "View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.h"
 #include "View/Constants.h"
@@ -21,7 +21,7 @@ public:
 		std::string& hostname,
 		IdType& user_id,
 		IncomeListSubPage& incomes_page,
-		//IncomeCreateSubPage& income_create_page);
+		IncomeCreateSubPage& income_create_page,
 		IncomeViewSubPage& income_view_page);
 
 	virtual ~IncomePagesController() override {}
@@ -37,7 +37,7 @@ private:
 	IdType& m_user_id;
 
 	IncomeListSubPage& m_incomes_page;
-	//IncomeCreateSubPage& m_income_create_page;
+	IncomeCreateSubPage& m_income_create_page;
 
 	IncomeViewSubPage& m_income_view_page;
 

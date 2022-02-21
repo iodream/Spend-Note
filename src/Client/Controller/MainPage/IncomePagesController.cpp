@@ -11,13 +11,13 @@ IncomePagesController::IncomePagesController(
 	std::string& hostname,
 	IdType& user_id,
 	IncomeListSubPage& incomes_page,
-//	IncomeCreateSubPage& income_create_page)
+	IncomeCreateSubPage& income_create_page,
 	IncomeViewSubPage& income_view_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
 	, m_incomes_page{incomes_page}
-	//, m_income_create_page{income_create_page}
+	, m_income_create_page{income_create_page}
 	, m_income_view_page{income_view_page}
 {
 	ConnectIncomesPage();
@@ -38,11 +38,11 @@ void IncomePagesController::ConnectIncomesPage()
 		this,
 		&IncomePagesController::OnGoToViewIncome);
 
-//	connect(
-//		&m_income_create_page,
-//		&IncomeCreateSubPage::CreateIncome,
-//		this,
-//		&IncomePagesController::OnCreateIncome);
+	connect(
+		&m_income_create_page,
+		&IncomeCreateSubPage::CreateIncome,
+		this,
+		&IncomePagesController::OnCreateIncome);
 }
 
 void IncomePagesController::ConnectIncomeViewPage()
@@ -100,7 +100,8 @@ bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 
 void IncomePagesController::OnGoToCreateIncome()
 {
-	//emit ChangeSubPage(MainSubPages::CREATE_INCOME);
+	m_income_create_page.SetMinimumDate(QDate::currentDate());
+	emit ChangeSubPage(MainSubPages::CREATE_INCOME);
 }
 
 void IncomePagesController::OnGoToViewIncome(const Income& income)
@@ -114,6 +115,23 @@ void IncomePagesController::OnCreateIncome(Income& income)
 {
 	AddIncomeModel model{m_hostname};
 	income.id = m_user_id;
+
+	if(!model.CheckFields(income))
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString("Fields can't be empty!"));
+		return;
+	}
+
+	if(!model.CheckExpDate(income))
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString("Expiration date can't be in the past"));
+		return;
+	}
+
 	auto request  = model.FormRequest(income);
 
 	Net::Response response;
@@ -132,9 +150,8 @@ void IncomePagesController::OnCreateIncome(Income& income)
 		return;
 	}
 
-	//auto incomes = model.ParseResponse(response);
-	//m_incomes_page.Update(incomes);
-
+	m_income_create_page.Clear();
+	emit GoBack();
 }
 void IncomePagesController::OnGoToEditIncome(const Income& income)
 {

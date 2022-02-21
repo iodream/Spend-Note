@@ -26,6 +26,21 @@ void IncomeCreateSubPage::OnCreateIncome()
 	income.expiration_time = ui->ExpirationDateEdit->text();
 	emit CreateIncome(income);
 }
+
+void IncomeCreateSubPage::Clear()
+{
+	ui->AmountLineEdit->clear();
+	ui->CategoryLineEdit->clear();
+	ui->ExpirationDateEdit->clear();
+	ui->NameLineEdit->clear();
+}
+
+void IncomeCreateSubPage::SetMinimumDate(const QDate& date)
+{
+	ui->ExpirationDateEdit->setMinimumDate(date);
+}
+
+
 IncomeCreateSubPage::~IncomeCreateSubPage()
 {
 	delete ui;
