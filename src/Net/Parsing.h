@@ -143,6 +143,16 @@ void WriteMoney(
 	const std::string& label,
 	const db::Money& value);
 
+void WriteNumber(
+	QJsonObject& json,
+	const char* label,
+	const double& value);
+
+void WriteNumber(
+	QJsonObject& json,
+	const std::string& label,
+	const double& value);
+
 void WriteString(
 	QJsonObject& json,
 	const char* label,

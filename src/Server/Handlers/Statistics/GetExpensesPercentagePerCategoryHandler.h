@@ -1,0 +1,11 @@
+#ifndef GETEXPENSESPERCENTAGEPERCATEGORYHANDLER_H
+#define GETEXPENSESPERCENTAGEPERCATEGORYHANDLER_H
+
+
+class GetExpensesPercentagePerCategoryHandler
+{
+public:
+	GetExpensesPercentagePerCategoryHandler();
+};
+
+#endif // GETEXPENSESPERCENTAGEPERCATEGORYHANDLER_H
