@@ -195,15 +195,8 @@ Income IncomeRepository::ParseSQLRow(const pqxx::row &row)
 	income.name = row[db::income::NAME].as<std::string>();
 	income.amount = row[db::income::AMOUNT].as<Money>();
 	income.category_id = row[db::income::CATEGORY_ID].as<IdType>();
-	income.add_time = row[db::income::ADD_TIME].as<std::string>();
-	if (row[db::income::EXPIRATION_TIME].is_null())
-	{
-		income.expiration_time = std::nullopt;
-	}
-	else
-	{
-		income.expiration_time = row[db::income::EXPIRATION_TIME].as<std::string>();
-	}
+	income.add_time = row[db::income::ADD_TIME].as<Timestamp>();
+	income.expiration_time = row[db::income::EXPIRATION_TIME].get<Timestamp>();
 
 	return income;
 }

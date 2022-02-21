@@ -22,7 +22,7 @@ void HTTPRequestHandler::handleRequest(HTTPRequest& http_req, HTTPResponse& http
 		}
 
 		auto request  = ParseRequest(http_req);
-		auto response = m_command_handler->Handle(request);
+		auto response = m_command_handler->SafeHandle(request);
 		SendResponse(response, http_res);
 	}
 	catch (const ClientError& ex) {
