@@ -5,6 +5,8 @@
 #include "Controller/HTTPClient.h"
 
 #include "View/MainPage/Income/IncomesSubPage/IncomeListSubPage.h"
+#include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
+#include "View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.h"
 #include "View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.h"
 #include "View/Constants.h"
 
@@ -34,8 +36,12 @@ private:
 	IdType& m_user_id;
 
 	IncomeListSubPage& m_incomes_page;
+	//IncomeCreateSubPage& m_create_page;
+	//IncomeEditSubPage& m_edit_page;
 	IncomeViewSubPage& m_income_view_page;
 
+	static bool already_added;
+	void UpdateCategoryBoxes();
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
