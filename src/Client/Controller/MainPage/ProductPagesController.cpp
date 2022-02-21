@@ -233,7 +233,7 @@ bool ProductPagesController::UpdateProductsPage(List list)
 	}
 
 	auto products = model.ParseResponse(response);
-	UpadeteCategoryBox();
+	UpdateCategoryBox();
 	SetRangeOfSpinBoxes();
 	m_products_page.Update(products);
 	return true;
