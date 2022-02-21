@@ -165,8 +165,7 @@ std::vector<Income> IncomeRepository::GetAllIncomes(const IdType &user_id)
 			" WHERE " + db::user::ID + " = " + w.quote(user_id) + ";");
 		if (user_ids.empty())
 		{
-			auto message = "User with id = " + std::to_string(user_id) + " not found";
-			throw NonexistentResource(message);
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
 		}
 
 		pqxx::result r = w.exec(

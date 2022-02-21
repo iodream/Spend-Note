@@ -10,7 +10,7 @@ class DatabaseFailure : public std::runtime_error
 {
 public:
 	DatabaseFailure() : std::runtime_error("Database failed") {}
-	DatabaseFailure(std::string& msg) : std::runtime_error(msg) {}
+	DatabaseFailure(const std::string& msg) : std::runtime_error(msg) {}
 	DatabaseFailure(const char* msg) : std::runtime_error(msg) {}
 };
 }

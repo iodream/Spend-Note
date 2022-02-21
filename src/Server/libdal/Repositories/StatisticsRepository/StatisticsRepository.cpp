@@ -10,36 +10,37 @@ StatisticsRepository::StatisticsRepository(pqxx::connection& db_connection) : m_
 {
 }
 
-std::vector<std::pair<IdType, Money>> StatisticsRepository::ExpensesPerCategoryWeekly(IdType user_id)
+std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType user_id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
 
-		pqxx::result user_ids = w.exec(
-			"SELECT " + user::ID +
-			" FROM " + user::TABLE_NAME +
-			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
-		if (user_ids.empty())
+		if (DoesUserExist(user_id, w))
 		{
-			auto message = "User with id = " + std::to_string(user_id) + " not found";
-			throw NonexistentResource(message);
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
 		}
 
-		pqxx::result expences = w.exec(
-			"SELECT " + product::CATEGORY_ID + ", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) AS " + statistics::TOTAL_PRICE +
+		pqxx::result expenses = w.exec(
+			"SELECT " +
+				product::CATEGORY_ID +
+				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) AS " + statistics::TOTAL_PRICE +
 			" FROM " + product::TABLE_NAME +
-			" JOIN " + list::TABLE_NAME + " ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
-			" WHERE " + list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " + product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			" JOIN " + list::TABLE_NAME +
+			" ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
+			" WHERE " +
+				list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " +
+				product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
 			"GROUP BY " + product::CATEGORY_ID + ";");
 
 		w.commit();
 
-		std::vector<std::pair<IdType, Money>> result(expences.size());
-		std::transform(expences.begin(), expences.end(), result.begin(), [](const pqxx::row& row){
-			return std::make_pair(
-				row[product::CATEGORY_ID].as<IdType>(),
-				row[statistics::TOTAL_PRICE].as<Money>());
+		std::vector<ExpensePerCategory> result(expenses.size());
+		std::transform(expenses.begin(), expenses.end(), result.begin(), [](const pqxx::row& row){
+			ExpensePerCategory expense;
+			expense.category_id = row[product::CATEGORY_ID].as<IdType>();
+			expense.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return expense;
 		});
 
 		return result;
@@ -50,20 +51,71 @@ std::vector<std::pair<IdType, Money>> StatisticsRepository::ExpensesPerCategoryW
 	}
 }
 
-std::vector<std::pair<Date, Money>> StatisticsRepository::ExpencesDynamicsWeekly(IdType user_id)
+std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercentagePerCategory(IdType user_id)
 {
 	try
 	{
 		pqxx::work w{m_db_connection};
 
-		pqxx::result user_ids = w.exec(
-			"SELECT " + user::ID +
-			" FROM " + user::TABLE_NAME +
-			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
-		if (user_ids.empty())
+		if (DoesUserExist(user_id, w))
 		{
-			auto message = "User with id = " + std::to_string(user_id) + " not found";
-			throw NonexistentResource(message);
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		auto total_expenses = w.query_value<Money>(
+			"SELECT COALESCE(SUM(" + db::product::AMOUNT + " * " + db::product::PRICE + "), 0) " +
+			"FROM " + db::product::TABLE_NAME + " JOIN " + db::list::TABLE_NAME +
+			" ON " +
+				db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " +
+				db::list::TABLE_NAME + "." + db::list::ID +
+			" WHERE " + db::list::USER_ID + " = " + w.quote(user_id) + " AND " + db::product::IS_BOUGHT + ";");
+
+		if (total_expenses == 0)
+		{
+			return {};
+		}
+
+		pqxx::result expenses = w.exec(
+			"SELECT " +
+				product::CATEGORY_ID +
+				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) / " + w.quote(total_expenses) + " AS " + statistics::TOTAL_PRICE +
+			" FROM " + product::TABLE_NAME +
+			" JOIN " + list::TABLE_NAME +
+			" ON " +
+				product::TABLE_NAME + "." + product::LIST_ID + " = " +
+				list::TABLE_NAME + "." + list::ID +
+			" WHERE " +
+				list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " +
+				product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			"GROUP BY " + product::CATEGORY_ID + ";");
+
+		w.commit();
+
+		std::vector<ExpensePercentagePerCategory> result(expenses.size());
+		std::transform(expenses.begin(), expenses.end(), result.begin(), [](const pqxx::row& row){
+			ExpensePercentagePerCategory expense;
+			expense.category_id = row[product::CATEGORY_ID].as<IdType>();
+			expense.percentage = row[statistics::TOTAL_PRICE].as<double>();
+			return expense;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+std::vector<ExpensePerDay> StatisticsRepository::ExpencesDynamics(IdType user_id)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
 		}
 
 		pqxx::result expences = w.exec(
@@ -75,11 +127,12 @@ std::vector<std::pair<Date, Money>> StatisticsRepository::ExpencesDynamicsWeekly
 
 		w.commit();
 
-		std::vector<std::pair<Date, Money>> result(expences.size());
+		std::vector<ExpensePerDay> result(expences.size());
 		std::transform(expences.begin(), expences.end(), result.begin(), [](const pqxx::row& row) {
-			return std::make_pair(
-				row[statistics::PURCHASE_DATE].as<Date>(),
-				row[statistics::TOTAL_PRICE].as<Money>());
+			ExpensePerDay expense;
+			expense.day = row[statistics::PURCHASE_DATE].as<Date>();
+			expense.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return expense;
 		});
 
 		return result;
@@ -88,6 +141,15 @@ std::vector<std::pair<Date, Money>> StatisticsRepository::ExpencesDynamicsWeekly
 	{
 		throw DatabaseFailure(e.what());
 	}
+}
+
+bool StatisticsRepository::DoesUserExist(IdType user_id, pqxx::work& work)
+{
+	pqxx::result user_ids = work.exec(
+		"SELECT " + user::ID +
+		" FROM " + user::TABLE_NAME +
+		" WHERE " + user::ID + " = " + work.quote(user_id) + ";");
+	return user_ids.empty();
 }
 
 }
