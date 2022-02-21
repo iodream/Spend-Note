@@ -4,7 +4,7 @@
 #include <QJsonObject>
 
 #include "../../MockDbFacade.h"
-#include "Server/Handlers/Product/GetProductsHandler.h"
+#include "Server/Handlers/List/GetDailyListHandler.h"
 #include "Server/Handlers/Entities/Parsers.h"
 #include "Net/Parsing.h"
 
@@ -48,24 +48,24 @@ void CheckProductsEquality(const db::Product& p1, const Product& p2)
 	EXPECT_EQ("", p2.buy_until_date);
 }
 
-std::unique_ptr<GetProductsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+std::unique_ptr<GetDailyListHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
 {
-	auto handler = std::make_unique<GetProductsHandler>();
+	auto handler = std::make_unique<GetDailyListHandler>();
 	handler->set_facade(std::move(facade));
 
 	Params params;
-	params.Insert(Params::LIST_ID, Params::Value{1});
+	params.Insert(Params::USER_ID, Params::Value{1});
 	handler->set_params(std::move(params));
 	return std::move(handler);
 }
 
 }
 
-TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
+TEST(GetDailyListHandlerTest, EMPTY_DAILY_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetProductsForList(_))
+	EXPECT_CALL(*facade, GetDailyList(_))
 		.WillOnce(Return(std::vector<db::Product>{}));
 
 	auto handler = MakeHandler(std::move(facade));
@@ -82,11 +82,11 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 	EXPECT_EQ(procucts.size(), 0);
 }
 
-TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
+TEST(GetDailyListHandlerTest, ONE_PRODUCT_DAILY_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetProductsForList(1))
+	EXPECT_CALL(*facade, GetDailyList(1))
 		.WillOnce(Return(std::vector<db::Product>{p1}));
 	EXPECT_CALL(*facade, GetProductCategoryById(1))
 		.WillOnce(Return(std::optional<db::ProductCategory>{c1}));

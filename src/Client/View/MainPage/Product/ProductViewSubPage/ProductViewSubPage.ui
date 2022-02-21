@@ -65,13 +65,6 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="BuyUntil">
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="4" column="0">
       <widget class="QLabel" name="PriorityLabel">
        <property name="text">
@@ -109,6 +102,13 @@
      </item>
      <item row="6" column="1">
       <widget class="QLineEdit" name="IsBought">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDateTimeEdit" name="BuyUntil">
        <property name="readOnly">
         <bool>true</bool>
        </property>

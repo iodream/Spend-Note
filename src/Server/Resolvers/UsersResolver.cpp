@@ -6,6 +6,7 @@
 #include "../Handlers/Income/AddIncomeHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 #include "../Handlers/Statistics/GetBalanceHandler.h"
+#include "../Handlers/List/GetDailyListHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -16,6 +17,7 @@ namespace {
 const std::string LISTS   = "/lists";
 const std::string INCOMES = "/incomes";
 const std::string BALANCE = "/balance";
+const std::string DAILY_LIST = "/daily-list";
 
 }
 
@@ -56,6 +58,11 @@ ICommandHandler* UsersResolver::Resolve(
 	else if (segment == BALANCE) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetBalanceHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == DAILY_LIST) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetDailyListHandler();
 		return new MethodNotAllowedHandler();
 	}
 
