@@ -2,6 +2,7 @@
 
 #include "Models/Income/GetIncomesModel.h"
 #include "Models/Income/RemoveIncomeModel.h"
+#include "Models/Income/GetIncomeCategoriesModel.h"
 
 #include "Net/Constants.h"
 
@@ -100,6 +101,38 @@ void IncomePagesController::OnGoToViewIncome(const Income& income)
 	data.setValue(income);
 	emit ChangeSubPage(MainSubPages::VIEW_INCOME, data);
 }
+
+bool IncomePagesController::already_added = false;
+
+void IncomePagesController::UpdateCategoryBoxes()
+{
+	if(!already_added)
+	{
+		GetIncomeCategoriesModel model(m_hostname);
+		auto request = model.FormRequest();
+
+		try
+		{
+			auto response = m_http_client.Request(request);
+
+			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+			{
+				emit Message(
+					QString("Error occured"),
+					QString::fromStdString(response.reason));
+				return ;
+			}
+
+			//m_edit_page.FillCategoryBox(model.ParseResponse(response));
+			//m_create_page.FillCategoryBox(model.ParseResponse(response));
+
+			already_added = true;
+			}
+		catch (const Poco::Exception& ex)
+		{
+			return;
+		}
+	}
 
 void IncomePagesController::OnGoToEditIncome(const Income& income)
 {
