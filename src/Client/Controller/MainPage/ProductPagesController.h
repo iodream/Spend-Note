@@ -35,7 +35,7 @@ public:
 	bool UpdateViewPage(Product product);
 
 	void SetRangeOfSpinBoxes();
-	void UpadeteCategoryBox();
+	void UpdateCategoryBox();
 
 private:
 	void ConnectProductsPage();
