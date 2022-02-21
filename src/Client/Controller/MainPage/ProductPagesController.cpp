@@ -248,7 +248,7 @@ bool ProductPagesController::UpdateViewPage(Product product)
 
 bool ProductPagesController::already_added = false;
 
-void ProductPagesController::UpadeteCategoryBox()
+void ProductPagesController::UpdateCategoryBox()
 {
 	if(!already_added)
 	{
@@ -275,7 +275,6 @@ void ProductPagesController::UpadeteCategoryBox()
 		{
 			return;
 		}
-
 	}
 }
 
