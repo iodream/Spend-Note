@@ -48,5 +48,5 @@ public slots:
 	void OnGoToViewIncome(const Income& income);
 
 	void OnGoToEditIncome(const Income& income);
-	void OnGoToDeleteIncome(const Income& income);
+	void OnDeleteIncome(const Income& income);
 };

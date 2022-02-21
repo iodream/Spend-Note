@@ -1,6 +1,7 @@
 #include "IncomePagesController.h"
 
 #include "Models/Income/GetIncomesModel.h"
+#include "Models/Income/RemoveIncomeModel.h"
 
 #include "Net/Constants.h"
 
@@ -47,7 +48,7 @@ void IncomePagesController::ConnectIncomeViewPage()
 		&m_income_view_page,
 		&IncomeViewSubPage::DeleteIncome,
 		this,
-		&IncomePagesController::OnGoToDeleteIncome);
+		&IncomePagesController::OnDeleteIncome);
 }
 
 bool IncomePagesController::UpdateIncomesPage()
@@ -105,7 +106,27 @@ void IncomePagesController::OnGoToEditIncome(const Income& income)
 
 }
 
-void IncomePagesController::OnGoToDeleteIncome(const Income& income)
+void IncomePagesController::OnDeleteIncome(const Income& income)
 {
+	RemoveIncomeModel model{m_hostname};
+	IncomeId delete_id;
+	delete_id.id = income.id;
 
+	auto request = model.FormRequest(delete_id);
+	Net::Response response;
+	try{
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		return;
+	}
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit Message(
+			QString("Error occured"),
+			QString::fromStdString(response.reason));
+		return;
+	}
+	emit GoBack();
 }
