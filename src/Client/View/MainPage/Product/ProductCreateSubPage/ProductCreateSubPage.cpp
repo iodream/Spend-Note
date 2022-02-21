@@ -31,7 +31,7 @@ Money ProductCreateSubPage::GetPrice()
 
 BigInt ProductCreateSubPage::GetAmount()
 {
-	return m_ui->Amount->text().toLongLong();
+	return m_ui->Amount->value();
 }
 
 bool ProductCreateSubPage::GetIsBought()
@@ -41,12 +41,22 @@ bool ProductCreateSubPage::GetIsBought()
 
 QString ProductCreateSubPage::GetBuyUntil()
 {
-	return m_ui->BuyUntil->text();
+	return toDBstring(m_ui->BuyUntil->dateTime());
 }
 
 BigInt ProductCreateSubPage::GetPriority()
 {
-	return m_ui->Priority->text().toLongLong();
+	return m_ui->Priority->value();
+}
+
+IdType ProductCreateSubPage::GetCategoryId()
+{
+	return m_ui->Category->currentIndex() + 1;
+}
+
+QString ProductCreateSubPage::GetCategoryName()
+{
+	return m_ui->Category->currentText();
 }
 
 void ProductCreateSubPage::Clear()
@@ -58,4 +68,18 @@ void ProductCreateSubPage::Clear()
 	m_ui->BuyUntil->clear();
 	m_ui->Name->clear();
 	m_ui->IsBought->setChecked(false);
+}
+
+void ProductCreateSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)
+{
+	for(const auto& el : categories)
+	{
+		m_ui->Category->addItem(el.name, el.id);
+	}
+}
+
+void ProductCreateSubPage::SetRangeOfSpinBox()
+{
+	m_ui->Amount->setRange(1, 100); // need to be changed do not hardcode
+	m_ui->Priority->setRange(1, 5);
 }

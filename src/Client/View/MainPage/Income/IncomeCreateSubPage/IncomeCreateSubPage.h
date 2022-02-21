@@ -19,8 +19,13 @@ public:
 
 signals:
 	void CreateIncome(Income& income);
+  
 public slots:
 	void OnCreateIncome();
+	void FillCategoryBox(const std::vector<IncomeCategory>& income);
+
+	IncomeCategory get_category();
+
 private:
 	Ui::IncomeCreateSubPage *ui;
 };

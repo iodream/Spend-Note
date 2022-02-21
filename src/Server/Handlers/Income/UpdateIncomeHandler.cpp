@@ -15,16 +15,31 @@ UpdateIncomeHandler::UpdateIncomeHandler()
 Net::Response UpdateIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	auto json_payload = request.json_payload.object();
-	auto income = m_parser.Parse(json_payload);
-	auto income_db = ToDBIncome(income);
+	auto income_id = std::get<long long>(m_params.Get(Params::INCOME_ID));
 
-	if (m_facade->UpdateIncome(income_db)) {
-		return FormEmptyResponse();
-	}
-	else {
+	if (!m_facade->GetIncomeById(income_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Resource not found");
 	}
+
+	auto json_payload = request.json_payload.object();
+	auto income = m_parser.Parse(json_payload);
+
+	if (income_id != income.id){
+		return FormErrorResponse(
+			NetError::Status::HTTP_BAD_REQUEST,
+			"Income id in uri and in json are not equal");
+	}
+
+	if (!m_facade->CanUserEditIncome(request.uid, income_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"Update income with id " + std::to_string(income_id) + " is forbidden");
+	}
+
+	auto income_db = ToDBIncome(income);
+
+	m_facade->UpdateIncome(income_db);
+	return FormEmptyResponse();
 }
