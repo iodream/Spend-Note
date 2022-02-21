@@ -275,6 +275,7 @@ bool ProductRepository::CanUserEditProduct(IdType user_id, IdType product_id)
 Product ProductRepository::ProductFromRow(const pqxx::row& row)
 {
 	Product product;
+
 	product.id = row[db::product::ID].as<IdType>();
 	product.list_id = row[db::product::LIST_ID].as<IdType>();
 	product.category_id = row[db::product::CATEGORY_ID].as<IdType>();
@@ -284,24 +285,8 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	product.product_priority = row[db::product::PRIORITY].as<int>();
 	product.is_bought = row[db::product::IS_BOUGHT].as<bool>();
 	product.add_date = row[db::product::ADD_DATE].as<Timestamp>();
-
-	if (row[db::product::PURCHASE_DATE].is_null())
-	{
-		product.purchase_date = std::nullopt;
-	}
-	else
-	{
-		product.purchase_date = row[db::product::PURCHASE_DATE].as<Timestamp>();
-	}
-
-	if (row[db::product::BUY_UNTIL_DATE].is_null())
-	{
-		product.purchase_date = std::nullopt;
-	}
-	else
-	{
-		product.purchase_date = row[db::product::BUY_UNTIL_DATE].as<Timestamp>();
-	}
+	product.purchase_date = row[db::product::PURCHASE_DATE].get<Timestamp>();
+	product.buy_until_date = row[db::product::BUY_UNTIL_DATE].get<Timestamp>();
 
 	return product;
 }
