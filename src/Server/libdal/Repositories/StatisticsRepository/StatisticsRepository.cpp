@@ -78,7 +78,8 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 		pqxx::result expenses = w.exec(
 			"SELECT " +
 				product::CATEGORY_ID +
-				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) / " + w.quote(total_expenses) + " AS " + statistics::TOTAL_PRICE +
+				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) / (" +
+				w.quote(total_expenses) + "::DECIMAL) AS " + statistics::TOTAL_PRICE +
 			" FROM " + product::TABLE_NAME +
 			" JOIN " + list::TABLE_NAME +
 			" ON " +
