@@ -13,9 +13,10 @@ public:
 	virtual ~ICommandHandler() {}
 
 	virtual Net::Response Handle(Net::Request& request) = 0;
+	Net::Response SafeHandle(Net::Request& request);
 
-	void set_facade(db::IDbFacade::Ptr&& facade) { m_facade = std::move(facade); }
-	void set_params(Params&& params) { m_params = std::move(params); }
+	void set_facade(db::IDbFacade::Ptr&& facade);
+	void set_params(Params&& params);
 
 protected:
 	db::IDbFacade::Ptr m_facade;
