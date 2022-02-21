@@ -13,6 +13,7 @@
 #include "DTOs/IncomeCategory.h"
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
+#include "DTOs/Statistics.h"
 
 namespace db
 {
@@ -64,5 +65,9 @@ public:
 	virtual bool CanUserEditIncome(IdType user_id, IdType income_id) = 0;
 
 	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
+
+	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) = 0;
+	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
+	virtual std::vector<ExpensePerDay> ExpencesDynamics(IdType user_id) = 0;
 };
 }
