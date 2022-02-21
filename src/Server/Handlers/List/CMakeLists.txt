@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListsHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListsHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetDailyListHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetDailyListHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListStatesHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetListStatesHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AddListHandler.h

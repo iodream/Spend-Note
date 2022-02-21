@@ -7,9 +7,17 @@
 
 Controller::Controller()
 {
+	InitConfig();
 	InitLoginPageController();
 	InitSignupPageController();
 	InitMainPageController();
+}
+
+void Controller::InitConfig()
+{
+	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
+
+	m_hostname = m_json_configuration.getString("hostname");
 }
 
 void Controller::InitLoginPageController()
@@ -75,7 +83,13 @@ void Controller::InitMainPageController()
 		m_main_page_controller.get(),
 		&MainPageController::ChangePage,
 		this,
-		&Controller::OnChangePage);
+				&Controller::OnChangePage);
+}
+
+bool Controller::AskUser(const QString& title, const QString& text)
+{
+	return QMessageBox::Yes == QMessageBox::question(nullptr, QString("Retry?"),
+													 QString("No connection to server. Retry?"));
 }
 
 void Controller::Start(UIPages at_page)
