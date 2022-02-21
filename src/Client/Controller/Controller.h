@@ -37,11 +37,7 @@ private:
 	void InitSignupPageController();
 	void InitMainPageController();
 private:
-<<<<<<< HEAD
-	std::string m_hostname{"http://localhost:8080"};
-=======
 	std::string m_hostname;
->>>>>>> origin/dev
 	HTTPClient m_http_client;
 	IdType m_user_id{1};
 	MainWindow m_main_window{};
