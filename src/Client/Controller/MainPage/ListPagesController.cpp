@@ -4,6 +4,7 @@
 #include "Models/List/AddNewListModel.h"
 #include "Models/List/RemoveListModel.h"
 #include "Models/List/UpdateListModel.h"
+#include "Models/List/GetListStatesModel.h"
 
 #include "Net/Constants.h"
 
@@ -112,6 +113,7 @@ bool ListPagesController::UpdateListPage()
 	auto lists = model.ParseResponse(response);
 
 	m_list_page.Update(lists);
+	FillBoxOfStates();
 	return true;
 }
 
@@ -127,8 +129,41 @@ bool ListPagesController::UpdateListViewPage(PageData& data)
 		return true;
 	}
 	auto list = qvariant_cast<List>(data);
+
 	m_list_view_page.Update(list);
 	return true;
+}
+
+bool ListPagesController::already_added = false;
+
+void ListPagesController::FillBoxOfStates()
+{
+	if(!already_added)
+	{
+		GetListStatesModel model{m_hostname};
+		const auto request = model.FormRequest();
+		try
+		{
+			auto response = m_http_client.Request(request);
+
+			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+			{
+				emit Message(
+					QString("Error!"),
+					QString::fromStdString(response.reason));
+				return ;
+			}
+
+			auto states = model.ParseResponse(response);
+			m_list_edit_page.FillStateBox(states);
+			m_create_page.FillStateBox(states);
+			already_added = true;
+		}
+		catch(const Poco::Exception& ex)
+		{
+			return;
+		}
+	}
 }
 
 bool ListPagesController::UpdateListEditPage(PageData& data)
@@ -136,6 +171,7 @@ bool ListPagesController::UpdateListEditPage(PageData& data)
 	if (!data.canConvert<List>()) {
 		return true;
 	}
+
 	auto list = qvariant_cast<List>(data);
 	m_list_edit_page.Update(list);
 	return true;
@@ -147,13 +183,9 @@ void ListPagesController::OnCreateList()
 
 	List new_list;
 	new_list.name = m_create_page.GetListName();
+	new_list.state.id = 11 + m_create_page.GetListState();
 	new_list.id = 0;
 	new_list.owner_id = m_user_id;
-
-	ListState state;
-	state.id = 1;
-	state.name = QString("");
-	new_list.state = state;
 
 	if(!model.CheckName(new_list.name))
 	{
@@ -243,9 +275,11 @@ void ListPagesController::OnDeleteList(const List& list)
 	emit GoBack(2); // go back 2 pages to avoid sending another request to the server
 }
 
-void ListPagesController::OnUpdateList(const List& list)
+void ListPagesController::OnUpdateList()
 {
 	UpdateListModel model{m_hostname};
+
+	List list = m_list_edit_page.get_list();
 
 	if(!model.CheckName(list.name))
 	{
