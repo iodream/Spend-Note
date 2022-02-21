@@ -1,4 +1,4 @@
-	#pragma once
+#pragma once
 
 #include <pqxx/pqxx>
 #include "DTOs/ProductCategory.h"
