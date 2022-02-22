@@ -19,7 +19,7 @@ void IncomeCreateSubPage::OnCreateIncome()
 {
 	Income income;
 	income.category.name = ui->Category->currentText();
-	income.category.id = 1 + ui->Category->currentIndex();
+	income.category.id = qvariant_cast<IdType>(ui->Category->currentData());
 	income.amount = ui->Amount->value();
 	income.name = ui->NameLineEdit->text();
 	income.add_time = QDate::currentDate().toString();
@@ -58,7 +58,7 @@ IncomeCategory IncomeCreateSubPage::get_category()
 {
 	IncomeCategory category;
 
-	category.id = 1 + ui->Category->currentIndex();
+	category.id = qvariant_cast<IdType>(ui->Category->currentData());
 	category.name = ui->Category->currentText();
 
 	return category;

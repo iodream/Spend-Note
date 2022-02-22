@@ -28,7 +28,7 @@ public:
 signals:
 	void UpdateListView(PageData& data);
 
-	void UpdateList(List);
+	void UpdateList();
 
 private:
 	Ui::ListEditSubPage *m_ui;

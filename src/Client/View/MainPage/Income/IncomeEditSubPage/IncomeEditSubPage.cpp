@@ -20,7 +20,7 @@ void IncomeEditSubPage::OnEditIncome()
 {
 	m_income.add_time = QDate::currentDate().toString();
 	m_income.amount = ui->Amount->value();
-	m_income.category.id = 1 + ui->Category->currentIndex();
+	m_income.category.id = qvariant_cast<IdType>(ui->Category->currentData());
 	m_income.category.name = ui->Category->currentText();
 	m_income.expiration_time = ui->ExpirationDateEdit->date().toString();
 	m_income.name = ui->NameLineEdit->text();
@@ -58,7 +58,7 @@ IncomeEditSubPage::~IncomeEditSubPage()
 IncomeCategory IncomeEditSubPage::get_category()
 {
 	IncomeCategory category;
-	category.id = 1 + ui->Category->currentIndex();
+	category.id = qvariant_cast<IdType>(ui->Category->currentData());
 	category.name = ui->Category->currentText();
 	return category;
 }
