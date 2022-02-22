@@ -8,7 +8,38 @@ IncomeCreateSubPage::IncomeCreateSubPage(QWidget *parent) :
 	ui->setupUi(this);
 
 	ui->ExpirationDateEdit->setDate(QDate::currentDate());
+	connect(
+		ui->SaveButton,
+		&QPushButton::released,
+		this,
+		&IncomeCreateSubPage::OnCreateIncome);
 }
+
+void IncomeCreateSubPage::OnCreateIncome()
+{
+	Income income;
+	income.category.name = ui->Category->currentText();
+	income.category.id = 1 + ui->Category->currentIndex();
+	income.amount = ui->Amount->value();
+	income.name = ui->NameLineEdit->text();
+	income.add_time = QDate::currentDate().toString();
+	income.expiration_time = ui->ExpirationDateEdit->text();
+	emit CreateIncome(income);
+}
+
+void IncomeCreateSubPage::Clear()
+{
+	ui->Amount->clear();
+	ui->Category->clear();
+	ui->ExpirationDateEdit->clear();
+	ui->NameLineEdit->clear();
+}
+
+void IncomeCreateSubPage::SetMinimumDate(const QDate& date)
+{
+	ui->ExpirationDateEdit->setMinimumDate(date);
+}
+
 
 IncomeCreateSubPage::~IncomeCreateSubPage()
 {

@@ -8,3 +8,4 @@
 std::string EraseWhitespace(std::string str);
 
 QString toDBstring(const QDateTime& time);
+

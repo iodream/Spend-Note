@@ -15,6 +15,8 @@ public:
 
 	Net::Request FormRequest(const Income& income);
 	IncomeId ParseResponse(const Net::Response& response);
+	bool CheckExpDate(const Income&);
+	bool CheckFields(const Income&);
 private:
 	const std::string& m_hostname;
 
