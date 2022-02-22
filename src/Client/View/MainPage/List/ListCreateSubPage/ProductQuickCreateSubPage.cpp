@@ -59,7 +59,7 @@ QString ProductQuickCreateSubPage::GetCategoryName()
 
 IdType ProductQuickCreateSubPage::GetCategoryId()
 {
-	return m_ui->Category->currentIndex() + 1;
+	return qvariant_cast<IdType>(m_ui->Category->currentData());
 }
 
 void ProductQuickCreateSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)

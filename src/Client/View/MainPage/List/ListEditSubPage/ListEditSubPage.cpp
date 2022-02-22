@@ -29,7 +29,7 @@ void ListEditSubPage::set_list(const List& list)
 List ListEditSubPage::get_list()
 {
 	m_list.name = m_ui->ListName->text();
-	m_list.state.id = 1 + m_ui->ListState->currentIndex();
+	m_list.state.id = qvariant_cast<IdType>(m_ui->ListState->currentData());
 	m_list.state.name = m_ui->ListState->currentText();
 	return m_list;
 }
