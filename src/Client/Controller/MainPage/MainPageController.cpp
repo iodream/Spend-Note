@@ -105,6 +105,12 @@ void MainPageController::InitProductPagesController()
 
 	connect(
 		m_product_pages_controller.get(),
+		&ProductPagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_product_pages_controller.get(),
 		&ProductPagesController::ChangeSubPage,
 		this,
 		&MainPageController::OnChangeSubPage);
@@ -130,6 +136,12 @@ void MainPageController::InitIncomePagesController()
 		&IncomePagesController::ServerError,
 		this,
 		&MainPageController::OnServerError);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 
 	connect(
 		m_income_pages_controller.get(),
