@@ -13,6 +13,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_list_states(m_connection)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
+		, m_statistics(m_connection)
 {
 }
 
@@ -177,6 +178,21 @@ bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
 std::vector<Product> DbFacade::GetDailyList(IdType user_id)
 {
 	return m_products.GetDailyList(user_id);
+}
+
+std::vector<ExpensePerCategory> DbFacade::ExpensesPerCategory(IdType user_id)
+{
+	return m_statistics.ExpensesPerCategory(user_id);
+}
+
+std::vector<ExpensePercentagePerCategory> DbFacade::ExpensesPercentagePerCategory(IdType user_id)
+{
+	return m_statistics.ExpensesPercentagePerCategory(user_id);
+}
+
+std::vector<ExpensePerDay> DbFacade::ExpencesDynamics(IdType user_id)
+{
+	return m_statistics.ExpencesDynamics(user_id);
 }
 
 }

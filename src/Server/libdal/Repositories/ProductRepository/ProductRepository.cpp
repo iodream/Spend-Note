@@ -108,8 +108,7 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 				db::list::ID + " = " + w.quote(list_id) + ";");
 		if (list_ids.empty())
 		{
-			auto message = "List with id = " + std::to_string(list_id) + " not found";
-			throw NonexistentResource(message);
+			throw NonexistentResource("List with id = " + std::to_string(list_id) + " not found");
 		}
 
 		pqxx::result product_rows = w.exec(
@@ -154,8 +153,7 @@ std::vector<Product> ProductRepository::GetDailyList(IdType user_id)
 				db::user::ID + " = " + w.quote(user_id) + ";");
 		if (user_ids.empty())
 		{
-			auto message = "User with id = " + std::to_string(user_id) + " not found";
-			throw NonexistentResource(message);
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
 		}
 
 		pqxx::result product_rows = w.exec(
