@@ -36,7 +36,11 @@ void LoginPageController::ConnectPage()
 
 #ifdef QT_DEBUG
 	QShortcut *shortcut = new QShortcut(QKeySequence("Return"), &m_page);
-	connect(shortcut, SIGNAL(activated()), this, SLOT(QuickLogin()));
+	connect(
+		shortcut,
+		&QShortcut::activated,
+		this,
+		&LoginPageController::QuickLogin);
 #endif
 }
 

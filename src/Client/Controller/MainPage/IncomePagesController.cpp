@@ -103,6 +103,7 @@ bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 
 bool IncomePagesController::UpdateIncomeEditPage(const PageData& data)
 {
+	UpdateCategoryBoxes();
 	if (!data.canConvert<Income>()) {
 		return false;
 	}
@@ -145,7 +146,7 @@ void IncomePagesController::UpdateCategoryBoxes()
 				return ;
 			}
 
-			//m_edit_page.FillCategoryBox(model.ParseResponse(response));
+			m_income_edit_page.FillCategoryBox(model.ParseResponse(response));
 			//m_create_page.FillCategoryBox(model.ParseResponse(response));
 
 			already_added = true;
