@@ -1,6 +1,6 @@
 #include "AddNewListModel.h"
 #include "Utils.h"
-Net::Request  AddNewListsModel::FormRequest(const List& list, const IdType& user_id)
+Net::Request AddNewListsModel::FormRequest(const List& list, const IdType& user_id)
 {
 	Net::Request request;
 	request.uri = m_hostname + "/users/" + std::to_string(user_id) + "/lists";
@@ -12,7 +12,7 @@ Net::Request  AddNewListsModel::FormRequest(const List& list, const IdType& user
 
 bool AddNewListsModel::CheckName(QString name)
 {
-	std::string str =EraseWhitespace(name.toStdString());
+	std::string str = EraseWhitespace(name.toStdString());
 
 	return (!str.empty());
 }

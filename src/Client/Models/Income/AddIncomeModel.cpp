@@ -4,7 +4,7 @@
 Net::Request AddIncomeModel::FormRequest(const Income& income)
 {
 	Net::Request request;
-	request.uri = m_hostname +"/users/" + std::to_string(income.id) +  "/incomes" ;
+	request.uri = m_hostname + "/users/" + std::to_string(income.id) + "/incomes" ;
 	request.method = Net::HTTP_METHOD_POST;
 	request.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
 	request.json_payload = QJsonDocument(m_formatter.Format(income));
