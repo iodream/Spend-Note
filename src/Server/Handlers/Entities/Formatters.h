@@ -54,3 +54,5 @@ using ExpensesPerDayJSONFormatter =
 	ArrayJSONFormatterBase<ExpensePerDayJSONFormatter, ExpensePerDay>;
 using ExpensesPerCategoryJSONFormatter =
 	ArrayJSONFormatterBase<ExpensePerCategoryJSONFormatter, ExpensePerCategory>;
+using ExpensesPercentagePerCategoryJSONFormatter =
+	ArrayJSONFormatterBase<ExpensePercentagePerCategoryJSONFormatter, ExpensePercentagePerCategory>;
