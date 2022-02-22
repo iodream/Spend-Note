@@ -133,6 +133,7 @@ void IncomePagesController::UpdateCategoryBoxes()
 		}
 	}
 }
+
 void IncomePagesController::OnGoToEditIncome(const Income& income)
 {
 
