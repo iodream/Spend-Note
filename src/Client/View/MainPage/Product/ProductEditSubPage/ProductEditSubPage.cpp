@@ -31,7 +31,7 @@ Product ProductEditSubPage::get_product()
 	m_product.amount = m_ui->Amount->value();
 	m_product.buy_until_date = toDBstring(m_ui->BuyUntil->dateTime());
 	m_product.priority = m_ui->Priority->value();
-	m_product.category.id = 1 + m_ui->Category->currentIndex();
+	m_product.category.id = qvariant_cast<IdType>(m_ui->Category->currentData());
 	m_product.is_bought = m_ui->IsBought->isChecked();
 	return m_product;
 }

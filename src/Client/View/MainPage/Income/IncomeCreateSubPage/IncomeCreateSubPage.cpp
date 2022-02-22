@@ -27,7 +27,7 @@ IncomeCategory IncomeCreateSubPage::get_category()
 {
 	IncomeCategory category;
 
-	category.id = 1 + ui->Category->currentIndex();
+	category.id = qvariant_cast<IdType>(ui->Category->currentData());
 	category.name = ui->Category->currentText();
 
 	return category;

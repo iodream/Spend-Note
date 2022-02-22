@@ -29,7 +29,7 @@ QString ListCreateSubPage::GetListName()
 
 IdType ListCreateSubPage::GetListState()
 {
-	return m_ui->ListState->currentIndex();
+	return qvariant_cast<IdType>(m_ui->ListState->currentData());
 }
 
 void ListCreateSubPage::Update()

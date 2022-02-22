@@ -51,7 +51,7 @@ BigInt ProductCreateSubPage::GetPriority()
 
 IdType ProductCreateSubPage::GetCategoryId()
 {
-	return m_ui->Category->currentIndex() + 1;
+	return qvariant_cast<IdType>(m_ui->Category->currentData());;
 }
 
 QString ProductCreateSubPage::GetCategoryName()
