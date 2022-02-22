@@ -79,9 +79,9 @@ int ListCreateSubPage::GetListSize()
 	return m_list_size;
 }
 
-void ListCreateSubPage::AddProductToVector(Product prd)
+void ListCreateSubPage::AddProductToVector(Product product)
 {
-	items.push_back(prd);
+	items.push_back(product);
 }
 
 std::vector<Product>& ListCreateSubPage::GetItems()
