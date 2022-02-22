@@ -24,6 +24,7 @@ enum class MainSubPages
 
 	INCOMES,
 	VIEW_INCOME,
+	EDIT_INCOME,
 
 	SETTINGS,
 };

@@ -8,6 +8,8 @@
 #include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
 #include "View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.h"
 #include "View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.h"
+#include "View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -21,12 +23,15 @@ public:
 		std::string& hostname,
 		IdType& user_id,
 		IncomeListSubPage& incomes_page,
-		IncomeViewSubPage& income_view_page);
+		IncomeViewSubPage& income_view_page,
+		IncomeEditSubPage& income_edit_page);
 
 	virtual ~IncomePagesController() override {}
 
 	bool UpdateIncomesPage();
 	bool UpdateIncomeViewPage(const PageData& data);
+	bool UpdateIncomeEditPage(const PageData& data);
+
 private:
 	void ConnectIncomesPage();
 	void ConnectIncomeViewPage();
@@ -37,8 +42,8 @@ private:
 
 	IncomeListSubPage& m_incomes_page;
 	//IncomeCreateSubPage& m_create_page;
-	//IncomeEditSubPage& m_edit_page;
 	IncomeViewSubPage& m_income_view_page;
+	IncomeEditSubPage& m_income_edit_page;
 
 	static bool already_added;
 	void UpdateCategoryBoxes();
@@ -55,4 +60,6 @@ public slots:
 
 	void OnGoToEditIncome(const Income& income);
 	void OnGoToDeleteIncome(const Income& income);
+	void OnUpdateIncome(Income& income);
+
 };
