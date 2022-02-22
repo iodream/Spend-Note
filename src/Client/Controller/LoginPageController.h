@@ -29,10 +29,13 @@ private:
 	void ConnectPage();
 
 signals:
-	void Message(const QString& window_name, const QString& message);
 	void ChangePage(UIPages page);
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnGoToSignupPage();
+
+#ifdef QT_DEBUG
+	void QuickLogin();
+#endif
 };

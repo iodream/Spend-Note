@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProductEditSubPage</class>
- <widget class="QWidget" name="ProductEditSubPage">
+ <class>ProductQuickCreateSubPage</class>
+ <widget class="QWidget" name="ProductQuickCreateSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="Title">
      <property name="text">
-      <string>Edit product</string>
+      <string>New product</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -88,9 +88,6 @@
      <item row="5" column="1">
       <widget class="QComboBox" name="Category"/>
      </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="Priority"/>
-     </item>
      <item row="3" column="1">
       <widget class="QDateTimeEdit" name="BuyUntil">
        <property name="date">
@@ -100,9 +97,6 @@
          <day>1</day>
         </date>
        </property>
-       <property name="displayFormat">
-        <string>dd.MM.yyyy HH:mm</string>
-       </property>
        <property name="calendarPopup">
         <bool>true</bool>
        </property>
@@ -110,6 +104,9 @@
      </item>
      <item row="2" column="1">
       <widget class="QSpinBox" name="Amount"/>
+     </item>
+     <item row="4" column="1">
+      <widget class="QSpinBox" name="Priority"/>
      </item>
      <item row="1" column="1">
       <widget class="QSpinBox" name="Price">

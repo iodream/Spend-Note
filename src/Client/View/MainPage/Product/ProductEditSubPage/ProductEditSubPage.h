@@ -26,6 +26,7 @@ public:
 	void Update();
 	void FillCategoryBox(const std::vector<ProductCategory>& categories);
 	void SetRangeOfSpinBox();
+	void SetMinimumDate(const QDate& date);
 
 signals:
 	void UpdateProduct();

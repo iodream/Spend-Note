@@ -12,6 +12,9 @@ ProductCreateSubPage::ProductCreateSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&ProductCreateSubPage::CreateProduct);
+
+	m_ui->BuyUntil->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
 }
 
 ProductCreateSubPage::~ProductCreateSubPage()
@@ -26,7 +29,7 @@ QString ProductCreateSubPage::GetName()
 
 Money ProductCreateSubPage::GetPrice()
 {
-	return m_ui->Price->text().toLongLong();
+	return m_ui->Price->value();
 }
 
 BigInt ProductCreateSubPage::GetAmount()
@@ -51,7 +54,7 @@ BigInt ProductCreateSubPage::GetPriority()
 
 IdType ProductCreateSubPage::GetCategoryId()
 {
-	return m_ui->Category->currentIndex() + 1;
+	return qvariant_cast<IdType>(m_ui->Category->currentData());
 }
 
 QString ProductCreateSubPage::GetCategoryName()
@@ -82,4 +85,9 @@ void ProductCreateSubPage::SetRangeOfSpinBox()
 {
 	m_ui->Amount->setRange(1, 100); // need to be changed do not hardcode
 	m_ui->Priority->setRange(1, 5);
+}
+
+void ProductCreateSubPage::SetMinimumDate(const QDate& date)
+{
+	m_ui->BuyUntil->setMinimumDate(date);
 }

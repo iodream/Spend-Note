@@ -13,8 +13,15 @@ class IncomeCreateSubPage : public QWidget
 
 public:
 	explicit IncomeCreateSubPage(QWidget *parent = nullptr);
+	void SetMinimumDate(const QDate& date);
 	~IncomeCreateSubPage();
+	void Clear();
 
+signals:
+	void CreateIncome(Income& income);
+  
+public slots:
+	void OnCreateIncome();
 	void FillCategoryBox(const std::vector<IncomeCategory>& income);
 
 	IncomeCategory get_category();
