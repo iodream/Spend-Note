@@ -18,9 +18,9 @@ IncomeCreateSubPage::IncomeCreateSubPage(QWidget *parent) :
 void IncomeCreateSubPage::OnCreateIncome()
 {
 	Income income;
-	income.category.name = ui->CategoryLineEdit->text();
-	income.category.id = 1;
-	income.amount = ui->AmountLineEdit->text().toLongLong();
+	income.category.name = ui->Category->currentText();
+	income.category.id = 1 + ui->Category->currentIndex();
+	income.amount = ui->Amount->value();
 	income.name = ui->NameLineEdit->text();
 	income.add_time = QDate::currentDate().toString();
 	income.expiration_time = ui->ExpirationDateEdit->text();
@@ -29,8 +29,8 @@ void IncomeCreateSubPage::OnCreateIncome()
 
 void IncomeCreateSubPage::Clear()
 {
-	ui->AmountLineEdit->clear();
-	ui->CategoryLineEdit->clear();
+	ui->Amount->clear();
+	ui->Category->clear();
 	ui->ExpirationDateEdit->clear();
 	ui->NameLineEdit->clear();
 }

@@ -18,6 +18,7 @@
 #include "Income/IncomesSubPage/IncomeListSubPage.h"
 #include "Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
 #include "Income/IncomeViewSubPage/IncomeViewSubPage.h"
+#include "Income/IncomeEditSubPage/IncomeEditSubPage.h"
 
 #include "View/Constants.h"
 
@@ -55,6 +56,8 @@ private:
 	void InitIncomesCreateSubPage();
 
 	void InitIncomeViewSubPage();
+	void InitIncomeEditPage();
+
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
@@ -71,6 +74,8 @@ public:
 	IncomeCreateSubPage& get_incomes_create_spage() { return m_incomes_create_spage; }
 
 	IncomeViewSubPage& get_income_view_spage() { return m_income_view_spage; }
+	IncomeEditSubPage& get_income_edit_spage() { return m_income_edit_spage; }
+
 
 private:
 	Ui::MainPage *m_ui;
@@ -89,6 +94,8 @@ private:
 	IncomeCreateSubPage m_incomes_create_spage;
 
 	IncomeViewSubPage m_income_view_spage;
+	IncomeEditSubPage m_income_edit_spage;
+
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
