@@ -18,14 +18,13 @@ IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 
 void IncomeEditSubPage::OnEditIncome()
 {
-	Income updated_income;
-	updated_income.add_time = QDate::currentDate().toString();
-	updated_income.amount = ui->Amount->value();
-	updated_income.category.id = 1 + ui->Category->currentIndex();
-	updated_income.category.name = ui->Category->currentText();
-	updated_income.expiration_time = ui->ExpirationDateEdit->date().toString();
-	updated_income.name = ui->NameLineEdit->text();
-	emit UpdateIncome(updated_income);	
+	m_income.add_time = QDate::currentDate().toString();
+	m_income.amount = ui->Amount->value();
+	m_income.category.id = 1 + ui->Category->currentIndex();
+	m_income.category.name = ui->Category->currentText();
+	m_income.expiration_time = ui->ExpirationDateEdit->date().toString();
+	m_income.name = ui->NameLineEdit->text();
+	emit UpdateIncome();
 }
 
 void IncomeEditSubPage::SetMinimumDate(const QDate& date)
@@ -33,13 +32,22 @@ void IncomeEditSubPage::SetMinimumDate(const QDate& date)
 	ui->ExpirationDateEdit->setMinimumDate(date);
 }
 
+const Income& IncomeEditSubPage::get_income()
+{
+	return m_income;
+}
+
+void IncomeEditSubPage::set_income(const Income& income)
+{
+	m_income = income;
+}
+
 void IncomeEditSubPage::Update(const Income& income)
 {
+	m_income = income;
 	ui->NameLineEdit->setText(income.name);
 	ui->Amount->setValue(income.amount);
 	ui->Category->setCurrentText(income.category.name);
-//	QDate old_date = QDate::fromString(income.expiration_time);
-//	ui->ExpirationDateEdit->setDate(old_date);
 }
 
 IncomeEditSubPage::~IncomeEditSubPage()
@@ -50,10 +58,8 @@ IncomeEditSubPage::~IncomeEditSubPage()
 IncomeCategory IncomeEditSubPage::get_category()
 {
 	IncomeCategory category;
-
 	category.id = 1 + ui->Category->currentIndex();
 	category.name = ui->Category->currentText();
-
 	return category;
 }
 

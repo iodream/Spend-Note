@@ -17,9 +17,11 @@ public:
 	void Update(const Income& income);
 	void SetMinimumDate(const QDate&);
 
+	const Income& get_income();
+	void set_income(const Income& income);
 
 signals:
-	void UpdateIncome(Income& income);
+	void UpdateIncome();
 	
 public slots:
 	void OnEditIncome();
@@ -29,5 +31,6 @@ public slots:
 
 private:
 	Ui::IncomeEditSubPage *ui;
+	Income m_income;
 };
 

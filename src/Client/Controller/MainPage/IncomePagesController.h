@@ -23,6 +23,7 @@ public:
 		std::string& hostname,
 		IdType& user_id,
 		IncomeListSubPage& incomes_page,
+		IncomeCreateSubPage& income_create_page,
 		IncomeViewSubPage& income_view_page,
 		IncomeEditSubPage& income_edit_page);
 
@@ -41,7 +42,10 @@ private:
 	IdType& m_user_id;
 
 	IncomeListSubPage& m_incomes_page;
-	//IncomeCreateSubPage& m_create_page;
+	IncomeCreateSubPage& m_income_create_page;
+
+	//IncomeEditSubPage& m_edit_page;
+
 	IncomeViewSubPage& m_income_view_page;
 	IncomeEditSubPage& m_income_edit_page;
 
@@ -57,8 +61,9 @@ signals:
 public slots:
 	void OnGoToCreateIncome();
 	void OnGoToViewIncome(const Income& income);
+	void OnCreateIncome(Income& income);
 
 	void OnGoToEditIncome(const Income& income);
 	void OnDeleteIncome(const Income& income);
-	void OnUpdateIncome(Income& income);
+	void OnUpdateIncome();
 };
