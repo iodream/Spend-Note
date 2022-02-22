@@ -56,9 +56,15 @@ void MainPageController::InitListPagesController()
 
 	connect(
 		m_list_pages_controller.get(),
-		&ListPagesController::Message,
+		&ListPagesController::ServerError,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnServerError);
+
+	connect(
+		m_list_pages_controller.get(),
+		&ListPagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 
 	connect(
 		m_list_pages_controller.get(),
@@ -93,9 +99,15 @@ void MainPageController::InitProductPagesController()
 
 	connect(
 		m_product_pages_controller.get(),
-		&ProductPagesController::Message,
+		&ProductPagesController::ServerError,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnServerError);
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductPagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 
 	connect(
 		m_product_pages_controller.get(),
@@ -123,9 +135,15 @@ void MainPageController::InitIncomePagesController()
 			m_page.get_income_edit_spage());
 	connect(
 		m_income_pages_controller.get(),
-		&IncomePagesController::Message,
+		&IncomePagesController::ServerError,
 		this,
-		&MainPageController::Message);
+		&MainPageController::OnServerError);
+
+	connect(
+		m_income_pages_controller.get(),
+		&IncomePagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 
 	connect(
 		m_income_pages_controller.get(),
@@ -173,8 +191,18 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		// go to error page;
+		m_page.SetErrorBanner("Error updating page");
 	}
+}
+
+void MainPageController::OnServerError(const int code, const std::string& desc)
+{
+	m_page.SetErrorBanner(code, desc);
+}
+
+void MainPageController::OnClientError(const std::string& desc)
+{
+	m_page.SetErrorBanner(desc);
 }
 
 bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
@@ -234,9 +262,7 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 
 		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 		{
-			emit Message(
-				QString("Error occured"),
-				QString::fromStdString(response.reason));
+			m_page.SetErrorBanner(response.status, response.reason);
 			return std::nullopt;
 		}
 

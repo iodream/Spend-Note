@@ -18,13 +18,16 @@ public:
 
 	void ChangeLoginErrorLabel(std::string reason);
 
+	void SetErrorBanner(const int code, const std::string& description);
+	void SetErrorBanner(const std::string& description);
+	void CloseErrorBanner();
+
 private:
 	Ui::LoginPage *m_ui;
 
 signals:
 	void GotoSignup();
 	void Login(LoginModel::JSONFormatter::Credentials credentials);
-
 
 private slots:
 	void OnLoginSubmitButtonClicked();

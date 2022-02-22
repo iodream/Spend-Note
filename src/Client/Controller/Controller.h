@@ -48,6 +48,5 @@ private:
 	std::unique_ptr<MainPageController>   m_main_page_controller;
 
 public slots:
-	void OnMessage(const QString& window_name, const QString& message);
 	void OnChangePage(UIPages page);
 };

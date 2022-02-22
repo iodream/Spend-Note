@@ -32,6 +32,13 @@ MainPage::MainPage(QWidget *parent)
 		this,
 		SIGNAL(GoBack()));
 
+
+	connect(
+		m_ui->CloseErrorBannerToolButton,
+		&QToolButton::clicked,
+		this,
+		&MainPage::CloseErrorBanner);
+
 	InitListsSubPage();
 	InitListCreateSubPage();
 	InitListEditSubPage();
@@ -144,4 +151,27 @@ void MainPage::ShowBalance(const Balance& money)
 {
 	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
+}
+
+void MainPage::SetErrorBanner(const int code, const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1); // expands the banner
+	m_ui->ErrorTitleLabel->setVisible(true);
+
+	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::SetErrorBanner(const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1);
+	m_ui->ErrorTitleLabel->setVisible(false);
+
+	m_ui->ErrorCodeLabel->setText("");
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::CloseErrorBanner()
+{
+	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
 }

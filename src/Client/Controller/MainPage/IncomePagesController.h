@@ -52,7 +52,8 @@ private:
 	static bool already_added;
 	void UpdateCategoryBoxes();
 signals:
-	void Message(const QString& window_name, const QString& message);
+	void ServerError(const int code, const std::string& desc);
+	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 
