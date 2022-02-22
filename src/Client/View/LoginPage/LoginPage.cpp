@@ -41,7 +41,16 @@ void LoginPage::ChangeLoginErrorLabel(std::string reason)
 void LoginPage::SetErrorBanner(const int code, const std::string& description)
 {
 	m_ui->ErrorWidget->setVisible(true);
+	m_ui->ErrorTitleLabel->setVisible(true);
 	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void LoginPage::SetErrorBanner(const std::string& description)
+{
+	m_ui->ErrorWidget->setVisible(true);
+	m_ui->ErrorTitleLabel->setVisible(false);
+	m_ui->ErrorCodeLabel->setText("");
 	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
 }
 

@@ -49,7 +49,8 @@ private:
 	ProductsSubPage& m_product_page;
 
 signals:
-	void Error(const int code, const std::string& desc);
+	void ServerError(const int code, const std::string& desc);
+	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 

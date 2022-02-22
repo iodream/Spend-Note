@@ -56,9 +56,15 @@ void MainPageController::InitListPagesController()
 
 	connect(
 		m_list_pages_controller.get(),
-		&ListPagesController::Error,
+		&ListPagesController::ServerError,
 		this,
-		&MainPageController::OnError);
+		&MainPageController::OnServerError);
+
+	connect(
+		m_list_pages_controller.get(),
+		&ListPagesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 
 	connect(
 		m_list_pages_controller.get(),
@@ -93,9 +99,9 @@ void MainPageController::InitProductPagesController()
 
 	connect(
 		m_product_pages_controller.get(),
-		&ProductPagesController::Error,
+		&ProductPagesController::ServerError,
 		this,
-		&MainPageController::OnError);
+		&MainPageController::OnServerError);
 
 	connect(
 		m_product_pages_controller.get(),
@@ -121,9 +127,9 @@ void MainPageController::InitIncomePagesController()
 
 	connect(
 		m_income_pages_controller.get(),
-		&IncomePagesController::Error,
+		&IncomePagesController::ServerError,
 		this,
-		&MainPageController::OnError);
+		&MainPageController::OnServerError);
 
 	connect(
 		m_income_pages_controller.get(),
@@ -171,15 +177,18 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		m_page.SetErrorBanner(
-			static_cast<int>(ErrorCodes::UPDATE_ERROR),
-			"Error in updating page");
+		m_page.SetErrorBanner("Error updating page");
 	}
 }
 
-void MainPageController::OnError(const int code, const std::string& desc)
+void MainPageController::OnServerError(const int code, const std::string& desc)
 {
 	m_page.SetErrorBanner(code, desc);
+}
+
+void MainPageController::OnClientError(const std::string& desc)
+{
+	m_page.SetErrorBanner(desc);
 }
 
 bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)

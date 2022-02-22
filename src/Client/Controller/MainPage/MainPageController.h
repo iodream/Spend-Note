@@ -58,7 +58,8 @@ public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnUpdateSubPage(MainSubPages page, PageData data=PageData{});
 
-	void OnError(const int code, const std::string& desc);
+	void OnServerError(const int code, const std::string& desc);
+	void OnClientError(const std::string& desc);
 
 	void OnGoBack(int n=1);
 	void OnLogout();

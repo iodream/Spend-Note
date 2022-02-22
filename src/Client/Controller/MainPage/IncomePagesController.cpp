@@ -47,7 +47,7 @@ bool IncomePagesController::UpdateIncomesPage()
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return false;
 	}
 

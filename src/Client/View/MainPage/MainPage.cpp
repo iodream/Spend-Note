@@ -136,8 +136,18 @@ void MainPage::ShowBalance(const Balance& money)
 void MainPage::SetErrorBanner(const int code, const std::string& description)
 {
 	m_ui->gridLayout_2->setRowStretch(2,1); // expands the banner
+	m_ui->ErrorTitleLabel->setVisible(true);
 
 	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::SetErrorBanner(const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1);
+	m_ui->ErrorTitleLabel->setVisible(false);
+
+	m_ui->ErrorCodeLabel->setText("");
 	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
 }
 

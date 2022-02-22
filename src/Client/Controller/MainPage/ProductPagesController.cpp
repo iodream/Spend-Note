@@ -125,7 +125,7 @@ void ProductPagesController::OnUpdateProduct()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 
@@ -166,7 +166,7 @@ void ProductPagesController::OnCreateProduct()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return ;
 	}
 
@@ -185,7 +185,7 @@ void ProductPagesController::OnDeleteProduct()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 
@@ -201,7 +201,7 @@ bool ProductPagesController::UpdateProductsPage()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return false;
 	}
 
@@ -220,7 +220,7 @@ bool ProductPagesController::UpdateProductsPage(List list)
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Error(response.status, response.reason);
+		emit ServerError(response.status, response.reason);
 		return false;
 	}
 

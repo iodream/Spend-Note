@@ -29,11 +29,4 @@ enum class MainSubPages
 	SETTINGS,
 };
 
-enum class ErrorCodes
-{
-	PASSWORDS_MISMATCH= 1,
-	EMPTY_FIELD,
-	UPDATE_ERROR,
-};
-
 const QString STYLESHEET_BACKGROUND_COLOR = "background-color:";

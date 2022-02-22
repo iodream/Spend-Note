@@ -32,7 +32,7 @@ private:
 	IncomeListSubPage& m_incomes_page;
 
 signals:
-	void Error(const int code, const std::string& desc);
+	void ServerError(const int code, const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 
