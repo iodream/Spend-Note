@@ -34,6 +34,8 @@ MainPage::MainPage(QWidget *parent)
 
 	InitListsSubPage();
 	InitListCreateSubPage();
+	InitProductQuickCreateSubPage();
+
 	InitListEditSubPage();
 	InitListViewSubPage();
 
@@ -53,6 +55,11 @@ void MainPage::InitListsSubPage()
 void MainPage::InitListCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
+}
+
+void MainPage::InitProductQuickCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_product_quick_create_spage);
 }
 
 void MainPage::InitListEditSubPage()

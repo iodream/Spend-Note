@@ -2,6 +2,8 @@
 
 #include "Net/Constants.h"
 
+#include "View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.h"
+
 #include "Models/Statistics/GetBalanceModel.h"
 
 MainPageController::MainPageController(
@@ -52,7 +54,8 @@ void MainPageController::InitListPagesController()
 			m_page.get_list_create_spage(),
 			m_page.get_list_view_spage(),
 			m_page.get_list_edit_spage(),
-			m_page.get_products_spage());
+			m_page.get_products_spage(),
+			m_page.get_product_quick_create_spage());
 
 	connect(
 		m_list_pages_controller.get(),
@@ -77,6 +80,12 @@ void MainPageController::InitListPagesController()
 		&ListPagesController::UpdatePage,
 		this,
 		&MainPageController::OnUpdateSubPage);
+
+//	connect(
+//		m_list_pages_controller.get(),
+//		&ListPagesController::CreateProduct,
+//		m_product_pages_controller.get,
+//		&ProductPagesController::OnCreateProduct);
 }
 
 void MainPageController::InitProductPagesController()

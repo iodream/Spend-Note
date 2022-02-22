@@ -9,6 +9,7 @@
 #include "List/ListCreateSubPage/ListCreateSubPage.h"
 #include "List/ListEditSubPage/ListEditSubPage.h"
 #include "List/ListViewSubPage/ListViewSubPage.h"
+#include "List/ListCreateSubPage/ProductQuickCreateSubPage.h"
 
 #include "Product/ProductsSubPage/ProductsSubPage.h"
 #include "Product/ProductCreateSubPage/ProductCreateSubPage.h"
@@ -41,6 +42,7 @@ public:
 private:
 	void InitListsSubPage();
 	void InitListCreateSubPage();
+	void InitProductQuickCreateSubPage();
 	void InitListEditSubPage();
 	void InitListViewSubPage();
 
@@ -56,6 +58,8 @@ public:
 	ListCreateSubPage& get_list_create_spage() { return m_list_create_spage; }
 	ListEditSubPage& get_list_edit_spage() { return m_list_edit_spage; }
 	ListViewSubPage& get_list_view_spage() { return m_list_view_spage; }
+	ProductQuickCreateSubPage& get_product_quick_create_spage() { return m_product_quick_create_spage; }
+
 
 	ProductsSubPage& get_products_spage() { return m_products_spage; }
 	ProductCreateSubPage& get_product_create_spage() { return m_product_create_spage; }
@@ -69,6 +73,7 @@ private:
 
 	ListsSubPage m_lists_spage;
 	ListCreateSubPage m_list_create_spage;
+	ProductQuickCreateSubPage m_product_quick_create_spage;
 	ListEditSubPage m_list_edit_spage;
 	ListViewSubPage m_list_view_spage;
 

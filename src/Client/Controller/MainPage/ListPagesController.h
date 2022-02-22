@@ -7,6 +7,7 @@
 #include "View/MainPage/List/ListViewSubPage/ListViewSubPage.h"
 #include "View/MainPage/List/ListEditSubPage/ListEditSubPage.h"
 #include "View/MainPage/Product/ProductsSubPage/ProductsSubPage.h"
+#include "View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.h"
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -23,7 +24,8 @@ public:
 		ListCreateSubPage& create_page,
 		ListViewSubPage& list_view_page,
 		ListEditSubPage& list_edit_page,
-		ProductsSubPage& product_page);
+		ProductsSubPage& product_page,
+		ProductQuickCreateSubPage& product_quick_create_page);
 
 	virtual ~ListPagesController() override {}
 
@@ -47,21 +49,23 @@ private:
 	ListViewSubPage& m_list_view_page;
 	ListEditSubPage& m_list_edit_page;
 	ProductsSubPage& m_product_page;
+	ProductQuickCreateSubPage& m_product_quick_create_page;
 
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
-
 	void GoBack(int n=1);
-	void CreateList();
 
 public slots:
-	void OnGoToProducts(const List& list);
+	void OnCreateList();
 	void OnUpdateList(const List& list);
 	void OnDeleteList(const List& list);
+	void OnQuickAddItem();
+
+	void OnGoToCreateList();
 	void OnGoToViewList();
 	void OnGoToEditList();
-	void OnGoToCreateList();
-	void OnCreateList();
+	void OnGoToProducts(const List& list);
+	void OnGoToQuickCreateProduct();
 };

@@ -13,7 +13,7 @@ enum class MainSubPages
 {
 	LISTS = 0,
 	CREATE_LIST,
-
+	QUICK_CREATE_PRODUCT,
 	EDIT_LIST,
 	VIEW_LIST,
 
