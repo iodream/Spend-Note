@@ -98,6 +98,10 @@ void ListCreateSubPage::AppendItem(Item* item)
 {
 	InsertItem(item, GetListSize());
 }
+IdType ListCreateSubPage::GetListState()
+{
+	return m_ui->ListState->currentIndex();
+}
 
 void ListCreateSubPage::Update()
 {
@@ -109,4 +113,11 @@ void ListCreateSubPage::InsertItem(Item* item, int idx)
 	m_ui->ItemsLayout->insertWidget(idx, item);
 	item->SetNumber(idx + 1);
 	SetListSize(GetListSize() + 1);
+}
+void ListCreateSubPage::FillStateBox(const std::vector<ListState> &states)
+{
+	for(const auto& el : states)
+	{
+		m_ui->ListState->addItem(el.name, el.id);
+	}
 }

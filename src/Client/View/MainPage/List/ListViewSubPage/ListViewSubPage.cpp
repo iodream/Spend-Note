@@ -41,4 +41,5 @@ void ListViewSubPage::Update(const List& list)
 {
 	set_list(list);
 	m_ui->ListName->setText(m_list.name);
+	m_ui->StateName->setText(m_list.state.name);
 }

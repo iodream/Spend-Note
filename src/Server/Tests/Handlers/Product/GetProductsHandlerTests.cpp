@@ -71,7 +71,7 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;
+	request.method = Net::HTTP_METHOD_GET;
 
 	auto response = handler->AuthHandle(request);
 
@@ -94,7 +94,7 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;
+	request.method = Net::HTTP_METHOD_GET;
 
 	auto response = handler->AuthHandle(request);
 

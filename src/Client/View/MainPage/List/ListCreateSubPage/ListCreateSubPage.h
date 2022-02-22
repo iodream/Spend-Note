@@ -29,6 +29,8 @@ public:
 	void ClearItems();
 	void AddProductToVector(Product);
 	std::vector<Product>& GetItems();
+	void FillStateBox(const std::vector<ListState>& states);
+	IdType GetListState();
 
 private:
 	void SetListSize(int size);

@@ -51,6 +51,9 @@ private:
 	ProductsSubPage& m_product_page;
 	ProductQuickCreateSubPage& m_product_quick_create_page;
 
+	void FillBoxOfStates();
+	static bool already_added;
+
 signals:
 	void Message(const QString& window_name, const QString& message);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -59,13 +62,13 @@ signals:
 
 public slots:
 	void OnCreateList();
-	void OnUpdateList(const List& list);
+	void OnUpdateList();
 	void OnDeleteList(const List& list);
 	void OnQuickAddItem();
 
 	void OnGoToCreateList();
 	void OnGoToViewList();
 	void OnGoToEditList();
-	void OnGoToProducts(const List& list);
 	void OnGoToQuickCreateProduct();
+	void OnGoToProducts(const List& list);
 };

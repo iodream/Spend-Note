@@ -10,6 +10,7 @@
 #include "Repositories/ListRepository/ListRepository.h"
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
+#include "Repositories/StatisticsRepository/StatisticsRepository.h"
 
 namespace db
 {
@@ -61,6 +62,10 @@ public:
 
 	std::vector<Product> GetDailyList(IdType user_id) override;
 
+	std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) override;
+	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
+	std::vector<ExpensePerDay> ExpencesDynamics(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -72,5 +77,6 @@ private:
 	ListRepository m_lists;
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
+	StatisticsRepository m_statistics;
 };
 }

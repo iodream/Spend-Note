@@ -34,6 +34,9 @@ public:
 
 	bool UpdateViewPage(Product product);
 
+	void SetRangeOfSpinBoxes();
+	void UpdateCategoryBox();
+
 private:
 	void ConnectProductsPage();
 	void ConnectViewPage();
@@ -49,6 +52,8 @@ private:
 	ProductViewSubPage& m_view_page;
 	ProductEditSubPage& m_edit_page;
 	ProductCreateSubPage& m_create_page;
+
+	static bool already_added;
 
 signals:
 	void Message(const QString& window_name, const QString& message);

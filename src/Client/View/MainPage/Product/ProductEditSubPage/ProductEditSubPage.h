@@ -2,9 +2,11 @@
 
 #include <QString>
 #include <QWidget>
+#include <QDateTime>
 
 #include "Common.h"
 #include "Entities/Entities.h"
+#include "Utils.h"
 
 namespace Ui {
 class ProductEditSubPage;
@@ -22,6 +24,9 @@ public:
 	Product get_product();
 
 	void Update();
+	void FillCategoryBox(const std::vector<ProductCategory>& categories);
+	void SetRangeOfSpinBox();
+
 signals:
 	void UpdateProduct();
 

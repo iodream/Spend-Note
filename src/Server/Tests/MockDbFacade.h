@@ -48,4 +48,8 @@ public:
 	MOCK_METHOD(bool, CanUserEditIncome, (db::IdType, db::IdType), (override));
 
 	MOCK_METHOD(std::vector<db::Product>, GetDailyList, (db::IdType), (override));
+
+	MOCK_METHOD(std::vector<db::ExpensePerCategory>, ExpensesPerCategory, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::ExpensePercentagePerCategory>, ExpensesPercentagePerCategory, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::ExpensePerDay>, ExpencesDynamics, (db::IdType), (override));
 };
