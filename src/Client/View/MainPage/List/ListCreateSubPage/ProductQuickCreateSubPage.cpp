@@ -12,6 +12,9 @@ ProductQuickCreateSubPage::ProductQuickCreateSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&ProductQuickCreateSubPage::QuickAddItem);
+
+	m_ui->BuyUntil->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
 }
 
 ProductQuickCreateSubPage::~ProductQuickCreateSubPage()
@@ -31,7 +34,7 @@ Money ProductQuickCreateSubPage::GetPrice()
 
 BigInt ProductQuickCreateSubPage::GetAmount()
 {
-	return m_ui->Amount->text().toLongLong();
+	return m_ui->Amount->value();
 }
 
 bool ProductQuickCreateSubPage::GetIsBought()
@@ -41,12 +44,30 @@ bool ProductQuickCreateSubPage::GetIsBought()
 
 QString ProductQuickCreateSubPage::GetBuyUntil()
 {
-	return m_ui->BuyUntil->text();
+	return toDBstring(m_ui->BuyUntil->dateTime());
 }
 
 BigInt ProductQuickCreateSubPage::GetPriority()
 {
-	return m_ui->Priority->text().toLongLong();
+	return m_ui->Priority->value();
+}
+
+QString ProductQuickCreateSubPage::GetCategoryName()
+{
+	return m_ui->Category->currentText();
+}
+
+IdType ProductQuickCreateSubPage::GetCategoryId()
+{
+	return m_ui->Category->currentIndex() + 1;
+}
+
+void ProductQuickCreateSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)
+{
+	for(const auto& el : categories)
+	{
+		m_ui->Category->addItem(el.name, el.id);
+	}
 }
 
 void ProductQuickCreateSubPage::Clear()
@@ -58,4 +79,15 @@ void ProductQuickCreateSubPage::Clear()
 	m_ui->BuyUntil->clear();
 	m_ui->Name->clear();
 	m_ui->IsBought->setChecked(false);
+}
+
+void ProductQuickCreateSubPage::SetRangeOfSpinBox()
+{
+	m_ui->Amount->setRange(1, 100); // need to be changed do not hardcode
+	m_ui->Priority->setRange(1, 5);
+}
+
+void ProductQuickCreateSubPage::SetMinimumDate(const QDate& date)
+{
+	m_ui->BuyUntil->setMinimumDate(date);
 }

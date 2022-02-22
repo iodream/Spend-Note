@@ -23,14 +23,16 @@ public:
 	QString GetListName();
 
 	void AppendItem(Item* item);
-	void Update();
 	void InsertItem(Item* item, int idx);
 	void RemoveItem(Item* item);
 	void ClearItems();
+
 	void AddProductToVector(Product);
 	std::vector<Product>& GetItems();
+
 	void FillStateBox(const std::vector<ListState>& states);
 	IdType GetListState();
+	void Update();
 
 private:
 	void SetListSize(int size);

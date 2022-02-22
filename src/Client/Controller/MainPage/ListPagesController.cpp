@@ -5,6 +5,8 @@
 #include "Models/List/RemoveListModel.h"
 #include "Models/List/UpdateListModel.h"
 #include "Models/Product/AddProductModel.h"
+#include "Models/Product/GetProductCategoriesModel.h"
+
 #include "View/MainPage/List/ListCreateSubPage/Item.h"
 #include "Models/List/GetListStatesModel.h"
 
@@ -133,6 +135,13 @@ bool ListPagesController::UpdateListPage()
 bool ListPagesController::UpdateListCreatePage()
 {
 	m_create_page.Update();
+	return true;
+}
+
+bool ListPagesController::UpdateListQuickCreatePage()
+{
+	UpdateCategoryBox();
+	SetRangeOfSpinBoxes();
 	return true;
 }
 
@@ -287,6 +296,7 @@ void ListPagesController::OnGoToViewList()
 void ListPagesController::OnGoToCreateList()
 {
 	m_create_page.ClearItems();
+	FillBoxOfStates();
 	emit ChangeSubPage(MainSubPages::CREATE_LIST);
 }
 
@@ -300,15 +310,15 @@ void ListPagesController::OnQuickAddItem()
 {
 	Product new_item;
 	new_item.name = m_product_quick_create_page.GetName();
-	new_item.add_date = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-	new_item.purchase_date = "";
 	new_item.is_bought = m_product_quick_create_page.GetIsBought();
 	new_item.amount = m_product_quick_create_page.GetAmount();
 	new_item.buy_until_date = m_product_quick_create_page.GetBuyUntil();
 	new_item.price = m_product_quick_create_page.GetPrice();
 	new_item.priority = m_product_quick_create_page.GetPriority();
-	new_item.category.id = 1;
-	new_item.category.name = "";
+	new_item.category.id = m_product_quick_create_page.GetCategoryId();
+	new_item.category.name = m_product_quick_create_page.GetCategoryName();
+	new_item.add_date = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+	new_item.purchase_date = "";
 
 	if(!AddProductModel::CheckFields(new_item))
 	{
@@ -401,4 +411,41 @@ void ListPagesController::OnUpdateList()
 	emit UpdatePage(MainSubPages::PRODUCTS, data);
 	emit UpdatePage(MainSubPages::VIEW_LIST, data);
 	emit GoBack();
+}
+
+bool ListPagesController::category_already_added = false;
+
+void ListPagesController::UpdateCategoryBox()
+{
+	if(!category_already_added)
+	{
+		GetProductCategoriesModel model{m_hostname};
+		auto request = model.FormRequest();
+
+		try
+		{
+			auto response = m_http_client.Request(request);
+
+			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+			{
+				emit Message(
+					QString("Error occured"),
+					QString::fromStdString(response.reason));
+				return ;
+			}
+			m_product_quick_create_page.FillCategoryBox(model.ParseResponse(response));
+			category_already_added = true;
+		}
+		catch (const Poco::Exception& ex)
+		{
+			return;
+		}
+
+	}
+}
+
+
+void ListPagesController::SetRangeOfSpinBoxes()
+{
+	m_product_quick_create_page.SetRangeOfSpinBox();
 }

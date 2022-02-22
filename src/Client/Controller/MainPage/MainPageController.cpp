@@ -215,6 +215,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		return m_income_pages_controller->UpdateIncomeViewPage(data);
 	case MainSubPages::SETTINGS:
 		break;
+	case MainSubPages::QUICK_CREATE_PRODUCT:
+		return m_list_pages_controller->UpdateListQuickCreatePage();
 	}
 	return update_succeeded;
 }

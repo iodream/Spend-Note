@@ -33,6 +33,10 @@ public:
 	bool UpdateListCreatePage();
 	bool UpdateListViewPage(PageData& data);
 	bool UpdateListEditPage(PageData& data);
+	bool UpdateListQuickCreatePage();
+	void UpdateCategoryBox();
+	void SetRangeOfSpinBoxes();
+
 
 private:
 	void ConnectListPage();
@@ -53,6 +57,8 @@ private:
 
 	void FillBoxOfStates();
 	static bool already_added;
+	static bool category_already_added;
+
 
 signals:
 	void Message(const QString& window_name, const QString& message);

@@ -12,6 +12,9 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&ProductEditSubPage::UpdateProduct);
+
+	m_ui->BuyUntil->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
 }
 
 ProductEditSubPage::~ProductEditSubPage()
@@ -59,4 +62,9 @@ void ProductEditSubPage::SetRangeOfSpinBox()
 {
 	m_ui->Amount->setRange(1, 100); // need to be changed do not hardcode
 	m_ui->Priority->setRange(1, 5);
+}
+
+void ProductEditSubPage::SetMinimumDate(const QDate& date)
+{
+	m_ui->BuyUntil->setMinimumDate(date);
 }
