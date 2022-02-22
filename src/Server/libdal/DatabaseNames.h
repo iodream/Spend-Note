@@ -67,4 +67,10 @@ namespace db
 		const std::string LOGIN = "login";
 		const std::string PASSWORD = "password";
 	}
+
+	namespace statistics
+	{
+		const std::string TOTAL_PRICE = "totalPrice";
+		const std::string PURCHASE_DATE = "purchase_date";
+	}
 }
