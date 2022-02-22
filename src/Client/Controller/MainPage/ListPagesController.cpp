@@ -146,9 +146,7 @@ void ListPagesController::FillBoxOfStates()
 
 			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 			{
-				emit Message(
-					QString("Error!"),
-					QString::fromStdString(response.reason));
+				emit ServerError(response.status, response.reason);
 				return ;
 			}
 
