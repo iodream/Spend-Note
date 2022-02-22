@@ -3,6 +3,8 @@
 #include "Exceptions/NonexistentResource.h"
 #include "DatabaseNames.h"
 
+#include <iostream>
+
 namespace db
 {
 
@@ -24,13 +26,13 @@ std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType
 		pqxx::result expenses = w.exec(
 			"SELECT " +
 				product::CATEGORY_ID +
-				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) AS " + statistics::TOTAL_PRICE +
+				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + "), 0) AS " + statistics::TOTAL_PRICE +
 			" FROM " + product::TABLE_NAME +
 			" JOIN " + list::TABLE_NAME +
 			" ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
 			" WHERE " +
-				list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " +
-				product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
 			"GROUP BY " + product::CATEGORY_ID + ";");
 
 		w.commit();
@@ -68,8 +70,12 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 			" ON " +
 				db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " +
 				db::list::TABLE_NAME + "." + db::list::ID +
-			" WHERE " + db::list::USER_ID + " = " + w.quote(user_id) + " AND " + db::product::IS_BOUGHT + ";");
+			" WHERE " +
+				db::list::USER_ID + " = " + w.quote(user_id) + " AND " +
+				db::product::IS_BOUGHT + " AND " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK';");
 
+		std::cout << "Total expences: " << total_expenses << "\n";
 		if (total_expenses == 0)
 		{
 			return {};
@@ -78,16 +84,16 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 		pqxx::result expenses = w.exec(
 			"SELECT " +
 				product::CATEGORY_ID +
-				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) / (" +
-				w.quote(total_expenses) + "::DECIMAL) AS " + statistics::TOTAL_PRICE +
+				", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + "), 0) / (" +
+				w.quote(total_expenses) + "::DECIMAL) * 100 AS " + statistics::TOTAL_PRICE +
 			" FROM " + product::TABLE_NAME +
 			" JOIN " + list::TABLE_NAME +
 			" ON " +
 				product::TABLE_NAME + "." + product::LIST_ID + " = " +
 				list::TABLE_NAME + "." + list::ID +
 			" WHERE " +
-				list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " +
-				product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
 			"GROUP BY " + product::CATEGORY_ID + ";");
 
 		w.commit();
@@ -108,7 +114,7 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 	}
 }
 
-std::vector<ExpensePerDay> StatisticsRepository::ExpencesDynamics(IdType user_id)
+std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id)
 {
 	try
 	{
@@ -120,10 +126,12 @@ std::vector<ExpensePerDay> StatisticsRepository::ExpencesDynamics(IdType user_id
 		}
 
 		pqxx::result expences = w.exec(
-			"SELECT DATE(" + product::PURCHASE_DATE + ") AS " + statistics::PURCHASE_DATE + ", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + ", 0) AS " + statistics::TOTAL_PRICE +
+			"SELECT DATE(" + product::PURCHASE_DATE + ") AS " + statistics::PURCHASE_DATE + ", COALESCE(SUM(" + product::AMOUNT+ " * " + product::PRICE + "), 0) AS " + statistics::TOTAL_PRICE +
 			" FROM " + product::TABLE_NAME +
 			" JOIN " + list::TABLE_NAME + " ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
-			" WHERE " + list::TABLE_NAME + "." + user::ID + " = " + w.quote(user_id) + " AND " + product::PURCHASE_DATE + " < LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			" WHERE " +
+				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
 			"GROUP BY DATE(" + product::PURCHASE_DATE + ");");
 
 		w.commit();

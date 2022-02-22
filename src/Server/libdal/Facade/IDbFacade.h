@@ -68,6 +68,6 @@ public:
 
 	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
-	virtual std::vector<ExpensePerDay> ExpencesDynamics(IdType user_id) = 0;
+	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
 };
 }
