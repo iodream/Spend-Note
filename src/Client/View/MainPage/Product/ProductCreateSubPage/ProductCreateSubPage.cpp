@@ -29,7 +29,7 @@ QString ProductCreateSubPage::GetName()
 
 Money ProductCreateSubPage::GetPrice()
 {
-	return m_ui->Price->text().toLongLong();
+	return m_ui->Price->value();
 }
 
 BigInt ProductCreateSubPage::GetAmount()

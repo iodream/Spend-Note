@@ -30,7 +30,7 @@ void ProductEditSubPage::set_product(const Product& product)
 Product ProductEditSubPage::get_product()
 {
 	m_product.name = m_ui->Name->text();
-	m_product.price = m_ui->Price->text().toLongLong();
+	m_product.price = m_ui->Price->value();
 	m_product.amount = m_ui->Amount->value();
 	m_product.buy_until_date = toDBstring(m_ui->BuyUntil->dateTime());
 	m_product.priority = m_ui->Priority->value();
@@ -42,7 +42,7 @@ Product ProductEditSubPage::get_product()
 void ProductEditSubPage::Update()
 {
 	m_ui->Name->setText(m_product.name);
-	m_ui->Price->setText(QString::number(m_product.price));
+	m_ui->Price->setValue(m_product.price);
 	m_ui->Amount->setDisplayIntegerBase(m_product.amount);
 	m_ui->BuyUntil->setDateTime(QDateTime::fromString(m_product.buy_until_date, "yyyy-mm-dd HH:mm:ss.zzz"));
 	m_ui->Priority->setDisplayIntegerBase(m_product.priority);

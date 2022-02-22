@@ -26,20 +26,5 @@ bool AddProductModel::CheckFields(Product& product)
 	std::string str = EraseWhitespace(product.name.toStdString());
 	if(str.empty())
 		return false;
-	str = product.amount;
-	if(str.empty())
-		return false;
-	str = EraseWhitespace(product.add_date.toStdString());
-	if(str.empty())
-		return false;
-	str = EraseWhitespace(product.buy_until_date.toStdString());
-	if(str.empty())
-		return false;
-	str = product.price;
-	if(str.empty())
-		return false;
-	str = product.priority;
-	if(str.empty())
-		return false;
 	return true;
 }
