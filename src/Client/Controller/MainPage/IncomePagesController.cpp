@@ -155,7 +155,7 @@ void IncomePagesController::UpdateCategoryBoxes()
 			return;
 		}
 	}
-
+}
 void IncomePagesController::OnGoToEditIncome(const Income& income)
 {
 	PageData data{};

@@ -17,34 +17,36 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 option(TestLibdal "build test executable" OFF)
 
 add_library(libdal STATIC
-  Types.h
+	Types.h
 
-  DTOs/Income.h
-  DTOs/List.h
-  DTOs/IncomeCategory.h
-  DTOs/ListState.h
-  DTOs/User.h
-  DTOs/Product.h
-  DTOs/ProductCategory.h
+	DTOs/Income.h
+	DTOs/List.h
+	DTOs/IncomeCategory.h
+	DTOs/ListState.h
+	DTOs/User.h
+	DTOs/Product.h
+	DTOs/ProductCategory.h
+	DTOs/Statistics.h
 
-  Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
-  Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
-  Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h Repositories/IncomeCategoryRepository/IncomeCategoryRepository.cpp
-  Repositories/ListStateRepository/ListStateRepository.h Repositories/ListStateRepository/ListStateRepository.cpp
-  Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
-  Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
-  Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
-  Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
+	Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
+	Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
+	Repositories/IncomeCategoryRepository/IncomeCategoryRepository.h Repositories/IncomeCategoryRepository/IncomeCategoryRepository.cpp
+	Repositories/ListStateRepository/ListStateRepository.h Repositories/ListStateRepository/ListStateRepository.cpp
+	Repositories/UserRepository/UserRepository.h Repositories/UserRepository/UserRepository.cpp
+	Repositories/ProductRepository/ProductRepository.h Repositories/ProductRepository/ProductRepository.cpp
+	Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
+	Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
+	Repositories/StatisticsRepository/StatisticsRepository.h Repositories/StatisticsRepository/StatisticsRepository.cpp
 
-  Facade/IDbFacade.h
-  Facade/DbFacade.h
-  Facade/DbFacade.cpp
+	Facade/IDbFacade.h
+	Facade/DbFacade.h
+	Facade/DbFacade.cpp
 
-  Exceptions/DatabaseFailure.h
-  Exceptions/SQLFailure.h
-  Exceptions/NonexistentResource.h
+	Exceptions/DatabaseFailure.h
+	Exceptions/SQLFailure.h
+	Exceptions/NonexistentResource.h
 
-  DatabaseNames.h
+	DatabaseNames.h
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)
