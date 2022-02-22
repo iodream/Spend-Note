@@ -49,7 +49,7 @@ using ProductCategoriesJSONParser =
 	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;
 
 using ExpensePerDayJSONParser =
-	ExpensePerDayBase<ExpensePerDay>;
+	ExpensePerDayJSONParserBase<ExpensePerDay>;
 using ExpensesPerDayJSONParser =
 	ArrayJSONParserBase<ExpensePerDayJSONParser, ExpensePerDay>;
 using ExpensesPerCategoryJSONParser =
