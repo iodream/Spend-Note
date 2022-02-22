@@ -168,9 +168,7 @@ void ListPagesController::FillBoxOfStates()
 
 			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 			{
-				emit Message(
-					QString("Error!"),
-					QString::fromStdString(response.reason));
+				emit ServerError(response.status, response.reason);
 				return ;
 			}
 
@@ -241,10 +239,7 @@ void ListPagesController::OnCreateList()
 
 		if(!model.CheckFields(new_product))
 		{
-			emit Message(
-					QString("Error!"),
-					QString("Product data can't be empty")
-					);
+			emit ClientError("Product data can't be empty");
 			return;
 		}
 		auto request  = model.FormRequest(new_product);
@@ -260,9 +255,7 @@ void ListPagesController::OnCreateList()
 
 		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 		{
-			emit Message(
-			QString("Error!"),
-				QString::fromStdString(response.reason));
+			emit ServerError(response.status, response.reason);
 			return ;
 		}
 	}
@@ -315,10 +308,7 @@ void ListPagesController::OnQuickAddItem()
 
 	if(!AddProductModel::CheckFields(new_item))
 	{
-		emit Message(
-				QString("Error!"),
-				QString("Product data can't be empty")
-				);
+		emit ClientError("Product data can't be empty");
 		return;
 	}
 
@@ -414,9 +404,7 @@ void ListPagesController::UpdateCategoryBox()
 
 			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 			{
-				emit Message(
-					QString("Error occured"),
-					QString::fromStdString(response.reason));
+				emit ServerError(response.status, response.reason);
 				return ;
 			}
 			m_product_quick_create_page.FillCategoryBox(model.ParseResponse(response));

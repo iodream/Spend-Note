@@ -142,17 +142,13 @@ void IncomePagesController::OnCreateIncome(Income& income)
 
 	if(!model.CheckFields(income))
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString("Fields can't be empty!"));
+		emit ClientError("Fields can't be empty!");
 		return;
 	}
 
 	if(!model.CheckExpDate(income))
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString("Expiration date can't be in the past"));
+		emit ClientError("Expiration date can't be in the past");
 		return;
 	}
 
@@ -168,9 +164,7 @@ void IncomePagesController::OnCreateIncome(Income& income)
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 
@@ -193,9 +187,7 @@ void IncomePagesController::UpdateCategoryBoxes()
 
 			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 			{
-				emit Message(
-					QString("Error occured"),
-					QString::fromStdString(response.reason));
+				emit ServerError(response.status, response.reason);
 				return ;
 			}
 
@@ -236,9 +228,7 @@ void IncomePagesController::OnDeleteIncome(const Income& income)
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 	emit GoBack();
@@ -252,17 +242,13 @@ void IncomePagesController::OnUpdateIncome()
 
 	if(!model.CheckFields(income))
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString("Fields can't be empty!"));
+		emit ClientError("Fields can't be empty!");
 		return;
 	}
 
 	if(model.CheckExpDate(income))
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString("Expiration date can't be in the past"));
+		emit ClientError("Expiration date can't be in the past");
 		return;
 	}
 
@@ -278,9 +264,7 @@ void IncomePagesController::OnUpdateIncome()
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 	emit GoBack();
