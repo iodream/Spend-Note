@@ -2,23 +2,22 @@
 
 #include <QString>
 #include <QWidget>
-#include <QDateTime>
 
 #include "Common.h"
-#include "Entities/Entities.h"
 #include "Utils.h"
+#include "Entities/Entities.h"
 
 namespace Ui {
-class ProductCreateSubPage;
+class ProductQuickCreateSubPage;
 }
 
-class ProductCreateSubPage : public QWidget
+class ProductQuickCreateSubPage : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit ProductCreateSubPage(QWidget *parent = nullptr);
-	~ProductCreateSubPage();
+	explicit ProductQuickCreateSubPage(QWidget *parent = nullptr);
+	~ProductQuickCreateSubPage();
 
 	QString GetName();
 	Money GetPrice();
@@ -28,15 +27,15 @@ public:
 	BigInt GetPriority();
 	IdType GetCategoryId();
 	QString GetCategoryName();
-
-	void Clear();
-	void FillCategoryBox(const std::vector<ProductCategory>& categories);
 	void SetRangeOfSpinBox();
 	void SetMinimumDate(const QDate& date);
 
+	void Clear();
+	void FillCategoryBox(const std::vector<ProductCategory>& categories);
+
 signals:
-	void CreateProduct();
+	void QuickAddItem();
 
 private:
-	Ui::ProductCreateSubPage *m_ui;
+	Ui::ProductQuickCreateSubPage *m_ui;
 };

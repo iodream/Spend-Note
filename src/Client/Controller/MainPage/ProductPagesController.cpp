@@ -160,6 +160,7 @@ void ProductPagesController::OnCreateProduct()
 	new_product.list_id = m_list_id;
 
 	auto request  = model.FormRequest(new_product);
+	//todo catch poco exception
 	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)

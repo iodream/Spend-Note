@@ -34,6 +34,7 @@ void LoginPageController::ConnectPage()
 		this,
 		&LoginPageController::OnGoToSignupPage);
 
+
 #ifdef QT_DEBUG
 	QShortcut *shortcut = new QShortcut(QKeySequence("Return"), &m_page);
 	connect(
