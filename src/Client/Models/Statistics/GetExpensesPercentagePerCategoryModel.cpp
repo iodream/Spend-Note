@@ -1,3 +1,4 @@
+
 #include "GetExpensesPercentagePerCategoryModel.h"
 
 Net::Request GetExpensesPercentagePerCategoryModel::FormRequest(IdType user_id)

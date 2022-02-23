@@ -11,8 +11,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Charts REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Charts REQUIRED)
 
 set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
@@ -62,7 +62,7 @@ target_link_libraries(
     ${Spend-Note-Client_LIBS}
 )
 
-target_link_libraries(Spend-Note-Client PRIVATE )
+target_link_libraries(Spend-Note-Client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 
 set_target_properties(Spend-Note-Client PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
