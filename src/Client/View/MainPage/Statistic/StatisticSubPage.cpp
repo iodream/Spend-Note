@@ -12,8 +12,9 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 	m_ui(new Ui::StatisticSubPage)
 {
 	m_ui->setupUi(this);
-	m_pie_persent_chart = InitPieChart(m_ui->PercentChart);
+	m_pie_percent_chart = InitPieChart(m_ui->PercentChart);
 	m_pie_amount_chart = InitPieChart(m_ui->AmountChart);
+	m_bar_balance_chart = InitBarChart(m_ui->BalanceChart);
 }
 
 StatisticSubPage::~StatisticSubPage()

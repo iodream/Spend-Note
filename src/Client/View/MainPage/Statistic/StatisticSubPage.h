@@ -34,7 +34,7 @@ private slots:
 
 private:
 	Ui::StatisticSubPage *m_ui;
-	QChart* m_pie_persent_chart;
+	QChart* m_pie_percent_chart;
 	QChart* m_pie_amount_chart;
 	QChart* m_bar_balance_chart;
 
