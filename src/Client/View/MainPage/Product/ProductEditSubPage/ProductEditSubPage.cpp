@@ -43,9 +43,9 @@ void ProductEditSubPage::Update()
 {
 	m_ui->Name->setText(m_product.name);
 	m_ui->Price->setValue(m_product.price);
-	m_ui->Amount->setDisplayIntegerBase(m_product.amount);
+	m_ui->Amount->setValue(m_product.amount);
 	m_ui->BuyUntil->setDateTime(QDateTime::fromString(m_product.buy_until_date, "yyyy-mm-dd HH:mm:ss.zzz"));
-	m_ui->Priority->setDisplayIntegerBase(m_product.priority);
+	m_ui->Priority->setValue(m_product.priority);
 	m_ui->Category->setPlaceholderText(m_product.category.name);
 	m_ui->IsBought->setChecked(m_product.is_bought);
 }

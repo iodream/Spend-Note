@@ -20,6 +20,7 @@ MainPageController::MainPageController(
 	InitListPagesController();
 	InitProductPagesController();
 	InitIncomePagesController();
+	InitDailyListPageController();
 }
 
 void MainPageController::ConnectPage()
@@ -142,6 +143,7 @@ void MainPageController::InitIncomePagesController()
 			m_page.get_incomes_create_spage(),
 			m_page.get_income_view_spage(),
 			m_page.get_income_edit_spage());
+
 	connect(
 		m_income_pages_controller.get(),
 		&IncomePagesController::ServerError,
@@ -163,6 +165,40 @@ void MainPageController::InitIncomePagesController()
 	connect(
 		m_income_pages_controller.get(),
 		&IncomePagesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
+void MainPageController::InitDailyListPageController()
+{
+	m_daily_list_page_controller =
+		std::make_unique<DailyListPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_daily_list_spage());
+
+	connect(
+		m_daily_list_page_controller.get(),
+		&DailyListPageController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_daily_list_page_controller.get(),
+		&DailyListPageController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_daily_list_page_controller.get(),
+		&DailyListPageController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_daily_list_page_controller.get(),
+		&DailyListPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
 }
@@ -247,7 +283,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::SETTINGS:
 		break;
 	case MainSubPages::DAILY_LIST:
-		break;
+		return m_daily_list_page_controller->UpdateDailyListPage();
 	case MainSubPages::QUICK_CREATE_PRODUCT:
 		return m_list_pages_controller->UpdateListQuickCreatePage();
 	}

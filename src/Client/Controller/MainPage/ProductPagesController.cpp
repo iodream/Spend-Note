@@ -76,7 +76,6 @@ void ProductPagesController::ConnectViewPage()
 		&ProductPagesController::OnDeleteProduct);
 }
 
-
 void ProductPagesController::ConnectEditPage()
 {
 	connect(
