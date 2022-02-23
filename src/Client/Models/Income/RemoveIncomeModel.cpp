@@ -1,4 +1,5 @@
 #include "RemoveIncomeModel.h"
+#include "Utils.h"
 
 Net::Request RemoveIncomeModel::FormRequest(const IncomeId& income_id)
 {

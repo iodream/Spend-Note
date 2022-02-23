@@ -27,6 +27,7 @@ public:
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
+
 private:
 	void ConnectPage();
 
@@ -50,15 +51,17 @@ private:
 	std::unique_ptr<ProductPagesController> m_product_pages_controller;
 	std::unique_ptr<IncomePagesController> m_income_pages_controller;
 
+
 signals:
-	void Message(const QString& window_name, const QString& message);
 	void ChangePage(UIPages page);
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnUpdateSubPage(MainSubPages page, PageData data=PageData{});
 
-	void OnGoBack(int n=1);
+	void OnServerError(const int code, const std::string& desc);
+	void OnClientError(const std::string& desc);
 
+	void OnGoBack(int n=1);
 	void OnLogout();
 };
