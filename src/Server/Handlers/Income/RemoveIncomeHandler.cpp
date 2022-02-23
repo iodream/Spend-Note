@@ -26,7 +26,7 @@ Net::Response RemoveIncomeHandler::AuthHandle(const Net::Request& request)
 	if (!m_facade->CanUserEditIncome(request.uid, income_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
-			"Remove income with id " + std::to_string(income_id) + " is forbidden");
+			"Remove income with id \"" + std::to_string(income_id) + "\" is forbidden");
 	}
 
 	m_facade->RemoveIncome(income_id);
