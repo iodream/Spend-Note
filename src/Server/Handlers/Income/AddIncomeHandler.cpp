@@ -16,6 +16,14 @@ Net::Response AddIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+
+	if (request.uid != user_id){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"User with id \"" + std::to_string(request.uid) +
+			"\" can't create income for user with id \"" + std::to_string(user_id) + "\"");
+	}
+
 	auto json_payload = request.json_payload.object();
 	auto income = m_parser.Parse(json_payload);
 	auto income_db = ToDBIncome(income, user_id);

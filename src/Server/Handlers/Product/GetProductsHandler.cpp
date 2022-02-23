@@ -19,6 +19,14 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 	Q_UNUSED(request);
 
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
+
+	if (!m_facade->CanUserEditList(request.uid, list_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"User with id \"" + std::to_string(request.uid) +
+			"\" can't get products for list with id \"" + std::to_string(list_id) + "\"");;
+	}
+
 	std::vector<db::Product> db_products;
 	try
 	{
@@ -27,7 +35,7 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
-			"List with id = " + std::to_string(list_id) + " not found");
+			"List with id = \"" + std::to_string(list_id) + "\" not found");
 	}
 
 	std::vector<Product> products;

@@ -19,6 +19,14 @@ Net::Response GetIncomesHandler::AuthHandle(const Net::Request& request)
 	Q_UNUSED(request);
 
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+
+	if (request.uid != user_id){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"User with id \"" + std::to_string(request.uid) +
+			"\" can't get incomes for user with id \"" + std::to_string(user_id) + "\"");
+	}
+
 	std::vector<db::Income> db_incomes;
 	try {
 		db_incomes = m_facade->GetAllIncomes(user_id);

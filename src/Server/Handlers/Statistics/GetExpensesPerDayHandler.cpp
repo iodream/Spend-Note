@@ -20,6 +20,14 @@ Net::Response GetExpensesPerDayHandler::AuthHandle(const Net::Request& request)
 	Q_UNUSED(request);
 
 	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+
+	if (request.uid != user_id){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"User with id \"" + std::to_string(request.uid) +
+			"\" can't get expenses for user with id \"" + std::to_string(user_id) + "\"");
+	}
+
 	std::vector<db::ExpensePerDay> db_expenses;
 
 	try {
