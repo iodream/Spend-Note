@@ -187,7 +187,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../../resources.qrc">
-         <normaloff>:/Icons/Icons/edit.png</normaloff>:/Icons/Icons/edit.png</iconset>
+         <normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</iconset>
        </property>
        <property name="iconSize">
         <size>

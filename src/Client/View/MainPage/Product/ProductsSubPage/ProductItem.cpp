@@ -7,11 +7,11 @@ namespace {
 
 //const QString COLOR_BOUGHT = "rgba(23, 207, 63, 50%)";
 //const QString COLOR_NOT_BOUGHT = "rgba(25, 96, 209, 50%)";
-const QString COLOR_PRIO_ONE = "rgba(25, 96, 209, 50%)";
-const QString COLOR_PRIO_TWO = "rgba(25, 209, 108, 50%)";
-const QString COLOR_PRIO_THREE = "rgba(175, 209, 25, 50%)";
-const QString COLOR_PRIO_FOUR = "rgba(209, 151, 25, 50%)";
-const QString COLOR_PRIO_FIVE = "rgba(214, 108, 15, 50%)";
+const QString COLOR_PRIO_FIVE = "rgba(25, 96, 209, 50%)";
+const QString COLOR_PRIO_FOUR = "rgba(35, 217, 108, 50%)";
+const QString COLOR_PRIO_THREE = "rgba(202, 224, 31, 50%)";
+const QString COLOR_PRIO_TWO = "rgba(224, 133, 29, 50%)";
+const QString COLOR_PRIO_ONE = "rgba(201, 60, 32, 50%)";
 
 
 }

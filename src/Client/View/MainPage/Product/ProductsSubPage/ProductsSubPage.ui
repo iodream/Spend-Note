@@ -211,7 +211,7 @@
             </font>
            </property>
            <property name="text">
-            <string>New product</string>
+            <string>Add</string>
            </property>
            <property name="icon">
             <iconset resource="../../../../resources.qrc">

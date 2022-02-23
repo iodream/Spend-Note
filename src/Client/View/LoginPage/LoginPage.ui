@@ -272,9 +272,31 @@ color: rgb(255, 255, 255);</string>
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,3,0">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1,1,1,3,0">
+        <item>
+         <widget class="QToolButton" name="icon">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../resources.qrc">
+            <normaloff>:/Icons/Icons/baseline_warning_black_24dp.png</normaloff>:/Icons/Icons/baseline_warning_black_24dp.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Login failed!</string>
           </property>
@@ -296,6 +318,11 @@ color: rgb(255, 255, 255);</string>
         </item>
         <item>
          <widget class="QLabel" name="ErrorDescriptionLabel">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>*description*</string>
           </property>
@@ -328,6 +355,8 @@ color: rgb(255, 255, 255);</string>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

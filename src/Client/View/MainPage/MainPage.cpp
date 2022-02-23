@@ -9,6 +9,13 @@ MainPage::MainPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
+		m_ui->GoBackButton->setToolTip("Back");
+		m_ui->GoToIncomesButton->setToolTip("My Incomes");
+		m_ui->GoToListsButton->setToolTip("My Lists");
+		m_ui->LogoutButton->setToolTip("Log Out");
+		m_ui->Settings->setToolTip("Settings");
+
+
 	connect(
 		m_ui->GoToListsButton,
 		SIGNAL(clicked()),

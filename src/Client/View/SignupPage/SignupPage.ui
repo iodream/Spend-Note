@@ -86,7 +86,7 @@ color: rgb(255, 255, 255);</string>
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/Icons/Icons/warning.png</normaloff>:/Icons/Icons/warning.png</iconset>
+            <normaloff>:/Icons/Icons/baseline_warning_black_24dp.png</normaloff>:/Icons/Icons/baseline_warning_black_24dp.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -268,7 +268,7 @@ color: rgb(255, 255, 255);</string>
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/Icons/Icons/go-back.png</normaloff>:/Icons/Icons/go-back.png</iconset>
+            <normaloff>:/Icons/Icons/baseline_arrow_back_black_24dp.png</normaloff>:/Icons/Icons/baseline_arrow_back_black_24dp.png</iconset>
           </property>
          </widget>
         </item>
