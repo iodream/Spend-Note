@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="1,4,1,1" columnstretch="1,4,1">
    <item row="1" column="0">
     <spacer name="horizontalSpacer">

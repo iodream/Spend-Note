@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../../../1200px-Icon-notepad.svg.png</normaloff>../../../../../../1200px-Icon-notepad.svg.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
     <widget class="QFrame" name="frame">
@@ -52,7 +56,21 @@
           <height>0</height>
          </size>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Your lists:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -67,6 +85,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+             <bold>false</bold>
+            </font>
+           </property>
            <property name="text">
             <string>Items:</string>
            </property>
@@ -109,8 +133,17 @@
              <height>0</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
            <property name="text">
-            <string>Add</string>
+            <string>New list</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../../resources.qrc">
+             <normaloff>:/Icons/Icons/add.png</normaloff>:/Icons/Icons/add.png</iconset>
            </property>
           </widget>
          </item>
@@ -141,7 +174,7 @@
             <x>0</x>
             <y>0</y>
             <width>849</width>
-            <height>513</height>
+            <height>508</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="ItemsLayout">
@@ -168,6 +201,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

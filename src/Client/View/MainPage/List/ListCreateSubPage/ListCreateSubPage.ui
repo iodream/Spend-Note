@@ -26,6 +26,11 @@
            <height>0</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>List name:</string>
          </property>
@@ -47,6 +52,11 @@
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>List State</string>
          </property>
@@ -74,7 +84,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>347</width>
-                <height>114</height>
+                <height>108</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -105,15 +115,45 @@
    </item>
    <item>
     <widget class="QPushButton" name="AddItemButton">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Add Item</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../../resources.qrc">
+       <normaloff>:/Icons/Icons/add.png</normaloff>:/Icons/Icons/add.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>19</height>
+      </size>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="ClearAllButton">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <property name="text">
       <string>Clear all</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../../resources.qrc">
+       <normaloff>:/Icons/Icons/cancel.png</normaloff>:/Icons/Icons/cancel.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>18</width>
+       <height>18</height>
+      </size>
      </property>
     </widget>
    </item>
@@ -121,8 +161,23 @@
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QPushButton" name="SaveButton">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Save</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../../resources.qrc">
+         <normaloff>:/Icons/Icons/check.png</normaloff>:/Icons/Icons/check.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -130,6 +185,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

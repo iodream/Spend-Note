@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Icons/go-back.png</file>
+        <file>Icons/logout.png</file>
+        <file>Icons/my-incomes.png</file>
+        <file>Icons/my-lists.png</file>
+        <file>Icons/settings.png</file>
+        <file>Icons/spenandnote.png</file>
+        <file>Icons/warning.png</file>
+        <file>Icons/check.png</file>
+        <file>Icons/cancel.png</file>
+        <file>Icons/edit.png</file>
+        <file>Icons/add.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>

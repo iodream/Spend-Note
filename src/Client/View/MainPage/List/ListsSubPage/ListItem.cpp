@@ -7,8 +7,8 @@
 
 namespace {
 
-const QString DEFAULT_COLOR_ODD  = "rgba(255, 255, 255, 50%)";
-const QString DEFAULT_COLOR_EVEN = "rgba(235, 235, 235, 50%)";
+const QString COLOR_STATE_ACTIVE  = "rgba(93, 194, 43, 50%)";
+const QString COLOR_STATE_INACTIVE  = "rgba(75, 121, 191, 50%)";
 
 }
 
@@ -25,14 +25,15 @@ ListItem::~ListItem()
 	delete m_ui;
 }
 
-void ListItem::UpdateColor()
+void ListItem::UpdateColor(const ListState& state)
 {
-	bool is_odd = m_number % 2;
-	if (is_odd) {
-		m_color = DEFAULT_COLOR_ODD;
+	if(state.name == "active")
+	{
+		m_color = COLOR_STATE_ACTIVE;
 	}
-	else {
-		m_color = DEFAULT_COLOR_EVEN;
+	else
+	{
+		m_color = COLOR_STATE_INACTIVE;
 	}
 }
 
@@ -40,11 +41,11 @@ void ListItem::Update()
 {
 	m_ui->ListName->setText(m_list.name);
 	m_ui->Number->setText(QString("%1").arg(m_number));
-	UpdateColor();
 	m_ui->Holder->setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
 	m_ui->Holder->show();
 }
+
 
 void ListItem::set_number(int number)
 {
