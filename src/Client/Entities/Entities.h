@@ -15,6 +15,9 @@
 #include "Net/Entities/Product/ProductCategoryBase.h"
 
 #include "Net/Entities/Statistics/Balance.h"
+#include "Net/Entities/Statistics/ExpensePerCategory.h"
+#include "Net/Entities/Statistics/ExpensePercentagePerCategory.h"
+#include "Net/Entities/Statistics/ExpensePerDayBase.h"
 
 using String = QString;
 
@@ -26,3 +29,5 @@ using ListState = ListStateBase<String>;
 
 using Product = ProductBase<ProductCategoryBase, String>;
 using ProductCategory = ProductCategoryBase<String>;
+
+using ExpensePerDay = ExpensePerDayBase<String>;

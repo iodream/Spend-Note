@@ -227,7 +227,6 @@ void WriteBigInt(
 	const db::BigInt& value)
 {
 	json[label] = value;
-
 }
 
 void WriteBigInt(
@@ -244,7 +243,6 @@ void WriteMoney(
 	const db::Money& value)
 {
 	json[label] = value;
-
 }
 
 void WriteMoney(
@@ -253,6 +251,22 @@ void WriteMoney(
 	const db::Money& value)
 {
 	return WriteMoney(json, label.c_str(), value);
+}
+
+void WriteNumber(
+	QJsonObject& json,
+	const char* label,
+	const double& value)
+{
+	json[label] = value;
+}
+
+void WriteNumber(
+	QJsonObject& json,
+	const std::string& label,
+	const double& value)
+{
+	return WriteNumber(json, label.c_str(), value);
 }
 
 void WriteString(

@@ -15,6 +15,9 @@
 #include "Net/Tools/Parsers/Product/ProductIdJSONParser.h"
 
 #include "Net/Tools/Parsers/Statistics/BalanceJSONParser.h"
+#include "Net/Tools/Parsers/Statistics/ExpensePerCategoryJSONParser.h"
+#include "Net/Tools/Parsers/Statistics/ExpensePercentagePerCategoryJSONParser.h"
+#include "Net/Tools/Parsers/Statistics/ExpensePerDayJSONParserBase.h"
 
 #include "Net/Tools/Parsers/ArrayJSONParserBase.h"
 
@@ -44,3 +47,8 @@ using ProductsJSONParser =
 	ArrayJSONParserBase<ProductJSONParser, Product>;
 using ProductCategoriesJSONParser =
 	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;
+
+using ExpensePerDayJSONParser =
+	ExpensePerDayJSONParserBase<ExpensePerDay>;
+using ExpensesPerDayJSONParser =
+	ArrayJSONParserBase<ExpensePerDayJSONParser, ExpensePerDay>;

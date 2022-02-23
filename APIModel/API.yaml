@@ -1,0 +1,539 @@
+swagger: "2.0"
+info:
+  description: "Spend&Note API page"
+  version: "1.0.0"
+  title: "Spend&Note"
+tags:
+- name: "Authorization"
+- name: "List"
+- name: "Product"
+- name: "Income"
+
+schemes:
+- "http"
+
+paths:
+  /login:
+    post:
+      tags:
+      - "Authorization"
+      summary: "Logs user into the system"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Login info"
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorizationData"
+      responses:
+        "200":
+          description: "Login succesful"
+          schema:
+           $ref: "#/definitions/AuthorizationToken"
+        "401":
+          description: "Invalid login data"
+
+  /signup:
+    post:
+      tags:
+      - "Authorization"
+      summary: "Sign up new user"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Info about user that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorizationData"
+      responses:
+        "200":
+          description: "Ok"
+        "409":
+          description: "User with such login already exists"
+
+  /users/{user-id}/lists:
+    get:
+      tags:
+      - "List"
+      summary: "Get lists by user ID"
+      description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/Lists"
+        "400":
+          description: "Unsupported method"
+  
+    post:
+      tags:
+      - "List"
+      summary: "Add list to the database"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "New list to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/List"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/ListId"
+        "404":
+          description: "Resource not found"
+        "409":
+          description: "Failed to update resource"
+
+  /lists/{list-id}:
+    put:
+      tags:
+      - "List"
+      summary: "Update list in the database"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "list-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Info about list that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/List"
+      responses:
+        "404":
+          description: "Resource not found"
+        "409":
+          description: "Failed to update resource"
+
+    delete:
+      tags:
+      - "List"
+      summary: "Delete list by ID"
+      description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "list-id"
+        in: "path"
+        description: "remove list"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "204":
+          description: "No content"
+        "404":
+          description: "Resource not found"
+  
+  /lists/{list-id}/products:
+    get:
+      tags:
+      - "Product"
+      summary: "Get products of the list"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "list-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/Products"
+
+    post:
+      tags:
+      - "Product"
+      summary: "Add a new product"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "list-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Product object that needs to be added to some list"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            $ref: "#/definitions/ProductId"
+        "409":
+          description: "Unable to create resource"
+
+  /products/{product-id}:
+    put:
+      tags:
+      - "Product"
+      summary: "Update product in the database"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "product-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Info about product that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      responses:
+        "404":
+          description: "Resource not found"
+        "409":
+          description: "Failed to update resource"
+
+    delete:
+      tags:
+      - "Product"
+      summary: "Remove existsing product"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - ""
+      parameters:
+      - name: "product-id"
+        in: "path"
+        description: "Product id that needs to be removed"
+        required: true
+        type: "integer"
+      responses:
+        "204":
+          description: "No content"
+        "404":
+          description: "Resource not found"
+  
+  /users/{user-id}/incomes:
+    get:
+      tags:
+      - "Income"
+      summary: "Get all incomes of the user"
+      description: ""
+      operationId: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user-id"
+        in: "path"
+        description: "get income"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/Incomes"
+
+    post:
+      tags:
+      - "Income"
+      summary: "Add a new income to the database"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user-id"
+        in: "path"
+        description: "Product id that needs to be removed"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "Info about income that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/Income"
+      responses:
+        "201":
+          description: "Created"
+          schema: 
+            $ref: "#/definitions/IncomeId"
+
+  /incomes/{income-id}:
+    put:
+      tags:
+      - "Income"
+      summary: "Update income"
+      description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
+      operationId: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "income-id"
+        in: "path"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "body"
+        in: "body"
+        description: "update income"
+        required: true
+        schema:
+          $ref: "#/definitions/Income"
+      responses:
+        "204":
+          description: "No content"
+        "404":
+          description: "Resource not found"
+          
+    delete:
+      tags:
+      - "Income"
+      summary: "Delete income by income ID"
+      description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
+      operationId: "income_remove"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "income-id"
+        in: "path"
+        description: "update list"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "204":
+          description: "No content"
+        "404":
+          description: "Resource not found"
+
+definitions:
+  AuthorizationData:
+    type: "object"
+    required:
+    - "login"
+    - "password"
+    properties:
+      login:
+        type: "string"
+      password:
+        type: "string"
+  AuthorizationToken:
+    type: "object"
+    required:
+    - "token"
+    properties:
+      token:
+        type: "string"
+
+  Income:
+    type: "object"
+    required:
+    - "category"
+    - "name"
+    - "amount"
+    - "number"
+    - "add_time"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      category:
+          $ref: "#/definitions/IncomeCategory"
+      name:
+        type: "string"
+      amount:
+        type: "number"
+        format: "int64"
+      add_time:
+        type: "string"
+        example: "2022-01-01 00:00:00"
+      expiration_time:
+        type: "string"
+        example: "2022-02-02 00:00:00"
+
+  IncomeCategory:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      name:
+        type: "string"
+
+  IncomeId:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+
+  List:
+    type: "object"
+    required:
+    - "name"
+    - "owner_id"
+    - "state"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      name:
+        type: "string"
+      owner_id:
+        type: "number"
+        format: "int64"
+      state:
+        $ref: "#/definitions/ListState"
+  
+  ListState:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      name:
+        type: "string"  
+
+  ListId:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+
+  Product:
+    type: "object"
+    required:
+    - "list_id"
+    - "category"
+    - "is_bought"
+    - "name"
+    - "amount"
+    - "price"
+    - "add_date"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      list_id:
+        type: "number"
+        format: "int64"
+      category:
+        $ref: "#/definitions/ProductCategory"
+      
+      is_bought:
+        type: "boolean"
+      
+      name:
+        type: "string"
+      
+      amount:
+        type: "number"
+        format: "int64"
+      price:
+        type: "number"
+        format: "int64"
+      priority:
+        type: "number"
+        format: "int"
+      
+      add_date:
+        type: "string"
+      purchase_date:
+        type: "string"
+      buy_until_date:
+        type: "string"
+  
+  ProductCategory:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+      name:
+        type: "string"
+
+  ProductId:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "number"
+        format: "int64"
+        
+  Products:
+    type: "array"
+    items:
+      $ref: "#/definitions/Product"
+  
+  Lists:
+    type: "array"
+    items:
+      $ref: "#/definitions/List"
+  
+  Incomes:
+    type: "array"
+    items:
+      $ref: "#/definitions/Income"
