@@ -22,16 +22,22 @@ MainPage::MainPage(QWidget *parent)
 		&MainPage::OnGoToIncomesClicked);
 
 	connect(
+		m_ui->GoToDailyList,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToDailyListClicked);
+
+	connect(
 		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
 		SLOT(OnLogoutClicked()));
+
 	connect(
 		m_ui->GoBackButton,
 		SIGNAL(clicked()),
 		this,
 		SIGNAL(GoBack()));
-
 
 	connect(
 		m_ui->CloseErrorBannerToolButton,
@@ -57,6 +63,7 @@ MainPage::MainPage(QWidget *parent)
 	InitIncomeViewSubPage();
 	InitIncomeEditPage();
 
+	InitDailyListSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -109,6 +116,10 @@ void MainPage::InitIncomesSubPage()
 	m_ui->Display->addWidget(&m_incomes_spage);
 }
 
+void MainPage::InitDailyListSubPage()
+{
+	m_ui->Display->addWidget(&m_dailylist_spage);
+}
 void MainPage::InitIncomesCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_incomes_create_spage);
@@ -154,11 +165,17 @@ void MainPage::OnLogoutClicked()
 	emit Logout();
 }
 
+void MainPage::OnGoToDailyListClicked()
+{
+	emit ChangeSubPage(MainSubPages::DAILY_LIST);
+}
+
 void MainPage::ShowBalance(const Balance& money)
 {
 	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
+
 
 void MainPage::SetErrorBanner(const int code, const std::string& description)
 {

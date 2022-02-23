@@ -51,6 +51,7 @@ private:
 	std::unique_ptr<ProductPagesController> m_product_pages_controller;
 	std::unique_ptr<IncomePagesController> m_income_pages_controller;
 
+
 signals:
 	void ChangePage(UIPages page);
 
