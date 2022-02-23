@@ -28,7 +28,7 @@ Net::Response RemoveProductHandler::AuthHandle(const Net::Request& request)
 	if (!m_facade->CanUserEditProduct(request.uid, product_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
-			"Remove product with id " + std::to_string(product_id) + " is forbidden");
+			"Remove product with id \"" + std::to_string(product_id) + "\" is forbidden");
 	}
 
 	m_facade->RemoveProduct(product_id);
