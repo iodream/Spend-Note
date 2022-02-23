@@ -62,7 +62,7 @@ target_link_libraries(
     ${Spend-Note-Client_LIBS}
 )
 
-target_link_libraries(Spend-Note-Client PRIVATE )
+target_link_libraries(Spend-Note-Client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 
 set_target_properties(Spend-Note-Client PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
