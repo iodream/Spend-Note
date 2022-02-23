@@ -25,8 +25,7 @@ public:
 	void UpdatePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
 	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
 
-	QChart* InitPieChart(QFrame* frame);
-	QChart* InitBarChart(QFrame* frame);
+	QChart* InitChart(QFrame* frame);
 
 private slots:
 	void OnForwardButtonClicked();
