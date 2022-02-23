@@ -37,9 +37,7 @@ void DailyListSubPage::InsertProduct(ProductItem *product, int idx)
 
 void DailyListSubPage::set_list_size(int size)
 {
-	m_list_size = size;
-	//m_ui->ListSize->setText(QString("%1").arg(m_list_size));
-	//m_ui->ListSize->show();
+	m_list_size = size;	
 }
 
 int DailyListSubPage::get_list_size()

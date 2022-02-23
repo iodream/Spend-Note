@@ -32,15 +32,23 @@ MainPage::MainPage(QWidget *parent)
 		SIGNAL(clicked()),
 		this,
 		SLOT(OnLogoutClicked()));
+
 	connect(
 		m_ui->GoBackButton,
 		SIGNAL(clicked()),
 		this,
 		SIGNAL(GoBack()));
 
+	connect(
+		m_ui->CloseErrorBannerToolButton,
+		&QToolButton::clicked,
+		this,
+		&MainPage::CloseErrorBanner);
 
 	InitListsSubPage();
 	InitListCreateSubPage();
+	InitProductQuickCreateSubPage();
+
 	InitListEditSubPage();
 	InitListViewSubPage();
 
@@ -50,7 +58,10 @@ MainPage::MainPage(QWidget *parent)
 	InitProductViewSubPage();
 
 	InitIncomesSubPage();
+	InitIncomesCreateSubPage();
+
 	InitIncomeViewSubPage();
+	InitIncomeEditPage();
 
 	InitDailyListSubPage();
 }
@@ -63,6 +74,11 @@ void MainPage::InitListsSubPage()
 void MainPage::InitListCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
+}
+
+void MainPage::InitProductQuickCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_product_quick_create_spage);
 }
 
 void MainPage::InitListEditSubPage()
@@ -104,10 +120,19 @@ void MainPage::InitDailyListSubPage()
 {
 	m_ui->Display->addWidget(&m_dailylist_spage);
 }
+void MainPage::InitIncomesCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_incomes_create_spage);
+}
 
 void MainPage::InitIncomeViewSubPage()
 {
 	m_ui->Display->addWidget(&m_income_view_spage);
+}
+
+void MainPage::InitIncomeEditPage()
+{
+	m_ui->Display->addWidget(&m_income_edit_spage);
 }
 
 MainPage::~MainPage()
@@ -152,3 +177,25 @@ void MainPage::ShowBalance(const Balance& money)
 }
 
 
+void MainPage::SetErrorBanner(const int code, const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1); // expands the banner
+	m_ui->ErrorTitleLabel->setVisible(true);
+
+	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::SetErrorBanner(const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1);
+	m_ui->ErrorTitleLabel->setVisible(false);
+
+	m_ui->ErrorCodeLabel->setText("");
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::CloseErrorBanner()
+{
+	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
+}

@@ -112,14 +112,14 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="page_4">
+     <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QScrollArea" name="scrollArea_4">
+        <widget class="QScrollArea" name="scrollArea">
          <property name="widgetResizable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="Incomes_4">
+         <widget class="QWidget" name="Incomes">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -130,7 +130,7 @@
           </property>
           <layout class="QVBoxLayout" name="ItemsLayout_4">
            <item>
-            <spacer name="verticalSpacer_4">
+            <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>

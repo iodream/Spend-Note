@@ -15,6 +15,8 @@ public:
 
 	Net::Request FormRequest(const Product& product);
 	ProductId ParseResponse(const Net::Response& response);
+	static bool CheckFields(Product& product);
+
 private:
 	const std::string& m_hostname;
 
