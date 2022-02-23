@@ -3,8 +3,6 @@
 #include "Exceptions/NonexistentResource.h"
 #include "DatabaseNames.h"
 
-#include <iostream>
-
 namespace db
 {
 
@@ -75,7 +73,6 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 				db::product::IS_BOUGHT + " AND " +
 				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK';");
 
-		std::cout << "Total expences: " << total_expenses << "\n";
 		if (total_expenses == 0)
 		{
 			return {};
