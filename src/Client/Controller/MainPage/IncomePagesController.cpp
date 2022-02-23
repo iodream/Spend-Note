@@ -267,5 +267,5 @@ void IncomePagesController::OnUpdateIncome()
 		emit ServerError(response.status, response.reason);
 		return;
 	}
-	emit GoBack();
+	emit GoBack(2);
 }

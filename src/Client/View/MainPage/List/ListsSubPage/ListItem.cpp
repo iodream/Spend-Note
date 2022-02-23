@@ -7,8 +7,8 @@
 
 namespace {
 
-const QString COLOR_STATE_ACTIVE  = "rgba(93, 194, 43, 50%)";
-const QString COLOR_STATE_INACTIVE  = "rgba(75, 121, 191, 50%)";
+const QString COLOR_STATE_ACTIVE  = "rgba(163, 255, 188, 50%)";
+const QString COLOR_STATE_INACTIVE  = "rgba(41, 118, 207, 50%)";
 
 }
 

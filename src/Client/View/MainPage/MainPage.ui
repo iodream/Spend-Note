@@ -100,9 +100,8 @@
          <string extracomment="Go Back"/>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>Go Back</string>
@@ -143,8 +142,8 @@ background-color: #2ca89e;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>My Lists</string>
@@ -191,8 +190,8 @@ background-color: #2ca89e;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>My 
@@ -237,8 +236,8 @@ Incomes</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>Daily list</string>
@@ -276,8 +275,8 @@ background-color: #2ca89e;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -305,8 +304,8 @@ background-color: #2ca89e;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>Settings</string>
@@ -337,8 +336,8 @@ background-color: #2ca89e;</string>
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
+         <string notr="true">color: black;
+background-color: #29baa7</string>
         </property>
         <property name="text">
          <string>Logout</string>
@@ -375,12 +374,12 @@ background-color: #2ca89e;</string>
        </spacer>
       </item>
      </layout>
+     <zorder>GoToDailyList</zorder>
      <zorder>toolButton_5</zorder>
      <zorder>GoToIncomesButton</zorder>
      <zorder>GoToListsButton</zorder>
      <zorder>GoBackButton</zorder>
      <zorder>Settings</zorder>
-     <zorder>toolButton_4</zorder>
      <zorder>LogoutButton</zorder>
     </widget>
    </item>
