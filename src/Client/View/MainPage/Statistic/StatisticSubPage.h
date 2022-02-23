@@ -1,6 +1,10 @@
 #pragma once
 
 #include <QWidget>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+
+#include "Entities/Entities.h"
 
 namespace Ui {
 class StatisticSubPage;
@@ -14,7 +18,15 @@ public:
 	explicit StatisticSubPage(QWidget *parent = nullptr);
 	~StatisticSubPage();
 
-	void FormingChart(/*vector of enteties*/);
+	QString GetCategoryById(IdType id, std::vector<ProductCategory> category);
+	QStringList GetCategoryNames(std::vector<ProductCategory> category);
+
+	void UpdatePiePercentChart(std::vector<ExpensePercentagePerCategory> stats, std::vector<ProductCategory> category);
+	void UpdatePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
+	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
+
+	QChart* InitPieChart(QFrame* frame);
+	QChart* InitBarChart(QFrame* frame);
 
 private slots:
 	void OnForwardButtonClicked();
@@ -22,4 +34,8 @@ private slots:
 
 private:
 	Ui::StatisticSubPage *m_ui;
+	QChart* m_pie_persent_chart;
+	QChart* m_pie_amount_chart;
+	QChart* m_bar_balance_chart;
+
 };
