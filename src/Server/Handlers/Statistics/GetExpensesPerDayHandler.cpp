@@ -23,7 +23,7 @@ Net::Response GetExpensesPerDayHandler::AuthHandle(const Net::Request& request)
 	std::vector<db::ExpensePerDay> db_expenses;
 
 	try {
-		db_expenses = m_facade->ExpencesDynamics(user_id);
+		db_expenses = m_facade->ExpensesDynamics(user_id);
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(NetError::Status::HTTP_NOT_FOUND, ex.what());
