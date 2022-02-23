@@ -246,6 +246,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		return m_income_pages_controller->UpdateIncomeEditPage(data);
 	case MainSubPages::SETTINGS:
 		break;
+	case MainSubPages::DAILY_LIST:
+		break;
 	case MainSubPages::QUICK_CREATE_PRODUCT:
 		return m_list_pages_controller->UpdateListQuickCreatePage();
 	}

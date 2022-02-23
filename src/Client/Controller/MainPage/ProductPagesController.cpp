@@ -264,7 +264,6 @@ void ProductPagesController::UpdateCategoryBox()
 		{
 			return;
 		}
-
 	}
 }
 

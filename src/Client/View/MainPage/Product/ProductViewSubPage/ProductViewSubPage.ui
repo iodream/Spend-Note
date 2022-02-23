@@ -177,7 +177,7 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QDateTimeEdit" name="BuyUntil">
+      <widget class="QLineEdit" name="BuyUntil">
        <property name="readOnly">
         <bool>true</bool>
        </property>

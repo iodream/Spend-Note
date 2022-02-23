@@ -214,7 +214,10 @@ Incomes</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="Settings">
+       <widget class="QToolButton" name="GoToDailyList">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -238,7 +241,7 @@ Incomes</string>
 background-color: #2ca89e;</string>
         </property>
         <property name="text">
-         <string>Settings</string>
+         <string>Daily list</string>
         </property>
         <property name="icon">
          <iconset resource="../../resources.qrc">
@@ -249,38 +252,6 @@ background-color: #2ca89e;</string>
           <width>38</width>
           <height>31</height>
          </size>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonIconOnly</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="toolButton_4">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(243, 243, 243);
-background-color: #2ca89e;</string>
-        </property>
-        <property name="text">
-         <string>...</string>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonIconOnly</enum>
@@ -310,6 +281,35 @@ background-color: #2ca89e;</string>
         </property>
         <property name="text">
          <string>...</string>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonIconOnly</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="Settings">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(243, 243, 243);
+background-color: #2ca89e;</string>
+        </property>
+        <property name="text">
+         <string>Settings</string>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonIconOnly</enum>
