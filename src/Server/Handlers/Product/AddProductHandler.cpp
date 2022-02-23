@@ -28,7 +28,7 @@ Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 			"List id in uri and in json are not equal");
 	}
 
-	if (m_facade->CanUserEditList(request.uid, product.list_id)){
+	if (!m_facade->CanUserEditList(request.uid, product.list_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
 			"User with id \"" + std::to_string(request.uid) +
