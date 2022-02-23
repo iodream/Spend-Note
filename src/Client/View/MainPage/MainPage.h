@@ -84,10 +84,10 @@ public:
 
 	IncomeListSubPage& get_incomes_spage() { return m_incomes_spage; }
 	IncomeCreateSubPage& get_incomes_create_spage() { return m_incomes_create_spage; }
-
 	IncomeViewSubPage& get_income_view_spage() { return m_income_view_spage; }
 	IncomeEditSubPage& get_income_edit_spage() { return m_income_edit_spage; }
 
+	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
 
 private:
 	Ui::MainPage *m_ui;

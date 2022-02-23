@@ -44,9 +44,6 @@ private:
 
 	IncomeListSubPage& m_incomes_page;
 	IncomeCreateSubPage& m_income_create_page;
-
-	//IncomeEditSubPage& m_edit_page;
-
 	IncomeViewSubPage& m_income_view_page;
 	IncomeEditSubPage& m_income_edit_page;
 

@@ -59,7 +59,6 @@ MainPage::MainPage(QWidget *parent)
 
 	InitIncomesSubPage();
 	InitIncomesCreateSubPage();
-
 	InitIncomeViewSubPage();
 	InitIncomeEditPage();
 
