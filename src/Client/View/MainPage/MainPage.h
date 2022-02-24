@@ -22,6 +22,7 @@
 #include "Income/IncomeEditSubPage/IncomeEditSubPage.h"
 
 #include "DailyList/DailyListSubPage/DailyListSubPage.h"
+#include "Statistic/StatisticSubPage.h"
 
 #include "View/Constants.h"
 
@@ -66,8 +67,8 @@ private:
 	void InitIncomeViewSubPage();
 	void InitIncomeEditPage();
 
-
 	void InitDailyListSubPage();
+	void InitStatisticsSubPage();
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
@@ -88,6 +89,7 @@ public:
 	IncomeEditSubPage& get_income_edit_spage() { return m_income_edit_spage; }
 
 	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
+	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 
 private:
 	Ui::MainPage *m_ui;
@@ -109,8 +111,8 @@ private:
 	IncomeViewSubPage m_income_view_spage;
 	IncomeEditSubPage m_income_edit_spage;
 
-
 	DailyListSubPage m_dailylist_spage;
+	StatisticSubPage m_statistics_spage;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -122,5 +124,6 @@ public slots:
 	void OnGoToIncomesClicked();
 	void OnLogoutClicked();
 	void OnGoToDailyListClicked();
+	void OnGoToStatiticsClicked();
 };
 

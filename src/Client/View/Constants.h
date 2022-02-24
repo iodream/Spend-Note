@@ -28,7 +28,8 @@ enum class MainSubPages
 	EDIT_INCOME,
 
 	DAILY_LIST,
-	SETTINGS,
+	STATISTICS,
+	SETTINGS
 };
 
 const QString STYLESHEET_BACKGROUND_COLOR = "background-color:";
