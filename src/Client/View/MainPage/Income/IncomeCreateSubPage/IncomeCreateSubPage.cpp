@@ -48,6 +48,7 @@ IncomeCreateSubPage::~IncomeCreateSubPage()
 
 void IncomeCreateSubPage::FillCategoryBox(const std::vector<IncomeCategory>& income)
 {
+	ui->Category->clear();
 	for(const auto& el : income)
 	{
 		ui->Category->addItem(el.name, el.id);

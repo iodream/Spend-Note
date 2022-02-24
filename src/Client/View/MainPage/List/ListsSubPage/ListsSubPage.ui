@@ -66,7 +66,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Your lists:</string>
+            <string>My Lists:</string>
            </property>
           </widget>
          </item>
@@ -87,7 +87,7 @@
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
-             <pointsize>14</pointsize>
+             <pointsize>13</pointsize>
              <bold>false</bold>
             </font>
            </property>
@@ -106,7 +106,7 @@
            </property>
            <property name="font">
             <font>
-             <pointsize>14</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">

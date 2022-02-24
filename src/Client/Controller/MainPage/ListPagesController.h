@@ -58,7 +58,7 @@ private:
 	void FillBoxOfStates();
 	static bool already_added;
 	static bool category_already_added;
-
+	static int m_curr_products;
 
 signals:
 	void ServerError(const int code, const std::string& desc);
