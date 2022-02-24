@@ -18,6 +18,9 @@
     <layout class="QVBoxLayout" name="verticalLayout_15">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
          <item>
@@ -62,7 +65,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>Persent outcomes statistic</string>
+               <string>Percent outcomes statistic</string>
               </property>
              </widget>
             </item>
@@ -83,9 +86,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="PercentChart">
-           <layout class="QVBoxLayout" name="verticalLayout_7"/>
-          </widget>
+          <layout class="QHBoxLayout" name="PercentChart"/>
          </item>
         </layout>
        </widget>
@@ -157,9 +158,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="AmountChart">
-           <layout class="QVBoxLayout" name="verticalLayout_14"/>
-          </widget>
+          <layout class="QHBoxLayout" name="AmountChart"/>
          </item>
         </layout>
        </widget>
@@ -225,9 +224,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="BalanceChart">
-           <layout class="QVBoxLayout" name="verticalLayout_16"/>
-          </widget>
+          <layout class="QHBoxLayout" name="BalanceChart"/>
          </item>
         </layout>
        </widget>

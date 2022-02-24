@@ -11,7 +11,7 @@ public:
 	{
 		QJsonObject json;
 		WriteString(json, "day", expense.day);
-		WriteMoney(json, "name", expense.amount);
+		WriteMoney(json, "amount", expense.amount);
 		return json;
-	};
+	}
 };

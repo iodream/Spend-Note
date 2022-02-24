@@ -21,11 +21,14 @@ public:
 	QString GetCategoryById(IdType id, std::vector<ProductCategory> category);
 	QStringList GetCategoryNames(std::vector<ProductCategory> category);
 
+	void UpdateCurrentChart();
+
 	void UpdatePiePercentChart(std::vector<ExpensePercentagePerCategory> stats, std::vector<ProductCategory> category);
 	void UpdatePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
 	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
 
-	QChart* InitChart(QFrame* frame);
+	QChart* InitChart(QLayout* layout);
+	//QChart* InitChart(QFrame* frame);
 
 private slots:
 	void OnForwardButtonClicked();

@@ -18,6 +18,12 @@ StatisticsPageController::StatisticsPageController(
 	ConnectStatisticsPage();
 }
 
+bool StatisticsPageController::UpdateStatisticsPage()
+{
+	m_statistics_page.UpdateCurrentChart();
+	return true;
+}
+
 std::vector<ProductCategory> StatisticsPageController::GetProductCategories()
 {
 	GetProductCategoriesModel model{m_hostname};

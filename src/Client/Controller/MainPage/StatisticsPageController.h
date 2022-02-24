@@ -17,7 +17,7 @@ public:
 
 	virtual ~StatisticsPageController() override {}
 
-	std::vector<ProductCategory> GetProductCategories();
+	bool UpdateStatisticsPage();
 
 signals:
 	void ServerError(const int code, const std::string& desc);
@@ -38,4 +38,5 @@ private:
 	StatisticSubPage& m_statistics_page;
 
 	void ConnectStatisticsPage();
+	std::vector<ProductCategory> GetProductCategories();
 };
