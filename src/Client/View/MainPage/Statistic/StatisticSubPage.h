@@ -37,4 +37,10 @@ private:
 	QChart* m_pie_amount_chart;
 	QChart* m_bar_balance_chart;
 
+	void ChartChanged(int index);
+
+signals:
+	void PercentChartSelected();
+	void AmountChartSelected();
+	void BalanceChartSelected();
 };

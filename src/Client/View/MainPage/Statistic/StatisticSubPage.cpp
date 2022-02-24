@@ -28,6 +28,7 @@ QString StatisticSubPage::GetCategoryById(IdType id, std::vector<ProductCategory
 	{
 		if(el.id == id) return el.name;
 	}
+	return "Unknown category";
 }
 
 QStringList StatisticSubPage::GetCategoryNames(std::vector<ProductCategory> category)
@@ -114,6 +115,7 @@ void StatisticSubPage::OnForwardButtonClicked()
 	int current_index = m_ui->stackedWidget->currentIndex() + 1;
 	current_index > 3 ? current_index = 1 : current_index; //replace
 	m_ui->stackedWidget->setCurrentIndex(current_index);
+	ChartChanged(current_index);
 }
 
 void StatisticSubPage::OnBackButtonClicked()
@@ -121,5 +123,22 @@ void StatisticSubPage::OnBackButtonClicked()
 	int current_index = m_ui->stackedWidget->currentIndex() - 1;
 	current_index > 1 ? current_index = 3 : current_index;
 	m_ui->stackedWidget->setCurrentIndex(current_index);
+	ChartChanged(current_index);
+}
+
+void StatisticSubPage::ChartChanged(int index)
+{
+	if (index == 0)
+	{
+		emit PercentChartSelected();
+	}
+	else if (index == 1)
+	{
+		emit AmountChartSelected();
+	}
+	else
+	{
+		emit BalanceChartSelected();
+	}
 }
 

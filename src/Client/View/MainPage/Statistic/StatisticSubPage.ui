@@ -84,7 +84,7 @@
          </item>
          <item>
           <widget class="QFrame" name="PercentChart">
-           <layout class="QVBoxLayout" name="verticalLayout_7" stretch=""/>
+           <layout class="QVBoxLayout" name="verticalLayout_7"/>
           </widget>
          </item>
         </layout>
@@ -98,7 +98,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0">
          <item>
-          <widget class="QFrame" name="horizontalFrame">
+          <widget class="QFrame" name="horizontalFrame2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -166,7 +166,7 @@
        <widget class="QWidget" name="page_3">
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QFrame" name="horizontalFrame">
+          <widget class="QFrame" name="horizontalFrame3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -226,7 +226,7 @@
          </item>
          <item>
           <widget class="QFrame" name="BalanceChart">
-           <layout class="QVBoxLayout" name="verticalLayout_16" stretch=""/>
+           <layout class="QVBoxLayout" name="verticalLayout_16"/>
           </widget>
          </item>
         </layout>
