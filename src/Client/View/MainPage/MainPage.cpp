@@ -35,6 +35,12 @@ MainPage::MainPage(QWidget *parent)
 		&MainPage::OnGoToDailyListClicked);
 
 	connect(
+		m_ui->GoToStatisticsButton,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToStatiticsClicked);
+
+	connect(
 		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
@@ -70,6 +76,7 @@ MainPage::MainPage(QWidget *parent)
 	InitIncomeEditPage();
 
 	InitDailyListSubPage();
+	InitStatisticsSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -122,10 +129,6 @@ void MainPage::InitIncomesSubPage()
 	m_ui->Display->addWidget(&m_incomes_spage);
 }
 
-void MainPage::InitDailyListSubPage()
-{
-	m_ui->Display->addWidget(&m_dailylist_spage);
-}
 void MainPage::InitIncomesCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_incomes_create_spage);
@@ -139,6 +142,16 @@ void MainPage::InitIncomeViewSubPage()
 void MainPage::InitIncomeEditPage()
 {
 	m_ui->Display->addWidget(&m_income_edit_spage);
+}
+
+void MainPage::InitDailyListSubPage()
+{
+	m_ui->Display->addWidget(&m_dailylist_spage);
+}
+
+void MainPage::InitStatisticsSubPage()
+{
+	m_ui->Display->addWidget(&m_statistics_spage);
 }
 
 MainPage::~MainPage()
@@ -174,6 +187,11 @@ void MainPage::OnLogoutClicked()
 void MainPage::OnGoToDailyListClicked()
 {
 	emit ChangeSubPage(MainSubPages::DAILY_LIST);
+}
+
+void MainPage::OnGoToStatiticsClicked()
+{
+	emit ChangeSubPage(MainSubPages::STATISTICS);
 }
 
 void MainPage::ShowBalance(const Balance& money)

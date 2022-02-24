@@ -18,6 +18,9 @@
     <layout class="QVBoxLayout" name="verticalLayout_15">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
        <widget class="QWidget" name="page">
         <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
          <item>
@@ -62,7 +65,7 @@
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>Persent outcomes statistic</string>
+               <string>Percent outcomes statistic</string>
               </property>
              </widget>
             </item>
@@ -83,9 +86,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="PercentChart">
-           <layout class="QVBoxLayout" name="verticalLayout_7" stretch=""/>
-          </widget>
+          <layout class="QHBoxLayout" name="PercentChart"/>
          </item>
         </layout>
        </widget>
@@ -98,7 +99,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0">
          <item>
-          <widget class="QFrame" name="horizontalFrame">
+          <widget class="QFrame" name="horizontalFrame2">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -157,16 +158,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="AmountChart">
-           <layout class="QVBoxLayout" name="verticalLayout_14"/>
-          </widget>
+          <layout class="QHBoxLayout" name="AmountChart"/>
          </item>
         </layout>
        </widget>
        <widget class="QWidget" name="page_3">
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QFrame" name="horizontalFrame">
+          <widget class="QFrame" name="horizontalFrame3">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -225,9 +224,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="BalanceChart">
-           <layout class="QVBoxLayout" name="verticalLayout_16" stretch=""/>
-          </widget>
+          <layout class="QHBoxLayout" name="BalanceChart"/>
          </item>
         </layout>
        </widget>

@@ -21,6 +21,7 @@ MainPageController::MainPageController(
 	InitProductPagesController();
 	InitIncomePagesController();
 	InitDailyListPageController();
+	InitStatisticsPageController();
 }
 
 void MainPageController::ConnectPage()
@@ -203,6 +204,40 @@ void MainPageController::InitDailyListPageController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitStatisticsPageController()
+{
+	m_statistics_page_controller =
+		std::make_unique<StatisticsPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_statistics_spage());
+
+	connect(
+		m_statistics_page_controller.get(),
+		&StatisticsPageController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_statistics_page_controller.get(),
+		&StatisticsPageController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_statistics_page_controller.get(),
+		&StatisticsPageController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_statistics_page_controller.get(),
+		&StatisticsPageController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -286,6 +321,8 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		return m_daily_list_page_controller->UpdateDailyListPage();
 	case MainSubPages::QUICK_CREATE_PRODUCT:
 		return m_list_pages_controller->UpdateListQuickCreatePage();
+	case MainSubPages::STATISTICS:
+		return m_statistics_page_controller->UpdateStatisticsPage();
 	}
 	return update_succeeded;
 }

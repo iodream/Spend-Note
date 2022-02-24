@@ -258,7 +258,7 @@ background-color: #29baa7</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_5">
+       <widget class="QToolButton" name="GoToStatisticsButton">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -279,7 +279,7 @@ background-color: #29baa7</string>
 background-color: #29baa7</string>
         </property>
         <property name="text">
-         <string>...</string>
+         <string>Statistics</string>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonIconOnly</enum>
