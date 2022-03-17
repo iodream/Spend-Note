@@ -120,6 +120,12 @@ void ProductPagesController::OnUpdateProduct()
 		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
 	}
 
+	if (m_view_page.get_product().is_bought && !product.is_bought)
+	{
+		QDateTime date = QDateTime::currentDateTime();
+		product.purchase_date = date.toString("");
+	}
+
 	auto request = model.FormRequest(product);
 	auto response = m_http_client.Request(request);
 
@@ -155,7 +161,13 @@ void ProductPagesController::OnCreateProduct()
 	new_product.buy_until_date = m_create_page.GetBuyUntil();
 	QDateTime date = QDateTime::currentDateTime();
 	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
-	new_product.purchase_date = "";
+
+	if (m_create_page.GetIsBought())
+	{
+		QDateTime date = QDateTime::currentDateTime();
+		new_product.purchase_date =  date.toString("yyyy-MM-dd hh:mm:ss");
+	}
+
 	new_product.list_id = m_list_id;
 
 	auto request  = model.FormRequest(new_product);

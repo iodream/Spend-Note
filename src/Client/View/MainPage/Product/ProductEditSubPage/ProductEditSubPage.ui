@@ -71,13 +71,6 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
-      <widget class="QRadioButton" name="IsBought">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item row="5" column="0">
       <widget class="QLabel" name="CategoryLabel">
        <property name="text">
@@ -115,6 +108,13 @@
       <widget class="QSpinBox" name="Price">
        <property name="maximum">
         <number>100000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QCheckBox" name="IsBought">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
