@@ -105,6 +105,7 @@ void ProductPagesController::OnEditProduct()
 {
 	m_edit_page.set_product(m_view_page.get_product());
 	m_edit_page.Update();
+	UpdateCategoryBox();
 	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
 }
 
@@ -120,7 +121,7 @@ void ProductPagesController::OnUpdateProduct()
 		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
 	}
 
-	if(product.category.id == 0)
+	if(!product.category.id) // category.id == 0, may happen after changing product in daily list
 	{
 		product.category.id = 1;
 	}
