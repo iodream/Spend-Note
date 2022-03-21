@@ -121,11 +121,6 @@ void ProductPagesController::OnUpdateProduct()
 		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
 	}
 
-	if(!product.category.id) // category.id == 0, may happen after changing product in daily list
-	{
-		product.category.id = 1;
-	}
-
 	auto request = model.FormRequest(product);
 	auto response = m_http_client.Request(request);
 
