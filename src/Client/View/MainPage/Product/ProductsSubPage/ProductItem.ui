@@ -220,6 +220,9 @@
       </item>
       <item>
        <widget class="QCheckBox" name="PurchasedCheckbox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background:white</string>
         </property>
