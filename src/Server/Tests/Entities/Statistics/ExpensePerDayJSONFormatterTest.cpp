@@ -18,7 +18,6 @@ QJsonObject FormJSON()
 	return object;
 }
 
-
 ExpensePerDay FormExpense()
 {
 	ExpensePerDay expense;
@@ -28,7 +27,6 @@ ExpensePerDay FormExpense()
 
 	return expense;
 }
-
 
 }
 
