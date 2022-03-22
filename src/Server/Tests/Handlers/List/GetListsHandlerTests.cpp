@@ -76,6 +76,7 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
@@ -100,6 +101,7 @@ TEST(GetListsHandlerTest, ONE_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 

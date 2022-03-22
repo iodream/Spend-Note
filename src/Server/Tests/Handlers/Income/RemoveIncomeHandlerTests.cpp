@@ -32,6 +32,11 @@ TEST(RemoveIncomeHandlerTest, INCOME_PRESENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
+	db::Income income;
+	EXPECT_CALL(*facade, GetIncomeById(1))
+			.WillOnce(Return(std::optional<db::Income>{income}));
+	EXPECT_CALL(*facade, CanUserEditIncome(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, RemoveIncome(_))
 		.WillOnce(Return(true));
 
@@ -39,6 +44,7 @@ TEST(RemoveIncomeHandlerTest, INCOME_PRESENT)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_DELETE;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
@@ -49,8 +55,8 @@ TEST(RemoveIncomeHandlerTest, INCOME_ABSENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, RemoveIncome(_))
-		.WillOnce(Return(false));
+	EXPECT_CALL(*facade, GetIncomeById(1))
+			.WillOnce(Return(std::optional<db::Income>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 

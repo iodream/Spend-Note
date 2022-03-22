@@ -32,7 +32,19 @@ QJsonDocument FormatJSON()
 	return QJsonDocument{json};
 }
 
+std::unique_ptr<AddIncomeHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
+{
+	auto handler = std::make_unique<AddIncomeHandler>();
+	handler->set_facade(std::move(facade));
+
+	Params params;
+	params.Insert(Params::USER_ID, Params::Value{1});
+	handler->set_params(std::move(params));
+	return std::move(handler);
 }
+
+}
+
 
 TEST(AddIncomeHandler, ADD_INCOME_SUCCESS)
 {
@@ -40,15 +52,11 @@ TEST(AddIncomeHandler, ADD_INCOME_SUCCESS)
 	EXPECT_CALL(*facade, AddIncome(_))
 		.WillOnce(Return(std::optional<db::IdType>{1}));
 
-	auto handler = std::make_unique<AddIncomeHandler>();
-	handler->set_facade(std::move(facade));
-
-	Params params;
-	params.Insert(Params::USER_ID, Params::Value{1});
-	handler->set_params(std::move(params));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
+	request.uid = 1;
 
 	request.json_payload = FormatJSON();
 
@@ -67,15 +75,11 @@ TEST(AddIncomeHandler, ADD_INCOME_FAILURE)
 	EXPECT_CALL(*facade, AddIncome(_))
 		.WillOnce(Throw(db::SQLFailure("")));
 
-	auto handler = std::make_unique<AddIncomeHandler>();
-	handler->set_facade(std::move(facade));
-
-	Params params;
-	params.Insert(Params::USER_ID, Params::Value{1});
-	handler->set_params(std::move(params));
+	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_POST;
+	request.uid = 1;
 
 	request.json_payload = FormatJSON();
 

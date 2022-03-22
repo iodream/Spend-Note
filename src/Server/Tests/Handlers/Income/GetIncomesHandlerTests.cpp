@@ -76,6 +76,7 @@ TEST(GetIncomesHandlerTest, EMPTY_INCOME_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 	auto response = handler->AuthHandle(request);
 
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
@@ -100,6 +101,7 @@ TEST(GetIncomesHandlerTest, ONE_INCOME_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 	auto response = handler->AuthHandle(request);
 
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_OK);
