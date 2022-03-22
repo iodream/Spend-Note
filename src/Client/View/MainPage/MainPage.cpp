@@ -14,7 +14,8 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToListsButton->setToolTip("My Lists");
 		m_ui->LogoutButton->setToolTip("Log Out");
 		m_ui->GoToDailyList->setToolTip("Daily List");
-		m_ui->Settings->setToolTip("Daily List");
+		m_ui->Settings->setToolTip("Settings");
+		m_ui->GoToStatisticsButton->setToolTip("Statistics");
 
 
 	connect(
