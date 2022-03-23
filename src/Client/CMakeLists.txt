@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Spend-Note-Client VERSION 0.1 LANGUAGES CXX)
 
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -45,7 +46,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(
         Spend-Note-Client
         MANUAL_FINALIZATION
-	${Spend-Note-Client_SOURCES}
+        ${Spend-Note-Client_SOURCES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/resources.qrc
     )
 endif()
 

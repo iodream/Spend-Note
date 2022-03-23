@@ -172,12 +172,10 @@ void IncomePagesController::OnCreateIncome(Income& income)
 	emit GoBack();
 }
 
-bool IncomePagesController::already_added = false;
+bool IncomePagesController::already_added = true;
 
 void IncomePagesController::UpdateCategoryBoxes()
 {
-	if(!already_added)
-	{
 		GetIncomeCategoriesModel model(m_hostname);
 		auto request = model.FormRequest();
 
@@ -193,14 +191,11 @@ void IncomePagesController::UpdateCategoryBoxes()
 
 			m_income_edit_page.FillCategoryBox(model.ParseResponse(response));
 			m_income_create_page.FillCategoryBox(model.ParseResponse(response));
-
-			already_added = true;
-			}
+		}
 		catch (const Poco::Exception& ex)
 		{
 			return;
 		}
-	}
 }
 
 void IncomePagesController::OnGoToEditIncome(const Income& income)
@@ -267,5 +262,5 @@ void IncomePagesController::OnUpdateIncome()
 		emit ServerError(response.status, response.reason);
 		return;
 	}
-	emit GoBack();
+	emit GoBack(2);
 }

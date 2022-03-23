@@ -126,6 +126,7 @@ bool ListPagesController::UpdateListPage()
 	auto lists = model.ParseResponse(response);
 
 	m_list_page.Update(lists);
+
 	FillBoxOfStates();
 	return true;
 }
@@ -204,7 +205,6 @@ void ListPagesController::OnCreateList()
 	new_list.state.id = m_create_page.GetListState();
 	new_list.id = 0;
 	new_list.owner_id = m_user_id;
-
 	if(!model.CheckName(new_list.name))
 	{
 		emit ClientError("List name can't be empty");
@@ -318,7 +318,7 @@ void ListPagesController::OnQuickAddItem()
 
 	emit GoBack();
 }
-
+int ListPagesController::m_curr_products = 0;
 void ListPagesController::OnGoToEditList()
 {
 	auto list = m_product_page.get_list();

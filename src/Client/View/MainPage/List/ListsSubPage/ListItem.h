@@ -25,11 +25,11 @@ public:
 
 	void set_number(int number);
 	int get_number() const;
+	void UpdateColor(const ListState& state);
 
 	QString get_color();
 
 private:
-	void UpdateColor();
 
 	List m_list;
 

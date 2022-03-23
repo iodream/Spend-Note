@@ -26,7 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
 	, m_ui(new Ui::MainWindow)
 {
 	m_ui->setupUi(this);
-
 	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::LOGIN), &get_login_page());
 	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::SIGNUP), &get_signup_page());
 	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::MAIN), &get_main_page());

@@ -2,12 +2,11 @@
 #include "ui_IncomeListItem.h"
 
 #include "View/Constants.h"
-
+#include <QDate>
+#include <QDateTime>
 namespace {
 
-const QString DEFAULT_COLOR_ODD  = "rgba(255, 255, 255, 50%)";
-const QString DEFAULT_COLOR_EVEN = "rgba(235, 235, 235, 50%)";
-
+const QString DEFAULT_COLOR_ODD  = "rgba(163, 255, 188, 50%)";
 }
 
 #include <iostream>
@@ -27,13 +26,7 @@ IncomeListItem::~IncomeListItem()
 
 void IncomeListItem::UpdateColor()
 {
-	bool is_odd = m_number % 2;
-	if (is_odd) {
-		m_color = DEFAULT_COLOR_ODD;
-	}
-	else {
-		m_color = DEFAULT_COLOR_EVEN;
-	}
+	m_color = DEFAULT_COLOR_ODD;
 }
 
 void IncomeListItem::Update()

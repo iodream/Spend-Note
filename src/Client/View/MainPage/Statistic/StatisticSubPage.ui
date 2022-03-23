@@ -247,13 +247,29 @@
        </item>
        <item>
         <widget class="QPushButton" name="BackButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>16</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>&lt;-</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../resources.qrc">
+           <normaloff>:/Icons/Icons/baseline_arrow_back_ios_new_black_24dp.png</normaloff>:/Icons/Icons/baseline_arrow_back_ios_new_black_24dp.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>47</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -265,7 +281,17 @@
           </font>
          </property>
          <property name="text">
-          <string>-&gt;</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../resources.qrc">
+           <normaloff>:/Icons/Icons/baseline_arrow_forward_ios_black_24dp.png</normaloff>:/Icons/Icons/baseline_arrow_forward_ios_black_24dp.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>47</width>
+           <height>32</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -275,6 +301,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
