@@ -59,6 +59,7 @@ void ProductItem::Update()
 	m_ui->BuyUntil->setText(m_product.buy_until_date);
 	m_ui->Price->setText(QString("%1").arg(m_product.price));
 	m_ui->Number->setText(QString("%1").arg(m_number));
+	m_ui->PurchasedCheckbox->setChecked(m_product.is_bought);
 	UpdateColor();
 	if(m_product.is_bought)
 		m_ui->PurchasedCheckbox->setChecked(true);
