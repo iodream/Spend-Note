@@ -40,7 +40,7 @@ else
 			
 			read answer
 			
-			if [ "$answer" = "y" ]; then
+			if [ "$answer" = "n" ]; then
 				echo "Terminating script. Nothing was changed"
 			else
 				if [ "$( psql -tAc "SELECT 1 FROM pg_database WHERE datname='$dbname'" )" = '1' ]; then
@@ -65,6 +65,14 @@ else
 					echo "Initialization script $init_script_path executed successfully"
 				else
 					echo "Database creation script $creation_script_path not found"
+				fi
+				
+				populate_script_path="db-populate/populate.sql"
+				if [ -f $populate_script_path ]; then
+					psql -f "$populate_script_path" "postgresql://$username:$password@$host:$port/$dbname"
+					echo "Database was populated with some initial data"
+				else
+					echo "Database population script $populate_script_path not found"
 				fi
 			fi			
 		fi
