@@ -1,13 +1,13 @@
 BEGIN;
 
-\i user_.sql
+\i db-populate/user_.sql
 
-\i list_state.sql
-\i income_category.sql
-\i product_category.sql
+\i db-populate/list_state.sql
+\i db-populate/income_category.sql
+\i db-populate/product_category.sql
 
-\i list.sql
-\i income.sql
-\i product.sql
+\i db-populate/list.sql
+\i db-populate/income.sql
+\i db-populate/product.sql
 
 COMMIT;
