@@ -53,6 +53,7 @@ TEST(GetBalanceHandlerTest, BALANCE)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 

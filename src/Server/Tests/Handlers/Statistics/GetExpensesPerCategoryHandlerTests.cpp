@@ -7,8 +7,7 @@
 
 #include "Server/Handlers/Entities/Entities.h"
 #include "Server/Handlers/Entities/Parsers.h"
-#include "Server/Handlers/List/GetListsHandler.h"
-#include "Server/Handlers/List/Utils.h"
+#include "Server/Handlers/Statistics/GetExpensesPerCategoryHandler.h"
 #include "Net/Parsing.h"
 
 
@@ -17,42 +16,19 @@ using ::testing::_;
 
 namespace  {
 
-ListState list_state{
+db::ExpensePerCategory db_expense{
 	1,
-	"State 1"
+	1
 };
 
-List list{
+ExpensePerCategory expense{
 	1,
-	"List 1",
-	1,
-	list_state
+	1
 };
 
-db::List db_list{
-	1,
-	1,
-	1,
-	"List 1",
-};
-
-db::ListState db_list_state {
-	1,
-	"State 1"
-};
-
-void CheckListsEquality(const List& list1, const List& list2)
+std::unique_ptr<GetExpensesPerCategoryHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
 {
-	EXPECT_EQ(list1.id, list2.id);
-	EXPECT_EQ(list1.owner_id, list2.owner_id);
-	EXPECT_EQ(list1.state.id, list2.state.id);
-	EXPECT_EQ(list1.state.name, list2.state.name);
-	EXPECT_EQ(list1.name, list2.name);
-}
-
-std::unique_ptr<GetListsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& facade)
-{
-	auto handler = std::make_unique<GetListsHandler>();
+	auto handler = std::make_unique<GetExpensesPerCategoryHandler>();
 	handler->set_facade(std::move(facade));
 
 	Params params;
@@ -61,16 +37,15 @@ std::unique_ptr<GetListsHandler> MakeHandler(std::unique_ptr<MockDbFacade>&& fac
 	return std::move(handler);
 }
 
-
 }
 
 
-TEST(GetListsHandlerTest, EMPTY_LIST)
+TEST(GetExpensesPerCategoryHandlerTest, EMPTY_EXPENSES)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllLists(_))
-		.WillOnce(Return(std::vector<db::List>{}));
+	EXPECT_CALL(*facade, ExpensesPerCategory(1))
+		.WillOnce(Return(std::vector<db::ExpensePerCategory>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -86,16 +61,27 @@ TEST(GetListsHandlerTest, EMPTY_LIST)
 	EXPECT_EQ(lists.size(), 0);
 }
 
-TEST(GetListsHandlerTest, ONE_LIST)
+TEST(GetExpensesPerCategoryHandlerTest, FORBIDDEN)
 {
-	ListJSONParser m_parser;
+	auto facade = std::make_unique<MockDbFacade>();
+	auto handler = MakeHandler(std::move(facade));
 
+	Net::Request request;
+	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 2;
+
+	auto response = handler->AuthHandle(request);
+
+	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_FORBIDDEN);
+}
+
+TEST(GetExpensesPerCategoryHandlerTest, ONE_EXPENSE)
+{
+	ExpensePerCategoryJSONParser m_parser;
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllLists(_))
-		.WillOnce(Return(std::vector<db::List>{db_list}));
-	EXPECT_CALL(*facade, GetListStateById(1))
-		.WillOnce(Return(std::optional<db::ListState>{db_list_state}));
+	EXPECT_CALL(*facade, ExpensesPerCategory(1))
+		.WillOnce(Return(std::vector<db::ExpensePerCategory>{db_expense}));
 
 	auto handler = MakeHandler(std::move(facade));
 
@@ -110,8 +96,8 @@ TEST(GetListsHandlerTest, ONE_LIST)
 	QJsonArray lists = response.json_payload.array();
 	EXPECT_EQ(lists.size(), 1);
 
-	auto list = m_parser.Parse(lists[0].toObject());
+	auto expense = m_parser.Parse(lists[0].toObject());
 
-	CheckListsEquality(list, ::list);
+	EXPECT_EQ(expense.category_id, ::expense.category_id);
+	EXPECT_EQ(expense.amount, ::expense.amount);
 }
-

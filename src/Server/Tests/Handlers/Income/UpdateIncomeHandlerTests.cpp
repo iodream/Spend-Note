@@ -34,7 +34,14 @@ QJsonDocument FormatJSON()
 
 TEST(UpdateIncomeHandler, UPDATE_INCOME_SUCCESS)
 {
+
 	auto facade = std::make_unique<MockDbFacade>();
+
+	db::Income income;
+	EXPECT_CALL(*facade, GetIncomeById(1))
+			.WillOnce(Return(std::optional<db::Income>{income}));
+	EXPECT_CALL(*facade, CanUserEditIncome(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, UpdateIncome(_))
 		.WillOnce(Return(true));
 
@@ -47,6 +54,7 @@ TEST(UpdateIncomeHandler, UPDATE_INCOME_SUCCESS)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_PUT;
+	request.uid = 1;
 	request.json_payload = FormatJSON();
 
 	auto response = handler->AuthHandle(request);
@@ -55,9 +63,10 @@ TEST(UpdateIncomeHandler, UPDATE_INCOME_SUCCESS)
 
 TEST(UpdateIncomeHandler, UPDATE_INCOME_FAILURE)
 {
+
 	auto facade = std::make_unique<MockDbFacade>();
-	EXPECT_CALL(*facade, UpdateIncome(_))
-		.WillOnce(Return(false));
+	EXPECT_CALL(*facade, GetIncomeById(1))
+			.WillOnce(Return(std::optional<db::Income>{}));
 
 	auto handler = std::make_unique<UpdateIncomeHandler>();
 	handler->set_facade(std::move(facade));
@@ -68,6 +77,7 @@ TEST(UpdateIncomeHandler, UPDATE_INCOME_FAILURE)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_PUT;
+	request.uid = 1;
 	request.json_payload = FormatJSON();
 
 	auto response = handler->AuthHandle(request);

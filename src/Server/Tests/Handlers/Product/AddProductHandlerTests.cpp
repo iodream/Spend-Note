@@ -62,6 +62,8 @@ TEST(AddProductHandlerTest, SUCCESS)
 
 	auto facade = std::make_unique<MockDbFacade>();
 
+	EXPECT_CALL(*facade, CanUserEditList(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, AddProduct(_))
 		.WillOnce(Return(std::optional<db::IdType>{1}));
 
@@ -70,6 +72,7 @@ TEST(AddProductHandlerTest, SUCCESS)
 	Net::Request request;
 	request.json_payload = QJsonDocument{FormObject(1)};
 	request.method = Net::HTTP_METHOD_POST;
+	request.uid = 1;
 
 
 	auto response = handler->AuthHandle(request);
@@ -86,7 +89,8 @@ TEST(AddProductHandlerTest, FAILURE)
 {
 
 	auto facade = std::make_unique<MockDbFacade>();
-
+	EXPECT_CALL(*facade, CanUserEditList(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, AddProduct(_))
 		.WillOnce(Throw(db::SQLFailure("")));
 
@@ -95,6 +99,7 @@ TEST(AddProductHandlerTest, FAILURE)
 	Net::Request request;
 	request.json_payload = QJsonDocument{FormObject(123)};
 	request.method = Net::HTTP_METHOD_POST;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 

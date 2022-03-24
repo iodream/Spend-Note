@@ -72,6 +72,7 @@ TEST(GetDailyListHandlerTest, EMPTY_DAILY_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
@@ -95,6 +96,7 @@ TEST(GetDailyListHandlerTest, ONE_PRODUCT_DAILY_LIST)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
