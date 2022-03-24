@@ -172,7 +172,7 @@ std::vector<Product> ProductRepository::GetDailyList(IdType user_id)
 			" FROM " + db::product::TABLE_NAME +
 			" JOIN " + db::list::TABLE_NAME +
 			" ON " + db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
-			" WHERE DATE(" + db::product::BUY_UNTIL_DATE + ") = current_date AND " + db::list::USER_ID + " = " + w.quote(user_id) + ";");
+			" WHERE DATE(" + db::product::BUY_UNTIL_DATE + ") = current_date AND " + db::list::USER_ID + " = " + w.quote(user_id) + " AND NOT " + db::product::IS_BOUGHT + ";");
 
 		products.resize(product_rows.size());
 		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
