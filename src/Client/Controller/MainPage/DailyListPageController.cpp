@@ -13,6 +13,15 @@ DailyListPageController::DailyListPageController(
 	ConnectDailyListPage();
 }
 
+void DailyListPageController::ConnectDailyListPage()
+{
+	connect(
+		&m_daily_list_page,
+		&DailyListSubPage::GoToProductView,
+		this,
+		&DailyListPageController::OnGoToProductView);
+}
+
 void DailyListPageController::OnGoToProductView(const Product& product)
 {
 	PageData data{};
@@ -45,13 +54,4 @@ bool DailyListPageController::UpdateDailyListPage()
 	m_daily_list_page.Update(list);
 
 	return true;
-}
-
-void DailyListPageController::ConnectDailyListPage()
-{
-	connect(
-		&m_daily_list_page,
-		&DailyListSubPage::GoToProductView,
-		this,
-		&DailyListPageController::OnGoToProductView);
 }

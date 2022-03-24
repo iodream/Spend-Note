@@ -105,6 +105,7 @@ void ProductPagesController::OnEditProduct()
 {
 	m_edit_page.set_product(m_view_page.get_product());
 	m_edit_page.Update();
+	UpdateCategoryBox();
 	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
 }
 

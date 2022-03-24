@@ -47,6 +47,7 @@ void ProductEditSubPage::Update()
 	m_ui->BuyUntil->setDateTime(QDateTime::fromString(m_product.buy_until_date, "yyyy-mm-dd HH:mm:ss.zzz"));
 	m_ui->Priority->setValue(m_product.priority);
 	m_ui->Category->setPlaceholderText(m_product.category.name);
+	m_ui->Category->setCurrentIndex(m_ui->Category->findData(m_product.category.id));
 	m_ui->IsBought->setChecked(m_product.is_bought);
 }
 
@@ -56,6 +57,7 @@ void ProductEditSubPage::FillCategoryBox(const std::vector<ProductCategory> &cat
 	{
 		m_ui->Category->addItem(el.name, el.id);
 	}
+	m_ui->Category->setCurrentIndex(0);
 }
 
 void ProductEditSubPage::SetRangeOfSpinBox()
