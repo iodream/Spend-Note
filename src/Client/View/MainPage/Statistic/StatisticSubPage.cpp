@@ -66,58 +66,90 @@ void StatisticSubPage::UpdatePieAmountChart(
 		std::vector<ExpensePerCategory> stats,
 		std::vector<ProductCategory> category)
 {
-	QPieSeries* series = new QPieSeries();
-
-	for(const auto& el : stats)
+	if (stats.empty())
 	{
-		QString lable = GetCategoryById(el.category_id, category) + " " + QString::number(el.amount);
-		series->append(lable, el.amount);
+		m_ui->NotEnoughData2->show();
+		m_pie_amount_chart->hide();
 	}
-	series->setLabelsVisible();
+	else
+	{
+		m_ui->NotEnoughData2->hide();
+		m_pie_amount_chart->show();
 
-	m_pie_amount_chart->removeAllSeries();
-	m_pie_amount_chart->addSeries(series);
+		QPieSeries* series = new QPieSeries();
+
+		for(const auto& el : stats)
+		{
+			QString lable = GetCategoryById(el.category_id, category) + " " + QString::number(el.amount);
+			series->append(lable, el.amount);
+		}
+		series->setLabelsVisible();
+
+		m_pie_amount_chart->removeAllSeries();
+		m_pie_amount_chart->addSeries(series);
+	}
 }
 
 void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
 {
-
-	QBarSet* set = new QBarSet(nullptr);
-	QBarSeries* series = new QBarSeries();
-	QBarCategoryAxis* axis = new QBarCategoryAxis();
-	QStringList list;
-
-	for(const auto& el : stats)
+	if (stats.empty())
 	{
-		*set << el.amount;
-		list << el.day;
+		m_ui->NotEnoughData3->show();
+		m_bar_balance_chart->hide();
 	}
+	else
+	{
+		m_ui->NotEnoughData3->hide();
+		m_bar_balance_chart->show();
 
-	axis->append(list);
-	series->append(set);
-	series->setLabelsVisible();
-	m_bar_balance_chart->createDefaultAxes();
-	m_bar_balance_chart->setAxisX(axis, series);
-	m_bar_balance_chart->removeAllSeries();
-	m_bar_balance_chart->addSeries(series);
+		QBarSet* set = new QBarSet(nullptr);
+		QBarSeries* series = new QBarSeries();
+		QBarCategoryAxis* axis = new QBarCategoryAxis();
+		QStringList list;
+
+		for(const auto& el : stats)
+		{
+			*set << el.amount;
+			list << el.day;
+		}
+
+		axis->append(list);
+		series->append(set);
+		series->setLabelsVisible();
+		m_bar_balance_chart->createDefaultAxes();
+		m_bar_balance_chart->setAxisX(axis, series);
+		m_bar_balance_chart->removeAllSeries();
+		m_bar_balance_chart->addSeries(series);
+	}
 }
 
 void StatisticSubPage::UpdatePiePercentChart(
 		std::vector<ExpensePercentagePerCategory> stats,
 		std::vector<ProductCategory> category)
 {
-	QPieSeries* series = new QPieSeries();
-
-	for(const auto& el : stats)
+	if (stats.empty())
 	{
-		QString label = GetCategoryById(el.category_id, category) + " " +QString::number(el.percentage) + "%";
-		series->append(label, el.percentage);
+		m_ui->NotEnoughData1->show();
+		m_pie_percent_chart->hide();
 	}
+	else
+	{
+		m_ui->NotEnoughData1->hide();
+		m_pie_percent_chart->show();
 
-	series->setLabelsVisible();
+		QPieSeries* series = new QPieSeries();
 
-	m_pie_percent_chart->removeAllSeries();
-	m_pie_percent_chart->addSeries(series);
+		for(const auto& el : stats)
+		{
+			QString label = GetCategoryById(el.category_id, category) + " " +QString::number(el.percentage) + "%";
+			series->append(label, el.percentage);
+		}
+
+		series->setLabelsVisible();
+
+		m_pie_percent_chart->removeAllSeries();
+		m_pie_percent_chart->addSeries(series);
+	}
 }
 
 QChart* StatisticSubPage::InitChart(QLayout* layout)
