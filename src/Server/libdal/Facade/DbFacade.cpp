@@ -14,6 +14,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
+		, m_product_custom_categories(m_connection)
 {
 }
 
@@ -193,6 +194,31 @@ std::vector<ExpensePercentagePerCategory> DbFacade::ExpensesPercentagePerCategor
 std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 {
 	return m_statistics.ExpensesDynamics(user_id);
+}
+
+std::optional<ProductCustomCategory> DbFacade::GetById(IdType id, IdType user_id)
+{
+	return m_product_custom_categories.GetById(id, user_id);
+}
+
+std::vector<ProductCustomCategory> DbFacade::GetAll(IdType user_id)
+{
+	return m_product_custom_categories.GetAll(user_id);
+}
+
+std::optional<IdType> DbFacade::Add(const ProductCustomCategory& category)
+{
+	return m_product_custom_categories.Add(category);
+}
+
+bool DbFacade::Update(const ProductCustomCategory& category)
+{
+	return m_product_custom_categories.Update(category);
+}
+
+bool DbFacade::Remove(const ProductCustomCategory& category)
+{
+	return m_product_custom_categories.Remove(category);
 }
 
 }

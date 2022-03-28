@@ -11,6 +11,7 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
+#include "Repositories/ProductCustomCategoryRepository/ProductCustomCategoryRepository.h"
 
 namespace db
 {
@@ -66,6 +67,12 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
 
+	std::optional<ProductCustomCategory> GetById(IdType id, IdType user_id) override;
+	std::vector<ProductCustomCategory> GetAll(IdType user_id) override;
+	std::optional<IdType> Add(const ProductCustomCategory& category) override;
+	bool Update(const ProductCustomCategory& category) override;
+	bool Remove(const ProductCustomCategory& category) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -78,5 +85,6 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
+	ProductCustomCategoryRepository m_product_custom_categories;
 };
 }
