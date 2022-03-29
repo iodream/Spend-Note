@@ -67,11 +67,11 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
 
-	std::optional<ProductCustomCategory> GetById(IdType id, IdType user_id) override;
-	std::vector<ProductCustomCategory> GetAll(IdType user_id) override;
-	std::optional<IdType> Add(const ProductCustomCategory& category) override;
-	bool Update(const ProductCustomCategory& category) override;
-	bool Remove(const ProductCustomCategory& category) override;
+	std::optional<ProductCustomCategory> GetProductCustomCategoryById(IdType id, IdType user_id) override;
+	std::vector<ProductCustomCategory> GetAllProductCustomCategories(IdType user_id) override;
+	std::optional<IdType> AddProductCustomCategory(const ProductCustomCategory& category) override;
+	bool UpdateProductCustomCategory(const ProductCustomCategory& category) override;
+	bool RemoveProductCustomCategory(const ProductCustomCategory& category) override;
 
 private:
 	pqxx::connection m_connection;

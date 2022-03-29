@@ -21,12 +21,9 @@ std::optional<ProductCustomCategory> ProductCustomCategoryRepository::GetById(Id
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-			"SELECT " +
-				db::productCustomCategory::ID + ", " +
-				db::productCustomCategory::NAME +
-			" FROM " + db::productCustomCategory::TABLE_NAME +
-			" WHERE " + db::productCustomCategory::ID + " = " + w.quote(id) +
-			" AND " + db::productCustomCategory::USER_ID + " = " + w.quote(user_id) + ";");
+			"SELECT * FROM " + db::productCustomCategory::TABLE_NAME +
+			" WHERE " + db::productCustomCategory::USER_ID + " = " + w.quote(user_id) +
+			" AND " + db::productCustomCategory::ID + " = " + w.quote(id) + ";");
 
 		if (!product_category_rows.empty())
 		{
@@ -49,10 +46,7 @@ std::vector<ProductCustomCategory> ProductCustomCategoryRepository::GetAll(IdTyp
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-			"SELECT " +
-				db::productCustomCategory::ID + ", " +
-				db::productCustomCategory::NAME +
-			" FROM " + db::productCustomCategory::TABLE_NAME +
+			"SELECT * FROM " + db::productCustomCategory::TABLE_NAME +
 			" WHERE " + db::productCustomCategory::USER_ID + " = " + w.quote(user_id) + ";");
 
 		product_categories.resize(product_category_rows.size());
@@ -76,7 +70,8 @@ std::optional<IdType> ProductCustomCategoryRepository::Add(const ProductCustomCa
 	{
 		pqxx::work w(m_database_connection);
 		pqxx::result id_rows = w.exec(
-			"INSERT INTO " + db::productCustomCategory::TABLE_NAME + " (" +
+			"INSERT INTO " +
+				db::productCustomCategory::TABLE_NAME + " (" +
 				db::productCustomCategory::NAME + ", " +
 				db::productCustomCategory::USER_ID + ") " +
 			"VALUES (" +
@@ -167,8 +162,8 @@ ProductCustomCategory ProductCustomCategoryRepository::ProductCategoryFromRow(co
 {
 	ProductCustomCategory product_category;
 	product_category.id = row[db::productCustomCategory::ID].as<IdType>();
-	product_category.user_id = row[db::productCustomCategory::USER_ID].as<IdType>();
 	product_category.name = row[db::productCustomCategory::NAME].as<std::string>();
+	product_category.user_id = row[db::productCustomCategory::USER_ID].as<IdType>();
 	return product_category;
 }
 

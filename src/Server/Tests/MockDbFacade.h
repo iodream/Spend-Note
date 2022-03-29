@@ -52,4 +52,10 @@ public:
 	MOCK_METHOD(std::vector<db::ExpensePerCategory>, ExpensesPerCategory, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::ExpensePercentagePerCategory>, ExpensesPercentagePerCategory, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::ExpensePerDay>, ExpensesDynamics, (db::IdType), (override));
+
+	MOCK_METHOD(std::optional<db::ProductCustomCategory>, GetCustomCategoryById, (db::IdType, db::IdType),(override));
+	MOCK_METHOD(std::vector<db::ProductCustomCategory>, GetAllCustomCategories, (db::IdType), (override));
+	MOCK_METHOD(std::optional<db::IdType>, AddCustomCategory, (const db::ProductCustomCategory& category), (override));
+	MOCK_METHOD(bool, UpdateCustomCategory, (const db::ProductCustomCategory& category), (override));
+	MOCK_METHOD(bool, RemoveCustomCategory, (const db::ProductCustomCategory& category), (override));
 };

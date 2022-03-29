@@ -71,10 +71,10 @@ public:
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
 
-	virtual std::optional<ProductCustomCategory> GetById(IdType id, IdType user_id) = 0;
-	virtual std::vector<ProductCustomCategory> GetAll(IdType user_id) = 0;
-	virtual std::optional<IdType> Add(const ProductCustomCategory& category) = 0;
-	virtual bool Update(const ProductCustomCategory& category) = 0;
-	virtual bool Remove(const ProductCustomCategory& category) = 0;
+	virtual std::optional<ProductCustomCategory> GetProductCustomCategoryById(IdType id, IdType user_id) = 0;
+	virtual std::vector<ProductCustomCategory> GetAllProductCustomCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddProductCustomCategory(const ProductCustomCategory& category) = 0;
+	virtual bool UpdateProductCustomCategory(const ProductCustomCategory& category) = 0;
+	virtual bool RemoveProductCustomCategory(const ProductCustomCategory& category) = 0;
 };
 }

@@ -196,27 +196,27 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
-std::optional<ProductCustomCategory> DbFacade::GetById(IdType id, IdType user_id)
+std::optional<ProductCustomCategory> DbFacade::GetProductCustomCategoryById(IdType id, IdType user_id)
 {
 	return m_product_custom_categories.GetById(id, user_id);
 }
 
-std::vector<ProductCustomCategory> DbFacade::GetAll(IdType user_id)
+std::vector<ProductCustomCategory> DbFacade::GetAllProductCustomCategories(IdType user_id)
 {
 	return m_product_custom_categories.GetAll(user_id);
 }
 
-std::optional<IdType> DbFacade::Add(const ProductCustomCategory& category)
+std::optional<IdType> DbFacade::AddProductCustomCategory(const ProductCustomCategory& category)
 {
 	return m_product_custom_categories.Add(category);
 }
 
-bool DbFacade::Update(const ProductCustomCategory& category)
+bool DbFacade::UpdateProductCustomCategory(const ProductCustomCategory& category)
 {
 	return m_product_custom_categories.Update(category);
 }
 
-bool DbFacade::Remove(const ProductCustomCategory& category)
+bool DbFacade::RemoveProductCustomCategory(const ProductCustomCategory& category)
 {
 	return m_product_custom_categories.Remove(category);
 }

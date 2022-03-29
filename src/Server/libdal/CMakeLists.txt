@@ -49,6 +49,8 @@ add_library(libdal STATIC
 	Exceptions/NonexistentResource.h
 
 	DatabaseNames.h
+
+	main.cpp #need to be deleted
 )
 target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)
