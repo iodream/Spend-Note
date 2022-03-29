@@ -14,6 +14,7 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
+#include "DTOs/IncomeCustomCategory.h"
 
 namespace db
 {
@@ -69,5 +70,11 @@ public:
 	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
+
+	virtual std::optional<IncomeCustomCategory> GetIncomeCustomCategoryById(IdType id, IdType user_id) = 0;
+	virtual std::vector<IncomeCustomCategory> GetAllIncomeCustomCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddIncomeCustomCategory(const IncomeCustomCategory& category) = 0;
+	virtual bool UpdateIncomeCustomCategory(const IncomeCustomCategory& category) = 0;
+	virtual bool RemoveIncomeCustomCategory(const IncomeCustomCategory& category) = 0;
 };
 }
