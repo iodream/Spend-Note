@@ -66,6 +66,10 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
 
+	std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id) override;
+	std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id) override;
+	std::vector<IncomePerDay> IncomesDynamics(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 

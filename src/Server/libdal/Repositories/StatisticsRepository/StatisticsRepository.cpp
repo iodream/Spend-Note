@@ -149,6 +149,135 @@ std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id
 	}
 }
 
+std::vector<IncomePerCategory> StatisticsRepository::IncomesPerCategory(IdType user_id)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT " +
+				income::CATEGORY_ID +
+				", COALESCE(SUM(" + income::AMOUNT + "), 0) AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			"GROUP BY " + income::CATEGORY_ID + ";");
+
+		w.commit();
+
+		std::vector<IncomePerCategory> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row){
+			IncomePerCategory income;
+			income.category_id = row[product::CATEGORY_ID].as<IdType>();
+			income.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+std::vector<IncomePercentagePerCategory> StatisticsRepository::IncomesPercentagePerCategory(IdType user_id)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		auto total_income = w.query_value<Money>(
+			"SELECT COALESCE(SUM(" + income::AMOUNT + "), 0) " +
+			"FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL '1 WEEK';");
+
+		if (total_income == 0)
+		{
+			return {};
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT " +
+				income::CATEGORY_ID +
+				", COALESCE(SUM(" + income::AMOUNT + "), 0) / (" +
+				w.quote(total_income) + "::DECIMAL) * 100 AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			"GROUP BY " + income::CATEGORY_ID + ";");
+
+		w.commit();
+
+		std::vector<IncomePercentagePerCategory> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row){
+			IncomePercentagePerCategory income;
+			income.category_id = row[product::CATEGORY_ID].as<IdType>();
+			income.percentage = row[statistics::TOTAL_PRICE].as<double>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+std::vector<IncomePerDay> StatisticsRepository::IncomesDynamics(IdType user_id)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT DATE(" + income::ADD_TIME + ") AS " + statistics::PURCHASE_DATE + ", COALESCE(SUM(" + income::AMOUNT + "), 0) AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+			"GROUP BY DATE(" + income::ADD_TIME + ");");
+
+		w.commit();
+
+		std::vector<IncomePerDay> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row) {
+			IncomePerDay income;
+			income.day = row[statistics::PURCHASE_DATE].as<Date>();
+			income.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+
 bool StatisticsRepository::DoesUserExist(IdType user_id, pqxx::work& work)
 {
 	pqxx::result user_ids = work.exec(

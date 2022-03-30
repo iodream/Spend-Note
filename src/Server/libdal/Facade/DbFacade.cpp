@@ -195,4 +195,19 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
+std::vector<IncomePerCategory> DbFacade::IncomesPerCategory(IdType user_id)
+{
+	return m_statistics.IncomesPerCategory(user_id);
+}
+
+std::vector<IncomePercentagePerCategory> DbFacade::IncomesPercentagePerCategory(IdType user_id)
+{
+	return m_statistics.IncomesPercentagePerCategory(user_id);
+}
+
+std::vector<IncomePerDay> DbFacade::IncomesDynamics(IdType user_id)
+{
+	return m_statistics.IncomesDynamics(user_id);
+}
+
 }
