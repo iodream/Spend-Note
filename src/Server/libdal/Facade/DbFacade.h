@@ -11,7 +11,6 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
-#include "Repositories/IncomeCustomCategoryRepository/IncomeCustomCategoryRepository.h"
 
 namespace db
 {
@@ -48,9 +47,6 @@ public:
 	bool UpdateList(const List& list_) override;
 	bool RemoveList(const IdType& id) override;
 
-	std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) override;
-	std::vector<IncomeCategory> GetAllIncomeCategories() override;
-
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;
 
@@ -67,11 +63,12 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
 
-	std::optional<IncomeCustomCategory> GetIncomeCustomCategoryById(IdType id, IdType user_id) override;
-	std::vector<IncomeCustomCategory> GetAllIncomeCustomCategories(IdType user_id) override;
-	std::optional<IdType> AddIncomeCustomCategory(const IncomeCustomCategory& category) override;
-	bool UpdateIncomeCustomCategory(const IncomeCustomCategory& category) override;
-	bool RemoveIncomeCustomCategory(const IncomeCustomCategory& category) override;
+	std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) override;
+	std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) override;
+	std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) override;
+	bool UpdateIncomeCategory(const IncomeCategory& category) override;
+	bool RemoveIncomeCategory(IdType id) override;
+	bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) override;
 
 private:
 	pqxx::connection m_connection;
@@ -85,6 +82,5 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
-	IncomeCustomCategoryRepository m_income_custom_category;
 };
 }

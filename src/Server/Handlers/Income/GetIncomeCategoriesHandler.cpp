@@ -17,7 +17,7 @@ Net::Response GetIncomeCategoriesHandler::AuthHandle(const Net::Request& request
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
 
-	auto db_income_categories = m_facade->GetAllIncomeCategories();
+	auto db_income_categories = m_facade->GetAllIncomeCategories(request.uid);
 	std::vector<IncomeCategory> income_categories;
 
 	for (const db::IncomeCategory& db_income_category : db_income_categories) {

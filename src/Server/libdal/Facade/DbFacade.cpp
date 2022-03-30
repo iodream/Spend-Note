@@ -14,7 +14,6 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
-		, m_income_custom_category(m_connection)
 {
 }
 
@@ -130,16 +129,6 @@ bool DbFacade::RemoveList(const IdType& id)
 	return m_lists.Remove(id);
 }
 
-std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& category_id)
-{
-	return m_income_categories.GetById(category_id);
-}
-
-std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories()
-{
-	return m_income_categories.GetAll();
-}
-
 std::optional<ListState> DbFacade::GetListStateById(const IdType& list_state_id)
 {
 	return m_list_states.GetById(list_state_id);
@@ -196,29 +185,33 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
-std::optional<IncomeCustomCategory> DbFacade::GetIncomeCustomCategoryById(IdType id, IdType user_id)
+std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(IdType id)
 {
-	return m_income_custom_category.GetById(id, user_id);
+	return m_income_categories.GetById(id);
 }
 
-std::vector<IncomeCustomCategory> DbFacade::GetAllIncomeCustomCategories(IdType user_id)
+std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories(IdType user_id)
 {
-	return m_income_custom_category.GetAll(user_id);
+	return m_income_categories.GetAll(user_id);
 }
 
-std::optional<IdType> DbFacade::AddIncomeCustomCategory(const IncomeCustomCategory& category)
+std::optional<IdType> DbFacade::AddIncomeCategory(const IncomeCategory& category)
 {
-	return m_income_custom_category.Add(category);
+	return m_income_categories.Add(category);
 }
 
-bool DbFacade::UpdateIncomeCustomCategory(const IncomeCustomCategory& category)
+bool DbFacade::UpdateIncomeCategory(const IncomeCategory& category)
 {
-	return m_income_custom_category.Update(category);
+	return m_income_categories.Update(category);
 }
 
-bool DbFacade::RemoveIncomeCustomCategory(const IncomeCustomCategory& category)
+bool DbFacade::RemoveIncomeCategory(IdType id)
 {
-	return m_income_custom_category.Remove(category);
+	return m_income_categories.Remove(id);
 }
 
+bool DbFacade::CanUserEditIncomeCategory(IdType user_id, IdType category_id)
+{
+	return m_income_categories.CanUserEditIncomeCategory(user_id, category_id);
+}
 }

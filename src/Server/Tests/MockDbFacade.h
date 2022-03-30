@@ -34,9 +34,6 @@ public:
 	MOCK_METHOD(bool, UpdateList, (const db::List&), (override));
 	MOCK_METHOD(bool, RemoveList, (const db::IdType&), (override));
 
-	MOCK_METHOD(std::optional<db::IncomeCategory>, GetIncomeCategoryById, (const db::IdType&), (override));
-	MOCK_METHOD(std::vector<db::IncomeCategory>, GetAllIncomeCategories, (), (override));
-
 	MOCK_METHOD(std::optional<db::ListState>, GetListStateById, (const db::IdType&), (override));
 	MOCK_METHOD(std::vector<db::ListState>, GetAllListStates, (), (override));
 
@@ -46,6 +43,7 @@ public:
 	MOCK_METHOD(bool, CanUserEditList, (db::IdType, db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditProduct, (db::IdType, db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditIncome, (db::IdType, db::IdType), (override));
+	MOCK_METHOD(bool, CanUserEditIncomeCategory, (db::IdType, db::IdType), (override));
 
 	MOCK_METHOD(std::vector<db::Product>, GetDailyList, (db::IdType), (override));
 
@@ -53,9 +51,9 @@ public:
 	MOCK_METHOD(std::vector<db::ExpensePercentagePerCategory>, ExpensesPercentagePerCategory, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::ExpensePerDay>, ExpensesDynamics, (db::IdType), (override));
 
-	MOCK_METHOD(std::optional<db::IncomeCustomCategory>, GetIncomeCustomCategoryById, (db::IdType, db::IdType),(override));
-	MOCK_METHOD(std::vector<db::IncomeCustomCategory>, GetAllIncomeCustomCategories, (db::IdType), (override));
-	MOCK_METHOD(std::optional<db::IdType>, AddIncomeCustomCategory, (const db::IncomeCustomCategory& category), (override));
-	MOCK_METHOD(bool, UpdateIncomeCustomCategory, (const db::IncomeCustomCategory& category), (override));
-	MOCK_METHOD(bool, RemoveIncomeCustomCategory, (const db::IncomeCustomCategory& category), (override));
+	MOCK_METHOD(std::optional<db::IncomeCategory>, GetIncomeCategoryById, (db::IdType),(override));
+	MOCK_METHOD(std::vector<db::IncomeCategory>, GetAllIncomeCategories, (db::IdType), (override));
+	MOCK_METHOD(std::optional<db::IdType>, AddIncomeCategory, (const db::IncomeCategory& category), (override));
+	MOCK_METHOD(bool, UpdateIncomeCategory, (const db::IncomeCategory& category), (override));
+	MOCK_METHOD(bool, RemoveIncomeCategory, (db::IdType), (override));
 };

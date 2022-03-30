@@ -19,13 +19,6 @@ namespace db
 	{
 		const std::string TABLE_NAME = "IncomeCategory";
 		const std::string ID = "id";
-		const std::string NAME = "name";
-	}
-
-	namespace incomeCustomCategory
-	{
-		const std::string TABLE_NAME = "IncomeCustomCategory";
-		const std::string ID = "id";
 		const std::string USER_ID = "userId";
 		const std::string NAME = "name";
 	}
