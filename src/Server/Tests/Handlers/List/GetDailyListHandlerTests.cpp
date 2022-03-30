@@ -30,6 +30,7 @@ db::Product p1 {
 
 db::ProductCategory c1 {
 	1,
+	1,
 	"Category 1"
 };
 

@@ -17,7 +17,7 @@ Net::Response GetProductCategoriesHandler::AuthHandle(const Net::Request& reques
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
 
-	auto db_product_categories = m_facade->GetAllProductCategories();
+	auto db_product_categories = m_facade->GetAllProductCategories(request.uid);
 	std::vector<ProductCategory> product_categories;
 
 	for (const db::ProductCategory& db_product_category : db_product_categories) {

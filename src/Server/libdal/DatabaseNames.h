@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace db
 {
@@ -57,6 +58,7 @@ namespace db
 	{
 		const std::string TABLE_NAME = "ProductCategory";
 		const std::string ID = "id";
+		const std::string USER_ID = "userId";
 		const std::string NAME = "name";
 	}
 

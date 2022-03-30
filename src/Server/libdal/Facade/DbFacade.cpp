@@ -68,17 +68,6 @@ bool DbFacade::RemoveProduct(IdType id)
 	return m_products.Remove(id);
 }
 
-
-std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
-{
-	return m_product_categories.GetById(id);
-}
-
-std::vector<ProductCategory> DbFacade::GetAllProductCategories()
-{
-	return m_product_categories.GetAll();
-}
-
 std::optional<IdType> DbFacade::AddIncome(const Income& income)
 {
 	return m_incomes.Add(income);
@@ -195,4 +184,33 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
+std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
+{
+	return m_product_categories.GetById(id);
+}
+
+std::vector<ProductCategory> DbFacade::GetAllProductCategories(IdType user_id)
+{
+	return m_product_categories.GetAll(user_id);
+}
+
+std::optional<IdType> DbFacade::AddProductCategory(const ProductCategory& category)
+{
+	return m_product_categories.Add(category);
+}
+
+bool DbFacade::UpdateProductCategory(const ProductCategory& category)
+{
+	return m_product_categories.Update(category);
+}
+
+bool DbFacade::RemoveProductCategory(IdType id)
+{
+	return m_product_categories.Remove(id);
+}
+
+bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
+{
+	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
+}
 }
