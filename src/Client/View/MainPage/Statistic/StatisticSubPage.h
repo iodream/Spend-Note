@@ -27,6 +27,9 @@ public:
 	void UpdatePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
 	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
 
+	void ShowEmptyMessang();
+	void HideEmptyMessang();
+
 	QChart* InitChart(QLayout* layout);
 	//QChart* InitChart(QFrame* frame);
 

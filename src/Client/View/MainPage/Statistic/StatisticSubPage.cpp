@@ -68,14 +68,12 @@ void StatisticSubPage::UpdatePieAmountChart(
 {
 	if (stats.empty())
 	{
-		m_ui->NotEnoughData2->show();
-		m_pie_amount_chart->hide();
+		ShowEmptyMessang();
 	}
 	else
 	{
 		m_ui->NotEnoughData2->hide();
-		m_pie_amount_chart->show();
-
+		m_pie_percent_chart->show();
 		QPieSeries* series = new QPieSeries();
 
 		for(const auto& el : stats)
@@ -94,13 +92,12 @@ void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
 {
 	if (stats.empty())
 	{
-		m_ui->NotEnoughData3->show();
-		m_bar_balance_chart->hide();
+		ShowEmptyMessang();
 	}
 	else
 	{
 		m_ui->NotEnoughData3->hide();
-		m_bar_balance_chart->show();
+		m_pie_percent_chart->show();
 
 		QBarSet* set = new QBarSet(nullptr);
 		QBarSeries* series = new QBarSeries();
@@ -129,8 +126,7 @@ void StatisticSubPage::UpdatePiePercentChart(
 {
 	if (stats.empty())
 	{
-		m_ui->NotEnoughData1->show();
-		m_pie_percent_chart->hide();
+		ShowEmptyMessang();
 	}
 	else
 	{
@@ -212,6 +208,31 @@ void StatisticSubPage::ChartChanged(int index)
 	else
 	{
 		emit BalanceChartSelected();
+	}
+}
+
+void StatisticSubPage::ShowEmptyMessang()
+{
+	switch (m_ui->stackedWidget->currentIndex())
+	{
+	case 0:
+	{
+		m_ui->NotEnoughData1->show();
+		m_pie_percent_chart->hide();
+		break;
+	}
+	case 1:
+	{
+		m_ui->NotEnoughData2->show();
+		m_pie_amount_chart->hide();
+		break;
+	}
+	case 2:
+	{
+		m_ui->NotEnoughData3->show();
+		m_bar_balance_chart->hide();
+		break;
+	}
 	}
 }
 
