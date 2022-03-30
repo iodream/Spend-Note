@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QString>
+#include <QDateTime>
 
 #include "Client/Common.h"
 #include "Client/Entities/Entities.h"

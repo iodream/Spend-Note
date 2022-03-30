@@ -29,7 +29,11 @@ void ProductViewSubPage::Update()
 	m_ui->Name->setText(m_product.name);
 	m_ui->Price->setText(QString::number(m_product.price));
 	m_ui->Amount->setText(QString::number(m_product.amount));
-	m_ui->BuyUntil->setText(m_product.buy_until_date);
+
+	QDateTime date = QDateTime::fromString(
+		m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+
+	m_ui->BuyUntil->setText(date.toString(QLocale::system().dateTimeFormat()));
 	m_ui->Priority->setText(QString::number(m_product.priority));
 	m_ui->Category->setText(m_product.category.name);
 	m_ui->IsBought->setText(m_product.is_bought ? "Yes" : "No");

@@ -7,6 +7,7 @@
 #include "Common.h"
 #include "Entities/Entities.h"
 #include "Utils.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class ProductEditSubPage;

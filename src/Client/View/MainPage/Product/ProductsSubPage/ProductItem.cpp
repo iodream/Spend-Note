@@ -56,7 +56,9 @@ void ProductItem::UpdateColor()
 void ProductItem::Update()
 {
 	m_ui->ProductName->setText(m_product.name);
-	m_ui->BuyUntil->setText(m_product.buy_until_date);
+	QDateTime date = QDateTime::fromString(
+		m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_ui->BuyUntil->setText(date.toString(QLocale::system().dateTimeFormat()));
 	m_ui->Price->setText(QString("%1").arg(m_product.price));
 	m_ui->Number->setText(QString("%1").arg(m_number));
 	m_ui->PurchasedCheckbox->setChecked(m_product.is_bought);
