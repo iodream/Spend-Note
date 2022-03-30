@@ -11,7 +11,6 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
-#include "Repositories/ProductCustomCategoryRepository/ProductCustomCategoryRepository.h"
 
 namespace db
 {
@@ -32,9 +31,6 @@ public:
 	std::vector<Product> GetProductsForList(IdType list_id) override;
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
-
-	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
-	std::vector<ProductCategory> GetAllProductCategories() override;
 
 	std::optional<IdType> AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
@@ -67,11 +63,12 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
 
-	std::optional<ProductCustomCategory> GetProductCustomCategoryById(IdType id, IdType user_id) override;
-	std::vector<ProductCustomCategory> GetAllProductCustomCategories(IdType user_id) override;
-	std::optional<IdType> AddProductCustomCategory(const ProductCustomCategory& category) override;
-	bool UpdateProductCustomCategory(const ProductCustomCategory& category) override;
-	bool RemoveProductCustomCategory(const ProductCustomCategory& category) override;
+	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
+	std::vector<ProductCategory> GetAllProductCategories(IdType user_id) override;
+	std::optional<IdType> AddProductCategory(const ProductCategory& category) override;
+	bool UpdateProductCategory(const ProductCategory& category) override;
+	bool RemoveProductCategory(const ProductCategory& category) override;
+	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
 private:
 	pqxx::connection m_connection;
@@ -85,6 +82,5 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
-	ProductCustomCategoryRepository m_product_custom_categories;
 };
 }

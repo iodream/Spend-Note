@@ -14,7 +14,6 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
-		, m_product_custom_categories(m_connection)
 {
 }
 
@@ -67,17 +66,6 @@ bool DbFacade::UpdateProduct(const Product& product)
 bool DbFacade::RemoveProduct(IdType id)
 {
 	return m_products.Remove(id);
-}
-
-
-std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
-{
-	return m_product_categories.GetById(id);
-}
-
-std::vector<ProductCategory> DbFacade::GetAllProductCategories()
-{
-	return m_product_categories.GetAll();
 }
 
 std::optional<IdType> DbFacade::AddIncome(const Income& income)
@@ -196,29 +184,33 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
-std::optional<ProductCustomCategory> DbFacade::GetProductCustomCategoryById(IdType id, IdType user_id)
+std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
 {
-	return m_product_custom_categories.GetById(id, user_id);
+	return m_product_categories.GetById(id);
 }
 
-std::vector<ProductCustomCategory> DbFacade::GetAllProductCustomCategories(IdType user_id)
+std::vector<ProductCategory> DbFacade::GetAllProductCategories(IdType user_id)
 {
-	return m_product_custom_categories.GetAll(user_id);
+	return m_product_categories.GetAll(user_id);
 }
 
-std::optional<IdType> DbFacade::AddProductCustomCategory(const ProductCustomCategory& category)
+std::optional<IdType> DbFacade::AddProductCategory(const ProductCategory& category)
 {
-	return m_product_custom_categories.Add(category);
+	return m_product_categories.Add(category);
 }
 
-bool DbFacade::UpdateProductCustomCategory(const ProductCustomCategory& category)
+bool DbFacade::UpdateProductCategory(const ProductCategory& category)
 {
-	return m_product_custom_categories.Update(category);
+	return m_product_categories.Update(category);
 }
 
-bool DbFacade::RemoveProductCustomCategory(const ProductCustomCategory& category)
+bool DbFacade::RemoveProductCategory(const ProductCategory& category)
 {
-	return m_product_custom_categories.Remove(category);
+	return m_product_categories.Remove(category);
 }
 
+bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
+{
+	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
+}
 }
