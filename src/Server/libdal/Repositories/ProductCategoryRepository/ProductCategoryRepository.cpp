@@ -21,7 +21,11 @@ std::optional<ProductCategory> ProductCategoryRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-			"SELECT * FROM " + db::productCategory::TABLE_NAME +
+			"SELECT " +
+				db::productCategory::ID + ", " +
+				db::productCategory::NAME + ", " +
+				db::productCategory::USER_ID +
+			" FROM " + db::productCategory::TABLE_NAME +
 			" WHERE " + db::productCategory::ID + " = " + w.quote(id) + ";");
 
 		if (!product_category_rows.empty())
@@ -45,7 +49,11 @@ std::vector<ProductCategory> ProductCategoryRepository::GetAll(IdType user_id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_category_rows = w.exec(
-			"SELECT * FROM " + db::productCategory::TABLE_NAME +
+			"SELECT " +
+				db::productCategory::ID + ", " +
+				db::productCategory::NAME + ", " +
+				db::productCategory::USER_ID +
+			" FROM " + db::productCategory::TABLE_NAME +
 			" WHERE " + db::productCategory::USER_ID + " = " + w.quote(user_id) + ";");
 
 		product_categories.resize(product_category_rows.size());
@@ -97,23 +105,24 @@ bool ProductCategoryRepository::Update(const ProductCategory& category)
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto result = w.exec("SELECT " + db::productCategory::ID +
-				" FROM " + db::productCategory::TABLE_NAME +
-				" WHERE " + db::productCategory::ID + " = " + w.quote(category.id) +
-				" AND " + db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";");
+		auto result = w.exec(
+			"SELECT " + db::productCategory::ID +
+			" FROM " + db::productCategory::TABLE_NAME +
+			" WHERE " + db::productCategory::ID + " = " + w.quote(category.id) +
+			" AND " + db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";");
 		if(result.empty())
 		{
 			return false;
 		}
 
 		w.exec0(
-				"UPDATE " + db::productCategory::TABLE_NAME +
-				" SET " +
-					db::productCategory::NAME + " = " + w.quote(category.name) +
-				" WHERE " +
-					db::productCategory::ID + " = " + w.quote(category.id) +
-				" AND " +
-					db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";"
+			"UPDATE " + db::productCategory::TABLE_NAME +
+			" SET " +
+				db::productCategory::NAME + " = " + w.quote(category.name) +
+			" WHERE " +
+				db::productCategory::ID + " = " + w.quote(category.id) +
+			" AND " +
+				db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";"
 
 				);
 		w.commit();
@@ -126,23 +135,23 @@ bool ProductCategoryRepository::Update(const ProductCategory& category)
 }
 
 
-bool ProductCategoryRepository::Remove(const ProductCategory& category)
+bool ProductCategoryRepository::Remove(IdType id)
 {
 	try
 	{
 		pqxx::work w(m_database_connection);
-		auto result = w.exec("SELECT " + db::productCategory::ID +
-				" FROM " + db::productCategory::TABLE_NAME +
-				" WHERE " + db::productCategory::ID + " = " + w.quote(category.id) +
-				" AND " + db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";");
+		auto result = w.exec(
+			"SELECT " + db::productCategory::ID +
+			" FROM " + db::productCategory::TABLE_NAME +
+			" WHERE " + db::productCategory::ID + " = " + w.quote(id) + ";");
 		if(result.empty())
 		{
 			return false;
 		}
 
-		w.exec0("DELETE FROM " + db::productCategory::TABLE_NAME +
-				" WHERE " + db::productCategory::ID + " = " + w.quote(category.id) +
-				" AND " + db::productCategory::USER_ID + " = " + w.quote(category.user_id) + ";");
+		w.exec0(
+			"DELETE FROM " + db::productCategory::TABLE_NAME +
+			" WHERE " + db::productCategory::ID + " = " + w.quote(id) + ";");
 
 		w.commit();
 	}

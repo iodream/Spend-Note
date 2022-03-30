@@ -204,9 +204,9 @@ bool DbFacade::UpdateProductCategory(const ProductCategory& category)
 	return m_product_categories.Update(category);
 }
 
-bool DbFacade::RemoveProductCategory(const ProductCategory& category)
+bool DbFacade::RemoveProductCategory(IdType id)
 {
-	return m_product_categories.Remove(category);
+	return m_product_categories.Remove(id);
 }
 
 bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)

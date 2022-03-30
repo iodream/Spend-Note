@@ -67,7 +67,7 @@ public:
 	std::vector<ProductCategory> GetAllProductCategories(IdType user_id) override;
 	std::optional<IdType> AddProductCategory(const ProductCategory& category) override;
 	bool UpdateProductCategory(const ProductCategory& category) override;
-	bool RemoveProductCategory(const ProductCategory& category) override;
+	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
 private:

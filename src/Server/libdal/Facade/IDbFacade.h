@@ -71,7 +71,7 @@ public:
 	virtual std::vector<ProductCategory> GetAllProductCategories(IdType user_id) = 0;
 	virtual std::optional<IdType> AddProductCategory(const ProductCategory& category) = 0;
 	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
-	virtual bool RemoveProductCategory(const ProductCategory& category) = 0;
+	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
 };
 }

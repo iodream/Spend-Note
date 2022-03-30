@@ -14,7 +14,7 @@ public:
 	std::vector<ProductCategory> GetAll(IdType user_id);
 	std::optional<IdType> Add(const ProductCategory& category);
 	bool Update(const ProductCategory& category);
-	bool Remove(const ProductCategory& category);
+	bool Remove(IdType id);
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id);
 
 private:
