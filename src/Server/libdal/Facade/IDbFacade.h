@@ -37,9 +37,6 @@ public:
 	virtual bool UpdateProduct(const Product& product) = 0;
 	virtual bool RemoveProduct(IdType id) = 0;
 
-	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
-	virtual std::vector<ProductCategory> GetAllProductCategories() = 0;
-
 	virtual std::optional<IdType> AddIncome(const Income& income) = 0;
 	virtual std::optional<Income> GetIncomeById(const IdType& id) = 0;
 	virtual std::vector<Income> GetAllIncomes(const IdType& user_id) = 0;
@@ -75,5 +72,11 @@ public:
 	virtual bool RemoveIncomeCategory(IdType id) = 0;
 	virtual bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) = 0;
 
+	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
+	virtual std::vector<ProductCategory> GetAllProductCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddProductCategory(const ProductCategory& category) = 0;
+	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
+	virtual bool RemoveProductCategory(IdType id) = 0;
+	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
 };
 }

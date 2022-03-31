@@ -32,9 +32,6 @@ public:
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
 
-	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
-	std::vector<ProductCategory> GetAllProductCategories() override;
-
 	std::optional<IdType> AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
 	std::vector<Income> GetAllIncomes(const IdType& user_id) override;
@@ -69,6 +66,13 @@ public:
 	bool UpdateIncomeCategory(const IncomeCategory& category) override;
 	bool RemoveIncomeCategory(IdType id) override;
 	bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) override;
+
+	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
+	std::vector<ProductCategory> GetAllProductCategories(IdType user_id) override;
+	std::optional<IdType> AddProductCategory(const ProductCategory& category) override;
+	bool UpdateProductCategory(const ProductCategory& category) override;
+	bool RemoveProductCategory(IdType id) override;
+	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
 private:
 	pqxx::connection m_connection;
