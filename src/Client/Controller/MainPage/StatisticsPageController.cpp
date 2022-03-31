@@ -1,6 +1,6 @@
 #include "StatisticsPageController.h"
 
-#include "Models/Product/GetProductCategoriesModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 #include "Models/Statistics/GetExpensesPercentagePerCategoryModel.h"
 #include "Models/Statistics/GetExpensesPerCategoryModel.h"
 #include "Models/Statistics/GetExpensesPerDayModel.h"
@@ -27,7 +27,7 @@ bool StatisticsPageController::UpdateStatisticsPage()
 std::vector<ProductCategory> StatisticsPageController::GetProductCategories()
 {
 	GetProductCategoriesModel model{m_hostname};
-	auto request  = model.FormRequest();
+	auto request  = model.FormRequest(m_user_id);
 
 	Net::Response response;
 	try{

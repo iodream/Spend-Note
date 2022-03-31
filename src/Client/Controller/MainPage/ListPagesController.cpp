@@ -5,7 +5,7 @@
 #include "Models/List/RemoveListModel.h"
 #include "Models/List/UpdateListModel.h"
 #include "Models/Product/AddProductModel.h"
-#include "Models/Product/GetProductCategoriesModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 
 #include "View/MainPage/List/ListCreateSubPage/Item.h"
 #include "Models/List/GetListStatesModel.h"
@@ -396,7 +396,7 @@ void ListPagesController::UpdateCategoryBox()
 	if(!category_already_added)
 	{
 		GetProductCategoriesModel model{m_hostname};
-		auto request = model.FormRequest();
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{
