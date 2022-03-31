@@ -44,5 +44,7 @@ void IncomeViewSubPage::Update(const Income& income)
 	m_ui->Name->setText(m_income.name);
 	m_ui->Amount->setText(QString::number(m_income.amount));
 	m_ui->Category->setText(m_income.category.name);
-	m_ui->Expires->setText(m_income.expiration_time);
+	QDateTime date = QDateTime::fromString(
+		income.expiration_time, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_ui->Expires->setText(date.toString(QLocale::system().dateTimeFormat()));
 }

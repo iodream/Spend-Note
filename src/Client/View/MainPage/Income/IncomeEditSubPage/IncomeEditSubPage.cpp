@@ -6,6 +6,8 @@ IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	ui->ExpirationDateEdit->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
 	ui->ExpirationDateEdit->setDate(QDate::currentDate());
 	
 	connect(

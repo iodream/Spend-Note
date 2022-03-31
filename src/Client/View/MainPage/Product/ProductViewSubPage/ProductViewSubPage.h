@@ -2,9 +2,11 @@
 
 #include <QString>
 #include <QWidget>
+#include <QDateTime>
 
 #include "Common.h"
 #include "Entities/Entities.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class ProductViewSubPage;

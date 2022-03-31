@@ -13,6 +13,9 @@ ProductCreateSubPage::ProductCreateSubPage(QWidget *parent) :
 		this,
 		&ProductCreateSubPage::CreateProduct);
 
+	m_ui->BuyUntil->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
+
 	m_ui->BuyUntil->setDate(QDate::currentDate());
 	SetMinimumDate(QDate::currentDate());
 }

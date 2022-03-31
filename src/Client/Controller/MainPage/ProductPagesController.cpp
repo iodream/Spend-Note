@@ -118,7 +118,7 @@ void ProductPagesController::OnUpdateProduct()
 	if (!m_view_page.get_product().is_bought && product.is_bought)
 	{
 		QDateTime date = QDateTime::currentDateTime();
-		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
+		product.purchase_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	}
 
 	if (m_view_page.get_product().is_bought && !product.is_bought)
@@ -161,12 +161,12 @@ void ProductPagesController::OnCreateProduct()
 	new_product.category.name = m_create_page.GetCategoryName();
 	new_product.buy_until_date = m_create_page.GetBuyUntil();
 	QDateTime date = QDateTime::currentDateTime();
-	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
+	new_product.add_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
 	if (m_create_page.GetIsBought())
 	{
 		QDateTime date = QDateTime::currentDateTime();
-		new_product.purchase_date =  date.toString("yyyy-MM-dd hh:mm:ss");
+		new_product.purchase_date =  date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	}
 
 	new_product.list_id = m_list_id;

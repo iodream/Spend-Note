@@ -303,7 +303,7 @@ void ListPagesController::OnQuickAddItem()
 	new_item.priority = m_product_quick_create_page.GetPriority();
 	new_item.category.id = m_product_quick_create_page.GetCategoryId();
 	new_item.category.name = m_product_quick_create_page.GetCategoryName();
-	new_item.add_date = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+	new_item.add_date = QDateTime::currentDateTime().toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	new_item.purchase_date = "";
 
 	if(!AddProductModel::CheckFields(new_item))
