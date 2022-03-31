@@ -44,9 +44,6 @@ public:
 	bool UpdateList(const List& list_) override;
 	bool RemoveList(const IdType& id) override;
 
-	std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) override;
-	std::vector<IncomeCategory> GetAllIncomeCategories() override;
-
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;
 
@@ -62,6 +59,13 @@ public:
 	std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) override;
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
+
+	std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) override;
+	std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) override;
+	std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) override;
+	bool UpdateIncomeCategory(const IncomeCategory& category) override;
+	bool RemoveIncomeCategory(IdType id) override;
+	bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) override;
 
 	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
 	std::vector<ProductCategory> GetAllProductCategories(IdType user_id) override;

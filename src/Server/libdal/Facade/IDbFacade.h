@@ -14,6 +14,7 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
+#include "DTOs/IncomeCategory.h"
 
 namespace db
 {
@@ -48,9 +49,6 @@ public:
 	virtual bool UpdateList(const List& list_) = 0;
 	virtual bool RemoveList(const IdType& id) = 0;
 
-	virtual std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) = 0;
-	virtual std::vector<IncomeCategory> GetAllIncomeCategories() = 0;
-
 	virtual std::optional<ListState> GetListStateById(const IdType& list_state_id) = 0;
 	virtual std::vector<ListState> GetAllListStates() = 0;
 
@@ -66,6 +64,13 @@ public:
 	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
+
+	virtual std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) = 0;
+	virtual std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) = 0;
+	virtual bool UpdateIncomeCategory(const IncomeCategory& category) = 0;
+	virtual bool RemoveIncomeCategory(IdType id) = 0;
+	virtual bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) = 0;
 
 	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
 	virtual std::vector<ProductCategory> GetAllProductCategories(IdType user_id) = 0;

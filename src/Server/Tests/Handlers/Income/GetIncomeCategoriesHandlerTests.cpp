@@ -22,6 +22,7 @@ IncomeCategory category {
 
 db::IncomeCategory db_category{
 	1,
+	1,
 	"Category 1"
 };
 
@@ -46,7 +47,7 @@ TEST(GetIncomeCategoriesHandlerTest, EMPTY_LIST)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllIncomeCategories())
+	EXPECT_CALL(*facade, GetAllIncomeCategories(1))
 		.WillOnce(Return(std::vector<db::IncomeCategory>{}));
 
 	auto handler = MakeHandler(std::move(facade));
@@ -69,7 +70,7 @@ TEST(GetIncomeCategoriesHandlerTest, ONE_INCOME_CATEGORY)
 
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, GetAllIncomeCategories())
+	EXPECT_CALL(*facade, GetAllIncomeCategories(1))
 		.WillOnce(Return(std::vector<db::IncomeCategory>{db_category}));
 
 	auto handler = MakeHandler(std::move(facade));
