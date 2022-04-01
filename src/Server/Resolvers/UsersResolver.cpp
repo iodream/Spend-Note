@@ -11,6 +11,7 @@
 #include "../Handlers/Statistics/GetExpensesPercentagePerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPerDayHandler.h"
 #include "../Handlers/Categories/Income/AddIncomeCategoryHandler.h"
+#include "../Handlers/Categories/Income/GetIncomeCategoriesHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -90,6 +91,8 @@ ICommandHandler* UsersResolver::Resolve(
 	else if (segment == INCOME_CATEGORIES) {
 		if (method == Net::HTTP_METHOD_POST)
 			return new AddIncomeCategoryHandler();
+		else if (method == Net::HTTP_METHOD_GET)
+			return new GetIncomeCategoriesHandler();
 		return new MethodNotAllowedHandler();
 	}
 

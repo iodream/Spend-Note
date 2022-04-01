@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -14,11 +13,10 @@ class GetIncomeCategoriesModel
 public:
 	GetIncomeCategoriesModel(const std::string& hostname) : m_hostname{hostname} {}
 
-	Net::Request FormRequest();
+	Net::Request FormRequest(const IdType& user_id);
 	std::vector<IncomeCategory> ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;
-
 	IncomeCategoriesJSONParser m_parser{};
 };
