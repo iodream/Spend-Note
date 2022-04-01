@@ -7,6 +7,8 @@ const std::string Params::USER_ID = "user-id";
 const std::string Params::LIST_ID = "list-id";
 const std::string Params::PRODUCT_ID = "product-id";
 const std::string Params::INCOME_ID = "income-id";
+const std::string Params::INCOME_CATEGORY_ID = "income-category-id";
+
 
 
 void Params::Insert(const std::string& key, Value&& value)

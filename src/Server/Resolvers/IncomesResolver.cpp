@@ -2,18 +2,12 @@
 
 #include "../Handlers/Income/UpdateIncomeHandler.h"
 #include "../Handlers/Income/RemoveIncomeHandler.h"
-#include "../Handlers/Income/GetIncomeCategoriesHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
 #include "Logger/ScopedLogger.h"
 
-namespace {
-
-const std::string CATEGORIES = "/categories";
-
-}
 
 ICommandHandler* IncomesResolver::Resolve(
 	const std::string& path,
@@ -34,12 +28,6 @@ ICommandHandler* IncomesResolver::Resolve(
 		params.Insert(Params::INCOME_ID, Params::Value{income_id});
 		return Resolve(path, method, next_pos, params);
 	}
-
-	if (segment == CATEGORIES) {
-		if (method == Net::HTTP_METHOD_GET)
-			return new GetIncomeCategoriesHandler();
-		return new MethodNotAllowedHandler();
-		}
 
 	return nullptr;
 }

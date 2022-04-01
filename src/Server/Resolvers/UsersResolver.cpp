@@ -10,6 +10,7 @@
 #include "../Handlers/Statistics/GetExpensesPerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPercentagePerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPerDayHandler.h"
+#include "../Handlers/Categories/Income/AddIncomeCategoryHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -24,6 +25,7 @@ const std::string DAILY_LIST = "/daily-list";
 const std::string EXPENSES_PER_CATEGORY = "/expenses-per-category";
 const std::string EXPENSES_PERCENTAGE_PER_CATEGORY = "/expenses-percentage-per-category";
 const std::string EXPENSES_PER_DAY = "/expenses-per-day";
+const std::string INCOME_CATEGORIES = "/income-categories";
 }
 
 ICommandHandler* UsersResolver::Resolve(
@@ -83,6 +85,11 @@ ICommandHandler* UsersResolver::Resolve(
 	else if (segment == EXPENSES_PER_DAY) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetExpensesPerDayHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == INCOME_CATEGORIES) {
+		if (method == Net::HTTP_METHOD_POST)
+			return new AddIncomeCategoryHandler();
 		return new MethodNotAllowedHandler();
 	}
 
