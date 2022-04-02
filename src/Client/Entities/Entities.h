@@ -13,6 +13,7 @@
 #include "Net/Entities/Product/ProductBase.h"
 #include "Net/Entities/Product/ProductId.h"
 #include "Net/Entities/Product/ProductCategoryBase.h"
+#include "Net/Entities/Product/ProductCategoryId.h"
 
 #include "Net/Entities/Statistics/Balance.h"
 #include "Net/Entities/Statistics/ExpensePerCategory.h"
