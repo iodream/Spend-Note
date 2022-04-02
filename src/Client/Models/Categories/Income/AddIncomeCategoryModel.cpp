@@ -6,6 +6,7 @@ Net::Request AddIncomeCategoryModel::FormRequest(
 {
 	Net::Request request;
 	request.uid = user_id;
+	request.uri = m_hostname + "/users/" + std::to_string(user_id) + "/income-categories";
 	request.auth_scheme = Net::AUTH_SCHEME_TYPE_BEARER;
 	request.json_payload = QJsonDocument(m_formatter.Format(income_category));
 	request.method = Net::HTTP_METHOD_POST;
