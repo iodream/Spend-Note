@@ -61,15 +61,14 @@ public:
 
 	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
 
-	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) = 0;
-	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
-	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
+	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id, Period period) = 0;
+	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id, Period period) = 0;
+	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id, Period period) = 0;
 
-<<<<<<< HEAD
-	virtual std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id);
-	virtual std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id);
-	virtual std::vector<IncomePerDay> IncomesDynamics(IdType user_id);
-=======
+	virtual std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id, Period period);
+	virtual std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id, Period period);
+	virtual std::vector<IncomePerDay> IncomesDynamics(IdType user_id, Period period);
+
 	virtual std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) = 0;
 	virtual std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) = 0;
 	virtual std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) = 0;
@@ -83,6 +82,5 @@ public:
 	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
->>>>>>> dev
 };
 }

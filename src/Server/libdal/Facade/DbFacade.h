@@ -56,15 +56,14 @@ public:
 
 	std::vector<Product> GetDailyList(IdType user_id) override;
 
-	std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id) override;
-	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) override;
-	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) override;
+	std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id, Period period) override;
+	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id, Period period) override;
+	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id, Period period) override;
 
-<<<<<<< HEAD
-	std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id) override;
-	std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id) override;
-	std::vector<IncomePerDay> IncomesDynamics(IdType user_id) override;
-=======
+	std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id, Period period) override;
+	std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id, Period period) override;
+	std::vector<IncomePerDay> IncomesDynamics(IdType user_id, Period period) override;
+
 	std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) override;
 	std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) override;
 	std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) override;
@@ -78,7 +77,6 @@ public:
 	bool UpdateProductCategory(const ProductCategory& category) override;
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
->>>>>>> dev
 
 private:
 	pqxx::connection m_connection;
