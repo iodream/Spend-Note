@@ -6,6 +6,7 @@
 const std::string Params::USER_ID = "user-id";
 const std::string Params::LIST_ID = "list-id";
 const std::string Params::PRODUCT_ID = "product-id";
+const std::string Params::PRODUCT_CATEGORY_ID = "product-category-id";
 const std::string Params::INCOME_ID = "income-id";
 
 

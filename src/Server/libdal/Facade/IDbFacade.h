@@ -14,6 +14,7 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
+#include "DTOs/IncomeCategory.h"
 
 namespace db
 {
@@ -36,9 +37,6 @@ public:
 	virtual bool UpdateProduct(const Product& product) = 0;
 	virtual bool RemoveProduct(IdType id) = 0;
 
-	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
-	virtual std::vector<ProductCategory> GetAllProductCategories() = 0;
-
 	virtual std::optional<IdType> AddIncome(const Income& income) = 0;
 	virtual std::optional<Income> GetIncomeById(const IdType& id) = 0;
 	virtual std::vector<Income> GetAllIncomes(const IdType& user_id) = 0;
@@ -50,9 +48,6 @@ public:
 	virtual std::vector<List> GetAllLists(const IdType& user_id) = 0;
 	virtual bool UpdateList(const List& list_) = 0;
 	virtual bool RemoveList(const IdType& id) = 0;
-
-	virtual std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) = 0;
-	virtual std::vector<IncomeCategory> GetAllIncomeCategories() = 0;
 
 	virtual std::optional<ListState> GetListStateById(const IdType& list_state_id) = 0;
 	virtual std::vector<ListState> GetAllListStates() = 0;
@@ -70,8 +65,24 @@ public:
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id) = 0;
 	virtual std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id) = 0;
 
+<<<<<<< HEAD
 	virtual std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id);
 	virtual std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id);
 	virtual std::vector<IncomePerDay> IncomesDynamics(IdType user_id);
+=======
+	virtual std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) = 0;
+	virtual std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) = 0;
+	virtual bool UpdateIncomeCategory(const IncomeCategory& category) = 0;
+	virtual bool RemoveIncomeCategory(IdType id) = 0;
+	virtual bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) = 0;
+
+	virtual std::optional<ProductCategory> GetProductCategoryById(IdType id) = 0;
+	virtual std::vector<ProductCategory> GetAllProductCategories(IdType user_id) = 0;
+	virtual std::optional<IdType> AddProductCategory(const ProductCategory& category) = 0;
+	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
+	virtual bool RemoveProductCategory(IdType id) = 0;
+	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
+>>>>>>> dev
 };
 }

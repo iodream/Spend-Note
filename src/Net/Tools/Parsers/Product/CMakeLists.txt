@@ -2,6 +2,8 @@ list(APPEND Spend-Note-Net_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryJSONParserBase.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONParser.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductIdJSONParser.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryIdJSONParser.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoryIdJSONParser.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ProductJSONParserBase.h
 )
 

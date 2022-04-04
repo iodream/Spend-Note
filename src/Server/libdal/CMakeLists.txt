@@ -25,8 +25,8 @@ add_library(libdal STATIC
 	DTOs/ListState.h
 	DTOs/User.h
 	DTOs/Product.h
-	DTOs/ProductCategory.h
 	DTOs/Statistics.h
+	DTOs/ProductCategory.h
 
 	Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
 	Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
