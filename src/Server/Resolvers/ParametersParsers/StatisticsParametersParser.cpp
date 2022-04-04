@@ -5,7 +5,6 @@ namespace {
 const std::string TYPE  = "type";
 const std::string PERIOD = "period";
 const std::string ASSIGNMENT_OPERATOR = "=";
-const std::string AMPERSAND = "&";
 }
 
 void StatisticsParametersParser::Parse(const std::string& segment, Params& params)

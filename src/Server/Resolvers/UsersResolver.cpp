@@ -103,7 +103,6 @@ ICommandHandler* UsersResolver::Resolve(
 		m_statistics_par_parser.Parse(segment, params);
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetStatisticsHandler();
-
 	}
 	return nullptr;
 }
