@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
+#include <QStackedWidget>
 
 #include "Entities/Entities.h"
 
@@ -18,21 +19,24 @@ public:
 	explicit StatisticSubPage(QWidget *parent = nullptr);
 	~StatisticSubPage();
 
-	QString GetProductCategoryById(IdType id, std::vector<ProductCategory> category);
-	QStringList GetProductCategoryNames(std::vector<ProductCategory> category);
+	QString GetProductCategoryById(IdType id, const std::vector<ProductCategory>& category);
+	QStringList GetProductCategoryNames(const std::vector<ProductCategory>& category);
 
-	QString GetIncomeCategoryById(IdType id, std::vector<IncomeCategory> category);
-	QStringList GetIncomeCategoryNames(std::vector<IncomeCategory> category);
+	QString GetIncomeCategoryById(IdType id, const std::vector<IncomeCategory>& category);
+	QStringList GetIncomeCategoryNames(const std::vector<IncomeCategory>& category);
 
 	void UpdateCurrentChart();
 
-	void UpdateProductPiePercentChart(std::vector<ExpensePercentagePerCategory> stats, std::vector<ProductCategory> category);
-	void UpdateProductPieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
-	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
+	void UpdateProductPiePercentChart(const std::vector<ExpensePercentagePerCategory>& stats, const std::vector<ProductCategory>& category);
+	void UpdateProductPieAmountChart(const std::vector<ExpensePerCategory>& stats, const std::vector<ProductCategory>& category);
+	void UpdateBarBalanceChart(const std::vector<ExpensePerDay>& stats);
 
-	void UpdateIncomePiePercentChart(std::vector<ExpensePercentagePerCategory> stats, std::vector<IncomeCategory> category);
-	void UpdateIncomePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<IncomeCategory> category);
-	void UpdateBarIncomeChart(std::vector<ExpensePerDay> stats);
+	void UpdateIncomePiePercentChart(const std::vector<ExpensePercentagePerCategory>& stats, const std::vector<IncomeCategory>& category);
+	void UpdateIncomePieAmountChart(const std::vector<ExpensePerCategory>& stats, const std::vector<IncomeCategory>& category);
+	void UpdateBarIncomeChart(const std::vector<ExpensePerDay>& stats);
+
+	void ChangPageToNext(QStackedWidget& widget);
+	void ChangPageToPrevious(QStackedWidget& widget);
 
 	void ShowEmptyMessage();
 	void HideEmptyMessage();

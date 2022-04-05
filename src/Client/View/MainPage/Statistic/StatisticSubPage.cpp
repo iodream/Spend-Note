@@ -47,7 +47,7 @@ StatisticSubPage::~StatisticSubPage()
 	delete m_ui;
 }
 
-QString StatisticSubPage::GetProductCategoryById(IdType id, std::vector<ProductCategory> category)
+QString StatisticSubPage::GetProductCategoryById(IdType id, const std::vector<ProductCategory>& category)
 {
 	for (const auto& el : category)
 	{
@@ -56,7 +56,7 @@ QString StatisticSubPage::GetProductCategoryById(IdType id, std::vector<ProductC
 	return "Unknown category";
 }
 
-QStringList StatisticSubPage::GetProductCategoryNames(std::vector<ProductCategory> category)
+QStringList StatisticSubPage::GetProductCategoryNames(const std::vector<ProductCategory>& category)
 {
 	QStringList list;
 	for (const auto& el : category)
@@ -66,7 +66,7 @@ QStringList StatisticSubPage::GetProductCategoryNames(std::vector<ProductCategor
 	return list;
 }
 
-QString StatisticSubPage::GetIncomeCategoryById(IdType id, std::vector<IncomeCategory> category)
+QString StatisticSubPage::GetIncomeCategoryById(IdType id, const std::vector<IncomeCategory>& category)
 {
 	for (const auto& el : category)
 	{
@@ -75,7 +75,7 @@ QString StatisticSubPage::GetIncomeCategoryById(IdType id, std::vector<IncomeCat
 	return "Unknown category";
 }
 
-QStringList StatisticSubPage::GetIncomeCategoryNames(std::vector<IncomeCategory> category)
+QStringList StatisticSubPage::GetIncomeCategoryNames(const std::vector<IncomeCategory>& category)
 {
 	QStringList list;
 	for (const auto& el : category)
@@ -100,8 +100,8 @@ void StatisticSubPage::UpdateCurrentChart()
 
 
 void StatisticSubPage::UpdateProductPieAmountChart(
-		std::vector<ExpensePerCategory> stats,
-		std::vector<ProductCategory> category)
+		const std::vector<ExpensePerCategory>& stats,
+		const std::vector<ProductCategory>& category)
 {
 	if (stats.empty())
 	{
@@ -115,8 +115,8 @@ void StatisticSubPage::UpdateProductPieAmountChart(
 
 		for(const auto& el : stats)
 		{
-			QString lable = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
-			series->append(lable, el.amount);
+			QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
+			series->append(label, el.amount);
 		}
 
 		series->setLabelsVisible();
@@ -126,7 +126,7 @@ void StatisticSubPage::UpdateProductPieAmountChart(
 	}
 }
 
-void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
+void StatisticSubPage::UpdateBarBalanceChart(const std::vector<ExpensePerDay>& stats)
 {
 	if (stats.empty())
 	{
@@ -158,8 +158,8 @@ void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
 }
 
 void StatisticSubPage::UpdateIncomePiePercentChart(
-		std::vector<ExpensePercentagePerCategory> stats,
-		std::vector<IncomeCategory> category)
+		const std::vector<ExpensePercentagePerCategory>& stats,
+		const std::vector<IncomeCategory>& category)
 {
 	if (stats.empty())
 	{
@@ -173,7 +173,7 @@ void StatisticSubPage::UpdateIncomePiePercentChart(
 
 		for(const auto& el : stats)
 		{
-			QString label = GetIncomeCategoryById(el.category_id, category) + " " +QString::number(el.percentage) + "%";
+			QString label = GetIncomeCategoryById(el.category_id, category) + " " + QString::number(el.percentage) + "%";
 			series->append(label, el.percentage);
 		}
 
@@ -186,8 +186,8 @@ void StatisticSubPage::UpdateIncomePiePercentChart(
 }
 
 void StatisticSubPage::UpdateIncomePieAmountChart(
-		std::vector<ExpensePerCategory> stats,
-		std::vector<IncomeCategory> category)
+		const std::vector<ExpensePerCategory>& stats,
+		const std::vector<IncomeCategory>& category)
 {
 	if (stats.empty())
 	{
@@ -212,7 +212,7 @@ void StatisticSubPage::UpdateIncomePieAmountChart(
 	}
 }
 
-void StatisticSubPage::UpdateBarIncomeChart(std::vector<ExpensePerDay> stats)
+void StatisticSubPage::UpdateBarIncomeChart(const std::vector<ExpensePerDay>& stats)
 {
 	if (stats.empty())
 	{
@@ -243,9 +243,39 @@ void StatisticSubPage::UpdateBarIncomeChart(std::vector<ExpensePerDay> stats)
 	}
 }
 
+void StatisticSubPage::ChangPageToNext(QStackedWidget& widget)
+{
+	int current_index = widget.currentIndex();
+	if (current_index == widget.count() - 1)
+	{
+		current_index = 0;
+	}
+	else
+	{
+		current_index++;
+	}
+	widget.setCurrentIndex(current_index);
+	ChartChanged(current_index);
+}
+
+void StatisticSubPage::ChangPageToPrevious(QStackedWidget& widget)
+{
+	int current_index = widget.currentIndex();
+	if (current_index == 0)
+	{
+		current_index = widget.count() - 1;
+	}
+	else
+	{
+		current_index--;
+	}
+	widget.setCurrentIndex(current_index);
+	ChartChanged(current_index);
+}
+
 void StatisticSubPage::UpdateProductPiePercentChart(
-		std::vector<ExpensePercentagePerCategory> stats,
-		std::vector<ProductCategory> category)
+		const std::vector<ExpensePercentagePerCategory>& stats,
+		const std::vector<ProductCategory>& category)
 {
 	if (stats.empty())
 	{
@@ -259,7 +289,7 @@ void StatisticSubPage::UpdateProductPiePercentChart(
 
 		for(const auto& el : stats)
 		{
-			QString label = GetProductCategoryById(el.category_id, category) + " " +QString::number(el.percentage) + "%";
+			QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.percentage) + "%";
 			series->append(label, el.percentage);
 		}
 
@@ -292,31 +322,11 @@ void StatisticSubPage::OnForwardButtonClicked()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		int current_index = m_ui->stackedWidget->currentIndex();
-		if (current_index == m_ui->stackedWidget->count() - 1)
-		{
-			current_index = 0;
-		}
-		else
-		{
-			current_index++;
-		}
-		m_ui->stackedWidget->setCurrentIndex(current_index);
-		ChartChanged(current_index);
+		ChangPageToNext(*m_ui->stackedWidget);
 	}
 	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		int current_index = m_ui->stackedWidget_2->currentIndex();
-		if (current_index == m_ui->stackedWidget_2->count() - 1)
-		{
-			current_index = 0;
-		}
-		else
-		{
-			current_index++;
-		}
-		m_ui->stackedWidget_2->setCurrentIndex(current_index);
-		ChartChanged(current_index);
+		ChangPageToNext(*m_ui->stackedWidget_2);
 	}
 }
 
@@ -324,31 +334,11 @@ void StatisticSubPage::OnBackButtonClicked()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		int current_index = m_ui->stackedWidget->currentIndex();
-		if (current_index == 0)
-		{
-			current_index = m_ui->stackedWidget->count() - 1;
-		}
-		else
-		{
-			current_index--;
-		}
-		m_ui->stackedWidget->setCurrentIndex(current_index);
-		ChartChanged(current_index);
+		ChangPageToPrevious(*m_ui->stackedWidget);
 	}
 	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		int current_index = m_ui->stackedWidget_2->currentIndex();
-		if (current_index == 0)
-		{
-			current_index = m_ui->stackedWidget_2->count() - 1;
-		}
-		else
-		{
-			current_index--;
-		}
-		m_ui->stackedWidget_2->setCurrentIndex(current_index);
-		ChartChanged(current_index);
+		ChangPageToPrevious(*m_ui->stackedWidget);
 	}
 }
 
