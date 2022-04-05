@@ -40,7 +40,7 @@ void IncomeCreateSubPage::OnCreateIncome()
 	income.amount = ui->Amount->value();
 	income.name = ui->NameLineEdit->text();
 	income.add_time = QDate::currentDate().toString();
-	income.expiration_time = ui->ExpirationDateEdit->text();
+	income.expiration_time = ui->ExpirationDateEdit->date().toString();
 	emit CreateIncome(income);
 }
 
