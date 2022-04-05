@@ -294,13 +294,7 @@ void MainPageController::InitProductCategoriesController()
 		&ProductCategoriesController::ClientError,
 		this,
 		&MainPageController::OnClientError);
-
-//	connect(
-//		m_product_categories_controller.get(),
-//		&ProductCategoriesController::ChangeSubPage,
-//		this,
-//		&MainPageController::OnChangeSubPage);
-
+	
 	connect(
 		m_product_categories_controller.get(),
 		&ProductCategoriesController::GoBack,
