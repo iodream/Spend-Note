@@ -5,6 +5,7 @@
 #include "Net/Tools/Parsers/Income/IncomeCategoryJSONParserBase.h"
 #include "Net/Tools/Parsers/Income/IncomeJSONParserBase.h"
 #include "Net/Tools/Parsers/Income/IncomeIdJSONParser.h"
+#include "Net/Tools/Parsers/Income/IncomeCategoryIdJSONParser.h"
 
 #include "Net/Tools/Parsers/List/ListJSONParserBase.h"
 #include "Net/Tools/Parsers/List/ListStateJSONParserBase.h"

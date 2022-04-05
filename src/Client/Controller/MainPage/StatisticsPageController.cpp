@@ -51,13 +51,13 @@ void StatisticsPageController::ConnectStatisticsPage()
 {
 	connect(
 		&m_statistics_page,
-		&StatisticSubPage::PercentChartSelected,
+		&StatisticSubPage::PercentProductChartSelected,
 		this,
 		&StatisticsPageController::OnPercentChartSelected);
 
 	connect(
 		&m_statistics_page,
-		&StatisticSubPage::AmountChartSelected,
+		&StatisticSubPage::AmountProductChartSelected,
 		this,
 		&StatisticsPageController::OnAmountChartSelected);
 
@@ -89,7 +89,7 @@ void StatisticsPageController::OnPercentChartSelected()
 	auto expenses = model.ParseResponse(response);
 	auto categories = GetProductCategories();
 
-	m_statistics_page.UpdatePiePercentChart(expenses, categories);
+	m_statistics_page.UpdateProductPiePercentChart(expenses, categories);
 }
 
 void StatisticsPageController::OnAmountChartSelected()
@@ -114,7 +114,7 @@ void StatisticsPageController::OnAmountChartSelected()
 	auto expenses = model.ParseResponse(response);
 	auto categories = GetProductCategories();
 
-	m_statistics_page.UpdatePieAmountChart(expenses, categories);
+	m_statistics_page.UpdateProductPieAmountChart(expenses, categories);
 }
 
 void StatisticsPageController::OnBalanceChartSelected()

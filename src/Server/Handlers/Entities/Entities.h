@@ -5,6 +5,7 @@
 #include "Net/Entities/Income/IncomeBase.h"
 #include "Net/Entities/Income/IncomeId.h"
 #include "Net/Entities/Income/IncomeCategoryBase.h"
+#include "Net/Entities/Income/IncomeCategoryId.h"
 
 #include "Net/Entities/List/ListBase.h"
 #include "Net/Entities/List/ListId.h"

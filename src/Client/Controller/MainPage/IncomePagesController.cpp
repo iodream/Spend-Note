@@ -4,7 +4,7 @@
 #include "Models/Income/AddIncomeModel.h"
 #include "Models/Income/RemoveIncomeModel.h"
 #include "Models/Income/UpdateIncomeModel.h"
-#include "Models/Income/GetIncomeCategoriesModel.h"
+#include "Models/Categories/Income/GetIncomeCategoriesModel.h"
 
 
 #include "Net/Constants.h"
@@ -176,8 +176,8 @@ bool IncomePagesController::already_added = true;
 
 void IncomePagesController::UpdateCategoryBoxes()
 {
-		GetIncomeCategoriesModel model(m_hostname);
-		auto request = model.FormRequest();
+		GetIncomeCategoriesModel model{m_hostname};
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{

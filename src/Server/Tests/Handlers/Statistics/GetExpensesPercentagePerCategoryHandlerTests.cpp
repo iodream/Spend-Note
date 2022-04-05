@@ -44,7 +44,7 @@ TEST(GetExpensesPercentagePerCategoryHandlerTest, EMPTY_EXPENSES)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ExpensesPercentagePerCategory(1))
+	EXPECT_CALL(*facade, ExpensesPercentagePerCategory(1, db::Period::Weekly))
 		.WillOnce(Return(std::vector<db::ExpensePercentagePerCategory>{}));
 
 	auto handler = MakeHandler(std::move(facade));
@@ -80,7 +80,7 @@ TEST(GetExpensesPercentagePerCategoryHandlerTest, ONE_EXPENSE)
 	ExpensePercentagePerCategoryJSONParser m_parser;
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ExpensesPercentagePerCategory(1))
+	EXPECT_CALL(*facade, ExpensesPercentagePerCategory(1, db::Period::Weekly))
 		.WillOnce(Return(std::vector<db::ExpensePercentagePerCategory>{db_expense}));
 
 	auto handler = MakeHandler(std::move(facade));

@@ -5,6 +5,7 @@
 #include "Net/Tools/Formatters/Income/IncomeCategoryJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Income/IncomeJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Income/IncomeIdJSONFormatter.h"
+#include "Net/Tools/Formatters/Income/IncomeCategoryIdJSONFormatter.h"
 
 #include "Net/Tools/Formatters/List/ListJSONFormatterBase.h"
 #include "Net/Tools/Formatters/List/ListStateJSONFormatterBase.h"

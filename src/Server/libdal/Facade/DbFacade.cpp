@@ -159,34 +159,34 @@ std::vector<Product> DbFacade::GetDailyList(IdType user_id)
 	return m_products.GetDailyList(user_id);
 }
 
-std::vector<ExpensePerCategory> DbFacade::ExpensesPerCategory(IdType user_id)
+std::vector<ExpensePerCategory> DbFacade::ExpensesPerCategory(IdType user_id, Period period)
 {
-	return m_statistics.ExpensesPerCategory(user_id);
+	return m_statistics.ExpensesPerCategory(user_id, period);
 }
 
-std::vector<ExpensePercentagePerCategory> DbFacade::ExpensesPercentagePerCategory(IdType user_id)
+std::vector<ExpensePercentagePerCategory> DbFacade::ExpensesPercentagePerCategory(IdType user_id, Period period)
 {
-	return m_statistics.ExpensesPercentagePerCategory(user_id);
+	return m_statistics.ExpensesPercentagePerCategory(user_id, period);
 }
 
-std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
+std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id, Period period)
 {
-	return m_statistics.ExpensesDynamics(user_id);
+	return m_statistics.ExpensesDynamics(user_id, period);
 }
 
-std::vector<IncomePerCategory> DbFacade::IncomesPerCategory(IdType user_id)
+std::vector<IncomePerCategory> DbFacade::IncomesPerCategory(IdType user_id, Period period)
 {
-	return m_statistics.IncomesPerCategory(user_id);
+	return m_statistics.IncomesPerCategory(user_id, period);
 }
 
-std::vector<IncomePercentagePerCategory> DbFacade::IncomesPercentagePerCategory(IdType user_id)
+std::vector<IncomePercentagePerCategory> DbFacade::IncomesPercentagePerCategory(IdType user_id, Period period)
 {
-	return m_statistics.IncomesPercentagePerCategory(user_id);
+	return m_statistics.IncomesPercentagePerCategory(user_id, period);
 }
 
-std::vector<IncomePerDay> DbFacade::IncomesDynamics(IdType user_id)
+std::vector<IncomePerDay> DbFacade::IncomesDynamics(IdType user_id, Period period)
 {
-	return m_statistics.IncomesDynamics(user_id);
+	return m_statistics.IncomesDynamics(user_id, period);
 }
 
 std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(IdType id)
