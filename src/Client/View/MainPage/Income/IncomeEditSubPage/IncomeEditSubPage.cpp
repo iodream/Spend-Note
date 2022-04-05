@@ -6,13 +6,28 @@ IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	ui->ExpirationDateEdit->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
 	ui->ExpirationDateEdit->setDate(QDate::currentDate());
-	
+
+	ui->NewCategoryName->setVisible(false);
+	ui->NewCategorySaveButton->setVisible(false);
 	connect(
 		ui->SubmitButton,
 		&QPushButton::clicked,
 		this,
 		&IncomeEditSubPage::OnEditIncome);
+	connect(
+		ui->NewCategoryButton,
+		&QPushButton::released,
+		this,
+		&IncomeEditSubPage::OnNewCategoryPushed);
+	connect(
+		ui->NewCategorySaveButton,
+		&QPushButton::released,
+		this,
+		&IncomeEditSubPage::OnNewCategorySaved);
+
 }
 
 
@@ -72,3 +87,18 @@ void IncomeEditSubPage::FillCategoryBox(const std::vector<IncomeCategory>& incom
 		ui->Category->addItem(el.name, el.id);
 	}
 }
+
+void IncomeEditSubPage::OnNewCategoryPushed()
+{
+	ui->NewCategoryName->setVisible(true);
+	ui->NewCategorySaveButton->setVisible(true);
+	ui->NewCategoryButton->setDisabled(true);
+}
+
+void IncomeEditSubPage::OnNewCategorySaved()
+{
+	ui->NewCategoryName->setVisible(false);
+	ui->NewCategorySaveButton->setVisible(false);
+	ui->NewCategoryButton->setDisabled(false);
+}
+

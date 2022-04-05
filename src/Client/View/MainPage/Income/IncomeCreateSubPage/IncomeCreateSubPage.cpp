@@ -7,12 +7,29 @@ IncomeCreateSubPage::IncomeCreateSubPage(QWidget *parent) :
 {
 	ui->setupUi(this);
 
+	ui->ExpirationDateEdit->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
 	ui->ExpirationDateEdit->setDate(QDate::currentDate());
+
+	ui->NewCategoryName->setVisible(false);
+	ui->NewCategorySaveButton->setVisible(false);
 	connect(
 		ui->SaveButton,
 		&QPushButton::released,
 		this,
 		&IncomeCreateSubPage::OnCreateIncome);
+	connect(
+		ui->NewCategoryButton,
+		&QPushButton::released,
+		this,
+		&IncomeCreateSubPage::OnNewCategoryPushed);
+	connect(
+		ui->NewCategorySaveButton,
+		&QPushButton::released,
+		this,
+		&IncomeCreateSubPage::OnNewCategorySaved);
+
+
 }
 
 void IncomeCreateSubPage::OnCreateIncome()
@@ -64,3 +81,18 @@ IncomeCategory IncomeCreateSubPage::get_category()
 
 	return category;
 }
+
+void IncomeCreateSubPage::OnNewCategoryPushed()
+{
+	ui->NewCategoryName->setVisible(true);
+	ui->NewCategorySaveButton->setVisible(true);
+	ui->NewCategoryButton->setDisabled(true);
+}
+
+void IncomeCreateSubPage::OnNewCategorySaved()
+{
+	ui->NewCategoryName->setVisible(false);
+	ui->NewCategorySaveButton->setVisible(false);
+	ui->NewCategoryButton->setDisabled(false);
+}
+

@@ -13,8 +13,25 @@ ProductQuickCreateSubPage::ProductQuickCreateSubPage(QWidget *parent) :
 		this,
 		&ProductQuickCreateSubPage::QuickAddItem);
 
+	m_ui->BuyUntil->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
+
 	m_ui->BuyUntil->setDate(QDate::currentDate());
 	SetMinimumDate(QDate::currentDate());
+
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+
+	connect(
+		m_ui->NewCategoryButton,
+		&QPushButton::released,
+		this,
+		&ProductQuickCreateSubPage::OnNewCategoryPushed);
+	connect(
+		m_ui->NewCategorySaveButton,
+		&QPushButton::released,
+		this,
+		&ProductQuickCreateSubPage::OnNewCategorySaved);
 }
 
 ProductQuickCreateSubPage::~ProductQuickCreateSubPage()
@@ -90,4 +107,18 @@ void ProductQuickCreateSubPage::SetRangeOfSpinBox()
 void ProductQuickCreateSubPage::SetMinimumDate(const QDate& date)
 {
 	m_ui->BuyUntil->setMinimumDate(date);
+}
+
+void ProductQuickCreateSubPage::OnNewCategoryPushed()
+{
+	m_ui->NewCategoryName->setVisible(true);
+	m_ui->NewCategorySaveButton->setVisible(true);
+	m_ui->NewCategoryButton->setDisabled(true);
+}
+
+void ProductQuickCreateSubPage::OnNewCategorySaved()
+{
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+	m_ui->NewCategoryButton->setDisabled(false);
 }

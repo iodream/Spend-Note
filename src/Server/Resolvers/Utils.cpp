@@ -8,6 +8,6 @@ std::string GetSegment(
 {
 	SCOPED_LOGGER;
 	next_pos = path.find("/", pos + 1);
-	auto domain = path.substr(pos, next_pos);
+	auto domain = path.substr(pos, next_pos - pos);
 	return domain;
 }

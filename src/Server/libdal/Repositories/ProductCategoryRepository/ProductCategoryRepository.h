@@ -11,7 +11,12 @@ public:
 	ProductCategoryRepository(pqxx::connection& db_connection);
 
 	std::optional<ProductCategory> GetById(IdType id);
-	std::vector<ProductCategory> GetAll();
+	std::vector<ProductCategory> GetAll(IdType user_id);
+	std::optional<IdType> Add(const ProductCategory& category);
+	bool Update(const ProductCategory& category);
+	bool Remove(IdType id);
+	bool CanUserEditProductCategory(IdType user_id, IdType category_id);
+
 private:
 	static ProductCategory ProductCategoryFromRow(const pqxx::row& row);
 

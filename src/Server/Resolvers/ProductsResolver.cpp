@@ -2,18 +2,11 @@
 
 #include "../Handlers/Product/RemoveProductHandler.h"
 #include "../Handlers/Product/UpdateProductHandler.h"
-#include "../Handlers/Product/GetProductCategoriesHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
 #include "Logger/ScopedLogger.h"
-
-namespace {
-
-const std::string CATEGORIES = "/categories";
-
-}
 
 ICommandHandler* ProductsResolver::Resolve(
 	const std::string& path,
@@ -34,12 +27,6 @@ ICommandHandler* ProductsResolver::Resolve(
 		params.Insert(Params::PRODUCT_ID, Params::Value{product_id});
 		return Resolve(path, method, next_pos, params);
 	}
-
-	if (segment == CATEGORIES) {
-		if (method == Net::HTTP_METHOD_GET)
-			return new GetProductCategoriesHandler();
-		return new MethodNotAllowedHandler();
-		}
 
 	return nullptr;
 }

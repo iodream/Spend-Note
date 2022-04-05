@@ -4,7 +4,7 @@
 #include "Models/Product/UpdateProductModel.h"
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
-#include "Models/Product/GetProductCategoriesModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 
 #include "Net/Constants.h"
 
@@ -41,7 +41,7 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
@@ -118,7 +118,7 @@ void ProductPagesController::OnUpdateProduct()
 	if (!m_view_page.get_product().is_bought && product.is_bought)
 	{
 		QDateTime date = QDateTime::currentDateTime();
-		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
+		product.purchase_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	}
 
 	if (m_view_page.get_product().is_bought && !product.is_bought)
@@ -161,12 +161,12 @@ void ProductPagesController::OnCreateProduct()
 	new_product.category.name = m_create_page.GetCategoryName();
 	new_product.buy_until_date = m_create_page.GetBuyUntil();
 	QDateTime date = QDateTime::currentDateTime();
-	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
+	new_product.add_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
 	if (m_create_page.GetIsBought())
 	{
 		QDateTime date = QDateTime::currentDateTime();
-		new_product.purchase_date =  date.toString("yyyy-MM-dd hh:mm:ss");
+		new_product.purchase_date =  date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	}
 
 	new_product.list_id = m_list_id;
@@ -256,7 +256,7 @@ void ProductPagesController::UpdateCategoryBox()
 	if(!already_added)
 	{
 		GetProductCategoriesModel model{m_hostname};
-		auto request = model.FormRequest();
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{

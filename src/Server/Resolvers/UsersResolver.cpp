@@ -10,6 +10,9 @@
 #include "../Handlers/Statistics/GetExpensesPerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPercentagePerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPerDayHandler.h"
+#include "../Handlers/Categories/Product/GetProductCategoriesHandler.h"
+#include "../Handlers/Categories/Product/AddProductCategoryHandler.h"
+#include "../Handlers/Statistics/GetStatisticsHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -24,6 +27,8 @@ const std::string DAILY_LIST = "/daily-list";
 const std::string EXPENSES_PER_CATEGORY = "/expenses-per-category";
 const std::string EXPENSES_PERCENTAGE_PER_CATEGORY = "/expenses-percentage-per-category";
 const std::string EXPENSES_PER_DAY = "/expenses-per-day";
+const std::string PRODUCT_CATEGORIES = "/product-categories";
+const std::string STATISTICS = "/statistics";
 }
 
 ICommandHandler* UsersResolver::Resolve(
@@ -85,7 +90,20 @@ ICommandHandler* UsersResolver::Resolve(
 			return new GetExpensesPerDayHandler();
 		return new MethodNotAllowedHandler();
 	}
+	else if (segment == PRODUCT_CATEGORIES) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetProductCategoriesHandler();
+		else if (method == Net::HTTP_METHOD_POST)
+			return new AddProductCategoryHandler();
+		return new MethodNotAllowedHandler();
+	}
 
+	auto statistics = segment.find(STATISTICS);
+	if (statistics != std::string::npos) {
+		m_statistics_par_parser.Parse(segment, params);
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetStatisticsHandler();
+	}
 	return nullptr;
 }
 

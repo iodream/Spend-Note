@@ -7,6 +7,7 @@
 #include "Common.h"
 #include "Entities/Entities.h"
 #include "Utils.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class ProductEditSubPage;
@@ -30,7 +31,9 @@ public:
 
 signals:
 	void UpdateProduct();
-
+public slots:
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
 private:
 	Ui::ProductEditSubPage *m_ui;
 	Product m_product;

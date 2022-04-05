@@ -4,7 +4,7 @@
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "../Common.h"
+#include "../../Common.h"
 #include "Logger/ScopedLogger.h"
 #include "Utils.h"
 
@@ -17,7 +17,8 @@ Net::Response GetProductCategoriesHandler::AuthHandle(const Net::Request& reques
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
 
-	auto db_product_categories = m_facade->GetAllProductCategories();
+	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+	auto db_product_categories = m_facade->GetAllProductCategories(user_id);
 	std::vector<ProductCategory> product_categories;
 
 	for (const db::ProductCategory& db_product_category : db_product_categories) {

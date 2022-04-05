@@ -6,6 +6,7 @@
 #include "ListsResolver.h"
 #include "ProductsResolver.h"
 #include "UsersResolver.h"
+#include "ProductCategoriesResolver.h"
 
 #include "../Handlers/LoginHandler.h"
 #include "../Handlers/SignupHandler.h"
@@ -23,6 +24,7 @@ const std::string INCOMES  = "/incomes";
 const std::string LISTS    = "/lists";
 const std::string PRODUCTS = "/products";
 const std::string USERS    = "/users";
+const std::string PRODUCT_CATEGORIES = "/product-categories";
 
 }
 
@@ -37,6 +39,8 @@ RootResolver::RootResolver()
 		std::unique_ptr<ISubDomainResolver>(new ProductsResolver());
 	m_resolvers[USERS] =
 		std::unique_ptr<ISubDomainResolver>(new UsersResolver());
+	m_resolvers[PRODUCT_CATEGORIES] =
+		std::unique_ptr<ISubDomainResolver>(new ProductCategoriesResolver());
 }
 
 ICommandHandler* RootResolver::Resolve(

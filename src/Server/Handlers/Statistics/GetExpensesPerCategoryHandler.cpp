@@ -31,7 +31,7 @@ Net::Response GetExpensesPerCategoryHandler::AuthHandle(const Net::Request& requ
 	std::vector<db::ExpensePerCategory> db_expenses;
 
 	try {
-		db_expenses = m_facade->ExpensesPerCategory(user_id);
+		db_expenses = m_facade->ExpensesPerCategory(user_id, db::Period::Weekly);
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(NetError::Status::HTTP_NOT_FOUND, ex.what());

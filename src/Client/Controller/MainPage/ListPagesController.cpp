@@ -5,7 +5,7 @@
 #include "Models/List/RemoveListModel.h"
 #include "Models/List/UpdateListModel.h"
 #include "Models/Product/AddProductModel.h"
-#include "Models/Product/GetProductCategoriesModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 
 #include "View/MainPage/List/ListCreateSubPage/Item.h"
 #include "Models/List/GetListStatesModel.h"
@@ -303,7 +303,7 @@ void ListPagesController::OnQuickAddItem()
 	new_item.priority = m_product_quick_create_page.GetPriority();
 	new_item.category.id = m_product_quick_create_page.GetCategoryId();
 	new_item.category.name = m_product_quick_create_page.GetCategoryName();
-	new_item.add_date = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+	new_item.add_date = QDateTime::currentDateTime().toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	new_item.purchase_date = "";
 
 	if(!AddProductModel::CheckFields(new_item))
@@ -396,7 +396,7 @@ void ListPagesController::UpdateCategoryBox()
 	if(!category_already_added)
 	{
 		GetProductCategoriesModel model{m_hostname};
-		auto request = model.FormRequest();
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{

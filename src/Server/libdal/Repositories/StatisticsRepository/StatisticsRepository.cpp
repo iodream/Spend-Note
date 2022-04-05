@@ -10,7 +10,7 @@ StatisticsRepository::StatisticsRepository(pqxx::connection& db_connection) : m_
 {
 }
 
-std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType user_id)
+std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType user_id, Period period)
 {
 	try
 	{
@@ -30,7 +30,7 @@ std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType
 			" ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
 			" WHERE " +
 				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
-				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
 			"GROUP BY " + product::CATEGORY_ID + ";");
 
 		w.commit();
@@ -51,7 +51,7 @@ std::vector<ExpensePerCategory> StatisticsRepository::ExpensesPerCategory(IdType
 	}
 }
 
-std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercentagePerCategory(IdType user_id)
+std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercentagePerCategory(IdType user_id, Period period)
 {
 	try
 	{
@@ -71,7 +71,7 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 			" WHERE " +
 				db::list::USER_ID + " = " + w.quote(user_id) + " AND " +
 				db::product::IS_BOUGHT + " AND " +
-				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK';");
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + ";");
 
 		if (total_expenses == 0)
 		{
@@ -90,7 +90,7 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 				list::TABLE_NAME + "." + list::ID +
 			" WHERE " +
 				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
-				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
 			"GROUP BY " + product::CATEGORY_ID + ";");
 
 		w.commit();
@@ -111,7 +111,7 @@ std::vector<ExpensePercentagePerCategory> StatisticsRepository::ExpensesPercenta
 	}
 }
 
-std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id)
+std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id, Period period)
 {
 	try
 	{
@@ -128,7 +128,7 @@ std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id
 			" JOIN " + list::TABLE_NAME + " ON " + product::TABLE_NAME + "." + product::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
 			" WHERE " +
 				list::TABLE_NAME + "." + list::USER_ID + " = " + w.quote(user_id) + " AND " +
-				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL '1 WEEK' " +
+				product::PURCHASE_DATE + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
 			"GROUP BY DATE(" + product::PURCHASE_DATE + ");");
 
 		w.commit();
@@ -149,6 +149,135 @@ std::vector<ExpensePerDay> StatisticsRepository::ExpensesDynamics(IdType user_id
 	}
 }
 
+std::vector<IncomePerCategory> StatisticsRepository::IncomesPerCategory(IdType user_id, Period period)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT " +
+				income::CATEGORY_ID +
+				", COALESCE(SUM(" + income::AMOUNT + "), 0) AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
+			"GROUP BY " + income::CATEGORY_ID + ";");
+
+		w.commit();
+
+		std::vector<IncomePerCategory> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row){
+			IncomePerCategory income;
+			income.category_id = row[product::CATEGORY_ID].as<IdType>();
+			income.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+std::vector<IncomePercentagePerCategory> StatisticsRepository::IncomesPercentagePerCategory(IdType user_id, Period period)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		auto total_income = w.query_value<Money>(
+			"SELECT COALESCE(SUM(" + income::AMOUNT + "), 0) " +
+			"FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + ";");
+
+		if (total_income == 0)
+		{
+			return {};
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT " +
+				income::CATEGORY_ID +
+				", COALESCE(SUM(" + income::AMOUNT + "), 0) / (" +
+				w.quote(total_income) + "::DECIMAL) * 100 AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
+			"GROUP BY " + income::CATEGORY_ID + ";");
+
+		w.commit();
+
+		std::vector<IncomePercentagePerCategory> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row){
+			IncomePercentagePerCategory income;
+			income.category_id = row[product::CATEGORY_ID].as<IdType>();
+			income.percentage = row[statistics::TOTAL_PRICE].as<double>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+std::vector<IncomePerDay> StatisticsRepository::IncomesDynamics(IdType user_id, Period period)
+{
+	try
+	{
+		pqxx::work w{m_db_connection};
+
+		if (DoesUserExist(user_id, w))
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		pqxx::result incomes = w.exec(
+			"SELECT DATE(" + income::ADD_TIME + ") AS " + statistics::PURCHASE_DATE + ", COALESCE(SUM(" + income::AMOUNT + "), 0) AS " + statistics::TOTAL_PRICE +
+			" FROM " + income::TABLE_NAME +
+			" WHERE " +
+				income::USER_ID + " = " + w.quote(user_id) + " AND " +
+				income::ADD_TIME + " > LOCALTIMESTAMP - INTERVAL " + PeriodToString(period) + " " +
+			"GROUP BY DATE(" + income::ADD_TIME + ");");
+
+		w.commit();
+
+		std::vector<IncomePerDay> result(incomes.size());
+		std::transform(incomes.begin(), incomes.end(), result.begin(), [](const pqxx::row& row) {
+			IncomePerDay income;
+			income.day = row[statistics::PURCHASE_DATE].as<Date>();
+			income.amount = row[statistics::TOTAL_PRICE].as<Money>();
+			return income;
+		});
+
+		return result;
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+}
+
+
 bool StatisticsRepository::DoesUserExist(IdType user_id, pqxx::work& work)
 {
 	pqxx::result user_ids = work.exec(
@@ -156,6 +285,21 @@ bool StatisticsRepository::DoesUserExist(IdType user_id, pqxx::work& work)
 		" FROM " + user::TABLE_NAME +
 		" WHERE " + user::ID + " = " + work.quote(user_id) + ";");
 	return user_ids.empty();
+}
+
+std::string StatisticsRepository::PeriodToString(Period period)
+{
+	switch (period)
+	{
+		case Period::Daily:
+			return "'1 DAY'";
+		case Period::Weekly:
+			return "'1 WEEK'";
+		case Period::Monthly:
+			return "'1 MONTH'";
+		case Period::Yearly:
+			return "'1 YEAR'";
+	}
 }
 
 }

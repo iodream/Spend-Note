@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ISubDomainResolver.h"
+#include "ParametersParsers/StatisticsParametersParser.h"
 
 class UsersResolver : public ISubDomainResolver
 {
@@ -15,4 +16,6 @@ public:
 
 	virtual ICommandHandler* ResolveLastSegment(
 		const std::string& method) override;
+private:
+	StatisticsParametersParser m_statistics_par_parser;
 };
