@@ -34,8 +34,8 @@ public:
 	void UpdateIncomePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<IncomeCategory> category);
 	void UpdateBarIncomeChart(std::vector<ExpensePerDay> stats);
 
-	void ShowEmptyMessang();
-	void HideEmptyMessang();
+	void ShowEmptyMessage();
+	void HideEmptyMessage();
 
 	QChart* InitChart(QLayout* layout);
 	//QChart* InitChart(QFrame* frame);

@@ -105,11 +105,11 @@ void StatisticSubPage::UpdateProductPieAmountChart(
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QPieSeries* series = new QPieSeries();
 
@@ -130,11 +130,11 @@ void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QBarSet* set = new QBarSet(nullptr);
 		QBarSeries* series = new QBarSeries();
@@ -163,11 +163,11 @@ void StatisticSubPage::UpdateIncomePiePercentChart(
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QPieSeries* series = new QPieSeries();
 
@@ -191,11 +191,11 @@ void StatisticSubPage::UpdateIncomePieAmountChart(
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QPieSeries* series = new QPieSeries();
 
@@ -216,11 +216,11 @@ void StatisticSubPage::UpdateBarIncomeChart(std::vector<ExpensePerDay> stats)
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QBarSet* set = new QBarSet(nullptr);
 		QBarSeries* series = new QBarSeries();
@@ -249,11 +249,11 @@ void StatisticSubPage::UpdateProductPiePercentChart(
 {
 	if (stats.empty())
 	{
-		ShowEmptyMessang();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		HideEmptyMessang();
+		HideEmptyMessage();
 
 		QPieSeries* series = new QPieSeries();
 
@@ -390,7 +390,7 @@ void StatisticSubPage::ChartChanged(int index)
 
 }
 
-void StatisticSubPage::ShowEmptyMessang()
+void StatisticSubPage::ShowEmptyMessage()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
@@ -442,7 +442,7 @@ void StatisticSubPage::ShowEmptyMessang()
 	}
 }
 
-void StatisticSubPage::HideEmptyMessang()
+void StatisticSubPage::HideEmptyMessage()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
