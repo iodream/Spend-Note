@@ -17,15 +17,20 @@ RemoveProductHandler::RemoveProductHandler()
 Net::Response RemoveProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	Q_UNUSED(request);
 	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
 
-	if (m_facade->RemoveProduct(product_id)) {
-		return FormEmptyResponse();
-	}
-	else {
+	if (!m_facade->GetProductById(product_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Resource not found");
 	}
+
+	if (!m_facade->CanUserEditProduct(request.uid, product_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"Remove product with id \"" + std::to_string(product_id) + "\" is forbidden");
+	}
+
+	m_facade->RemoveProduct(product_id);
+	return FormEmptyResponse();
 }

@@ -2,9 +2,11 @@
 
 #include <QString>
 #include <QWidget>
+#include <QDateTime>
 
 #include "Common.h"
 #include "Entities/Entities.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class ProductViewSubPage;
@@ -23,7 +25,6 @@ public:
 	void set_product(const Product& product);
 	Product get_product();
 signals:
-	void GoBack(int n=1);
 	void EditProduct();
 	void DeleteProduct();
 

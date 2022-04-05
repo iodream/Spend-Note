@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Icons/spenandnote.png</file>
+        <file>Icons/baseline_done_black_24dp.png</file>
+        <file>Icons/baseline_arrow_back_black_24dp.png</file>
+        <file>Icons/baseline_backspace_black_24dp.png</file>
+        <file>Icons/baseline_cancel_black_24dp.png</file>
+        <file>Icons/baseline_check_circle_black_24dp.png</file>
+        <file>Icons/baseline_insights_black_24dp.png</file>
+        <file>Icons/baseline_list_black_24dp.png</file>
+        <file>Icons/baseline_logout_black_24dp.png</file>
+        <file>Icons/baseline_paid_black_24dp.png</file>
+        <file>Icons/baseline_settings_black_24dp.png</file>
+        <file>Icons/baseline_warning_black_24dp.png</file>
+        <file>Icons/baseline_edit_black_24dp.png</file>
+        <file>Icons/baseline_add_black_24dp.png</file>
+        <file>Icons/baseline_add_circle_outline_black_24dp.png</file>
+        <file>Icons/baseline_arrow_forward_ios_black_24dp.png</file>
+        <file>Icons/baseline_arrow_back_ios_new_black_24dp.png</file>
+        <file>Icons/baseline_dashboard_customize_black_24dp.png</file>
+    </qresource>
+    <qresource prefix="/new/prefix1"/>
+</RCC>

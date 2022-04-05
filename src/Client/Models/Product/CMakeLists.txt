@@ -1,6 +1,6 @@
 list(APPEND Spend-Note-Client_SOURCES
-  	${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductModel.h
-	  ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductModel.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductModel.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RemoveProductModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UpdateProductModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/UpdateProductModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AddProductModel.h

@@ -1,5 +1,6 @@
 #include "SignupModel.h"
 #include "Net/Parsing.h"
+#include "Utils.h"
 Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 {
 	Net::Request request;
@@ -31,11 +32,7 @@ bool SignupModel::CheckPassRepeat(const SignupInDTO& dto) const
 //checks data for presence of any characters at all
 bool SignupModel::CheckData(const SignupInDTO& dto) const
 {
-	auto username = dto.login;
-	auto pass = dto.password;
-	username.erase(std::remove_if(username.begin(), username.end(), ::isspace)
-				   , username.end());
-	pass.erase(std::remove_if(pass.begin(), pass.end(), ::isspace)
-			   , pass.end());
+	auto username = EraseWhitespace(dto.login);
+	auto pass = EraseWhitespace(dto.password);
 	return (!username.empty() && !pass.empty());
 }

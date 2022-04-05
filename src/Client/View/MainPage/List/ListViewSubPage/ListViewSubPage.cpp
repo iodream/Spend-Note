@@ -16,12 +16,6 @@ ListViewSubPage::ListViewSubPage(QWidget *parent)
 		m_ui->EditButton,
 		&QPushButton::released,
 		[this](){ emit GoToEditList(m_list); });
-
-	connect(
-		m_ui->GoBackButton,
-		&QPushButton::released,
-		[this](){ emit GoBack();});
-
 	connect(
 		m_ui->DeleteButton,
 		&QPushButton::clicked,
@@ -47,4 +41,5 @@ void ListViewSubPage::Update(const List& list)
 {
 	set_list(list);
 	m_ui->ListName->setText(m_list.name);
+	m_ui->StateName->setText(m_list.state.name);
 }

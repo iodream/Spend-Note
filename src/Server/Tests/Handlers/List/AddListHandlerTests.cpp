@@ -54,6 +54,7 @@ TEST(AddListHandler, ADD_LIST_SUCCESS)
 
   Net::Request request;
   request.method = Net::HTTP_METHOD_POST;
+  request.uid = 1;
 
   request.json_payload = FormJSON();
 
@@ -76,6 +77,7 @@ TEST(AddListHandler, ADD_LIST_FAILURE)
 
   Net::Request request;
   request.method = Net::HTTP_METHOD_POST;
+  request.uid = 1;
 
   request.json_payload = FormJSON();
 

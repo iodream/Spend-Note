@@ -13,6 +13,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_list_states(m_connection)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
+		, m_statistics(m_connection)
 {
 }
 
@@ -67,17 +68,6 @@ bool DbFacade::RemoveProduct(IdType id)
 	return m_products.Remove(id);
 }
 
-
-std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
-{
-	return m_product_categories.GetById(id);
-}
-
-std::vector<ProductCategory> DbFacade::GetAllProductCategories()
-{
-	return m_product_categories.GetAll();
-}
-
 std::optional<IdType> DbFacade::AddIncome(const Income& income)
 {
 	return m_incomes.Add(income);
@@ -128,16 +118,6 @@ bool DbFacade::RemoveList(const IdType& id)
 	return m_lists.Remove(id);
 }
 
-std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(const IdType& category_id)
-{
-	return m_income_categories.GetById(category_id);
-}
-
-std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories()
-{
-	return m_income_categories.GetAll();
-}
-
 std::optional<ListState> DbFacade::GetListStateById(const IdType& list_state_id)
 {
 	return m_list_states.GetById(list_state_id);
@@ -172,6 +152,101 @@ bool DbFacade::CanUserEditProduct(IdType user_id, IdType product_id)
 bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
 {
 	return m_incomes.CanUserEditIncome(user_id, income_id);
+}
+
+std::vector<Product> DbFacade::GetDailyList(IdType user_id)
+{
+	return m_products.GetDailyList(user_id);
+}
+
+std::vector<ExpensePerCategory> DbFacade::ExpensesPerCategory(IdType user_id, Period period)
+{
+	return m_statistics.ExpensesPerCategory(user_id, period);
+}
+
+std::vector<ExpensePercentagePerCategory> DbFacade::ExpensesPercentagePerCategory(IdType user_id, Period period)
+{
+	return m_statistics.ExpensesPercentagePerCategory(user_id, period);
+}
+
+std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id, Period period)
+{
+	return m_statistics.ExpensesDynamics(user_id, period);
+}
+
+std::vector<IncomePerCategory> DbFacade::IncomesPerCategory(IdType user_id, Period period)
+{
+	return m_statistics.IncomesPerCategory(user_id, period);
+}
+
+std::vector<IncomePercentagePerCategory> DbFacade::IncomesPercentagePerCategory(IdType user_id, Period period)
+{
+	return m_statistics.IncomesPercentagePerCategory(user_id, period);
+}
+
+std::vector<IncomePerDay> DbFacade::IncomesDynamics(IdType user_id, Period period)
+{
+	return m_statistics.IncomesDynamics(user_id, period);
+}
+
+std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(IdType id)
+{
+	return m_income_categories.GetById(id);
+}
+
+std::vector<IncomeCategory> DbFacade::GetAllIncomeCategories(IdType user_id)
+{
+	return m_income_categories.GetAll(user_id);
+}
+
+std::optional<IdType> DbFacade::AddIncomeCategory(const IncomeCategory& category)
+{
+	return m_income_categories.Add(category);
+}
+
+bool DbFacade::UpdateIncomeCategory(const IncomeCategory& category)
+{
+	return m_income_categories.Update(category);
+}
+
+bool DbFacade::RemoveIncomeCategory(IdType id)
+{
+	return m_income_categories.Remove(id);
+}
+
+bool DbFacade::CanUserEditIncomeCategory(IdType user_id, IdType category_id)
+{
+	return m_income_categories.CanUserEditIncomeCategory(user_id, category_id);
+}
+  
+std::optional<ProductCategory> DbFacade::GetProductCategoryById(IdType id)
+{
+	return m_product_categories.GetById(id);
+}
+
+std::vector<ProductCategory> DbFacade::GetAllProductCategories(IdType user_id)
+{
+	return m_product_categories.GetAll(user_id);
+}
+
+std::optional<IdType> DbFacade::AddProductCategory(const ProductCategory& category)
+{
+	return m_product_categories.Add(category);
+}
+
+bool DbFacade::UpdateProductCategory(const ProductCategory& category)
+{
+	return m_product_categories.Update(category);
+}
+
+bool DbFacade::RemoveProductCategory(IdType id)
+{
+	return m_product_categories.Remove(id);
+}
+
+bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
+{
+	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
 }
 
 }

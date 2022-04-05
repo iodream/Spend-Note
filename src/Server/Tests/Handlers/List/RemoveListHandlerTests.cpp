@@ -31,6 +31,11 @@ TEST(RemoveListHandlerTest, LIST_PRESENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
+	db::List list;
+	EXPECT_CALL(*facade, GetListById(1))
+			.WillOnce(Return(std::optional<db::List>{list}));
+	EXPECT_CALL(*facade, CanUserEditList(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, RemoveList(_))
 		.WillOnce(Return(true));
 
@@ -38,18 +43,19 @@ TEST(RemoveListHandlerTest, LIST_PRESENT)
 
 	Net::Request request;
 	request.method = Net::HTTP_METHOD_DELETE;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
 	ASSERT_EQ(response.status, Poco::Net::HTTPResponse::HTTPStatus::HTTP_NO_CONTENT);
 }
 
-TEST(RemoveListHandlerTest, INCOME_ABSENT)
+TEST(RemoveListHandlerTest, LIST_ABSENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, RemoveList(_))
-		.WillOnce(Return(false));
+	EXPECT_CALL(*facade, GetListById(1))
+		.WillOnce(Return(std::optional<db::List>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 

@@ -15,15 +15,20 @@ RemoveIncomeHandler::RemoveIncomeHandler()
 Net::Response RemoveIncomeHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	Q_UNUSED(request);
 	auto income_id = std::get<long long>(m_params.Get(Params::INCOME_ID));
 
-	if (m_facade->RemoveIncome(income_id)) {
-		return FormEmptyResponse();
-	}
-	else {
+	if (!m_facade->GetIncomeById(income_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Resource not found");
 	}
+
+	if (!m_facade->CanUserEditIncome(request.uid, income_id)){
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"Remove income with id \"" + std::to_string(income_id) + "\" is forbidden");
+	}
+
+	m_facade->RemoveIncome(income_id);
+	return FormEmptyResponse();
 }

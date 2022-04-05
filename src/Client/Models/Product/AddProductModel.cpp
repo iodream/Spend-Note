@@ -1,7 +1,7 @@
 #include "AddProductModel.h"
 
 #include "Net/Parsing.h"
-
+#include "Utils.h"
 Net::Request AddProductModel::FormRequest(const Product& product)
 {
 	Net::Request request;
@@ -19,4 +19,12 @@ ProductId AddProductModel::ParseResponse(const Net::Response& response)
 	product_id = m_parser.Parse(response.json_payload.object());
 
 	return product_id;
+}
+
+bool AddProductModel::CheckFields(Product& product)
+{
+	std::string str = EraseWhitespace(product.name.toStdString());
+	if(str.empty())
+		return false;
+	return true;
 }

@@ -30,6 +30,7 @@ db::Product p1 {
 
 db::ProductCategory c1 {
 	1,
+	1,
 	"Category 1"
 };
 
@@ -67,11 +68,14 @@ TEST(GetProductsHandlerTest, EMPTY_PRODUCTS_LIST)
 
 	EXPECT_CALL(*facade, GetProductsForList(_))
 		.WillOnce(Return(std::vector<db::Product>{}));
+	EXPECT_CALL(*facade, CanUserEditList(1, 1))
+		.WillOnce(Return(true));
 
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;
+	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
@@ -90,11 +94,14 @@ TEST(GetProductsHandlerTest, ONE_PRODUCT_LIST)
 		.WillOnce(Return(std::vector<db::Product>{p1}));
 	EXPECT_CALL(*facade, GetProductCategoryById(1))
 		.WillOnce(Return(std::optional<db::ProductCategory>{c1}));
+	EXPECT_CALL(*facade, CanUserEditList(1, 1))
+		.WillOnce(Return(true));
 
 	auto handler = MakeHandler(std::move(facade));
 
 	Net::Request request;
-	request.method = Net::HTTP_METHOD_POST;
+	request.method = Net::HTTP_METHOD_GET;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 

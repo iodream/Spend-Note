@@ -13,10 +13,25 @@ ProductCreateSubPage::ProductCreateSubPage(QWidget *parent) :
 		this,
 		&ProductCreateSubPage::CreateProduct);
 
+	m_ui->BuyUntil->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
+
+	m_ui->BuyUntil->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
+
 	connect(
-		m_ui->GoBackButton,
-		&QPushButton::clicked,
-		[this](){ emit GoBack(); });
+		m_ui->NewCategoryButton,
+		&QPushButton::released,
+		this,
+		&ProductCreateSubPage::OnNewCategoryPushed);
+	connect(
+		m_ui->NewCategorySaveButton,
+		&QPushButton::released,
+		this,
+		&ProductCreateSubPage::OnNewCategorySaved);
+
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
 }
 
 ProductCreateSubPage::~ProductCreateSubPage()
@@ -31,12 +46,12 @@ QString ProductCreateSubPage::GetName()
 
 Money ProductCreateSubPage::GetPrice()
 {
-	return m_ui->Price->text().toLongLong();
+	return m_ui->Price->value();
 }
 
 BigInt ProductCreateSubPage::GetAmount()
 {
-	return m_ui->Amount->text().toLongLong();
+	return m_ui->Amount->value();
 }
 
 bool ProductCreateSubPage::GetIsBought()
@@ -46,12 +61,22 @@ bool ProductCreateSubPage::GetIsBought()
 
 QString ProductCreateSubPage::GetBuyUntil()
 {
-	return m_ui->BuyUntil->text();
+	return toDBstring(m_ui->BuyUntil->dateTime());
 }
 
 BigInt ProductCreateSubPage::GetPriority()
 {
-	return m_ui->Priority->text().toLongLong();
+	return m_ui->Priority->value();
+}
+
+IdType ProductCreateSubPage::GetCategoryId()
+{
+	return qvariant_cast<IdType>(m_ui->Category->currentData());
+}
+
+QString ProductCreateSubPage::GetCategoryName()
+{
+	return m_ui->Category->currentText();
 }
 
 void ProductCreateSubPage::Clear()
@@ -63,4 +88,37 @@ void ProductCreateSubPage::Clear()
 	m_ui->BuyUntil->clear();
 	m_ui->Name->clear();
 	m_ui->IsBought->setChecked(false);
+}
+
+void ProductCreateSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)
+{
+	for(const auto& el : categories)
+	{
+		m_ui->Category->addItem(el.name, el.id);
+	}
+}
+
+void ProductCreateSubPage::SetRangeOfSpinBox()
+{
+	m_ui->Amount->setRange(1, 100); // need to be changed do not hardcode
+	m_ui->Priority->setRange(1, 5);
+}
+
+void ProductCreateSubPage::SetMinimumDate(const QDate& date)
+{
+	m_ui->BuyUntil->setMinimumDate(date);
+}
+
+void ProductCreateSubPage::OnNewCategoryPushed()
+{
+	m_ui->NewCategoryName->setVisible(true);
+	m_ui->NewCategorySaveButton->setVisible(true);
+	m_ui->NewCategoryButton->setDisabled(true);
+}
+
+void ProductCreateSubPage::OnNewCategorySaved()
+{
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+	m_ui->NewCategoryButton->setDisabled(false);
 }

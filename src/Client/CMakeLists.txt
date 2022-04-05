@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(Spend-Note-Client VERSION 0.1 LANGUAGES CXX)
 
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -11,12 +12,14 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Charts REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Charts REQUIRED)
 
 set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Common.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
 )
 
 list(APPEND Spend-Note-Client_LIBS
@@ -43,7 +46,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(
         Spend-Note-Client
         MANUAL_FINALIZATION
-	${Spend-Note-Client_SOURCES}
+        ${Spend-Note-Client_SOURCES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/resources.qrc
     )
 endif()
 
@@ -60,7 +64,7 @@ target_link_libraries(
     ${Spend-Note-Client_LIBS}
 )
 
-target_link_libraries(Spend-Note-Client PRIVATE )
+target_link_libraries(Spend-Note-Client PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 
 set_target_properties(Spend-Note-Client PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

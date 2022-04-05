@@ -6,12 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>963</width>
-    <height>694</height>
+    <width>631</width>
+    <height>635</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>631</width>
+    <height>635</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Spend &amp; Note</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources.qrc">
+    <normaloff>:/Icons/Icons/spenandnote.png</normaloff>:/Icons/Icons/spenandnote.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -25,12 +35,14 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>963</width>
+     <width>631</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -9,6 +9,17 @@ MainPage::MainPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
+		m_ui->GoBackButton->setToolTip("Back");
+		m_ui->GoToIncomesButton->setToolTip("My Incomes");
+		m_ui->GoToListsButton->setToolTip("My Lists");
+		m_ui->LogoutButton->setToolTip("Log Out");
+		m_ui->GoToDailyList->setToolTip("Daily List");
+		m_ui->Settings->setToolTip("Settings");
+		m_ui->GoToStatisticsButton->setToolTip("Statistics");
+		m_ui->CategoriesButton->setToolTip("My Categories");
+
+
+
 	connect(
 		m_ui->GoToListsButton,
 		SIGNAL(clicked()),
@@ -16,13 +27,45 @@ MainPage::MainPage(QWidget *parent)
 		SLOT(OnGoToListsClicked()));
 
 	connect(
+		m_ui->GoToIncomesButton,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToIncomesClicked);
+
+	connect(
+		m_ui->GoToDailyList,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToDailyListClicked);
+
+	connect(
+		m_ui->GoToStatisticsButton,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToStatiticsClicked);
+
+	connect(
 		m_ui->LogoutButton,
 		SIGNAL(clicked()),
 		this,
 		SLOT(OnLogoutClicked()));
 
+	connect(
+		m_ui->GoBackButton,
+		SIGNAL(clicked()),
+		this,
+		SIGNAL(GoBack()));
+
+	connect(
+		m_ui->CloseErrorBannerToolButton,
+		&QToolButton::clicked,
+		this,
+		&MainPage::CloseErrorBanner);
+
 	InitListsSubPage();
 	InitListCreateSubPage();
+	InitProductQuickCreateSubPage();
+
 	InitListEditSubPage();
 	InitListViewSubPage();
 
@@ -30,6 +73,14 @@ MainPage::MainPage(QWidget *parent)
 	InitProductCreateSubPage();
 	InitProductEditSubPage();
 	InitProductViewSubPage();
+
+	InitIncomesSubPage();
+	InitIncomesCreateSubPage();
+	InitIncomeViewSubPage();
+	InitIncomeEditPage();
+
+	InitDailyListSubPage();
+	InitStatisticsSubPage();
 }
 
 void MainPage::InitListsSubPage()
@@ -40,6 +91,11 @@ void MainPage::InitListsSubPage()
 void MainPage::InitListCreateSubPage()
 {
 	m_ui->Display->addWidget(&m_list_create_spage);
+}
+
+void MainPage::InitProductQuickCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_product_quick_create_spage);
 }
 
 void MainPage::InitListEditSubPage()
@@ -72,6 +128,36 @@ void MainPage::InitProductViewSubPage()
 	m_ui->Display->addWidget(&m_product_view_spage);
 }
 
+void MainPage::InitIncomesSubPage()
+{
+	m_ui->Display->addWidget(&m_incomes_spage);
+}
+
+void MainPage::InitIncomesCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_incomes_create_spage);
+}
+
+void MainPage::InitIncomeViewSubPage()
+{
+	m_ui->Display->addWidget(&m_income_view_spage);
+}
+
+void MainPage::InitIncomeEditPage()
+{
+	m_ui->Display->addWidget(&m_income_edit_spage);
+}
+
+void MainPage::InitDailyListSubPage()
+{
+	m_ui->Display->addWidget(&m_dailylist_spage);
+}
+
+void MainPage::InitStatisticsSubPage()
+{
+	m_ui->Display->addWidget(&m_statistics_spage);
+}
+
 MainPage::~MainPage()
 {
 	delete m_ui;
@@ -92,7 +178,52 @@ void MainPage::OnGoToListsClicked()
 	emit ChangeSubPage(MainSubPages::LISTS);
 }
 
+void MainPage::OnGoToIncomesClicked()
+{
+	emit ChangeSubPage(MainSubPages::INCOMES);
+}
+
 void MainPage::OnLogoutClicked()
 {
 	emit Logout();
+}
+
+void MainPage::OnGoToDailyListClicked()
+{
+	emit ChangeSubPage(MainSubPages::DAILY_LIST);
+}
+
+void MainPage::OnGoToStatiticsClicked()
+{
+	emit ChangeSubPage(MainSubPages::STATISTICS);
+}
+
+void MainPage::ShowBalance(const Balance& money)
+{
+	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
+	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
+}
+
+
+void MainPage::SetErrorBanner(const int code, const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1); // expands the banner
+	m_ui->ErrorTitleLabel->setVisible(true);
+
+	m_ui->ErrorCodeLabel->setText(QString::number(code));
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::SetErrorBanner(const std::string& description)
+{
+	m_ui->gridLayout_2->setRowStretch(2,1);
+	m_ui->ErrorTitleLabel->setVisible(false);
+
+	m_ui->ErrorCodeLabel->setText("");
+	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+}
+
+void MainPage::CloseErrorBanner()
+{
+	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
 }

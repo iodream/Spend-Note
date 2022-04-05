@@ -2,8 +2,11 @@
 
 #include <QString>
 #include <QWidget>
+#include <QDateTime>
 
 #include "Common.h"
+#include "Entities/Entities.h"
+#include "Utils.h"
 
 namespace Ui {
 class ProductCreateSubPage;
@@ -23,11 +26,20 @@ public:
 	bool GetIsBought();
 	QString GetBuyUntil();
 	BigInt GetPriority();
+	IdType GetCategoryId();
+	QString GetCategoryName();
 
 	void Clear();
+	void FillCategoryBox(const std::vector<ProductCategory>& categories);
+	void SetRangeOfSpinBox();
+	void SetMinimumDate(const QDate& date);
+
 signals:
-	void GoBack(int n=1);
 	void CreateProduct();
+
+public slots:
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
 
 private:
 	Ui::ProductCreateSubPage *m_ui;

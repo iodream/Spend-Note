@@ -4,6 +4,7 @@
 #include "Models/Product/UpdateProductModel.h"
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 
 #include "Net/Constants.h"
 
@@ -40,7 +41,7 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
@@ -64,12 +65,6 @@ void ProductPagesController::ConnectViewPage()
 {
 	connect(
 		&m_view_page,
-		&ProductViewSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
-	connect(
-		&m_view_page,
 		&ProductViewSubPage::EditProduct,
 		this,
 		&ProductPagesController::OnEditProduct);
@@ -81,15 +76,8 @@ void ProductPagesController::ConnectViewPage()
 		&ProductPagesController::OnDeleteProduct);
 }
 
-
 void ProductPagesController::ConnectEditPage()
 {
-	connect(
-		&m_edit_page,
-		&ProductEditSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
 	connect(
 		&m_edit_page,
 		&ProductEditSubPage::UpdateProduct,
@@ -99,12 +87,6 @@ void ProductPagesController::ConnectEditPage()
 
 void ProductPagesController::ConnectCreatePage()
 {
-	connect(
-		&m_create_page,
-		&ProductCreateSubPage::GoBack,
-		this,
-		&ProductPagesController::GoBack);
-
 	connect(
 		&m_create_page,
 		&ProductCreateSubPage::CreateProduct,
@@ -123,6 +105,7 @@ void ProductPagesController::OnEditProduct()
 {
 	m_edit_page.set_product(m_view_page.get_product());
 	m_edit_page.Update();
+	UpdateCategoryBox();
 	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
 }
 
@@ -135,7 +118,13 @@ void ProductPagesController::OnUpdateProduct()
 	if (!m_view_page.get_product().is_bought && product.is_bought)
 	{
 		QDateTime date = QDateTime::currentDateTime();
-		product.purchase_date = date.toString("yyyy-MM-dd hh:mm:ss");
+		product.purchase_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	}
+
+	if (m_view_page.get_product().is_bought && !product.is_bought)
+	{
+		QDateTime date = QDateTime::currentDateTime();
+		product.purchase_date = date.toString("");
 	}
 
 	auto request = model.FormRequest(product);
@@ -143,9 +132,7 @@ void ProductPagesController::OnUpdateProduct()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 
@@ -163,10 +150,6 @@ void ProductPagesController::OnCreateProduct()
 {
 	AddProductModel model{m_hostname};
 
-	ProductCategory category;
-	category.id = 1;
-	category.name = "";
-
 	Product new_product;
 	new_product.id = 0;
 	new_product.name = m_create_page.GetName();
@@ -174,21 +157,27 @@ void ProductPagesController::OnCreateProduct()
 	new_product.amount = m_create_page.GetAmount();
 	new_product.priority = m_create_page.GetPriority();
 	new_product.is_bought = m_create_page.GetIsBought();
-	new_product.category = category;
+	new_product.category.id = m_create_page.GetCategoryId();
+	new_product.category.name = m_create_page.GetCategoryName();
 	new_product.buy_until_date = m_create_page.GetBuyUntil();
 	QDateTime date = QDateTime::currentDateTime();
-	new_product.add_date = date.toString("yyyy-MM-dd hh:mm:ss");
-	new_product.purchase_date = "";
+	new_product.add_date = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+
+	if (m_create_page.GetIsBought())
+	{
+		QDateTime date = QDateTime::currentDateTime();
+		new_product.purchase_date =  date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	}
+
 	new_product.list_id = m_list_id;
 
 	auto request  = model.FormRequest(new_product);
+	//todo catch poco exception
 	auto response = m_http_client.Request(request);
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-		QString("Error!"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return ;
 	}
 
@@ -207,9 +196,7 @@ void ProductPagesController::OnDeleteProduct()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return;
 	}
 
@@ -225,9 +212,7 @@ bool ProductPagesController::UpdateProductsPage()
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return false;
 	}
 
@@ -246,14 +231,13 @@ bool ProductPagesController::UpdateProductsPage(List list)
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
-		emit Message(
-			QString("Error occured"),
-			QString::fromStdString(response.reason));
+		emit ServerError(response.status, response.reason);
 		return false;
 	}
 
 	auto products = model.ParseResponse(response);
-
+	UpdateCategoryBox();
+	SetRangeOfSpinBoxes();
 	m_products_page.Update(products);
 	return true;
 }
@@ -263,4 +247,40 @@ bool ProductPagesController::UpdateViewPage(Product product)
 	m_view_page.set_product(product);
 	m_view_page.Update();
 	return true;
+}
+
+bool ProductPagesController::already_added = false;
+
+void ProductPagesController::UpdateCategoryBox()
+{
+	if(!already_added)
+	{
+		GetProductCategoriesModel model{m_hostname};
+		auto request = model.FormRequest(m_user_id);
+
+		try
+		{
+			auto response = m_http_client.Request(request);
+
+			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+			{
+				emit ServerError(response.status, response.reason);
+				return ;
+			}
+
+			m_edit_page.FillCategoryBox(model.ParseResponse(response));
+			m_create_page.FillCategoryBox(model.ParseResponse(response));
+			already_added = true;
+		}
+		catch (const Poco::Exception& ex)
+		{
+			return;
+		}
+	}
+}
+
+void ProductPagesController::SetRangeOfSpinBoxes()
+{
+	m_edit_page.SetRangeOfSpinBox();
+	m_create_page.SetRangeOfSpinBox();
 }

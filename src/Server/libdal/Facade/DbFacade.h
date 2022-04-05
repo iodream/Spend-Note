@@ -10,6 +10,7 @@
 #include "Repositories/ListRepository/ListRepository.h"
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
+#include "Repositories/StatisticsRepository/StatisticsRepository.h"
 
 namespace db
 {
@@ -31,9 +32,6 @@ public:
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
 
-	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
-	std::vector<ProductCategory> GetAllProductCategories() override;
-
 	std::optional<IdType> AddIncome(const Income& income) override;
 	std::optional<Income> GetIncomeById(const IdType& id) override;
 	std::vector<Income> GetAllIncomes(const IdType& user_id) override;
@@ -46,9 +44,6 @@ public:
 	bool UpdateList(const List& list_) override;
 	bool RemoveList(const IdType& id) override;
 
-	std::optional<IncomeCategory> GetIncomeCategoryById(const IdType& category_id) override;
-	std::vector<IncomeCategory> GetAllIncomeCategories() override;
-
 	std::optional<ListState> GetListStateById(const IdType& list_state_id) override;
 	std::vector<ListState> GetAllListStates() override;
 
@@ -58,6 +53,30 @@ public:
 	bool CanUserEditList(IdType user_id, IdType list_id) override;
 	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
 	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
+
+	std::vector<Product> GetDailyList(IdType user_id) override;
+
+	std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id, Period period) override;
+	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id, Period period) override;
+	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id, Period period) override;
+
+	std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id, Period period) override;
+	std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id, Period period) override;
+	std::vector<IncomePerDay> IncomesDynamics(IdType user_id, Period period) override;
+
+	std::optional<IncomeCategory> GetIncomeCategoryById(IdType id) override;
+	std::vector<IncomeCategory> GetAllIncomeCategories(IdType user_id) override;
+	std::optional<IdType> AddIncomeCategory(const IncomeCategory& category) override;
+	bool UpdateIncomeCategory(const IncomeCategory& category) override;
+	bool RemoveIncomeCategory(IdType id) override;
+	bool CanUserEditIncomeCategory(IdType user_id, IdType category_id) override;
+
+	std::optional<ProductCategory> GetProductCategoryById(IdType id) override;
+	std::vector<ProductCategory> GetAllProductCategories(IdType user_id) override;
+	std::optional<IdType> AddProductCategory(const ProductCategory& category) override;
+	bool UpdateProductCategory(const ProductCategory& category) override;
+	bool RemoveProductCategory(IdType id) override;
+	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
 private:
 	pqxx::connection m_connection;
@@ -70,5 +89,6 @@ private:
 	ListRepository m_lists;
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
+	StatisticsRepository m_statistics;
 };
 }

@@ -13,6 +13,7 @@
 
 #include "Net/Constants.h"
 #include "HandlerFactory.h"
+#include "ConfigManager.h"
 #include "SpendNoteServer_Config.h"
 #include "Logger/ScopedLogger.h"
 #include "Logger/Logger.h"
@@ -28,12 +29,20 @@ class HTTPServer: public Poco::Util::ServerApplication
 
 	int main(const std::vector<std::string>&)
 	{
-		Logger::Init("Server.log");
-		ScopedLogger::Init("ServerScopedLogger.log");
+		auto json_config = ConfigManager::GetConfig();
+
+		if(!ConfigManager::isConfigFull(json_config))
+		{
+			qCritical() << "Config invalid!";
+			return Application::EXIT_CONFIG;
+		}
+
+		Logger::Init(json_config.getString(Config::SERVER_LOGGER_NAME), json_config.getString(Config::SERVER_SCOPED_LOGGER_NAME));
+		ScopedLogger::Init(json_config.getString(Config::SERVER_SCOPED_LOGGER_NAME));
 
 		SCOPED_LOGGER;
 
-		Poco::UInt16 port = static_cast<Poco::UInt16>(config().getUInt("port", 8080));
+		Poco::UInt16 port = json_config.getUInt(Config::PORT);
 
 		auto* params = new Poco::Net::HTTPServerParams();
 		params->setSoftwareVersion(
@@ -42,7 +51,7 @@ class HTTPServer: public Poco::Util::ServerApplication
 			append(std::string{"."}).
 			append(std::string{SpendNoteServer_VERSION_MINOR}));
 
-		Poco::Net::HTTPServer srv(new HandlerFactory, port);
+		Poco::Net::HTTPServer srv(new HandlerFactory(json_config), port);
 		srv.start();
 		qInfo() << "HTTP Server started on port " << port;
 		waitForTerminationRequest();

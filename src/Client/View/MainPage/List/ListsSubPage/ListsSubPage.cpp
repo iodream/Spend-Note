@@ -103,6 +103,7 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 	Clear();
 	for (auto it = lists.begin(); it != lists.end(); it++) {
 		ListItem* item = new ListItem(*it);
+		item->UpdateColor(it->state);
 		item->Update();
 		AppendList(item);
 	}

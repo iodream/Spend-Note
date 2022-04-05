@@ -13,7 +13,7 @@ enum class MainSubPages
 {
 	LISTS = 0,
 	CREATE_LIST,
-
+	QUICK_CREATE_PRODUCT,
 	EDIT_LIST,
 	VIEW_LIST,
 
@@ -22,8 +22,15 @@ enum class MainSubPages
 	EDIT_PRODUCT,
 	VIEW_PRODUCT,
 
-	ICOMES,
-	SETTINGS,
+	INCOMES,
+	CREATE_INCOME,
+	VIEW_INCOME,
+	EDIT_INCOME,
+
+	DAILY_LIST,
+	STATISTICS,
+	SETTINGS
 };
 
 const QString STYLESHEET_BACKGROUND_COLOR = "background-color:";
+const QString DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";

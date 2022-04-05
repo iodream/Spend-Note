@@ -7,6 +7,7 @@
 #include "View/MainPage/List/ListViewSubPage/ListViewSubPage.h"
 #include "View/MainPage/List/ListEditSubPage/ListEditSubPage.h"
 #include "View/MainPage/Product/ProductsSubPage/ProductsSubPage.h"
+#include "View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.h"
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -23,7 +24,8 @@ public:
 		ListCreateSubPage& create_page,
 		ListViewSubPage& list_view_page,
 		ListEditSubPage& list_edit_page,
-		ProductsSubPage& product_page);
+		ProductsSubPage& product_page,
+		ProductQuickCreateSubPage& product_quick_create_page);
 
 	virtual ~ListPagesController() override {}
 
@@ -31,6 +33,10 @@ public:
 	bool UpdateListCreatePage();
 	bool UpdateListViewPage(PageData& data);
 	bool UpdateListEditPage(PageData& data);
+	bool UpdateListQuickCreatePage();
+	void UpdateCategoryBox();
+	void SetRangeOfSpinBoxes();
+
 
 private:
 	void ConnectListPage();
@@ -47,21 +53,29 @@ private:
 	ListViewSubPage& m_list_view_page;
 	ListEditSubPage& m_list_edit_page;
 	ProductsSubPage& m_product_page;
+	ProductQuickCreateSubPage& m_product_quick_create_page;
+
+	void FillBoxOfStates();
+	static bool already_added;
+	static bool category_already_added;
+	static int m_curr_products;
 
 signals:
-	void Message(const QString& window_name, const QString& message);
+	void ServerError(const int code, const std::string& desc);
+	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
-
 	void GoBack(int n=1);
-	void CreateList();
 
 public slots:
-	void OnGoToProducts(const List& list);
-	void OnUpdateList(const List& list);
+	void OnCreateList();
+	void OnUpdateList();
 	void OnDeleteList(const List& list);
+	void OnQuickAddItem();
+
+	void OnGoToCreateList();
 	void OnGoToViewList();
 	void OnGoToEditList();
-	void OnGoToCreateList();
-	void OnCreateList();
+	void OnGoToQuickCreateProduct();
+	void OnGoToProducts(const List& list);
 };

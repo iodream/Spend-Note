@@ -37,17 +37,13 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	SignupModel model{m_hostname};
 	if (!model.CheckPassRepeat(in_dto))
 	{
-		emit Message(
-			QString("Error"),
-			QString("Passwords must match!"));
+		m_page.SetErrorBanner("Passwords must match!");
 		return;
 	}
 
 	if (!model.CheckData(in_dto))
 	{
-		emit Message(
-			QString("Error"),
-			QString("Username or password can't be empty!"));
+		m_page.SetErrorBanner("Username or password can't be empty!");
 		return;
 	}
 
@@ -65,9 +61,7 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	{
 		if(response.status == Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_CONFLICT)
 		{
-			emit Message(
-				QString("Error"),
-				QString("User already exists!"));
+			m_page.SetErrorBanner(response.status, response.reason);
 			return;
 		}
 	}
@@ -77,5 +71,6 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 
 void SignupPageController::OnGoToLoginPage()
 {
+	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::LOGIN);
 }

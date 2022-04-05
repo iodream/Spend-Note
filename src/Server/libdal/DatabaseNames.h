@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace db
 {
@@ -18,6 +19,7 @@ namespace db
 	{
 		const std::string TABLE_NAME = "IncomeCategory";
 		const std::string ID = "id";
+		const std::string USER_ID = "userId";
 		const std::string NAME = "name";
 	}
 
@@ -57,6 +59,7 @@ namespace db
 	{
 		const std::string TABLE_NAME = "ProductCategory";
 		const std::string ID = "id";
+		const std::string USER_ID = "userId";
 		const std::string NAME = "name";
 	}
 
@@ -66,5 +69,11 @@ namespace db
 		const std::string ID = "id";
 		const std::string LOGIN = "login";
 		const std::string PASSWORD = "password";
+	}
+
+	namespace statistics
+	{
+		const std::string TOTAL_PRICE = "totalPrice";
+		const std::string PURCHASE_DATE = "purchase_date";
 	}
 }

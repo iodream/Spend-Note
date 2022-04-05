@@ -49,10 +49,15 @@ QJsonObject FormObject(int id, int list_id)
 
 }
 
-TEST(UpdateProduct, LIST_PRESENT)
+TEST(UpdateProduct, PRODUCT_PRESENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
+	db::Product product;
+	EXPECT_CALL(*facade, GetProductById(1))
+		.WillOnce(Return(product));
+	EXPECT_CALL(*facade, CanUserEditProduct(1, 1))
+		.WillOnce(Return(true));
 	EXPECT_CALL(*facade, UpdateProduct(_))
 		.WillOnce(Return(true));
 
@@ -61,6 +66,7 @@ TEST(UpdateProduct, LIST_PRESENT)
 	Net::Request request;
 	request.json_payload = QJsonDocument{FormObject(1, 1)};
 	request.method = Net::HTTP_METHOD_PUT;
+	request.uid = 1;
 
 	auto response = handler->AuthHandle(request);
 
@@ -71,8 +77,8 @@ TEST(UpdateProductHandlerTest, PRODUCT_ABSENT)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, UpdateProduct(_))
-		.WillOnce(Return(false));
+	EXPECT_CALL(*facade, GetProductById(1))
+		.WillOnce(Return(std::optional<db::Product>{}));
 
 	auto handler = MakeHandler(std::move(facade));
 
