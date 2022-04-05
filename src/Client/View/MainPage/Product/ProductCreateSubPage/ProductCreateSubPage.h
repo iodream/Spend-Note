@@ -37,6 +37,10 @@ public:
 signals:
 	void CreateProduct();
 
+public slots:
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
+
 private:
 	Ui::ProductCreateSubPage *m_ui;
 };

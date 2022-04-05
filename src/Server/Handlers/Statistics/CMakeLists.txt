@@ -7,6 +7,8 @@ list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/GetExpensesPercentagePerCategoryHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/GetExpensesPerDayHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetExpensesPerDayHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetStatisticsHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetStatisticsHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
 )

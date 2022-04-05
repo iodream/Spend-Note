@@ -36,38 +36,21 @@
      <item row="0" column="1">
       <widget class="QLineEdit" name="NameLineEdit"/>
      </item>
-     <item row="1" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string>Category:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Amount:</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Expire date:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QDateEdit" name="ExpirationDateEdit">
-       <property name="displayFormat">
-        <string>yyyy-MM-dd hh:mm:ss</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
+     <item row="7" column="1">
       <widget class="QSpinBox" name="Amount">
        <property name="minimum">
         <number>1</number>
@@ -77,8 +60,70 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="Category"/>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Expire date:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QDateEdit" name="ExpirationDateEdit">
+       <property name="displayFormat">
+        <string>yyyy-MM-dd hh:mm:ss</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <layout class="QHBoxLayout" name="CategoryLayout">
+       <item>
+        <widget class="QComboBox" name="Category"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="NewCategoryButton">
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../../resources.qrc">
+           <normaloff>:/Icons/Icons/baseline_add_black_24dp.png</normaloff>:/Icons/Icons/baseline_add_black_24dp.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="6" column="1">
+      <layout class="QHBoxLayout" name="CategoryEditLayout">
+       <item>
+        <widget class="QLineEdit" name="NewCategoryName"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="NewCategorySaveButton">
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../../resources.qrc">
+           <normaloff>:/Icons/Icons/baseline_done_black_24dp.png</normaloff>:/Icons/Icons/baseline_done_black_24dp.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

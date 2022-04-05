@@ -4,7 +4,7 @@
 #include "Models/Product/UpdateProductModel.h"
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
-#include "Models/Product/GetProductCategoriesModel.h"
+#include "Models/Categories/Product/GetProductCategoriesModel.h"
 
 #include "Net/Constants.h"
 
@@ -41,7 +41,7 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
@@ -256,7 +256,7 @@ void ProductPagesController::UpdateCategoryBox()
 	if(!already_added)
 	{
 		GetProductCategoriesModel model{m_hostname};
-		auto request = model.FormRequest();
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{

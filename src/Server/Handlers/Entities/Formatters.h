@@ -14,6 +14,7 @@
 #include "Net/Tools/Formatters/Product/ProductCategoryJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Product/ProductJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Product/ProductIdJSONFormatter.h"
+#include "Net/Tools/Formatters/Product/ProductCategoryIdJSONFormatter.h"
 
 #include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
 #include "Net/Tools/Formatters/Statistics/ExpensePerCategoryJSONFormatter.h"

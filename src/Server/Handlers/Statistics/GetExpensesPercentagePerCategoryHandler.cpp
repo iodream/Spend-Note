@@ -31,7 +31,7 @@ Net::Response GetExpensesPercentagePerCategoryHandler::AuthHandle(const Net::Req
 	std::vector<db::ExpensePercentagePerCategory> db_expenses;
 
 	try {
-		db_expenses = m_facade->ExpensesPercentagePerCategory(user_id);
+		db_expenses = m_facade->ExpensesPercentagePerCategory(user_id, db::Period::Weekly);
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(NetError::Status::HTTP_NOT_FOUND, ex.what());

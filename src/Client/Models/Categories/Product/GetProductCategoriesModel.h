@@ -14,7 +14,7 @@ class GetProductCategoriesModel
 public:
 	GetProductCategoriesModel(const std::string& hostname) : m_hostname{hostname} {}
 
-	Net::Request FormRequest();
+	Net::Request FormRequest(const IdType& user_id);
 	std::vector<ProductCategory> ParseResponse(const Net::Response& response);
 
 private:

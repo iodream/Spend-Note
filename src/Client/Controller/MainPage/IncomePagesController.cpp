@@ -100,7 +100,7 @@ bool IncomePagesController::UpdateIncomesPage()
 bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 {
 	if (!data.canConvert<Income>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 
 	auto income = qvariant_cast<Income>(data);

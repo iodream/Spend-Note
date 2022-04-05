@@ -14,6 +14,7 @@
 #include "Net/Tools/Parsers/Product/ProductCategoryJSONParserBase.h"
 #include "Net/Tools/Parsers/Product/ProductJSONParserBase.h"
 #include "Net/Tools/Parsers/Product/ProductIdJSONParser.h"
+#include "Net/Tools/Parsers/Product/ProductCategoryIdJSONParser.h"
 
 #include "Net/Tools/Parsers/Statistics/BalanceJSONParser.h"
 #include "Net/Tools/Parsers/Statistics/ExpensePerCategoryJSONParser.h"

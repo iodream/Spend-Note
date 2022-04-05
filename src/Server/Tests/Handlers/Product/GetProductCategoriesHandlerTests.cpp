@@ -7,7 +7,7 @@
 
 #include "Server/Handlers/Entities/Entities.h"
 #include "Server/Handlers/Entities/Parsers.h"
-#include "Server/Handlers/Product/GetProductCategoriesHandler.h"
+#include "Server/Handlers/Categories/Product/GetProductCategoriesHandler.h"
 
 
 using ::testing::Return;

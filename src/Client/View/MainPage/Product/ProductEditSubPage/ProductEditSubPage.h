@@ -31,7 +31,9 @@ public:
 
 signals:
 	void UpdateProduct();
-
+public slots:
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
 private:
 	Ui::ProductEditSubPage *m_ui;
 	Product m_product;
