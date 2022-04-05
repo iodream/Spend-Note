@@ -37,9 +37,9 @@ Net::Response GetExpensesPercentagePerCategoryHandler::AuthHandle(const Net::Req
 		return FormErrorResponse(NetError::Status::HTTP_NOT_FOUND, ex.what());
 	}
 
-	std::vector<ExpensePercentagePerCategory> expenses;
+	std::vector<StatisticPercentagePerCategory> expenses;
 	for (auto db_expense : db_expenses) {
-		auto expense = ToNetExpensePercentagePerCategory(db_expense);
+		auto expense = ToNetStatisticPercentagePerCategory(db_expense);
 		expenses.push_back(expense);
 	}
 

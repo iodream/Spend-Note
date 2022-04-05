@@ -13,10 +13,10 @@ public:
 	GetExpensesPerCategoryModel(const std::string& hostname) : m_hostname{hostname} {}
 
 	Net::Request FormRequest(IdType user_id);
-	std::vector<ExpensePerCategory> ParseResponse(const Net::Response& response);
+	std::vector<StatisticPerCategory> ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;
 
-	ExpensesPerCategoryJSONParser m_parser{};
+	StatisticsPerCategoryJSONParser m_parser{};
 };

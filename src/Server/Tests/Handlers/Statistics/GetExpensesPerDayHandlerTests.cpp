@@ -21,7 +21,7 @@ db::ExpensePerDay db_expense{
 	1
 };
 
-ExpensePerDay expense{
+StatisticPerDay expense{
 	"Monday",
 	1
 };
@@ -77,7 +77,7 @@ TEST(GetExpensesPerDayHandlerTest, FORBIDDEN)
 
 TEST(GetExpensesPerDayHandlerTest, ONE_EXPENSE)
 {
-	ExpensePerDayJSONParser m_parser;
+	StatisticPerDayJSONParser m_parser;
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, ExpensesDynamics(1, db::Period::Weekly))

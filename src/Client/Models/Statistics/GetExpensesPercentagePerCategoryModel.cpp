@@ -10,9 +10,9 @@ Net::Request GetExpensesPercentagePerCategoryModel::FormRequest(IdType user_id)
 	return request;
 }
 
-std::vector<ExpensePercentagePerCategory> GetExpensesPercentagePerCategoryModel::ParseResponse(const Net::Response& response)
+std::vector<StatisticPercentagePerCategory> GetExpensesPercentagePerCategoryModel::ParseResponse(const Net::Response& response)
 {
-	std::vector<ExpensePercentagePerCategory> expenses;
+	std::vector<StatisticPercentagePerCategory> expenses;
 
 	expenses = m_parser.Parse(response.json_payload.array());
 

@@ -9,9 +9,9 @@ Net::Request GetExpensesPerDayModel::FormRequest(IdType user_id)
 	return request;
 }
 
-std::vector<ExpensePerDay> GetExpensesPerDayModel::ParseResponse(const Net::Response& response)
+std::vector<StatisticPerDay> GetExpensesPerDayModel::ParseResponse(const Net::Response& response)
 {
-	std::vector<ExpensePerDay> expenses;
+	std::vector<StatisticPerDay> expenses;
 
 	expenses = m_parser.Parse(response.json_payload.array());
 

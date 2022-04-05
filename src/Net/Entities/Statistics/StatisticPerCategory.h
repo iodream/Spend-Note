@@ -2,9 +2,8 @@
 
 #include "Net/Types.h"
 
-template<typename T>
-struct ExpensePerDayBase
+struct StatisticPerCategory
 {
-	T day;
+	IdType category_id;
 	Money amount;
 };

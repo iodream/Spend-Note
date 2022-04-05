@@ -19,5 +19,5 @@ public:
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	ExpensesPerDayJSONFormatter m_formatter;
+	StatisticsPerDayJSONFormatter m_formatter;
 };

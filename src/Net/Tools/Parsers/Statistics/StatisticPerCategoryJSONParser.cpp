@@ -1,11 +1,11 @@
 #include <QJsonObject>
 
 #include "Net/Parsing.h"
-#include "ExpensePerCategoryJSONParser.h"
+#include "StatisticPerCategoryJSONParser.h"
 
-ExpensePerCategory ExpensePerCategoryJSONParser::Parse(const QJsonObject& json)
+StatisticPerCategory StatisticPerCategoryJSONParser::Parse(const QJsonObject& json)
 {
-	ExpensePerCategory expense;
+	StatisticPerCategory expense;
 	SafeReadId(json, "category_id", expense.category_id);
 	SafeReadMoney(json, "amount", expense.amount);
 	return expense;

@@ -2,7 +2,7 @@
 
 #include "Net/Types.h"
 
-struct ExpensePercentagePerCategory
+struct StatisticPercentagePerCategory
 {
 	IdType category_id;
 	double percentage;

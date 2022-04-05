@@ -3,11 +3,11 @@
 
 #include "Net/Parsing.h"
 
-template<class ExpensePerDay>
-class ExpensePerDayJSONFormatterBase
+template<class StatisticPerDay>
+class StatisticPerDayJSONFormatterBase
 {
 public:
-	QJsonObject Format(const ExpensePerDay& expense)
+	QJsonObject Format(const StatisticPerDay& expense)
 	{
 		QJsonObject json;
 		WriteString(json, "day", expense.day);

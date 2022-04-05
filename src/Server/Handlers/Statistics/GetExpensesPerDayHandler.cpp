@@ -37,9 +37,9 @@ Net::Response GetExpensesPerDayHandler::AuthHandle(const Net::Request& request)
 		return FormErrorResponse(NetError::Status::HTTP_NOT_FOUND, ex.what());
 	}
 
-	std::vector<ExpensePerDay> expenses;
+	std::vector<StatisticPerDay> expenses;
 	for (const db::ExpensePerDay& db_expense : db_expenses) {
-		auto expense = ToNetExpensePerDay(db_expense);
+		auto expense = ToNetStatisticPerDay(db_expense);
 		expenses.push_back(expense);
 	}
 

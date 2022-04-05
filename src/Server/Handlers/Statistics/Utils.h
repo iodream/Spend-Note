@@ -3,8 +3,8 @@
 #include "../libdal/Facade/IDbFacade.h"
 #include "../Entities/Entities.h"
 
-ExpensePerCategory ToNetExpensePerCategory(const db::ExpensePerCategory& db_expense);
+StatisticPerCategory ToNetStatisticPerCategory(const db::ExpensePerCategory& db_expense);
 
-ExpensePercentagePerCategory ToNetExpensePercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense);
+StatisticPercentagePerCategory ToNetStatisticPercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense);
 
-ExpensePerDay ToNetExpensePerDay(const db::ExpensePerDay& db_expense);
+StatisticPerDay ToNetStatisticPerDay(const db::ExpensePerDay& db_expense);

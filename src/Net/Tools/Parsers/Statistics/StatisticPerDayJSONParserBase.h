@@ -3,13 +3,13 @@
 
 #include "Net/Parsing.h"
 
-template<class ExpensePerDay>
-class ExpensePerDayJSONParserBase
+template<class StatisticPerDay>
+class StatisticPerDayJSONParserBase
 {
 public:
-	ExpensePerDay Parse(const QJsonObject& obj)
+	StatisticPerDay Parse(const QJsonObject& obj)
 	{
-		ExpensePerDay expense;
+		StatisticPerDay expense;
 
 		SafeReadString(obj, "day", expense.day);
 		SafeReadMoney(obj, "amount", expense.amount);

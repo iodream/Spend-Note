@@ -23,9 +23,9 @@ public:
 
 	void UpdateCurrentChart();
 
-	void UpdatePiePercentChart(std::vector<ExpensePercentagePerCategory> stats, std::vector<ProductCategory> category);
-	void UpdatePieAmountChart(std::vector<ExpensePerCategory> stats, std::vector<ProductCategory> category);
-	void UpdateBarBalanceChart(std::vector<ExpensePerDay> stats);
+	void UpdatePiePercentChart(std::vector<StatisticPercentagePerCategory> stats, std::vector<ProductCategory> category);
+	void UpdatePieAmountChart(std::vector<StatisticPerCategory> stats, std::vector<ProductCategory> category);
+	void UpdateBarBalanceChart(std::vector<StatisticPerDay> stats);
 
 	QChart* InitChart(QLayout* layout);
 	//QChart* InitChart(QFrame* frame);

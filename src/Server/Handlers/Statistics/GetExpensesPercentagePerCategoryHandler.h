@@ -19,5 +19,5 @@ public:
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	ExpensesPercentagePerCategoryJSONFormatter m_formatter;
+	StatisticsPercentagePerCategoryJSONFormatter m_formatter;
 };

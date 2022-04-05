@@ -63,7 +63,7 @@ void StatisticSubPage::UpdateCurrentChart()
 
 
 void StatisticSubPage::UpdatePieAmountChart(
-		std::vector<ExpensePerCategory> stats,
+		std::vector<StatisticPerCategory> stats,
 		std::vector<ProductCategory> category)
 {
 	if (stats.empty())
@@ -90,7 +90,7 @@ void StatisticSubPage::UpdatePieAmountChart(
 	}
 }
 
-void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
+void StatisticSubPage::UpdateBarBalanceChart(std::vector<StatisticPerDay> stats)
 {
 	if (stats.empty())
 	{
@@ -124,7 +124,7 @@ void StatisticSubPage::UpdateBarBalanceChart(std::vector<ExpensePerDay> stats)
 }
 
 void StatisticSubPage::UpdatePiePercentChart(
-		std::vector<ExpensePercentagePerCategory> stats,
+		std::vector<StatisticPercentagePerCategory> stats,
 		std::vector<ProductCategory> category)
 {
 	if (stats.empty())

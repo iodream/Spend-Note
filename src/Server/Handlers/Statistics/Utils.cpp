@@ -2,28 +2,28 @@
 
 #include "Logger/ScopedLogger.h"
 
-ExpensePerCategory ToNetExpensePerCategory(const db::ExpensePerCategory& db_expense)
+StatisticPerCategory ToNetStatisticPerCategory(const db::ExpensePerCategory& db_expense)
 {
 	SCOPED_LOGGER;
-	ExpensePerCategory expense;
+	StatisticPerCategory expense;
 	expense.category_id = db_expense.category_id;
 	expense.amount = db_expense.amount;
 	return expense;
 }
 
-ExpensePercentagePerCategory ToNetExpensePercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense)
+StatisticPercentagePerCategory ToNetStatisticPercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense)
 {
 	SCOPED_LOGGER;
-	ExpensePercentagePerCategory expense;
+	StatisticPercentagePerCategory expense;
 	expense.category_id = db_expense.category_id;
 	expense.percentage = db_expense.percentage;
 	return expense;
 }
 
-ExpensePerDay ToNetExpensePerDay(const db::ExpensePerDay& db_expense)
+StatisticPerDay ToNetStatisticPerDay(const db::ExpensePerDay& db_expense)
 {
 	SCOPED_LOGGER;
-	ExpensePerDay expense;
+	StatisticPerDay expense;
 	expense.day = db_expense.day;
 	expense.amount = db_expense.amount;
 	return expense;

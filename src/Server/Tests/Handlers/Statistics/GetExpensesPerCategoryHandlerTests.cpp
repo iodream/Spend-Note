@@ -21,7 +21,7 @@ db::ExpensePerCategory db_expense{
 	1
 };
 
-ExpensePerCategory expense{
+StatisticPerCategory expense{
 	1,
 	1
 };
@@ -77,7 +77,7 @@ TEST(GetExpensesPerCategoryHandlerTest, FORBIDDEN)
 
 TEST(GetExpensesPerCategoryHandlerTest, ONE_EXPENSE)
 {
-	ExpensePerCategoryJSONParser m_parser;
+	StatisticPerCategoryJSONParser m_parser;
 	auto facade = std::make_unique<MockDbFacade>();
 
 	EXPECT_CALL(*facade, ExpensesPerCategory(1, db::Period::Weekly))

@@ -13,10 +13,10 @@ public:
 	GetExpensesPerDayModel(const std::string& hostname) : m_hostname{hostname} {}
 
 	Net::Request FormRequest(IdType user_id);
-	std::vector<ExpensePerDay> ParseResponse(const Net::Response& response);
+	std::vector<StatisticPerDay> ParseResponse(const Net::Response& response);
 
 private:
 	const std::string& m_hostname;
 
-	ExpensesPerDayJSONParser m_parser{};
+	StatisticsPerDayJSONParser m_parser{};
 };
