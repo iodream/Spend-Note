@@ -35,8 +35,8 @@ public:
 	void UpdateIncomePieAmountChart(const std::vector<ExpensePerCategory>& stats, const std::vector<IncomeCategory>& category);
 	void UpdateBarIncomeChart(const std::vector<ExpensePerDay>& stats);
 
-	void ChangPageToNext(QStackedWidget& widget);
-	void ChangPageToPrevious(QStackedWidget& widget);
+	void ChangePageToNext(QStackedWidget& widget);
+	void ChangePageToPrevious(QStackedWidget& widget);
 
 	void ShowEmptyMessage();
 	void HideEmptyMessage();

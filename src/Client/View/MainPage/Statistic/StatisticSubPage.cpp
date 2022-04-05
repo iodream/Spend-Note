@@ -243,7 +243,7 @@ void StatisticSubPage::UpdateBarIncomeChart(const std::vector<ExpensePerDay>& st
 	}
 }
 
-void StatisticSubPage::ChangPageToNext(QStackedWidget& widget)
+void StatisticSubPage::ChangePageToNext(QStackedWidget& widget)
 {
 	int current_index = widget.currentIndex();
 	if (current_index == widget.count() - 1)
@@ -258,7 +258,7 @@ void StatisticSubPage::ChangPageToNext(QStackedWidget& widget)
 	ChartChanged(current_index);
 }
 
-void StatisticSubPage::ChangPageToPrevious(QStackedWidget& widget)
+void StatisticSubPage::ChangePageToPrevious(QStackedWidget& widget)
 {
 	int current_index = widget.currentIndex();
 	if (current_index == 0)
@@ -322,11 +322,11 @@ void StatisticSubPage::OnForwardButtonClicked()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		ChangPageToNext(*m_ui->stackedWidget);
+		ChangePageToNext(*m_ui->stackedWidget);
 	}
 	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		ChangPageToNext(*m_ui->stackedWidget_2);
+		ChangePageToNext(*m_ui->stackedWidget_2);
 	}
 }
 
@@ -334,11 +334,11 @@ void StatisticSubPage::OnBackButtonClicked()
 {
 	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		ChangPageToPrevious(*m_ui->stackedWidget);
+		ChangePageToPrevious(*m_ui->stackedWidget);
 	}
 	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		ChangPageToPrevious(*m_ui->stackedWidget);
+		ChangePageToPrevious(*m_ui->stackedWidget);
 	}
 }
 
