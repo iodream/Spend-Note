@@ -3,6 +3,8 @@
 #include <QWidget>
 #include <Entities/Entities.h>
 
+#include "View/Constants.h"
+
 namespace Ui {
 class IncomeEditSubPage;
 }
