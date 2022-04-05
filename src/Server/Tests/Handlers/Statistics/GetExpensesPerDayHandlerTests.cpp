@@ -44,7 +44,7 @@ TEST(GetExpensesPerDayHandlerTest, EMPTY_EXPENSES)
 {
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ExpensesDynamics(1))
+	EXPECT_CALL(*facade, ExpensesDynamics(1, db::Period::Weekly))
 		.WillOnce(Return(std::vector<db::ExpensePerDay>{}));
 
 	auto handler = MakeHandler(std::move(facade));
@@ -80,7 +80,7 @@ TEST(GetExpensesPerDayHandlerTest, ONE_EXPENSE)
 	ExpensePerDayJSONParser m_parser;
 	auto facade = std::make_unique<MockDbFacade>();
 
-	EXPECT_CALL(*facade, ExpensesDynamics(1))
+	EXPECT_CALL(*facade, ExpensesDynamics(1, db::Period::Weekly))
 		.WillOnce(Return(std::vector<db::ExpensePerDay>{db_expense}));
 
 	auto handler = MakeHandler(std::move(facade));
