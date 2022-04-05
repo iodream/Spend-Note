@@ -41,7 +41,7 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }

@@ -35,6 +35,9 @@ public:
 
 signals:
 	void QuickAddItem();
+public slots:
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
 
 private:
 	Ui::ProductQuickCreateSubPage *m_ui;

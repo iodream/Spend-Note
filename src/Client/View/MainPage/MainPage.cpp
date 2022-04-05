@@ -16,6 +16,8 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToDailyList->setToolTip("Daily List");
 		m_ui->Settings->setToolTip("Settings");
 		m_ui->GoToStatisticsButton->setToolTip("Statistics");
+		m_ui->CategoriesButton->setToolTip("My Categories");
+
 
 
 	connect(

@@ -82,5 +82,6 @@ public:
 	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
+
 };
 }
