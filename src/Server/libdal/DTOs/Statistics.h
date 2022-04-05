@@ -21,4 +21,22 @@ namespace db
 		Date day;
 		Money amount;
 	};
+
+	struct IncomePerCategory
+	{
+		IdType category_id;
+		Money amount;
+	};
+
+	struct IncomePercentagePerCategory
+	{
+		IdType category_id;
+		double percentage;
+	};
+
+	struct IncomePerDay
+	{
+		Date day;
+		Money amount;
+	};
 }

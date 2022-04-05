@@ -17,6 +17,10 @@ public:
 	std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id);
 	std::vector<ExpensePerDay> ExpensesDynamics(IdType user_id);
 
+	std::vector<IncomePerCategory> IncomesPerCategory(IdType user_id);
+	std::vector<IncomePercentagePerCategory> IncomesPercentagePerCategory(IdType user_id);
+	std::vector<IncomePerDay> IncomesDynamics(IdType user_id);
+
 	static bool DoesUserExist(IdType user_id, pqxx::work& work);
 private:
 	pqxx::connection& m_db_connection;

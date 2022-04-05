@@ -174,6 +174,21 @@ std::vector<ExpensePerDay> DbFacade::ExpensesDynamics(IdType user_id)
 	return m_statistics.ExpensesDynamics(user_id);
 }
 
+std::vector<IncomePerCategory> DbFacade::IncomesPerCategory(IdType user_id)
+{
+	return m_statistics.IncomesPerCategory(user_id);
+}
+
+std::vector<IncomePercentagePerCategory> DbFacade::IncomesPercentagePerCategory(IdType user_id)
+{
+	return m_statistics.IncomesPercentagePerCategory(user_id);
+}
+
+std::vector<IncomePerDay> DbFacade::IncomesDynamics(IdType user_id)
+{
+	return m_statistics.IncomesDynamics(user_id);
+}
+
 std::optional<IncomeCategory> DbFacade::GetIncomeCategoryById(IdType id)
 {
 	return m_income_categories.GetById(id);
@@ -233,4 +248,5 @@ bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 {
 	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
 }
+
 }
