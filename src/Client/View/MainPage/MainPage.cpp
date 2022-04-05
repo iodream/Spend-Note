@@ -16,7 +16,7 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToDailyList->setToolTip("Daily List");
 		m_ui->Settings->setToolTip("Settings");
 		m_ui->GoToStatisticsButton->setToolTip("Statistics");
-		m_ui->CategoriesButton->setToolTip("My Categories");
+		m_ui->GoToCategoriesButton->setToolTip("My Categories");
 
 
 
@@ -43,6 +43,12 @@ MainPage::MainPage(QWidget *parent)
 		&QPushButton::clicked,
 		this,
 		&MainPage::OnGoToStatiticsClicked);
+
+	connect(
+		m_ui->GoToCategoriesButton,
+		&QPushButton::clicked,
+		this,
+		&MainPage::OnGoToCategoriesEditClicked);
 
 	connect(
 		m_ui->LogoutButton,
@@ -81,6 +87,8 @@ MainPage::MainPage(QWidget *parent)
 
 	InitDailyListSubPage();
 	InitStatisticsSubPage();
+	InitCategoriesEditSubPage();
+
 }
 
 void MainPage::InitListsSubPage()
@@ -158,6 +166,12 @@ void MainPage::InitStatisticsSubPage()
 	m_ui->Display->addWidget(&m_statistics_spage);
 }
 
+void MainPage::InitCategoriesEditSubPage()
+{
+	m_ui->Display->addWidget(&m_categories_edit_spage);
+}
+
+
 MainPage::~MainPage()
 {
 	delete m_ui;
@@ -196,6 +210,11 @@ void MainPage::OnGoToDailyListClicked()
 void MainPage::OnGoToStatiticsClicked()
 {
 	emit ChangeSubPage(MainSubPages::STATISTICS);
+}
+
+void MainPage::OnGoToCategoriesEditClicked()
+{
+	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
 }
 
 void MainPage::ShowBalance(const Balance& money)
