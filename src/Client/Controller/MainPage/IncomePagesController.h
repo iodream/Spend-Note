@@ -43,9 +43,10 @@ private:
 	IdType& m_user_id;
 
 	IncomeListSubPage& m_incomes_page;
+	IncomeCreateSubPage& m_income_create_page;
+	IncomeViewSubPage& m_income_view_page;
+	IncomeEditSubPage& m_income_edit_page;
 
-
-	static bool already_added;
 	void UpdateCategoryBoxes();
 signals:
 	void ServerError(const int code, const std::string& desc);
@@ -55,11 +56,6 @@ signals:
 	void AddIncomeCategory(IncomeCategory);
 
 	void GoBack(int n=1);
-
-public:
-	IncomeCreateSubPage& m_income_create_page;
-	IncomeViewSubPage& m_income_view_page;
-	IncomeEditSubPage& m_income_edit_page;
 
 public slots:
 	void OnGoToCreateIncome();

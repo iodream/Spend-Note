@@ -100,5 +100,6 @@ void IncomeCreateSubPage::OnNewCategorySaved()
 	cat.name = ui->NewCategoryName->text();
 
 	emit AddIncomeCategory(cat);
+	emit UpdateCategories();
 }
 

@@ -22,9 +22,9 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		CategoryEditPage& category_edit_spage,
 		IncomeCreateSubPage& income_create_page,
-		IncomeEditSubPage& income_edit_page);
+		IncomeEditSubPage& income_edit_page,
+		CategoryEditPage& category_edit_page);
 
 	virtual ~IncomeCategoriesController() override {}
 
@@ -36,7 +36,7 @@ private:
 	IdType& m_user_id;
 	IncomeCreateSubPage& m_income_create_page;
 	IncomeEditSubPage& m_income_edit_page;
-	CategoryEditPage& m_category_edit_spage;
+	CategoryEditPage& m_category_edit_page;
 
 signals:
 	void ServerError(const int code, const std::string& desc);
@@ -49,4 +49,5 @@ public slots:
 	void OnAddIncomeCategory(IncomeCategory category);
 	void OnDeleteIncomeCategory(IncomeCategoryId id);
 	void OnUpdateIncomeCategory(IncomeCategory category);
+	void OnClientError(const std::string& desc);
 };

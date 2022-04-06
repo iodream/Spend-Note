@@ -22,10 +22,10 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		CategoryEditPage& category_edit_spag,
 		ProductCreateSubPage& product_create_page,
 		ProductEditSubPage& product_edit_page,
-		ProductQuickCreateSubPage& product_quick_create_page);
+		ProductQuickCreateSubPage& product_quick_create_page,
+		CategoryEditPage& category_edit_page);
 
 	virtual ~ProductCategoriesController() override {}
 
@@ -36,7 +36,7 @@ private:
 	std::string& m_hostname;
 	IdType& m_user_id;
 
-	CategoryEditPage& m_category_edit_spage;
+	CategoryEditPage& m_category_edit_page;
 	ProductCreateSubPage& m_product_create_page;
 	ProductEditSubPage& m_product_edit_page;
 	ProductQuickCreateSubPage& m_product_quick_create_page;

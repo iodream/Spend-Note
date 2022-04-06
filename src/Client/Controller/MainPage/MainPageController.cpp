@@ -5,6 +5,7 @@
 #include "View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.h"
 
 #include "Models/Statistics/GetBalanceModel.h"
+#include <iostream>
 
 MainPageController::MainPageController(
 	HTTPClient& http_client,
@@ -247,9 +248,9 @@ void MainPageController::InitIncomeCategoriesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_categories_edit_spage(),
 			m_page.get_incomes_create_spage(),
-			m_page.get_income_edit_spage());
+			m_page.get_income_edit_spage(),
+			m_page.get_categories_edit_spage());
 
 	connect(
 		m_income_categories_controller.get(),
@@ -262,12 +263,6 @@ void MainPageController::InitIncomeCategoriesController()
 		&IncomeCategoriesController::ClientError,
 		this,
 		&MainPageController::OnClientError);
-
-//	connect(
-//		m_income_categories_controller.get(),
-//		&IncomeCategoriesController::ChangeSubPage,
-//		this,
-//		&MainPageController::OnChangeSubPage);
 
 	connect(
 		m_income_categories_controller.get(),
@@ -283,10 +278,10 @@ void MainPageController::InitProductCategoriesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_categories_edit_spage(),
 			m_page.get_product_create_spage(),
 			m_page.get_product_edit_spage(),
-			m_page.get_product_quick_create_spage());
+			m_page.get_product_quick_create_spage(),
+			m_page.get_categories_edit_spage());
 
 	connect(
 		m_product_categories_controller.get(),

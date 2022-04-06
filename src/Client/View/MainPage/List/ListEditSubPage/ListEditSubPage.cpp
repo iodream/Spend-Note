@@ -48,6 +48,7 @@ void ListEditSubPage::Update(const List& list)
 
 void ListEditSubPage::FillStateBox(const std::vector<ListState> &states)
 {
+	m_ui->ListState->clear();
 	for(const auto& el : states)
 	{
 		m_ui->ListState->addItem(el.name, el.id);

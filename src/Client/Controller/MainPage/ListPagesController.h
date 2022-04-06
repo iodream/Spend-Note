@@ -56,8 +56,7 @@ private:
 	ProductQuickCreateSubPage& m_product_quick_create_page;
 
 	void FillBoxOfStates();
-	static bool already_added;
-	static bool category_already_added;
+
 	static int m_curr_products;
 
 signals:

@@ -116,6 +116,7 @@ void ListCreateSubPage::InsertItem(Item* item, int idx)
 }
 void ListCreateSubPage::FillStateBox(const std::vector<ListState> &states)
 {
+	m_ui->ListState->clear();
 	for(const auto& el : states)
 	{
 		m_ui->ListState->addItem(el.name, el.id);

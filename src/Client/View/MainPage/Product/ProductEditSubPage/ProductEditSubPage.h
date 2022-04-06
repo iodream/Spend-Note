@@ -32,6 +32,8 @@ public:
 signals:
 	void UpdateProduct();
 	void AddProductCategory(ProductCategory);
+	void UpdateCategories();
+
 
 public slots:
 	void OnNewCategoryPushed();

@@ -23,6 +23,7 @@ public:
 signals:
 	void UpdateIncome();
 	void AddIncomeCategory(IncomeCategory);
+	void UpdateCategories();
 
 public slots:
 	void OnEditIncome();

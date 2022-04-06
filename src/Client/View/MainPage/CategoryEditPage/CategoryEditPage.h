@@ -18,13 +18,13 @@ public:
 
 signals:
 	void AddIncomeCategory(IncomeCategory);
-	void UpdateIncomeCategory(IncomeCategory);
-	void RemoveIncomeCategory(IncomeCategoryId);
-	void AddProductCategory(ProductCategory&);
+	void AddProductCategory(ProductCategory);
+	void UpdateIncomeCategory(IncomeCategory&);
 	void UpdateProductCategory(ProductCategory&);
-	void RemoveProductCategory(ProductCategoryId&);
-	void ClientError(const std::string& desc);
+	void RemoveIncomeCategory(IncomeCategoryId);
+	void RemoveProductCategory(ProductCategoryId);
 
+	void ClientError(const std::string& desc);
 
 public slots:
 	void OnEditCategoryClicked();
@@ -35,4 +35,3 @@ public slots:
 private:
 	Ui::CategoryEditPage *ui;
 };
-

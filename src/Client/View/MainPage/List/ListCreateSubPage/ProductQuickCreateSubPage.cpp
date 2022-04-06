@@ -81,6 +81,7 @@ IdType ProductQuickCreateSubPage::GetCategoryId()
 
 void ProductQuickCreateSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)
 {
+	m_ui->Category->clear();
 	for(const auto& el : categories)
 	{
 		m_ui->Category->addItem(el.name, el.id);
@@ -127,4 +128,5 @@ void ProductQuickCreateSubPage::OnNewCategorySaved()
 	cat.name = m_ui->NewCategoryName->text();
 
 	emit AddProductCategory(cat);
+	emit UpdateCategories();
 }

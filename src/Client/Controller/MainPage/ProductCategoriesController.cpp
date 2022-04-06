@@ -12,30 +12,30 @@ ProductCategoriesController::ProductCategoriesController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	CategoryEditPage& category_edit_spage,
 	ProductCreateSubPage& product_create_page,
 	ProductEditSubPage& product_edit_page,
-	ProductQuickCreateSubPage& product_quick_create_page):
+	ProductQuickCreateSubPage& product_quick_create_page,
+	CategoryEditPage& category_edit_page):
 	m_http_client(http_client),
 	m_hostname(hostname),
 	m_user_id(user_id),
-	m_category_edit_spage(category_edit_spage),
+	m_category_edit_page(category_edit_page),
 	m_product_create_page(product_create_page),
 	m_product_edit_page(product_edit_page),
 	m_product_quick_create_page(product_quick_create_page)
 {
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::AddProductCategory,
 		this,
 		&ProductCategoriesController::OnAddProductCategory);
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::RemoveProductCategory,
 		this,
 		&ProductCategoriesController::OnDeleteProductCategory);
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::UpdateProductCategory,
 		this,
 		&ProductCategoriesController::OnUpdateProductCategory);
@@ -76,7 +76,7 @@ bool ProductCategoriesController::UpdateProductCategoryPage()
 	}
 
 	auto categories = model.ParseResponse(response);
-	m_category_edit_spage.Update(categories);
+	m_category_edit_page.Update(categories);
 
 	return true;
 }
@@ -140,12 +140,6 @@ void ProductCategoriesController::OnUpdateProductCategory(ProductCategory& categ
 	UpdateProductCategoryModel model{m_hostname};
 
 	auto request  = model.FormRequest(category);
-
-//	if(!model.CheckFields(category))
-//	{
-//		emit ClientError("Fields can't be empty!");
-//		return;
-//	}
 
 	Net::Response response;
 	try{

@@ -82,15 +82,17 @@ void CategoryEditPage::Update(const std::vector<IncomeCategory>& categories)
 	}
 }
 
-void CategoryEditPage::OnEditCategoryClicked()
+void CategoryEditPage::OnEditCategoryClicked() // shows fields for editing
 {
+	ui->NewCategoryEdit->clear();
 	ui->NewCategoryEdit->setVisible(true);
 	ui->NewCategoryEditButton->setVisible(true);
 	ui->NewCategoryAddButton->setVisible(false);
 }
 
-void CategoryEditPage::OnAddCategoryClicked()
+void CategoryEditPage::OnAddCategoryClicked() // shows fields for adding
 {
+	ui->NewCategoryEdit->clear();
 	ui->NewCategoryEdit->setVisible(true);
 	ui->NewCategoryEditButton->setVisible(false);
 	ui->NewCategoryAddButton->setVisible(true);
@@ -100,12 +102,22 @@ void CategoryEditPage::OnRemoveClicked()
 {
 	if(ui->tabWidget->currentIndex() == 0)
 	{
+		if(ui->Incomes->currentRow() == -1) // if user didn't select a category
+		{
+			emit ClientError("Please Select an item!");
+			return;
+		}
 		int id = qvariant_cast<int>(ui->Incomes->currentItem()->data(Qt::UserRole));
 		IncomeCategoryId id_removed {id};
 		emit RemoveIncomeCategory(id_removed);
 	}
 	else
 	{
+		if(ui->Products->currentRow() == -1)
+		{
+			emit ClientError("Please Select an item!");
+			return;
+		}
 		int id = qvariant_cast<int>(ui->Products->currentItem()->data(Qt::UserRole));
 		ProductCategoryId id_removed {id};
 		emit RemoveProductCategory(id_removed);
@@ -116,21 +128,21 @@ void CategoryEditPage::OnCategoryEditConfirmClicked()
 	ui->NewCategoryEdit->setVisible(false);
 	ui->NewCategoryEditButton->setVisible(false);
 
-	if(ui->tabWidget->currentIndex() == 0)
+	if(ui->tabWidget->currentIndex() == 0) // see if we're on incomes tab
 		{
-			IncomeCategory cat;
-			auto Item = ui->Incomes->currentItem();
-			cat.id = qvariant_cast<int>(Item->data(Qt::UserRole));
-			if(ui->Incomes->currentRow() == -1)
+			if(ui->Incomes->currentRow() == -1) // if user didn't select a category
 			{
 				emit ClientError("Please Select an item!");
 				return;
 			}
+			IncomeCategory cat;
+			auto Item = ui->Incomes->currentItem();
+			cat.id = qvariant_cast<int>(Item->data(Qt::UserRole));
 			cat.name = ui->NewCategoryEdit->text();
 
 			emit UpdateIncomeCategory(cat);
 		}
-	else
+	else // or on products tab
 	{
 		if(ui->Products->currentRow() == -1)
 		{

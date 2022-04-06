@@ -12,28 +12,28 @@ IncomeCategoriesController::IncomeCategoriesController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	CategoryEditPage& category_edit_spage,
 	IncomeCreateSubPage& income_create_page,
-	IncomeEditSubPage& income_edit_page):
+	IncomeEditSubPage& income_edit_page,
+	CategoryEditPage& category_edit_page):
 	m_http_client(http_client),
 	m_hostname(hostname),
 	m_user_id(user_id),
-	m_category_edit_spage(category_edit_spage),
+	m_category_edit_page(category_edit_page),
 	m_income_create_page(income_create_page),
 	m_income_edit_page(income_edit_page)
 {
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::AddIncomeCategory,
 		this,
 		&IncomeCategoriesController::OnAddIncomeCategory);
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::RemoveIncomeCategory,
 		this,
 		&IncomeCategoriesController::OnDeleteIncomeCategory);
 	connect(
-		&m_category_edit_spage,
+		&m_category_edit_page,
 		&CategoryEditPage::UpdateIncomeCategory,
 		this,
 		&IncomeCategoriesController::OnUpdateIncomeCategory);
@@ -47,6 +47,11 @@ IncomeCategoriesController::IncomeCategoriesController(
 		&IncomeEditSubPage::AddIncomeCategory,
 		this,
 		&IncomeCategoriesController::OnAddIncomeCategory);
+	connect(
+		&m_category_edit_page,
+		&CategoryEditPage::ClientError,
+		this,
+		&IncomeCategoriesController::OnClientError);
 }
 
 bool IncomeCategoriesController::UpdateIncomeCategoryPage()
@@ -69,12 +74,10 @@ bool IncomeCategoriesController::UpdateIncomeCategoryPage()
 	}
 
 	auto categories = model.ParseResponse(response);
-	m_category_edit_spage.Update(categories);
+	m_category_edit_page.Update(categories);
 
 	return true;
 }
-
-
 
 void IncomeCategoriesController::OnAddIncomeCategory(IncomeCategory category)
 {
@@ -128,12 +131,6 @@ void IncomeCategoriesController::OnUpdateIncomeCategory(IncomeCategory category)
 
 	auto request  = model.FormRequest(category);
 
-//	if(!model.CheckFields(category))
-//	{
-//		emit ClientError("Fields can't be empty!");
-//		return;
-//	}
-
 	Net::Response response;
 	try{
 		response = m_http_client.Request(request);
@@ -148,4 +145,9 @@ void IncomeCategoriesController::OnUpdateIncomeCategory(IncomeCategory category)
 		return;
 	}
 	UpdateIncomeCategoryPage();
+}
+
+void IncomeCategoriesController::OnClientError(const std::string& desc)
+{
+	emit ClientError(desc); //rethrow signal so that it reaches MainPageController
 }

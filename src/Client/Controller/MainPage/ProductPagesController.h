@@ -53,8 +53,6 @@ private:
 	ProductEditSubPage& m_edit_page;
 	ProductCreateSubPage& m_create_page;
 
-	static bool already_added;
-
 signals:
 	void ServerError(const int code, const std::string& desc);
 	void ClientError(const std::string& desc);
