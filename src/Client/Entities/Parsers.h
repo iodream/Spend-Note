@@ -5,6 +5,7 @@
 #include "Net/Tools/Parsers/Income/IncomeCategoryJSONParserBase.h"
 #include "Net/Tools/Parsers/Income/IncomeJSONParserBase.h"
 #include "Net/Tools/Parsers/Income/IncomeIdJSONParser.h"
+#include "Net/Tools/Parsers/Income/IncomeCategoryIdJSONParser.h"
 
 #include "Net/Tools/Parsers/List/ListJSONParserBase.h"
 #include "Net/Tools/Parsers/List/ListStateJSONParserBase.h"
@@ -16,9 +17,9 @@
 #include "Net/Tools/Parsers/Product/ProductCategoryIdJSONParser.h"
 
 #include "Net/Tools/Parsers/Statistics/BalanceJSONParser.h"
-#include "Net/Tools/Parsers/Statistics/ExpensePerCategoryJSONParser.h"
-#include "Net/Tools/Parsers/Statistics/ExpensePercentagePerCategoryJSONParser.h"
-#include "Net/Tools/Parsers/Statistics/ExpensePerDayJSONParserBase.h"
+#include "Net/Tools/Parsers/Statistics/StatisticPerCategoryJSONParser.h"
+#include "Net/Tools/Parsers/Statistics/StatisticPercentagePerCategoryJSONParser.h"
+#include "Net/Tools/Parsers/Statistics/StatisticPerDayJSONParserBase.h"
 
 #include "Net/Tools/Parsers/ArrayJSONParserBase.h"
 
@@ -49,11 +50,11 @@ using ProductsJSONParser =
 using ProductCategoriesJSONParser =
 	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;
 
-using ExpensePerDayJSONParser =
-	ExpensePerDayJSONParserBase<ExpensePerDay>;
-using ExpensesPerDayJSONParser =
-	ArrayJSONParserBase<ExpensePerDayJSONParser, ExpensePerDay>;
-using ExpensesPerCategoryJSONParser =
-	ArrayJSONParserBase<ExpensePerCategoryJSONParser, ExpensePerCategory>;
-using ExpensesPercentagePerCategoryJSONParser =
-	ArrayJSONParserBase<ExpensePercentagePerCategoryJSONParser, ExpensePercentagePerCategory>;
+using StatisticPerDayJSONParser =
+	StatisticPerDayJSONParserBase<StatisticPerDay>;
+using StatisticsPerDayJSONParser =
+	ArrayJSONParserBase<StatisticPerDayJSONParser, StatisticPerDay>;
+using StatisticsPerCategoryJSONParser =
+	ArrayJSONParserBase<StatisticPerCategoryJSONParser, StatisticPerCategory>;
+using StatisticsPercentagePerCategoryJSONParser =
+	ArrayJSONParserBase<StatisticPercentagePerCategoryJSONParser, StatisticPercentagePerCategory>;

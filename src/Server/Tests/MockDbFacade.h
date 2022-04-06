@@ -44,9 +44,13 @@ public:
 
 	MOCK_METHOD(std::vector<db::Product>, GetDailyList, (db::IdType), (override));
 
-	MOCK_METHOD(std::vector<db::ExpensePerCategory>, ExpensesPerCategory, (db::IdType), (override));
-	MOCK_METHOD(std::vector<db::ExpensePercentagePerCategory>, ExpensesPercentagePerCategory, (db::IdType), (override));
-	MOCK_METHOD(std::vector<db::ExpensePerDay>, ExpensesDynamics, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::ExpensePerCategory>, ExpensesPerCategory, (db::IdType, db::Period), (override));
+	MOCK_METHOD(std::vector<db::ExpensePercentagePerCategory>, ExpensesPercentagePerCategory, (db::IdType, db::Period), (override));
+	MOCK_METHOD(std::vector<db::ExpensePerDay>, ExpensesDynamics, (db::IdType, db::Period), (override));
+
+	MOCK_METHOD(std::vector<db::IncomePerCategory>, IncomesPerCategory, (db::IdType, db::Period), (override));
+	MOCK_METHOD(std::vector<db::IncomePercentagePerCategory>, IncomesPercentagePerCategory, (db::IdType, db::Period), (override));
+	MOCK_METHOD(std::vector<db::IncomePerDay>, IncomesDynamics, (db::IdType, db::Period), (override));
 
 	MOCK_METHOD(std::vector<db::IncomePerCategory>, IncomesPerCategory, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::IncomePercentagePerCategory>, IncomesPercentagePerCategory, (db::IdType), (override));

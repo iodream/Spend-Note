@@ -28,6 +28,8 @@ signals:
 public slots:
 	void OnEditIncome();
 	void FillCategoryBox(const std::vector<IncomeCategory>& income);
+	void OnNewCategoryPushed();
+	void OnNewCategorySaved();
 
 	IncomeCategory get_category();
 

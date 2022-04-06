@@ -19,6 +19,20 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 
 	//m_ui->BuyUntil->setDate(QDate::currentDate());
 	SetMinimumDate(QDate::currentDate());
+
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+
+	connect(
+		m_ui->NewCategoryButton,
+		&QPushButton::released,
+		this,
+		&ProductEditSubPage::OnNewCategoryPushed);
+	connect(
+		m_ui->NewCategorySaveButton,
+		&QPushButton::released,
+		this,
+		&ProductEditSubPage::OnNewCategorySaved);
 }
 
 ProductEditSubPage::~ProductEditSubPage()
@@ -73,4 +87,18 @@ void ProductEditSubPage::SetRangeOfSpinBox()
 void ProductEditSubPage::SetMinimumDate(const QDate& date)
 {
 	m_ui->BuyUntil->setMinimumDate(date);
+}
+
+void ProductEditSubPage::OnNewCategoryPushed()
+{
+	m_ui->NewCategoryName->setVisible(true);
+	m_ui->NewCategorySaveButton->setVisible(true);
+	m_ui->NewCategoryButton->setDisabled(true);
+}
+
+void ProductEditSubPage::OnNewCategorySaved()
+{
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+	m_ui->NewCategoryButton->setDisabled(false);
 }

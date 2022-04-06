@@ -18,9 +18,9 @@ QJsonObject FormJSON()
 	return object;
 }
 
-ExpensePerDay FormExpense()
+StatisticPerDay FormExpense()
 {
-	ExpensePerDay expense;
+	StatisticPerDay expense;
 
 	expense.amount = 1;
 	expense.day = "Monday";
@@ -33,7 +33,7 @@ ExpensePerDay FormExpense()
 TEST(ExpensePerDayJSONFormatter, FORMAT)
 {
 	auto object = FormJSON();
-	ExpensePerDayJSONFormatter m_formatter{};
+	StatisticPerDayJSONFormatter m_formatter{};
 	auto expense = m_formatter.Format(FormExpense());
 
 	EXPECT_EQ(object["amount"], expense["amount"]);

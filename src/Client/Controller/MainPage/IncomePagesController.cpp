@@ -4,7 +4,7 @@
 #include "Models/Income/AddIncomeModel.h"
 #include "Models/Income/RemoveIncomeModel.h"
 #include "Models/Income/UpdateIncomeModel.h"
-#include "Models/Income/GetIncomeCategoriesModel.h"
+#include "Models/Categories/Income/GetIncomeCategoriesModel.h"
 
 
 #include "Net/Constants.h"
@@ -100,7 +100,7 @@ bool IncomePagesController::UpdateIncomesPage()
 bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 {
 	if (!data.canConvert<Income>()) {
-		return false;
+		return true; // skip update for this case if PageData is invalid
 	}
 
 	auto income = qvariant_cast<Income>(data);
@@ -140,6 +140,11 @@ void IncomePagesController::OnCreateIncome(Income& income)
 	AddIncomeModel model{m_hostname};
 	income.id = m_user_id;
 
+	QDateTime date(QDate::fromString(income.expiration_time), QTime(0,0));
+	income.expiration_time = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	date = QDateTime(QDate::fromString(income.add_time), QTime(0,0));
+	income.add_time = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+
 	if(!model.CheckFields(income))
 	{
 		emit ClientError("Fields can't be empty!");
@@ -176,8 +181,8 @@ bool IncomePagesController::already_added = true;
 
 void IncomePagesController::UpdateCategoryBoxes()
 {
-		GetIncomeCategoriesModel model(m_hostname);
-		auto request = model.FormRequest();
+		GetIncomeCategoriesModel model{m_hostname};
+		auto request = model.FormRequest(m_user_id);
 
 		try
 		{

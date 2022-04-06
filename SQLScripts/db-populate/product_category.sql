@@ -9,7 +9,7 @@ VALUES
 	('transport', 1),
 	('tech', 1),
 	('other', 1),
-	
+
 	('food', 2),
 	('health', 2),
 	('entertainment', 2),
@@ -18,7 +18,7 @@ VALUES
 	('transport', 2),
 	('tech', 2),
 	('other', 2),
-	
+
 	('food', 3),
 	('health', 3),
 	('entertainment', 3),
@@ -36,7 +36,7 @@ VALUES
 	('transport', 4),
 	('tech', 4),
 	('other', 4),
-	
+
 	('food', 5),
 	('health', 5),
 	('entertainment', 5),
@@ -45,7 +45,7 @@ VALUES
 	('transport', 5),
 	('tech', 5),
 	('other', 5),
-	
+
 	('food', 6),
 	('health', 6),
 	('entertainment', 6),

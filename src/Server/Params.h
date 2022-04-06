@@ -16,6 +16,10 @@ public:
 	const static std::string PRODUCT_ID;
 	const static std::string PRODUCT_CATEGORY_ID;
 	const static std::string INCOME_ID;
+	const static std::string INCOME_CATEGORY_ID;
+	const static std::string STATISTICS_TYPE;
+	const static std::string STATISTICS_PERIOD;
+	const static std::string STATISTICS_FORMAT;
 
 private:
 	std::unordered_map<std::string, Value> m_data;

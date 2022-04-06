@@ -5,6 +5,7 @@
 #include "Net/Entities/Income/IncomeBase.h"
 #include "Net/Entities/Income/IncomeId.h"
 #include "Net/Entities/Income/IncomeCategoryBase.h"
+#include "Net/Entities/Income/IncomeCategoryId.h"
 
 #include "Net/Entities/List/ListBase.h"
 #include "Net/Entities/List/ListId.h"
@@ -16,9 +17,9 @@
 #include "Net/Entities/Product/ProductCategoryId.h"
 
 #include "Net/Entities/Statistics/Balance.h"
-#include "Net/Entities/Statistics/ExpensePerCategory.h"
-#include "Net/Entities/Statistics/ExpensePercentagePerCategory.h"
-#include "Net/Entities/Statistics/ExpensePerDayBase.h"
+#include "Net/Entities/Statistics/StatisticPerCategory.h"
+#include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
+#include "Net/Entities/Statistics/StatisticPerDayBase.h"
 
 using String = QString;
 
@@ -31,4 +32,4 @@ using ListState = ListStateBase<String>;
 using Product = ProductBase<ProductCategoryBase, String>;
 using ProductCategory = ProductCategoryBase<String>;
 
-using ExpensePerDay = ExpensePerDayBase<String>;
+using StatisticPerDay = StatisticPerDayBase<String>;

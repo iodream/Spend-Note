@@ -1,10 +1,23 @@
 #pragma once
 
-#include "../libdal/Facade/IDbFacade.h"
-#include "../Entities/Entities.h"
+#include <optional>
+#include "../libdal/Types.h"
 
-ExpensePerCategory ToNetExpensePerCategory(const db::ExpensePerCategory& db_expense);
+enum class Type
+{
+	Incomes,
+	Expenses
+};
 
-ExpensePercentagePerCategory ToNetExpensePercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense);
+enum class Format
+{
+	PerCategory,
+	PercentagePerCategory,
+	PerDay
+};
 
-ExpensePerDay ToNetExpensePerDay(const db::ExpensePerDay& db_expense);
+std::optional<db::Period> ToPeriod(const std::string& period);
+
+std::optional<Type> ToType(const std::string& type);
+
+std::optional<Format> ToFormat(const std::string& format);
