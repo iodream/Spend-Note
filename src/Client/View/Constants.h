@@ -34,3 +34,6 @@ enum class MainSubPages
 
 const QString STYLESHEET_BACKGROUND_COLOR = "background-color:";
 const QString DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
+
+const std::string STATISTIC_EXPENSES = "expenses";
+const std::string STATISTIC_INCOMES = "incomes";

@@ -6,6 +6,7 @@
 #include <QStackedWidget>
 
 #include "Entities/Entities.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class StatisticSubPage;
@@ -41,7 +42,8 @@ public:
 	void ShowEmptyMessage();
 	void HideEmptyMessage();
 
-	QString GetStatisticRange();
+	std::string GetCurrentRange();
+	std::string GetCurrentTabName();
 
 	QChart* InitChart(QLayout* layout);
 
@@ -50,9 +52,7 @@ private slots:
 	void OnBackButtonClicked();
 	void OnRefreshButtonClicked();
 
-	//void OnRefreshButtonClicked();
-
-
+	void OnTabChanged(int index);
 private:
 	Ui::StatisticSubPage *m_ui;
 	QChart* m_pie_percent_chart;

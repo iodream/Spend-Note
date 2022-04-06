@@ -16,7 +16,7 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 	m_pie_percent_chart = InitChart(m_ui->PercentChart);
 	m_pie_amount_chart = InitChart(m_ui->AmountChart);
 	m_bar_balance_chart = InitChart(m_ui->BalanceChart);
-	m_pie_income_amount_chart = InitChart(m_ui->PercentIncomeChart);
+	m_pie_income_persent_chart = InitChart(m_ui->PercentIncomeChart);
 	m_pie_income_amount_chart = InitChart(m_ui->AmountIncomeChart);
 	m_bar_income_chart = InitChart(m_ui->BarIncomeChart);
 
@@ -44,6 +44,13 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&StatisticSubPage::OnRefreshButtonClicked
+	);
+
+	connect(
+		m_ui->tabWidget,
+		&QTabWidget::currentChanged,
+		this,
+		&StatisticSubPage::OnTabChanged
 	);
 
 
@@ -139,7 +146,6 @@ void StatisticSubPage::UpdateBarBalanceChart(const std::vector<StatisticPerDay>&
 void StatisticSubPage::UpdateIncomePiePercentChart(
 		const std::vector<StatisticPercentagePerCategory>& stats,
 		const std::vector<IncomeCategory>& category)
-
 {
 	if (stats.empty())
 	{
@@ -347,7 +353,7 @@ void StatisticSubPage::OnBackButtonClicked()
 	}
 	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		ChangePageToPrevious(*m_ui->stackedWidget);
+		ChangePageToPrevious(*m_ui->stackedWidget_2);
 	}
 }
 
@@ -494,14 +500,26 @@ void StatisticSubPage::HideEmptyMessage()
 }
 
 
-QString StatisticSubPage::GetStatisticRange()
+std::string StatisticSubPage::GetCurrentRange()
 {
-	return qvariant_cast<QString>(m_ui->periods->currentData());
+	return m_ui->periods->currentText().toStdString();
 }
 
+std::string StatisticSubPage::GetCurrentTabName()
+{
+	if(!m_ui->tabWidget->currentIndex()) // if indedx == 0
+		return STATISTIC_EXPENSES;
+	return STATISTIC_INCOMES;
+}
 
 void StatisticSubPage::OnRefreshButtonClicked()
 {
 	UpdateCurrentChart();
+}
+
+void StatisticSubPage::OnTabChanged(int index)
+{
+	if(index)
+		emit OnRefreshButtonClicked();
 }
 
