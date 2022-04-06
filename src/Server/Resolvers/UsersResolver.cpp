@@ -98,6 +98,8 @@ ICommandHandler* UsersResolver::Resolve(
 			return new AddIncomeCategoryHandler();
 		else if (method == Net::HTTP_METHOD_GET)
 			return new GetIncomeCategoriesHandler();
+		return new MethodNotAllowedHandler();
+	}
 	else if (segment == PRODUCT_CATEGORIES) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetProductCategoriesHandler();
@@ -113,7 +115,6 @@ ICommandHandler* UsersResolver::Resolve(
 			return new GetStatisticsHandler();
 	}
 	return nullptr;
-}
 }
 
 ICommandHandler* UsersResolver::ResolveLastSegment(

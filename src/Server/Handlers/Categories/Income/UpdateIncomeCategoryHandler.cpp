@@ -13,7 +13,7 @@ Net::Response UpdateIncomeCategoryHandler::AuthHandle(const Net::Request& reques
 
 	auto category = m_parser.Parse(request.json_payload.object());
 
-	if (!m_facade->CanUserEditProductCategory(request.uid, category_id))
+	if (!m_facade->CanUserEditIncomeCategory(request.uid, category_id))
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
 			"Update product category with id \"" + std::to_string(category_id) + "\" is forbidden");
