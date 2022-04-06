@@ -17,7 +17,7 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 	m_ui->BuyUntil->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
 
-	m_ui->BuyUntil->setDate(QDate::currentDate());
+	//m_ui->BuyUntil->setDate(QDate::currentDate());
 	SetMinimumDate(QDate::currentDate());
 
 	m_ui->NewCategoryName->setVisible(false);
@@ -62,7 +62,7 @@ void ProductEditSubPage::Update()
 	m_ui->Name->setText(m_product.name);
 	m_ui->Price->setValue(m_product.price);
 	m_ui->Amount->setValue(m_product.amount);
-	m_ui->BuyUntil->setDateTime(QDateTime::fromString(m_product.buy_until_date, "yyyy-mm-dd HH:mm:ss.zzz"));
+	m_ui->BuyUntil->setDateTime(QDateTime::fromString(m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
 	m_ui->Priority->setValue(m_product.priority);
 	m_ui->Category->setPlaceholderText(m_product.category.name);
 	m_ui->Category->setCurrentIndex(m_ui->Category->findData(m_product.category.id));

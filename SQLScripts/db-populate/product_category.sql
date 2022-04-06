@@ -1,7 +1,7 @@
 INSERT INTO public.productcategory
-    ("name", userId)
+	("name", userId)
 VALUES
-    ('food', 1),
+	('food', 1),
 	('health', 1),
 	('entertainment', 1),
 	('clothes', 1),
@@ -9,6 +9,7 @@ VALUES
 	('transport', 1),
 	('tech', 1),
 	('other', 1),
+
 	('food', 2),
 	('health', 2),
 	('entertainment', 2),
@@ -17,6 +18,7 @@ VALUES
 	('transport', 2),
 	('tech', 2),
 	('other', 2),
+
 	('food', 3),
 	('health', 3),
 	('entertainment', 3),
@@ -25,7 +27,8 @@ VALUES
 	('transport', 3),
 	('tech', 3),
 	('other', 3),
-	('food', 1),
+	
+	('food', 4),
 	('health', 4),
 	('entertainment', 4),
 	('clothes', 4),
@@ -33,6 +36,7 @@ VALUES
 	('transport', 4),
 	('tech', 4),
 	('other', 4),
+
 	('food', 5),
 	('health', 5),
 	('entertainment', 5),
@@ -41,6 +45,7 @@ VALUES
 	('transport', 5),
 	('tech', 5),
 	('other', 5),
+
 	('food', 6),
 	('health', 6),
 	('entertainment', 6),

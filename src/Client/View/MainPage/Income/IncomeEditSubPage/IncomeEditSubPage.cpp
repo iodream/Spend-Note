@@ -1,5 +1,6 @@
 #include "IncomeEditSubPage.h"
 #include "ui_IncomeEditSubPage.h"
+
 IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::IncomeEditSubPage)
@@ -8,10 +9,10 @@ IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 
 	ui->ExpirationDateEdit->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
-	ui->ExpirationDateEdit->setDate(QDate::currentDate());
 
 	ui->NewCategoryName->setVisible(false);
 	ui->NewCategorySaveButton->setVisible(false);
+
 	connect(
 		ui->SubmitButton,
 		&QPushButton::clicked,
@@ -63,6 +64,10 @@ void IncomeEditSubPage::Update(const Income& income)
 	ui->NameLineEdit->setText(income.name);
 	ui->Amount->setValue(income.amount);
 	ui->Category->setCurrentText(income.category.name);
+
+	QDateTime date = QDateTime::fromString(
+		income.expiration_time, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	ui->ExpirationDateEdit->setDate(date.date());
 }
 
 IncomeEditSubPage::~IncomeEditSubPage()
