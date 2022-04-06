@@ -496,7 +496,7 @@ void StatisticSubPage::HideEmptyMessage()
 
 QString StatisticSubPage::GetStatisticRange()
 {
-	return qvariant_cast<QString>(m_ui->comboBox->currentData());
+	return qvariant_cast<QString>(m_ui->periods->currentData());
 }
 
 
