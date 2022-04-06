@@ -10,6 +10,8 @@
 #include "../Handlers/Statistics/GetExpensesPerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPercentagePerCategoryHandler.h"
 #include "../Handlers/Statistics/GetExpensesPerDayHandler.h"
+#include "../Handlers/Categories/Income/AddIncomeCategoryHandler.h"
+#include "../Handlers/Categories/Income/GetIncomeCategoriesHandler.h"
 #include "../Handlers/Categories/Product/GetProductCategoriesHandler.h"
 #include "../Handlers/Categories/Product/AddProductCategoryHandler.h"
 #include "../Handlers/Statistics/GetStatisticsHandler.h"
@@ -27,6 +29,7 @@ const std::string DAILY_LIST = "/daily-list";
 const std::string EXPENSES_PER_CATEGORY = "/expenses-per-category";
 const std::string EXPENSES_PERCENTAGE_PER_CATEGORY = "/expenses-percentage-per-category";
 const std::string EXPENSES_PER_DAY = "/expenses-per-day";
+const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
 const std::string STATISTICS = "/statistics";
 }
@@ -88,6 +91,13 @@ ICommandHandler* UsersResolver::Resolve(
 	else if (segment == EXPENSES_PER_DAY) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetExpensesPerDayHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == INCOME_CATEGORIES) {
+		if (method == Net::HTTP_METHOD_POST)
+			return new AddIncomeCategoryHandler();
+		else if (method == Net::HTTP_METHOD_GET)
+			return new GetIncomeCategoriesHandler();
 		return new MethodNotAllowedHandler();
 	}
 	else if (segment == PRODUCT_CATEGORIES) {
