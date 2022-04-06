@@ -16,6 +16,14 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 	m_pie_percent_chart = InitChart(m_ui->PercentChart);
 	m_pie_amount_chart = InitChart(m_ui->AmountChart);
 	m_bar_balance_chart = InitChart(m_ui->BalanceChart);
+	m_pie_income_amount_chart = InitChart(m_ui->PercentIncomeChart);
+	m_pie_income_amount_chart = InitChart(m_ui->AmountIncomeChart);
+	m_bar_income_chart = InitChart(m_ui->BarIncomeChart);
+
+	m_ui->tabWidget->setTabText(0, "Outcomes");
+	m_ui->tabWidget->setTabText(1, "Incomes");
+
+	m_ui->tabWidget->setCurrentIndex(0);
 
 	connect(
 		m_ui->BackButton,
@@ -30,6 +38,15 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 		this,
 		&StatisticSubPage::OnForwardButtonClicked
 	);
+
+	connect(
+		m_ui->RefreshButton,
+		&QPushButton::clicked,
+		this,
+		&StatisticSubPage::OnRefreshButtonClicked
+	);
+
+
 }
 
 StatisticSubPage::~StatisticSubPage()
@@ -37,7 +54,7 @@ StatisticSubPage::~StatisticSubPage()
 	delete m_ui;
 }
 
-QString StatisticSubPage::GetCategoryById(IdType id, std::vector<ProductCategory> category)
+QString StatisticSubPage::GetProductCategoryById(IdType id, const std::vector<ProductCategory>& category)
 {
 	for (const auto& el : category)
 	{
@@ -46,7 +63,7 @@ QString StatisticSubPage::GetCategoryById(IdType id, std::vector<ProductCategory
 	return "Unknown category";
 }
 
-QStringList StatisticSubPage::GetCategoryNames(std::vector<ProductCategory> category)
+QStringList StatisticSubPage::GetProductCategoryNames(const std::vector<ProductCategory>& category)
 {
 	QStringList list;
 	for (const auto& el : category)
@@ -56,51 +73,47 @@ QStringList StatisticSubPage::GetCategoryNames(std::vector<ProductCategory> cate
 	return list;
 }
 
+QString StatisticSubPage::GetIncomeCategoryById(IdType id, const std::vector<IncomeCategory>& category)
+{
+	for (const auto& el : category)
+	{
+		if(el.id == id) return el.name;
+	}
+	return "Unknown category";
+}
+
+QStringList StatisticSubPage::GetIncomeCategoryNames(const std::vector<IncomeCategory>& category)
+{
+	QStringList list;
+	for (const auto& el : category)
+	{
+		list.push_back(el.name);
+	}
+	return list;
+}
+
+
 void StatisticSubPage::UpdateCurrentChart()
 {
-	ChartChanged(m_ui->stackedWidget->currentIndex());
-}
-
-
-void StatisticSubPage::UpdatePieAmountChart(
-		std::vector<StatisticPerCategory> stats,
-		std::vector<ProductCategory> category)
-{
-	if (stats.empty())
+	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		m_ui->NotEnoughData2->show();
-		m_pie_amount_chart->hide();
+		ChartChanged(m_ui->stackedWidget->currentIndex());
 	}
-	else
+	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		m_ui->NotEnoughData2->hide();
-		m_pie_amount_chart->show();
-
-		QPieSeries* series = new QPieSeries();
-
-		for(const auto& el : stats)
-		{
-			QString lable = GetCategoryById(el.category_id, category) + " " + QString::number(el.amount);
-			series->append(lable, el.amount);
-		}
-		series->setLabelsVisible();
-
-		m_pie_amount_chart->removeAllSeries();
-		m_pie_amount_chart->addSeries(series);
+		ChartChanged(m_ui->stackedWidget_2->currentIndex());
 	}
 }
 
-void StatisticSubPage::UpdateBarBalanceChart(std::vector<StatisticPerDay> stats)
+void StatisticSubPage::UpdateBarBalanceChart(const std::vector<StatisticPerDay>& stats)
 {
 	if (stats.empty())
 	{
-		m_ui->NotEnoughData3->show();
-		m_bar_balance_chart->hide();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		m_ui->NotEnoughData3->hide();
-		m_bar_balance_chart->show();
+		HideEmptyMessage();
 
 		QBarSet* set = new QBarSet(nullptr);
 		QBarSeries* series = new QBarSeries();
@@ -123,29 +136,174 @@ void StatisticSubPage::UpdateBarBalanceChart(std::vector<StatisticPerDay> stats)
 	}
 }
 
-void StatisticSubPage::UpdatePiePercentChart(
-		std::vector<StatisticPercentagePerCategory> stats,
-		std::vector<ProductCategory> category)
+void StatisticSubPage::UpdateIncomePiePercentChart(
+		const std::vector<StatisticPercentagePerCategory>& stats,
+		const std::vector<IncomeCategory>& category)
+
 {
 	if (stats.empty())
 	{
-		m_ui->NotEnoughData1->show();
-		m_pie_percent_chart->hide();
+		ShowEmptyMessage();
 	}
 	else
 	{
-		m_ui->NotEnoughData1->hide();
-		m_pie_percent_chart->show();
+		HideEmptyMessage();
 
 		QPieSeries* series = new QPieSeries();
 
 		for(const auto& el : stats)
 		{
-			QString label = GetCategoryById(el.category_id, category) + " " +QString::number(el.percentage) + "%";
+			QString label = GetIncomeCategoryById(el.category_id, category) + " " + QString::number(el.percentage) + "%";
 			series->append(label, el.percentage);
 		}
 
 		series->setLabelsVisible();
+		series->setHoleSize(0.35);
+
+		m_pie_income_persent_chart->removeAllSeries();
+		m_pie_income_persent_chart->addSeries(series);
+	}
+}
+
+void StatisticSubPage::UpdateIncomePieAmountChart(
+		const std::vector<StatisticPerCategory>& stats,
+		const std::vector<IncomeCategory>& category)
+{
+	if (stats.empty())
+	{
+		ShowEmptyMessage();
+	}
+	else
+	{
+		HideEmptyMessage();
+
+		QPieSeries* series = new QPieSeries();
+
+		for(const auto& el : stats)
+		{
+			QString lable = GetIncomeCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
+			series->append(lable, el.amount);
+		}
+
+		series->setLabelsVisible();
+		series->setHoleSize(0.35);
+
+		m_pie_income_amount_chart->removeAllSeries();
+		m_pie_income_amount_chart->addSeries(series);
+	}
+}
+
+void StatisticSubPage::UpdateBarIncomeChart(const std::vector<StatisticPerDay>& stats)
+{
+	if (stats.empty())
+	{
+		ShowEmptyMessage();
+	}
+	else
+	{
+		HideEmptyMessage();
+
+		QBarSet* set = new QBarSet(nullptr);
+		QBarSeries* series = new QBarSeries();
+		QBarCategoryAxis* axis = new QBarCategoryAxis();
+		QStringList list;
+
+		for(const auto& el : stats)
+		{
+			*set << el.amount;
+			list << el.day;
+		}
+
+		axis->append(list);
+		series->append(set);
+		series->setLabelsVisible();
+		m_bar_income_chart->createDefaultAxes();
+		m_bar_income_chart->setAxisX(axis, series);
+		m_bar_income_chart->removeAllSeries();
+		m_bar_income_chart->addSeries(series);
+	}
+}
+
+void StatisticSubPage::ChangePageToNext(QStackedWidget& widget)
+{
+	int current_index = widget.currentIndex();
+	if (current_index == widget.count() - 1)
+	{
+		current_index = 0;
+	}
+	else
+	{
+		current_index++;
+	}
+	widget.setCurrentIndex(current_index);
+	ChartChanged(current_index);
+}
+
+void StatisticSubPage::ChangePageToPrevious(QStackedWidget& widget)
+{
+	int current_index = widget.currentIndex();
+	if (current_index == 0)
+	{
+		current_index = widget.count() - 1;
+	}
+	else
+	{
+		current_index--;
+	}
+	widget.setCurrentIndex(current_index);
+	ChartChanged(current_index);
+}
+
+void StatisticSubPage::UpdateProductPieAmountChart(
+	const std::vector<StatisticPerCategory>& stats,
+	const std::vector<ProductCategory>& category)
+{
+  if (stats.empty())
+  {
+	ShowEmptyMessage();
+  }
+  else
+  {
+	HideEmptyMessage();
+
+	QPieSeries* series = new QPieSeries();
+
+	for(const auto& el : stats)
+	{
+	  QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
+	  series->append(label, el.amount);
+	}
+
+	series->setLabelsVisible();
+	series->setHoleSize(0.35);
+
+	m_pie_amount_chart->removeAllSeries();
+	m_pie_amount_chart->addSeries(series);
+  }
+}
+
+void StatisticSubPage::UpdateProductPiePercentChart(
+		const std::vector<StatisticPercentagePerCategory>& stats,
+		const std::vector<ProductCategory>& category)
+{
+	if (stats.empty())
+	{
+		ShowEmptyMessage();
+	}
+	else
+	{
+		HideEmptyMessage();
+
+		QPieSeries* series = new QPieSeries();
+
+		for(const auto& el : stats)
+		{
+			QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.percentage) + "%";
+			series->append(label, el.percentage);
+		}
+
+		series->setLabelsVisible();
+		series->setHoleSize(0.35);
 
 		m_pie_percent_chart->removeAllSeries();
 		m_pie_percent_chart->addSeries(series);
@@ -171,47 +329,179 @@ QChart* StatisticSubPage::InitChart(QLayout* layout)
 
 void StatisticSubPage::OnForwardButtonClicked()
 {
-	int current_index = m_ui->stackedWidget->currentIndex();
-	if (current_index == m_ui->stackedWidget->count() - 1)
+	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		current_index = 0;
+		ChangePageToNext(*m_ui->stackedWidget);
 	}
-	else
+	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		current_index++;
+		ChangePageToNext(*m_ui->stackedWidget_2);
 	}
-	m_ui->stackedWidget->setCurrentIndex(current_index);
-	ChartChanged(current_index);
 }
 
 void StatisticSubPage::OnBackButtonClicked()
 {
-	int current_index = m_ui->stackedWidget->currentIndex();
-	if (current_index == 0)
+	if(m_ui->tabWidget->currentIndex() == 0)
 	{
-		current_index = m_ui->stackedWidget->count() - 1;
+		ChangePageToPrevious(*m_ui->stackedWidget);
 	}
-	else
+	else if(m_ui->tabWidget->currentIndex() == 1)
 	{
-		current_index--;
+		ChangePageToPrevious(*m_ui->stackedWidget);
 	}
-	m_ui->stackedWidget->setCurrentIndex(current_index);
-	ChartChanged(current_index);
 }
 
 void StatisticSubPage::ChartChanged(int index)
 {
-	if (index == 0)
+	switch (m_ui->tabWidget->currentIndex())
 	{
-		emit PercentChartSelected();
-	}
-	else if (index == 1)
+	case 0:
 	{
-		emit AmountChartSelected();
+		if (index == 0)
+		{
+			emit PercentProductChartSelected();
+		}
+		else if (index == 1)
+		{
+			emit AmountProductChartSelected();
+		}
+		else
+		{
+			emit BalanceChartSelected();
+		}
 	}
-	else
+	case 1:
 	{
-		emit BalanceChartSelected();
+		if (index == 0)
+		{
+			emit PercentIncomeChartSelected();
+		}
+		else if (index == 1)
+		{
+			emit AmountIncomeChartSelected();
+		}
+		else
+		{
+			emit IncomeChartSelected();
+		}
 	}
+	}
+
+}
+
+void StatisticSubPage::ShowEmptyMessage()
+{
+	if(m_ui->tabWidget->currentIndex() == 0)
+	{
+		switch (m_ui->stackedWidget->currentIndex())
+		{
+		case 0:
+		{
+			m_pie_percent_chart->hide();
+			m_ui->NotEnoughData1->show();
+			break;
+		}
+		case 1:
+		{
+			m_pie_amount_chart->hide();
+			m_ui->NotEnoughData2->show();
+			break;
+		}
+		case 2:
+		{
+			m_bar_balance_chart->hide();
+			m_ui->NotEnoughData3->show();
+			break;
+		}
+		}
+	}
+	else if(m_ui->tabWidget->currentIndex() == 1)
+	{
+		switch (m_ui->stackedWidget_2->currentIndex())
+		{
+		case 0:
+		{
+			m_pie_income_amount_chart->hide();
+			m_ui->NotEnoughData4->show();
+			break;
+		}
+		case 1:
+		{
+			m_pie_income_amount_chart->hide();
+			m_ui->NotEnoughData5->show();
+			break;
+		}
+		case 2:
+		{
+			m_bar_income_chart->hide();
+			m_ui->NotEnoughData6->show();
+			break;
+		}
+		}
+	}
+}
+
+void StatisticSubPage::HideEmptyMessage()
+{
+	if(m_ui->tabWidget->currentIndex() == 0)
+	{
+		switch (m_ui->stackedWidget->currentIndex())
+		{
+		case 0:
+		{
+			m_ui->NotEnoughData1->hide();
+			m_pie_percent_chart->show();
+			break;
+		}
+		case 1:
+		{
+			m_ui->NotEnoughData2->hide();
+			m_pie_amount_chart->show();
+			break;
+		}
+		case 2:
+		{
+			m_ui->NotEnoughData3->hide();
+			m_bar_balance_chart->show();
+			break;
+		}
+		}
+	}
+	else if(m_ui->tabWidget->currentIndex() == 1)
+	{
+		switch (m_ui->stackedWidget_2->currentIndex())
+		{
+		case 0:
+		{
+			m_ui->NotEnoughData4->hide();
+			m_pie_income_amount_chart->show();
+			break;
+		}
+		case 1:
+		{
+			m_ui->NotEnoughData5->hide();
+			m_pie_income_amount_chart->show();
+			break;
+		}
+		case 2:
+		{
+			m_ui->NotEnoughData6->hide();
+			m_bar_income_chart->show();
+			break;
+		}
+		}
+	}
+}
+
+
+QString StatisticSubPage::GetStatisticRange()
+{
+	return qvariant_cast<QString>(m_ui->periods->currentData());
+}
+
+
+void StatisticSubPage::OnRefreshButtonClicked()
+{
+	UpdateCurrentChart();
 }
 

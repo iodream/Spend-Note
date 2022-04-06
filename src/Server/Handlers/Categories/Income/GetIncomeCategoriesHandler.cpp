@@ -4,7 +4,7 @@
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
-#include "../Common.h"
+#include "../../Common.h"
 #include "Logger/ScopedLogger.h"
 #include "Utils.h"
 
@@ -17,7 +17,8 @@ Net::Response GetIncomeCategoriesHandler::AuthHandle(const Net::Request& request
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
 
-	auto db_income_categories = m_facade->GetAllIncomeCategories(request.uid);
+	auto user_id = std::get<long long>(m_params.Get(Params::USER_ID));
+	auto db_income_categories = m_facade->GetAllIncomeCategories(user_id);
 	std::vector<IncomeCategory> income_categories;
 
 	for (const db::IncomeCategory& db_income_category : db_income_categories) {

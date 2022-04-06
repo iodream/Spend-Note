@@ -1,15 +1,14 @@
-#include "IncomesResolver.h"
+#include "IncomeCategoriesResolver.h"
 
-#include "../Handlers/Income/UpdateIncomeHandler.h"
-#include "../Handlers/Income/RemoveIncomeHandler.h"
+#include "../Handlers/Categories/Income/RemoveIncomeCategoryHandler.h"
+#include "../Handlers/Categories/Income/UpdateIncomeCategoryHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
 #include "Logger/ScopedLogger.h"
 
-
-ICommandHandler* IncomesResolver::Resolve(
+ICommandHandler* IncomeCategoriesResolver::Resolve(
 	const std::string& path,
 	const std::string& method,
 	std::string::size_type pos,
@@ -24,21 +23,21 @@ ICommandHandler* IncomesResolver::Resolve(
 	auto segment = GetSegment(path, pos, next_pos);
 
 	if (std::isdigit(segment[1])) {
-		auto income_id = std::stoll(segment.substr(1));
-		params.Insert(Params::INCOME_ID, Params::Value{income_id});
+		auto income_category_id = std::stoll(segment.substr(1));
+		params.Insert(Params::INCOME_CATEGORY_ID, Params::Value{income_category_id});
 		return Resolve(path, method, next_pos, params);
 	}
 
 	return nullptr;
 }
 
-ICommandHandler* IncomesResolver::ResolveLastSegment(
+ICommandHandler* IncomeCategoriesResolver::ResolveLastSegment(
 	const std::string& method)
 {
 	SCOPED_LOGGER;
 	if (method == Net::HTTP_METHOD_PUT)
-		return new UpdateIncomeHandler();
+		return new UpdateIncomeCategoryHandler();
 	else if (method == Net::HTTP_METHOD_DELETE)
-		return new RemoveIncomeHandler();
+		return new RemoveIncomeCategoryHandler();
 	return new MethodNotAllowedHandler();
 }
