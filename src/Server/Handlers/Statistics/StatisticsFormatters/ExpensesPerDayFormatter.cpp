@@ -1,8 +1,7 @@
 #include "ExpensesPerDayFormatter.h"
 #include "Utils.h"
 
-ExpensesPerDayFormatter::ExpensesPerDayFormatter(db::IDbFacade::Ptr&& facade)
-	: IStatisticsFormatter(std::move(facade))
+ExpensesPerDayFormatter::ExpensesPerDayFormatter()
 {
 
 }

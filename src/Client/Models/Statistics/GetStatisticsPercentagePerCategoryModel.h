@@ -7,12 +7,12 @@
 #include "Net/Constants.h"
 #include "Net/Message.h"
 
-class GetExpensesPercentagePerCategoryModel
+class GetStatisticsPercentagePerCategoryModel
 {
 public:
-	GetExpensesPercentagePerCategoryModel(const std::string& hostname) : m_hostname{hostname} {}
+	GetStatisticsPercentagePerCategoryModel(const std::string& hostname) : m_hostname{hostname} {}
 
-	Net::Request FormRequest(IdType user_id);
+	Net::Request FormRequest(const IdType& user_id, const std::string& type, const std::string& period);
 	std::vector<StatisticPercentagePerCategory> ParseResponse(const Net::Response& response);
 
 private:

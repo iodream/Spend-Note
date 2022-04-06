@@ -6,7 +6,7 @@
 class ExpensesPerCategoryFormatter : public IStatisticsFormatter
 {
 public:
-	ExpensesPerCategoryFormatter(db::IDbFacade::Ptr&& facade);
+	ExpensesPerCategoryFormatter();
 	virtual ~ExpensesPerCategoryFormatter() {}
 	virtual QJsonArray StatisticsFormat(const db::IdType& user_id, const db::Period& period) override;
 private:

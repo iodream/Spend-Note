@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IStatisticsFormatter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/IStatisticsFormatter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ExpensesPerCategoryFormatter.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ExpensesPerCategoryFormatter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ExpensesPercentagePerCategoryFormatter.cpp

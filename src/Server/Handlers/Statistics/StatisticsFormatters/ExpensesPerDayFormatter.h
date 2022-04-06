@@ -6,7 +6,7 @@
 class ExpensesPerDayFormatter : public IStatisticsFormatter
 {
 public:
-	ExpensesPerDayFormatter(db::IDbFacade::Ptr&& facade);
+	ExpensesPerDayFormatter();
 	virtual ~ExpensesPerDayFormatter() {}
 	virtual QJsonArray StatisticsFormat(const db::IdType& user_id, const db::Period& period) override;
 private:

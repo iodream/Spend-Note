@@ -10,7 +10,7 @@ const std::string Params::PRODUCT_CATEGORY_ID = "product-category-id";
 const std::string Params::INCOME_ID = "income-id";
 const std::string Params::STATISTICS_TYPE = "statistics-type";
 const std::string Params::STATISTICS_PERIOD = "statistics-period";
-
+const std::string Params::STATISTICS_FORMAT = "statistics-format";
 
 void Params::Insert(const std::string& key, Value&& value)
 {

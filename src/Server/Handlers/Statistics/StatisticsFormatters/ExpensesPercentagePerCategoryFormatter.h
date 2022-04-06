@@ -6,7 +6,7 @@
 class ExpensesPercentagePerCategoryFormatter : public IStatisticsFormatter
 {
 public:
-	ExpensesPercentagePerCategoryFormatter(db::IDbFacade::Ptr&& facade);
+	ExpensesPercentagePerCategoryFormatter();
 	virtual ~ExpensesPercentagePerCategoryFormatter() {}
 	virtual QJsonArray StatisticsFormat(const db::IdType& user_id, const db::Period& period) override;
 private:

@@ -6,7 +6,7 @@
 class IncomesPercentagePerCategoryFormatter : public IStatisticsFormatter
 {
 public:
-	IncomesPercentagePerCategoryFormatter(db::IDbFacade::Ptr&& facade);
+	IncomesPercentagePerCategoryFormatter();
 	virtual ~IncomesPercentagePerCategoryFormatter() {}
 	virtual QJsonArray StatisticsFormat(const db::IdType& user_id, const db::Period& period) override;
 private:
