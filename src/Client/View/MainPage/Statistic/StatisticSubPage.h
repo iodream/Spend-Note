@@ -41,12 +41,17 @@ public:
 	void ShowEmptyMessage();
 	void HideEmptyMessage();
 
+	QString GetStatisticRange();
+
 	QChart* InitChart(QLayout* layout);
-	//QChart* InitChart(QFrame* frame);
 
 private slots:
 	void OnForwardButtonClicked();
 	void OnBackButtonClicked();
+	void OnRefreshButtonClicked();
+
+	//void OnRefreshButtonClicked();
+
 
 private:
 	Ui::StatisticSubPage *m_ui;

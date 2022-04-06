@@ -39,6 +39,13 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 		&StatisticSubPage::OnForwardButtonClicked
 	);
 
+	connect(
+		m_ui->RefreshButton,
+		&QPushButton::clicked,
+		this,
+		&StatisticSubPage::OnRefreshButtonClicked
+	);
+
 
 }
 
@@ -120,6 +127,7 @@ void StatisticSubPage::UpdateProductPieAmountChart(
 		}
 
 		series->setLabelsVisible();
+		series->setHoleSize(0.35);
 
 		m_pie_amount_chart->removeAllSeries();
 		m_pie_amount_chart->addSeries(series);
@@ -206,6 +214,7 @@ void StatisticSubPage::UpdateIncomePieAmountChart(
 		}
 
 		series->setLabelsVisible();
+		series->setHoleSize(0.35);
 
 		m_pie_income_amount_chart->removeAllSeries();
 		m_pie_income_amount_chart->addSeries(series);
@@ -482,5 +491,17 @@ void StatisticSubPage::HideEmptyMessage()
 		}
 		}
 	}
+}
+
+
+QString StatisticSubPage::GetStatisticRange()
+{
+	return qvariant_cast<QString>(m_ui->periods->currentData());
+}
+
+
+void StatisticSubPage::OnRefreshButtonClicked()
+{
+	UpdateCurrentChart();
 }
 
