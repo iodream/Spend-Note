@@ -1,6 +1,5 @@
 #include "CategoryEditPage.h"
 #include "ui_CategoryEditPage.h"
-#include <iostream>
 
 CategoryEditPage::CategoryEditPage(QWidget *parent) :
 	QWidget(parent),

@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <QObject>
@@ -8,7 +7,6 @@
 #include "View/MainPage/CategoryEditPage/CategoryEditPage.h"
 #include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
 #include "View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.h"
-
 
 #include "View/Constants.h"
 

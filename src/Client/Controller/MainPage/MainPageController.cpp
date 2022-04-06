@@ -5,7 +5,6 @@
 #include "View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.h"
 
 #include "Models/Statistics/GetBalanceModel.h"
-#include <iostream>
 
 MainPageController::MainPageController(
 	HTTPClient& http_client,
