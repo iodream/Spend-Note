@@ -140,6 +140,11 @@ void IncomePagesController::OnCreateIncome(Income& income)
 	AddIncomeModel model{m_hostname};
 	income.id = m_user_id;
 
+	QDateTime date(QDate::fromString(income.expiration_time), QTime(0,0));
+	income.expiration_time = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	date = QDateTime(QDate::fromString(income.add_time), QTime(0,0));
+	income.add_time = date.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+
 	if(!model.CheckFields(income))
 	{
 		emit ClientError("Fields can't be empty!");
