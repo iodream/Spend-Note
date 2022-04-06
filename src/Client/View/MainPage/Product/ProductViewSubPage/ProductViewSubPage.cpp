@@ -33,7 +33,7 @@ void ProductViewSubPage::Update()
 	QDateTime date = QDateTime::fromString(
 		m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
-	m_ui->BuyUntil->setText(date.toString(QLocale::system().dateTimeFormat()));
+	m_ui->BuyUntil->setText(QLocale::system().toString(date, QLocale::system().dateTimeFormat()));
 	m_ui->Priority->setText(QString::number(m_product.priority));
 	m_ui->Category->setText(m_product.category.name);
 	m_ui->IsBought->setText(m_product.is_bought ? "Yes" : "No");
