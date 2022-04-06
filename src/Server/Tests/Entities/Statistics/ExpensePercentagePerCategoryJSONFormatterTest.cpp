@@ -2,8 +2,8 @@
 
 #include <QJsonObject>
 
-#include "Net/Entities/Statistics/ExpensePercentagePerCategory.h"
-#include "Net/Tools/Formatters/Statistics/ExpensePercentagePerCategoryJSONFormatter.h"
+#include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
+#include "Net/Tools/Formatters/Statistics/StatisticPercentagePerCategoryJSONFormatter.h"
 
 namespace
 {
@@ -18,9 +18,9 @@ QJsonObject FormJSON()
 	return object;
 }
 
-ExpensePercentagePerCategory FormExpense()
+StatisticPercentagePerCategory FormExpense()
 {
-	ExpensePercentagePerCategory expense;
+	StatisticPercentagePerCategory expense;
 
 	expense.category_id = 1;
 	expense.percentage = 2;
@@ -34,7 +34,7 @@ ExpensePercentagePerCategory FormExpense()
 TEST(ExpensePercentagePerCategoryJSONFormatter, FORMATTER)
 {
 	auto object = FormJSON();
-	ExpensePercentagePerCategoryJSONFormatter m_formatter{};
+	StatisticPercentagePerCategoryJSONFormatter m_formatter{};
 	auto expense = m_formatter.Format(FormExpense());
 
 	EXPECT_EQ(object["category_id"], expense["category_id"]);

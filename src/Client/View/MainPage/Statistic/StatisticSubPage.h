@@ -27,13 +27,13 @@ public:
 
 	void UpdateCurrentChart();
 
-	void UpdateProductPiePercentChart(const std::vector<ExpensePercentagePerCategory>& stats, const std::vector<ProductCategory>& category);
-	void UpdateProductPieAmountChart(const std::vector<ExpensePerCategory>& stats, const std::vector<ProductCategory>& category);
-	void UpdateBarBalanceChart(const std::vector<ExpensePerDay>& stats);
+	void UpdateProductPiePercentChart(const std::vector<StatisticPercentagePerCategory>& stats, const std::vector<ProductCategory>& category);
+	void UpdateProductPieAmountChart(const std::vector<StatisticPerCategory>& stats, const std::vector<ProductCategory>& category);
+	void UpdateBarBalanceChart(const std::vector<StatisticPerDay>& stats);
 
-	void UpdateIncomePiePercentChart(const std::vector<ExpensePercentagePerCategory>& stats, const std::vector<IncomeCategory>& category);
-	void UpdateIncomePieAmountChart(const std::vector<ExpensePerCategory>& stats, const std::vector<IncomeCategory>& category);
-	void UpdateBarIncomeChart(const std::vector<ExpensePerDay>& stats);
+	void UpdateIncomePiePercentChart(const std::vector<StatisticPercentagePerCategory>& stats, const std::vector<IncomeCategory>& category);
+	void UpdateIncomePieAmountChart(const std::vector<StatisticPerCategory>& stats, const std::vector<IncomeCategory>& category);
+	void UpdateBarIncomeChart(const std::vector<StatisticPerDay>& stats);
 
 	void ChangePageToNext(QStackedWidget& widget);
 	void ChangePageToPrevious(QStackedWidget& widget);

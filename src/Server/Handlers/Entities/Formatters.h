@@ -17,9 +17,9 @@
 #include "Net/Tools/Formatters/Product/ProductCategoryIdJSONFormatter.h"
 
 #include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
-#include "Net/Tools/Formatters/Statistics/ExpensePerCategoryJSONFormatter.h"
-#include "Net/Tools/Formatters/Statistics/ExpensePercentagePerCategoryJSONFormatter.h"
-#include "Net/Tools/Formatters/Statistics/ExpensePerDayJSONFormatterBase.h"
+#include "Net/Tools/Formatters/Statistics/StatisticPerCategoryJSONFormatter.h"
+#include "Net/Tools/Formatters/Statistics/StatisticPercentagePerCategoryJSONFormatter.h"
+#include "Net/Tools/Formatters/Statistics/StatisticPerDayJSONFormatterBase.h"
 
 #include "Net/Tools/Formatters/ArrayJSONFormatterBase.h"
 
@@ -50,11 +50,11 @@ using ProductsJSONFormatter =
 using ProductCategoriesJSONFormatter =
 	ArrayJSONFormatterBase<ProductCategoryJSONFormatter, ProductCategory>;
 
-using ExpensePerDayJSONFormatter =
-	ExpensePerDayJSONFormatterBase<ExpensePerDay>;
-using ExpensesPerDayJSONFormatter =
-	ArrayJSONFormatterBase<ExpensePerDayJSONFormatter, ExpensePerDay>;
-using ExpensesPerCategoryJSONFormatter =
-	ArrayJSONFormatterBase<ExpensePerCategoryJSONFormatter, ExpensePerCategory>;
-using ExpensesPercentagePerCategoryJSONFormatter =
-	ArrayJSONFormatterBase<ExpensePercentagePerCategoryJSONFormatter, ExpensePercentagePerCategory>;
+using StatisticPerDayJSONFormatter =
+	StatisticPerDayJSONFormatterBase<StatisticPerDay>;
+using StatisticsPerDayJSONFormatter =
+	ArrayJSONFormatterBase<StatisticPerDayJSONFormatter, StatisticPerDay>;
+using StatisticsPerCategoryJSONFormatter =
+	ArrayJSONFormatterBase<StatisticPerCategoryJSONFormatter, StatisticPerCategory>;
+using StatisticsPercentagePerCategoryJSONFormatter =
+	ArrayJSONFormatterBase<StatisticPercentagePerCategoryJSONFormatter, StatisticPercentagePerCategory>;

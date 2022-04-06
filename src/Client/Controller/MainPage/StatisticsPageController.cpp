@@ -1,9 +1,9 @@
 #include "StatisticsPageController.h"
 
 #include "Models/Categories/Product/GetProductCategoriesModel.h"
-#include "Models/Statistics/GetExpensesPercentagePerCategoryModel.h"
-#include "Models/Statistics/GetExpensesPerCategoryModel.h"
-#include "Models/Statistics/GetExpensesPerDayModel.h"
+#include "Models/Statistics/GetStatisticsPercentagePerCategoryModel.h"
+#include "Models/Statistics/GetStatisticsPerCategoryModel.h"
+#include "Models/Statistics/GetStatisticsPerDayModel.h"
 
 StatisticsPageController::StatisticsPageController(
 	HTTPClient& http_client,
@@ -70,8 +70,8 @@ void StatisticsPageController::ConnectStatisticsPage()
 
 void StatisticsPageController::OnPercentChartSelected()
 {
-	GetExpensesPercentagePerCategoryModel model{m_hostname};
-	auto request  = model.FormRequest(m_user_id);
+	GetStatisticsPercentagePerCategoryModel model{m_hostname};
+	auto request  = model.FormRequest(m_user_id, "incomes", "weekly");
 
 	Net::Response response;
 	try{
@@ -94,8 +94,8 @@ void StatisticsPageController::OnPercentChartSelected()
 
 void StatisticsPageController::OnAmountChartSelected()
 {
-	GetExpensesPerCategoryModel model{m_hostname};
-	auto request  = model.FormRequest(m_user_id);
+	GetStatisticsPerCategoryModel model{m_hostname};
+	auto request  = model.FormRequest(m_user_id, "incomes", "weekly");
 
 	Net::Response response;
 	try
@@ -119,8 +119,8 @@ void StatisticsPageController::OnAmountChartSelected()
 
 void StatisticsPageController::OnBalanceChartSelected()
 {
-	GetExpensesPerDayModel model{m_hostname};
-	auto request  = model.FormRequest(m_user_id);
+	GetStatisticsPerDayModel model{m_hostname};
+	auto request  = model.FormRequest(m_user_id, "incomes", "weekly");
 
 	Net::Response response;
 	try

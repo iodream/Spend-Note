@@ -105,36 +105,7 @@ void StatisticSubPage::UpdateCurrentChart()
 	}
 }
 
-
-void StatisticSubPage::UpdateProductPieAmountChart(
-		const std::vector<ExpensePerCategory>& stats,
-		const std::vector<ProductCategory>& category)
-{
-	if (stats.empty())
-	{
-		ShowEmptyMessage();
-	}
-	else
-	{
-		HideEmptyMessage();
-
-		QPieSeries* series = new QPieSeries();
-
-		for(const auto& el : stats)
-		{
-			QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
-			series->append(label, el.amount);
-		}
-
-		series->setLabelsVisible();
-		series->setHoleSize(0.35);
-
-		m_pie_amount_chart->removeAllSeries();
-		m_pie_amount_chart->addSeries(series);
-	}
-}
-
-void StatisticSubPage::UpdateBarBalanceChart(const std::vector<ExpensePerDay>& stats)
+void StatisticSubPage::UpdateBarBalanceChart(const std::vector<StatisticPerDay>& stats)
 {
 	if (stats.empty())
 	{
@@ -166,8 +137,9 @@ void StatisticSubPage::UpdateBarBalanceChart(const std::vector<ExpensePerDay>& s
 }
 
 void StatisticSubPage::UpdateIncomePiePercentChart(
-		const std::vector<ExpensePercentagePerCategory>& stats,
+		const std::vector<StatisticPercentagePerCategory>& stats,
 		const std::vector<IncomeCategory>& category)
+
 {
 	if (stats.empty())
 	{
@@ -194,7 +166,7 @@ void StatisticSubPage::UpdateIncomePiePercentChart(
 }
 
 void StatisticSubPage::UpdateIncomePieAmountChart(
-		const std::vector<ExpensePerCategory>& stats,
+		const std::vector<StatisticPerCategory>& stats,
 		const std::vector<IncomeCategory>& category)
 {
 	if (stats.empty())
@@ -221,7 +193,7 @@ void StatisticSubPage::UpdateIncomePieAmountChart(
 	}
 }
 
-void StatisticSubPage::UpdateBarIncomeChart(const std::vector<ExpensePerDay>& stats)
+void StatisticSubPage::UpdateBarIncomeChart(const std::vector<StatisticPerDay>& stats)
 {
 	if (stats.empty())
 	{
@@ -282,8 +254,36 @@ void StatisticSubPage::ChangePageToPrevious(QStackedWidget& widget)
 	ChartChanged(current_index);
 }
 
+void StatisticSubPage::UpdateProductPieAmountChart(
+	const std::vector<StatisticPerCategory>& stats,
+	const std::vector<ProductCategory>& category)
+{
+  if (stats.empty())
+  {
+	ShowEmptyMessage();
+  }
+  else
+  {
+	HideEmptyMessage();
+
+	QPieSeries* series = new QPieSeries();
+
+	for(const auto& el : stats)
+	{
+	  QString label = GetProductCategoryById(el.category_id, category) + " " + QString::number(el.amount) + "$";
+	  series->append(label, el.amount);
+	}
+
+	series->setLabelsVisible();
+	series->setHoleSize(0.35);
+
+	m_pie_amount_chart->removeAllSeries();
+	m_pie_amount_chart->addSeries(series);
+  }
+}
+
 void StatisticSubPage::UpdateProductPiePercentChart(
-		const std::vector<ExpensePercentagePerCategory>& stats,
+		const std::vector<StatisticPercentagePerCategory>& stats,
 		const std::vector<ProductCategory>& category)
 {
 	if (stats.empty())

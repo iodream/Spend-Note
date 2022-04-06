@@ -17,9 +17,9 @@
 #include "Net/Entities/Product/ProductCategoryBase.h"
 
 #include "Net/Entities/Statistics/Balance.h"
-#include "Net/Entities/Statistics/ExpensePerCategory.h"
-#include "Net/Entities/Statistics/ExpensePercentagePerCategory.h"
-#include "Net/Entities/Statistics/ExpensePerDayBase.h"
+#include "Net/Entities/Statistics/StatisticPerCategory.h"
+#include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
+#include "Net/Entities/Statistics/StatisticPerDayBase.h"
 
 using String = std::string;
 
@@ -32,4 +32,4 @@ using ListState = ListStateBase<String>;
 using Product = ProductBase<ProductCategoryBase, String>;
 using ProductCategory = ProductCategoryBase<String>;
 
-using ExpensePerDay = ExpensePerDayBase<String>;
+using StatisticPerDay = StatisticPerDayBase<String>;

@@ -1,30 +1,46 @@
 #include "Utils.h"
 
-#include "Logger/ScopedLogger.h"
+const std::string DAILY = "daily";
+const std::string WEEKLY = "weekly";
+const std::string MONTHLY = "monthly";
+const std::string YEARLY= "yearly";
 
-ExpensePerCategory ToNetExpensePerCategory(const db::ExpensePerCategory& db_expense)
-{
-	SCOPED_LOGGER;
-	ExpensePerCategory expense;
-	expense.category_id = db_expense.category_id;
-	expense.amount = db_expense.amount;
-	return expense;
+const std::string INCOMES = "incomes";
+const std::string EXPENSES= "expenses";
+
+const std::string PER_CATEGORY = "per-category";
+const std::string PERCENTAGE_PER_CATEGORY = "percentage-per-category";
+const std::string PER_DAY = "per-day";
+
+std::optional<db::Period> ToPeriod (const std::string& period) {
+	if (period == DAILY)
+		return db::Period::Daily;
+	else if (period == WEEKLY)
+		return db::Period::Weekly;
+	else if (period == MONTHLY)
+		return db::Period::Monthly;
+	else if (period == YEARLY)
+		return db::Period::Yearly;
+
+	return std::nullopt;
 }
 
-ExpensePercentagePerCategory ToNetExpensePercentagePerCategory(const db::ExpensePercentagePerCategory& db_expense)
-{
-	SCOPED_LOGGER;
-	ExpensePercentagePerCategory expense;
-	expense.category_id = db_expense.category_id;
-	expense.percentage = db_expense.percentage;
-	return expense;
+std::optional<Type> ToType (const std::string& type) {
+	if (type == INCOMES)
+		return Type::Incomes;
+	if (type == EXPENSES)
+		return Type::Expenses;
+
+	return std::nullopt;
 }
 
-ExpensePerDay ToNetExpensePerDay(const db::ExpensePerDay& db_expense)
-{
-	SCOPED_LOGGER;
-	ExpensePerDay expense;
-	expense.day = db_expense.day;
-	expense.amount = db_expense.amount;
-	return expense;
+std::optional<Format> ToFormat (const std::string& format) {
+	if (format == PER_CATEGORY)
+		return Format::PerCategory;
+	if (format == PERCENTAGE_PER_CATEGORY)
+		return Format::PercentagePerCategory;
+	if (format == PER_DAY)
+		return Format::PerDay;
+
+	return std::nullopt;
 }
