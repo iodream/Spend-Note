@@ -29,6 +29,7 @@ enum class MainSubPages
 
 	DAILY_LIST,
 	STATISTICS,
+	CATEGORIES_EDIT,
 	SETTINGS
 };
 

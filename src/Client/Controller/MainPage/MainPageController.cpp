@@ -22,6 +22,8 @@ MainPageController::MainPageController(
 	InitIncomePagesController();
 	InitDailyListPageController();
 	InitStatisticsPageController();
+	InitIncomeCategoriesController();
+	InitProductCategoriesController();
 }
 
 void MainPageController::ConnectPage()
@@ -238,6 +240,67 @@ void MainPageController::InitStatisticsPageController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitIncomeCategoriesController()
+{
+	m_income_categories_controller =
+		std::make_unique<IncomeCategoriesController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_incomes_create_spage(),
+			m_page.get_income_edit_spage(),
+			m_page.get_categories_edit_spage());
+
+	connect(
+		m_income_categories_controller.get(),
+		&IncomeCategoriesController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_income_categories_controller.get(),
+		&IncomeCategoriesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_income_categories_controller.get(),
+		&IncomeCategoriesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
+void MainPageController::InitProductCategoriesController()
+{
+	m_product_categories_controller =
+		std::make_unique<ProductCategoriesController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_product_create_spage(),
+			m_page.get_product_edit_spage(),
+			m_page.get_product_quick_create_spage(),
+			m_page.get_categories_edit_spage());
+
+	connect(
+		m_product_categories_controller.get(),
+		&ProductCategoriesController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_product_categories_controller.get(),
+		&ProductCategoriesController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_product_categories_controller.get(),
+		&ProductCategoriesController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -323,6 +386,9 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		return m_list_pages_controller->UpdateListQuickCreatePage();
 	case MainSubPages::STATISTICS:
 		return m_statistics_page_controller->UpdateStatisticsPage();
+	case MainSubPages::CATEGORIES_EDIT:
+		m_income_categories_controller->UpdateIncomeCategoryPage();
+		return m_product_categories_controller->UpdateProductCategoryPage();
 	}
 	return update_succeeded;
 }

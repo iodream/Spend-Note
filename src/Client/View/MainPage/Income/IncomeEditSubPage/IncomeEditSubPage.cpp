@@ -105,5 +105,14 @@ void IncomeEditSubPage::OnNewCategorySaved()
 	ui->NewCategoryName->setVisible(false);
 	ui->NewCategorySaveButton->setVisible(false);
 	ui->NewCategoryButton->setDisabled(false);
+
+	IncomeCategory cat;
+
+	cat.id = 0;
+	cat.name = ui->NewCategoryName->text();
+
+	emit AddIncomeCategory(cat);
+	emit UpdateCategories();
+
 }
 

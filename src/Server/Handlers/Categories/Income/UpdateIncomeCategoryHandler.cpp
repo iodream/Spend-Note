@@ -16,7 +16,7 @@ Net::Response UpdateIncomeCategoryHandler::AuthHandle(const Net::Request& reques
 	if (!m_facade->CanUserEditIncomeCategory(request.uid, category_id))
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
-			"Update product category with id \"" + std::to_string(category_id) + "\" is forbidden");
+			"Update Income category with id \"" + std::to_string(category_id) + "\" is forbidden");
 
 	auto db_category = ToDBIncomeCategory(category, request.uid);
 	m_facade->UpdateIncomeCategory(db_category);

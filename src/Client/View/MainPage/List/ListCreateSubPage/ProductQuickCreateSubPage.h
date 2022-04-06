@@ -35,6 +35,9 @@ public:
 
 signals:
 	void QuickAddItem();
+	void AddProductCategory(ProductCategory);
+	void UpdateCategories();
+
 public slots:
 	void OnNewCategoryPushed();
 	void OnNewCategorySaved();

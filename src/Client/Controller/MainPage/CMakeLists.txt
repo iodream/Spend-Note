@@ -13,6 +13,11 @@ list(APPEND Spend-Note-Client_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/DailyListPageController.h
 	${CMAKE_CURRENT_SOURCE_DIR}/StatisticsPageController.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/StatisticsPageController.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoriesController.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoriesController.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoriesController.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ProductCategoriesController.h
+
 )
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)

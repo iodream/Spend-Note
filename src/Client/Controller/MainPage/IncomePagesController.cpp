@@ -70,6 +70,17 @@ void IncomePagesController::ConnectIncomeViewPage()
 		&IncomeEditSubPage::UpdateIncome,
 		this,
 		&IncomePagesController::OnUpdateIncome);
+
+	connect(
+		&m_income_create_page,
+		&IncomeCreateSubPage::UpdateCategories,
+		this,
+		&IncomePagesController::UpdateCategoryBoxes);
+	connect(
+		&m_income_edit_page,
+		&IncomeEditSubPage::UpdateCategories,
+		this,
+		&IncomePagesController::UpdateCategoryBoxes);
 }
 
 bool IncomePagesController::UpdateIncomesPage()
@@ -176,8 +187,6 @@ void IncomePagesController::OnCreateIncome(Income& income)
 	m_income_create_page.Clear();
 	emit GoBack();
 }
-
-bool IncomePagesController::already_added = true;
 
 void IncomePagesController::UpdateCategoryBoxes()
 {

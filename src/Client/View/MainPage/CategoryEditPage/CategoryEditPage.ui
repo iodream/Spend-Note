@@ -54,6 +54,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QListWidget" name="Incomes">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <pointsize>13</pointsize>
@@ -82,9 +88,6 @@
     </widget>
    </item>
    <item>
-    <layout class="QFormLayout" name="formLayout_2"/>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QLineEdit" name="NewCategoryEdit">
@@ -94,7 +97,24 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="NewCategorySaveButton">
+      <widget class="QPushButton" name="NewCategoryEditButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../resources.qrc">
+         <normaloff>:/Icons/Icons/baseline_done_black_24dp.png</normaloff>:/Icons/Icons/baseline_done_black_24dp.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="NewCategoryAddButton">
+       <property name="maximumSize">
+        <size>
+         <width>30</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -114,7 +134,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>20</height>
       </size>
      </property>
     </spacer>

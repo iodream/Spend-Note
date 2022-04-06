@@ -7,6 +7,8 @@
 #include "IncomePagesController.h"
 #include "DailyListPageController.h"
 #include "StatisticsPageController.h"
+#include "IncomeCategoriesController.h"
+#include "ProductCategoriesController.h"
 #include "NavHistory.h"
 
 #include "View/MainPage/MainPage.h"
@@ -38,6 +40,9 @@ private:
 	void InitIncomePagesController();
 	void InitDailyListPageController();
 	void InitStatisticsPageController();
+	void InitIncomeCategoriesController();
+	void InitProductCategoriesController();
+
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
 	std::optional<Balance> UpdateUserBalance(const IdType& id);
@@ -56,6 +61,8 @@ private:
 	std::unique_ptr<IncomePagesController> m_income_pages_controller;
 	std::unique_ptr<DailyListPageController> m_daily_list_page_controller;
 	std::unique_ptr<StatisticsPageController> m_statistics_page_controller;
+	std::unique_ptr<IncomeCategoriesController> m_income_categories_controller;
+	std::unique_ptr<ProductCategoriesController> m_product_categories_controller;
 
 signals:
 	void ChangePage(UIPages page);

@@ -71,6 +71,7 @@ void ProductEditSubPage::Update()
 
 void ProductEditSubPage::FillCategoryBox(const std::vector<ProductCategory> &categories)
 {
+	m_ui->Category->clear();
 	for(const auto& el : categories)
 	{
 		m_ui->Category->addItem(el.name, el.id);
@@ -101,4 +102,13 @@ void ProductEditSubPage::OnNewCategorySaved()
 	m_ui->NewCategoryName->setVisible(false);
 	m_ui->NewCategorySaveButton->setVisible(false);
 	m_ui->NewCategoryButton->setDisabled(false);
+
+	ProductCategory cat;
+
+	cat.id = 0;
+	cat.name = m_ui->NewCategoryName->text();
+
+	emit AddProductCategory(cat);
+	emit UpdateCategories();
+
 }

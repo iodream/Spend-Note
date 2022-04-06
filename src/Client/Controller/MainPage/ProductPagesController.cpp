@@ -83,6 +83,11 @@ void ProductPagesController::ConnectEditPage()
 		&ProductEditSubPage::UpdateProduct,
 		this,
 		&ProductPagesController::OnUpdateProduct);
+	connect(
+		&m_edit_page,
+		&ProductEditSubPage::UpdateCategories,
+		this,
+		&ProductPagesController::UpdateCategoryBox);
 }
 
 void ProductPagesController::ConnectCreatePage()
@@ -92,6 +97,11 @@ void ProductPagesController::ConnectCreatePage()
 		&ProductCreateSubPage::CreateProduct,
 		this,
 		&ProductPagesController::OnCreateProduct);
+	connect(
+		&m_create_page,
+		&ProductCreateSubPage::UpdateCategories,
+		this,
+		&ProductPagesController::UpdateCategoryBox);
 }
 
 void ProductPagesController::OnProductClicked(const Product& product)
@@ -249,12 +259,8 @@ bool ProductPagesController::UpdateViewPage(Product product)
 	return true;
 }
 
-bool ProductPagesController::already_added = false;
-
 void ProductPagesController::UpdateCategoryBox()
 {
-	if(!already_added)
-	{
 		GetProductCategoriesModel model{m_hostname};
 		auto request = model.FormRequest(m_user_id);
 
@@ -270,13 +276,11 @@ void ProductPagesController::UpdateCategoryBox()
 
 			m_edit_page.FillCategoryBox(model.ParseResponse(response));
 			m_create_page.FillCategoryBox(model.ParseResponse(response));
-			already_added = true;
 		}
 		catch (const Poco::Exception& ex)
 		{
 			return;
 		}
-	}
 }
 
 void ProductPagesController::SetRangeOfSpinBoxes()

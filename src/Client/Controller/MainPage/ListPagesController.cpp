@@ -69,6 +69,11 @@ void ListPagesController::ConnectCreatePage()
 		&ProductQuickCreateSubPage::QuickAddItem,
 		this,
 		&ListPagesController::OnQuickAddItem);
+	connect(
+		&m_product_quick_create_page,
+		&ProductQuickCreateSubPage::UpdateCategories,
+		this,
+		&ListPagesController::UpdateCategoryBox);
 }
 
 void ListPagesController::ConnectViewListPage()
@@ -155,12 +160,8 @@ bool ListPagesController::UpdateListViewPage(PageData& data)
 	return true;
 }
 
-bool ListPagesController::already_added = false;
-
 void ListPagesController::FillBoxOfStates()
 {
-	if(!already_added)
-	{
 		GetListStatesModel model{m_hostname};
 		const auto request = model.FormRequest();
 		try
@@ -176,13 +177,11 @@ void ListPagesController::FillBoxOfStates()
 			auto states = model.ParseResponse(response);
 			m_list_edit_page.FillStateBox(states);
 			m_create_page.FillStateBox(states);
-			already_added = true;
 		}
 		catch(const Poco::Exception& ex)
 		{
 			return;
 		}
-	}
 }
 
 bool ListPagesController::UpdateListEditPage(PageData& data)
@@ -389,12 +388,8 @@ void ListPagesController::OnUpdateList()
 	emit GoBack();
 }
 
-bool ListPagesController::category_already_added = false;
-
 void ListPagesController::UpdateCategoryBox()
 {
-	if(!category_already_added)
-	{
 		GetProductCategoriesModel model{m_hostname};
 		auto request = model.FormRequest(m_user_id);
 
@@ -408,14 +403,12 @@ void ListPagesController::UpdateCategoryBox()
 				return ;
 			}
 			m_product_quick_create_page.FillCategoryBox(model.ParseResponse(response));
-			category_already_added = true;
 		}
 		catch (const Poco::Exception& ex)
 		{
 			return;
 		}
 
-	}
 }
 
 

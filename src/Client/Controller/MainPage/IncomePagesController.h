@@ -47,13 +47,13 @@ private:
 	IncomeViewSubPage& m_income_view_page;
 	IncomeEditSubPage& m_income_edit_page;
 
-	static bool already_added;
 	void UpdateCategoryBoxes();
 signals:
 	void ServerError(const int code, const std::string& desc);
 	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
+	void AddIncomeCategory(IncomeCategory);
 
 	void GoBack(int n=1);
 
