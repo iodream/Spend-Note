@@ -5,10 +5,6 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
-
-//#include "../Entities/Entities.h"
-//#include "../Entities/Formatters.h"
-
 #include "StatisticsFormatterManager.h"
 
 class GetStatisticsHandler : public AuthorizedHandler
