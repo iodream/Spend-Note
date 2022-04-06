@@ -98,6 +98,7 @@ ICommandHandler* UsersResolver::Resolve(
 			return new AddIncomeCategoryHandler();
 		else if (method == Net::HTTP_METHOD_GET)
 			return new GetIncomeCategoriesHandler();
+	}
 	else if (segment == PRODUCT_CATEGORIES) {
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetProductCategoriesHandler();
@@ -114,7 +115,7 @@ ICommandHandler* UsersResolver::Resolve(
 	}
 	return nullptr;
 }
-}
+
 
 ICommandHandler* UsersResolver::ResolveLastSegment(
 	const std::string& method)

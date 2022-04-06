@@ -64,12 +64,29 @@ void CategoryEditPage::Update(const std::vector<ProductCategory>& categories)
 	}
 }
 
+void CategoryEditPage::Update(const std::vector<IncomeCategory>& categories)
+{
+	ui->NewCategoryEdit->setVisible(false);
+	ui->NewCategoryEditButton->setVisible(false);
+	ui->NewCategoryAddButton->setVisible(false);
+
+	ui->Incomes->clear();
+	for(auto it:categories)
+	{
+		QListWidgetItem *newItem = new QListWidgetItem;
+		QString name(it.name);
+		QVariant data(it.id);
+		newItem->setText(name);
+		newItem->setData(Qt::UserRole, data);
+		ui->Incomes->addItem(newItem);
+	}
+}
+
 void CategoryEditPage::OnEditCategoryClicked()
 {
 	ui->NewCategoryEdit->setVisible(true);
 	ui->NewCategoryEditButton->setVisible(true);
 	ui->NewCategoryAddButton->setVisible(false);
-	auto i= ui->tabWidget->currentIndex();
 }
 
 void CategoryEditPage::OnAddCategoryClicked()
@@ -82,11 +99,15 @@ void CategoryEditPage::OnAddCategoryClicked()
 void CategoryEditPage::OnRemoveClicked()
 {
 	if(ui->tabWidget->currentIndex() == 0)
-		emit RemoveIncomeCategory();
+	{
+		int id = qvariant_cast<int>(ui->Incomes->currentItem()->data(Qt::UserRole));
+		IncomeCategoryId id_removed {id};
+		emit RemoveIncomeCategory(id_removed);
+	}
 	else
 	{
 		int id = qvariant_cast<int>(ui->Products->currentItem()->data(Qt::UserRole));
-	ProductCategoryId id_removed {id};
+		ProductCategoryId id_removed {id};
 		emit RemoveProductCategory(id_removed);
 	}
 }

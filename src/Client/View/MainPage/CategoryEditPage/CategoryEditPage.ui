@@ -59,16 +59,6 @@
            <pointsize>13</pointsize>
           </font>
          </property>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>New Item</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>

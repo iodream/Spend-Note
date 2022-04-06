@@ -36,6 +36,7 @@ public:
 
 signals:
 	void CreateProduct();
+	void AddProductCategory(ProductCategory);
 
 public slots:
 	void OnNewCategoryPushed();

@@ -101,4 +101,11 @@ void ProductEditSubPage::OnNewCategorySaved()
 	m_ui->NewCategoryName->setVisible(false);
 	m_ui->NewCategorySaveButton->setVisible(false);
 	m_ui->NewCategoryButton->setDisabled(false);
+
+	ProductCategory cat;
+
+	cat.id = 0;
+	cat.name = m_ui->NewCategoryName->text();
+
+	emit AddProductCategory(cat);
 }

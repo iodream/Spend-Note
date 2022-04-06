@@ -247,7 +247,9 @@ void MainPageController::InitIncomeCategoriesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_categories_edit_spage());
+			m_page.get_categories_edit_spage(),
+			m_page.get_incomes_create_spage(),
+			m_page.get_income_edit_spage());
 
 	connect(
 		m_income_categories_controller.get(),
@@ -281,7 +283,10 @@ void MainPageController::InitProductCategoriesController()
 			m_http_client,
 			m_hostname,
 			m_user_id,
-			m_page.get_categories_edit_spage());
+			m_page.get_categories_edit_spage(),
+			m_page.get_product_create_spage(),
+			m_page.get_product_edit_spage(),
+			m_page.get_product_quick_create_spage());
 
 	connect(
 		m_product_categories_controller.get(),
@@ -294,12 +299,6 @@ void MainPageController::InitProductCategoriesController()
 		&ProductCategoriesController::ClientError,
 		this,
 		&MainPageController::OnClientError);
-
-//	connect(
-//		m_product_categories_controller.get(),
-//		&ProductCategoriesController::ChangeSubPage,
-//		this,
-//		&MainPageController::OnChangeSubPage);
 
 	connect(
 		m_product_categories_controller.get(),
@@ -394,7 +393,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::STATISTICS:
 		return m_statistics_page_controller->UpdateStatisticsPage();
 	case MainSubPages::CATEGORIES_EDIT:
-		//m_income_categories_controller->UpdateIncomeCategoryPage();
+		m_income_categories_controller->UpdateIncomeCategoryPage();
 		return m_product_categories_controller->UpdateProductCategoryPage();
 	}
 	return update_succeeded;

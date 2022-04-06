@@ -19,7 +19,7 @@ public:
 signals:
 	void AddIncomeCategory(IncomeCategory);
 	void UpdateIncomeCategory(IncomeCategory);
-	void RemoveIncomeCategory();
+	void RemoveIncomeCategory(IncomeCategoryId);
 	void AddProductCategory(ProductCategory&);
 	void UpdateProductCategory(ProductCategory&);
 	void RemoveProductCategory(ProductCategoryId&);

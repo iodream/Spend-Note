@@ -19,6 +19,7 @@ public:
 
 signals:
 	void CreateIncome(Income& income);
+	void AddIncomeCategory(IncomeCategory);
   
 public slots:
 	void OnCreateIncome();

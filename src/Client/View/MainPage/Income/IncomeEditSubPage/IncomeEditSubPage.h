@@ -22,7 +22,8 @@ public:
 
 signals:
 	void UpdateIncome();
-	
+	void AddIncomeCategory(IncomeCategory);
+
 public slots:
 	void OnEditIncome();
 	void FillCategoryBox(const std::vector<IncomeCategory>& income);

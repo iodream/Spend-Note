@@ -12,11 +12,17 @@ ProductCategoriesController::ProductCategoriesController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	CategoryEditPage& category_edit_spage):
+	CategoryEditPage& category_edit_spage,
+	ProductCreateSubPage& product_create_page,
+	ProductEditSubPage& product_edit_page,
+	ProductQuickCreateSubPage& product_quick_create_page):
 	m_http_client(http_client),
 	m_hostname(hostname),
 	m_user_id(user_id),
-	m_category_edit_spage(category_edit_spage)
+	m_category_edit_spage(category_edit_spage),
+	m_product_create_page(product_create_page),
+	m_product_edit_page(product_edit_page),
+	m_product_quick_create_page(product_quick_create_page)
 {
 	connect(
 		&m_category_edit_spage,
@@ -33,6 +39,21 @@ ProductCategoriesController::ProductCategoriesController(
 		&CategoryEditPage::UpdateProductCategory,
 		this,
 		&ProductCategoriesController::OnUpdateProductCategory);
+	connect(
+		&m_product_create_page,
+		&ProductCreateSubPage::AddProductCategory,
+		this,
+		&ProductCategoriesController::OnAddProductCategory);
+	connect(
+		&m_product_edit_page,
+		&ProductEditSubPage::AddProductCategory,
+		this,
+		&ProductCategoriesController::OnAddProductCategory);
+	connect(
+		&m_product_quick_create_page,
+		&ProductQuickCreateSubPage::AddProductCategory,
+		this,
+		&ProductCategoriesController::OnAddProductCategory);
 }
 
 bool ProductCategoriesController::UpdateProductCategoryPage()
@@ -62,7 +83,7 @@ bool ProductCategoriesController::UpdateProductCategoryPage()
 
 
 
-void ProductCategoriesController::OnAddProductCategory(ProductCategory& category)
+void ProductCategoriesController::OnAddProductCategory(ProductCategory category)
 {
 	AddProductCategoryModel model{m_hostname};
 	category.id = 0;

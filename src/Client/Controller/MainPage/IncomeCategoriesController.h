@@ -6,6 +6,9 @@
 #include "Controller/HTTPClient.h"
 
 #include "View/MainPage/CategoryEditPage/CategoryEditPage.h"
+#include "View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
+#include "View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.h"
+
 
 #include "View/Constants.h"
 
@@ -19,18 +22,21 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		CategoryEditPage& category_edit_spage);
+		CategoryEditPage& category_edit_spage,
+		IncomeCreateSubPage& income_create_page,
+		IncomeEditSubPage& income_edit_page);
 
 	virtual ~IncomeCategoriesController() override {}
 
-	bool UpdateIncomesCategoryPage();
+	bool UpdateIncomeCategoryPage();
 
 private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
 	IdType& m_user_id;
-
-	CategoryEditPage & m_category_edit_spage;
+	IncomeCreateSubPage& m_income_create_page;
+	IncomeEditSubPage& m_income_edit_page;
+	CategoryEditPage& m_category_edit_spage;
 
 signals:
 	void ServerError(const int code, const std::string& desc);
@@ -40,7 +46,7 @@ signals:
 	void GoBack(int n=1);
 
 public slots:
-	void OnAddIncomeCategory();
-	void OnDeleteIncomeCategory();
-	void OnUpdateIncomeCategory();
+	void OnAddIncomeCategory(IncomeCategory category);
+	void OnDeleteIncomeCategory(IncomeCategoryId id);
+	void OnUpdateIncomeCategory(IncomeCategory category);
 };
