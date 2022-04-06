@@ -31,6 +31,12 @@ Net::Response RemoveProductCategoryHandler::AuthHandle(const Net::Request& reque
 			"Remove product category with id \"" + std::to_string(product_category_id) + "\" is forbidden");
 	}
 
-	m_facade->RemoveProductCategory(product_category_id);
+	try {
+		m_facade->RemoveProductCategory(product_category_id);
+	}  catch (const db::DatabaseFailure& ex) {
+		return FormErrorResponse(
+			NetError::Status::HTTP_FORBIDDEN,
+			"Unable to delete category");
+	}
 	return FormEmptyResponse();
 }
