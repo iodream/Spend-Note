@@ -39,4 +39,5 @@ private:
 
 	void ConnectStatisticsPage();
 	std::vector<ProductCategory> GetProductCategories();
+	std::vector<IncomeCategory> GetIncomeCategories();
 };
