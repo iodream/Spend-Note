@@ -1,8 +1,8 @@
 #include "IncomesPerCategoryFormatter.h"
 #include "Utils.h"
 
-IncomesPerCategoryFormatter::IncomesPerCategoryFormatter()
-{
+IncomesPerCategoryFormatter::IncomesPerCategoryFormatter(db::IDbFacade::Ptr&& facade)
+	: IStatisticsFormatter(std::move(facade)) {
 
 }
 

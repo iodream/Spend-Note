@@ -11,7 +11,7 @@ class StatisticsFormatterManager
 public:
 	StatisticsFormatterManager() {}
 	~StatisticsFormatterManager() {}
-	void set_formatter(IStatisticsFormatter* formatter, db::IDbFacade::Ptr&& facade);
+	void set_formatter(IStatisticsFormatter* formatter);
 	QJsonArray ConcreteStatisticsFormat(const db::IdType& user_id, const db::Period& period);
 private:
 	IStatisticsFormatter* m_formatter;

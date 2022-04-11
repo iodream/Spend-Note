@@ -1,8 +1,8 @@
 #include "ExpensesPerCategoryFormatter.h"
 #include "Utils.h"
 
-ExpensesPerCategoryFormatter::ExpensesPerCategoryFormatter ()
-{
+ExpensesPerCategoryFormatter::ExpensesPerCategoryFormatter (db::IDbFacade::Ptr&& facade)
+	: IStatisticsFormatter(std::move(facade)) {
 
 }
 

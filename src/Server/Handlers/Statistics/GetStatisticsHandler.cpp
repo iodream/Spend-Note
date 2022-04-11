@@ -42,23 +42,23 @@ Net::Response GetStatisticsHandler::AuthHandle(const Net::Request& request)
 	auto format = ToFormat(format_str);
 
 	if (!type.has_value() || !period.has_value() || !format.has_value())
-		return FormErrorResponse(NetError::Status::HTTP_BAD_REQUEST, "Uri parameters");
+		return FormErrorResponse(NetError::Status::HTTP_BAD_REQUEST, "Wrong URI parameters");
 
 	if (type == Type::Incomes){
 		if (format == Format::PerCategory)
-			m_formatters_manager.set_formatter(new IncomesPerCategoryFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new IncomesPerCategoryFormatter(std::move(m_facade)));
 		else if (format == Format::PercentagePerCategory)
-			m_formatters_manager.set_formatter(new IncomesPercentagePerCategoryFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new IncomesPercentagePerCategoryFormatter(std::move(m_facade)));
 		else
-			m_formatters_manager.set_formatter(new IncomesPerDayFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new IncomesPerDayFormatter(std::move(m_facade)));
 	}
 	else {
 		if (format == Format::PerCategory)
-			m_formatters_manager.set_formatter(new ExpensesPerCategoryFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new ExpensesPerCategoryFormatter(std::move(m_facade)));
 		else if (format == Format::PercentagePerCategory)
-			m_formatters_manager.set_formatter(new ExpensesPercentagePerCategoryFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new ExpensesPercentagePerCategoryFormatter(std::move(m_facade)));
 		else
-			m_formatters_manager.set_formatter(new ExpensesPerDayFormatter, std::move(m_facade));
+			m_formatters_manager.set_formatter(new ExpensesPerDayFormatter(std::move(m_facade)));
 	}
 
 	try {

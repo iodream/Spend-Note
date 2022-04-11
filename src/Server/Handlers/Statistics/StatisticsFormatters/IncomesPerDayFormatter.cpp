@@ -1,8 +1,8 @@
 #include "IncomesPerDayFormatter.h"
 #include "Utils.h"
 
-IncomesPerDayFormatter::IncomesPerDayFormatter()
-{
+IncomesPerDayFormatter::IncomesPerDayFormatter(db::IDbFacade::Ptr&& facade)
+	: IStatisticsFormatter(std::move(facade)) {
 
 }
 
