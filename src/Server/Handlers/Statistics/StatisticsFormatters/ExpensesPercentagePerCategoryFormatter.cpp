@@ -1,8 +1,8 @@
 #include "ExpensesPercentagePerCategoryFormatter.h"
 #include "Utils.h"
 
-ExpensesPercentagePerCategoryFormatter::ExpensesPercentagePerCategoryFormatter()
-{
+ExpensesPercentagePerCategoryFormatter::ExpensesPercentagePerCategoryFormatter(db::IDbFacade::Ptr&& facade)
+	: IStatisticsFormatter(std::move(facade)) {
 
 }
 

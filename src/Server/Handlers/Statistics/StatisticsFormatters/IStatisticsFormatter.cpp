@@ -1,6 +1,5 @@
 #include "IStatisticsFormatter.h"
 
-void IStatisticsFormatter::set_facade(db::IDbFacade::Ptr&& facade)
-{
+IStatisticsFormatter::IStatisticsFormatter(db::IDbFacade::Ptr&& facade) {
 	m_facade = std::move(facade);
 }
