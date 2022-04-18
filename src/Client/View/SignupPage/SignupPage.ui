@@ -210,18 +210,18 @@ color: rgb(255, 255, 255);</string>
            <string/>
           </property>
           <property name="placeholderText">
-           <string>Type your username</string>
+           <string>Type your username...</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="passwordCreateLabel">
           <property name="text">
            <string>Create a password:</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QLineEdit" name="passwordCreateLineEdit">
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
@@ -231,7 +231,7 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="passwordRepeatLabel">
           <property name="minimumSize">
            <size>
@@ -247,13 +247,27 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QLineEdit" name="passwordRepeatLineEdit">
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
           <property name="placeholderText">
            <string>Repeat password...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="emailLabel">
+          <property name="text">
+           <string>Type an email (optional):</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="emailLineEdit">
+          <property name="placeholderText">
+           <string>Type your email...</string>
           </property>
          </widget>
         </item>
