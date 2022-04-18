@@ -26,6 +26,7 @@ signals:
 
 private slots:
 	void OnSignupSubmitButtonClicked();
+	void OnShowPasswordChecked();
 
 private:
 	Ui::SignupPage *m_ui;

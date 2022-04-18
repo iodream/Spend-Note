@@ -34,6 +34,6 @@ private slots:
 	void OnSignupButtonClicked();
 	void OnPasswordTextChanged(const QString& arg1);
 	void OnLoginTextChanged(const QString& arg1);
-	void OnShowPasswordClick();
+	void OnShowPasswordChecked();
 };
 

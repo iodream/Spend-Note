@@ -43,7 +43,7 @@ LoginPage::LoginPage(QWidget *parent)
 		m_ui->showPassword,
 		&QCheckBox::clicked,
 		this,
-		&LoginPage::OnShowPasswordClick);
+		&LoginPage::OnShowPasswordChecked);
 }
 
 LoginPage::~LoginPage()
@@ -100,9 +100,10 @@ void LoginPage::OnPasswordTextChanged(const QString& arg1)
 	m_ui->loginErrorLabel->setText("");
 }
 
-void LoginPage::OnShowPasswordClick()
+void LoginPage::OnShowPasswordChecked()
 {
-	if(m_ui->showPassword->isChecked()){
+	if(m_ui->showPassword->isChecked())
+	{
 		m_ui->passwordLineEdit->setEchoMode(QLineEdit::EchoMode::Normal);
 	}
 	else
