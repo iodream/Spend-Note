@@ -24,6 +24,7 @@ MainPageController::MainPageController(
 	InitStatisticsPageController();
 	InitIncomeCategoriesController();
 	InitProductCategoriesController();
+	InitSettingsPageController();
 }
 
 void MainPageController::ConnectPage()
@@ -301,6 +302,40 @@ void MainPageController::InitProductCategoriesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitSettingsPageController()
+{
+	m_settings_page_controller =
+		std::make_unique<SettingsPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_settings_spage());
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
@@ -379,6 +414,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::EDIT_INCOME:
 		return m_income_pages_controller->UpdateIncomeEditPage(data);
 	case MainSubPages::SETTINGS:
+		m_settings_page_controller->UpdateSettingsSubPage();
 		break;
 	case MainSubPages::DAILY_LIST:
 		return m_daily_list_page_controller->UpdateDailyListPage();
