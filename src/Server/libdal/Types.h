@@ -13,8 +13,8 @@ namespace db
 	enum class Period
 	{
 		Daily,
-		Monthly,
 		Weekly,
+		Monthly,
 		Yearly
 	};
 }

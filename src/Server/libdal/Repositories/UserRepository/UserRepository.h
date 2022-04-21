@@ -14,7 +14,7 @@ public:
 
 	std::optional<IdType> Add(const User& user);
 	std::optional<User> GetById(IdType id);
-	std::optional<User> GetByLogin(const std::string& login);
+	std::optional<User> GetByEmail(const std::string& email);
 	bool Update(const User& user);
 	bool Remove(IdType id);
 private:

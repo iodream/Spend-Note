@@ -27,9 +27,9 @@ std::optional<User> DbFacade::GetUserById(IdType id)
 	return m_users.GetById(id);
 }
 
-std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
+std::optional<User> DbFacade::GetUserByEmail(const std::string& email)
 {
-	return m_users.GetByLogin(login);
+	return m_users.GetByEmail(email);
 }
 
 bool DbFacade::UpdateUser(const User &user)

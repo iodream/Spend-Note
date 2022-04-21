@@ -27,7 +27,7 @@ public:
 
 	virtual std::optional<IdType> AddUser(const User& user) = 0;
 	virtual std::optional<User> GetUserById(IdType id) = 0;
-	virtual std::optional<User> GetUserByLogin(const std::string& login) = 0;
+	virtual std::optional<User> GetUserByEmail(const std::string& email) = 0;
 	virtual bool UpdateUser(const User& user) = 0;
 	virtual bool RemoveUser(IdType id) = 0;
 

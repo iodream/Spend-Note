@@ -22,7 +22,7 @@ public:
 
 	std::optional<IdType> AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
-	std::optional<User> GetUserByLogin(const std::string& login) override;
+	std::optional<User> GetUserByEmail(const std::string& email) override;
 	bool UpdateUser(const User &user) override;
 	bool RemoveUser(IdType id) override;
 
