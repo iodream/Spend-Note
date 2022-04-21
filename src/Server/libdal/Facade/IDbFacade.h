@@ -14,7 +14,7 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
-#include "DTOs/IncomeCategory.h"
+#include "DTOs/VerificationCode.h"
 
 namespace db
 {
@@ -83,5 +83,10 @@ public:
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
 
+	virtual std::optional<IdType> AddVerificationCode(const VerificationCode& code) = 0;
+	virtual std::optional<VerificationCode> GetVerificationCodeById(IdType id) = 0;
+	virtual std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) = 0;
+	virtual bool UpdateVerificationCode(const VerificationCode& code) = 0;
+	virtual bool RemoveVerificationCode(IdType id) = 0;
 };
 }

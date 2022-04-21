@@ -1,7 +1,5 @@
 #include "UserRepository.h"
 
-#include <iostream>
-
 #include "Exceptions/DatabaseFailure.h"
 #include "DatabaseNames.h"
 
@@ -142,7 +140,7 @@ bool UserRepository::Remove(IdType id)
 User UserRepository::UserFromRow(const pqxx::row& row)
 {
 	User user;
-	user.id = row[user::ID].as<int>();
+	user.id = row[user::ID].as<IdType>();
 	user.email = row[user::EMAIL].as<std::string>();
 	user.password = row[user::PASSWORD].as<std::string>();
 	user.verified = row[user::VERIFIED].as<bool>();

@@ -11,6 +11,7 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
+#include "Repositories/VerificationCodeRepository/VerificationCodeRepository.h"
 
 namespace db
 {
@@ -78,6 +79,12 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
+	std::optional<IdType> AddVerificationCode(const VerificationCode& code) override;
+	std::optional<VerificationCode> GetVerificationCodeById(IdType id) override;
+	std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) override;
+	bool UpdateVerificationCode(const VerificationCode& code) override;
+	bool RemoveVerificationCode(IdType id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -90,5 +97,6 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
+	VerificationCodeRepository m_verification_codes;
 };
 }
