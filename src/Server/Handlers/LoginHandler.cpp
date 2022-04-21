@@ -47,6 +47,8 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 Net::Response LoginHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
+
+	/*
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByLogin(dto.login);
 
@@ -68,4 +70,9 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
 	return FormJSONResponse(m_formatter.Format(out_dto));
+	*/
+
+	return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Method not implemented" + request.uri);
 }

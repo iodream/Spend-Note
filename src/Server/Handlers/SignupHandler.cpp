@@ -37,6 +37,8 @@ SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 Net::Response SignupHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
+
+	/*
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByLogin(dto.login);
 
@@ -59,4 +61,9 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
 			"User not created because database error occured");
 	}
+	*/
+
+	return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Method not implemented" + request.uri);
 }
