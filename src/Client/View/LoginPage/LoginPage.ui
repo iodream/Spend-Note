@@ -72,14 +72,14 @@
           <item row="0" column="0">
            <widget class="QLabel" name="loginLabel">
             <property name="text">
-             <string>Login or email</string>
+             <string>Email</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="loginLineEdit">
             <property name="placeholderText">
-             <string>Login or email.....</string>
+             <string>Email.....</string>
             </property>
            </widget>
           </item>

@@ -63,7 +63,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
 			m_page.ChangeLoginErrorLabel(
-				"Login or password is incorrect");
+				"Email or password is incorrect");
 		}
 		else
 		{
