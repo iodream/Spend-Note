@@ -22,6 +22,20 @@ ListViewSubPage::ListViewSubPage(QWidget *parent)
 		[this](){ emit DeleteList(m_list); });
 }
 
+void ListViewSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+  QWidget::changeEvent(event);
+ }
+}
 ListViewSubPage::~ListViewSubPage()
 {
 	delete m_ui;

@@ -30,6 +30,8 @@ public:
 
 	void set_list_size(int size);
 	int get_list_size();
+	void changeEvent(QEvent* event);
+
 private:
 	Ui::IncomeListSubPage *m_ui;
 

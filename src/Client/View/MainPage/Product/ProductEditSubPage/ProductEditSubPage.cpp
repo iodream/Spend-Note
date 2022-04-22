@@ -40,6 +40,21 @@ ProductEditSubPage::~ProductEditSubPage()
 	delete m_ui;
 }
 
+void ProductEditSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void ProductEditSubPage::set_product(const Product& product)
 {
 	m_product = product;

@@ -32,6 +32,21 @@ IncomeCreateSubPage::IncomeCreateSubPage(QWidget *parent) :
 
 }
 
+void IncomeCreateSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void IncomeCreateSubPage::OnCreateIncome()
 {
 	Income income;

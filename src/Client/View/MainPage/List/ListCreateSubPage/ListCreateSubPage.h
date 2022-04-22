@@ -33,6 +33,7 @@ public:
 	void FillStateBox(const std::vector<ListState>& states);
 	IdType GetListState();
 	void Update();
+	void changeEvent(QEvent* event);
 
 private:
 	void SetListSize(int size);

@@ -24,6 +24,21 @@ IncomeListItem::~IncomeListItem()
 	delete m_ui;
 }
 
+void IncomeListItem::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void IncomeListItem::UpdateColor()
 {
 	m_color = DEFAULT_COLOR_ODD;

@@ -26,6 +26,11 @@ LoginPage::LoginPage(QWidget *parent)
 		&QToolButton::clicked,
 		this,
 		&LoginPage::CloseErrorBanner);
+	connect(
+		m_ui->LanguageSelector,
+		&QComboBox::currentTextChanged,
+		this,
+		&LoginPage::OnLangSelected);
 }
 
 LoginPage::~LoginPage()
@@ -75,6 +80,31 @@ void LoginPage::OnSignupButtonClicked()
 void LoginPage::OnLoginTextChanged(const QString& arg1)
 {
 	m_ui->loginErrorLabel->setText("");
+}
+
+void LoginPage::OnLangSelected(QString lang)
+{
+	if(lang == "English")
+		emit LangChanged(UILangs::ENGLISH);
+	else
+		if(lang == "Українська")
+			emit LangChanged(UILangs::UKRAINIAN);
+
+}
+
+void LoginPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
 }
 
 void LoginPage::OnPasswordTextChanged(const QString& arg1)

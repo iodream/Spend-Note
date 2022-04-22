@@ -29,6 +29,8 @@ public:
 
 	QString get_color();
 
+	void changeEvent(QEvent* event);
+
 private:
 	void UpdateColor();
 

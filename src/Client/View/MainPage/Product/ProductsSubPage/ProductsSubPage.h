@@ -34,6 +34,7 @@ public:
 
 	void set_list(List list);
 	List get_list();
+	void changeEvent(QEvent* event);
 
 signals:
 	void GoToCreateProduct(IdType list_id);

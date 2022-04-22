@@ -19,6 +19,7 @@ public:
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
+	void changeEvent(QEvent* event);
 
 signals:
 	void Signup(const SignupModel::SignupInDTO& dto);

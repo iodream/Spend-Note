@@ -16,6 +16,21 @@ ListsSubPage::ListsSubPage(QWidget *parent)
 		&ListsSubPage::GoToCreateList);
 }
 
+void ListsSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void ListsSubPage::AppendList(ListItem* list)
 {
 	InsertList(list, get_list_size());

@@ -20,6 +20,8 @@ public:
 	~MainWindow();
 
 	void SetCurrentPage(UIPages page);
+	void changeEvent(QEvent* event);
+
 	LoginPage& get_login_page();
 	SignupPage& get_signup_page();
 	MainPage& get_main_page();

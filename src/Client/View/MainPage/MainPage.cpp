@@ -9,14 +9,14 @@ MainPage::MainPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
-		m_ui->GoBackButton->setToolTip("Back");
-		m_ui->GoToIncomesButton->setToolTip("My Incomes");
-		m_ui->GoToListsButton->setToolTip("My Lists");
-		m_ui->LogoutButton->setToolTip("Log Out");
-		m_ui->GoToDailyList->setToolTip("Daily List");
-		m_ui->Settings->setToolTip("Settings");
-		m_ui->GoToStatisticsButton->setToolTip("Statistics");
-		m_ui->GoToCategoriesButton->setToolTip("My Categories");
+		m_ui->GoBackButton->setToolTip(tr("Back"));
+		m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
+		m_ui->GoToListsButton->setToolTip(tr("My Lists"));
+		m_ui->LogoutButton->setToolTip(tr("Log Out"));
+		m_ui->GoToDailyList->setToolTip(tr("Daily List"));
+		m_ui->Settings->setToolTip(tr("Settings"));
+		m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
+		m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
 
 
 
@@ -177,6 +177,29 @@ MainPage::~MainPage()
 	delete m_ui;
 }
 
+void MainPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	m_ui->GoBackButton->setToolTip(tr("Back"));
+	m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
+	m_ui->GoToListsButton->setToolTip(tr("My Lists"));
+	m_ui->LogoutButton->setToolTip(tr("Log Out"));
+	m_ui->GoToDailyList->setToolTip(tr("Daily List"));
+	m_ui->Settings->setToolTip(tr("Settings"));
+	m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
+	m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void MainPage::SetCurrentSubPage(int idx)
 {
 	m_ui->Display->setCurrentIndex(idx);
@@ -219,8 +242,8 @@ void MainPage::OnGoToCategoriesEditClicked()
 
 void MainPage::ShowBalance(const Balance& money)
 {
-	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
-	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
+	m_ui->CurrentBalance->setText(tr("Current Balance:  ") + QString::number(money.balance));
+	m_ui->ProjectedBalance->setText(tr("Predicted balance:  ") + QString::number(money.planned_balance));
 }
 
 

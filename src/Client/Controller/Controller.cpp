@@ -5,8 +5,13 @@
 
 #include "Net/Constants.h"
 
-Controller::Controller()
+Controller::Controller(QApplication* a)
 {
+	m_app = a;
+	m_trans = new QTranslator();
+	m_trans->load("en_US.qm"); // default lang is eng
+	m_app->installTranslator(m_trans);
+
 	InitConfig();
 	InitLoginPageController();
 	InitSignupPageController();
@@ -16,7 +21,6 @@ Controller::Controller()
 void Controller::InitConfig()
 {
 	Poco::Util::JSONConfiguration m_json_configuration(config_filename);
-
 	m_hostname = m_json_configuration.getString("hostname");
 }
 
@@ -34,6 +38,11 @@ void Controller::InitLoginPageController()
 		&LoginPageController::ChangePage,
 		this,
 		&Controller::OnChangePage);
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::LangChanged,
+		this,
+		&Controller::OnLangChanged);
 }
 
 void Controller::InitSignupPageController()
@@ -70,8 +79,8 @@ void Controller::InitMainPageController()
 
 bool Controller::AskUser(const QString& title, const QString& text)
 {
-	return QMessageBox::Yes == QMessageBox::question(nullptr, QString("Retry?"),
-													 QString("No connection to server. Retry?"));
+	return QMessageBox::Yes == QMessageBox::question(nullptr, tr("Retry?"),
+											tr("No connection to server. Retry?"));
 }
 
 void Controller::Start(UIPages at_page)
@@ -98,4 +107,21 @@ void Controller::SetPage(UIPages page)
 void Controller::OnChangePage(UIPages page)
 {
 	SetPage(page);
+}
+
+void Controller::OnLangChanged(const UILangs& lang)
+{
+	switch(lang)
+	{
+	case UILangs::ENGLISH:
+		m_app->removeTranslator(m_trans);
+		m_trans->load("en_US.qm");
+		m_app->installTranslator(m_trans);
+		break;
+	case UILangs::UKRAINIAN:
+		m_app->removeTranslator(m_trans);
+		m_trans->load("uk_UA.qm");
+		m_app->installTranslator(m_trans);
+		break;
+	}
 }

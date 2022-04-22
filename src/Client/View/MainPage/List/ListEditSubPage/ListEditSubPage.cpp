@@ -21,6 +21,21 @@ ListEditSubPage::~ListEditSubPage()
 	delete m_ui;
 }
 
+void ListEditSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void ListEditSubPage::set_list(const List& list)
 {
 	m_list = list;

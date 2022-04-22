@@ -34,6 +34,12 @@ void LoginPageController::ConnectPage()
 		this,
 		&LoginPageController::OnGoToSignupPage);
 
+	QObject::connect(
+		&m_page,
+		&LoginPage::LangChanged,
+		this,
+		&LoginPageController::OnLangChanged);
+
 
 #ifdef QT_DEBUG
 	QShortcut *shortcut = new QShortcut(QKeySequence("Return"), &m_page);
@@ -63,7 +69,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
 			m_page.ChangeLoginErrorLabel(
-				"Login or password is incorrect");
+				tr("Login or password is incorrect").toStdString());
 		}
 		else
 		{
@@ -86,6 +92,11 @@ void LoginPageController::OnGoToSignupPage()
 {
 	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::SIGNUP);
+}
+
+void LoginPageController::OnLangChanged(const UILangs& lang)
+{
+	emit LangChanged(lang);
 }
 
 #ifdef QT_DEBUG

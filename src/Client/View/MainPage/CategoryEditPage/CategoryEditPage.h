@@ -15,7 +15,7 @@ public:
 	~CategoryEditPage();
 	void Update(const std::vector<ProductCategory>& categories);
 	void Update(const std::vector<IncomeCategory>& categories);
-
+	void changeEvent(QEvent* event);
 signals:
 	void AddIncomeCategory(IncomeCategory);
 	void AddProductCategory(ProductCategory);

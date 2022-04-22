@@ -24,12 +24,14 @@ public:
 
 	void Update();
 
-	Product get_product() const { return m_product; };
+	Product get_product() const { return m_product; }
 
 	void set_number(int number);
 	int get_number();
 
 	QString get_color();
+
+	void changeEvent(QEvent* event);
 
 private:
 	void UpdateColor();

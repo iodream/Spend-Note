@@ -30,10 +30,12 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void LangChanged(const UILangs& lang);
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnGoToSignupPage();
+	void OnLangChanged(const UILangs& lang);
 
 #ifdef QT_DEBUG
 	void QuickLogin();

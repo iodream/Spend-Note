@@ -24,6 +24,21 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 		&ProductsSubPage::GoToViewList);
 }
 
+void ProductsSubPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void ProductsSubPage::AppendProduct(ProductItem* product)
 {
 	InsertProduct(product, get_list_size());

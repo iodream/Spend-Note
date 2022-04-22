@@ -45,6 +45,21 @@ CategoryEditPage::~CategoryEditPage()
 	delete ui;
 }
 
+void CategoryEditPage::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
+}
+
 void CategoryEditPage::Update(const std::vector<ProductCategory>& categories)
 {
 	ui->NewCategoryEdit->setVisible(false);

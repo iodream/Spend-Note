@@ -16,8 +16,6 @@ const QString COLOR_PRIO_ONE = "rgba(201, 60, 32, 50%)";
 
 }
 
-#include <iostream>
-
 ProductItem::ProductItem(Product product, QWidget *parent)
 	: QPushButton(parent)
 	, m_product(product)
@@ -51,6 +49,21 @@ void ProductItem::UpdateColor()
 		m_color = COLOR_PRIO_FIVE;
 		break;
 	}
+}
+
+void ProductItem::changeEvent(QEvent* event)
+{
+ if(event)
+ {
+  switch(event->type())
+  {
+   case QEvent::LanguageChange:
+	m_ui->retranslateUi(this);
+	break;
+  }
+
+ QWidget::changeEvent(event);
+ }
 }
 
 void ProductItem::Update()

@@ -3,6 +3,8 @@
 #include <memory>
 
 #include <QMessageBox>
+#include <QApplication>
+#include <QTranslator>
 
 #include "Poco/Util/JSONConfiguration.h"
 
@@ -11,6 +13,7 @@
 #include "LoginPageController.h"
 #include "SignupPageController.h"
 #include "MainPage/MainPageController.h"
+
 
 #include "View/MainWindow.h"
 #include "View/Constants.h"
@@ -25,7 +28,7 @@ class Controller : public QObject
 public:
 	using SignupInDTO = SignupModel::SignupInDTO;
 
-	Controller();
+	Controller(QApplication* a);
 	void Start(UIPages at_page=UIPages::LOGIN);
 	static bool AskUser(const QString& title, const QString& text);
 
@@ -41,6 +44,8 @@ private:
 	HTTPClient m_http_client;
 	IdType m_user_id{1};
 	MainWindow m_main_window{};
+	QApplication* m_app;
+	QTranslator* m_trans;
 
 private:
 	std::unique_ptr<LoginPageController>  m_login_page_controller;
@@ -49,4 +54,6 @@ private:
 
 public slots:
 	void OnChangePage(UIPages page);
+	void OnLangChanged(const UILangs& lang);
+
 };
