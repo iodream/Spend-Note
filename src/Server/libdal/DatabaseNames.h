@@ -69,6 +69,7 @@ namespace db
 		const std::string ID = "id";
 		const std::string LOGIN = "login";
 		const std::string PASSWORD = "password";
+		const std::string SALT = "salt";
 	}
 
 	namespace statistics

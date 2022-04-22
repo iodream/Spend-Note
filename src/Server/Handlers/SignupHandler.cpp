@@ -4,6 +4,12 @@
 #include <QJsonObject>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
+#include "Poco/DigestStream.h"
+#include "Poco/MD5Engine.h"
+
+#include <random>
+#include <algorithm>
+
 #include "Common.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -11,6 +17,7 @@
 #include "Net/Parsing.h"
 #include <iostream>
 #include "Logger/ScopedLogger.h"
+#include "Net/Constants.h"
 
 SignupHandler::SignupHandler()
 {
@@ -34,6 +41,24 @@ SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 	return dto;
 }
 
+std::string SignupHandler::CreateSalt()
+{
+	std::string salt;
+
+	std::random_device random_device; // create object for seeding
+	std::mt19937 engine{random_device()}; // create engine and seed it
+	std::uniform_int_distribution<> dist(33,126); // create distribution for integers with [1; 9] range
+
+	for(int i = 0; i < Net::SALT_SIZE; ++i)
+	{
+		auto random_number = dist(engine);
+		salt += char(random_number);
+	}
+	std::shuffle(salt.begin(), salt.end(), engine);
+
+	return salt;
+}
+
 Net::Response SignupHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
@@ -49,7 +74,16 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 
 	try
 	{
-		m_facade->AddUser(db::User {0, dto.login, dto.passwd_hash}).value();
+		Poco::MD5Engine md5;
+		Poco::DigestOutputStream ostr(md5);
+		dto.salt = CreateSalt();
+		ostr << dto.passwd_hash + dto.salt;
+		ostr.flush();
+
+		const Poco::DigestEngine::Digest& digest = md5.digest();
+		dto.passwd_hash= Poco::DigestEngine::digestToHex(digest);
+
+		m_facade->AddUser(db::User {0, dto.login, dto.passwd_hash, dto.salt}).value();
 		qInfo() << "Registered new user: " << QString::fromStdString(dto.login) << "\n";
 		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 	}

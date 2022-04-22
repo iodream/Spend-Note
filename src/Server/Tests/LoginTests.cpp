@@ -39,7 +39,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto response = handler->Handle(request);
 	auto dto = handler->m_parser.Parse(request.json_payload);
 
-	ASSERT_NE(dto.passwd_hash, existing_user.password);
+	ASSERT_NE(dto.password, existing_user.password);
 }
 
 //checks for good login

@@ -3,6 +3,8 @@
 #include <QJsonObject>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
+#include "Poco/DigestStream.h"
+#include "Poco/MD5Engine.h"
 
 #include "LoginHandler.h"
 
@@ -36,7 +38,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 
 	try {
 		SafeReadString(json, "login", dto.login);
-		SafeReadString(json, "password", dto.passwd_hash);
+		SafeReadString(json, "password", dto.password);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
@@ -50,7 +52,16 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByLogin(dto.login);
 
-	if(!user || dto.passwd_hash != user->password) {
+	Poco::MD5Engine md5;
+	Poco::DigestOutputStream ostr(md5);
+
+	ostr << dto.password + user->salt;
+	ostr.flush();
+
+	const Poco::DigestEngine::Digest& digest = md5.digest();
+	dto.password = Poco::DigestEngine::digestToHex(digest);
+
+	if(!user || dto.password != user->password) {
 		return FormErrorResponse(
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Invalid login data");

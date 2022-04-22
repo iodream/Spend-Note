@@ -23,4 +23,6 @@ const AuthSchemeType AUTH_SCHEME_TYPE_BEARER = "Bearer";
 
 const std::string DUMMY_PASSWORD = "0123456789ABCDEF0123456789ABCDEF";
 
+const int SALT_SIZE = 6;
+
 }

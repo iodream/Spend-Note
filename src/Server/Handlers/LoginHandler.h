@@ -23,7 +23,8 @@ class LoginHandler : public ICommandHandler
 	public:
 		struct Login{
 			std::string login;
-			std::string passwd_hash;
+			std::string password;
+			std::string salt;
 		};
 	Login Parse(const QJsonDocument& payload);
 

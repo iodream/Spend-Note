@@ -10,5 +10,6 @@ namespace db
 		IdType id;
 		std::string login;
 		std::string password;
+		std::string salt;
 	};
 }
