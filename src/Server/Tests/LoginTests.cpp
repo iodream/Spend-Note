@@ -18,10 +18,10 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto facade = std::make_unique<MockDbFacade>();
 	db::User existing_user;
 	existing_user.id = 1;
-	existing_user.login = "Test user";
+	existing_user.email = "example@mail.com";
 	existing_user.password = "Test password hash";
 
-	EXPECT_CALL(*facade, GetUserByLogin(_))
+	EXPECT_CALL(*facade, GetUserByEmail(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
 	auto handler = std::make_unique<LoginHandler>();
@@ -48,10 +48,10 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	auto facade = std::make_unique<MockDbFacade>();
 	db::User existing_user;
 	existing_user.id = 1;
-	existing_user.login = "Test user";
+	existing_user.email = "example@mail.com";
 	existing_user.password = "Test password hash";
 
-	EXPECT_CALL(*facade, GetUserByLogin(_))
+	EXPECT_CALL(*facade, GetUserByEmail(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
 	auto handler = std::make_unique<LoginHandler>();
