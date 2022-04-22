@@ -14,6 +14,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
+		, m_recommendation(m_connection)
 {
 }
 
@@ -247,6 +248,11 @@ bool DbFacade::RemoveProductCategory(IdType id)
 bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 {
 	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
+}
+
+Product DbFacade::GetRecommendation(const IdType &user_id)
+{
+	return m_recommendation.GetRecommendation(user_id);
 }
 
 }
