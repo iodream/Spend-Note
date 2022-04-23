@@ -109,7 +109,7 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="PriorityLabel">
        <property name="font">
         <font>
@@ -121,10 +121,10 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <widget class="QSpinBox" name="Priority"/>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="CategoryLabel">
        <property name="font">
         <font>
@@ -136,7 +136,7 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
+     <item row="10" column="0">
       <widget class="QLabel" name="IsBoughtLabel">
        <property name="font">
         <font>
@@ -148,14 +148,14 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
+     <item row="10" column="1">
       <widget class="QCheckBox" name="IsBought">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="7" column="1">
       <layout class="QHBoxLayout" name="CategoryLayout">
        <item>
         <widget class="QComboBox" name="Category"/>
@@ -175,7 +175,7 @@
        </item>
       </layout>
      </item>
-     <item row="7" column="1">
+     <item row="8" column="1">
       <layout class="QHBoxLayout" name="NewCategoryLayout">
        <item>
         <widget class="QLineEdit" name="NewCategoryName"/>
@@ -192,6 +192,42 @@
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="RepeatLabel">
+       <property name="text">
+        <string>Repeating</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QComboBox" name="RepeatingSelect">
+       <item>
+        <property name="text">
+         <string>No</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Daily</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Weekly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monthy</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Annually</string>
+        </property>
+       </item>
+      </widget>
      </item>
     </layout>
    </item>
