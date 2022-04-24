@@ -3,6 +3,8 @@
 
 #include "Exceptions/NonexistentResource.h"
 #include "DatabaseNames.h"
+#include <random>
+
 
 namespace db {
 
@@ -25,11 +27,13 @@ Product RecommendationRepository::GetRecommendation(const IdType &user_id)
 				" WHERE " + db::list::USER_ID + " = " + w.quote(user_id) +
 				" AND " + product::PRICE + " < " + w.quote(GetUserBalance(user_id, w)) +
 				" AND " + product::IS_BOUGHT + " = " + w.quote(false) +
-				" AND " + product::BUY_UNTIL_DATE + " > NOW()" + ";"); // <
+				" AND " + product::BUY_UNTIL_DATE + " < NOW()" + ";"); // <
 
 		if (!rec_product_rows.empty())
 		{
-			return ProductFromRow(rec_product_rows[rand() % rec_product_rows.size()]);
+			srand(time(NULL));
+			auto random_number = rand() % rec_product_rows.size();
+			return ProductFromRow(rec_product_rows[random_number]);
 		}
 	}
 	catch(const pqxx::failure& e)
