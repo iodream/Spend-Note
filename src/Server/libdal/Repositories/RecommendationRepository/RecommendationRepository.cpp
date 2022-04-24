@@ -31,8 +31,10 @@ Product RecommendationRepository::GetRecommendation(const IdType &user_id)
 
 		if (!rec_product_rows.empty())
 		{
-			srand(time(NULL));
-			auto random_number = rand() % rec_product_rows.size();
+			std::random_device random_device;
+			std::mt19937 engine{random_device()};
+			std::uniform_int_distribution<> dist(0, rec_product_rows.size() - 1);
+			auto random_number = dist(engine);
 			return ProductFromRow(rec_product_rows[random_number]);
 		}
 	}
