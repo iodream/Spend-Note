@@ -11,6 +11,7 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
+#include "Repositories/RecommendationRepository/RecommendationRepository.h"
 
 namespace db
 {
@@ -78,6 +79,8 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
+	Product GetRecommendation(const IdType& user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -90,5 +93,6 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
+	RecommendationRepository m_recommendation;
 };
 }
