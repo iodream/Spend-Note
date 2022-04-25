@@ -212,7 +212,7 @@ color: rgb(255, 255, 255);</string>
         <item>
          <widget class="QLabel" name="usernameLabel">
           <property name="text">
-           <string>Create a username:</string>
+           <string>Type your email:</string>
           </property>
          </widget>
         </item>
@@ -222,7 +222,7 @@ color: rgb(255, 255, 255);</string>
            <string/>
           </property>
           <property name="placeholderText">
-           <string>Type your username</string>
+           <string>Type your email...</string>
           </property>
          </widget>
         </item>

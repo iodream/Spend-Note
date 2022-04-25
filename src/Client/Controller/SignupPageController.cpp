@@ -43,7 +43,7 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 
 	if (!model.CheckData(in_dto))
 	{
-		m_page.SetErrorBanner("Username or password can't be empty!");
+		m_page.SetErrorBanner("Email or password can't be empty!");
 		return;
 	}
 
