@@ -9,3 +9,5 @@ Net::Response FormErrorResponse(
 Net::Response FormErrorResponse(
 	Poco::Net::HTTPServerResponse::HTTPStatus status,
 	const char* reason);
+
+std::string HashingPassword(const std::string& password, const std::string& salt);

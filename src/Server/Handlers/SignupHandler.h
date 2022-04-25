@@ -14,7 +14,8 @@ class SignupHandler : public ICommandHandler
 	public:
 		struct Credentials {
 			std::string login;
-			std::string passwd_hash;
+			std::string password;
+			std::string password_hash;
 			std::string salt;
 		};
 		Credentials Parse(const QJsonDocument& payload);

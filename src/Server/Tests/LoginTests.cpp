@@ -19,7 +19,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
-	existing_user.password = "Test password hash";
+	existing_user.password_hash = "Test password hash";
 
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
@@ -39,7 +39,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto response = handler->Handle(request);
 	auto dto = handler->m_parser.Parse(request.json_payload);
 
-	ASSERT_NE(dto.password, existing_user.password);
+	ASSERT_NE(dto.password, existing_user.password_hash);
 }
 
 //checks for good login
@@ -49,7 +49,7 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
-	existing_user.password = "Test password hash";
+	existing_user.password_hash = "Test password hash";
 
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
