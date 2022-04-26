@@ -60,7 +60,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 	{
 		m_sender.SendEmail(dto.email, code);
 	}
-	catch (Exception& exc)
+	catch (Poco::Exception& exc)
 	{
 		return FormErrorResponse(
 			Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_BAD_REQUEST,
