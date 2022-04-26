@@ -4,6 +4,7 @@
 
 const std::string VerificationCodeFormatter::FormatVerificationCode(const size_t length)
 {
+	srand(time(0));
 	auto randchar = []() -> char
 	{
 		const char charset[] =

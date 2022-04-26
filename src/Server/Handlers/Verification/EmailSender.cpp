@@ -15,6 +15,7 @@ void EmailSender::SendEmail(const std::string& recipient, const std::string& cod
 	  message.setSubject("Hello from the POCO C++ Libraries");
 	  std::string content;
 	  content += code;
+	  content += "\n";
 	  content += recipient;
 	  content += ",\r\n\r\n";
 	  content += "Demo messages.\r\n\r\n";
