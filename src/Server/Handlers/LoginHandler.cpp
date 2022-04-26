@@ -35,7 +35,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 	auto json = payload.object();
 
 	try {
-		SafeReadString(json, "login", dto.login);
+		SafeReadString(json, "login", dto.email);
 		SafeReadString(json, "password", dto.passwd_hash);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
@@ -48,11 +48,11 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
 
-	/*
-	auto dto = m_parser.Parse(request.json_payload);
-	auto user = m_facade->GetUserByLogin(dto.login);
 
-	if(!user || dto.passwd_hash != user->password) {
+	auto dto = m_parser.Parse(request.json_payload);
+	auto user = m_facade->GetUserByEmail(dto.email);
+
+	if(!user || dto.passwd_hash != user->password || !user.value().verified) {
 		return FormErrorResponse(
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Invalid login data");
@@ -62,7 +62,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	token.setType("JWT");
 
 	token.payload().set("id", FormatId(user->id));
-	token.payload().set("login", std::string(user->login));
+	token.payload().set("email", std::string(user->email));
 
 	token.setIssuedAt(Poco::Timestamp());
 
@@ -70,9 +70,5 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
 	return FormJSONResponse(m_formatter.Format(out_dto));
-	*/
 
-	return FormErrorResponse(
-			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
-			"Method not implemented" + request.uri);
 }

@@ -38,6 +38,11 @@ bool DbFacade::UpdateUser(const User &user)
 	return m_users.Update(user);
 }
 
+bool DbFacade::UpdateUserVerification(IdType id)
+{
+	return m_users.UpdateVerification(id);
+}
+
 bool DbFacade::RemoveUser(IdType id)
 {
 	return m_users.Remove(id);

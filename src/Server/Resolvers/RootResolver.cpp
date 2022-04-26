@@ -11,6 +11,7 @@
 
 #include "../Handlers/LoginHandler.h"
 #include "../Handlers/SignupHandler.h"
+#include "../Handlers/Verification/VerificationHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
@@ -21,6 +22,7 @@ namespace {
 
 const std::string LOGIN    = "/login";
 const std::string SIGNUP   = "/signup";
+const std::string VERIFICATION   = "/verification";
 const std::string INCOMES  = "/incomes";
 const std::string LISTS    = "/lists";
 const std::string PRODUCTS = "/products";
@@ -64,6 +66,11 @@ ICommandHandler* RootResolver::Resolve(
 	else if (segment == SIGNUP) {
 		if (method == Net::HTTP_METHOD_POST)
 			return new SignupHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == VERIFICATION) {
+		if (method == Net::HTTP_METHOD_PUT)
+			return new VerificationHandler();
 		return new MethodNotAllowedHandler();
 	}
 

@@ -114,6 +114,32 @@ bool UserRepository::Update(const User &user)
 	return true;
 }
 
+bool UserRepository::UpdateVerification(IdType id)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		auto result = w.exec("SELECT " + user::ID + " FROM  " + user::TABLE_NAME + " WHERE " + user::ID + " = " + w.quote(id));
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + user::TABLE_NAME +
+			" SET " +
+				user::VERIFIED + " = " + w.quote(true) +
+			" WHERE " + user::ID + " = " + w.quote(id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return true;
+}
+
 bool UserRepository::Remove(IdType id)
 {
 	try
