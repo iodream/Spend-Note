@@ -17,7 +17,7 @@ TEST(SignupHandlerTest, USER_ALREADY_EXISTS)
 	db::User existing_user;
 	existing_user.id = 1;
 	existing_user.login = "Test user";
-	existing_user.password = "Test password hash";
+	existing_user.password_hash = "Test password hash";
 
 	EXPECT_CALL(*facade, GetUserByLogin(_))
 		.WillOnce(Return(std::optional{existing_user}));
