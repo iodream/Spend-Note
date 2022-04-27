@@ -8,7 +8,7 @@
 #include "../ICommandHandler.h"
 #include "../Verification/EmailSender.h"
 
-class VerificationHandler : public ICommandHandler
+class CheckVerificationHandler : public ICommandHandler
 {
 	class JSONParser
 	{
@@ -20,8 +20,8 @@ class VerificationHandler : public ICommandHandler
 		Verification Parse(const QJsonDocument& payload);
 	};
 public:
-	VerificationHandler() = default;
-	virtual ~VerificationHandler() override = default;
+	CheckVerificationHandler() = default;
+	virtual ~CheckVerificationHandler() override = default;
 
 	Net::Response Handle(Net::Request& request) override;
 

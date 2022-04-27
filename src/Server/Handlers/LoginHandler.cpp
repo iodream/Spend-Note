@@ -35,7 +35,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 	auto json = payload.object();
 
 	try {
-		SafeReadString(json, "login", dto.email);
+		SafeReadString(json, "email", dto.email);
 		SafeReadString(json, "password", dto.passwd_hash);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};

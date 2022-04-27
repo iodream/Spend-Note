@@ -24,7 +24,7 @@ std::optional<IdType> VerificationCodeRepository::Add(const VerificationCode &co
 				verificationCode::EXPIRATION_TIME +
 			") VALUES (" +
 				w.quote(code.user_id) + ", " +
-				w.quote(code.code) + ")" +
+				w.quote(code.code) + ", " +
 				w.quote(code.expiration_time) + ")" +
 			" RETURNING " + verificationCode::ID + ";");
 

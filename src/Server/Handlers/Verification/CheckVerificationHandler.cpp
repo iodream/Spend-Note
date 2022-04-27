@@ -1,4 +1,4 @@
-#include "VerificationHandler.h"
+#include "CheckVerificationHandler.h"
 
 #include <memory>
 #include <QJsonObject>
@@ -12,7 +12,7 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-VerificationHandler::JSONParser::Verification VerificationHandler::JSONParser::Parse(
+CheckVerificationHandler::JSONParser::Verification CheckVerificationHandler::JSONParser::Parse(
 		const QJsonDocument& payload)
 {
 	SCOPED_LOGGER;
@@ -29,7 +29,7 @@ VerificationHandler::JSONParser::Verification VerificationHandler::JSONParser::P
 	return dto;
 }
 
-Net::Response VerificationHandler::Handle(Net::Request& request)
+Net::Response CheckVerificationHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
 
@@ -41,6 +41,12 @@ Net::Response VerificationHandler::Handle(Net::Request& request)
 	}
 	catch (const db::DatabaseFailure& e) {
 		return FormErrorResponse(
+			NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Such user was not get because database error occurred");
+	}
+
+	if (!user.has_value()) {
+		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"User not found");
 	}
@@ -51,21 +57,49 @@ Net::Response VerificationHandler::Handle(Net::Request& request)
 	}
 	catch (const db::DatabaseFailure& e) {
 		return FormErrorResponse(
+			NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"Such verification code was not gotten because database error occurred");
+	}
+
+	if (!verification.has_value()) {
+		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Verification code not found");
 	}
 
 	QDateTime current_time(QDateTime::currentDateTime());
-	if (current_time > QDateTime::fromString(QString::fromStdString(verification.value().expiration_time))) {
-		m_facade->RemoveVerificationCode(verification.value().id);
+
+	if (current_time > QDateTime::fromString(QString::fromStdString(verification.value().expiration_time), Qt::ISODate)) {
+		try {
+			m_facade->RemoveVerificationCode(verification.value().id);
+		}
+		catch (const db::DatabaseFailure& e) {
+			return FormErrorResponse(
+				NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
+				"Such verification code was not removed because database error occurred");
+		}
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Verification code not found");
 	}
 	else {
 		if (dto.code == verification.value().code) {
-			m_facade->UpdateUserVerification(user.value().id);
-			m_facade->RemoveVerificationCode(verification.value().id);
+			try {
+				m_facade->UpdateUserVerification(user.value().id);
+			}
+			catch (const db::DatabaseFailure& e) {
+				return FormErrorResponse(
+					NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
+					"Such user was not updated because database error occurred");
+			}
+			try {
+				m_facade->RemoveVerificationCode(verification.value().id);
+			}
+			catch (const db::DatabaseFailure& e) {
+				return FormErrorResponse(
+					NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
+					"Such verification code was not removed because database error occurred");
+			}
 			return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 		}
 	}
@@ -73,5 +107,4 @@ Net::Response VerificationHandler::Handle(Net::Request& request)
 	return FormErrorResponse(
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Wrong verification code");
-
 }

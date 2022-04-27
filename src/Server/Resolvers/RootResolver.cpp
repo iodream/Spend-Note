@@ -11,7 +11,8 @@
 
 #include "../Handlers/LoginHandler.h"
 #include "../Handlers/SignupHandler.h"
-#include "../Handlers/Verification/VerificationHandler.h"
+#include "../Handlers/Verification/AddVerificationHandler.h"
+#include "../Handlers/Verification/CheckVerificationHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
@@ -69,8 +70,10 @@ ICommandHandler* RootResolver::Resolve(
 		return new MethodNotAllowedHandler();
 	}
 	else if (segment == VERIFICATION) {
+		if (method == Net::HTTP_METHOD_POST)
+			return new AddVerificationHandler();
 		if (method == Net::HTTP_METHOD_PUT)
-			return new VerificationHandler();
+			return new CheckVerificationHandler();
 		return new MethodNotAllowedHandler();
 	}
 

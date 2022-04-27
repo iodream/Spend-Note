@@ -15,7 +15,6 @@
 #include <iostream>
 #include "Logger/ScopedLogger.h"
 
-const QString DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
 const unsigned long code_expiration_in_secs = 900;
 
 SignupHandler::SignupHandler()
@@ -54,35 +53,15 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 			"User with this email already exists");
 	}
 
-	const std::string code = m_code_formatter.FormatVerificationCode(code_length);
-
-	try
-	{
-		m_sender.SendEmail(dto.email, code);
+	try {
+		m_facade->AddUser(db::User{0, dto.email, dto.passwd_hash, false});
 	}
-	catch (Poco::Exception& exc)
-	{
-		return FormErrorResponse(
-			Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_BAD_REQUEST,
-			"Impossible to send email");
-	}
-
-	try
-	{
-		auto user_id = m_facade->AddUser(db::User {0, dto.email, dto.passwd_hash, false}).value();
-
-		QDateTime expiration_time(QDateTime::currentDateTime().addSecs(code_expiration_in_secs));
-		m_facade->AddVerificationCode(db::VerificationCode {0, user_id, code,
-			expiration_time.toString(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS).toStdString()});
-
-		qInfo() << "Registered new user: " << QString::fromStdString(dto.email) << "\n";
-		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
-	}
-	catch(const db::DatabaseFailure& e)
-	{
+	catch(const db::DatabaseFailure& e) {
 		return FormErrorResponse(
 			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
 			"User not created because database error occured");
 	}
+
+	return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 
 }

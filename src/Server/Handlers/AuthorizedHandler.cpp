@@ -64,7 +64,7 @@ AuthorizedHandler::JSONParser::Token AuthorizedHandler::JSONParser::Parse(
 
 	try {
 		SafeReadId(json, "id", dto.id);
-		SafeReadString(json, "login", dto.login);
+		SafeReadString(json, "email", dto.email);
 		SafeReadNumber(json, "iat", dto.iat);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
