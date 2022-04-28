@@ -16,5 +16,6 @@ add_subdirectory(Income)
 add_subdirectory(Statistic)
 add_subdirectory(CategoryEditPage)
 add_subdirectory(DailyList)
+add_subdirectory(Settings)
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)

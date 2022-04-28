@@ -24,6 +24,7 @@
 #include "DailyList/DailyListSubPage/DailyListSubPage.h"
 #include "Statistic/StatisticSubPage.h"
 #include "CategoryEditPage/CategoryEditPage.h"
+#include "Settings/SettingsSubPage/SettingsSubPage.h"
 
 #include "RecommendationWidget.h"
 
@@ -51,6 +52,7 @@ public:
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
+	void HideRecommendation();
 
 private:
 	void InitListsSubPage();
@@ -73,6 +75,7 @@ private:
 	void InitDailyListSubPage();
 	void InitStatisticsSubPage();
 	void InitCategoriesEditSubPage();
+	void InitSettingsSubPage();
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
@@ -96,8 +99,8 @@ public:
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
 
-	void HideRecommendation();
 
+	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 
 	void resizeEvent(QResizeEvent* event);
 private:
@@ -125,6 +128,7 @@ private:
 	CategoryEditPage m_categories_edit_spage;
 	RecommendationWidget* rec;
 	RecommendationItem* item;
+	SettingsSubPage m_settings_spage;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -141,6 +145,6 @@ public slots:
 	void OnGoToCategoriesEditClicked();
 	void OnRecommendationClosed();
 
-
+	void OnGoToSettingsClicked();
 };
 

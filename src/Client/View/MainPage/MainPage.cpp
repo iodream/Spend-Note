@@ -14,7 +14,7 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToListsButton->setToolTip("My Lists");
 		m_ui->LogoutButton->setToolTip("Log Out");
 		m_ui->GoToDailyList->setToolTip("Daily List");
-		m_ui->Settings->setToolTip("Settings");
+		m_ui->GoToSettingsButton->setToolTip("Settings");
 		m_ui->GoToStatisticsButton->setToolTip("Statistics");
 		m_ui->GoToCategoriesButton->setToolTip("My Categories");
 
@@ -68,6 +68,12 @@ MainPage::MainPage(QWidget *parent)
 		this,
 		&MainPage::CloseErrorBanner);
 
+	connect(
+		m_ui->GoToSettingsButton,
+		&QToolButton::clicked,
+		this,
+		&MainPage::OnGoToSettingsClicked);
+
 	InitListsSubPage();
 	InitListCreateSubPage();
 	InitProductQuickCreateSubPage();
@@ -88,6 +94,7 @@ MainPage::MainPage(QWidget *parent)
 	InitDailyListSubPage();
 	InitStatisticsSubPage();
 	InitCategoriesEditSubPage();
+	InitSettingsSubPage();
 
 	rec = new RecommendationWidget(this);
 	rec->setAttribute(Qt::WA_StyledBackground, true);
@@ -195,9 +202,15 @@ void MainPage::InitCategoriesEditSubPage()
 	m_ui->Display->addWidget(&m_categories_edit_spage);
 }
 
+<<<<<<< HEAD
 void MainPage::HideRecommendation()
 {
 	rec->hide();
+=======
+void MainPage::InitSettingsSubPage()
+{
+	m_ui->Display->addWidget(&m_settings_spage);
+>>>>>>> origin/dev
 }
 
 
@@ -246,9 +259,15 @@ void MainPage::OnGoToCategoriesEditClicked()
 	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
 }
 
+<<<<<<< HEAD
 void MainPage::OnRecommendationClosed()
 {
 	emit RecommendationClosed();
+=======
+void MainPage::OnGoToSettingsClicked()
+{
+	emit ChangeSubPage(MainSubPages::SETTINGS);
+>>>>>>> origin/dev
 }
 
 void MainPage::ShowBalance(const Balance& money)

@@ -1,6 +1,10 @@
 #include "Utils.h"
 #include "Logger/ScopedLogger.h"
 
+#include <string>
+#include "Poco/DigestStream.h"
+#include "Poco/SHA1Engine.h"
+
 Net::Response FormErrorResponse(
 	Poco::Net::HTTPServerResponse::HTTPStatus status,
 	std::string reason)
@@ -21,4 +25,19 @@ Net::Response FormErrorResponse(
 {
 	SCOPED_LOGGER;
 	return FormErrorResponse(status, std::string(reason));
+}
+
+std::string HashingPassword(const std::string& password, const std::string& salt)
+{
+	std::string hashed_password;
+
+	Poco::SHA1Engine sha1;
+	Poco::DigestOutputStream ostr(sha1);
+	ostr << password + salt;
+	ostr.flush();
+
+	const Poco::DigestEngine::Digest& digest = sha1.digest();
+	hashed_password = Poco::DigestEngine::digestToHex(digest);
+
+	return hashed_password;
 }
