@@ -2,6 +2,20 @@
 #include "ui_MainPage.h"
 
 #include "Exception.h"
+#include <QColorDialog>
+QString MainPage::ColorSettings::COLOR_BALANCE_BANNER;
+QString MainPage::ColorSettings::NAVBUTTONS;
+QString MainPage::ColorSettings::RECOMMENDATION;
+QString MainPage::ColorSettings::ERROR_BANNER;
+QString MainPage::ColorSettings::WINDOW_BACKGROUND;
+QString MainPage::ColorSettings::LABEL_TEXT;
+QString MainPage::ColorSettings::PRODUCT_PRIO1;
+QString MainPage::ColorSettings::PRODUCT_PRIO2;
+QString MainPage::ColorSettings::PRODUCT_PRIO3;
+QString MainPage::ColorSettings::PRODUCT_PRIO4;
+QString MainPage::ColorSettings::PRODUCT_PRIO5;
+QString MainPage::ColorSettings::LIST_INACTIVE;
+QString MainPage::ColorSettings::LIST_ACTIVE;
 
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
@@ -238,6 +252,14 @@ void MainPage::ShowBalance(const Balance& money)
 {
 	m_ui->CurrentBalance->setText("Current Balance:  " + QString::number(money.balance));
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
+}
+
+void MainPage::UpdatePageColors()
+{
+	setStyleSheet(QString("background-color:" + ColorSettings::WINDOW_BACKGROUND));
+	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_BALANCE_BANNER));
+	setStyleSheet(QString("QLabel { color:" + ColorSettings::LABEL_TEXT + QString( " } ")));
+
 }
 
 

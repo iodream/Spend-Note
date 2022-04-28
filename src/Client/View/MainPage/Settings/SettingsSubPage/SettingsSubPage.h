@@ -27,5 +27,10 @@ private slots:
 	void OnSubmitPasswordChangeButtonClicked();
 	void OnSubmitEmailChangeButtonClicked();
 	void OnGoBackClicked();
+	void OnColorScheme1Selected();
+	void OnColorScheme2Selected();
+	void OnColorScheme3Selected();
+signals:
+	void ColorSchemeChanged();
 };
 

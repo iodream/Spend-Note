@@ -99,6 +99,8 @@ void MainPageController::InitListPagesController()
 //		&ProductPagesController::OnCreateProduct);
 }
 
+
+
 void MainPageController::InitProductPagesController()
 {
 	m_product_pages_controller =
@@ -334,6 +336,12 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ColorSchemeChanged,
+		this,
+		&MainPageController::OnColorSchemeChanged);
 }
 
 void MainPageController::OnLogout()
@@ -429,6 +437,53 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	return update_succeeded;
 }
 
+bool MainPageController::UpdateSubPage(MainSubPages page)
+{
+	bool update_succeeded{true};
+
+	switch(page)
+	{
+	case MainSubPages::LISTS:
+		return m_list_pages_controller->UpdateListPageColors();
+//	case MainSubPages::CREATE_LIST:
+//		return m_list_pages_controller->UpdateListCreatePageColors();
+//	case MainSubPages::EDIT_LIST:
+//		return m_list_pages_controller->UpdateListEditPageColors();
+//	case MainSubPages::VIEW_LIST:
+//		return m_list_pages_controller->UpdateListViewPageColors();
+//	case MainSubPages::PRODUCTS:
+//		return m_product_pages_controller->UpdateProductsPageColors();
+//	case MainSubPages::VIEW_PRODUCT:
+//		return m_product_pages_controller->UpdateViewProductSubPageColors();
+//	case MainSubPages::CREATE_PRODUCT:
+//		return m_product_pages_controller->UpdateCreateProductPageColors();
+//		break;
+//	case MainSubPages::EDIT_PRODUCT:
+//		return m_product_pages_controller->UpdateEditProductSubPageColors();
+//		break;
+//	case MainSubPages::INCOMES:
+//		return m_income_pages_controller->UpdateIncomesPageColors();
+//	case MainSubPages::VIEW_INCOME:
+//		return m_income_pages_controller->UpdateIncomeViewPageColors();
+//	case MainSubPages::EDIT_INCOME:
+//		return m_income_pages_controller->UpdateIncomeEditPageColors();
+//	case MainSubPages::SETTINGS:
+//		m_settings_page_controller->UpdateSettingsSubPageColors();
+//		break;
+//	case MainSubPages::DAILY_LIST:
+//		return m_daily_list_page_controller->UpdateDailyListPageColors();
+//	case MainSubPages::QUICK_CREATE_PRODUCT:
+//		return m_list_pages_controller->UpdateListQuickCreatePageColors();
+//	case MainSubPages::STATISTICS:
+//		return m_statistics_page_controller->UpdateStatisticsPageColors();
+//	case MainSubPages::CATEGORIES_EDIT:
+//		m_income_categories_controller->UpdateIncomeCategoryPageColors();
+//		return m_product_categories_controller->UpdateProductCategoryPageColors();
+	}
+	return update_succeeded;
+}
+
+
 void MainPageController::OnUpdateSubPage(MainSubPages page, PageData data)
 {
 	UpdateSubPage(page, data);
@@ -460,5 +515,10 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 	{
 		return std::nullopt;
 	}
+}
 
+void MainPageController::OnColorSchemeChanged()
+{
+	m_page.UpdatePageColors();
+	//UpdateSubPage(MainSubPages::LISTS);
 }

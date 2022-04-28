@@ -10,7 +10,16 @@ SettingsPageController::SettingsPageController(
 	, m_user_id(user_id)
 	, m_settings_page(settings_page)
 {
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::ColorSchemeChanged,
+		this,
+		&SettingsPageController::OnColorSchemeChanged);
+}
 
+void SettingsPageController::OnColorSchemeChanged()
+{
+	emit ColorSchemeChanged();
 }
 
 void SettingsPageController::UpdateSettingsSubPage()
