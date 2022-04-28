@@ -47,7 +47,7 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD +
+			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::VERIFIED +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 

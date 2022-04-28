@@ -89,7 +89,7 @@ Net::Response AddVerificationHandler::Handle(Net::Request& request)
 
 	try
 	{
-		//m_sender.SendEmail(dto.email, code);
+		m_sender.SendEmail(dto.email, code);
 		return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
 	}
 	catch (Poco::Exception& exc)
