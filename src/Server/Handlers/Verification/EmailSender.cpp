@@ -42,16 +42,13 @@ void EmailSender::SendEmail(const std::string& recipient, const std::string& cod
 	MailMessage message;
 	message.setSender(json_config.getString(Config::EMAIL_SENDER));
 	message.addRecipient(MailRecipient(MailRecipient::PRIMARY_RECIPIENT, recipient));
-	message.setSubject("Hello from the POCO C++ Libraries");
+	message.setSubject("Verification code from SpendAndNote application");
 	std::string content;
 	content += code;
 	content += "\n";
-	content += recipient;
-	content += ",\r\n\r\n";
-	content += "Demo messages.\r\n\r\n";
 	message.setContent(content);
 
-	SecureSMTPClientSession session(json_config.getString(Config::MAILHOST));
+	SecureSMTPClientSession session(json_config.getString(Config::MAILHOST), json_config.getUInt(Config::SMTP_PORT));
 	session.login();
 	session.startTLS(pContext);
 	if (!json_config.getString(Config::EMAIL_USERNAME).empty())

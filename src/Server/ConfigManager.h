@@ -15,6 +15,7 @@ const std::string MAILHOST= "mailhost";
 const std::string EMAIL_SENDER = "email_sender";
 const std::string EMAIL_USERNAME = "email_username";
 const std::string EMAIL_PASSWORD = "email_password";
+const std::string SMTP_PORT = "SMTP_port";
 }
 
 class ConfigManager

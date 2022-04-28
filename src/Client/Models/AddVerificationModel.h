@@ -7,14 +7,12 @@
 #include "Net/Constants.h"
 #include "Net/Message.h"
 
-class VerificationModel
+class AddVerificationModel
 {
 public:
 	struct VerificationInDTO
 	{
 		std::string email;
-		std::string code;
-
 	};
 
 	class JSONFormatter
@@ -23,7 +21,7 @@ public:
 		QJsonDocument Format(const VerificationInDTO& dto);
 	};
 
-	VerificationModel(const std::string& hostname) : m_hostname{hostname} {}
+	AddVerificationModel(const std::string& hostname) : m_hostname{hostname} {}
 	Net::Request FormRequest(const VerificationInDTO& dto);
 
 	bool CheckData(const VerificationInDTO& dto) const;

@@ -14,7 +14,8 @@ bool ConfigManager::isConfigFull(const Poco::Util::JSONConfiguration& config)
 		config.has(Config::MAILHOST) &&
 		config.has(Config::EMAIL_SENDER) &&
 		config.has(Config::EMAIL_USERNAME) &&
-		config.has(Config::EMAIL_PASSWORD);
+		config.has(Config::EMAIL_PASSWORD) &&
+		config.has(Config::SMTP_PORT);
 }
 
 Poco::Util::JSONConfiguration ConfigManager::GetConfig()
