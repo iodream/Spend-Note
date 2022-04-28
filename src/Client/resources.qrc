@@ -19,6 +19,7 @@
         <file>Icons/baseline_arrow_back_ios_new_black_24dp.png</file>
         <file>Icons/baseline_dashboard_customize_black_24dp.png</file>
         <file>Icons/baseline_loop_black_24dp.png</file>
+        <file>Icons/baseline_recommend_black_24dp.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
 </RCC>

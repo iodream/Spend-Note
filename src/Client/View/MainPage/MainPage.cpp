@@ -96,30 +96,22 @@ MainPage::MainPage(QWidget *parent)
 	InitCategoriesEditSubPage();
 	InitSettingsSubPage();
 
-	rec = new RecommendationWidget(this);
-	rec->setAttribute(Qt::WA_StyledBackground, true);
-	item = new RecommendationItem("new1",rec);
-	item->setAttribute(Qt::WA_StyledBackground, true);
+//	rec = new RecommendationWidget(this);
+//	item = new RecommendationItem("new1",rec);
+//	rec->AppendItem(item);
 
-
-
-
-	rec->AppendItem(item);
-
-	rec->show();
-
-		connect(
-			rec,
-			&RecommendationWidget::RecommendationClosed,
-			this,
-			&MainPage::OnRecommendationClosed);
+//		connect(
+//			rec,
+//			&RecommendationWidget::RecommendationClosed,
+//			this,
+//			&MainPage::OnRecommendationClosed);
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)
 {
-	rec->move(size().width() - rec->size().width() - 20, 10);
+	rec->move(size().width() - rec->size().width() - 10,
+			  size().height() - rec->size().height() - 10);
 	QWidget::resizeEvent(event);
-
 }
 
 void MainPage::InitListsSubPage()
@@ -202,15 +194,15 @@ void MainPage::InitCategoriesEditSubPage()
 	m_ui->Display->addWidget(&m_categories_edit_spage);
 }
 
-<<<<<<< HEAD
+
 void MainPage::HideRecommendation()
 {
 	rec->hide();
-=======
+}
+
 void MainPage::InitSettingsSubPage()
 {
 	m_ui->Display->addWidget(&m_settings_spage);
->>>>>>> origin/dev
 }
 
 
@@ -259,15 +251,14 @@ void MainPage::OnGoToCategoriesEditClicked()
 	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
 }
 
-<<<<<<< HEAD
 void MainPage::OnRecommendationClosed()
 {
 	emit RecommendationClosed();
-=======
+}
+
 void MainPage::OnGoToSettingsClicked()
 {
 	emit ChangeSubPage(MainSubPages::SETTINGS);
->>>>>>> origin/dev
 }
 
 void MainPage::ShowBalance(const Balance& money)

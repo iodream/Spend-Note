@@ -1,7 +1,5 @@
 #include "RecommendationItem.h"
 #include "ui_RecommendationItem.h"
-#include <QPainter>
-#include <QStyleOption>
 
 RecommendationItem::RecommendationItem(QString name, QWidget *parent)
 	: QPushButton(parent)
@@ -9,6 +7,8 @@ RecommendationItem::RecommendationItem(QString name, QWidget *parent)
 	, m_name(name)
 {
 	m_ui->setupUi(this);
+	setAttribute(Qt::WA_StyledBackground, true);
+
 	Update();
 }
 
@@ -28,23 +28,5 @@ void RecommendationItem::SetNumber(int number)
 	m_number = number;
 	m_ui->Number->setText(QString("%1").arg(m_number));
 	Update();
-}
-
-void RecommendationItem::enterEvent(QEnterEvent * event)
-{
-	setStyleSheet("background-color:rgba(242, 171, 17, 50%)");
-//	setStyleSheet("color:rgba(260, 171, 17, 100%)");
-
-	setFlat(false);
-	QWidget::enterEvent(event);
-}
-
-void RecommendationItem::leaveEvent(QEvent * event)
-{
-	setFlat(true);
-	setStyleSheet(QString("background-color:rgba(242, 171, 17, %1%)").arg(Transparency));
-//	setStyleSheet("color:rgba(260, 171, 17, 10%)");
-
-	QWidget::leaveEvent(event);
 }
 

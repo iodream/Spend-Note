@@ -14,8 +14,6 @@ class RecommendationItem : public QPushButton
 public:
 	explicit RecommendationItem(QString name, QWidget *parent = nullptr);
 	~RecommendationItem();
-	void enterEvent(QEnterEvent* event);
-	void leaveEvent(QEvent* event);
 
 	void Update();
 	void SetNumber(int number);
@@ -24,6 +22,4 @@ public:
 private:
 	QString m_name;
 	Ui::RecommendationItem *m_ui;
-	static const int Transparency = 70;
-
 };

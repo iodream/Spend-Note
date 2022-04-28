@@ -1,7 +1,6 @@
 #pragma once
 
 #include <QWidget>
-#include <QString>
 #include "RecommendationItem.h"
 
 namespace Ui {
@@ -20,12 +19,11 @@ public:
 	void InsertItem(RecommendationItem* Item, int idx);
 	int GetListSize();
 	void SetListSize(int size);
-	void enterEvent(QEnterEvent* event);
-	void leaveEvent(QEvent* event);
+
 private:
-	static const int Transparency = 70;
 	Ui::RecommendationWidget *m_ui;
 	int m_list_size;
+
 signals:
 	void RecommendationClosed();
 

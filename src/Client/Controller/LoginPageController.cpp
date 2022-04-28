@@ -93,7 +93,7 @@ void LoginPageController::QuickLogin()
 {
 	LoginModel::JSONFormatter::Credentials credentials;
 	credentials.login="user";
-	credentials.password="123";
+	credentials.password="12345";
 	OnLogin(credentials);
 }
 #endif
