@@ -89,6 +89,30 @@ MainPage::MainPage(QWidget *parent)
 	InitStatisticsSubPage();
 	InitCategoriesEditSubPage();
 
+	rec = new RecommendationWidget(this);
+	rec->setAttribute(Qt::WA_StyledBackground, true);
+	item = new RecommendationItem("new1",rec);
+	item->setAttribute(Qt::WA_StyledBackground, true);
+
+
+
+
+	rec->AppendItem(item);
+
+	rec->show();
+
+		connect(
+			rec,
+			&RecommendationWidget::RecommendationClosed,
+			this,
+			&MainPage::OnRecommendationClosed);
+}
+
+void MainPage::resizeEvent(QResizeEvent *event)
+{
+	rec->move(size().width() - rec->size().width() - 20, 10);
+	QWidget::resizeEvent(event);
+
 }
 
 void MainPage::InitListsSubPage()
@@ -171,6 +195,11 @@ void MainPage::InitCategoriesEditSubPage()
 	m_ui->Display->addWidget(&m_categories_edit_spage);
 }
 
+void MainPage::HideRecommendation()
+{
+	rec->hide();
+}
+
 
 MainPage::~MainPage()
 {
@@ -215,6 +244,11 @@ void MainPage::OnGoToStatiticsClicked()
 void MainPage::OnGoToCategoriesEditClicked()
 {
 	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
+}
+
+void MainPage::OnRecommendationClosed()
+{
+	emit RecommendationClosed();
 }
 
 void MainPage::ShowBalance(const Balance& money)

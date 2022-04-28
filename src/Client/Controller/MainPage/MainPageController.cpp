@@ -45,6 +45,12 @@ void MainPageController::ConnectPage()
 		&MainPage::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	QObject::connect(
+		&m_page,
+		&MainPage::RecommendationClosed,
+		this,
+		&MainPageController::OnRecommendationClosed);
+
 }
 
 void MainPageController::InitListPagesController()
@@ -305,6 +311,11 @@ void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
 	emit ChangePage(UIPages::LOGIN);
+}
+
+void MainPageController::OnRecommendationClosed()
+{
+	m_page.HideRecommendation();
 }
 
 void MainPageController::OnGoBack(int n)

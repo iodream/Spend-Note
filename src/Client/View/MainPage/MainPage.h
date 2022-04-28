@@ -25,6 +25,8 @@
 #include "Statistic/StatisticSubPage.h"
 #include "CategoryEditPage/CategoryEditPage.h"
 
+#include "RecommendationWidget.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -94,7 +96,10 @@ public:
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
 
+	void HideRecommendation();
 
+
+	void resizeEvent(QResizeEvent* event);
 private:
 	Ui::MainPage *m_ui;
 
@@ -118,11 +123,14 @@ private:
 	DailyListSubPage m_dailylist_spage;
 	StatisticSubPage m_statistics_spage;
 	CategoryEditPage m_categories_edit_spage;
+	RecommendationWidget* rec;
+	RecommendationItem* item;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack(int n=1);
+	void RecommendationClosed();
 
 public slots:
 	void OnGoToListsClicked();
@@ -131,6 +139,8 @@ public slots:
 	void OnGoToDailyListClicked();
 	void OnGoToStatiticsClicked();
 	void OnGoToCategoriesEditClicked();
+	void OnRecommendationClosed();
+
 
 };
 

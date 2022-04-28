@@ -2,6 +2,12 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/MainPage.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainPage.h
     ${CMAKE_CURRENT_SOURCE_DIR}/MainPage.ui
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationWidget.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationWidget.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationWidget.ui
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationItem.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationItem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RecommendationItem.ui
 )
 
 add_subdirectory(List)
