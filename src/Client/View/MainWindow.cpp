@@ -40,3 +40,9 @@ void MainWindow::SetCurrentPage(UIPages page)
 {
 	m_ui->stackedWidget->setCurrentIndex(PageToInt(page));
 }
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+	emit SaveConfig();
+	event->accept();
+}

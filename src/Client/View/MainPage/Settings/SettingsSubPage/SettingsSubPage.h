@@ -30,7 +30,11 @@ private slots:
 	void OnColorScheme1Selected();
 	void OnColorScheme2Selected();
 	void OnColorScheme3Selected();
+	void OnColorSchemeCustomSelect(int);
+	void OnCustomColorSchemeSaveAll();
+	void OnUseCustomColorScheme();
 signals:
 	void ColorSchemeChanged();
+	void SaveColorConfig();
 };
 

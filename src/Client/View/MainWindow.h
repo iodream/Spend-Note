@@ -6,6 +6,7 @@
 #include "SignupPage/SignupPage.h"
 #include "MainPage/MainPage.h"
 #include "Constants.h"
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +21,8 @@ public:
 	~MainWindow();
 
 	void SetCurrentPage(UIPages page);
+	void closeEvent(QCloseEvent *event);
+
 	LoginPage& get_login_page();
 	SignupPage& get_signup_page();
 	MainPage& get_main_page();
@@ -31,4 +34,6 @@ private:
 	LoginPage m_login_page;
 	SignupPage m_signup_page;
 	MainPage m_main_page;
+signals:
+	void SaveConfig();
 };

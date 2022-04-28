@@ -2,7 +2,8 @@
 #include "ui_SettingsSubPage.h"
 
 #include "View/MainPage/MainPage.h"
-#include <iostream>
+
+#include <QColorDialog>
 
 SettingsSubPage::SettingsSubPage(QWidget *parent) :
 	QWidget(parent),
@@ -63,6 +64,21 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&SettingsSubPage::OnColorScheme3Selected);
+	connect(
+		m_ui->ColorColorsSelectBox,
+		&QComboBox::currentIndexChanged,
+		this,
+		&SettingsSubPage::OnColorSchemeCustomSelect);
+	connect(
+		m_ui->CustomColorSchemeSave,
+		&QPushButton::clicked,
+		this,
+		&SettingsSubPage::OnCustomColorSchemeSaveAll);
+	connect(
+		m_ui->UseCustom,
+		&QPushButton::clicked,
+		this,
+		&SettingsSubPage::OnUseCustomColorScheme);
 }
 
 SettingsSubPage::~SettingsSubPage()
@@ -165,20 +181,62 @@ void SettingsSubPage::OnColorScheme3Selected()
 	emit ColorSchemeChanged();
 }
 
-void SettingsSubPage::OnColorSchemeCustom()
+void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 {
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#323ca8";
-	MainPage::ColorSettings::LABEL_TEXT= "#dbbe18";
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
-	MainPage::ColorSettings::ERROR_BANNER= "#dbbe18";
-	MainPage::ColorSettings::LIST_ACTIVE= "#dbbe18";
-	MainPage::ColorSettings::LIST_INACTIVE= "#dbbe18";
-	MainPage::ColorSettings::NAVBUTTONS= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO1= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO2= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO3= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO4= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO5= "#dbbe18";
-	MainPage::ColorSettings::RECOMMENDATION= "#dbbe18";
+	auto custom = QColorDialog::getColor();
+	if(custom.isValid())
+	{
+		switch(index)
+		{
+		case 1:
+			MainPage::ColorSettings::WINDOW_BACKGROUND = custom.name();
+			break;;
+		case 2:
+			MainPage::ColorSettings::COLOR_BALANCE_BANNER = custom.name();
+			break;
+		case 3:
+			MainPage::ColorSettings::NAVBUTTONS= custom.name();
+			break;
+		case 4:
+			MainPage::ColorSettings::ERROR_BANNER = custom.name();
+			break;
+		case 5:
+			MainPage::ColorSettings::RECOMMENDATION = custom.name();
+			break;
+		case 6:
+			MainPage::ColorSettings::LABEL_TEXT = custom.name();
+			break;
+		case 7:
+			MainPage::ColorSettings::PRODUCT_PRIO1 = custom.name();
+			break;
+		case 8:
+			MainPage::ColorSettings::PRODUCT_PRIO2 = custom.name();
+			break;
+		case 9:
+			MainPage::ColorSettings::PRODUCT_PRIO3 = custom.name();
+			break;
+		case 10:
+			MainPage::ColorSettings::PRODUCT_PRIO4 = custom.name();
+			break;
+		case 11:
+			MainPage::ColorSettings::PRODUCT_PRIO5 = custom.name();
+			break;
+		case 12:
+			MainPage::ColorSettings::LIST_ACTIVE = custom.name();
+			break;
+		case 13:
+			MainPage::ColorSettings::LIST_INACTIVE = custom.name();
+			break;
+		}
+	}
+}
+
+void SettingsSubPage::OnCustomColorSchemeSaveAll()
+{
+	emit SaveColorConfig();
+}
+
+void SettingsSubPage::OnUseCustomColorScheme()
+{
 	emit ColorSchemeChanged();
 }
