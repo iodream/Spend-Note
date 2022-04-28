@@ -33,6 +33,8 @@ private:
 	void SetPage(UIPages page);
 
 	void InitConfig();
+	void ReadSettings();
+
 	void InitLoginPageController();
 	void InitSignupPageController();
 	void InitMainPageController();
@@ -49,4 +51,5 @@ private:
 
 public slots:
 	void OnChangePage(UIPages page);
+	void OnSaveConfig();
 };

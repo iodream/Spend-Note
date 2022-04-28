@@ -47,7 +47,6 @@ private:
 
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
-	bool UpdateSubPage(MainSubPages page);
 
 	std::optional<Balance> UpdateUserBalance(const IdType& id);
 

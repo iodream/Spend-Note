@@ -254,6 +254,7 @@ void MainPage::ShowBalance(const Balance& money)
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
 
+//most color changes are done here
 void MainPage::UpdatePageColors()
 {
 	setStyleSheet(QString("background-color:" + ColorSettings::WINDOW_BACKGROUND));
