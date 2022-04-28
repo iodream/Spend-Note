@@ -1,6 +1,8 @@
 #include "SignupPage.h"
 #include "ui_SignupPage.h"
 
+#include <QShortcut>
+
 SignupPage::SignupPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::SignupPage)
@@ -26,6 +28,15 @@ SignupPage::SignupPage(QWidget *parent)
 		&QToolButton::clicked,
 		this,
 		&SignupPage::CloseErrorBanner);
+
+
+	QShortcut* shortcut = new QShortcut(QKeySequence("Return"), this);
+	connect(
+		shortcut,
+		&QShortcut::activated,
+		this,
+		&SignupPage::OnSignupSubmitButtonClicked);
+
 }
 
 SignupPage::~SignupPage()
