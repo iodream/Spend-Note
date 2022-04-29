@@ -1,4 +1,3 @@
-#pragma once
 #include "RecommendationRepository.h"
 
 #include "Exceptions/NonexistentResource.h"
