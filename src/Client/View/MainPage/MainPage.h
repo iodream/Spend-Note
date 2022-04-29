@@ -136,5 +136,10 @@ public slots:
 	void OnGoToCategoriesEditClicked();
 	void OnGoToSettingsClicked();
 
+//	class FontSettings{
+//	public:
+//		static int FONT_SIZE;
+//	};
+
 };
 

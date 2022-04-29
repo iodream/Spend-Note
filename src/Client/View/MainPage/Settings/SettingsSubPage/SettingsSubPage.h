@@ -21,11 +21,16 @@ private:
 
 	void EraseLineEdits();
 
+signals:
+	void FontChange(QFont);
+
 private slots:
 	void OnChangePasswordButtonClicked();
 	void OnChangeEmailButtonClicked();
 	void OnSubmitPasswordChangeButtonClicked();
 	void OnSubmitEmailChangeButtonClicked();
 	void OnGoBackClicked();
+	void OnFontChange();
+
 };
 

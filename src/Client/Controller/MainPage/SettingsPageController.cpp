@@ -10,7 +10,11 @@ SettingsPageController::SettingsPageController(
 	, m_user_id(user_id)
 	, m_settings_page(settings_page)
 {
-
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::FontChange,
+		this,
+		[this](QFont font){ emit(FontChange(font)); });
 }
 
 void SettingsPageController::UpdateSettingsSubPage()

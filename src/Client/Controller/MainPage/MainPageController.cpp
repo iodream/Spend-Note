@@ -334,12 +334,22 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::FontChange,
+		this,
+		&MainPageController::OnFontChange);
 }
 
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
 	emit ChangePage(UIPages::LOGIN);
+}
+
+void MainPageController::OnFontChange(QFont font)
+{
+	m_page.setStyleSheet(QString("font-family:%1; font-size:%2px").arg(font.family()).arg(font.pointSize()));
 }
 
 void MainPageController::OnGoBack(int n)

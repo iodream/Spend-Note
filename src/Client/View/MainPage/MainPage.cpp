@@ -3,6 +3,9 @@
 
 #include "Exception.h"
 
+//int MainPage::FontSettings::FONT_SIZE = ;
+
+
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::MainPage)

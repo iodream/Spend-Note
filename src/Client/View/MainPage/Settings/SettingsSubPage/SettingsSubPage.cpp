@@ -1,7 +1,7 @@
 #include "SettingsSubPage.h"
 #include "ui_SettingsSubPage.h"
 
-#include <iostream>
+#include <QFontDialog>
 
 SettingsSubPage::SettingsSubPage(QWidget *parent) :
 	QWidget(parent),
@@ -44,6 +44,13 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&SettingsSubPage::OnGoBackClicked);
+
+
+	connect(
+		m_ui->FontChangeButton,
+		&QPushButton::clicked,
+		this,
+		&SettingsSubPage::OnFontChange);
 }
 
 SettingsSubPage::~SettingsSubPage()
@@ -91,3 +98,10 @@ void SettingsSubPage::OnGoBackClicked()
 	EraseLineEdits();
 	GoToMainSubPage();
 }
+
+void SettingsSubPage::OnFontChange()
+{
+	QFont font = QFontDialog::getFont(nullptr, QApplication::font());
+	emit FontChange(font);
+}
+
