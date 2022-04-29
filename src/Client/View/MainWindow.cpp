@@ -1,6 +1,10 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "View/MainPage/MainPage.h"
+
+UIPages MainWindow::active_page = UIPages::LOGIN;
+
 LoginPage& MainWindow::get_login_page()
 {
 	return m_login_page;
@@ -43,6 +47,17 @@ void MainWindow::SetCurrentPage(UIPages page)
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
+	if(active_page == UIPages::LOGIN || active_page == UIPages::SIGNUP) // dont save default settings to file if we are not logged in
+		{
+			event->accept();
+			return;
+		}
+
 	emit SaveConfig();
-	event->accept();
+
+}
+
+void MainWindow::UpdateColors()
+{
+	setStyleSheet(QString("background-color:" + MainPage::ColorSettings::WINDOW_BACKGROUND));
 }

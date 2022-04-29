@@ -259,6 +259,12 @@ bool ProductPagesController::UpdateViewPage(Product product)
 	return true;
 }
 
+void ProductPagesController::UpdateProductColors()
+{
+	m_products_page.UpdateColors();
+}
+
+
 void ProductPagesController::UpdateCategoryBox()
 {
 		GetProductCategoriesModel model{m_hostname};

@@ -6,6 +6,7 @@
 #include "Net/Constants.h"
 #include <QJsonDocument>
 #include <QFile>
+#include <QApplication>
 
 Controller::Controller()
 {
@@ -16,6 +17,17 @@ Controller::Controller()
 	InitSignupPageController();
 	InitMainPageController();
 
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::ReadSettings,
+		this,
+		&Controller::ReadSettings);
+
+	connect(
+		m_main_page_controller.get(),
+		&MainPageController::SaveConfig,
+		this,
+		&Controller::OnSaveConfig);
 	connect(
 		&m_main_window,
 		&MainWindow::SaveConfig,
@@ -47,7 +59,6 @@ void Controller::ReadSettings()
 		   }
 		   if( document.isObject() )
 		   {
-			   //todo: add check if vals are present in config
 				QJsonObject json = document.object();
 				MainPage::ColorSettings::LABEL_TEXT = json.value("COLOR_LABEL").toString();
 				MainPage::ColorSettings::COLOR_BALANCE_BANNER = json.value("COLOR_TOP_BALANCE_BANNER").toString();
@@ -111,7 +122,15 @@ void Controller::InitMainPageController()
 		m_main_page_controller.get(),
 		&MainPageController::ChangePage,
 		this,
-				&Controller::OnChangePage);
+		&Controller::OnChangePage);
+
+	connect(
+		m_main_page_controller.get(),
+		&MainPageController::ColorSchemeChanged,
+		this,
+		&Controller::OnColorSchemeChanged);
+
+
 }
 
 bool Controller::AskUser(const QString& title, const QString& text)
@@ -123,6 +142,7 @@ bool Controller::AskUser(const QString& title, const QString& text)
 void Controller::Start(UIPages at_page)
 {
 	m_main_window.show();
+	MainWindow::active_page = at_page;
 	m_main_window.SetCurrentPage(at_page);
 }
 
@@ -131,12 +151,14 @@ void Controller::SetPage(UIPages page)
 	switch (page) {
 	case UIPages::MAIN:
 		m_main_page_controller->ChangeSubPage(MainSubPages::LISTS);
+
 		break;
 	case UIPages::LOGIN:
 		break;
 	case UIPages::SIGNUP:
 		break;
 	}
+	MainWindow::active_page = page;
 
 	m_main_window.SetCurrentPage(page);
 }
@@ -172,4 +194,9 @@ void Controller::OnSaveConfig()
 		QTextStream iStream( &file );
 		iStream << bytes;
 		file.close();
+}
+
+void Controller::OnColorSchemeChanged()
+{
+		m_main_window.UpdateColors();
 }

@@ -16,9 +16,10 @@ public:
 
 	void GoToMainSubPage();
 
+	void UpdateColors();
 private:
 	Ui::SettingsSubPage *m_ui;
-
+	static int CurColorElemSelected;
 	void EraseLineEdits();
 
 private slots:
@@ -31,10 +32,9 @@ private slots:
 	void OnColorScheme2Selected();
 	void OnColorScheme3Selected();
 	void OnColorSchemeCustomSelect(int);
-	void OnCustomColorSchemeSaveAll();
-	void OnUseCustomColorScheme();
+	void OnNewColorSelected();
+
 signals:
 	void ColorSchemeChanged();
-	void SaveColorConfig();
 };
 

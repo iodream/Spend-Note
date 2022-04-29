@@ -3,19 +3,22 @@
 
 #include "Exception.h"
 #include <QColorDialog>
-QString MainPage::ColorSettings::COLOR_BALANCE_BANNER;
-QString MainPage::ColorSettings::NAVBUTTONS;
+#include <iostream>
+QString MainPage::ColorSettings::COLOR_BALANCE_BANNER = "#a3ffbc";
+QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
 QString MainPage::ColorSettings::RECOMMENDATION;
-QString MainPage::ColorSettings::ERROR_BANNER;
+QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
 QString MainPage::ColorSettings::WINDOW_BACKGROUND;
 QString MainPage::ColorSettings::LABEL_TEXT;
-QString MainPage::ColorSettings::PRODUCT_PRIO1;
-QString MainPage::ColorSettings::PRODUCT_PRIO2;
-QString MainPage::ColorSettings::PRODUCT_PRIO3;
-QString MainPage::ColorSettings::PRODUCT_PRIO4;
-QString MainPage::ColorSettings::PRODUCT_PRIO5;
-QString MainPage::ColorSettings::LIST_INACTIVE;
-QString MainPage::ColorSettings::LIST_ACTIVE;
+QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO4 = "rgba(35, 217, 108, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
+QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
+QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
+
+bool MainPage::bNeedColorUpdate = true;
 
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
@@ -257,10 +260,18 @@ void MainPage::ShowBalance(const Balance& money)
 //most color changes are done here
 void MainPage::UpdatePageColors()
 {
-	setStyleSheet(QString("background-color:" + ColorSettings::WINDOW_BACKGROUND));
+	//balance banner holders
 	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_BALANCE_BANNER));
-	setStyleSheet(QString("QLabel { color:" + ColorSettings::LABEL_TEXT + QString( " } ")));
 
+	//text inside qlabels
+	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));
+
+	//nav buttons
+	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();
+	foreach(auto obj, list)
+	{
+		obj->setStyleSheet(QString("background-color:" + ColorSettings::NAVBUTTONS));
+	}
 }
 
 

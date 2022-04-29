@@ -23,6 +23,7 @@ public:
 	virtual ~SettingsPageController() override {}
 
 	void UpdateSettingsSubPage();
+	void UpdateSettingsPageColors();
 
 private:
 	SettingsSubPage& m_settings_page;

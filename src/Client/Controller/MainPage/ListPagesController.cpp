@@ -136,6 +136,12 @@ bool ListPagesController::UpdateListPage()
 	return true;
 }
 
+void ListPagesController::UpdateListPageColors()
+{
+	m_list_page.UpdateColors();
+}
+
+
 bool ListPagesController::UpdateListCreatePage()
 {
 	m_create_page.Update();

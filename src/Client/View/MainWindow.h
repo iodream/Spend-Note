@@ -23,9 +23,13 @@ public:
 	void SetCurrentPage(UIPages page);
 	void closeEvent(QCloseEvent *event);
 
+	void UpdateColors();
+
 	LoginPage& get_login_page();
 	SignupPage& get_signup_page();
 	MainPage& get_main_page();
+	static UIPages active_page;
+
 
 private:
 	static int PageToInt(UIPages page);

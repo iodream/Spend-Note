@@ -24,7 +24,8 @@
     <normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLineEdit{
+   <string notr="true">background-color:black
+QLineEdit{
     border-width: 1px; 
    border-style: solid;   
  border-radius: 4px;
@@ -297,7 +298,7 @@ background-color: #29baa7</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="GoToCategoriesButton">
+       <widget class="QToolButton" name="GoToCategoriesButton">
         <property name="minimumSize">
          <size>
           <width>50</width>
@@ -479,9 +480,6 @@ background-color: #29baa7</string>
         </item>
         <item>
          <widget class="QLabel" name="CurrentBalance">
-          <property name="styleSheet">
-           <string notr="true">color: black;</string>
-          </property>
           <property name="text">
            <string>Current Balance</string>
           </property>
@@ -537,9 +535,6 @@ background-color: #29baa7</string>
         </item>
         <item>
          <widget class="QLabel" name="ProjectedBalance">
-          <property name="styleSheet">
-           <string notr="true">color: black;</string>
-          </property>
           <property name="text">
            <string>Projected Balance</string>
           </property>

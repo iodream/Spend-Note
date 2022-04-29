@@ -22,6 +22,12 @@ void SettingsPageController::OnColorSchemeChanged()
 	emit ColorSchemeChanged();
 }
 
+void SettingsPageController::UpdateSettingsPageColors()
+{
+	m_settings_page.UpdateColors();
+}
+
+
 void SettingsPageController::UpdateSettingsSubPage()
 {
 	m_settings_page.GoToMainSubPage();

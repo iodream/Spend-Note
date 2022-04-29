@@ -32,7 +32,6 @@ public:
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
-
 private:
 	void ConnectPage();
 
@@ -70,6 +69,8 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void ColorSchemeChanged();
+	void SaveConfig();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});

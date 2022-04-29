@@ -5,6 +5,9 @@
 
 #include <QColorDialog>
 
+int SettingsSubPage::CurColorElemSelected = 0;
+
+
 SettingsSubPage::SettingsSubPage(QWidget *parent) :
 	QWidget(parent),
 	m_ui(new Ui::SettingsSubPage)
@@ -65,20 +68,16 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 		this,
 		&SettingsSubPage::OnColorScheme3Selected);
 	connect(
-		m_ui->ColorColorsSelectBox,
-		&QComboBox::currentIndexChanged,
+		m_ui->CustomColorsSelectBox,
+		&QComboBox::activated,
 		this,
 		&SettingsSubPage::OnColorSchemeCustomSelect);
+
 	connect(
-		m_ui->CustomColorSchemeSave,
+		m_ui->OpenColorSelector,
 		&QPushButton::clicked,
 		this,
-		&SettingsSubPage::OnCustomColorSchemeSaveAll);
-	connect(
-		m_ui->UseCustom,
-		&QPushButton::clicked,
-		this,
-		&SettingsSubPage::OnUseCustomColorScheme);
+		&SettingsSubPage::OnNewColorSelected);
 }
 
 SettingsSubPage::~SettingsSubPage()
@@ -104,6 +103,11 @@ void SettingsSubPage::OnChangePasswordButtonClicked()
 	m_ui->stackedWidget->setCurrentIndex(1);
 }
 
+void SettingsSubPage::UpdateColors()
+{
+	m_ui->frame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+}
+
 void SettingsSubPage::OnChangeEmailButtonClicked()
 {
 	m_ui->stackedWidget->setCurrentIndex(2);
@@ -127,28 +131,34 @@ void SettingsSubPage::OnGoBackClicked()
 	GoToMainSubPage();
 }
 
+//default colors
 void SettingsSubPage::OnColorScheme1Selected()
 {
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#323ca8";
-	MainPage::ColorSettings::LABEL_TEXT= "#dbbe18";
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
-	MainPage::ColorSettings::ERROR_BANNER= "#dbbe18";
-	MainPage::ColorSettings::LIST_ACTIVE= "#dbbe18";
-	MainPage::ColorSettings::LIST_INACTIVE= "#dbbe18";
-	MainPage::ColorSettings::NAVBUTTONS= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO1= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO2= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO3= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO4= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO5= "#dbbe18";
-	MainPage::ColorSettings::RECOMMENDATION= "#dbbe18";
+	MainPage::bNeedColorUpdate = true;
+
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "";
+	MainPage::ColorSettings::LABEL_TEXT= "black";
+	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#a3ffbc";
+	MainPage::ColorSettings::ERROR_BANNER= "red";
+	MainPage::ColorSettings::LIST_ACTIVE= "rgba(100, 230, 53, 50%)";
+	MainPage::ColorSettings::LIST_INACTIVE= "rgba(37, 109, 217, 50%)";
+	MainPage::ColorSettings::NAVBUTTONS= "#29baa7";
+	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(201, 60, 32, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(224, 133, 29, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(202, 224, 31, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(35, 217, 108, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(25, 96, 209, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "#e38819";
 	emit ColorSchemeChanged();
 }
 
+//dark mode
 void SettingsSubPage::OnColorScheme2Selected()
 {
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#323ca8";
-	MainPage::ColorSettings::LABEL_TEXT= "#dbbe18";
+	MainPage::bNeedColorUpdate = true;
+
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "#000000";
+	MainPage::ColorSettings::LABEL_TEXT= "#f2eded";
 	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
 	MainPage::ColorSettings::ERROR_BANNER= "#dbbe18";
 	MainPage::ColorSettings::LIST_ACTIVE= "#dbbe18";
@@ -165,6 +175,8 @@ void SettingsSubPage::OnColorScheme2Selected()
 
 void SettingsSubPage::OnColorScheme3Selected()
 {
+	MainPage::bNeedColorUpdate = true;
+
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "#323ca8";
 	MainPage::ColorSettings::LABEL_TEXT= "#dbbe18";
 	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
@@ -183,60 +195,109 @@ void SettingsSubPage::OnColorScheme3Selected()
 
 void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 {
-	auto custom = QColorDialog::getColor();
+	QString style = "background-color:";
+
+	switch(index)
+	{
+	case 0:
+		break;
+	case 1:
+		style += MainPage::ColorSettings::COLOR_BALANCE_BANNER;
+		break;
+	case 2:
+		style += MainPage::ColorSettings::NAVBUTTONS;
+		break;
+	case 3:
+		style += MainPage::ColorSettings::ERROR_BANNER;
+		break;
+	case 4:
+		style += MainPage::ColorSettings::RECOMMENDATION;
+		break;
+	case 5:
+		style += MainPage::ColorSettings::LABEL_TEXT;
+		break;
+	case 6:
+		style += MainPage::ColorSettings::PRODUCT_PRIO1;
+		break;
+	case 7:
+		style += MainPage::ColorSettings::PRODUCT_PRIO2;
+		break;
+	case 8:
+		style += MainPage::ColorSettings::PRODUCT_PRIO3;;
+		break;
+	case 9:
+		style += MainPage::ColorSettings::PRODUCT_PRIO4;
+		break;
+	case 10:
+		style += MainPage::ColorSettings::PRODUCT_PRIO5;
+		break;
+	case 11:
+		style += MainPage::ColorSettings::LIST_ACTIVE;
+		break;
+	case 12:
+		style += MainPage::ColorSettings::LIST_INACTIVE;
+		break;
+	}
+	m_ui->ElemenColor->setStyleSheet(style);
+}
+
+void SettingsSubPage::OnNewColorSelected()
+{
+	MainPage::bNeedColorUpdate = true;
+	QColor custom = QColorDialog::getColor();
+
 	if(custom.isValid())
 	{
-		switch(index)
+		switch(m_ui->CustomColorsSelectBox->currentIndex())
 		{
-		case 1:
+		case 0:
 			MainPage::ColorSettings::WINDOW_BACKGROUND = custom.name();
-			break;;
-		case 2:
+			break;
+		case 1:
 			MainPage::ColorSettings::COLOR_BALANCE_BANNER = custom.name();
 			break;
-		case 3:
+		case 2:
 			MainPage::ColorSettings::NAVBUTTONS= custom.name();
 			break;
-		case 4:
+		case 3:
 			MainPage::ColorSettings::ERROR_BANNER = custom.name();
 			break;
-		case 5:
+		case 4:
 			MainPage::ColorSettings::RECOMMENDATION = custom.name();
 			break;
-		case 6:
+		case 5:
 			MainPage::ColorSettings::LABEL_TEXT = custom.name();
 			break;
+		case 6:
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::PRODUCT_PRIO1 = custom.name(QColor::HexArgb);
+			break;
 		case 7:
-			MainPage::ColorSettings::PRODUCT_PRIO1 = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::PRODUCT_PRIO2 = custom.name(QColor::HexArgb);
 			break;
 		case 8:
-			MainPage::ColorSettings::PRODUCT_PRIO2 = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::PRODUCT_PRIO3 = custom.name(QColor::HexArgb);
 			break;
 		case 9:
-			MainPage::ColorSettings::PRODUCT_PRIO3 = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::PRODUCT_PRIO4 = custom.name(QColor::HexArgb);
 			break;
 		case 10:
-			MainPage::ColorSettings::PRODUCT_PRIO4 = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::PRODUCT_PRIO5 = custom.name(QColor::HexArgb);
 			break;
 		case 11:
-			MainPage::ColorSettings::PRODUCT_PRIO5 = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::LIST_ACTIVE = custom.name(QColor::HexArgb);
 			break;
 		case 12:
-			MainPage::ColorSettings::LIST_ACTIVE = custom.name();
-			break;
-		case 13:
-			MainPage::ColorSettings::LIST_INACTIVE = custom.name();
+			custom.setAlphaF(0.5);
+			MainPage::ColorSettings::LIST_INACTIVE = custom.name(QColor::HexArgb);
 			break;
 		}
 	}
-}
-
-void SettingsSubPage::OnCustomColorSchemeSaveAll()
-{
-	emit SaveColorConfig();
-}
-
-void SettingsSubPage::OnUseCustomColorScheme()
-{
+	OnColorSchemeCustomSelect(m_ui->CustomColorsSelectBox->currentIndex());
 	emit ColorSchemeChanged();
 }

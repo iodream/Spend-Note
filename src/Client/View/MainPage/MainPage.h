@@ -52,6 +52,8 @@ public:
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
 
+	static bool bNeedColorUpdate;
+
 private:
 	void InitListsSubPage();
 	void InitListCreateSubPage();
@@ -144,7 +146,7 @@ public slots:
 		{
 		public:
 			static QString COLOR_BALANCE_BANNER;
-			static QString 	NAVBUTTONS;
+			static QString NAVBUTTONS;
 			static QString RECOMMENDATION;
 			static QString ERROR_BANNER;
 			static QString WINDOW_BACKGROUND;
