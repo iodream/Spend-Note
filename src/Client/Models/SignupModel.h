@@ -12,7 +12,7 @@ class SignupModel
 public:
 	struct SignupInDTO
 	{
-		std::string login;
+		std::string email;
 		std::string password, pass_repeat;
 		std::string passwd_hash;
 	};

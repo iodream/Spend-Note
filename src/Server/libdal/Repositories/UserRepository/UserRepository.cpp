@@ -23,7 +23,7 @@ std::optional<IdType> UserRepository::Add(const User &user)
 				user::VERIFIED +
 			") VALUES (" +
 				w.quote(user.email) + ", " +
-				w.quote(user.password) + ")" +
+				w.quote(user.password) + ", " +
 				w.quote(user.verified) + ")" +
 			" RETURNING " + user::ID + ";");
 
@@ -47,7 +47,7 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD +
+			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::VERIFIED +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 
@@ -70,7 +70,7 @@ std::optional<User> UserRepository::GetByEmail(const std::string& email)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + user::ID + ", " + user::EMAIL + ", " + user::PASSWORD +
+			"SELECT " + user::ID + ", " + user::EMAIL + ", " + user::PASSWORD + ", " + user::VERIFIED +
 			" FROM " + user::TABLE_NAME +
 			" WHERE " + user::EMAIL + " = " + w.quote(email) + ";");
 
@@ -103,8 +103,35 @@ bool UserRepository::Update(const User &user)
 			"UPDATE " + user::TABLE_NAME +
 			" SET " +
 				user::EMAIL + " = " + w.quote(user.email) + ", " +
-				user::PASSWORD + " = " + w.quote(user.password) +
+				user::PASSWORD + " = " + w.quote(user.password) + ", " +
+				user::VERIFIED + " = " + w.quote(user.verified) +
 			" WHERE " + user::ID + " = " + w.quote(user.id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return true;
+}
+
+bool UserRepository::UpdateVerification(IdType id)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		auto result = w.exec("SELECT " + user::ID + " FROM  " + user::TABLE_NAME + " WHERE " + user::ID + " = " + w.quote(id));
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + user::TABLE_NAME +
+			" SET " +
+				user::VERIFIED + " = " + w.quote(true) +
+			" WHERE " + user::ID + " = " + w.quote(id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::failure& e)

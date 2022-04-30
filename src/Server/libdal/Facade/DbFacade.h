@@ -25,6 +25,7 @@ public:
 	std::optional<User> GetUserById(IdType id) override;
 	std::optional<User> GetUserByEmail(const std::string& email) override;
 	bool UpdateUser(const User &user) override;
+	bool UpdateUserVerification(IdType id) override;
 	bool RemoveUser(IdType id) override;
 
 	std::optional<IdType> AddProduct(const Product& product) override;
