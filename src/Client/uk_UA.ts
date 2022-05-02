@@ -43,16 +43,21 @@
         <source>Add</source>
         <translation>Додати</translation>
     </message>
+    <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="138"/>
+        <source>Please Select an item!</source>
+        <translation>Будь ласка, виберіть елемент!</translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="151"/>
+        <location filename="Controller/Controller.cpp" line="173"/>
         <source>Retry?</source>
         <translation>Ще раз?</translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="152"/>
+        <location filename="Controller/Controller.cpp" line="174"/>
         <source>No connection to server. Retry?</source>
         <translation>Немає з&apos;єднання з сервером. Спробувати ще раз?</translation>
     </message>
@@ -210,6 +215,21 @@
     </message>
 </context>
 <context>
+    <name>IncomePagesController</name>
+    <message>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="166"/>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="259"/>
+        <source>Fields can&apos;t be empty!</source>
+        <translation>Поля не можуть бути пустими!</translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="172"/>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="265"/>
+        <source>Expiration date can&apos;t be in the past</source>
+        <translation>Кінцева дата не може бути в минулому</translation>
+    </message>
+</context>
+<context>
     <name>IncomeViewSubPage</name>
     <message>
         <location filename="View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.ui" line="14"/>
@@ -338,6 +358,21 @@
         <location filename="View/MainPage/List/ListsSubPage/ListItem.ui" line="109"/>
         <source>ListName</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>ListPagesController</name>
+    <message>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="214"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="367"/>
+        <source>List name can&apos;t be empty</source>
+        <translation>Назва списку не може бути пустою</translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="246"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="315"/>
+        <source>Product data can&apos;t be empty</source>
+        <translation>Дані продукту не можуть бути пустими</translation>
     </message>
 </context>
 <context>
@@ -494,7 +529,7 @@
 <context>
     <name>LoginPageController</name>
     <message>
-        <location filename="Controller/LoginPageController.cpp" line="62"/>
+        <location filename="Controller/LoginPageController.cpp" line="66"/>
         <source>Login or password is incorrect</source>
         <translation>Неправильний логін або пароль</translation>
     </message>
@@ -513,8 +548,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="31"/>
-        <location filename="View/MainPage/MainPage.cpp" line="217"/>
+        <location filename="View/MainPage/MainPage.cpp" line="33"/>
+        <location filename="View/MainPage/MainPage.cpp" line="219"/>
         <source>My Lists</source>
         <translation>Мої списки</translation>
     </message>
@@ -531,8 +566,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="35"/>
-        <location filename="View/MainPage/MainPage.cpp" line="221"/>
+        <location filename="View/MainPage/MainPage.cpp" line="37"/>
+        <location filename="View/MainPage/MainPage.cpp" line="223"/>
         <source>Statistics</source>
         <translation>Статистика</translation>
     </message>
@@ -583,50 +618,58 @@ Incomes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="29"/>
-        <location filename="View/MainPage/MainPage.cpp" line="215"/>
+        <location filename="View/MainPage/MainPage.cpp" line="31"/>
+        <location filename="View/MainPage/MainPage.cpp" line="217"/>
         <source>Back</source>
         <translation>Перейти назад</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="30"/>
-        <location filename="View/MainPage/MainPage.cpp" line="216"/>
+        <location filename="View/MainPage/MainPage.cpp" line="32"/>
+        <location filename="View/MainPage/MainPage.cpp" line="218"/>
         <source>My Incomes</source>
         <translation>Мої доходи</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="32"/>
-        <location filename="View/MainPage/MainPage.cpp" line="218"/>
+        <location filename="View/MainPage/MainPage.cpp" line="34"/>
+        <location filename="View/MainPage/MainPage.cpp" line="220"/>
         <source>Log Out</source>
         <translation>Вийти</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="33"/>
-        <location filename="View/MainPage/MainPage.cpp" line="219"/>
+        <location filename="View/MainPage/MainPage.cpp" line="35"/>
+        <location filename="View/MainPage/MainPage.cpp" line="221"/>
         <source>Daily List</source>
         <translation>Щоденний список</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="34"/>
-        <location filename="View/MainPage/MainPage.cpp" line="220"/>
+        <location filename="View/MainPage/MainPage.cpp" line="36"/>
+        <location filename="View/MainPage/MainPage.cpp" line="222"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="36"/>
-        <location filename="View/MainPage/MainPage.cpp" line="222"/>
+        <location filename="View/MainPage/MainPage.cpp" line="38"/>
+        <location filename="View/MainPage/MainPage.cpp" line="224"/>
         <source>My Categories</source>
         <translation>Мої категорії</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="277"/>
+        <location filename="View/MainPage/MainPage.cpp" line="279"/>
         <source>Current Balance:  </source>
         <translation>Поточний баланс:  </translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="278"/>
+        <location filename="View/MainPage/MainPage.cpp" line="280"/>
         <source>Predicted balance:  </source>
         <translation>Передбачений баланс:  </translation>
+    </message>
+</context>
+<context>
+    <name>MainPageController</name>
+    <message>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="404"/>
+        <source>Error updating page</source>
+        <translation>Помилка оновлення сторінки</translation>
     </message>
 </context>
 <context>
@@ -635,6 +678,14 @@ Incomes</source>
         <location filename="View/MainWindow.ui" line="20"/>
         <source>Spend &amp; Note</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>ProductCategoriesController</name>
+    <message>
+        <location filename="Controller/MainPage/ProductCategoriesController.cpp" line="96"/>
+        <source>Fields can&apos;t be empty!</source>
+        <translation>Поля не можуть бути пустими!</translation>
     </message>
 </context>
 <context>
@@ -924,6 +975,16 @@ Incomes</source>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="209"/>
         <source>Add</source>
         <translation>Додати</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
+        <source>Please Select an item!</source>
+        <translation>Будь ласка, виберіть елемент!</translation>
     </message>
 </context>
 <context>
@@ -1308,6 +1369,18 @@ Incomes</source>
         <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
         <source>Incomes</source>
         <translation>Доходи</translation>
+    </message>
+</context>
+<context>
+    <name>StatisticsPageController</name>
+    <message>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="39"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="62"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="127"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="162"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="197"/>
+        <source>Request to server failed</source>
+        <translation>Запит до сервера неуспішний</translation>
     </message>
 </context>
 </TS>

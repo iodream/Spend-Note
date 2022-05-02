@@ -26,7 +26,7 @@ signals:
 	void RemoveIncomeCategory(IncomeCategoryId);
 	void RemoveProductCategory(ProductCategoryId);
 
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 
 public slots:
 	void OnEditCategoryClicked();

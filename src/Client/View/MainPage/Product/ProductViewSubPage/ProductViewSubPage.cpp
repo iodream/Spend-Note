@@ -21,17 +21,17 @@ ProductViewSubPage::ProductViewSubPage(QWidget *parent) :
 
 void ProductViewSubPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
-}
+		QWidget::changeEvent(event);
+	}
 }
 
 ProductViewSubPage::~ProductViewSubPage()

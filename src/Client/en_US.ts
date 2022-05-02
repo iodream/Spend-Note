@@ -43,16 +43,21 @@
         <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="138"/>
+        <source>Please Select an item!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="151"/>
+        <location filename="Controller/Controller.cpp" line="173"/>
         <source>Retry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="152"/>
+        <location filename="Controller/Controller.cpp" line="174"/>
         <source>No connection to server. Retry?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,6 +215,21 @@
     </message>
 </context>
 <context>
+    <name>IncomePagesController</name>
+    <message>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="166"/>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="259"/>
+        <source>Fields can&apos;t be empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="172"/>
+        <location filename="Controller/MainPage/IncomePagesController.cpp" line="265"/>
+        <source>Expiration date can&apos;t be in the past</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IncomeViewSubPage</name>
     <message>
         <location filename="View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.ui" line="14"/>
@@ -337,6 +357,21 @@
     <message>
         <location filename="View/MainPage/List/ListsSubPage/ListItem.ui" line="109"/>
         <source>ListName</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListPagesController</name>
+    <message>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="214"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="367"/>
+        <source>List name can&apos;t be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="246"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="315"/>
+        <source>Product data can&apos;t be empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -482,7 +517,7 @@
 <context>
     <name>LoginPageController</name>
     <message>
-        <location filename="Controller/LoginPageController.cpp" line="62"/>
+        <location filename="Controller/LoginPageController.cpp" line="66"/>
         <source>Login or password is incorrect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -501,8 +536,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="31"/>
-        <location filename="View/MainPage/MainPage.cpp" line="217"/>
+        <location filename="View/MainPage/MainPage.cpp" line="33"/>
+        <location filename="View/MainPage/MainPage.cpp" line="219"/>
         <source>My Lists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -519,8 +554,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="35"/>
-        <location filename="View/MainPage/MainPage.cpp" line="221"/>
+        <location filename="View/MainPage/MainPage.cpp" line="37"/>
+        <location filename="View/MainPage/MainPage.cpp" line="223"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -571,49 +606,57 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="29"/>
-        <location filename="View/MainPage/MainPage.cpp" line="215"/>
+        <location filename="View/MainPage/MainPage.cpp" line="31"/>
+        <location filename="View/MainPage/MainPage.cpp" line="217"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/MainPage.cpp" line="30"/>
-        <location filename="View/MainPage/MainPage.cpp" line="216"/>
-        <source>My Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="32"/>
         <location filename="View/MainPage/MainPage.cpp" line="218"/>
-        <source>Log Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/MainPage.cpp" line="33"/>
-        <location filename="View/MainPage/MainPage.cpp" line="219"/>
-        <source>Daily List</source>
+        <source>My Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="34"/>
         <location filename="View/MainPage/MainPage.cpp" line="220"/>
-        <source>Settings</source>
+        <source>Log Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/MainPage.cpp" line="35"/>
+        <location filename="View/MainPage/MainPage.cpp" line="221"/>
+        <source>Daily List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="36"/>
         <location filename="View/MainPage/MainPage.cpp" line="222"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/MainPage.cpp" line="38"/>
+        <location filename="View/MainPage/MainPage.cpp" line="224"/>
         <source>My Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="277"/>
+        <location filename="View/MainPage/MainPage.cpp" line="279"/>
         <source>Current Balance:  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="278"/>
+        <location filename="View/MainPage/MainPage.cpp" line="280"/>
         <source>Predicted balance:  </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainPageController</name>
+    <message>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="404"/>
+        <source>Error updating page</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -622,6 +665,14 @@ Incomes</source>
     <message>
         <location filename="View/MainWindow.ui" line="20"/>
         <source>Spend &amp; Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProductCategoriesController</name>
+    <message>
+        <location filename="Controller/MainPage/ProductCategoriesController.cpp" line="96"/>
+        <source>Fields can&apos;t be empty!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -911,6 +962,16 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="209"/>
         <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
+        <source>Please Select an item!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1287,6 +1348,18 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
         <source>Incomes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StatisticsPageController</name>
+    <message>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="39"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="62"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="127"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="162"/>
+        <location filename="Controller/MainPage/StatisticsPageController.cpp" line="197"/>
+        <source>Request to server failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,6 +3,8 @@
 
 #include <QShortcut>
 
+#include "View/MainPage/MainPage.h"
+
 LoginPage::LoginPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::LoginPage)
@@ -113,26 +115,46 @@ void LoginPage::OnLoginTextChanged(const QString& arg1)
 void LoginPage::OnLangSelected(QString lang)
 {
 	if(lang == "English")
-		emit LangChanged(UILangs::ENGLISH);
-	else
-		if(lang == "Українська")
-			emit LangChanged(UILangs::UKRAINIAN);
+	{
+		MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
+	}
+	else if(lang == "Українська")
+	{
+		MainPage::UISettings::LANG_UI = UILangs::UKRAINIAN;
+	}
 
+	emit LangChanged();
 }
 
 void LoginPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
+}
+
+void LoginPage::Update()
+{
+	switch(MainPage::UISettings::LANG_UI)
+	{
+	case UILangs::ENGLISH:
+		m_ui->LanguageSelector->setCurrentText("English");
+		break;
+	case UILangs::UKRAINIAN:
+		m_ui->LanguageSelector->setCurrentText("Українська");
+		break;
+	default:
+		m_ui->LanguageSelector->setCurrentText("English");
+		break;
+	}
 }
 
 void LoginPage::OnPasswordTextChanged(const QString& arg1)

@@ -16,6 +16,9 @@ public:
 	~SettingsSubPage();
 
 	void GoToMainSubPage();
+	void changeEvent(QEvent* event);
+	void Update();
+
 
 	void UpdateColors();
 private:
@@ -38,7 +41,8 @@ private slots:
 
 signals:
 	void ColorSchemeChanged();
-	void LangChanged(const UILangs& lang);
+	void LangChanged();
+
 
 };
 

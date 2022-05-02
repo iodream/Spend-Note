@@ -23,6 +23,7 @@ public:
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
 	void changeEvent(QEvent* event);
+	void Update();
 
 
 private:
@@ -31,7 +32,7 @@ private:
 signals:
 	void GotoSignup();
 	void Login(LoginModel::JSONFormatter::Credentials credentials);
-	void LangChanged(const UILangs& lang);
+	void LangChanged();
 
 
 private slots:

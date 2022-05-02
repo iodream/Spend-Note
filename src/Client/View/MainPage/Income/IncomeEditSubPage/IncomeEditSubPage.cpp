@@ -33,17 +33,17 @@ IncomeEditSubPage::IncomeEditSubPage(QWidget *parent) :
 
 void IncomeEditSubPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
 
 void IncomeEditSubPage::OnEditIncome()

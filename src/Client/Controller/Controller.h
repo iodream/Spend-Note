@@ -47,7 +47,7 @@ private:
 	IdType m_user_id{1};
 	MainWindow m_main_window{};
 	QApplication* m_app;
-	QTranslator* m_trans;
+	std::shared_ptr<QTranslator> m_trans;
 
 private:
 	std::unique_ptr<LoginPageController>  m_login_page_controller;
@@ -56,7 +56,7 @@ private:
 
 public slots:
 	void OnChangePage(UIPages page);
-	void OnLangChanged(const UILangs& lang);
+	void OnLangChanged();
 	void OnSaveConfig();
 	void OnColorSchemeChanged();
 	void ReadSettings();

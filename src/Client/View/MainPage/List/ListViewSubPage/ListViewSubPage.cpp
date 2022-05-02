@@ -24,18 +24,19 @@ ListViewSubPage::ListViewSubPage(QWidget *parent)
 
 void ListViewSubPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
-  QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
+
 ListViewSubPage::~ListViewSubPage()
 {
 	delete m_ui;

@@ -15,6 +15,18 @@ SettingsPageController::SettingsPageController(
 		&SettingsSubPage::ColorSchemeChanged,
 		this,
 		&SettingsPageController::OnColorSchemeChanged);
+
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::LangChanged,
+		this,
+		&SettingsPageController::OnColorSchemeChanged);
+
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::LangChanged,
+		this,
+		[this](){ emit LangChanged(); });
 }
 
 void SettingsPageController::OnColorSchemeChanged()
@@ -30,5 +42,6 @@ void SettingsPageController::UpdateSettingsPageColors()
 
 void SettingsPageController::UpdateSettingsSubPage()
 {
+	m_settings_page.Update();
 	m_settings_page.GoToMainSubPage();
 }

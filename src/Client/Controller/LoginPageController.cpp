@@ -19,6 +19,11 @@ LoginPageController::LoginPageController(
 	ConnectPage();
 }
 
+void LoginPageController::UpdateLoginPage()
+{
+	m_page.Update();
+}
+
 void LoginPageController::ConnectPage()
 {
 	QObject::connect(
@@ -37,8 +42,7 @@ void LoginPageController::ConnectPage()
 		&m_page,
 		&LoginPage::LangChanged,
 		this,
-		&LoginPageController::OnLangChanged);
-
+		[this](){ emit LangChanged(); });
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
@@ -84,9 +88,4 @@ void LoginPageController::OnGoToSignupPage()
 {
 	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::SIGNUP);
-}
-
-void LoginPageController::OnLangChanged(const UILangs& lang)
-{
-	emit LangChanged(lang);
 }

@@ -114,6 +114,7 @@ void SettingsSubPage::UpdateColors()
 	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 	m_ui->UserInfoLabel_2->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 	m_ui->ColorSchemeLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
+	m_ui->LanguageLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 }
 
 void SettingsSubPage::OnChangeEmailButtonClicked()
@@ -321,12 +322,42 @@ void SettingsSubPage::OnLangSelected(QString lang)
 {
 	if(lang == "English")
 	{
-		emit LangChanged(UILangs::ENGLISH);
+		MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
 	}
+	else if(lang == "Українська")
+	{
+		MainPage::UISettings::LANG_UI = UILangs::UKRAINIAN;
+	}
+	emit LangChanged();
+}
 
-	else
-		if(lang == "Українська")
+void SettingsSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
 		{
-			emit LangChanged(UILangs::UKRAINIAN);
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
 		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
+void SettingsSubPage::Update()
+{
+	switch(MainPage::UISettings::LANG_UI)
+	{
+	case UILangs::ENGLISH:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	case UILangs::UKRAINIAN:
+		m_ui->LanguageBox->setCurrentText("Українська");
+		break;
+	default:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	}
 }

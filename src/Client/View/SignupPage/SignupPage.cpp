@@ -50,17 +50,17 @@ SignupPage::~SignupPage()
 
 void SignupPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
 
 void SignupPage::SetErrorBanner(const int code, const std::string& description)

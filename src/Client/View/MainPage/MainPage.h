@@ -49,7 +49,7 @@ public:
 	void UpdatePageColors();
 
 	void SetErrorBanner(const int code, const std::string& description);
-	void SetErrorBanner(const std::string& description);
+	void SetErrorBanner(const QString& description);
 	void CloseErrorBanner();
 	void changeEvent(QEvent* event);
 
@@ -132,7 +132,6 @@ signals:
 	void GoBack(int n=1);
 	void ColorSchemeChanged();
 
-
 public slots:
 	void OnGoToListsClicked();
 	void OnGoToIncomesClicked();
@@ -143,6 +142,12 @@ public slots:
 	void OnGoToSettingsClicked();
 
 public:
+	class UISettings
+	{
+	public:
+		static UILangs LANG_UI;
+	};
+
 	class ColorSettings
 	{
 	public:

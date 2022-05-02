@@ -342,6 +342,12 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::ColorSchemeChanged,
 		this,
 		&MainPageController::OnColorSchemeChanged);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::LangChanged,
+		this,
+		[this](){ emit LangChanged(); });
 }
 
 void MainPageController::OnLogout()
@@ -395,7 +401,7 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		m_page.SetErrorBanner("Error updating page");
+		m_page.SetErrorBanner(tr("Error updating page"));
 	}
 
 	if(MainPage::bNeedColorUpdate)
@@ -409,7 +415,7 @@ void MainPageController::OnServerError(const int code, const std::string& desc)
 	m_page.SetErrorBanner(code, desc);
 }
 
-void MainPageController::OnClientError(const std::string& desc)
+void MainPageController::OnClientError(const QString& desc)
 {
 	m_page.SetErrorBanner(desc);
 }

@@ -63,17 +63,17 @@ StatisticSubPage::~StatisticSubPage()
 
 void StatisticSubPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
 
 QString StatisticSubPage::GetProductCategoryById(IdType id, const std::vector<ProductCategory>& category)

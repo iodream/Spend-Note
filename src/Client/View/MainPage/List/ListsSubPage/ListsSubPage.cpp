@@ -19,17 +19,17 @@ ListsSubPage::ListsSubPage(QWidget *parent)
 
 void ListsSubPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
 
 void ListsSubPage::AppendList(ListItem* list)
@@ -123,6 +123,8 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 		item->Update();
 		AppendList(item);
 	}
+	if(MainPage::UISettings::LANG_UI == UILangs::ENGLISH)
+		qDebug() << "LANG IN lists subpage IS: ENGLISH";
 }
 
 void ListsSubPage::UpdateColors()

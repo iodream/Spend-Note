@@ -37,17 +37,17 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
 
- QMainWindow::changeEvent(event);
- }
+		QMainWindow::changeEvent(event);
+	}
 }
 
 MainWindow::~MainWindow()

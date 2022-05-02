@@ -93,7 +93,7 @@ void ProductCategoriesController::OnAddProductCategory(ProductCategory category)
 
 	if(!model.CheckFields(category))
 	{
-		emit ClientError("Fields can't be empty!");
+		emit ClientError(tr("Fields can't be empty!"));
 		return;
 	}
 

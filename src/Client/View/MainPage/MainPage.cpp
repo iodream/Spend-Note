@@ -18,6 +18,8 @@ QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
 QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
 QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
 
+UILangs MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
+
 bool MainPage::bNeedColorUpdate = true;
 
 MainPage::MainPage(QWidget *parent)
@@ -206,25 +208,25 @@ MainPage::~MainPage()
 
 void MainPage::changeEvent(QEvent* event)
 {
- if(event)
- {
-  switch(event->type())
-  {
-   case QEvent::LanguageChange:
-	m_ui->retranslateUi(this);
-	m_ui->GoBackButton->setToolTip(tr("Back"));
-	m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
-	m_ui->GoToListsButton->setToolTip(tr("My Lists"));
-	m_ui->LogoutButton->setToolTip(tr("Log Out"));
-	m_ui->GoToDailyList->setToolTip(tr("Daily List"));
-	m_ui->GoToSettingsButton->setToolTip(tr("Settings"));
-	m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
-	m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
-	break;
-  }
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			m_ui->GoBackButton->setToolTip(tr("Back"));
+			m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
+			m_ui->GoToListsButton->setToolTip(tr("My Lists"));
+			m_ui->LogoutButton->setToolTip(tr("Log Out"));
+			m_ui->GoToDailyList->setToolTip(tr("Daily List"));
+			m_ui->GoToSettingsButton->setToolTip(tr("Settings"));
+			m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
+			m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
+			break;
+		}
 
- QWidget::changeEvent(event);
- }
+		QWidget::changeEvent(event);
+	}
 }
 
 void MainPage::SetCurrentSubPage(int idx)
@@ -304,13 +306,13 @@ void MainPage::SetErrorBanner(const int code, const std::string& description)
 	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
 }
 
-void MainPage::SetErrorBanner(const std::string& description)
+void MainPage::SetErrorBanner(const QString& description)
 {
 	m_ui->gridLayout_2->setRowStretch(2,1);
 	m_ui->ErrorTitleLabel->setVisible(false);
 
 	m_ui->ErrorCodeLabel->setText("");
-	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+	m_ui->ErrorDescriptionLabel->setText(description);
 }
 
 void MainPage::CloseErrorBanner()

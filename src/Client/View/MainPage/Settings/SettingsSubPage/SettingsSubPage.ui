@@ -164,7 +164,7 @@ background-color: rgb(186, 189, 182);</string>
             </layout>
            </item>
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="LanguageLabel">
              <property name="font">
               <font>
                <pointsize>14</pointsize>
