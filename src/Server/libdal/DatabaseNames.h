@@ -55,11 +55,33 @@ namespace db
 		const std::string BUY_UNTIL_DATE = "buyUntilDate";
 	}
 
+	namespace periodicProduct
+	{
+		const std::string TABLE_NAME = "PeriodicProduct";
+		const std::string ID = "id";
+		const std::string LIST_ID = "listId";
+		const std::string CATEGORY_ID = "categoryId";
+		const std::string NAME = "name";
+		const std::string PRICE = "price";
+		const std::string AMOUNT = "amount";
+		const std::string PRIORITY = "productPriority";
+		const std::string PERIODICITY_ID = "periodicityId";
+		const std::string NEXT_ADD_DATE = "nextAddDate";
+		const std::string ADD_UNTIL = "addUntil";
+	}
+
 	namespace productCategory
 	{
 		const std::string TABLE_NAME = "ProductCategory";
 		const std::string ID = "id";
 		const std::string USER_ID = "userId";
+		const std::string NAME = "name";
+	}
+
+	namespace periodicity
+	{
+		const std::string TABLE_NAME = "Periodicity";
+		const std::string ID = "id";
 		const std::string NAME = "name";
 	}
 
