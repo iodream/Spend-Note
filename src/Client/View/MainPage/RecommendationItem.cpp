@@ -20,7 +20,6 @@ RecommendationItem::~RecommendationItem()
 void RecommendationItem::Update()
 {
 	m_ui->ListName->setText(m_name);
-	m_ui->Holder->show();
 }
 
 void RecommendationItem::SetNumber(int number)
@@ -29,4 +28,3 @@ void RecommendationItem::SetNumber(int number)
 	m_ui->Number->setText(QString("%1").arg(m_number));
 	Update();
 }
-

@@ -1,7 +1,6 @@
 #include "RecommendationWidget.h"
 #include "ui_RecommendationWidget.h"
 
-
 RecommendationWidget::RecommendationWidget(QWidget *parent)
 	: QWidget(parent)
 	, m_list_size(0)
@@ -9,11 +8,11 @@ RecommendationWidget::RecommendationWidget(QWidget *parent)
 {
 	m_ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground, true);
+
 	connect(m_ui->close_button,
 			&QPushButton::released,
 			this,
-			[this](){ emit(RecommendationClosed()); }
-			);
+			[this](){ emit RecommendationClosed(); });
 }
 
 RecommendationWidget::~RecommendationWidget()

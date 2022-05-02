@@ -113,21 +113,22 @@ MainPage::MainPage(QWidget *parent)
 	InitCategoriesEditSubPage();
 	InitSettingsSubPage();
 
-//	rec = new RecommendationWidget(this);
-//	item = new RecommendationItem("new1",rec);
-//	rec->AppendItem(item);
+	rec = new RecommendationWidget(this);
+	item = new RecommendationItem("new1",rec);
+	rec->AppendItem(item);
 
-//		connect(
-//			rec,
-//			&RecommendationWidget::RecommendationClosed,
-//			this,
-//			&MainPage::OnRecommendationClosed);
+		connect(
+			rec,
+			&RecommendationWidget::RecommendationClosed,
+			this,
+			&MainPage::OnRecommendationClosed);
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)
 {
-	rec->move(size().width() - rec->size().width() - 10,
-			  size().height() - rec->size().height() - 10);
+	//position it in lower right corner
+	rec->move(size().width() - rec->size().width() - 25,
+			  size().height() - rec->size().height() - 25);
 	QWidget::resizeEvent(event);
 }
 
