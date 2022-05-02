@@ -221,7 +221,7 @@ void Controller::OnLangChanged()
 	m_app->removeTranslator(m_trans.get());
 	if(!m_trans->load(file))
 	{
-		qDebug() << "Couldnt load translation file\n";
+		qWarning() << "Couldnt load translation file\n";
 	}
 
 	m_app->installTranslator(m_trans.get());
