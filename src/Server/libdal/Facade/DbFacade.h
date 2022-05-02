@@ -31,6 +31,7 @@ public:
 	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
+	std::vector<Product> GetProductsForPeriodicProduct(IdType periodic_id) override;
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
 

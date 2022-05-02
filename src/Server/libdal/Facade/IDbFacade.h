@@ -36,6 +36,8 @@ public:
 	virtual std::optional<IdType> AddProduct(const Product& product) = 0;
 	virtual std::optional<Product> GetProductById(IdType id) = 0;
 	virtual std::vector<Product> GetProductsForList(IdType list_id) = 0;
+	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
+	virtual std::vector<Product> GetProductsForPeriodicProduct(IdType periodic_id) = 0;
 	virtual bool UpdateProduct(const Product& product) = 0;
 	virtual bool RemoveProduct(IdType id) = 0;
 
@@ -61,8 +63,6 @@ public:
 	virtual bool CanUserEditProduct(IdType user_id, IdType product_id) = 0;
 	virtual bool CanUserEditIncome(IdType user_id, IdType income_id) = 0;
 	virtual bool CanUserEditPeriodicProduct(IdType user_id, IdType product_id) = 0;
-
-	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
 
 	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id, Period period) = 0;
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id, Period period) = 0;

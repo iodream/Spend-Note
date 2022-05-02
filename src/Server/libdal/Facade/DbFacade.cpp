@@ -291,4 +291,9 @@ std::vector<PeriodType> DbFacade::GetAllPeriodTypes()
 	return m_periodic_products.GetAllPeriodTypes();
 }
 
+std::vector<Product> DbFacade::GetProductsForPeriodicProduct(IdType periodic_id)
+{
+	return m_products.GetByPeriodicProductId(periodic_id);
+}
+
 }

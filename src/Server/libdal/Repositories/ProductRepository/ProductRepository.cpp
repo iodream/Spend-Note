@@ -185,6 +185,51 @@ std::vector<Product> ProductRepository::GetDailyList(IdType user_id)
 	return products;
 }
 
+std::vector<Product> ProductRepository::GetByPeriodicProductId(IdType periodic_id)
+{
+	std::vector<Product> products;
+
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		pqxx::result periodic_ids = w.exec(
+			"SELECT " + periodicProduct::ID +
+			" FROM " + periodicProduct::TABLE_NAME +
+			" WHERE " +
+				periodicProduct::ID + " = " + w.quote(periodic_id) + ";");
+		if (periodic_ids.empty())
+		{
+			throw NonexistentResource("Periodic product with id = " + std::to_string(periodic_id) + " not found");
+		}
+
+		pqxx::result product_rows = w.exec(
+			"SELECT " +
+				product::ID + ", " +
+				product::LIST_ID + ", " +
+				product::CATEGORY_ID + ", " +
+				product::NAME + ", " +
+				product::PRICE + ", " +
+				product::AMOUNT + ", " +
+				product::PRIORITY + ", " +
+				product::IS_BOUGHT + ", " +
+				product::ADD_DATE + ", " +
+				product::PURCHASE_DATE + ", " +
+				product::BUY_UNTIL_DATE +
+			" FROM " + product::TABLE_NAME +
+			" WHERE " + product::PERIODIC_ID + " = " + w.quote(periodic_id) + ";");
+
+		products.resize(product_rows.size());
+		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return products;
+}
+
 bool ProductRepository::Update(const Product& product)
 {
 	try

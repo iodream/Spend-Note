@@ -53,6 +53,7 @@ namespace db
 		const std::string ADD_DATE = "addDate";
 		const std::string PURCHASE_DATE = "purchaseDate";
 		const std::string BUY_UNTIL_DATE = "buyUntilDate";
+		const std::string PERIODIC_ID = "periodicId";
 	}
 
 	namespace periodicProduct
