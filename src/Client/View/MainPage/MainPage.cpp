@@ -308,9 +308,6 @@ void MainPage::UpdatePage()
 	//recommendation widget
 	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
 
-	//general text
-	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
-
 	//nav buttons
 	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();
 	foreach(auto obj, list)
