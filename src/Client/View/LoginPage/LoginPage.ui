@@ -33,7 +33,7 @@
    </item>
    <item row="1" column="1">
     <widget class="QWidget" name="loginWidget" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,4,1">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,4,0">
       <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
@@ -48,8 +48,8 @@
        </spacer>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="3,0,0,1,3,1,1,2">
-        <item alignment="Qt::AlignHCenter">
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="3,0,0,0,1,3,1,1,2">
+        <item>
          <widget class="QLabel" name="titleLabel">
           <property name="font">
            <font>
@@ -69,46 +69,66 @@
           <property name="sizeConstraint">
            <enum>QLayout::SetMinimumSize</enum>
           </property>
+          <property name="horizontalSpacing">
+           <number>32</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="loginLabel">
             <property name="text">
-             <string>Login</string>
+             <string>Email</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="loginLineEdit">
             <property name="placeholderText">
-             <string>Login.....</string>
+             <string>Email.....</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
            <widget class="QLabel" name="passwordLabel">
             <property name="text">
              <string>Password</string>
             </property>
-            <property name="scaledContents">
-             <bool>false</bool>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item>
            <widget class="QLineEdit" name="passwordLineEdit">
-            <property name="text">
-             <string/>
-            </property>
             <property name="echoMode">
              <enum>QLineEdit::Password</enum>
             </property>
             <property name="placeholderText">
-             <string>Password.....</string>
+             <string>Password...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="showPassword">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

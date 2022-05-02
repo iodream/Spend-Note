@@ -11,24 +11,41 @@ LoginPage::LoginPage(QWidget *parent)
 
 	m_ui->ErrorWidget->setVisible(false); // making our banner invisible
 
-	connect(m_ui->loginSubmitButton, SIGNAL(clicked())
-			, this, SLOT(OnLoginSubmitButtonClicked()));
+	connect(
+		m_ui->loginSubmitButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnLoginSubmitButtonClicked()));
 
-	connect(m_ui->signupButton, SIGNAL(clicked())
-			, this, SLOT(OnSignupButtonClicked()));
+	connect(
+		m_ui->signupButton,
+		SIGNAL(clicked()),
+		this,
+		SLOT(OnSignupButtonClicked()));
 
-	connect(m_ui->loginLineEdit, SIGNAL(textChanged(QString))
-			, this, SLOT(OnLoginTextChanged(QString)));
+	connect(
+		m_ui->loginLineEdit,
+		SIGNAL(textChanged(QString)),
+		this,
+		SLOT(OnLoginTextChanged(QString)));
 
-	connect(m_ui->passwordLineEdit, SIGNAL(textChanged(QString))
-			, this, SLOT(OnPasswordTextChanged(QString)));
+	connect(
+		m_ui->passwordLineEdit,
+		SIGNAL(textChanged(QString)),
+		this,
+		SLOT(OnPasswordTextChanged(QString)));
 
 	connect(
 		m_ui->CloseErrorBannerToolButton,
 		&QToolButton::clicked,
 		this,
 		&LoginPage::CloseErrorBanner);
-
+    
+  connect(
+		m_ui->showPassword,
+		&QCheckBox::clicked,
+		this,
+		&LoginPage::OnShowPasswordChecked);
 
 	QShortcut* shortcut = new QShortcut(QKeySequence("Return"), this);
 	connect(
@@ -36,6 +53,7 @@ LoginPage::LoginPage(QWidget *parent)
 		&QShortcut::activated,
 		this,
 		&LoginPage::OnLoginSubmitButtonClicked);
+
 }
 
 LoginPage::~LoginPage()
@@ -92,4 +110,15 @@ void LoginPage::OnPasswordTextChanged(const QString& arg1)
 	m_ui->loginErrorLabel->setText("");
 }
 
+void LoginPage::OnShowPasswordChecked()
+{
+	if(m_ui->showPassword->isChecked())
+	{
+		m_ui->passwordLineEdit->setEchoMode(QLineEdit::EchoMode::Normal);
+	}
+	else
+	{
+		m_ui->passwordLineEdit->setEchoMode(QLineEdit::EchoMode::Password);
+	}
+}
 

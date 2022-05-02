@@ -24,6 +24,7 @@
 #include "DailyList/DailyListSubPage/DailyListSubPage.h"
 #include "Statistic/StatisticSubPage.h"
 #include "CategoryEditPage/CategoryEditPage.h"
+#include "Settings/SettingsSubPage/SettingsSubPage.h"
 
 #include "View/Constants.h"
 
@@ -71,6 +72,7 @@ private:
 	void InitDailyListSubPage();
 	void InitStatisticsSubPage();
 	void InitCategoriesEditSubPage();
+	void InitSettingsSubPage();
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
@@ -93,7 +95,7 @@ public:
 	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
-
+	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 
 private:
 	Ui::MainPage *m_ui;
@@ -118,6 +120,7 @@ private:
 	DailyListSubPage m_dailylist_spage;
 	StatisticSubPage m_statistics_spage;
 	CategoryEditPage m_categories_edit_spage;
+	SettingsSubPage m_settings_spage;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -131,6 +134,7 @@ public slots:
 	void OnGoToDailyListClicked();
 	void OnGoToStatiticsClicked();
 	void OnGoToCategoriesEditClicked();
+	void OnGoToSettingsClicked();
 
 };
 

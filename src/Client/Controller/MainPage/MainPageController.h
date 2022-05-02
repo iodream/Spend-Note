@@ -9,6 +9,7 @@
 #include "StatisticsPageController.h"
 #include "IncomeCategoriesController.h"
 #include "ProductCategoriesController.h"
+#include "SettingsPageController.h"
 #include "NavHistory.h"
 
 #include "View/MainPage/MainPage.h"
@@ -42,6 +43,7 @@ private:
 	void InitStatisticsPageController();
 	void InitIncomeCategoriesController();
 	void InitProductCategoriesController();
+	void InitSettingsPageController();
 
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
@@ -63,6 +65,7 @@ private:
 	std::unique_ptr<StatisticsPageController> m_statistics_page_controller;
 	std::unique_ptr<IncomeCategoriesController> m_income_categories_controller;
 	std::unique_ptr<ProductCategoriesController> m_product_categories_controller;
+	std::unique_ptr<SettingsPageController> m_settings_page_controller;
 
 signals:
 	void ChangePage(UIPages page);
