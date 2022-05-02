@@ -349,7 +349,7 @@ void MainPageController::OnLogout()
 	m_http_client.ReleaseToken();
 	emit SaveConfig();
 
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER = "#a3ffbc";
+	MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
 	MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
 	MainPage::ColorSettings::RECOMMENDATION;
 	MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
@@ -495,6 +495,7 @@ void MainPageController::OnColorSchemeChanged()
 {
 	MainPage::bNeedColorUpdate = false;
 	emit ColorSchemeChanged();
+
 	m_page.UpdatePageColors();
 	m_list_pages_controller->UpdateListPageColors();
 	m_income_pages_controller->UpdateIncomesPageColors();

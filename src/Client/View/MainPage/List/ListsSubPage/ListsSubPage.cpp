@@ -117,7 +117,7 @@ void ListsSubPage::UpdateColors()
 		auto list = SafeGetList(i);
 		list->Update();
 	}
-	m_ui->frame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void ListsSubPage::Clear()

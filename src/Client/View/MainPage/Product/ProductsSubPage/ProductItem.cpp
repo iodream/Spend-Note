@@ -53,9 +53,8 @@ void ProductItem::Update()
 		m_ui->PurchasedCheckbox->setChecked(true);
 	else
 		m_ui->PurchasedCheckbox->setChecked(false);
-	m_ui->Holder->setStyleSheet(
+	setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	m_ui->Holder->show();
 }
 
 void ProductItem::set_number(int number)

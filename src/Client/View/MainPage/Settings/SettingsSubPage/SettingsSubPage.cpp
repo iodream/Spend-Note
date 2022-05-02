@@ -105,7 +105,9 @@ void SettingsSubPage::OnChangePasswordButtonClicked()
 
 void SettingsSubPage::UpdateColors()
 {
-	m_ui->frame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
+	m_ui->UserInfoLabel_2->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
+	m_ui->ColorSchemeLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 }
 
 void SettingsSubPage::OnChangeEmailButtonClicked()
@@ -138,17 +140,19 @@ void SettingsSubPage::OnColorScheme1Selected()
 
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "";
 	MainPage::ColorSettings::LABEL_TEXT= "black";
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#a3ffbc";
-	MainPage::ColorSettings::ERROR_BANNER= "red";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "#a3ffbc";
+	MainPage::ColorSettings::ERROR_BANNER= "#ef2929";
 	MainPage::ColorSettings::LIST_ACTIVE= "rgba(100, 230, 53, 50%)";
 	MainPage::ColorSettings::LIST_INACTIVE= "rgba(37, 109, 217, 50%)";
 	MainPage::ColorSettings::NAVBUTTONS= "#29baa7";
+
+	//set in rgba to specify transparency
 	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(201, 60, 32, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(224, 133, 29, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(202, 224, 31, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(35, 217, 108, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(25, 96, 209, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "#e38819";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(227, 136, 25)";
 	emit ColorSchemeChanged();
 }
 
@@ -157,42 +161,46 @@ void SettingsSubPage::OnColorScheme2Selected()
 {
 	MainPage::bNeedColorUpdate = true;
 
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#000000";
-	MainPage::ColorSettings::LABEL_TEXT= "#f2eded";
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
-	MainPage::ColorSettings::ERROR_BANNER= "#dbbe18";
-	MainPage::ColorSettings::LIST_ACTIVE= "#dbbe18";
-	MainPage::ColorSettings::LIST_INACTIVE= "#dbbe18";
-	MainPage::ColorSettings::NAVBUTTONS= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO1= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO2= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO3= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO4= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO5= "#dbbe18";
-	MainPage::ColorSettings::RECOMMENDATION= "#dbbe18";
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "#334257";
+	MainPage::ColorSettings::LABEL_TEXT= "#eeeeee";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "#5584ac";
+	MainPage::ColorSettings::ERROR_BANNER= "#990909";
+	MainPage::ColorSettings::LIST_ACTIVE= "#5b9bd5";
+	MainPage::ColorSettings::LIST_INACTIVE= "#92a9bd";
+	MainPage::ColorSettings::NAVBUTTONS= "#406882";
+	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(153, 9, 9, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(197, 90, 17, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(191, 144, 0, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(84, 130, 53, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(47, 85, 151, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(105, 152, 171, 50%)";
+
 	emit ColorSchemeChanged();
 }
 
+//winter day colors
 void SettingsSubPage::OnColorScheme3Selected()
 {
 	MainPage::bNeedColorUpdate = true;
 
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#323ca8";
-	MainPage::ColorSettings::LABEL_TEXT= "#dbbe18";
-	MainPage::ColorSettings::COLOR_BALANCE_BANNER= "#dbbe18";
-	MainPage::ColorSettings::ERROR_BANNER= "#dbbe18";
-	MainPage::ColorSettings::LIST_ACTIVE= "#dbbe18";
-	MainPage::ColorSettings::LIST_INACTIVE= "#dbbe18";
-	MainPage::ColorSettings::NAVBUTTONS= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO1= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO2= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO3= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO4= "#dbbe18";
-	MainPage::ColorSettings::PRODUCT_PRIO5= "#dbbe18";
-	MainPage::ColorSettings::RECOMMENDATION= "#dbbe18";
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "#edf7fa";
+	MainPage::ColorSettings::LABEL_TEXT= "black";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "#8faadc";
+	MainPage::ColorSettings::ERROR_BANNER= "#ef2929";
+	MainPage::ColorSettings::LIST_ACTIVE= "#ffe699";
+	MainPage::ColorSettings::LIST_INACTIVE= "#9dc3e6";
+	MainPage::ColorSettings::NAVBUTTONS= "#9dc3e6";
+	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(255, 122, 91, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(243, 168, 117, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(255, 204, 102, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(169, 209, 142, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(143, 170, 220, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(143, 170, 220, 50%)";
+
 	emit ColorSchemeChanged();
 }
 
+//dropdown box with elements
 void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 {
 	QString style = "background-color:";
@@ -202,7 +210,7 @@ void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 	case 0:
 		break;
 	case 1:
-		style += MainPage::ColorSettings::COLOR_BALANCE_BANNER;
+		style += MainPage::ColorSettings::COLOR_TOP_BANNER;
 		break;
 	case 2:
 		style += MainPage::ColorSettings::NAVBUTTONS;
@@ -241,6 +249,7 @@ void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 	m_ui->ElemenColor->setStyleSheet(style);
 }
 
+//custom color selection
 void SettingsSubPage::OnNewColorSelected()
 {
 	MainPage::bNeedColorUpdate = true;
@@ -254,7 +263,7 @@ void SettingsSubPage::OnNewColorSelected()
 			MainPage::ColorSettings::WINDOW_BACKGROUND = custom.name();
 			break;
 		case 1:
-			MainPage::ColorSettings::COLOR_BALANCE_BANNER = custom.name();
+			MainPage::ColorSettings::COLOR_TOP_BANNER = custom.name();
 			break;
 		case 2:
 			MainPage::ColorSettings::NAVBUTTONS= custom.name();

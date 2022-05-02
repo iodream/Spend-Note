@@ -108,7 +108,7 @@ void IncomeListSubPage::Update(const std::vector<Income>& incomes)
 
 void IncomeListSubPage::UpdateColors()
 {
-	m_ui->frame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void IncomeListSubPage::Clear()

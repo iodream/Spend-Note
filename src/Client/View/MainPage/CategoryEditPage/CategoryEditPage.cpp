@@ -100,7 +100,7 @@ void CategoryEditPage::OnAddCategoryClicked() // shows fields for adding
 
 void CategoryEditPage::UpdateColors()
 {
-	ui->label->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	ui->label->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void CategoryEditPage::OnRemoveClicked()

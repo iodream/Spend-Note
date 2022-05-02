@@ -141,24 +141,23 @@ public slots:
 	void OnGoToCategoriesEditClicked();
 	void OnGoToSettingsClicked();
 
+public:
+	class ColorSettings
+	{
 	public:
-		class ColorSettings
-		{
-		public:
-			static QString COLOR_BALANCE_BANNER;
-			static QString NAVBUTTONS;
-			static QString RECOMMENDATION;
-			static QString ERROR_BANNER;
-			static QString WINDOW_BACKGROUND;
-			static QString LABEL_TEXT;
-			static QString PRODUCT_PRIO1;
-			static QString PRODUCT_PRIO2;
-			static QString PRODUCT_PRIO3;
-			static QString PRODUCT_PRIO4;
-			static QString PRODUCT_PRIO5;
-			static QString LIST_INACTIVE;
-			static QString LIST_ACTIVE;
-		};
-
+		static QString COLOR_TOP_BANNER;
+		static QString NAVBUTTONS;
+		static QString RECOMMENDATION;
+		static QString ERROR_BANNER;
+		static QString WINDOW_BACKGROUND;
+		static QString LABEL_TEXT;
+		static QString PRODUCT_PRIO1;
+		static QString PRODUCT_PRIO2;
+		static QString PRODUCT_PRIO3;
+		static QString PRODUCT_PRIO4;
+		static QString PRODUCT_PRIO5;
+		static QString LIST_INACTIVE;
+		static QString LIST_ACTIVE;
+	};
 };
 

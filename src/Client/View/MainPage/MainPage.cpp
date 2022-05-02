@@ -3,8 +3,8 @@
 
 #include "Exception.h"
 #include <QColorDialog>
-#include <iostream>
-QString MainPage::ColorSettings::COLOR_BALANCE_BANNER = "#a3ffbc";
+
+QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
 QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
 QString MainPage::ColorSettings::RECOMMENDATION;
 QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
@@ -257,14 +257,14 @@ void MainPage::ShowBalance(const Balance& money)
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
 
-//most color changes are done here
+//top-lvl color changes are done here
 void MainPage::UpdatePageColors()
 {
-	//balance banner holders
-	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_BALANCE_BANNER));
+	//balance banners
+	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
 
-	//text inside qlabels
-	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));
+	//general text
+	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
 
 	//nav buttons
 	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();
@@ -273,7 +273,6 @@ void MainPage::UpdatePageColors()
 		obj->setStyleSheet(QString("background-color:" + ColorSettings::NAVBUTTONS));
 	}
 }
-
 
 void MainPage::SetErrorBanner(const int code, const std::string& description)
 {

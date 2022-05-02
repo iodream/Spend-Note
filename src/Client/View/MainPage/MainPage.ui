@@ -102,7 +102,7 @@ QLineEdit{
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>Go Back</string>
@@ -144,7 +144,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>My Lists</string>
@@ -192,7 +192,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>My 
@@ -238,7 +238,7 @@ Incomes</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>Daily list</string>
@@ -277,7 +277,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>Statistics</string>
@@ -307,7 +307,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string/>
@@ -334,7 +334,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -373,7 +373,7 @@ background-color: #29baa7</string>
         </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-background-color: #29baa7</string>
+background-color: #29baa7;</string>
         </property>
         <property name="text">
          <string>Logout</string>

@@ -17,7 +17,9 @@
 
 namespace{
 const std::string config_filename = "Config.json";
-};
+const QString settings_filename = "Settings.json";
+
+}
 
 class Controller : public QObject
 {

@@ -27,7 +27,7 @@ void ListItem::UpdateColor(const ListState& state)
 	}
 	else
 	{
-		m_color = MainPage::ColorSettings::LIST_ACTIVE;
+		m_color = MainPage::ColorSettings::LIST_INACTIVE;
 	}
 }
 
@@ -35,9 +35,8 @@ void ListItem::Update()
 {
 	m_ui->ListName->setText(m_list.name);
 	m_ui->Number->setText(QString("%1").arg(m_number));
-	m_ui->Holder->setStyleSheet(
+	setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	m_ui->Holder->show();
 }
 
 

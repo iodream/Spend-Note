@@ -67,7 +67,7 @@ void DailyListSubPage::Update(const std::vector<Product>& products)
 
 void DailyListSubPage::UpdateColors()
 {
-	m_ui->verticalFrame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	m_ui->verticalFrame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 

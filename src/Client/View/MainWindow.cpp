@@ -54,9 +54,9 @@ void MainWindow::closeEvent(QCloseEvent* event)
 		}
 
 	emit SaveConfig();
-
 }
 
+//update background color here
 void MainWindow::UpdateColors()
 {
 	setStyleSheet(QString("background-color:" + MainPage::ColorSettings::WINDOW_BACKGROUND));

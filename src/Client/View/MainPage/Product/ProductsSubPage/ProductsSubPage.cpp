@@ -130,12 +130,12 @@ void ProductsSubPage::Update(
 
 void ProductsSubPage::UpdateColors()
 {
-	for(int i=0;i<get_list_size();i++)
+	for(int i=0; i<get_list_size(); i++)
 	{
 		auto product = SafeGetProduct(i);
 		product->Update();
 	}
-	m_ui->frame->setStyleSheet("background-color:"+QString(MainPage::ColorSettings::COLOR_BALANCE_BANNER));
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void ProductsSubPage::Clear()
