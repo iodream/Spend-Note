@@ -70,7 +70,7 @@ create table PeriodicProduct
 	amount bigint not null,
 	productPriority integer not null,
 
-	periodicityId bigint references Periodicity(id),
+	periodicityId bigint not null references Periodicity(id),
 	nextAddDate timestamp not null,
 	addUntil timestamp,
 );

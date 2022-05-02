@@ -15,6 +15,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
 		, m_recommendation(m_connection)
+		, m_periodic_products(m_connection)
 {
 }
 
@@ -253,6 +254,31 @@ bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 Product DbFacade::GetRecommendation(const IdType &user_id)
 {
 	return m_recommendation.GetRecommendation(user_id);
+}
+
+std::optional<IdType> DbFacade::AddPeriodicProduct(const PeriodicProduct& product)
+{
+	return m_periodic_products.Add(product);
+}
+
+std::optional<PeriodicProduct> DbFacade::GetPeriodicProductById(IdType id)
+{
+	return m_periodic_products.GetById(id);
+}
+
+std::vector<PeriodicProduct> DbFacade::GetPeriodicProductsForList(IdType list_id)
+{
+	return m_periodic_products.GetByListId(list_id);
+}
+
+bool DbFacade::UpdatePeriodicProduct(const PeriodicProduct& product)
+{
+	return m_periodic_products.Update(product);
+}
+
+bool DbFacade::RemovePeriodicProduct(IdType id)
+{
+	return m_periodic_products.Remove(id);
 }
 
 }

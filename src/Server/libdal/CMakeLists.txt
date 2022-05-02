@@ -27,6 +27,7 @@ add_library(libdal STATIC
 	DTOs/Product.h
 	DTOs/Statistics.h
 	DTOs/ProductCategory.h
+	DTOs/PeriodicProduct.h
 
 	Repositories/IncomeRepository/IncomeRepository.h Repositories/IncomeRepository/IncomeRepository.cpp
 	Repositories/ListRepository/ListRepository.h Repositories/ListRepository/ListRepository.cpp
@@ -38,6 +39,7 @@ add_library(libdal STATIC
 	Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
 	Repositories/StatisticsRepository/StatisticsRepository.h Repositories/StatisticsRepository/StatisticsRepository.cpp
 	Repositories/RecommendationRepository/RecommendationRepository.h Repositories/RecommendationRepository/RecommendationRepository.cpp
+	Repositories/PeriodicProductRepository/PeriodicProductRepository.h Repositories/PeriodicProductRepository/PeriodicProductRepository.cpp
 
 	Facade/IDbFacade.h
 	Facade/DbFacade.h
