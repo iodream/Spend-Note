@@ -46,13 +46,13 @@ public:
 	void SetCurrentSubPage(MainSubPages page);
 	void SetCurrentSubPage(int idx);
 	void ShowBalance(const Balance& money);
-	void UpdatePageColors();
+	void UpdatePage();
 
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
 
-	static bool bNeedColorUpdate;
+	static bool bNeedsGlobalUIUpdate;
 
 private:
 	void InitListsSubPage();
@@ -142,6 +142,12 @@ public slots:
 	void OnGoToSettingsClicked();
 
 public:
+	class UISettings
+	{
+	public:
+		static QFont UI_FONT;
+	};
+
 	class ColorSettings
 	{
 	public:

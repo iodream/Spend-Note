@@ -14,7 +14,7 @@ SettingsPageController::SettingsPageController(
 		&m_settings_page,
 		&SettingsSubPage::FontChange,
 		this,
-		[this](QFont font){ emit(FontChange(font)); });
+		[this](){ emit(FontChange()); });
 
 	connect(
 		&m_settings_page,
@@ -33,8 +33,8 @@ void SettingsPageController::UpdateSettingsPageColors()
 	m_settings_page.UpdateColors();
 }
 
-
 void SettingsPageController::UpdateSettingsSubPage()
 {
+	m_settings_page.Update();
 	m_settings_page.GoToMainSubPage();
 }

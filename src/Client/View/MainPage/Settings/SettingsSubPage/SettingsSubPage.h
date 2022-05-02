@@ -15,6 +15,7 @@ public:
 	~SettingsSubPage();
 
 	void GoToMainSubPage();
+	void Update();
 
 	void UpdateColors();
 private:
@@ -23,7 +24,7 @@ private:
 	void EraseLineEdits();
 
 signals:
-	void FontChange(QFont);
+	void FontChange();
 
 private slots:
 	void OnChangePasswordButtonClicked();
@@ -37,6 +38,8 @@ private slots:
 	void OnColorScheme3Selected();
 	void OnColorSchemeCustomSelect(int);
 	void OnNewColorSelected();
+	void OnDefaultFontClicked();
+	void FontSizeChange(int);
 
 signals:
 	void ColorSchemeChanged();

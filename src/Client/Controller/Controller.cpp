@@ -80,6 +80,10 @@ void Controller::ReadSettings()
 		MainPage::ColorSettings::LIST_INACTIVE = json.value("COLOR_LIST_INACTIVE").toString();
 		MainPage::ColorSettings::NAVBUTTONS = json.value("COLOR_NAVBUTTONS").toString();
 		MainPage::ColorSettings::RECOMMENDATION = json.value("COLOR_RECOMMENDATION").toString();
+
+		QString FontName = json.value("UI_FONT_NAME").toString();
+		int FontSize= json.value("UI_FONT_SIZE").toInt();
+		MainPage::UISettings::UI_FONT = QFont(FontName, FontSize);
 	}
 }
 
@@ -155,7 +159,6 @@ void Controller::SetPage(UIPages page)
 	switch (page) {
 	case UIPages::MAIN:
 		m_main_page_controller->ChangeSubPage(MainSubPages::LISTS);
-
 		break;
 	case UIPages::LOGIN:
 		break;
@@ -188,6 +191,9 @@ void Controller::OnSaveConfig()
 	json["COLOR_LABEL"] = MainPage::ColorSettings::LABEL_TEXT;
 	json["COLOR_NAVBUTTONS"] = MainPage::ColorSettings::NAVBUTTONS;
 	json["COLOR_RECOMMENDATION"] = MainPage::ColorSettings::RECOMMENDATION;
+
+	json["UI_FONT_NAME"] = MainPage::UISettings::UI_FONT.family();
+	json["UI_FONT_SIZE"] = MainPage::UISettings::UI_FONT.pointSize();
 
 	QFile file(settings_filename);
 	QByteArray bytes = QJsonDocument(json).toJson( QJsonDocument::Indented );

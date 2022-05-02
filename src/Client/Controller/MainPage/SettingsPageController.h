@@ -35,7 +35,7 @@ signals:
 	void ServerError(const int code, const std::string& desc);
 	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-	void FontChange(QFont);
+	void FontChange();
 	void ColorSchemeChanged();
 	void GoBack(int n=1);
 

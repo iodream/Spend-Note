@@ -81,6 +81,6 @@ public slots:
 
 	void OnGoBack(int n=1);
 	void OnLogout();
-	void OnFontChange(QFont);
-	void OnColorSchemeChanged();
+	void OnFontChange();
+	void OnUIUpdate();
 };
