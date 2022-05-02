@@ -9,7 +9,6 @@
 
 #include "Net/Constants.h"
 
-
 Controller::Controller()
 {
 	InitConfig();
@@ -134,8 +133,6 @@ void Controller::InitMainPageController()
 		&MainPageController::ColorSchemeChanged,
 		this,
 		&Controller::OnColorSchemeChanged);
-
-
 }
 
 bool Controller::AskUser(const QString& title, const QString& text)

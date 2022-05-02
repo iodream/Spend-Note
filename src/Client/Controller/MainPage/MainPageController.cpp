@@ -397,9 +397,11 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 	else {
 		m_page.SetErrorBanner("Error updating page");
 	}
-	if(MainPage::bNeedColorUpdate)
-		OnColorSchemeChanged();
 
+	if(MainPage::bNeedColorUpdate)
+	{
+		OnColorSchemeChanged();
+	}
 }
 
 void MainPageController::OnServerError(const int code, const std::string& desc)
