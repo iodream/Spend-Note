@@ -20,9 +20,10 @@ public:
 		IdType& user_id,
 		DailyListSubPage& daily_list_page);
 
-	virtual ~DailyListPageController() override {};
+	virtual ~DailyListPageController() override {}
 
 	bool UpdateDailyListPage();
+	void UpdatePageColors();
 
 private:
 	HTTPClient& m_http_client;

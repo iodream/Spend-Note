@@ -1,6 +1,8 @@
 #include "LoginPage.h"
 #include "ui_LoginPage.h"
 
+#include <QShortcut>
+
 LoginPage::LoginPage(QWidget *parent)
 	: QWidget(parent)
 	, m_ui(new Ui::LoginPage)
@@ -38,12 +40,20 @@ LoginPage::LoginPage(QWidget *parent)
 		&QToolButton::clicked,
 		this,
 		&LoginPage::CloseErrorBanner);
-
-	connect(
+    
+  connect(
 		m_ui->showPassword,
 		&QCheckBox::clicked,
 		this,
 		&LoginPage::OnShowPasswordChecked);
+
+	QShortcut* shortcut = new QShortcut(QKeySequence("Return"), this);
+	connect(
+		shortcut,
+		&QShortcut::activated,
+		this,
+		&LoginPage::OnLoginSubmitButtonClicked);
+
 }
 
 LoginPage::~LoginPage()

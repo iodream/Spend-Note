@@ -34,6 +34,7 @@ public:
 	bool UpdateIncomeViewPage(const PageData& data);
 	bool UpdateIncomeEditPage(const PageData& data);
 
+	void UpdateIncomesPageColors();
 private:
 	void ConnectIncomesPage();
 	void ConnectIncomeViewPage();

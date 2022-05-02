@@ -30,12 +30,10 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void ReadSettings();
+
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnGoToSignupPage();
-
-#ifdef QT_DEBUG
-	void QuickLogin();
-#endif
 };

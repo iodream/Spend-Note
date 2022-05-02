@@ -78,9 +78,6 @@
              <pointsize>13</pointsize>
             </font>
            </property>
-           <property name="styleSheet">
-            <string notr="true">color: black;</string>
-           </property>
            <property name="text">
             <string>ListName</string>
            </property>
