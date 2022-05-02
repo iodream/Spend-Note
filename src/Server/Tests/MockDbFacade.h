@@ -64,5 +64,5 @@ public:
 	MOCK_METHOD(bool, UpdateProductCategory, (const db::ProductCategory& category), (override));
 	MOCK_METHOD(bool, RemoveProductCategory, (db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditProductCategory, (db::IdType, db::IdType), (override));
-	MOCK_METHOD(db::Product, GetRecommendation, (const db::IdType&), (override));
+	MOCK_METHOD(std::optional<db::Product>, GetRecommendation, (const db::IdType&), (override));
 };
