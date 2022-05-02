@@ -1,6 +1,6 @@
 #include <QJsonArray>
 
-#include "AddProductHandler.h"
+#include "AddPeriodicProductHandler.h"
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -10,17 +10,17 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-AddProductHandler::AddProductHandler()
+AddPeriodicProductHandler::AddPeriodicProductHandler()
 {
 }
 
-Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
+Net::Response AddPeriodicProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto list_id = std::get<long long>(m_params.Get(Params::LIST_ID));
 	auto json_payload = request.json_payload.object();
 	auto product = m_parser.Parse(json_payload);
-	auto product_db = ToDBProduct(product);
+	auto product_db = ToDBPeriodicProduct(product);
 
 	if (list_id != product.list_id){
 		return FormErrorResponse(
@@ -35,9 +35,9 @@ Net::Response AddProductHandler::AuthHandle(const Net::Request& request)
 			"\" can't create product with list id \"" + std::to_string(product.list_id) + "\"");;
 	}
 
-	ProductId product_id;
+	PeriodicProductId product_id;
 	try {
-		product_id.id = m_facade->AddProduct(product_db).value();
+		product_id.id = m_facade->AddPeriodicProduct(product_db).value();
 	}
 	catch (const db::SQLFailure& ex) {
 		return FormErrorResponse(

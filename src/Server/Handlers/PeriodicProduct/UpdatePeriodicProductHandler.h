@@ -10,13 +10,13 @@
 #include "../Entities/Parsers.h"
 #include "../Entities/Formatters.h"
 
-#include "../libdal/DTOs/Product.h"
+#include "../libdal/DTOs/PeriodicProduct.h"
 
-class UpdateProductHandler : public AuthorizedHandler
+class UpdatePeriodicProductHandler : public AuthorizedHandler
 {
 public:
-	UpdateProductHandler();
-	virtual ~UpdateProductHandler() override {}
+	UpdatePeriodicProductHandler();
+	virtual ~UpdatePeriodicProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:

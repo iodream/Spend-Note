@@ -9,11 +9,11 @@
 #include "../libdal/Exceptions/NonexistentResource.h"
 #include "Utils.h"
 
-GetProductsHandler::GetProductsHandler()
+GetPeriodicProductsHandler::GetPeriodicProductsHandler()
 {
 }
 
-Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
+Net::Response GetPeriodicProductsHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	Q_UNUSED(request);
@@ -39,13 +39,13 @@ Net::Response GetProductsHandler::AuthHandle(const Net::Request& request)
 	}
 
 	std::vector<PeriodicProduct> products;
-	for (const db::Product& db_product : db_products) {
+	for (const db::PeriodicProduct& db_product : db_products) {
 		auto category = m_facade->GetProductCategoryById(db_product.category_id);
 		if (!category.has_value())
 		{
 			throw InternalError(std::string("No product category with id:") + std::to_string(db_product.category_id));
 		}
-		auto product = ToNetPeriodProduct(db_product, category.value());
+		auto product = ToNetPeriodicProduct(db_product, category.value());
 		products.push_back(product);
 	}
 

@@ -10,16 +10,16 @@
 #include "../Entities/Parsers.h"
 #include "../Entities/Formatters.h"
 
-#include "../libdal/DTOs/Product.h"
+#include "../libdal/DTOs/PeriodicProduct.h"
 
-class AddProductHandler : public AuthorizedHandler
+class AddPeriodicProductHandler : public AuthorizedHandler
 {
 public:
-	AddProductHandler();
-	virtual ~AddProductHandler() override {}
+	AddPeriodicProductHandler();
+	virtual ~AddPeriodicProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	ProductJSONParser m_parser{};
-	ProductIdJSONFormatter m_formatter{};
+	PeriodicProductJSONParser m_parser{};
+	PeriodicProductIdJSONFormatter m_formatter{};
 };

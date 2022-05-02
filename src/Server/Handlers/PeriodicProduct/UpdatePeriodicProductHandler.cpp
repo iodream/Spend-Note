@@ -1,4 +1,4 @@
-#include "UpdateProductHandler.h"
+#include "UpdatePeriodicProductHandler.h"
 #include "Net/Parsing.h"
 #include "Server/Error.h"
 #include "Server/Utils.h"
@@ -8,16 +8,16 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-UpdateProductHandler::UpdateProductHandler()
+UpdatePeriodicProductHandler::UpdatePeriodicProductHandler()
 {
 }
 
-Net::Response UpdateProductHandler::AuthHandle(const Net::Request& request)
+Net::Response UpdatePeriodicProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
 	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
 
-	if (!m_facade->GetProductById(product_id)){
+	if (!m_facade->GetPeriodicProductById(product_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"Resource not found");
@@ -32,14 +32,14 @@ Net::Response UpdateProductHandler::AuthHandle(const Net::Request& request)
 			"Product id in uri and in json are not equal");
 	}
 
-	if (!m_facade->CanUserEditProduct(request.uid, product_id)){
+	if (!m_facade->CanUserEditPeriodicProduct(request.uid, product_id)){
 		return FormErrorResponse(
 			NetError::Status::HTTP_FORBIDDEN,
 			"Update product with id \"" + std::to_string(product_id) + "\" is forbidden");
 	}
 
-	auto product_db = ToDBProduct(product);
+	auto product_db = ToDBPeriodicProduct(product);
 
-	m_facade->UpdateProduct(product_db);
+	m_facade->UpdatePeriodicProduct(product_db);
 	return FormEmptyResponse();
 }
