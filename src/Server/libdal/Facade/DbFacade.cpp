@@ -286,4 +286,9 @@ bool DbFacade::RemovePeriodicProduct(IdType id)
 	return m_periodic_products.Remove(id);
 }
 
+std::vector<PeriodType> DbFacade::GetAllPeriodTypes()
+{
+	return m_periodic_products.GetAllPeriodTypes();
+}
+
 }

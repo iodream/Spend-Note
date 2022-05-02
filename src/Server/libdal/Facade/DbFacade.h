@@ -89,6 +89,8 @@ public:
 	bool UpdatePeriodicProduct(const PeriodicProduct& product) override;
 	bool RemovePeriodicProduct(IdType id) override;
 
+	std::vector<PeriodType> GetAllPeriodTypes() override;
+
 private:
 	pqxx::connection m_connection;
 

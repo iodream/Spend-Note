@@ -16,6 +16,7 @@
 #include "DTOs/Statistics.h"
 #include "DTOs/IncomeCategory.h"
 #include "DTOs/PeriodicProduct.h"
+#include "DTOs/PeriodType.h"
 
 namespace db
 {
@@ -92,5 +93,7 @@ public:
 	virtual std::vector<PeriodicProduct> GetPeriodicProductsForList(IdType list_id) = 0;
 	virtual bool UpdatePeriodicProduct(const PeriodicProduct& product) = 0;
 	virtual bool RemovePeriodicProduct(IdType id) = 0;
+
+	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
 };
 }

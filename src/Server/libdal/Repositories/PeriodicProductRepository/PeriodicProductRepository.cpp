@@ -28,7 +28,7 @@ std::optional<IdType> PeriodicProductRepository::Add(const PeriodicProduct& prod
 				periodicProduct::PRICE + ", " +
 				periodicProduct::AMOUNT + ", " +
 				periodicProduct::PRIORITY + ", " +
-				periodicProduct::PERIODICITY_ID + ", " +
+				periodicProduct::PERIOD_ID + ", " +
 				periodicProduct::NEXT_ADD_DATE + ", " +
 				periodicProduct::ADD_UNTIL +
 			") VALUES (" +
@@ -71,7 +71,7 @@ std::optional<PeriodicProduct> PeriodicProductRepository::GetById(IdType id)
 				periodicProduct::PRICE + ", " +
 				periodicProduct::AMOUNT + ", " +
 				periodicProduct::PRIORITY + ", " +
-				periodicProduct::PERIODICITY_ID + ", " +
+				periodicProduct::PERIOD_ID + ", " +
 				periodicProduct::NEXT_ADD_DATE + ", " +
 				periodicProduct::ADD_UNTIL +
 			" FROM " + periodicProduct::TABLE_NAME +
@@ -117,7 +117,7 @@ std::vector<PeriodicProduct> PeriodicProductRepository::GetByListId(IdType list_
 				periodicProduct::PRICE + ", " +
 				periodicProduct::AMOUNT + ", " +
 				periodicProduct::PRIORITY + ", " +
-				periodicProduct::PERIODICITY_ID + ", " +
+				periodicProduct::PERIOD_ID + ", " +
 				periodicProduct::NEXT_ADD_DATE + ", " +
 				periodicProduct::ADD_UNTIL +
 			" FROM " + periodicProduct::TABLE_NAME +
@@ -158,7 +158,7 @@ bool PeriodicProductRepository::Update(const PeriodicProduct& product)
 					periodicProduct::PRICE + " = " + w.quote(product.price) + ", " +
 					periodicProduct::AMOUNT + " = " + w.quote(product.amount) + ", " +
 					periodicProduct::PRIORITY + " = " + w.quote(product.product_priority) + ", " +
-					periodicProduct::PERIODICITY_ID + " = " + w.quote(product.period_id) + ", " +
+					periodicProduct::PERIOD_ID + " = " + w.quote(product.period_id) + ", " +
 					periodicProduct::NEXT_ADD_DATE + " = " + w.quote(product.next_add_date) + ", " +
 					periodicProduct::ADD_UNTIL +  + " = " + w.quote(product.add_until) +
 				" WHERE " + periodicProduct::ID + " = " + w.quote(product.id) + ";");
@@ -227,6 +227,31 @@ bool PeriodicProductRepository::CanUserEditProduct(IdType user_id, IdType produc
 	return true;
 }
 
+std::vector<PeriodType> PeriodicProductRepository::GetAllPeriodTypes()
+{
+	std::vector<PeriodType> period_types;
+
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		pqxx::result period_rows = w.exec(
+			"SELECT " +
+				periodType::ID + ", " +
+				periodType::NAME +
+			" FROM " + periodType::TABLE_NAME + ";");
+
+		period_types.resize(period_rows.size());
+		std::transform(period_rows.cbegin(), period_rows.cend(), period_types.begin(), PeriodFromRow);
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return period_types;
+}
+
 PeriodicProduct PeriodicProductRepository::ProductFromRow(const pqxx::row& row)
 {
 	PeriodicProduct product;
@@ -238,11 +263,20 @@ PeriodicProduct PeriodicProductRepository::ProductFromRow(const pqxx::row& row)
 	product.price = row[periodicProduct::PRICE].as<Money>();
 	product.amount = row[periodicProduct::AMOUNT].as<int>();
 	product.product_priority = row[periodicProduct::PRIORITY].as<int>();
-	product.period_id = row[periodicProduct::PERIODICITY_ID].as<IdType>();
+	product.period_id = row[periodicProduct::PERIOD_ID].as<IdType>();
 	product.next_add_date = row[periodicProduct::NEXT_ADD_DATE].as<Timestamp>();
 	product.add_until = row[periodicProduct::ADD_UNTIL].get<Timestamp>();
 
 	return product;
+}
+
+PeriodType PeriodicProductRepository::PeriodFromRow(const pqxx::row& row)
+{
+	PeriodType type;
+	type.id = row[periodType::ID].as<IdType>();
+	type.name = row[periodType::NAME].as<std::string>();
+
+	return type;
 }
 
 }

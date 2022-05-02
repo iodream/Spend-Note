@@ -65,7 +65,7 @@ namespace db
 		const std::string PRICE = "price";
 		const std::string AMOUNT = "amount";
 		const std::string PRIORITY = "productPriority";
-		const std::string PERIODICITY_ID = "periodicityId";
+		const std::string PERIOD_ID = "periodId";
 		const std::string NEXT_ADD_DATE = "nextAddDate";
 		const std::string ADD_UNTIL = "addUntil";
 	}
@@ -78,9 +78,9 @@ namespace db
 		const std::string NAME = "name";
 	}
 
-	namespace periodicity
+	namespace periodType
 	{
-		const std::string TABLE_NAME = "Periodicity";
+		const std::string TABLE_NAME = "PeriodType";
 		const std::string ID = "id";
 		const std::string NAME = "name";
 	}

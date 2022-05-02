@@ -1,4 +1,4 @@
-INSERT INTO public.Periodicity
+INSERT INTO public.PeriodType
 	("name")
 VALUES
 	('daily'),
