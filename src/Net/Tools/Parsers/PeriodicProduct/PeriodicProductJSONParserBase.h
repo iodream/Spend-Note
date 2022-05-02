@@ -26,7 +26,7 @@ public:
 		SafeReadMoney(json, "price", product.price);
 		SafeReadBigInt(json, "priority", product.priority);
 
-		SafeReadString(json, "period_id", product.period_id);
+		SafeReadId(json, "period_id", product.period_id);
 		SafeReadString(json, "next_add_date", product.next_add_date);
 		SafeReadString(json, "add_until", product.add_until);
 

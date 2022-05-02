@@ -54,9 +54,9 @@ using ProductsJSONFormatter =
 	ArrayJSONFormatterBase<ProductJSONFormatter, Product>;
 
 using PeriodicProductJSONFormatter =
-	PeriodicProductJSONFormatterBase<ProductCategoryJSONFormatterBase, Product>;
+	PeriodicProductJSONFormatterBase<ProductCategoryJSONFormatterBase, PeriodicProduct>;
 using PeriodicProductsJSONFormatter =
-	ArrayJSONFormatterBase<PeriodicProductJSONFormatter, Product>;
+	ArrayJSONFormatterBase<PeriodicProductJSONFormatter, PeriodicProduct>;
 
 using StatisticPerDayJSONFormatter =
 	StatisticPerDayJSONFormatterBase<StatisticPerDay>;
