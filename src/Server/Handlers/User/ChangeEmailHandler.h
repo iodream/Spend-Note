@@ -2,7 +2,7 @@
 
 #include "../libdal/Types.h"
 
-#include "../ICommandHandler.h"
+#include "../AuthorizedHandler.h"
 #include <QJsonObject>
 #include <QDateTime>
 #include <QString>
@@ -14,13 +14,13 @@
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
 
-class ChangeEmailHandler : public ICommandHandler
+class ChangeEmailHandler : public AuthorizedHandler
 {
 public:
     ChangeEmailHandler();
     virtual ~ChangeEmailHandler() override {}
 
-    virtual Net::Response AuthHandle(const Net::Request& request);
+	virtual Net::Response AuthHandle(const Net::Request& request) override;
 private:
 
     class JSONParser

@@ -14,6 +14,7 @@
 #include "../Handlers/Verification/AddVerificationHandler.h"
 #include "../Handlers/Verification/CheckVerificationHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
+#include "../Handlers/User/ChangeEmailHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -30,6 +31,7 @@ const std::string PRODUCTS = "/products";
 const std::string USERS    = "/users";
 const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
+const std::string CHANGE_EMAIL = "/change-email";
 
 }
 
@@ -74,6 +76,11 @@ ICommandHandler* RootResolver::Resolve(
 			return new AddVerificationHandler();
 		if (method == Net::HTTP_METHOD_PUT)
 			return new CheckVerificationHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == CHANGE_EMAIL) {
+		if(method == Net::HTTP_METHOD_POST)
+			return new ChangeEmailHandler();
 		return new MethodNotAllowedHandler();
 	}
 

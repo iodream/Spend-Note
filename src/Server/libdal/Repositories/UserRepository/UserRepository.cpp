@@ -121,7 +121,7 @@ bool UserRepository::UpdateEmail(const IdType user_id, const std::string &email)
     {
         pqxx::work w(m_database_connection);
 
-        auto result = w.exec("SELECT " + user::ID + " FROM  " + user::TABLE_NAME + " WHERE " + user::ID + " = " + w.quote(GetById(user_id)));
+		auto result = w.exec("SELECT " + user::ID + " FROM  " + user::TABLE_NAME + " WHERE " + user::ID + " = " + w.quote(user_id));
         if (result.empty())
         {
             return false;
@@ -131,7 +131,7 @@ bool UserRepository::UpdateEmail(const IdType user_id, const std::string &email)
             "UPDATE " + user::TABLE_NAME +
             " SET " +
                 user::EMAIL + " = " + w.quote(email) +
-            " WHERE " + user::ID + " = " + w.quote(GetById(user_id)) + ";");
+			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
         w.commit();
     }
     catch(const pqxx::failure& e)
