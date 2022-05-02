@@ -3,7 +3,7 @@
 
 #include "Exception.h"
 
-#include <iostream>
+#include "View/MainPage/MainPage.h"
 
 IncomeListSubPage::IncomeListSubPage(QWidget* parent)
 	: QWidget(parent)
@@ -104,6 +104,11 @@ void IncomeListSubPage::Update(const std::vector<Income>& incomes)
 		item->Update();
 		AppendIncome(item);
 	}
+}
+
+void IncomeListSubPage::UpdateColors()
+{
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void IncomeListSubPage::Clear()

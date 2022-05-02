@@ -2,6 +2,23 @@
 #include "ui_MainPage.h"
 
 #include "Exception.h"
+#include <QColorDialog>
+
+QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
+QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
+QString MainPage::ColorSettings::RECOMMENDATION;
+QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
+QString MainPage::ColorSettings::WINDOW_BACKGROUND;
+QString MainPage::ColorSettings::LABEL_TEXT;
+QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO4 = "rgba(35, 217, 108, 50%)";
+QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
+QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
+QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
+
+bool MainPage::bNeedColorUpdate = true;
 
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
@@ -240,6 +257,22 @@ void MainPage::ShowBalance(const Balance& money)
 	m_ui->ProjectedBalance->setText("Predicted balance:  " + QString::number(money.planned_balance));
 }
 
+//top-lvl color changes are done here
+void MainPage::UpdatePageColors()
+{
+	//balance banners
+	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
+
+	//general text
+	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
+
+	//nav buttons
+	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();
+	foreach(auto obj, list)
+	{
+		obj->setStyleSheet(QString("background-color:" + ColorSettings::NAVBUTTONS));
+	}
+}
 
 void MainPage::SetErrorBanner(const int code, const std::string& description)
 {

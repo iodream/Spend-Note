@@ -32,7 +32,6 @@ public:
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
-
 private:
 	void ConnectPage();
 
@@ -47,6 +46,7 @@ private:
 
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
+
 	std::optional<Balance> UpdateUserBalance(const IdType& id);
 
 private:
@@ -69,6 +69,8 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void ColorSchemeChanged();
+	void SaveConfig();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -79,4 +81,5 @@ public slots:
 
 	void OnGoBack(int n=1);
 	void OnLogout();
+	void OnColorSchemeChanged();
 };

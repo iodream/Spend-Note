@@ -46,10 +46,13 @@ public:
 	void SetCurrentSubPage(MainSubPages page);
 	void SetCurrentSubPage(int idx);
 	void ShowBalance(const Balance& money);
+	void UpdatePageColors();
 
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
+
+	static bool bNeedColorUpdate;
 
 private:
 	void InitListsSubPage();
@@ -126,6 +129,8 @@ signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack(int n=1);
+	void ColorSchemeChanged();
+
 
 public slots:
 	void OnGoToListsClicked();
@@ -136,5 +141,23 @@ public slots:
 	void OnGoToCategoriesEditClicked();
 	void OnGoToSettingsClicked();
 
+public:
+	class ColorSettings
+	{
+	public:
+		static QString COLOR_TOP_BANNER;
+		static QString NAVBUTTONS;
+		static QString RECOMMENDATION;
+		static QString ERROR_BANNER;
+		static QString WINDOW_BACKGROUND;
+		static QString LABEL_TEXT;
+		static QString PRODUCT_PRIO1;
+		static QString PRODUCT_PRIO2;
+		static QString PRODUCT_PRIO3;
+		static QString PRODUCT_PRIO4;
+		static QString PRODUCT_PRIO5;
+		static QString LIST_INACTIVE;
+		static QString LIST_ACTIVE;
+	};
 };
 

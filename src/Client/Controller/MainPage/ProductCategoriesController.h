@@ -31,6 +31,7 @@ public:
 
 	bool UpdateProductCategoryPage();
 
+	bool UpdateProductCategoryPageColors();
 private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
