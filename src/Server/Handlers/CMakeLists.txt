@@ -20,5 +20,6 @@ add_subdirectory(List)
 add_subdirectory(Income)
 add_subdirectory(Statistics)
 add_subdirectory(Categories)
+add_subdirectory(PeriodicProduct)
 
 set(Spend-Note-Server_SOURCES "${Spend-Note-Server_SOURCES}" PARENT_SCOPE)
