@@ -5,13 +5,13 @@
 #include <utility>
 
 #include "../AuthorizedHandler.h"
-#include "../libdal/DTOs/Product.h"
+#include "../libdal/DTOs/PeriodicProduct.h"
 
-class RemoveProductHandler : public AuthorizedHandler
+class RemovePeriodicProductHandler : public AuthorizedHandler
 {
 public:
-	RemoveProductHandler();
-	virtual ~RemoveProductHandler() override {}
+	RemovePeriodicProductHandler();
+	virtual ~RemovePeriodicProductHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 };

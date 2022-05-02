@@ -15,7 +15,7 @@ class GetPeriodicProductsHandler : public AuthorizedHandler
 {
 public:
 	GetPeriodicProductsHandler();
-	virtual ~GetProductsHandler() override {}
+	virtual ~GetPeriodicProductsHandler() override {}
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:

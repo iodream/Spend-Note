@@ -55,6 +55,7 @@ public:
 	bool CanUserEditList(IdType user_id, IdType list_id) override;
 	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
 	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
+	bool CanUserEditPeriodicProduct(IdType user_id, IdType product_id) override;
 
 	std::vector<Product> GetDailyList(IdType user_id) override;
 
