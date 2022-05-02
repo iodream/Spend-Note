@@ -17,7 +17,7 @@ public:
 		IdType& user_id,
 		LoginPage& page);
 
-	virtual ~LoginPageController() override {};
+	virtual ~LoginPageController() override {}
 
 private:
 	HTTPClient& m_http_client;
@@ -31,13 +31,11 @@ private:
 signals:
 	void ChangePage(UIPages page);
 	void LangChanged(const UILangs& lang);
+	void ReadSettings();
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
 	void OnGoToSignupPage();
 	void OnLangChanged(const UILangs& lang);
 
-#ifdef QT_DEBUG
-	void QuickLogin();
-#endif
 };

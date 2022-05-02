@@ -21,10 +21,12 @@ std::optional<IdType> UserRepository::Add(const User &user)
 		auto id_rows = w.exec(
 			"INSERT INTO " + db::user::TABLE_NAME + " (" +
 				db::user::LOGIN + ", " +
-				db::user::PASSWORD +
+				db::user::PASSWORD + ", " +
+				db::user::SALT +
 			") VALUES (" +
 				w.quote(user.login) + ", " +
-				w.quote(user.password) + ")" +
+				w.quote(user.password_hash) + ", " +
+				w.quote(user.salt) + ")" +
 			" RETURNING " + db::user::ID + ";");
 
 		w.commit();
@@ -47,7 +49,7 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD +
+			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD + ", " + db::user::SALT +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 
@@ -70,7 +72,7 @@ std::optional<User> UserRepository::GetByLogin(const std::string& login)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD +
+			"SELECT " + db::user::ID + ", " + db::user::LOGIN + ", " + db::user::PASSWORD + ", " + db::user::SALT +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::LOGIN + " = " + w.quote(login) + ";");
 
@@ -103,7 +105,8 @@ bool UserRepository::Update(const User &user)
 			"UPDATE " + db::user::TABLE_NAME +
 			" SET " +
 				db::user::LOGIN + " = " + w.quote(user.login) + ", " +
-				db::user::PASSWORD + " = " + w.quote(user.password) +
+				db::user::PASSWORD + " = " + w.quote(user.password_hash) + ", " +
+				db::user::SALT + " = " + w.quote(user.salt) +
 			" WHERE " + db::user::ID + " = " + w.quote(user.id) + ";");
 		w.commit();
 	}
@@ -142,7 +145,8 @@ User UserRepository::UserFromRow(const pqxx::row& row)
 	User user;
 	user.id = row[db::user::ID].as<int>();
 	user.login = row[db::user::LOGIN].as<std::string>();
-	user.password = row[db::user::PASSWORD].as<std::string>();
+	user.password_hash = row[db::user::PASSWORD].as<std::string>();
+	user.salt = row[db::user::SALT].as<std::string>();
 	return user;
 }
 

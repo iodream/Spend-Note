@@ -3,18 +3,7 @@
 
 #include "View/Constants.h"
 
-namespace {
-
-//const QString COLOR_BOUGHT = "rgba(23, 207, 63, 50%)";
-//const QString COLOR_NOT_BOUGHT = "rgba(25, 96, 209, 50%)";
-const QString COLOR_PRIO_FIVE = "rgba(25, 96, 209, 50%)";
-const QString COLOR_PRIO_FOUR = "rgba(35, 217, 108, 50%)";
-const QString COLOR_PRIO_THREE = "rgba(202, 224, 31, 50%)";
-const QString COLOR_PRIO_TWO = "rgba(224, 133, 29, 50%)";
-const QString COLOR_PRIO_ONE = "rgba(201, 60, 32, 50%)";
-
-
-}
+#include "View/MainPage/MainPage.h"
 
 ProductItem::ProductItem(Product product, QWidget *parent)
 	: QPushButton(parent)
@@ -34,19 +23,19 @@ void ProductItem::UpdateColor()
 	switch(m_product.priority)
 	{
 	case 1:
-		m_color = COLOR_PRIO_ONE;
+		m_color = MainPage::ColorSettings::PRODUCT_PRIO1;
 		break;
 	case 2:
-		m_color = COLOR_PRIO_TWO;
+		m_color = MainPage::ColorSettings::PRODUCT_PRIO2;
 		break;
 	case 3:
-		m_color = COLOR_PRIO_THREE;
+		m_color = MainPage::ColorSettings::PRODUCT_PRIO3;
 		break;
 	case 4:
-		m_color = COLOR_PRIO_FOUR;
+		m_color = MainPage::ColorSettings::PRODUCT_PRIO4;
 		break;
 	case 5:
-		m_color = COLOR_PRIO_FIVE;
+		m_color = MainPage::ColorSettings::PRODUCT_PRIO5;
 		break;
 	}
 }
@@ -80,9 +69,8 @@ void ProductItem::Update()
 		m_ui->PurchasedCheckbox->setChecked(true);
 	else
 		m_ui->PurchasedCheckbox->setChecked(false);
-	m_ui->Holder->setStyleSheet(
+	setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	m_ui->Holder->show();
 }
 
 void ProductItem::set_number(int number)

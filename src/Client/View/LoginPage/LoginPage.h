@@ -3,7 +3,7 @@
 #include <QWidget>
 
 #include "Models/LoginModel.h"
-#include "../Constants.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class LoginPage;
@@ -40,5 +40,6 @@ private slots:
 	void OnPasswordTextChanged(const QString& arg1);
 	void OnLoginTextChanged(const QString& arg1);
 	void OnLangSelected(QString lang);
+	void OnShowPasswordChecked();
 };
 

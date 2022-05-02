@@ -4,12 +4,7 @@
 #include "View/Constants.h"
 #include <QDate>
 #include <QDateTime>
-namespace {
-
-const QString DEFAULT_COLOR_ODD  = "rgba(163, 255, 188, 50%)";
-}
-
-#include <iostream>
+#include "View/MainPage/MainPage.h"
 
 IncomeListItem::IncomeListItem(Income income, QWidget *parent)
 	: QPushButton(parent)
@@ -41,7 +36,7 @@ void IncomeListItem::changeEvent(QEvent* event)
 
 void IncomeListItem::UpdateColor()
 {
-	m_color = DEFAULT_COLOR_ODD;
+	m_color = MainPage::ColorSettings::LIST_ACTIVE;
 }
 
 void IncomeListItem::Update()
@@ -55,9 +50,8 @@ void IncomeListItem::Update()
 	m_ui->Number->setText(QString("%1").arg(m_number));
 
 	UpdateColor();
-	m_ui->Holder->setStyleSheet(
+	setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	m_ui->Holder->show();
 }
 
 void IncomeListItem::set_number(int number)

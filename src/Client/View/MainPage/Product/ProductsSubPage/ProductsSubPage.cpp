@@ -3,7 +3,7 @@
 
 #include "Exception.h"
 
-#include <iostream>
+#include "View/MainPage/MainPage.h"
 
 ProductsSubPage::ProductsSubPage(QWidget *parent)
 	: QWidget(parent)
@@ -141,6 +141,16 @@ void ProductsSubPage::Update(
 		item->Update();
 		AppendProduct(item);
 	}
+}
+
+void ProductsSubPage::UpdateColors()
+{
+	for(int i=0; i<get_list_size(); i++)
+	{
+		auto product = SafeGetProduct(i);
+		product->Update();
+	}
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void ProductsSubPage::Clear()

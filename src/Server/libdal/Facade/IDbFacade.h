@@ -83,5 +83,7 @@ public:
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
 
+	virtual std::optional<Product> GetRecommendation(const IdType& user_id) = 0;
+
 };
 }

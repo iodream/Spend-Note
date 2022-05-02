@@ -16,6 +16,8 @@ public:
 	void Update(const std::vector<ProductCategory>& categories);
 	void Update(const std::vector<IncomeCategory>& categories);
 	void changeEvent(QEvent* event);
+
+	void UpdateColors();
 signals:
 	void AddIncomeCategory(IncomeCategory);
 	void AddProductCategory(ProductCategory);

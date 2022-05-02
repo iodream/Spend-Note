@@ -28,6 +28,9 @@ public:
 	int get_list_size();
 
 	void changeEvent(QEvent* event);
+
+	void UpdateColors();
+
 private:
 	Ui::DailyListSubPage *m_ui;
 

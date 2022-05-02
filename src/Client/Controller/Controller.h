@@ -20,7 +20,8 @@
 
 namespace{
 const std::string config_filename = "Config.json";
-};
+const QString settings_filename = "Settings.json";
+}
 
 class Controller : public QObject
 {
@@ -36,6 +37,7 @@ private:
 	void SetPage(UIPages page);
 
 	void InitConfig();
+
 	void InitLoginPageController();
 	void InitSignupPageController();
 	void InitMainPageController();
@@ -55,5 +57,8 @@ private:
 public slots:
 	void OnChangePage(UIPages page);
 	void OnLangChanged(const UILangs& lang);
+	void OnSaveConfig();
+	void OnColorSchemeChanged();
+	void ReadSettings();
 
 };

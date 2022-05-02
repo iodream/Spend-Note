@@ -55,3 +55,8 @@ bool DailyListPageController::UpdateDailyListPage()
 
 	return true;
 }
+
+void DailyListPageController::UpdatePageColors()
+{
+	m_daily_list_page.UpdateColors();
+}

@@ -1,6 +1,7 @@
 #include "CategoryEditPage.h"
 #include "ui_CategoryEditPage.h"
 
+#include "View/MainPage/MainPage.h"
 CategoryEditPage::CategoryEditPage(QWidget *parent) :
 	QWidget(parent),
 	ui(new Ui::CategoryEditPage)
@@ -110,6 +111,11 @@ void CategoryEditPage::OnAddCategoryClicked() // shows fields for adding
 	ui->NewCategoryEdit->setVisible(true);
 	ui->NewCategoryEditButton->setVisible(false);
 	ui->NewCategoryAddButton->setVisible(true);
+}
+
+void CategoryEditPage::UpdateColors()
+{
+	ui->label->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void CategoryEditPage::OnRemoveClicked()

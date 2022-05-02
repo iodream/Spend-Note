@@ -10,7 +10,6 @@
         <file>Icons/baseline_list_black_24dp.png</file>
         <file>Icons/baseline_logout_black_24dp.png</file>
         <file>Icons/baseline_paid_black_24dp.png</file>
-        <file>Icons/baseline_settings_black_24dp.png</file>
         <file>Icons/baseline_warning_black_24dp.png</file>
         <file>Icons/baseline_edit_black_24dp.png</file>
         <file>Icons/baseline_add_black_24dp.png</file>
@@ -20,5 +19,12 @@
         <file>Icons/baseline_dashboard_customize_black_24dp.png</file>
         <file>Icons/baseline_loop_black_24dp.png</file>
         <file>Icons/baseline_language_black_24dp.png</file>
+        <file>Icons/baseline_palette_black_24dp.png</file>
+        <file>Icons/baseline_settings_black_24dp.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>pics/dark.png</file>
+        <file>pics/default.png</file>
+        <file>pics/winter.png</file>
     </qresource>
 </RCC>

@@ -1,6 +1,7 @@
 #include "ListsSubPage.h"
 #include "ui_ListsSubPage.h"
 #include "Exception.h"
+#include "View/MainPage/MainPage.h"
 
 ListsSubPage::ListsSubPage(QWidget *parent)
 	: QWidget(parent)
@@ -122,6 +123,16 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 		item->Update();
 		AppendList(item);
 	}
+}
+
+void ListsSubPage::UpdateColors()
+{
+	for(int i=0;i<get_list_size();i++)
+	{
+		auto list = SafeGetList(i);
+		list->Update();
+	}
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void ListsSubPage::Clear()
