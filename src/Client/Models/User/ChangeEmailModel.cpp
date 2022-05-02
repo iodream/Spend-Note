@@ -1,14 +1,6 @@
 #include "ChangeEmailModel.h"
 
-QJsonDocument ChangeEmailModel::JSONFormatter::Format(const EmailInDTO& dto)
-{
-	QJsonObject json;
-	json["code"] = dto.code.c_str();
-	json["email"] = dto.email.c_str();
-	return QJsonDocument(json);
-}
-
-Net::Request ChangeEmailModel::FormRequest(const EmailInDTO& dto, const IdType user_id)
+Net::Request ChangeEmailModel::FormRequest(const EmailUpdate& dto, const IdType user_id)
 {
 	Net::Request request;
 	request.uri = m_hostname + "/change-email";

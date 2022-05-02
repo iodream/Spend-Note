@@ -21,6 +21,8 @@
 #include "Net/Tools/Parsers/Statistics/StatisticPercentagePerCategoryJSONParser.h"
 #include "Net/Tools/Parsers/Statistics/StatisticPerDayJSONParserBase.h"
 
+#include "Net/Tools/Parsers/User/EmailUpdateJSONParser.h"
+
 #include "Net/Tools/Parsers/ArrayJSONParserBase.h"
 
 using IncomeCategoryJSONParser =
