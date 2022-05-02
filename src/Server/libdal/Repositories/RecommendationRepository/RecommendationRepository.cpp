@@ -1,4 +1,3 @@
-#pragma once
 #include "RecommendationRepository.h"
 
 #include "Exceptions/NonexistentResource.h"
@@ -12,7 +11,7 @@ RecommendationRepository::RecommendationRepository(pqxx::connection& db_connecti
 {
 }
 
-Product RecommendationRepository::GetRecommendation(const IdType &user_id)
+std::optional<Product> RecommendationRepository::GetRecommendation(const IdType &user_id)
 {
 	try
 	{
@@ -36,6 +35,10 @@ Product RecommendationRepository::GetRecommendation(const IdType &user_id)
 			std::uniform_int_distribution<> dist(0, rec_product_rows.size() - 1);
 			auto random_number = dist(engine);
 			return ProductFromRow(rec_product_rows[random_number]);
+		}
+		else
+		{
+			return std::nullopt;
 		}
 	}
 	catch(const pqxx::failure& e)

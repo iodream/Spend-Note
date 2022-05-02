@@ -250,7 +250,7 @@ bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
 }
 
-Product DbFacade::GetRecommendation(const IdType &user_id)
+std::optional<Product> DbFacade::GetRecommendation(const IdType &user_id)
 {
 	return m_recommendation.GetRecommendation(user_id);
 }
