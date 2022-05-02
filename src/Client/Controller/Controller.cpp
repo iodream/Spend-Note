@@ -46,38 +46,40 @@ void Controller::InitConfig()
 void Controller::ReadSettings()
 {
 	QFile file(settings_filename);
-	if(file.open(QIODevice::ReadOnly))
+	if(!file.open(QIODevice::ReadOnly))
 	{
-		QByteArray bytes = file.readAll();
-		file.close();
+		qDebug() << "couldn't open settings file";
+		return;
+	}
+	QByteArray bytes = file.readAll();
+	file.close();
 
-		QJsonParseError jsonError;
-		QJsonDocument document = QJsonDocument::fromJson(bytes, &jsonError);
+	QJsonParseError jsonError;
+	QJsonDocument document = QJsonDocument::fromJson(bytes, &jsonError);
 
-		if(jsonError.error != QJsonParseError::NoError)
-		{
-			qDebug() << "parsing settings failed";
-			return;
-		}
+	if(jsonError.error != QJsonParseError::NoError)
+	{
+		qDebug() << "parsing settings failed";
+		return;
+	}
 
-		if(document.isObject())
-		{
-			QJsonObject json = document.object();
-			MainPage::ColorSettings::LABEL_TEXT = json.value("COLOR_LABEL").toString();
-			MainPage::ColorSettings::COLOR_TOP_BANNER = json.value("COLOR_TOP_BALANCE_BANNER").toString();
-			MainPage::ColorSettings::WINDOW_BACKGROUND = json.value("COLOR_WINDOW_BACKGROUND").toString();
-			MainPage::ColorSettings::PRODUCT_PRIO1 = json.value("COLOR_PRODUCT_PRIORITY1").toString();
-			MainPage::ColorSettings::PRODUCT_PRIO2 = json.value("COLOR_PRODUCT_PRIORITY2").toString();
-			MainPage::ColorSettings::PRODUCT_PRIO3 = json.value("COLOR_PRODUCT_PRIORITY3").toString();
-			MainPage::ColorSettings::PRODUCT_PRIO4 = json.value("COLOR_PRODUCT_PRIORITY4").toString();
-			MainPage::ColorSettings::PRODUCT_PRIO5 = json.value("COLOR_PRODUCT_PRIORITY5").toString();
-			MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
-			MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
-			MainPage::ColorSettings::LIST_ACTIVE = json.value("COLOR_LIST_ACTIVE").toString();
-			MainPage::ColorSettings::LIST_INACTIVE = json.value("COLOR_LIST_INACTIVE").toString();
-			MainPage::ColorSettings::NAVBUTTONS = json.value("COLOR_NAVBUTTONS").toString();
-			MainPage::ColorSettings::RECOMMENDATION = json.value("COLOR_RECOMMENDATION").toString();
-		}
+	if(document.isObject())
+	{
+		QJsonObject json = document.object();
+		MainPage::ColorSettings::LABEL_TEXT = json.value("COLOR_LABEL").toString();
+		MainPage::ColorSettings::COLOR_TOP_BANNER = json.value("COLOR_TOP_BALANCE_BANNER").toString();
+		MainPage::ColorSettings::WINDOW_BACKGROUND = json.value("COLOR_WINDOW_BACKGROUND").toString();
+		MainPage::ColorSettings::PRODUCT_PRIO1 = json.value("COLOR_PRODUCT_PRIORITY1").toString();
+		MainPage::ColorSettings::PRODUCT_PRIO2 = json.value("COLOR_PRODUCT_PRIORITY2").toString();
+		MainPage::ColorSettings::PRODUCT_PRIO3 = json.value("COLOR_PRODUCT_PRIORITY3").toString();
+		MainPage::ColorSettings::PRODUCT_PRIO4 = json.value("COLOR_PRODUCT_PRIORITY4").toString();
+		MainPage::ColorSettings::PRODUCT_PRIO5 = json.value("COLOR_PRODUCT_PRIORITY5").toString();
+		MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
+		MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
+		MainPage::ColorSettings::LIST_ACTIVE = json.value("COLOR_LIST_ACTIVE").toString();
+		MainPage::ColorSettings::LIST_INACTIVE = json.value("COLOR_LIST_INACTIVE").toString();
+		MainPage::ColorSettings::NAVBUTTONS = json.value("COLOR_NAVBUTTONS").toString();
+		MainPage::ColorSettings::RECOMMENDATION = json.value("COLOR_RECOMMENDATION").toString();
 	}
 }
 

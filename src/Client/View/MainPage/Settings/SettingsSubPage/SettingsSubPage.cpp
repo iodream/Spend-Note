@@ -266,7 +266,7 @@ void SettingsSubPage::OnNewColorSelected()
 			MainPage::ColorSettings::COLOR_TOP_BANNER = custom.name();
 			break;
 		case 2:
-			MainPage::ColorSettings::NAVBUTTONS= custom.name();
+			MainPage::ColorSettings::NAVBUTTONS = custom.name();
 			break;
 		case 3:
 			MainPage::ColorSettings::ERROR_BANNER = custom.name();
