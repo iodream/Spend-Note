@@ -10,4 +10,7 @@ BEGIN;
 \i db-populate/income.sql
 \i db-populate/product.sql
 
+\i db-populate/periodicity.sql
+\i db-populate/periodic_product.sql
+
 COMMIT;
