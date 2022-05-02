@@ -27,6 +27,8 @@ public:
 	ProductItem* SafeGetProduct(int idx);
 
 	void Update(const std::vector<Product>& products);
+	void UpdateColors();
+
 	void Clear();
 
 	void set_list_size(int size);

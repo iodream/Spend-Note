@@ -16,9 +16,10 @@ public:
 
 	void GoToMainSubPage();
 
+	void UpdateColors();
 private:
 	Ui::SettingsSubPage *m_ui;
-
+	static int CurColorElemSelected;
 	void EraseLineEdits();
 
 signals:
@@ -31,6 +32,13 @@ private slots:
 	void OnSubmitEmailChangeButtonClicked();
 	void OnGoBackClicked();
 	void OnFontChange();
+	void OnColorScheme1Selected();
+	void OnColorScheme2Selected();
+	void OnColorScheme3Selected();
+	void OnColorSchemeCustomSelect(int);
+	void OnNewColorSelected();
 
+signals:
+	void ColorSchemeChanged();
 };
 

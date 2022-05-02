@@ -25,6 +25,8 @@ public:
 	void RemoveList(ListItem* list);
 
 	void UpdateListNumbers(int idx);
+	void UpdateColors();
+
 
 	ListItem* SafeGetList(int idx);
 

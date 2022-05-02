@@ -3,7 +3,7 @@
 
 #include "Exception.h"
 
-#include <iostream>
+#include "View/MainPage/MainPage.h"
 
 DailyListSubPage::DailyListSubPage(QWidget* parent)
 	: QWidget(parent)
@@ -64,6 +64,12 @@ void DailyListSubPage::Update(const std::vector<Product>& products)
 		AppendProduct(item);
 	}
 }
+
+void DailyListSubPage::UpdateColors()
+{
+	m_ui->verticalFrame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
+}
+
 
 ProductItem* DailyListSubPage::SafeGetProduct(int idx)
 {

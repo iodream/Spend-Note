@@ -79,7 +79,7 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
-	Product GetRecommendation(const IdType& user_id) override;
+	std::optional<Product> GetRecommendation(const IdType& user_id) override;
 
 private:
 	pqxx::connection m_connection;

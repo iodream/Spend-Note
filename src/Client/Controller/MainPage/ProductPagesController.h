@@ -33,6 +33,8 @@ public:
 	bool UpdateViewProductSubPage(PageData data);
 
 	bool UpdateViewPage(Product product);
+	void UpdateProductColors();
+
 
 	void SetRangeOfSpinBoxes();
 	void UpdateCategoryBox();

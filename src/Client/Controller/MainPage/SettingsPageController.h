@@ -20,9 +20,10 @@ public:
 		IdType& user_id,
 		SettingsSubPage& settings_page);
 
-	virtual ~SettingsPageController() override {};
+	virtual ~SettingsPageController() override {}
 
 	void UpdateSettingsSubPage();
+	void UpdateSettingsPageColors();
 
 private:
 	SettingsSubPage& m_settings_page;
@@ -35,6 +36,10 @@ signals:
 	void ClientError(const std::string& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void FontChange(QFont);
+	void ColorSchemeChanged();
 	void GoBack(int n=1);
+
+public slots:
+	void OnColorSchemeChanged();
 };
 
