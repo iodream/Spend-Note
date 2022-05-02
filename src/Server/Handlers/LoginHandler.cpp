@@ -1,6 +1,7 @@
 #include <memory>
 
 #include <QJsonObject>
+#include <QDateTime>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
 #include "Poco/DigestStream.h"
@@ -16,6 +17,33 @@
 #include "Logger/ScopedLogger.h"
 
 #include "../Utils.h"
+
+void LoginHandler::UpdatePeriodicProducts(db::IdType user_id)
+{
+	const auto periodic_products = m_facade->GetPeriodicProductsForUser(user_id);
+
+	for (const auto& periodic_product : periodic_products) {
+		while (m_facade->CanPeriodicProductGenerate(periodic_product.id)) {
+			// Generate product
+			db::Product product;
+			product.id = 0;
+			product.list_id = periodic_product.list_id;
+			product.category_id = periodic_product.category_id;
+			product.name = periodic_product.name;
+			product.price = periodic_product.price;
+			product.amount = periodic_product.amount;
+			product.product_priority = periodic_product.product_priority;
+			product.is_bought = false;
+			product.add_date = QDateTime::currentDateTime().toString(Qt::ISODate).toStdString();
+			product.purchase_date = std::nullopt;
+			product.buy_until_date = std::nullopt;
+			product.periodic_id = periodic_product.id;
+
+			m_facade->AddProduct(product);
+			m_facade->UpdatePeriodicProductAddNext(periodic_product);
+		}
+	}
+}
 
 LoginHandler::LoginHandler()
 {
@@ -73,5 +101,8 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	Poco::JWT::Signer signer(user->password_hash);
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
+
+	UpdatePeriodicProducts(user->id);
+
 	return FormJSONResponse(m_formatter.Format(out_dto));
 }

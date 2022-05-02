@@ -5,7 +5,7 @@
 class PeriodicProductsResolver : public ISubDomainResolver
 {
 public:
-	virtual ~ProductsResolver() override {}
+	virtual ~PeriodicProductsResolver() override {}
 
 	virtual ICommandHandler* Resolve(
 		const std::string& path,

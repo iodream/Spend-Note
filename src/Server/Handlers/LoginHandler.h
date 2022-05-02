@@ -30,6 +30,8 @@ class LoginHandler : public ICommandHandler
 	Login Parse(const QJsonDocument& payload);
 
 	};
+private:
+	void UpdatePeriodicProducts(db::IdType user_id);
 public:
 	LoginHandler();
 	virtual ~LoginHandler() override {}

@@ -10,7 +10,7 @@
 #include "../libdal/Exceptions/SQLFailure.h"
 #include "Logger/ScopedLogger.h"
 
-RemovePeriodicProductHandler::RemoveProductHandler()
+RemovePeriodicProductHandler::RemovePeriodicProductHandler()
 {
 }
 

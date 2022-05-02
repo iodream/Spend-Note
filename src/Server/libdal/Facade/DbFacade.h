@@ -91,6 +91,9 @@ public:
 	bool RemovePeriodicProduct(IdType id) override;
 
 	std::vector<PeriodType> GetAllPeriodTypes() override;
+	bool CanPeriodicProductGenerate(IdType periodic_id) override;
+	bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) override;
+	std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) override;
 
 private:
 	pqxx::connection m_connection;

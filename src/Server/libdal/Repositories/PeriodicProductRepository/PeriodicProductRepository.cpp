@@ -252,6 +252,106 @@ std::vector<PeriodType> PeriodicProductRepository::GetAllPeriodTypes()
 	return period_types;
 }
 
+bool PeriodicProductRepository::CanGenerate(IdType periodic_id)
+{
+	try
+	{
+		pqxx::nontransaction w{m_database_connection};
+
+		auto result = w.exec(
+			"SELECT " + periodicProduct::ID +
+			" FROM " + periodicProduct::TABLE_NAME +
+			" WHERE " +
+				periodicProduct::ID +" = "  + w.quote(periodic_id) + " AND " +
+				periodicProduct::NEXT_ADD_DATE + " <= current_date AND " +
+				periodicProduct::NEXT_ADD_DATE + " < " + periodicProduct::ADD_UNTIL + ";");
+
+		if (result.empty())
+		{
+			return false;
+		}
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return true;
+}
+
+bool PeriodicProductRepository::UpdateAddNext(const PeriodicProduct& product)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+		auto result = w.exec(
+			"SELECT " + periodicProduct::ID +
+			" FROM  " + periodicProduct::TABLE_NAME +
+			" WHERE " + periodicProduct::ID + " = " + w.quote(product.id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + periodicProduct::TABLE_NAME +
+			" SET " + periodicProduct::NEXT_ADD_DATE + " = " + w.quote(product.next_add_date) + " + " + PeriodIdToString(product.period_id) + +
+			" WHERE " + periodicProduct::ID + " = " + w.quote(product.id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return true;
+}
+
+std::vector<PeriodicProduct> PeriodicProductRepository::GetByUserId(IdType user_id)
+{
+	std::vector<PeriodicProduct> products;
+
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		pqxx::result user_ids = w.exec(
+			"SELECT " + user::ID +
+			" FROM " + user::TABLE_NAME +
+			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
+
+		if (user_ids.empty())
+		{
+			throw NonexistentResource("User with id = " + std::to_string(user_id) + " not found");
+		}
+
+		pqxx::result product_rows = w.exec(
+			"SELECT " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::ID + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::LIST_ID + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::CATEGORY_ID + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::NAME + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::PRICE + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::AMOUNT + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::PRIORITY + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::PERIOD_ID + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::NEXT_ADD_DATE + ", " +
+				periodicProduct::TABLE_NAME + "." + periodicProduct::ADD_UNTIL +
+			" FROM " + periodicProduct::TABLE_NAME + " JOIN " + list::TABLE_NAME +
+			" ON " + periodicProduct::LIST_ID + " = " + list::TABLE_NAME + "." + list::ID +
+			" WHERE " + list::USER_ID + " = " + w.quote(user_id) + ";");
+
+		products.resize(product_rows.size());
+		std::transform(product_rows.cbegin(), product_rows.cend(), products.begin(), ProductFromRow);
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+
+	return products;
+}
+
 PeriodicProduct PeriodicProductRepository::ProductFromRow(const pqxx::row& row)
 {
 	PeriodicProduct product;
@@ -277,6 +377,21 @@ PeriodType PeriodicProductRepository::PeriodFromRow(const pqxx::row& row)
 	type.name = row[periodType::NAME].as<std::string>();
 
 	return type;
+}
+
+std::string PeriodicProductRepository::PeriodIdToString(IdType id)
+{
+	switch (id)
+	{
+		case 1:
+			return "'1 DAY'";
+		case 2:
+			return "'1 WEEK'";
+		case 3:
+			return "'1 MONTH'";
+		case 4:
+			return "'1 YEAR'";
+	}
 }
 
 }

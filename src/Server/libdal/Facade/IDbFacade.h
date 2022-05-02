@@ -95,5 +95,8 @@ public:
 	virtual bool RemovePeriodicProduct(IdType id) = 0;
 
 	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
+	virtual bool CanPeriodicProductGenerate(IdType periodic_id) = 0;
+	virtual bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) = 0;
+	virtual std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) = 0;
 };
 }

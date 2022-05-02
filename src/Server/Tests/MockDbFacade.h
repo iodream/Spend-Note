@@ -16,6 +16,7 @@ public:
 	MOCK_METHOD(std::optional<db::IdType>, AddProduct, (const db::Product&), (override));
 	MOCK_METHOD(std::optional<db::Product>, GetProductById, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::Product>, GetProductsForList, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::Product>, GetProductsForPeriodicProduct, (db::IdType), (override));
 	MOCK_METHOD(bool, UpdateProduct, (const db::Product&), (override));
 	MOCK_METHOD(bool, RemoveProduct, (db::IdType), (override));
 
@@ -73,4 +74,9 @@ public:
 	MOCK_METHOD(std::vector<db::PeriodicProduct>, GetPeriodicProductsForList, (db::IdType), (override));
 	MOCK_METHOD(bool, UpdatePeriodicProduct, (const db::PeriodicProduct&), (override));
 	MOCK_METHOD(bool, RemovePeriodicProduct, (db::IdType), (override));
+
+	MOCK_METHOD(std::vector<db::PeriodType>, GetAllPeriodTypes, (), (override));
+	MOCK_METHOD(bool, CanPeriodicProductGenerate, (db::IdType), (override));
+	MOCK_METHOD(bool, UpdatePeriodicProductAddNext, (const db::PeriodicProduct&), (override));
+	MOCK_METHOD(std::vector<db::PeriodicProduct>, GetPeriodicProductsForUser, (db::IdType), (override));
 };

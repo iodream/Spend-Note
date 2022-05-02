@@ -23,9 +23,13 @@ public:
 	bool CanUserEditProduct(IdType user_id, IdType product_id);
 
 	std::vector<PeriodType> GetAllPeriodTypes();
+	bool CanGenerate(IdType periodic_id);
+	bool UpdateAddNext(const PeriodicProduct& product);
+	std::vector<PeriodicProduct> GetByUserId(IdType user_id);
 private:
 	static PeriodicProduct ProductFromRow(const pqxx::row& row);
 	static PeriodType PeriodFromRow(const pqxx::row& row);
+	std::string PeriodIdToString(IdType id);
 
 	pqxx::connection& m_database_connection;
 };

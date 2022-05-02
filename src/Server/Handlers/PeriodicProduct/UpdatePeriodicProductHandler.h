@@ -20,5 +20,5 @@ public:
 
 	Net::Response AuthHandle(const Net::Request& request) override;
 private:
-	ProductJSONParser m_parser{};
+	PeriodicProductJSONParser m_parser{};
 };

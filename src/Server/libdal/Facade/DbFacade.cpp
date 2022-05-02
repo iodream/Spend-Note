@@ -291,6 +291,21 @@ std::vector<PeriodType> DbFacade::GetAllPeriodTypes()
 	return m_periodic_products.GetAllPeriodTypes();
 }
 
+bool DbFacade::CanPeriodicProductGenerate(IdType periodic_id)
+{
+	return m_periodic_products.CanGenerate(periodic_id);
+}
+
+bool DbFacade::UpdatePeriodicProductAddNext(const PeriodicProduct& product)
+{
+	return m_periodic_products.UpdateAddNext(product);
+}
+
+std::vector<PeriodicProduct> DbFacade::GetPeriodicProductsForUser(IdType user_id)
+{
+	return m_periodic_products.GetByUserId(user_id);
+}
+
 std::vector<Product> DbFacade::GetProductsForPeriodicProduct(IdType periodic_id)
 {
 	return m_products.GetByPeriodicProductId(periodic_id);

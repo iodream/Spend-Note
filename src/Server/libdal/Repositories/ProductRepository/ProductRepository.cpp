@@ -22,16 +22,17 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 		pqxx::work w(m_database_connection);
 		pqxx::result id_rows = w.exec(
 			"INSERT INTO " + db::product::TABLE_NAME + " (" +
-				db::product::LIST_ID + ", " +
-				db::product::CATEGORY_ID + ", " +
-				db::product::NAME + ", " +
-				db::product::PRICE + ", " +
-				db::product::AMOUNT + ", " +
-				db::product::PRIORITY + ", " +
-				db::product::IS_BOUGHT + ", " +
-				db::product::ADD_DATE + ", " +
-				db::product::PURCHASE_DATE + ", " +
-				db::product::BUY_UNTIL_DATE +
+				product::LIST_ID + ", " +
+				product::CATEGORY_ID + ", " +
+				product::NAME + ", " +
+				product::PRICE + ", " +
+				product::AMOUNT + ", " +
+				product::PRIORITY + ", " +
+				product::IS_BOUGHT + ", " +
+				product::ADD_DATE + ", " +
+				product::PURCHASE_DATE + ", " +
+				product::BUY_UNTIL_DATE + ", " +
+				product::PERIODIC_ID +
 			") VALUES (" +
 				w.quote(product.list_id) + ", " +
 				w.quote(product.category_id) + ", " +
@@ -42,7 +43,8 @@ std::optional<IdType> ProductRepository::Add(const Product& product)
 				w.quote(product.is_bought) + ", " +
 				w.quote(product.add_date) + ", " +
 				w.quote(product.purchase_date) + ", " +
-				w.quote(product.buy_until_date) + ") " +
+				w.quote(product.buy_until_date) + ", " +
+				w.quote(product.periodic_id) + ") " +
 			"RETURNING " + db::product::ID + ";");
 		w.commit();
 		auto id_row = id_rows.front();
@@ -66,17 +68,18 @@ std::optional<Product> ProductRepository::GetById(IdType id)
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result product_rows = w.exec(
 				"SELECT " +
-					db::product::ID + ", " +
-					db::product::LIST_ID + ", " +
-					db::product::CATEGORY_ID + ", " +
-					db::product::NAME + ", " +
-					db::product::PRICE + ", " +
-					db::product::AMOUNT + ", " +
-					db::product::PRIORITY + ", " +
-					db::product::IS_BOUGHT + ", " +
-					db::product::ADD_DATE + ", " +
-					db::product::PURCHASE_DATE + ", " +
-					db::product::BUY_UNTIL_DATE +
+					product::ID + ", " +
+					product::LIST_ID + ", " +
+					product::CATEGORY_ID + ", " +
+					product::NAME + ", " +
+					product::PRICE + ", " +
+					product::AMOUNT + ", " +
+					product::PRIORITY + ", " +
+					product::IS_BOUGHT + ", " +
+					product::ADD_DATE + ", " +
+					product::PURCHASE_DATE + ", " +
+					product::BUY_UNTIL_DATE + ", " +
+					product::PERIODIC_ID +
 				" FROM " + db::product::TABLE_NAME +
 				" WHERE " + db::product::ID + " = " + w.quote(id) + ";");
 
@@ -113,17 +116,18 @@ std::vector<Product> ProductRepository::GetByListId(IdType list_id)
 
 		pqxx::result product_rows = w.exec(
 			"SELECT " +
-				db::product::ID + ", " +
-				db::product::LIST_ID + ", " +
-				db::product::CATEGORY_ID + ", " +
-				db::product::NAME + ", " +
-				db::product::PRICE + ", " +
-				db::product::AMOUNT + ", " +
-				db::product::PRIORITY + ", " +
-				db::product::IS_BOUGHT + ", " +
-				db::product::ADD_DATE + ", " +
-				db::product::PURCHASE_DATE + ", " +
-				db::product::BUY_UNTIL_DATE +
+				product::ID + ", " +
+				product::LIST_ID + ", " +
+				product::CATEGORY_ID + ", " +
+				product::NAME + ", " +
+				product::PRICE + ", " +
+				product::AMOUNT + ", " +
+				product::PRIORITY + ", " +
+				product::IS_BOUGHT + ", " +
+				product::ADD_DATE + ", " +
+				product::PURCHASE_DATE + ", " +
+				product::BUY_UNTIL_DATE + ", " +
+				product::PERIODIC_ID +
 			" FROM " + db::product::TABLE_NAME +
 			" WHERE " + db::product::LIST_ID + " = " + w.quote(list_id) + ";");
 
@@ -168,7 +172,8 @@ std::vector<Product> ProductRepository::GetDailyList(IdType user_id)
 				db::product::TABLE_NAME + "." + db::product::IS_BOUGHT + ", " +
 				db::product::TABLE_NAME + "." + db::product::ADD_DATE + ", " +
 				db::product::TABLE_NAME + "." + db::product::PURCHASE_DATE + ", " +
-				db::product::TABLE_NAME + "." + db::product::BUY_UNTIL_DATE +
+				db::product::TABLE_NAME + "." + db::product::BUY_UNTIL_DATE + ", " +
+				db::product::TABLE_NAME + "." + db::product::PERIODIC_ID +
 			" FROM " + db::product::TABLE_NAME +
 			" JOIN " + db::list::TABLE_NAME +
 			" ON " + db::product::TABLE_NAME + "." + db::product::LIST_ID + " = " + db::list::TABLE_NAME + "." + db::list::ID +
@@ -215,7 +220,8 @@ std::vector<Product> ProductRepository::GetByPeriodicProductId(IdType periodic_i
 				product::IS_BOUGHT + ", " +
 				product::ADD_DATE + ", " +
 				product::PURCHASE_DATE + ", " +
-				product::BUY_UNTIL_DATE +
+				product::BUY_UNTIL_DATE + ", " +
+				product::PERIODIC_ID +
 			" FROM " + product::TABLE_NAME +
 			" WHERE " + product::PERIODIC_ID + " = " + w.quote(periodic_id) + ";");
 
@@ -253,7 +259,8 @@ bool ProductRepository::Update(const Product& product)
 					db::product::IS_BOUGHT + " = " + w.quote(product.is_bought) + ", " +
 					db::product::ADD_DATE + " = " + w.quote(product.add_date) + ", " +
 					db::product::PURCHASE_DATE + " = " + w.quote(product.purchase_date) + ", " +
-					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) +
+					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) + ", " +
+					db::product::PERIODIC_ID +  + " = " + w.quote(product.periodic_id) + ", " +
 				" WHERE " + db::product::ID + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}
@@ -330,6 +337,7 @@ Product ProductRepository::ProductFromRow(const pqxx::row& row)
 	product.add_date = row[db::product::ADD_DATE].as<Timestamp>();
 	product.purchase_date = row[db::product::PURCHASE_DATE].get<Timestamp>();
 	product.buy_until_date = row[db::product::BUY_UNTIL_DATE].get<Timestamp>();
+	product.periodic_id = row[db::product::PERIODIC_ID].get<IdType>();
 
 	return product;
 }
