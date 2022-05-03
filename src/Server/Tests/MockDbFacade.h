@@ -9,8 +9,9 @@ public:
 
 	MOCK_METHOD(std::optional<db::IdType>, AddUser, (const db::User&), (override));
 	MOCK_METHOD(std::optional<db::User>, GetUserById, (db::IdType), (override));
-	MOCK_METHOD(std::optional<db::User>, GetUserByLogin, (const std::string&), (override));
+	MOCK_METHOD(std::optional<db::User>, GetUserByEmail, (const std::string&), (override));
 	MOCK_METHOD(bool, UpdateUser, (const db::User&), (override));
+	MOCK_METHOD(bool, UpdateUserVerification, (db::IdType), (override));
 	MOCK_METHOD(bool, RemoveUser, (db::IdType), (override));
 
 	MOCK_METHOD(std::optional<db::IdType>, AddProduct, (const db::Product&), (override));
@@ -65,4 +66,9 @@ public:
 	MOCK_METHOD(bool, RemoveProductCategory, (db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditProductCategory, (db::IdType, db::IdType), (override));
 
+	MOCK_METHOD(std::optional<db::IdType>, AddVerificationCode, (const db::VerificationCode&), (override));
+	MOCK_METHOD(std::optional<db::VerificationCode>, GetVerificationCodeById, (db::IdType), (override));
+	MOCK_METHOD(std::optional<db::VerificationCode>, GetVerificationCodeByUserId, (db::IdType), (override));
+	MOCK_METHOD(bool, UpdateVerificationCode, (const db::VerificationCode&), (override));
+	MOCK_METHOD(bool, RemoveVerificationCode, (db::IdType), (override));
 };

@@ -14,9 +14,7 @@ Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 QJsonDocument SignupModel::JSONFormatter::Format(const SignupInDTO& dto)
 {
 	QJsonObject json;
-	QByteArray password = QByteArray::fromStdString(dto.password);
-
-	json["login"] = dto.login.c_str();
+  json["email"] = dto.email.c_str();
 	json["password"] = dto.password.c_str();
 	return QJsonDocument(json);
 }
@@ -30,7 +28,7 @@ bool SignupModel::CheckPassRepeat(const SignupInDTO& dto) const
 //checks data for presence of any characters at all
 bool SignupModel::CheckData(const SignupInDTO& dto) const
 {
-	auto username = EraseWhitespace(dto.login);
+	auto username = EraseWhitespace(dto.email);
 	auto pass = EraseWhitespace(dto.password);
 	return (!username.empty() && !pass.empty());
 }

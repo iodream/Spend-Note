@@ -15,9 +15,7 @@ Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 QJsonDocument LoginModel::JSONFormatter::Format(const Credentials& credentials)
 {
 	QJsonObject json;
-	QByteArray password = QByteArray::fromStdString(credentials.password);
-
-	json["login"] = credentials.login.c_str();
+	json["email"] = credentials.email.c_str();
 	json["password"] = credentials.password.c_str();
 	return QJsonDocument(json);
 }

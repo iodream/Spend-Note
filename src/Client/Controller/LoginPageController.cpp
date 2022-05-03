@@ -92,7 +92,7 @@ void LoginPageController::OnGoToSignupPage()
 void LoginPageController::QuickLogin()
 {
 	LoginModel::JSONFormatter::Credentials credentials;
-	credentials.login="user";
+	credentials.email="user";
 	credentials.password="123";
 	OnLogin(credentials);
 }

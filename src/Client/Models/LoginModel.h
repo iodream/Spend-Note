@@ -17,7 +17,7 @@ public:
 	public:
 		struct Credentials
 		{
-			std::string login;
+			std::string email;
 			std::string password;
 		};
 

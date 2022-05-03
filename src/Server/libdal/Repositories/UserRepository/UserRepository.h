@@ -14,8 +14,9 @@ public:
 
 	std::optional<IdType> Add(const User& user);
 	std::optional<User> GetById(IdType id);
-	std::optional<User> GetByLogin(const std::string& login);
+	std::optional<User> GetByEmail(const std::string& email);
 	bool Update(const User& user);
+	bool UpdateVerification(IdType id);
 	bool Remove(IdType id);
 private:
 	static User UserFromRow(const pqxx::row& row);

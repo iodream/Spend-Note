@@ -16,7 +16,7 @@ private:
 	public:
 		struct Token{
 			db::IdType id;
-			std::string login;
+			std::string email;
 			double iat;
 		};
 	Token Parse(const QJsonDocument& payload);

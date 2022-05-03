@@ -40,7 +40,8 @@ list(APPEND Spend-Note-Server_LIBS
     PocoUtil
     PocoFoundation
     PocoJWT
-    PocoJSON
+    PocoJSON	
+	PocoNetSSL
 )
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)

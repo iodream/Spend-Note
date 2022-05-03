@@ -67,14 +67,24 @@ namespace db
 	{
 		const std::string TABLE_NAME = "User_";
 		const std::string ID = "id";
-		const std::string LOGIN = "login";
+		const std::string EMAIL = "email";
 		const std::string PASSWORD = "password_hash";
 		const std::string SALT = "salt";
+		const std::string VERIFIED = "verified";
 	}
 
 	namespace statistics
 	{
 		const std::string TOTAL_PRICE = "totalPrice";
 		const std::string PURCHASE_DATE = "purchase_date";
+	}
+
+	namespace verificationCode
+	{
+		const std::string TABLE_NAME = "VerificationCode";
+		const std::string ID = "id";
+		const std::string USER_ID = "userId";
+		const std::string CODE = "code";
+		const std::string EXPIRATION_TIME = "expirationTime";
 	}
 }
