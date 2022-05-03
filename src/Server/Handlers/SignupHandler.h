@@ -16,13 +16,12 @@ class SignupHandler : public ICommandHandler
 		struct Credentials {
 			std::string email;
 			std::string password;
-      std::string password_hash;
+			std::string password_hash;
 			std::string salt;
 		};
 		Credentials Parse(const QJsonDocument& payload);
 	};
 
-	std::string CreateSalt();
 public:
 	SignupHandler();
 	virtual ~SignupHandler() override {}
