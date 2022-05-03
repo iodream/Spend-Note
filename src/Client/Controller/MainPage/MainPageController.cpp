@@ -19,6 +19,7 @@ MainPageController::MainPageController(
 	ConnectPage();
 	InitListPagesController();
 	InitProductPagesController();
+	InitProductRecommendationController();
 	InitIncomePagesController();
 	InitDailyListPageController();
 	InitStatisticsPageController();
@@ -130,6 +131,28 @@ void MainPageController::InitProductPagesController()
 		&ProductPagesController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+}
+
+void MainPageController::InitProductRecommendationController()
+{
+	m_product_recommendation_controller =
+		std::make_unique<ProductRecommendationController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page);
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductRecommendationController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_product_pages_controller.get(),
+		&ProductRecommendationController::ClientError,
+		this,
+		&MainPageController::OnClientError);
 }
 
 void MainPageController::InitIncomePagesController()
@@ -407,6 +430,11 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 	{
 		OnUIUpdate();
 	}
+}
+
+void MainPageController::UpdateRecommendations()
+{
+	m_product_recommendation_controller->UpdateRecommendations();
 }
 
 void MainPageController::OnServerError(const int code, const std::string& desc)
