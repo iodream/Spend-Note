@@ -44,7 +44,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="138"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
         <source>Please Select an item!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -962,16 +965,6 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="209"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
-        <source>Please Select an item!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

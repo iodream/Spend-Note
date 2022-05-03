@@ -124,7 +124,7 @@ void CategoryEditPage::OnRemoveClicked()
 	{
 		if(ui->Incomes->currentRow() == -1) // if user didn't select a category
 		{
-			emit ClientError(QApplication::tr("Please Select an item!"));
+			emit ClientError(tr("Please Select an item!"));
 			return;
 		}
 		int id = qvariant_cast<int>(ui->Incomes->currentItem()->data(Qt::UserRole));
@@ -152,7 +152,7 @@ void CategoryEditPage::OnCategoryEditConfirmClicked()
 		{
 			if(ui->Incomes->currentRow() == -1) // if user didn't select a category
 			{
-				emit ClientError(QApplication::tr("Please Select an item!"));
+				emit ClientError(tr("Please Select an item!"));
 				return;
 			}
 			IncomeCategory cat;
@@ -166,7 +166,7 @@ void CategoryEditPage::OnCategoryEditConfirmClicked()
 	{
 		if(ui->Products->currentRow() == -1)
 		{
-			emit ClientError(QApplication::tr("Please Select an item!"));
+			emit ClientError(tr("Please Select an item!"));
 			return;
 		}
 		ProductCategory cat;

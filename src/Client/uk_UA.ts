@@ -44,7 +44,10 @@
         <translation>Додати</translation>
     </message>
     <message>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="138"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
+        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
         <source>Please Select an item!</source>
         <translation>Будь ласка, виберіть елемент!</translation>
     </message>
@@ -980,11 +983,8 @@ Incomes</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="127"/>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
-        <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
         <source>Please Select an item!</source>
-        <translation>Будь ласка, виберіть елемент!</translation>
+        <translation type="vanished">Будь ласка, виберіть елемент!</translation>
     </message>
 </context>
 <context>
