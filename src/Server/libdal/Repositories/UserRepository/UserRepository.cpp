@@ -25,8 +25,8 @@ std::optional<IdType> UserRepository::Add(const User &user)
 			") VALUES (" +
 				w.quote(user.email) + ", " +
 				w.quote(user.password_hash) + ", " +
-				w.quote(user.salt) + ")" +
-        w.quote(user.verified) + ")" +
+				w.quote(user.salt) + ", " +
+				w.quote(user.verified) + ")" +
 			" RETURNING " + db::user::ID + ";");
 
 		w.commit();
@@ -49,7 +49,7 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT ", " + db::user::VERIFIED +
+			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT + ", " + db::user::VERIFIED +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 
@@ -105,7 +105,7 @@ bool UserRepository::Update(const User &user)
 			"UPDATE " + user::TABLE_NAME +
 			" SET " +
 				user::EMAIL + " = " + w.quote(user.email) + ", " +
-				user::PASSWORD + " = " + w.quote(user.password) + ", " +
+				user::PASSWORD + " = " + w.quote(user.password_hash) + ", " +
 				user::VERIFIED + " = " + w.quote(user.verified) +
 			" WHERE " + user::ID + " = " + w.quote(user.id) + ";");
 		w.commit();
@@ -131,8 +131,7 @@ bool UserRepository::UpdateEmail(const IdType user_id, const std::string &email)
 
 		w.exec0(
 			"UPDATE " + user::TABLE_NAME +
-			" SET " +
-			user::EMAIL + " = " + w.quote(email) +
+			" SET " + user::EMAIL + " = " + w.quote(email) +
 			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
 		w.commit();
 	}

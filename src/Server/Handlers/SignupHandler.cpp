@@ -75,7 +75,7 @@ Net::Response SignupHandler::Handle(Net::Request& request)
 		dto.salt = CreateSalt();
 		dto.password_hash = HashingPassword(dto.password, dto.salt);
 		m_facade->AddUser(db::User {0, dto.email, dto.password_hash, dto.salt, false}).value();
-		qInfo() << "Registered new user: " << QString::fromStdString(dto.login) << "\n";
+		qInfo() << "Registered new user: " << QString::fromStdString(dto.email) << "\n";
 	}
 	catch(const db::DatabaseFailure& e) {
 		return FormErrorResponse(
