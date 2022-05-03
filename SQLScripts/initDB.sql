@@ -72,7 +72,7 @@ create table PeriodicProduct
 
 	periodId bigint not null references PeriodType(id),
 	nextAddDate timestamp not null,
-	addUntil timestamp,
+	addUntil timestamp
 );
 
 create table Product
@@ -88,6 +88,6 @@ create table Product
 	addDate timestamp not null,
 	purchaseDate timestamp,
 	buyUntilDate timestamp,
-	periodicId bigint references PeriodicProduct(id),
+	periodicId bigint references PeriodicProduct(id)
 );
 
