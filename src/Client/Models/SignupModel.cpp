@@ -14,12 +14,8 @@ Net::Request SignupModel::FormRequest(const SignupInDTO& dto)
 QJsonDocument SignupModel::JSONFormatter::Format(const SignupInDTO& dto)
 {
 	QJsonObject json;
-	QByteArray password = QByteArray::fromStdString(dto.password);
-
-	json["email"] = dto.email.c_str();
-	auto digest = QString(QCryptographicHash::hash(
-			password, QCryptographicHash::Sha1).toHex());
-	json["password"] = digest.toStdString().c_str();
+  json["email"] = dto.email.c_str();
+	json["password"] = dto.password.c_str();
 	return QJsonDocument(json);
 }
 

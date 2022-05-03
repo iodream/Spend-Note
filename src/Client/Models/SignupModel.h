@@ -14,7 +14,6 @@ public:
 	{
 		std::string email;
 		std::string password, pass_repeat;
-		std::string passwd_hash;
 	};
 
 	class JSONFormatter
