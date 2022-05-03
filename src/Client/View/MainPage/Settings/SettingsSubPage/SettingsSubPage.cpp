@@ -322,13 +322,13 @@ void SettingsSubPage::OnLangSelected(QString lang)
 {
 	if(lang == "English")
 	{
-		MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
+		MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
 	}
 	else if(lang == "Українська")
 	{
 		MainPage::UISettings::LANG_UI = UILangs::UKRAINIAN;
 	}
-	emit LangChanged();
+	emit LanguageChanged();
 }
 
 void SettingsSubPage::changeEvent(QEvent* event)
@@ -350,7 +350,7 @@ void SettingsSubPage::Update()
 {
 	switch(MainPage::UISettings::LANG_UI)
 	{
-	case UILangs::ENGLISH:
+	case UILangs::AMERICAN_ENGLISH:
 		m_ui->LanguageBox->setCurrentText("English");
 		break;
 	case UILangs::UKRAINIAN:

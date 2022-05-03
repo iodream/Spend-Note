@@ -18,7 +18,12 @@ QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
 QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
 QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
 
-UILangs MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
+UILangs MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
+
+const std::map<UILangs, QString> MainPage::UISettings::translation_file{
+	{UILangs::AMERICAN_ENGLISH, "en_US"},
+	{UILangs::UKRAINIAN, "uk_UA"},
+};
 
 bool MainPage::bNeedColorUpdate = true;
 

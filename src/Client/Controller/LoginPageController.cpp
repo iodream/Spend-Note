@@ -40,9 +40,9 @@ void LoginPageController::ConnectPage()
 
 	QObject::connect(
 		&m_page,
-		&LoginPage::LangChanged,
+		&LoginPage::LanguageChanged,
 		this,
-		[this](){ emit LangChanged(); });
+		[this](){ emit LanguageChanged(); });
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)

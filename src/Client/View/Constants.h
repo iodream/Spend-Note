@@ -35,7 +35,7 @@ enum class MainSubPages
 
 enum class UILangs
 {
-	ENGLISH = 0,
+	AMERICAN_ENGLISH = 0,
 	UKRAINIAN
 };
 

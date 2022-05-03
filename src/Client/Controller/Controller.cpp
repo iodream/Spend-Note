@@ -9,9 +9,9 @@
 #include "Net/Constants.h"
 
 Controller::Controller(QApplication* a)
-	:m_app(a)
+	:m_application(a)
 {
-	m_trans = std::make_shared<QTranslator>();
+	m_translator = std::make_shared<QTranslator>();
 
 	InitConfig();
 	ReadSettings();
@@ -92,7 +92,7 @@ void Controller::ReadSettings()
 
 		if(lang == "English")
 		{
-			MainPage::UISettings::LANG_UI = UILangs::ENGLISH;
+			MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
 		}
 		else if(lang == "Ukrainian")
 		{
@@ -117,9 +117,9 @@ void Controller::InitLoginPageController()
 		&Controller::OnChangePage);
 	connect(
 		m_login_page_controller.get(),
-		&LoginPageController::LangChanged,
+		&LoginPageController::LanguageChanged,
 		this,
-		&Controller::OnLangChanged);
+		&Controller::OnLanguageChanged);
 
 	m_login_page_controller->UpdateLoginPage();
 }
@@ -163,15 +163,17 @@ void Controller::InitMainPageController()
 
 	connect(
 		m_main_page_controller.get(),
-		&MainPageController::LangChanged,
+		&MainPageController::LanguageChanged,
 		this,
-		&Controller::OnLangChanged);
+		&Controller::OnLanguageChanged);
 }
 
 bool Controller::AskUser(const QString& title, const QString& text)
 {
-	return QMessageBox::Yes == QMessageBox::question(nullptr, tr("Retry?"),
-											tr("No connection to server. Retry?"));
+	return QMessageBox::Yes == QMessageBox::question(
+			nullptr,
+			tr("Retry?"),
+			tr("No connection to server. Retry?"));
 }
 
 void Controller::Start(UIPages at_page)
@@ -203,28 +205,18 @@ void Controller::OnChangePage(UIPages page)
 	SetPage(page);
 }
 
-void Controller::OnLangChanged()
+void Controller::OnLanguageChanged()
 {
-	QString file;
-	switch(MainPage::UISettings::LANG_UI)
-	{
-	case UILangs::ENGLISH:
-		file = "en_US.qm";
-		break;
-	case UILangs::UKRAINIAN:
-		file = "uk_UA.qm";
-		break;
-	default:
-		file = "en_US.qm";
-	}
+	QString FileName = MainPage::UISettings::
+		translation_file.at(MainPage::UISettings::LANG_UI);
 
-	m_app->removeTranslator(m_trans.get());
-	if(!m_trans->load(file))
+	m_application->removeTranslator(m_translator.get());
+	if(!m_translator->load(FileName))
 	{
 		qWarning() << "Couldnt load translation file\n";
 	}
 
-	m_app->installTranslator(m_trans.get());
+	m_application->installTranslator(m_translator.get());
 }
 
 void Controller::OnSaveConfig()
@@ -246,7 +238,7 @@ void Controller::OnSaveConfig()
 
 	switch(MainPage::UISettings::LANG_UI)
 	{
-	case UILangs::ENGLISH:
+	case UILangs::AMERICAN_ENGLISH:
 		json["LANG_UI"] = "English";
 		break;
 	case UILangs::UKRAINIAN:

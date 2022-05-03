@@ -345,9 +345,9 @@ void MainPageController::InitSettingsPageController()
 
 	connect(
 		m_settings_page_controller.get(),
-		&SettingsPageController::LangChanged,
+		&SettingsPageController::LanguageChanged,
 		this,
-		[this](){ emit LangChanged(); });
+		[this](){ emit LanguageChanged(); });
 }
 
 void MainPageController::OnLogout()

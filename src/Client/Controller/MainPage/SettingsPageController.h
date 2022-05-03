@@ -36,7 +36,7 @@ signals:
 	void ClientError(const QString& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void ColorSchemeChanged();
-	void LangChanged();
+	void LanguageChanged();
 	void GoBack(int n=1);
 
 

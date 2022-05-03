@@ -41,7 +41,7 @@ private slots:
 
 signals:
 	void ColorSchemeChanged();
-	void LangChanged();
+	void LanguageChanged();
 
 
 };

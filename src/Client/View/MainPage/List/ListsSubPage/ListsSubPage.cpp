@@ -123,7 +123,7 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 		item->Update();
 		AppendList(item);
 	}
-	if(MainPage::UISettings::LANG_UI == UILangs::ENGLISH)
+	if(MainPage::UISettings::LANG_UI == UILangs::AMERICAN_ENGLISH)
 		qDebug() << "LANG IN lists subpage IS: ENGLISH";
 }
 

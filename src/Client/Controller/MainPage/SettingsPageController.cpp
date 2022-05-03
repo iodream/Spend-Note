@@ -18,15 +18,15 @@ SettingsPageController::SettingsPageController(
 
 	connect(
 		&m_settings_page,
-		&SettingsSubPage::LangChanged,
+		&SettingsSubPage::LanguageChanged,
 		this,
 		&SettingsPageController::OnColorSchemeChanged);
 
 	connect(
 		&m_settings_page,
-		&SettingsSubPage::LangChanged,
+		&SettingsSubPage::LanguageChanged,
 		this,
-		[this](){ emit LangChanged(); });
+		[this](){ emit LanguageChanged(); });
 }
 
 void SettingsPageController::OnColorSchemeChanged()

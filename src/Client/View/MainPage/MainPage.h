@@ -146,6 +146,7 @@ public:
 	{
 	public:
 		static UILangs LANG_UI;
+		static const std::map<UILangs, QString> translation_file;
 	};
 
 	class ColorSettings

@@ -30,7 +30,7 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
-	void LangChanged();
+	void LanguageChanged();
 	void ReadSettings();
 
 public slots:

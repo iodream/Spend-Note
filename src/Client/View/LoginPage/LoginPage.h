@@ -32,7 +32,7 @@ private:
 signals:
 	void GotoSignup();
 	void Login(LoginModel::JSONFormatter::Credentials credentials);
-	void LangChanged();
+	void LanguageChanged();
 
 
 private slots:

@@ -71,7 +71,7 @@ signals:
 	void ChangePage(UIPages page);
 	void ColorSchemeChanged();
 	void SaveConfig();
-	void LangChanged();
+	void LanguageChanged();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
