@@ -17,6 +17,8 @@ public:
 
 	void AppendItem(RecommendationItem* Item);
 	void InsertItem(RecommendationItem* Item, int idx);
+	void RemoveItem();
+
 	int GetListSize();
 	void SetListSize(int size);
 
@@ -26,5 +28,4 @@ private:
 
 signals:
 	void RecommendationClosed();
-
 };

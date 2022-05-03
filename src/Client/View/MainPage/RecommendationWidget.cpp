@@ -1,5 +1,6 @@
 #include "RecommendationWidget.h"
 #include "ui_RecommendationWidget.h"
+#include <stdexcept>
 
 RecommendationWidget::RecommendationWidget(QWidget *parent)
 	: QWidget(parent)
@@ -23,6 +24,18 @@ RecommendationWidget::~RecommendationWidget()
 void RecommendationWidget::AppendItem(RecommendationItem* Item)
 {
 	InsertItem(Item, GetListSize());
+}
+
+void RecommendationWidget::RemoveItem()
+{
+	QLayoutItem *layout = m_ui->Items->takeAt(0);
+	if (!layout) {
+		throw std::runtime_error("Failed to get list layout");
+	}
+
+	delete layout->widget();
+	delete layout;
+	SetListSize(0);
 }
 
 void RecommendationWidget::InsertItem(RecommendationItem* Item, int idx)

@@ -35,8 +35,6 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToStatisticsButton->setToolTip("Statistics");
 		m_ui->GoToCategoriesButton->setToolTip("My Categories");
 
-
-
 	connect(
 		m_ui->GoToListsButton,
 		SIGNAL(clicked()),
@@ -113,22 +111,21 @@ MainPage::MainPage(QWidget *parent)
 	InitCategoriesEditSubPage();
 	InitSettingsSubPage();
 
-	rec = new RecommendationWidget(this);
-	item = new RecommendationItem("new1",rec);
-	rec->AppendItem(item);
+	recommendation_widget = std::make_shared<RecommendationWidget>(this);
+	recommendation_item = std::make_shared<RecommendationItem>("", List(), recommendation_widget.get());
 
-		connect(
-			rec,
-			&RecommendationWidget::RecommendationClosed,
-			this,
-			&MainPage::OnRecommendationClosed);
+	connect(
+		recommendation_widget.get(),
+		&RecommendationWidget::RecommendationClosed,
+		this,
+		&MainPage::OnRecommendationClosed);
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)
 {
 	//position it in lower right corner
-	rec->move(size().width() - rec->size().width() - 25,
-			  size().height() - rec->size().height() - 25);
+	recommendation_widget->move(size().width() - recommendation_widget->size().width() - 25,
+			  size().height() - recommendation_widget->size().height() - 25);
 	QWidget::resizeEvent(event);
 }
 
@@ -215,7 +212,7 @@ void MainPage::InitCategoriesEditSubPage()
 
 void MainPage::HideRecommendation()
 {
-	rec->hide();
+	recommendation_widget->hide();
 }
 
 void MainPage::InitSettingsSubPage()
@@ -291,6 +288,9 @@ void MainPage::UpdatePageColors()
 	//balance banners
 	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
 
+	//recommendation widget
+	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
+
 	//general text
 	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
 
@@ -323,4 +323,23 @@ void MainPage::SetErrorBanner(const std::string& description)
 void MainPage::CloseErrorBanner()
 {
 	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
+}
+
+void MainPage::UpdateRecommendation(const List& list)
+{
+	recommendation_item = std::make_shared<RecommendationItem>(list.name, list, recommendation_widget.get());
+
+	connect(
+		recommendation_item.get(),
+		&RecommendationItem::clicked,
+		this,
+		&MainPage::OnRecommendationClicked);
+
+	recommendation_widget->RemoveItem();
+	recommendation_widget->AppendItem(recommendation_item.get());
+}
+
+void MainPage::OnRecommendationClicked()
+{
+	emit GoToProducts(recommendation_item->get_list());
 }

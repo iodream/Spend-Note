@@ -1,9 +1,10 @@
 #include "RecommendationItem.h"
 #include "ui_RecommendationItem.h"
 
-RecommendationItem::RecommendationItem(QString name, QWidget *parent)
+RecommendationItem::RecommendationItem(QString name, List list, QWidget *parent)
 	: QPushButton(parent)
 	, m_ui(new Ui::RecommendationItem)
+	, m_list(list)
 	, m_name(name)
 {
 	m_ui->setupUi(this);

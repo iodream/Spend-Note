@@ -106,6 +106,7 @@ public:
 	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 
 	void resizeEvent(QResizeEvent* event);
+	void UpdateRecommendation(const List& list);
 private:
 	Ui::MainPage *m_ui;
 
@@ -129,8 +130,8 @@ private:
 	DailyListSubPage m_dailylist_spage;
 	StatisticSubPage m_statistics_spage;
 	CategoryEditPage m_categories_edit_spage;
-	RecommendationWidget* rec;
-	RecommendationItem* item;
+	std::shared_ptr<RecommendationWidget> recommendation_widget;
+	std::shared_ptr<RecommendationItem> recommendation_item;
 	SettingsSubPage m_settings_spage;
 
 signals:
@@ -139,6 +140,8 @@ signals:
 	void GoBack(int n=1);
 	void RecommendationClosed();
 	void ColorSchemeChanged();
+	void GoToProducts(List);
+
 
 public slots:
 	void OnGoToListsClicked();
@@ -148,6 +151,7 @@ public slots:
 	void OnGoToStatiticsClicked();
 	void OnGoToCategoriesEditClicked();
 	void OnRecommendationClosed();
+	void OnRecommendationClicked();
 	void OnGoToSettingsClicked();
 
 public:
