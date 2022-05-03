@@ -17,15 +17,17 @@ std::optional<IdType> UserRepository::Add(const User &user)
 	{
 		pqxx::work w(m_database_connection);
 		auto id_rows = w.exec(
-			"INSERT INTO " + user::TABLE_NAME + " (" +
-				user::EMAIL + ", " +
-				user::PASSWORD + ", " +
+			"INSERT INTO " + db::user::TABLE_NAME + " (" +
+				db::user::EMAIL + ", " +
+				db::user::PASSWORD + ", " +
+				db::user::SALT + ", " +
 				user::VERIFIED +
 			") VALUES (" +
 				w.quote(user.email) + ", " +
-				w.quote(user.password) + ", " +
-				w.quote(user.verified) + ")" +
-			" RETURNING " + user::ID + ";");
+				w.quote(user.password_hash) + ", " +
+				w.quote(user.salt) + ")" +
+        w.quote(user.verified) + ")" +
+			" RETURNING " + db::user::ID + ";");
 
 		w.commit();
 
@@ -47,7 +49,7 @@ std::optional<User> UserRepository::GetById(IdType id)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::VERIFIED +
+			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT ", " + db::user::VERIFIED +
 			" FROM " + db::user::TABLE_NAME +
 			" WHERE " + db::user::ID + " = " + w.quote(id) + ";");
 
@@ -70,9 +72,9 @@ std::optional<User> UserRepository::GetByEmail(const std::string& email)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + user::ID + ", " + user::EMAIL + ", " + user::PASSWORD + ", " + user::VERIFIED +
-			" FROM " + user::TABLE_NAME +
-			" WHERE " + user::EMAIL + " = " + w.quote(email) + ";");
+			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT + ", " + db::user::VERIFIED +
+			" FROM " + db::user::TABLE_NAME +
+			" WHERE " + db::user::EMAIL + " = " + w.quote(email) + ";");
 
 		if (!user_rows.empty())
 		{
@@ -158,9 +160,9 @@ bool UserRepository::UpdateVerification(IdType id)
 
 		w.exec0(
 			"UPDATE " + user::TABLE_NAME +
-			" SET " +
-				user::VERIFIED + " = " + w.quote(true) +
+			" SET " + user::VERIFIED + " = " + w.quote(true) +
 			" WHERE " + user::ID + " = " + w.quote(id) + ";");
+
 		w.commit();
 	}
 	catch(const pqxx::failure& e)
@@ -196,10 +198,13 @@ bool UserRepository::Remove(IdType id)
 User UserRepository::UserFromRow(const pqxx::row& row)
 {
 	User user;
-	user.id = row[user::ID].as<IdType>();
-	user.email = row[user::EMAIL].as<std::string>();
-	user.password = row[user::PASSWORD].as<std::string>();
-	user.verified = row[user::VERIFIED].as<bool>();
+
+	user.id = row[db::user::ID].as<IdType>();
+	user.email = row[db::user::EMAIL].as<std::string>();
+	user.password_hash = row[db::user::PASSWORD].as<std::string>();
+	user.salt = row[db::user::SALT].as<std::string>();
+  user.verified = row[db::user::VERIFIED].as<bool>();
+
 	return user;
 }
 

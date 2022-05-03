@@ -9,7 +9,9 @@ namespace db
 	{
 		IdType id;
 		std::string email;
-		std::string password;
+		std::string password_hash;
+		std::string salt;
 		bool verified;
+
 	};
 }

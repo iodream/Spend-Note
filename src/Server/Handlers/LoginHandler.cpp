@@ -3,6 +3,8 @@
 #include <QJsonObject>
 #include <Poco/JWT/Token.h>
 #include <Poco/JWT/Signer.h>
+#include "Poco/DigestStream.h"
+#include "Poco/MD5Engine.h"
 
 #include "LoginHandler.h"
 
@@ -12,6 +14,8 @@
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
 #include "Logger/ScopedLogger.h"
+
+#include "../Utils.h"
 
 LoginHandler::LoginHandler()
 {
@@ -36,7 +40,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 
 	try {
 		SafeReadString(json, "email", dto.email);
-		SafeReadString(json, "password", dto.passwd_hash);
+  	SafeReadString(json, "password", dto.password);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
@@ -52,7 +56,9 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	auto dto = m_parser.Parse(request.json_payload);
 	auto user = m_facade->GetUserByEmail(dto.email);
 
-	if(!user || dto.passwd_hash != user->password || !user.value().verified) {
+	dto.password_hash = HashingPassword(dto.password, user->salt);
+	if(!user || dto.password_hash != user->password_hash || !user.value().verified) {
+
 		return FormErrorResponse(
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Invalid login data");
@@ -66,7 +72,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 
 	token.setIssuedAt(Poco::Timestamp());
 
-	Poco::JWT::Signer signer(user->password);
+	Poco::JWT::Signer signer(user->password_hash);
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
 	return FormJSONResponse(m_formatter.Format(out_dto));
