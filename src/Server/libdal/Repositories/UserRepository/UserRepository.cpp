@@ -115,6 +115,35 @@ bool UserRepository::Update(const User &user)
 	return true;
 }
 
+bool UserRepository::UpdatePassword(const IdType user_id, const std::string& password)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		auto result = w.exec("SELECT " + user::ID +
+			" FROM  " + user::TABLE_NAME +
+			" WHERE " + user::ID + " = " + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + user::TABLE_NAME +
+			" SET " +
+			user::PASSWORD + " = " + w.quote(password) +
+			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return true;
+}
+
 bool UserRepository::UpdateVerification(IdType id)
 {
 	try

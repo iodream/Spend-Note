@@ -38,6 +38,11 @@ bool DbFacade::UpdateUser(const User &user)
 	return m_users.Update(user);
 }
 
+bool DbFacade::UpdateUserPassword(const IdType user_id, const std::string& password)
+{
+	return m_users.UpdatePassword(user_id, password);
+}
+
 bool DbFacade::UpdateUserVerification(IdType id)
 {
 	return m_users.UpdateVerification(id);
