@@ -67,9 +67,9 @@ namespace db
 	{
 		const std::string TABLE_NAME = "User_";
 		const std::string ID = "id";
-		//const std::string LOGIN = "login";
-		const std::string PASSWORD = "password";
 		const std::string EMAIL = "email";
+		const std::string PASSWORD = "password_hash";
+		const std::string SALT = "salt";
 		const std::string VERIFIED = "verified";
 	}
 

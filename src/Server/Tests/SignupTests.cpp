@@ -16,8 +16,9 @@ TEST(SignupHandlerTest, USER_ALREADY_EXISTS)
 	auto facade = std::make_unique<MockDbFacade>();
 	db::User existing_user;
 	existing_user.id = 1;
+  
 	existing_user.email = "example@mail.com";
-	existing_user.password = "Test password hash";
+	existing_user.password_hash = "Test password hash";
 
 	EXPECT_CALL(*facade, GetUserByEmail(_))
 		.WillOnce(Return(std::optional{existing_user}));

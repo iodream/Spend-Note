@@ -82,7 +82,7 @@ bool AuthorizedHandler::CheckAuthorization(Net::Request& request)
 	auto user = m_facade->GetUserById(parsed_token.id);
 	if(!user)
 		return false;
-	auto password = user->password;
+	auto password = user->password_hash;
 	request.uid = user->id;
 	try {
 		Poco::JWT::Signer signer(password);
