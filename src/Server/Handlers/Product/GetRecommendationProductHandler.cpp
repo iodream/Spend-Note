@@ -27,10 +27,10 @@ Net::Response GetRecommendationProductHandler::AuthHandle(const Net::Request& re
 			"\" can't get recommendation product for user with id \"" + std::to_string(user_id) + "\"");
 	}
 
-	db::Product db_product;
+	std::optional<db::Product> db_product;
 	try
 	{
-		db_product = m_facade->GetRecommendation(user_id);
+		db_product = *(m_facade->GetRecommendation(user_id));
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(
@@ -38,11 +38,11 @@ Net::Response GetRecommendationProductHandler::AuthHandle(const Net::Request& re
 			"User with id = \"" + std::to_string(user_id) + "\" not found");
 	}
 
-	auto category = m_facade->GetProductCategoryById(db_product.category_id);
+	auto category = m_facade->GetProductCategoryById((*db_product).category_id);
 	if (!category.has_value()) {
-			throw InternalError(std::string("No product category with id:") + std::to_string(db_product.category_id));
+			throw InternalError(std::string("No product category with id:") + std::to_string((*db_product).category_id));
 	}
-	auto product = ToNetProduct(db_product, category.value());
+	auto product = ToNetProduct(*db_product, category.value());
 
 	return FormJSONResponse(m_formatter.Format(product));
 }
