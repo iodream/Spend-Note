@@ -19,13 +19,13 @@ SignupPageController::SignupPageController(
 
 void SignupPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&SignupPage::Signup,
 		this,
 		&SignupPageController::OnSignup);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&SignupPage::GoToLoginPage,
 		this,

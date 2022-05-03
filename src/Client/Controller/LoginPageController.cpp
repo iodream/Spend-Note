@@ -26,23 +26,23 @@ void LoginPageController::UpdateLoginPage()
 
 void LoginPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::Login,
 		this,
 		&LoginPageController::OnLogin);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::GotoSignup,
 		this,
 		&LoginPageController::OnGoToSignupPage);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::LanguageChanged,
 		this,
-		[this](){ emit LanguageChanged(); });
+		&LoginPageController::LanguageChanged);
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)

@@ -26,7 +26,7 @@ SettingsPageController::SettingsPageController(
 		&m_settings_page,
 		&SettingsSubPage::LanguageChanged,
 		this,
-		[this](){ emit LanguageChanged(); });
+		&SettingsPageController::LanguageChanged);
 }
 
 void SettingsPageController::OnColorSchemeChanged()

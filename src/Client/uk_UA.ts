@@ -52,12 +52,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="173"/>
+        <location filename="Controller/Controller.cpp" line="175"/>
         <source>Retry?</source>
         <translation>Ще раз?</translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="174"/>
+        <location filename="Controller/Controller.cpp" line="176"/>
         <source>No connection to server. Retry?</source>
         <translation>Немає з&apos;єднання з сервером. Спробувати ще раз?</translation>
     </message>
@@ -548,8 +548,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="33"/>
-        <location filename="View/MainPage/MainPage.cpp" line="219"/>
+        <location filename="View/MainPage/MainPage.cpp" line="38"/>
+        <location filename="View/MainPage/MainPage.cpp" line="224"/>
         <source>My Lists</source>
         <translation>Мої списки</translation>
     </message>
@@ -566,8 +566,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="37"/>
-        <location filename="View/MainPage/MainPage.cpp" line="223"/>
+        <location filename="View/MainPage/MainPage.cpp" line="42"/>
+        <location filename="View/MainPage/MainPage.cpp" line="228"/>
         <source>Statistics</source>
         <translation>Статистика</translation>
     </message>
@@ -618,48 +618,48 @@ Incomes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="31"/>
-        <location filename="View/MainPage/MainPage.cpp" line="217"/>
+        <location filename="View/MainPage/MainPage.cpp" line="36"/>
+        <location filename="View/MainPage/MainPage.cpp" line="222"/>
         <source>Back</source>
         <translation>Перейти назад</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="32"/>
-        <location filename="View/MainPage/MainPage.cpp" line="218"/>
+        <location filename="View/MainPage/MainPage.cpp" line="37"/>
+        <location filename="View/MainPage/MainPage.cpp" line="223"/>
         <source>My Incomes</source>
         <translation>Мої доходи</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="34"/>
-        <location filename="View/MainPage/MainPage.cpp" line="220"/>
+        <location filename="View/MainPage/MainPage.cpp" line="39"/>
+        <location filename="View/MainPage/MainPage.cpp" line="225"/>
         <source>Log Out</source>
         <translation>Вийти</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="35"/>
-        <location filename="View/MainPage/MainPage.cpp" line="221"/>
+        <location filename="View/MainPage/MainPage.cpp" line="40"/>
+        <location filename="View/MainPage/MainPage.cpp" line="226"/>
         <source>Daily List</source>
         <translation>Щоденний список</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="36"/>
-        <location filename="View/MainPage/MainPage.cpp" line="222"/>
+        <location filename="View/MainPage/MainPage.cpp" line="41"/>
+        <location filename="View/MainPage/MainPage.cpp" line="227"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="38"/>
-        <location filename="View/MainPage/MainPage.cpp" line="224"/>
+        <location filename="View/MainPage/MainPage.cpp" line="43"/>
+        <location filename="View/MainPage/MainPage.cpp" line="229"/>
         <source>My Categories</source>
         <translation>Мої категорії</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="279"/>
+        <location filename="View/MainPage/MainPage.cpp" line="284"/>
         <source>Current Balance:  </source>
         <translation>Поточний баланс:  </translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="280"/>
+        <location filename="View/MainPage/MainPage.cpp" line="285"/>
         <source>Predicted balance:  </source>
         <translation>Передбачений баланс:  </translation>
     </message>
@@ -667,7 +667,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="404"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="398"/>
         <source>Error updating page</source>
         <translation>Помилка оновлення сторінки</translation>
     </message>

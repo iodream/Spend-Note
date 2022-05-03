@@ -29,19 +29,19 @@ MainPageController::MainPageController(
 
 void MainPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::Logout,
 		this,
 		&MainPageController::OnLogout);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::ChangeSubPage,
 		this,
 		&MainPageController::OnChangeSubPage);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::GoBack,
 		this,
@@ -91,12 +91,6 @@ void MainPageController::InitListPagesController()
 		&ListPagesController::UpdatePage,
 		this,
 		&MainPageController::OnUpdateSubPage);
-
-//	connect(
-//		m_list_pages_controller.get(),
-//		&ListPagesController::CreateProduct,
-//		m_product_pages_controller.get,
-//		&ProductPagesController::OnCreateProduct);
 }
 
 
@@ -347,7 +341,7 @@ void MainPageController::InitSettingsPageController()
 		m_settings_page_controller.get(),
 		&SettingsPageController::LanguageChanged,
 		this,
-		[this](){ emit LanguageChanged(); });
+		&MainPageController::LanguageChanged);
 }
 
 void MainPageController::OnLogout()
