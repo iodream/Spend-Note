@@ -15,14 +15,15 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="Title">
+    <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <pointsize>11</pointsize>
+       <bold>false</bold>
       </font>
      </property>
      <property name="text">
-      <string>New periodic product</string>
+      <string>Periodic product info:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -35,7 +36,7 @@
       <widget class="QLabel" name="NameLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
@@ -44,13 +45,20 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="Name"/>
+      <widget class="QLineEdit" name="Name">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="PriceLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
@@ -59,9 +67,12 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="Price">
-       <property name="maximum">
-        <number>100000</number>
+      <widget class="QLineEdit" name="Price">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -69,7 +80,7 @@
       <widget class="QLabel" name="AmountLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
@@ -78,90 +89,66 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QSpinBox" name="Amount"/>
+      <widget class="QLineEdit" name="Amount">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="AddedDateLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="text">
-        <string>Added on:</string>
+        <string>Added on</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QDateTimeEdit" name="AddedDate">
-       <property name="displayFormat">
-        <string>yyyy-MM-dd hh:mm:ss</string>
+      <widget class="QLineEdit" name="AddedDate">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
        </property>
-       <property name="calendarPopup">
+       <property name="readOnly">
         <bool>true</bool>
        </property>
       </widget>
      </item>
      <item row="4" column="0">
-      <widget class="QLabel" name="BuyUntilLabel">
+      <widget class="QLabel" name="GenerateUntilLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Generate until:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QDateTimeEdit" name="GenerateUntil">
-       <property name="date">
-        <date>
-         <year>2022</year>
-         <month>1</month>
-         <day>1</day>
-        </date>
-       </property>
-       <property name="displayFormat">
-        <string>yyyy-MM-dd hh:mm:ss</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
+        <string>Generate until</string>
        </property>
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLabel" name="RepeatLabel">
+      <widget class="QLabel" name="RepeatingLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Repeating</string>
        </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QComboBox" name="RepeatingSelect">
-       <item>
-        <property name="text">
-         <string>Daily</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Weekly</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Monthy</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Annually</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="PriorityLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
@@ -170,13 +157,20 @@
       </widget>
      </item>
      <item row="6" column="1">
-      <widget class="QSpinBox" name="Priority"/>
+      <widget class="QLineEdit" name="Priority">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
-     <item row="8" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="CategoryLabel">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
@@ -184,43 +178,29 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="1">
-      <layout class="QHBoxLayout" name="CategoryLayout">
-       <item>
-        <widget class="QComboBox" name="Category"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="NewCategoryButton">
-         <property name="maximumSize">
-          <size>
-           <width>30</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>+</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="Category">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
-     <item row="9" column="1">
-      <layout class="QHBoxLayout" name="NewCategoryLayout">
-       <item>
-        <widget class="QLineEdit" name="NewCategoryName"/>
-       </item>
-       <item>
-        <widget class="QPushButton" name="NewCategorySaveButton">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../../../../resources.qrc">
-           <normaloff>:/Icons/Icons/baseline_done_black_24dp.png</normaloff>:/Icons/Icons/baseline_done_black_24dp.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="GenerateUntil">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="Repeating">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -240,18 +220,40 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="SaveButton">
+      <widget class="QPushButton" name="EditButton">
        <property name="font">
         <font>
          <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Save product</string>
+        <string>Edit</string>
        </property>
        <property name="icon">
         <iconset resource="../../../../resources.qrc">
-         <normaloff>:/Icons/Icons/baseline_check_circle_black_24dp.png</normaloff>:/Icons/Icons/baseline_check_circle_black_24dp.png</iconset>
+         <normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="DeleteButton">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../../resources.qrc">
+         <normaloff>:/Icons/Icons/baseline_cancel_black_24dp.png</normaloff>:/Icons/Icons/baseline_cancel_black_24dp.png</iconset>
        </property>
        <property name="iconSize">
         <size>

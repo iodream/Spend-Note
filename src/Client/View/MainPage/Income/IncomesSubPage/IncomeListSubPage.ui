@@ -165,7 +165,7 @@
          </property>
          <widget class="QWidget" name="RegularIncomesTab">
           <attribute name="title">
-           <string>Regular incomes</string>
+           <string>One-time incomes</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>

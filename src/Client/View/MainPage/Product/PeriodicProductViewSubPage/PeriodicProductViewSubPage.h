@@ -6,7 +6,7 @@
 
 #include "Common.h"
 #include "Entities/Entities.h"
-#include "Utils.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class PeriodicProductViewSubPage;
@@ -20,29 +20,15 @@ public:
 	explicit PeriodicProductViewSubPage(QWidget *parent = nullptr);
 	~PeriodicProductViewSubPage();
 
-	QString GetName();
-	Money GetPrice();
-	BigInt GetAmount();
-	bool GetIsBought();
-	QString GetGenerateUntil();
-	BigInt GetPriority();
-	IdType GetCategoryId();
-	QString GetCategoryName();
+	void Update();
 
-	void Clear();
-	void FillCategoryBox(const std::vector<ProductCategory>& categories);
-	void SetRangeOfSpinBox();
-	void SetMinimumDate(const QDate& date);
-
+	void set_product(const Product& product);
+	Product get_product();
 signals:
-	void CreateProduct();
-	void AddProductCategory(ProductCategory);
-	void UpdateCategories();
-
-public slots:
-	void OnNewCategoryPushed();
-	void OnNewCategorySaved();
+	void EditProduct();
+	void DeleteProduct();
 
 private:
 	Ui::PeriodicProductViewSubPage *m_ui;
+	Product m_product;
 };

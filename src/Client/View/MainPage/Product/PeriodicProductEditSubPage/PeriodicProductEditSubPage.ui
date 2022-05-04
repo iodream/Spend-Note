@@ -22,7 +22,7 @@
       </font>
      </property>
      <property name="text">
-      <string>New periodic product</string>
+      <string>Edit periodic product</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

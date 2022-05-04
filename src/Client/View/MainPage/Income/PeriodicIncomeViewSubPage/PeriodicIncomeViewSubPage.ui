@@ -91,7 +91,7 @@
      <item row="3" column="0">
       <widget class="QLabel" name="ExpiresLabel">
        <property name="text">
-        <string>Generate Until:</string>
+        <string>Generate until:</string>
        </property>
       </widget>
      </item>
@@ -113,7 +113,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="Repeats">
        <property name="text">
-        <string>Repeats:</string>
+        <string>Repeating:</string>
        </property>
       </widget>
      </item>
