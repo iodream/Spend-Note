@@ -234,7 +234,7 @@
          </property>
          <widget class="QWidget" name="RegularLists">
           <attribute name="title">
-           <string>Regular items</string>
+           <string>Regular products</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
@@ -242,7 +242,7 @@
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
-             <widget class="QWidget" name="Items">
+             <widget class="QWidget" name="RegularItems">
               <property name="geometry">
                <rect>
                 <x>0</x>
@@ -273,7 +273,7 @@
          </widget>
          <widget class="QWidget" name="PeriodicLists">
           <attribute name="title">
-           <string>Periodic items</string>
+           <string>Periodic products</string>
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
@@ -281,7 +281,7 @@
              <property name="widgetResizable">
               <bool>true</bool>
              </property>
-             <widget class="QWidget" name="Items_2">
+             <widget class="QWidget" name="PeriodicItems">
               <property name="geometry">
                <rect>
                 <x>0</x>

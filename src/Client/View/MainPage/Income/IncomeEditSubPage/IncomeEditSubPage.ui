@@ -43,40 +43,6 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Amount:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QSpinBox" name="Amount">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>100000</number>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Expire date:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QDateEdit" name="ExpirationDateEdit">
-       <property name="displayFormat">
-        <string>yyyy-MM-dd hh:mm:ss</string>
-       </property>
-       <property name="calendarPopup">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="5" column="1">
       <layout class="QHBoxLayout" name="CategoryLayout">
        <item>
@@ -125,40 +91,38 @@
        </item>
       </layout>
      </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="RepeatLabel">
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Repeating</string>
+        <string>Amount:</string>
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
-      <widget class="QComboBox" name="RepeatSelect">
-       <item>
-        <property name="text">
-         <string>No</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Daily</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Weekly</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Monthly</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Annually</string>
-        </property>
-       </item>
+     <item row="7" column="1">
+      <widget class="QSpinBox" name="Amount">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100000</number>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Expire date:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QDateEdit" name="ExpirationDateEdit">
+       <property name="displayFormat">
+        <string>yyyy-MM-dd hh:mm:ss</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>

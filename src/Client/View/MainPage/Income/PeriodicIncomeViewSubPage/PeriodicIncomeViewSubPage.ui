@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IncomeViewSubPage</class>
- <widget class="QWidget" name="IncomeViewSubPage">
+ <class>PeriodicIncomeViewSubPage</class>
+ <widget class="QWidget" name="PeriodicIncomeViewSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -91,7 +91,7 @@
      <item row="3" column="0">
       <widget class="QLabel" name="ExpiresLabel">
        <property name="text">
-        <string>Expires</string>
+        <string>Generate Until:</string>
        </property>
       </widget>
      </item>
@@ -104,6 +104,25 @@
        </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="Repeats">
+       <property name="text">
+        <string>Repeats:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="RepeatsLabel">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;</string>
        </property>
        <property name="text">
         <string/>
