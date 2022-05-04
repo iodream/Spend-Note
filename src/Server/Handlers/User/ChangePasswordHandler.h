@@ -1,6 +1,9 @@
 #pragma once
 
 #include <QDateTime>
+#include <Poco/JWT/Token.h>
+#include <Poco/JWT/Signer.h>
+
 #include "../libdal/Types.h"
 #include "../AuthorizedHandler.h"
 #include "../Common.h"
@@ -10,22 +13,16 @@
 #include "Logger/ScopedLogger.h"
 #include "../Entities/Entities.h"
 #include "../Entities/Parsers.h"
+#include "../Entities/Formatters.h"
 
 class ChangePasswordHandler : public AuthorizedHandler
 {
 public:
-	ChangePasswordHandler() {} ;
-	virtual ~ChangePasswordHandler() override {};
+	ChangePasswordHandler() {}
+	virtual ~ChangePasswordHandler() override {}
 	virtual Net::Response AuthHandle(const Net::Request& request) override;
 
 private:
-	class JSONParser{
-	public:
-		struct DTO
-		{
-			std::string code;
-			std::string password;
-		};
-		DTO Parse(const QJsonObject& json);
-	} m_parser{};
+	PasswordUpdateJSONParser m_parser{};
+	TokenJSONFormatter m_formatter{};
 };

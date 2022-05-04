@@ -1,15 +1,8 @@
 #include "ChangePasswordHandler.h"
 
-ChangePasswordHandler::JSONParser::DTO ChangePasswordHandler::JSONParser::Parse(const QJsonObject& json)
-{
-	DTO dto;
-	SafeReadString(json, "code", dto.code);
-	SafeReadString(json, "password", dto.password);
-	return dto;
-}
-
 Net::Response ChangePasswordHandler::AuthHandle(const Net::Request& request)
 {
+	SCOPED_LOGGER;
 	std::optional<db::VerificationCode> verification;
 	try
 	{
@@ -74,7 +67,21 @@ Net::Response ChangePasswordHandler::AuthHandle(const Net::Request& request)
 					NetError::Status::HTTP_INTERNAL_SERVER_ERROR,
 					"Such verification code was not removed because database error occurred");
 			}
-			return FormEmptyResponse(Poco::Net::HTTPServerResponse::HTTPStatus::HTTP_OK);
+
+			//RELOGIN
+			auto user = m_facade->GetUserById(request.uid);
+
+			Poco::JWT::Token token;
+			token.setType("JWT");
+			token.payload().set("id", FormatId(user->id));
+			token.payload().set("email", std::string(user->email));
+			token.setIssuedAt(Poco::Timestamp());
+
+			Poco::JWT::Signer signer(password_hash);
+			std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
+
+			Token out_dto{jwt};
+			return FormJSONResponse(m_formatter.Format(out_dto));
 		}
 	}
 
@@ -82,3 +89,4 @@ Net::Response ChangePasswordHandler::AuthHandle(const Net::Request& request)
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Wrong verification code");
 }
+

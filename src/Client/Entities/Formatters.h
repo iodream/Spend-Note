@@ -18,6 +18,8 @@
 
 #include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
 
+#include "Net/Tools/Formatters/User/PasswordUpdateJSONFormatter.h"
+
 #include "Net/Tools/Formatters/ArrayJSONFormatterBase.h"
 
 using IncomeCategoryJSONFormatter =

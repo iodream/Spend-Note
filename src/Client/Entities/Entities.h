@@ -21,6 +21,9 @@
 #include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
 #include "Net/Entities/Statistics/StatisticPerDayBase.h"
 
+#include "Net/Entities/User/PasswordUpdate.h"
+#include "Net/Entities/User/Token.h"
+
 using String = QString;
 
 using Income = IncomeBase<IncomeCategoryBase, String>;
