@@ -155,7 +155,9 @@ void SettingsSubPage::OnGoBackClicked()
 // font selection
 void SettingsSubPage::OnFontChange()
 {
-	QFont font = QFontDialog::getFont(nullptr, QFont("Sans Serif", 11));
+	MainPage::bNeedsGlobalUIUpdate = true;
+
+	QFont font = QFontDialog::getFont(nullptr, QFont("Sans Serif", 11)); //use this font if cancel is pressed
 	MainPage::UISettings::UI_FONT = font;
 
 	emit FontChange();

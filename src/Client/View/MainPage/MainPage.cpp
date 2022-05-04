@@ -6,17 +6,17 @@
 
 QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
 QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
-QString MainPage::ColorSettings::RECOMMENDATION;
+QString MainPage::ColorSettings::RECOMMENDATION = "rgba(227, 136, 25)";
 QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
-QString MainPage::ColorSettings::WINDOW_BACKGROUND;
-QString MainPage::ColorSettings::LABEL_TEXT;
+QString MainPage::ColorSettings::WINDOW_BACKGROUND = "";
+QString MainPage::ColorSettings::LABEL_TEXT = "black";
 QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO4 = "rgba(35, 217, 108, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
 QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
-QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
+QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(37, 109, 217, 50%)";
 
 QFont MainPage::UISettings::UI_FONT;
 bool MainPage::bNeedsGlobalUIUpdate = true;

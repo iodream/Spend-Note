@@ -14,7 +14,7 @@ SettingsPageController::SettingsPageController(
 		&m_settings_page,
 		&SettingsSubPage::FontChange,
 		this,
-		[this](){ emit(FontChange()); });
+		&SettingsPageController::FontChange);
 
 	connect(
 		&m_settings_page,
