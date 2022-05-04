@@ -9,6 +9,7 @@
 #include "StatisticsPageController.h"
 #include "IncomeCategoriesController.h"
 #include "ProductCategoriesController.h"
+#include "SettingsPageController.h"
 #include "NavHistory.h"
 
 #include "View/MainPage/MainPage.h"
@@ -31,7 +32,6 @@ public:
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 
-
 private:
 	void ConnectPage();
 
@@ -42,9 +42,11 @@ private:
 	void InitStatisticsPageController();
 	void InitIncomeCategoriesController();
 	void InitProductCategoriesController();
+	void InitSettingsPageController();
 
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
+
 	std::optional<Balance> UpdateUserBalance(const IdType& id);
 
 private:
@@ -63,9 +65,12 @@ private:
 	std::unique_ptr<StatisticsPageController> m_statistics_page_controller;
 	std::unique_ptr<IncomeCategoriesController> m_income_categories_controller;
 	std::unique_ptr<ProductCategoriesController> m_product_categories_controller;
+	std::unique_ptr<SettingsPageController> m_settings_page_controller;
 
 signals:
 	void ChangePage(UIPages page);
+	void ColorSchemeChanged();
+	void SaveConfig();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
@@ -76,4 +81,5 @@ public slots:
 
 	void OnGoBack(int n=1);
 	void OnLogout();
+	void OnColorSchemeChanged();
 };

@@ -24,6 +24,7 @@ MainPageController::MainPageController(
 	InitStatisticsPageController();
 	InitIncomeCategoriesController();
 	InitProductCategoriesController();
+	InitSettingsPageController();
 }
 
 void MainPageController::ConnectPage()
@@ -97,6 +98,8 @@ void MainPageController::InitListPagesController()
 //		m_product_pages_controller.get,
 //		&ProductPagesController::OnCreateProduct);
 }
+
+
 
 void MainPageController::InitProductPagesController()
 {
@@ -301,9 +304,67 @@ void MainPageController::InitProductCategoriesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitSettingsPageController()
+{
+	m_settings_page_controller =
+		std::make_unique<SettingsPageController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page.get_settings_spage());
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ChangeSubPage,
+		this,
+		&MainPageController::OnChangeSubPage);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::GoBack,
+		this,
+		&MainPageController::OnGoBack);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::ColorSchemeChanged,
+		this,
+		&MainPageController::OnColorSchemeChanged);
+}
+
 void MainPageController::OnLogout()
 {
 	m_http_client.ReleaseToken();
+	emit SaveConfig();
+
+	MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
+	MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
+	MainPage::ColorSettings::RECOMMENDATION;
+	MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "";
+	MainPage::ColorSettings::LABEL_TEXT;
+	MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO4 = "rgba(35, 217, 108, 50%)";
+	MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
+	MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
+	MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
+
+	MainPage::bNeedColorUpdate = true;
+	emit ColorSchemeChanged();
 	emit ChangePage(UIPages::LOGIN);
 }
 
@@ -335,6 +396,11 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 	}
 	else {
 		m_page.SetErrorBanner("Error updating page");
+	}
+
+	if(MainPage::bNeedColorUpdate)
+	{
+		OnColorSchemeChanged();
 	}
 }
 
@@ -379,6 +445,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::EDIT_INCOME:
 		return m_income_pages_controller->UpdateIncomeEditPage(data);
 	case MainSubPages::SETTINGS:
+		m_settings_page_controller->UpdateSettingsSubPage();
 		break;
 	case MainSubPages::DAILY_LIST:
 		return m_daily_list_page_controller->UpdateDailyListPage();
@@ -424,5 +491,18 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 	{
 		return std::nullopt;
 	}
+}
 
+void MainPageController::OnColorSchemeChanged()
+{
+	MainPage::bNeedColorUpdate = false;
+	emit ColorSchemeChanged();
+
+	m_page.UpdatePageColors();
+	m_list_pages_controller->UpdateListPageColors();
+	m_income_pages_controller->UpdateIncomesPageColors();
+	m_daily_list_page_controller->UpdatePageColors();
+	m_product_pages_controller->UpdateProductColors();
+	m_settings_page_controller->UpdateSettingsPageColors();
+	m_product_categories_controller->UpdateProductCategoryPageColors();
 }

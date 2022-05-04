@@ -37,6 +37,7 @@ add_library(libdal STATIC
 	Repositories/ProductCategoryRepository/ProductCategoryRepository.h Repositories/ProductCategoryRepository/ProductCategoryRepository.cpp
 	Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
 	Repositories/StatisticsRepository/StatisticsRepository.h Repositories/StatisticsRepository/StatisticsRepository.cpp
+	Repositories/RecommendationRepository/RecommendationRepository.h Repositories/RecommendationRepository/RecommendationRepository.cpp
 
 	Facade/IDbFacade.h
 	Facade/DbFacade.h

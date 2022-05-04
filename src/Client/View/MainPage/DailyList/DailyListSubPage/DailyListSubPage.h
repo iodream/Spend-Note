@@ -27,6 +27,7 @@ public:
 	void set_list_size(int size);
 	int get_list_size();
 
+	void UpdateColors();
 private:
 	Ui::DailyListSubPage *m_ui;
 

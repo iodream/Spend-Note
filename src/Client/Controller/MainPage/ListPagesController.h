@@ -30,6 +30,8 @@ public:
 	virtual ~ListPagesController() override {}
 
 	bool UpdateListPage();
+	void UpdateListPageColors();
+
 	bool UpdateListCreatePage();
 	bool UpdateListViewPage(PageData& data);
 	bool UpdateListEditPage(PageData& data);

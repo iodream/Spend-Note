@@ -108,6 +108,11 @@ bool IncomePagesController::UpdateIncomesPage()
 	return true;
 }
 
+bool IncomePagesController::UpdateIncomesPageColors()
+{
+	m_incomes_page.UpdateColors();
+}
+
 bool IncomePagesController::UpdateIncomeViewPage(const PageData& data)
 {
 	if (!data.canConvert<Income>()) {

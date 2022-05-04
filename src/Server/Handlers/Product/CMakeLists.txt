@@ -1,6 +1,8 @@
 list(APPEND Spend-Note-Server_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsHandler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetRecommendationProductHandler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GetRecommendationProductHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AddProductHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/AddProductHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/UpdateProductHandler.cpp
