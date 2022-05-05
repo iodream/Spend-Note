@@ -2,6 +2,7 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QRegularExpression>
 
 #include "Net/Constants.h"
 #include "Net/Message.h"
@@ -38,9 +39,11 @@ public:
 
 	Net::Request FormRequest(JSONFormatter::Credentials credentials);
 	JSONParser::UserData ParseResponse(const Net::Response& response);
+	bool IsEmailValid(const QString& email);
 
 private:
 	const std::string& m_hostname;
+	const QString REGEX_PATTERN = "^[A-Z0-9a-z._-]{1,}@(\\w+)(\\.(\\w+))(\\.(\\w+))?(\\.(\\w+))?$";
 
 	JSONParser m_parser{};
 	JSONFormatter m_formatter{};

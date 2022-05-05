@@ -27,8 +27,11 @@ public:
 
 	bool CheckPassRepeat(const SignupInDTO& dto) const;
 	bool CheckData(const SignupInDTO& dto) const;
+	bool IsEmailValid(const SignupInDTO& dto) const;
 
 private:
 	const std::string& m_hostname;
+	const QString REGEX_PATTERN = "^[A-Z0-9a-z._-]{1,}@(\\w+)(\\.(\\w+))(\\.(\\w+))?(\\.(\\w+))?$";
+
 	JSONFormatter m_formatter{};
 };

@@ -3,9 +3,8 @@
 #include "Models/LoginModel.h"
 
 #include "Net/Constants.h"
-#ifdef QT_DEBUG
-#include <QShortcut>
-#endif
+
+
 
 LoginPageController::LoginPageController(
 	HTTPClient& http_client,
@@ -34,20 +33,18 @@ void LoginPageController::ConnectPage()
 		this,
 		&LoginPageController::OnGoToSignupPage);
 
-
-#ifdef QT_DEBUG
-	QShortcut *shortcut = new QShortcut(QKeySequence("Return"), &m_page);
-	connect(
-		shortcut,
-		&QShortcut::activated,
-		this,
-		&LoginPageController::QuickLogin);
-#endif
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 {
 	LoginModel model{m_hostname};
+
+	if(!model.IsEmailValid(QString::fromStdString(credentials.email)))
+	{
+		m_page.SetErrorBanner("Type valid email");
+		return;
+	}
+
 	auto request  = model.FormRequest(credentials);
 	Net::Response response;
 	try{
@@ -88,12 +85,3 @@ void LoginPageController::OnGoToSignupPage()
 	emit ChangePage(UIPages::SIGNUP);
 }
 
-#ifdef QT_DEBUG
-void LoginPageController::QuickLogin()
-{
-	LoginModel::JSONFormatter::Credentials credentials;
-	credentials.email="user";
-	credentials.password="123";
-	OnLogin(credentials);
-}
-#endif
