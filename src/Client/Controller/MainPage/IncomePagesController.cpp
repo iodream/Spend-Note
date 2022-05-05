@@ -108,7 +108,7 @@ bool IncomePagesController::UpdateIncomesPage()
 	return true;
 }
 
-bool IncomePagesController::UpdateIncomesPageColors()
+void IncomePagesController::UpdateIncomesPageColors()
 {
 	m_incomes_page.UpdateColors();
 }
