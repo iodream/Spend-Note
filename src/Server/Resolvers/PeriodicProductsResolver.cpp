@@ -2,11 +2,16 @@
 
 #include "../Handlers/PeriodicProduct/RemovePeriodicProductHandler.h"
 #include "../Handlers/PeriodicProduct/UpdatePeriodicProductHandler.h"
+#include "../Handlers/PeriodicProduct/GetProductsForPeriodicProductHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
 #include "Logger/ScopedLogger.h"
+
+namespace {
+	const std::string PRODUCTS = "/products";
+}
 
 ICommandHandler* PeriodicProductsResolver::Resolve(
 	const std::string& path,
@@ -24,8 +29,16 @@ ICommandHandler* PeriodicProductsResolver::Resolve(
 
 	if (std::isdigit(segment[1])) {
 		auto product_id = std::stoll(segment.substr(1));
-		params.Insert(Params::PRODUCT_ID, Params::Value{product_id});
+		params.Insert(Params::PERIODIC_PRODUCT_ID, Params::Value{product_id});
 		return Resolve(path, method, next_pos, params);
+	}
+
+	if (segment == PRODUCTS) {
+		if (method == Net::HTTP_METHOD_GET)
+		{
+			return new GetProductsForPeriodicProductHandler();
+		}
+		return new MethodNotAllowedHandler();
 	}
 
 	return nullptr;

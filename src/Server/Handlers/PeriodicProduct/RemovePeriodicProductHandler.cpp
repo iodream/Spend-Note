@@ -17,7 +17,7 @@ RemovePeriodicProductHandler::RemovePeriodicProductHandler()
 Net::Response RemovePeriodicProductHandler::AuthHandle(const Net::Request& request)
 {
 	SCOPED_LOGGER;
-	auto product_id = std::get<long long>(m_params.Get(Params::PRODUCT_ID));
+	auto product_id = std::get<long long>(m_params.Get(Params::PERIODIC_PRODUCT_ID));
 
 	if (!m_facade->GetPeriodicProductById(product_id)){
 		return FormErrorResponse(
