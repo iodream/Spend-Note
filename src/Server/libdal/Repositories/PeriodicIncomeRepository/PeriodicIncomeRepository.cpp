@@ -143,16 +143,16 @@ bool PeriodicIncomeRepository::Update(const PeriodicIncome& income)
 		}
 
 		w.exec0(
-				"UPDATE " + periodicIncome::TABLE_NAME +
-				" SET " +
-					periodicIncome::NAME + " = " + w.quote(income.name) + ", " +
-					periodicIncome::USER_ID + " = " + w.quote(income.user_id) + ", " +
-					periodicIncome::AMOUNT + " = " + w.quote(income.amount) + ", " +
-					periodicIncome::CATEGORY_ID + " = " + w.quote(income.category_id) + ", " +
-					periodicIncome::PERIOD_ID + " = " + w.quote(income.period_id) + ", " +
-					periodicIncome::NEXT_ADD_DATE + " = " + w.quote(income.next_add_date) + ", " +
-					periodicIncome::ADD_UNTIL +  + " = " + w.quote(income.add_until) +
-				" WHERE " + periodicIncome::ID + " = " + w.quote(income.id) + ";");
+			"UPDATE " + periodicIncome::TABLE_NAME +
+			" SET " +
+				periodicIncome::NAME + " = " + w.quote(income.name) + ", " +
+				periodicIncome::USER_ID + " = " + w.quote(income.user_id) + ", " +
+				periodicIncome::AMOUNT + " = " + w.quote(income.amount) + ", " +
+				periodicIncome::CATEGORY_ID + " = " + w.quote(income.category_id) + ", " +
+				periodicIncome::PERIOD_ID + " = " + w.quote(income.period_id) + ", " +
+				periodicIncome::NEXT_ADD_DATE + " = " + w.quote(income.next_add_date) + ", " +
+				periodicIncome::ADD_UNTIL +  + " = " + w.quote(income.add_until) +
+			" WHERE " + periodicIncome::ID + " = " + w.quote(income.id) + ";");
 		w.commit();
 	}
 	catch(const pqxx::failure& e)

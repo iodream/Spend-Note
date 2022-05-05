@@ -76,16 +76,4 @@ public:
 	MOCK_METHOD(std::vector<db::PeriodType>, GetAllPeriodTypes, (), (override));
 	MOCK_METHOD(bool, CanGeneratePeriodicIncome, (db::IdType user_id, db::IdType periodic_id), (override));
 	MOCK_METHOD(bool, UpdateAddNextPeriodicIncome, (const db::PeriodicIncome& income), (override));
-	/*
-	 *
-	virtual std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) = 0;
-	virtual std::optional<PeriodicIncome> GetPeriodicIncomeById(IdType id) = 0;
-	virtual std::vector<PeriodicIncome> GetAllPeriodicIncomes(IdType user_id) = 0;
-	virtual bool UpdatePeriodicIncome(const PeriodicIncome& income) = 0;
-	virtual bool RemovePeriodicIncome(IdType id) = 0;
-	virtual bool CanUserEditPeriodicIncome(IdType user_id, IdType income_id) = 0;
-	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
-	virtual bool CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id) = 0;
-	virtual bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) = 0;
-	*/
 };
