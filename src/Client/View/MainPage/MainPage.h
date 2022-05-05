@@ -26,6 +26,8 @@
 #include "CategoryEditPage/CategoryEditPage.h"
 #include "Settings/SettingsSubPage/SettingsSubPage.h"
 
+#include "RecommendationWidget.h"
+
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
@@ -51,6 +53,7 @@ public:
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
+	void HideRecommendation();
 
 	static bool bNeedsGlobalUIUpdate;
 
@@ -98,8 +101,12 @@ public:
 	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
+
+
 	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 
+	void resizeEvent(QResizeEvent* event);
+	void UpdateRecommendation(const List& list);
 private:
 	Ui::MainPage *m_ui;
 
@@ -123,13 +130,17 @@ private:
 	DailyListSubPage m_dailylist_spage;
 	StatisticSubPage m_statistics_spage;
 	CategoryEditPage m_categories_edit_spage;
+	std::shared_ptr<RecommendationWidget> recommendation_widget;
+	std::shared_ptr<RecommendationItem> recommendation_item;
 	SettingsSubPage m_settings_spage;
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack(int n=1);
+	void RecommendationClosed();
 	void ColorSchemeChanged();
+	void GoToProducts(List);
 
 
 public slots:
@@ -139,6 +150,8 @@ public slots:
 	void OnGoToDailyListClicked();
 	void OnGoToStatiticsClicked();
 	void OnGoToCategoriesEditClicked();
+	void OnRecommendationClosed();
+	void OnRecommendationClicked();
 	void OnGoToSettingsClicked();
 
 public:

@@ -46,6 +46,12 @@ void MainPageController::ConnectPage()
 		&MainPage::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	QObject::connect(
+		&m_page,
+		&MainPage::RecommendationClosed,
+		this,
+		&MainPageController::OnRecommendationClosed);
+
 }
 
 void MainPageController::InitListPagesController()
@@ -370,6 +376,11 @@ void MainPageController::OnLogout()
 void MainPageController::OnFontChange()
 {
 	m_page.UpdatePage();
+}
+
+void MainPageController::OnRecommendationClosed()
+{
+	m_page.HideRecommendation();
 }
 
 void MainPageController::OnGoBack(int n)
