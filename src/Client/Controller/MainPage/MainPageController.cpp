@@ -46,6 +46,12 @@ void MainPageController::ConnectPage()
 		&MainPage::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	QObject::connect(
+		&m_page,
+		&MainPage::RecommendationClosed,
+		this,
+		&MainPageController::OnRecommendationClosed);
+
 }
 
 void MainPageController::InitListPagesController()
@@ -366,6 +372,11 @@ void MainPageController::OnLogout()
 	MainPage::bNeedColorUpdate = true;
 	emit ColorSchemeChanged();
 	emit ChangePage(UIPages::LOGIN);
+}
+
+void MainPageController::OnRecommendationClosed()
+{
+	m_page.HideRecommendation();
 }
 
 void MainPageController::OnGoBack(int n)

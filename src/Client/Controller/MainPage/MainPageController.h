@@ -18,6 +18,8 @@
 
 #include "Entities/PageData.h"
 
+#include "View/MainPage/RecommendationWidget.h"
+
 class MainPageController : public QObject
 {
 	Q_OBJECT
@@ -82,5 +84,6 @@ public slots:
 
 	void OnGoBack(int n=1);
 	void OnLogout();
+	void OnRecommendationClosed();
 	void OnColorSchemeChanged();
 };

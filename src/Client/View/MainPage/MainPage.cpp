@@ -33,68 +33,68 @@ MainPage::MainPage(QWidget *parent)
 {
 	m_ui->setupUi(this);
 
-		m_ui->GoBackButton->setToolTip(tr("Back"));
-		m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
-		m_ui->GoToListsButton->setToolTip(tr("My Lists"));
-		m_ui->LogoutButton->setToolTip(tr("Log Out"));
-		m_ui->GoToDailyList->setToolTip(tr("Daily List"));
-		m_ui->GoToSettingsButton->setToolTip(tr("Settings"));
-		m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
-		m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
+	m_ui->GoBackButton->setToolTip(tr("Back"));
+	m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
+	m_ui->GoToListsButton->setToolTip(tr("My Lists"));
+	m_ui->LogoutButton->setToolTip(tr("Log Out"));
+	m_ui->GoToDailyList->setToolTip(tr("Daily List"));
+	m_ui->GoToSettingsButton->setToolTip(tr("Settings"));
+	m_ui->GoToStatisticsButton->setToolTip(tr("Statistics"));
+	m_ui->GoToCategoriesButton->setToolTip(tr("My Categories"));
 
 	connect(
-		m_ui->GoToListsButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(OnGoToListsClicked()));
+				m_ui->GoToListsButton,
+				SIGNAL(clicked()),
+				this,
+				SLOT(OnGoToListsClicked()));
 
 	connect(
-		m_ui->GoToIncomesButton,
-		&QPushButton::clicked,
-		this,
-		&MainPage::OnGoToIncomesClicked);
+				m_ui->GoToIncomesButton,
+				&QPushButton::clicked,
+				this,
+				&MainPage::OnGoToIncomesClicked);
 
 	connect(
-		m_ui->GoToDailyList,
-		&QPushButton::clicked,
-		this,
-		&MainPage::OnGoToDailyListClicked);
+				m_ui->GoToDailyList,
+				&QPushButton::clicked,
+				this,
+				&MainPage::OnGoToDailyListClicked);
 
 	connect(
-		m_ui->GoToStatisticsButton,
-		&QPushButton::clicked,
-		this,
-		&MainPage::OnGoToStatiticsClicked);
+				m_ui->GoToStatisticsButton,
+				&QPushButton::clicked,
+				this,
+				&MainPage::OnGoToStatiticsClicked);
 
 	connect(
-		m_ui->GoToCategoriesButton,
-		&QPushButton::clicked,
-		this,
-		&MainPage::OnGoToCategoriesEditClicked);
+				m_ui->GoToCategoriesButton,
+				&QPushButton::clicked,
+				this,
+				&MainPage::OnGoToCategoriesEditClicked);
 
 	connect(
-		m_ui->LogoutButton,
-		SIGNAL(clicked()),
-		this,
-		SLOT(OnLogoutClicked()));
+				m_ui->LogoutButton,
+				SIGNAL(clicked()),
+				this,
+				SLOT(OnLogoutClicked()));
 
 	connect(
-		m_ui->GoBackButton,
-		SIGNAL(clicked()),
-		this,
-		SIGNAL(GoBack()));
+				m_ui->GoBackButton,
+				SIGNAL(clicked()),
+				this,
+				SIGNAL(GoBack()));
 
 	connect(
-		m_ui->CloseErrorBannerToolButton,
-		&QToolButton::clicked,
-		this,
-		&MainPage::CloseErrorBanner);
+				m_ui->CloseErrorBannerToolButton,
+				&QToolButton::clicked,
+				this,
+				&MainPage::CloseErrorBanner);
 
 	connect(
-		m_ui->GoToSettingsButton,
-		&QToolButton::clicked,
-		this,
-		&MainPage::OnGoToSettingsClicked);
+				m_ui->GoToSettingsButton,
+				&QToolButton::clicked,
+				this,
+				&MainPage::OnGoToSettingsClicked);
 
 	InitListsSubPage();
 	InitListCreateSubPage();
@@ -118,6 +118,22 @@ MainPage::MainPage(QWidget *parent)
 	InitCategoriesEditSubPage();
 	InitSettingsSubPage();
 
+	recommendation_widget = std::make_shared<RecommendationWidget>(this);
+	recommendation_item = std::make_shared<RecommendationItem>("", List(), recommendation_widget.get());
+
+	connect(
+				recommendation_widget.get(),
+				&RecommendationWidget::RecommendationClosed,
+				this,
+				&MainPage::OnRecommendationClosed);
+}
+
+void MainPage::resizeEvent(QResizeEvent *event)
+{
+	//position it in lower right corner
+	recommendation_widget->move(size().width() - recommendation_widget->size().width() - 25,
+			  size().height() - recommendation_widget->size().height() - 25);
+	QWidget::resizeEvent(event);
 }
 
 void MainPage::InitListsSubPage()
@@ -200,6 +216,12 @@ void MainPage::InitCategoriesEditSubPage()
 	m_ui->Display->addWidget(&m_categories_edit_spage);
 }
 
+
+void MainPage::HideRecommendation()
+{
+	recommendation_widget->hide();
+}
+
 void MainPage::InitSettingsSubPage()
 {
 	m_ui->Display->addWidget(&m_settings_spage);
@@ -274,6 +296,11 @@ void MainPage::OnGoToCategoriesEditClicked()
 	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
 }
 
+void MainPage::OnRecommendationClosed()
+{
+	emit RecommendationClosed();
+}
+
 void MainPage::OnGoToSettingsClicked()
 {
 	emit ChangeSubPage(MainSubPages::SETTINGS);
@@ -290,6 +317,9 @@ void MainPage::UpdatePageColors()
 {
 	//balance banners
 	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
+
+	//recommendation widget
+	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
 
 	//general text
 	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
@@ -323,4 +353,23 @@ void MainPage::SetErrorBanner(const QString& description)
 void MainPage::CloseErrorBanner()
 {
 	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
+}
+
+void MainPage::UpdateRecommendation(const List& list)
+{
+	recommendation_item = std::make_shared<RecommendationItem>(list.name, list, recommendation_widget.get());
+
+	connect(
+		recommendation_item.get(),
+		&RecommendationItem::clicked,
+		this,
+		&MainPage::OnRecommendationClicked);
+
+	recommendation_widget->RemoveItem();
+	recommendation_widget->AppendItem(recommendation_item.get());
+}
+
+void MainPage::OnRecommendationClicked()
+{
+	emit GoToProducts(recommendation_item->get_list());
 }

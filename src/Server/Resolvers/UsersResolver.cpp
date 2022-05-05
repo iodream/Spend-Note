@@ -12,6 +12,7 @@
 #include "../Handlers/Categories/Product/GetProductCategoriesHandler.h"
 #include "../Handlers/Categories/Product/AddProductCategoryHandler.h"
 #include "../Handlers/Statistics/GetStatisticsHandler.h"
+#include "../Handlers/Product/GetRecommendationProductHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -26,6 +27,7 @@ const std::string DAILY_LIST = "/daily-list";
 const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
 const std::string STATISTICS = "/statistics";
+const std::string RECOMMENDATION = "/recommendation";
 }
 
 ICommandHandler* UsersResolver::Resolve(
@@ -86,7 +88,11 @@ ICommandHandler* UsersResolver::Resolve(
 			return new AddProductCategoryHandler();
 		return new MethodNotAllowedHandler();
 	}
-
+	else if (segment == RECOMMENDATION) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetRecommendationProductHandler();
+		return new MethodNotAllowedHandler();
+	}
 	auto statistics = segment.find(STATISTICS);
 	if (statistics != std::string::npos) {
 		m_statistics_par_parser.Parse(segment, params);
