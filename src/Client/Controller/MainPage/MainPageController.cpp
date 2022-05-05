@@ -26,6 +26,7 @@ MainPageController::MainPageController(
 	InitIncomeCategoriesController();
 	InitProductCategoriesController();
 	InitSettingsPageController();
+	OnUIUpdate(); //need to update once here for recommendation widget
 }
 
 void MainPageController::ConnectPage()

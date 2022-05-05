@@ -1,7 +1,8 @@
 #include "RecommendationWidget.h"
 #include "ui_RecommendationWidget.h"
 #include <stdexcept>
-
+#include "View/MainPage/MainPage.h"
+#include <iostream>
 bool RecommendationWidget::bClosed = false;
 RecommendationWidget::RecommendationWidget(QWidget *parent)
 	: QWidget(parent)
@@ -10,7 +11,7 @@ RecommendationWidget::RecommendationWidget(QWidget *parent)
 {
 	m_ui->setupUi(this);
 	setAttribute(Qt::WA_StyledBackground, true);
-
+	setStyleSheet("background-color: " + MainPage::ColorSettings::RECOMMENDATION);
 	connect(m_ui->close_button,
 			&QPushButton::released,
 			this,
