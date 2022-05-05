@@ -21,7 +21,7 @@ public:
 
 	void Update();
 
-	List get_list() const { return m_list; };
+	List get_list() const { return m_list; }
 
 	void set_number(int number);
 	int get_number() const;

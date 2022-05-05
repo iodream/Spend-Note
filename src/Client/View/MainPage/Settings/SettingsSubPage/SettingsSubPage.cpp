@@ -183,6 +183,7 @@ void SettingsSubPage::OnColorScheme1Selected()
 	MainPage::ColorSettings::LIST_ACTIVE= "rgba(100, 230, 53, 50%)";
 	MainPage::ColorSettings::LIST_INACTIVE= "rgba(37, 109, 217, 50%)";
 	MainPage::ColorSettings::NAVBUTTONS= "#29baa7";
+	MainPage::ColorSettings::RECOMMENDATION= "#e8970c";
 
 	//set in rgba to specify transparency
 	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(201, 60, 32, 50%)";
@@ -190,7 +191,7 @@ void SettingsSubPage::OnColorScheme1Selected()
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(202, 224, 31, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(35, 217, 108, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(25, 96, 209, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(227, 136, 25)";
+
 	emit ColorSchemeChanged();
 }
 

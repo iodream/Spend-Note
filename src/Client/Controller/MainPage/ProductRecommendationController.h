@@ -16,7 +16,7 @@ public:
 		HTTPClient& http_client,
 		std::string& hostname,
 		IdType& user_id,
-		MainPage& main_page,
+		MainPage& main_page
 );
 
 	virtual ~ProductRecommendationController() override {}

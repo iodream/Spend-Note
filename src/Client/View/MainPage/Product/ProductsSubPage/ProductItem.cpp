@@ -39,6 +39,16 @@ void ProductItem::UpdateColor()
 	}
 }
 
+void ProductItem::HideCheck()
+{
+	m_ui->PurchasedCheckbox->setHidden(true);
+}
+
+void ProductItem::SetText(const QString& text)
+{
+	m_ui->Number->setText(text);
+}
+
 void ProductItem::Update()
 {
 	m_ui->ProductName->setText(m_product.name);

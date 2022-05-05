@@ -7,12 +7,14 @@ ProductRecommendationController::ProductRecommendationController(
 	HTTPClient& http_client,
 	std::string& hostname,
 	IdType& user_id,
-	MainPage& main_page,):
+	MainPage& main_page):
 	m_http_client(http_client),
 	m_hostname(hostname),
 	m_user_id(user_id),
 	m_main_page(main_page)
-{}
+{
+
+}
 
 bool ProductRecommendationController::UpdateRecommendations()
 {
@@ -34,7 +36,7 @@ bool ProductRecommendationController::UpdateRecommendations()
 	}
 
 	auto recommendation = model.ParseResponse(response);
-	//m_main_page.UpdateRecommendations(recommendation);
+	m_main_page.UpdateRecommendation(recommendation);
 
 	return true;
 }

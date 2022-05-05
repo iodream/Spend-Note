@@ -158,6 +158,7 @@ void Controller::SetPage(UIPages page)
 {
 	switch (page) {
 	case UIPages::MAIN:
+		m_main_page_controller->ShowRecommendation();
 		m_main_page_controller->ChangeSubPage(MainSubPages::LISTS);
 		break;
 	case UIPages::LOGIN:

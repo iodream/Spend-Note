@@ -133,6 +133,7 @@ bool ListPagesController::UpdateListPage()
 	m_list_page.Update(lists);
 
 	FillBoxOfStates();
+
 	return true;
 }
 

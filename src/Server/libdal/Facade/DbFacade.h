@@ -12,6 +12,7 @@
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
 #include "Repositories/RecommendationRepository/RecommendationRepository.h"
+#include "Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h"
 
 namespace db
 {
@@ -81,6 +82,17 @@ public:
 
 	std::optional<Product> GetRecommendation(const IdType& user_id) override;
 
+	std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) override;
+	std::optional<PeriodicIncome> GetPeriodicIncomeById(IdType id) override;
+	std::vector<PeriodicIncome> GetAllPeriodicIncomes(IdType user_id) override;
+	bool UpdatePeriodicIncome(const PeriodicIncome& income) override;
+	bool RemovePeriodicIncome(IdType id) override;
+	bool CanUserEditPeriodicIncome(IdType user_id, IdType income_id) override;
+	std::vector<PeriodType> GetAllPeriodTypes() override;
+	bool CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id) override;
+	bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) override;
+
+
 private:
 	pqxx::connection m_connection;
 
@@ -94,5 +106,6 @@ private:
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
 	RecommendationRepository m_recommendation;
+	PeriodicIncomeRepository m_periodic_income;
 };
 }

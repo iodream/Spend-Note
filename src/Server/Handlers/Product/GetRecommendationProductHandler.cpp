@@ -30,7 +30,7 @@ Net::Response GetRecommendationProductHandler::AuthHandle(const Net::Request& re
 	std::optional<db::Product> db_product;
 	try
 	{
-		db_product = m_facade->GetRecommendation(user_id);
+		db_product = m_facade->GetRecommendation(user_id).value();
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(

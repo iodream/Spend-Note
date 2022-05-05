@@ -19,6 +19,8 @@
 
 #include "Entities/PageData.h"
 
+#include "View/MainPage/RecommendationWidget.h"
+
 class MainPageController : public QObject
 {
 	Q_OBJECT
@@ -33,6 +35,7 @@ public:
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdateRecommendations();
+	void ShowRecommendation();
 
 private:
 	void ConnectPage();
@@ -88,4 +91,5 @@ public slots:
 	void OnLogout();
 	void OnFontChange();
 	void OnUIUpdate();
+	void OnRecommendationClosed();
 };
