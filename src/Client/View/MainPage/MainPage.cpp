@@ -35,8 +35,6 @@ MainPage::MainPage(QWidget *parent)
 		m_ui->GoToStatisticsButton->setToolTip("Statistics");
 		m_ui->GoToCategoriesButton->setToolTip("My Categories");
 
-
-
 	connect(
 		m_ui->GoToListsButton,
 		SIGNAL(clicked()),
@@ -113,6 +111,22 @@ MainPage::MainPage(QWidget *parent)
 	InitCategoriesEditSubPage();
 	InitSettingsSubPage();
 
+	recommendation_widget = std::make_shared<RecommendationWidget>(this);
+	recommendation_item = std::make_shared<RecommendationItem>("", List(), recommendation_widget.get());
+
+	connect(
+		recommendation_widget.get(),
+		&RecommendationWidget::RecommendationClosed,
+		this,
+		&MainPage::OnRecommendationClosed);
+}
+
+void MainPage::resizeEvent(QResizeEvent *event)
+{
+	//position it in lower right corner
+	recommendation_widget->move(size().width() - recommendation_widget->size().width() - 25,
+			  size().height() - recommendation_widget->size().height() - 25);
+	QWidget::resizeEvent(event);
 }
 
 void MainPage::InitListsSubPage()
@@ -195,6 +209,12 @@ void MainPage::InitCategoriesEditSubPage()
 	m_ui->Display->addWidget(&m_categories_edit_spage);
 }
 
+
+void MainPage::HideRecommendation()
+{
+	recommendation_widget->hide();
+}
+
 void MainPage::InitSettingsSubPage()
 {
 	m_ui->Display->addWidget(&m_settings_spage);
@@ -246,6 +266,11 @@ void MainPage::OnGoToCategoriesEditClicked()
 	emit ChangeSubPage(MainSubPages::CATEGORIES_EDIT);
 }
 
+void MainPage::OnRecommendationClosed()
+{
+	emit RecommendationClosed();
+}
+
 void MainPage::OnGoToSettingsClicked()
 {
 	emit ChangeSubPage(MainSubPages::SETTINGS);
@@ -262,6 +287,9 @@ void MainPage::UpdatePageColors()
 {
 	//balance banners
 	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
+
+	//recommendation widget
+	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
 
 	//general text
 	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
@@ -295,4 +323,23 @@ void MainPage::SetErrorBanner(const std::string& description)
 void MainPage::CloseErrorBanner()
 {
 	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
+}
+
+void MainPage::UpdateRecommendation(const List& list)
+{
+	recommendation_item = std::make_shared<RecommendationItem>(list.name, list, recommendation_widget.get());
+
+	connect(
+		recommendation_item.get(),
+		&RecommendationItem::clicked,
+		this,
+		&MainPage::OnRecommendationClicked);
+
+	recommendation_widget->RemoveItem();
+	recommendation_widget->AppendItem(recommendation_item.get());
+}
+
+void MainPage::OnRecommendationClicked()
+{
+	emit GoToProducts(recommendation_item->get_list());
 }
