@@ -214,7 +214,7 @@ void SettingsSubPage::OnColorScheme2Selected()
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(191, 144, 0, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(84, 130, 53, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(47, 85, 151, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(105, 152, 171, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgb(105, 152, 171)";
 
 	emit ColorSchemeChanged();
 }
@@ -236,7 +236,7 @@ void SettingsSubPage::OnColorScheme3Selected()
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(255, 204, 102, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(169, 209, 142, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(143, 170, 220, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(143, 170, 220, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgb(143, 170, 220)";
 
 	emit ColorSchemeChanged();
 }

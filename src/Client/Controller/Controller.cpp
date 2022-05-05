@@ -50,7 +50,7 @@ void Controller::ReadSettings()
 	{
 		qDebug() << "couldn't open settings file";
 		MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11); //set default font
-		MainPage::ColorSettings::RECOMMENDATION = "rgba(227, 136, 25)";
+		MainPage::ColorSettings::RECOMMENDATION = "rgb(227, 136, 25)";
 		return;
 	}
 	QByteArray bytes = file.readAll();
