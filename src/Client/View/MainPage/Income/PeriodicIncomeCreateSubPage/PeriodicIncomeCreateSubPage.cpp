@@ -93,12 +93,12 @@ void PeriodicIncomeCreateSubPage::OnNewCategorySaved()
 	ui->NewCategoryName->setVisible(false);
 	ui->NewCategorySaveButton->setVisible(false);
 	ui->NewCategoryButton->setDisabled(false);
-	IncomeCategory cat;
+	IncomeCategory category;
 
-	cat.id = 0;
-	cat.name = ui->NewCategoryName->text();
+	category.id = 0;
+	category.name = ui->NewCategoryName->text();
 
-	emit AddIncomeCategory(cat);
+	emit AddIncomeCategory(category);
 	emit UpdateCategories();
 }
 
