@@ -77,7 +77,7 @@ public:
 	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
-	std::shared_ptr<RecommendationWidget>& get_recommendation_widget() { return recommendation_widget; }
+	RecommendationWidget& get_recommendation_widget() { return *recommendation_widget; }
 
 	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 

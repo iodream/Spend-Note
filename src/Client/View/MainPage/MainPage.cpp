@@ -302,9 +302,9 @@ void MainPage::UpdatePage()
 
 	//general text and font size
 	setStyleSheet(QString("color:%1; font-family:%2; font-size:%3px")
-						  .arg(ColorSettings::LABEL_TEXT)
-						  .arg(MainPage::UISettings::UI_FONT.family())
-						  .arg(MainPage::UISettings::UI_FONT.pointSize()));
+				  .arg(ColorSettings::LABEL_TEXT)
+				  .arg(MainPage::UISettings::UI_FONT.family())
+				  .arg(MainPage::UISettings::UI_FONT.pointSize()));
 
 	//recommendation widget
 	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));

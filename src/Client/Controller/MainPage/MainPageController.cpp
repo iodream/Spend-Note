@@ -451,7 +451,7 @@ void MainPageController::UpdateRecommendations()
 void MainPageController::ShowRecommendation()
 {
 	RecommendationWidget::bClosed = false;
-	m_page.get_recommendation_widget()->setVisible(true);
+	m_page.get_recommendation_widget().setVisible(true);
 }
 
 void MainPageController::OnServerError(const int code, const std::string& desc)
@@ -469,10 +469,14 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	bool update_succeeded{true};
 
 	if(page != MainSubPages::LISTS)
+	{
 		m_page.HideRecommendation();
+	}
 	else
 		if (!RecommendationWidget::bClosed)
+		{
 			m_page.ShowRecommendation();
+		}
 
 	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
 
