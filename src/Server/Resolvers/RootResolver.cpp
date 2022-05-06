@@ -15,6 +15,7 @@
 #include "../Handlers/Verification/CheckVerificationHandler.h"
 #include "../Handlers/User/ChangePasswordHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
+#include "../Handlers/User/ChangeEmailHandler.h"
 
 #include "Utils.h"
 #include "../Error.h"
@@ -32,6 +33,8 @@ const std::string USERS = "/users";
 const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
 const std::string CHANGE_PASSWORD = "/change-password";
+const std::string CHANGE_EMAIL = "/change-email";
+
 
 }
 
@@ -81,6 +84,11 @@ ICommandHandler* RootResolver::Resolve(
 	else if(segment == CHANGE_PASSWORD){
 		if(method == Net::HTTP_METHOD_POST)
 			return new ChangePasswordHandler();
+    return new MethodNotAllowedHandler();
+  }
+	else if (segment == CHANGE_EMAIL) {
+		if(method == Net::HTTP_METHOD_POST)
+			return new ChangeEmailHandler();
 		return new MethodNotAllowedHandler();
 	}
 

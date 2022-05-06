@@ -25,9 +25,9 @@ std::optional<IdType> UserRepository::Add(const User &user)
 			") VALUES (" +
 				w.quote(user.email) + ", " +
 				w.quote(user.password_hash) + ", " +
-				w.quote(user.salt) + "," +
+				w.quote(user.salt) + ", " +
 				w.quote(user.verified) + ")" +
-			" RETURNING " + user::ID + ";");
+			" RETURNING " + db::user::ID + ";");
 
 		w.commit();
 
@@ -114,6 +114,31 @@ bool UserRepository::Update(const User &user)
 	{
 		throw DatabaseFailure(e.what());
 	}
+    return true;
+}
+
+bool UserRepository::UpdateEmail(const IdType user_id, const std::string &email)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		auto result = w.exec("SELECT " + user::ID + " FROM  " + user::TABLE_NAME + " WHERE " + user::ID + " = " + w.quote(user_id));
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + user::TABLE_NAME +
+			" SET " + user::EMAIL + " = " + w.quote(email) +
+			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
 	return true;
 }
 
@@ -171,7 +196,7 @@ bool UserRepository::UpdateVerification(IdType id)
 	{
 		throw DatabaseFailure(e.what());
 	}
-	return true;
+    return true;
 }
 
 bool UserRepository::Remove(IdType id)
