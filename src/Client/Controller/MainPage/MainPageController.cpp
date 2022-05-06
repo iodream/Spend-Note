@@ -336,12 +336,17 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::FontChange,
+		this,
+		&MainPageController::OnFontChange);
 
 	connect(
 		m_settings_page_controller.get(),
 		&SettingsPageController::ColorSchemeChanged,
 		this,
-		&MainPageController::OnColorSchemeChanged);
+		&MainPageController::OnUIUpdate);
 
 	connect(
 		m_settings_page_controller.get(),
@@ -369,9 +374,14 @@ void MainPageController::OnLogout()
 	MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
 	MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
 
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 	emit ColorSchemeChanged();
 	emit ChangePage(UIPages::LOGIN);
+}
+
+void MainPageController::OnFontChange()
+{
+	m_page.UpdatePage();
 }
 
 void MainPageController::OnRecommendationClosed()
@@ -409,9 +419,10 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_page.SetErrorBanner(tr("Error updating page"));
 	}
 
-	if(MainPage::bNeedColorUpdate)
+	// global UI update only when it's needed becuse its costly
+	if(MainPage::bNeedsGlobalUIUpdate)
 	{
-		OnColorSchemeChanged();
+		OnUIUpdate();
 	}
 }
 
@@ -504,12 +515,13 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 	}
 }
 
-void MainPageController::OnColorSchemeChanged()
+void MainPageController::OnUIUpdate()
 {
-	MainPage::bNeedColorUpdate = false;
+	MainPage::bNeedsGlobalUIUpdate = false;
+	// change colorscheme on upper-lvl Controller
 	emit ColorSchemeChanged();
 
-	m_page.UpdatePageColors();
+	m_page.UpdatePage();
 	m_list_pages_controller->UpdateListPageColors();
 	m_income_pages_controller->UpdateIncomesPageColors();
 	m_daily_list_page_controller->UpdatePageColors();

@@ -6,17 +6,17 @@
 
 QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
 QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
-QString MainPage::ColorSettings::RECOMMENDATION;
+QString MainPage::ColorSettings::RECOMMENDATION = "rgba(227, 136, 25)";
 QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
-QString MainPage::ColorSettings::WINDOW_BACKGROUND;
-QString MainPage::ColorSettings::LABEL_TEXT;
+QString MainPage::ColorSettings::WINDOW_BACKGROUND = "";
+QString MainPage::ColorSettings::LABEL_TEXT = "black";
 QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO4 = "rgba(35, 217, 108, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO5 = "rgba(25, 96, 209, 50%)";
 QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
-QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
+QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(37, 109, 217, 50%)";
 
 UILangs MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
 
@@ -25,7 +25,9 @@ const std::map<UILangs, QString> MainPage::UISettings::translation_file{
 	{UILangs::UKRAINIAN, "uk_UA"},
 };
 
-bool MainPage::bNeedColorUpdate = true;
+bool MainPage::bNeedsGlobalUIUpdate = true;
+
+QFont MainPage::UISettings::UI_FONT;
 
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
@@ -227,7 +229,6 @@ void MainPage::InitSettingsSubPage()
 	m_ui->Display->addWidget(&m_settings_spage);
 }
 
-
 MainPage::~MainPage()
 {
 	delete m_ui;
@@ -312,17 +313,24 @@ void MainPage::ShowBalance(const Balance& money)
 	m_ui->ProjectedBalance->setText(tr("Predicted balance:  ") + QString::number(money.planned_balance));
 }
 
-//top-lvl color changes are done here
-void MainPage::UpdatePageColors()
+//top-lvl changes are done here
+// need a unified function for now because setStyleSheet always wipes everything else
+void MainPage::UpdatePage()
 {
 	//balance banners
 	m_ui->BalanceHolder->setStyleSheet(QString("background-color:" + ColorSettings::COLOR_TOP_BANNER));
+
+	//general text and font size
+	setStyleSheet(QString("color:%1; font-family:%2; font-size:%3px")
+		.arg(ColorSettings::LABEL_TEXT)
+		.arg(MainPage::UISettings::UI_FONT.family())
+		.arg(MainPage::UISettings::UI_FONT.pointSize()));
 
 	//recommendation widget
 	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
 
 	//general text
-	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
+	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));
 
 	//nav buttons
 	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();

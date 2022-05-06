@@ -12,6 +12,12 @@ SettingsPageController::SettingsPageController(
 {
 	connect(
 		&m_settings_page,
+		&SettingsSubPage::FontChange,
+		this,
+		&SettingsPageController::FontChange);
+
+	connect(
+		&m_settings_page,
 		&SettingsSubPage::ColorSchemeChanged,
 		this,
 		&SettingsPageController::OnColorSchemeChanged);
@@ -38,7 +44,6 @@ void SettingsPageController::UpdateSettingsPageColors()
 {
 	m_settings_page.UpdateColors();
 }
-
 
 void SettingsPageController::UpdateSettingsSubPage()
 {

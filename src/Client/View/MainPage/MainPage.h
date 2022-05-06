@@ -48,7 +48,7 @@ public:
 	void SetCurrentSubPage(MainSubPages page);
 	void SetCurrentSubPage(int idx);
 	void ShowBalance(const Balance& money);
-	void UpdatePageColors();
+	void UpdatePage();
 
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const QString& description);
@@ -56,7 +56,7 @@ public:
 	void changeEvent(QEvent* event);
 	void HideRecommendation();
 
-	static bool bNeedColorUpdate;
+	static bool bNeedsGlobalUIUpdate;
 
 private:
 	void InitListsSubPage();
@@ -160,6 +160,7 @@ public:
 	public:
 		static UILangs LANG_UI;
 		static const std::map<UILangs, QString> translation_file;
+		static QFont UI_FONT;
 	};
 
 	class ColorSettings

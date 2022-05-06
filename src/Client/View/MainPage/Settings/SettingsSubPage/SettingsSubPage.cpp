@@ -1,18 +1,19 @@
 #include "SettingsSubPage.h"
 #include "ui_SettingsSubPage.h"
 
+#include <QFontDialog>
 #include "View/MainPage/MainPage.h"
-
 #include <QColorDialog>
 
 int SettingsSubPage::CurColorElemSelected = 0;
-
 
 SettingsSubPage::SettingsSubPage(QWidget *parent) :
 	QWidget(parent),
 	m_ui(new Ui::SettingsSubPage)
 {
 	m_ui->setupUi(this);
+
+	Update();
 
 	connect(
 		m_ui->ChangePasswordButton,
@@ -50,6 +51,23 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 		this,
 		&SettingsSubPage::OnGoBackClicked);
 
+	connect(
+		m_ui->FontSelectButton,
+		&QPushButton::clicked,
+		this,
+		&SettingsSubPage::OnFontChange);
+
+	connect(
+		m_ui->DefaultFontButton,
+		&QPushButton::clicked,
+		this,
+		&SettingsSubPage::OnDefaultFontClicked);
+
+	connect(
+		m_ui->FontSpinBox,
+		&QSpinBox::valueChanged,
+		this,
+		&SettingsSubPage::FontSizeChange);
 	connect(
 		m_ui->Scheme1,
 		&QPushButton::clicked,
@@ -115,6 +133,7 @@ void SettingsSubPage::UpdateColors()
 	m_ui->UserInfoLabel_2->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 	m_ui->ColorSchemeLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 	m_ui->LanguageLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
+	m_ui->FontsLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 }
 
 void SettingsSubPage::OnChangeEmailButtonClicked()
@@ -140,10 +159,44 @@ void SettingsSubPage::OnGoBackClicked()
 	GoToMainSubPage();
 }
 
+// font selection
+void SettingsSubPage::OnFontChange()
+{
+	MainPage::bNeedsGlobalUIUpdate = true;
+
+	QFont font = QFontDialog::getFont(nullptr, QFont("Sans Serif", 11)); //use this font if cancel is pressed
+	MainPage::UISettings::UI_FONT = font;
+
+	emit FontChange();
+	Update();
+}
+
+void SettingsSubPage::Update()
+{
+	m_ui->CurrentFontLabel->setText(QString(tr("Current font is: %1 %2"))
+		.arg(MainPage::UISettings::UI_FONT.family())
+		.arg(QString::number(MainPage::UISettings::UI_FONT.pointSize())));
+
+	m_ui->FontSpinBox->setValue(MainPage::UISettings::UI_FONT.pointSize());
+
+	switch(MainPage::UISettings::LANG_UI)
+	{
+	case UILangs::AMERICAN_ENGLISH:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	case UILangs::UKRAINIAN:
+		m_ui->LanguageBox->setCurrentText("Українська");
+		break;
+	default:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	}
+}
+
 //default colors
 void SettingsSubPage::OnColorScheme1Selected()
 {
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "";
 	MainPage::ColorSettings::LABEL_TEXT= "black";
@@ -166,7 +219,7 @@ void SettingsSubPage::OnColorScheme1Selected()
 //dark mode
 void SettingsSubPage::OnColorScheme2Selected()
 {
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "#334257";
 	MainPage::ColorSettings::LABEL_TEXT= "#eeeeee";
@@ -188,7 +241,7 @@ void SettingsSubPage::OnColorScheme2Selected()
 //winter day colors
 void SettingsSubPage::OnColorScheme3Selected()
 {
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "#edf7fa";
 	MainPage::ColorSettings::LABEL_TEXT= "black";
@@ -259,7 +312,7 @@ void SettingsSubPage::OnColorSchemeCustomSelect(int index)
 //custom color selection
 void SettingsSubPage::OnNewColorSelected()
 {
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 	QColor custom = QColorDialog::getColor();
 
 	if(custom.isValid())
@@ -346,18 +399,16 @@ void SettingsSubPage::changeEvent(QEvent* event)
 	}
 }
 
-void SettingsSubPage::Update()
+void SettingsSubPage::OnDefaultFontClicked()
 {
-	switch(MainPage::UISettings::LANG_UI)
-	{
-	case UILangs::AMERICAN_ENGLISH:
-		m_ui->LanguageBox->setCurrentText("English");
-		break;
-	case UILangs::UKRAINIAN:
-		m_ui->LanguageBox->setCurrentText("Українська");
-		break;
-	default:
-		m_ui->LanguageBox->setCurrentText("English");
-		break;
-	}
+	MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11);
+	Update();
+	emit FontChange();
+}
+
+// font size change from spinbox
+void SettingsSubPage::FontSizeChange(int size)
+{
+	MainPage::UISettings::UI_FONT.setPointSize(size);
+	emit FontChange();
 }

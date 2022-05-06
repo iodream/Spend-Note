@@ -51,6 +51,7 @@ void Controller::ReadSettings()
 	if(!file.open(QIODevice::ReadOnly))
 	{
 		qDebug() << "couldn't open settings file";
+		MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11); //set default font
 		return;
 	}
 	QByteArray bytes = file.readAll();
@@ -88,16 +89,20 @@ void Controller::ReadSettings()
 		 Hence if someone chooses a different language on the LoginPage, the translation will happen
 		 but both the global var and the settings file will have the wrong value until the user chooses
 		 the language in the settings menu */
-		QString lang = json.value("LANG_UI").toString();
+		QString language = json.value("LANG_UI").toString();
 
-		if(lang == "English")
+		if(language == "English")
 		{
 			MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
 		}
-		else if(lang == "Ukrainian")
+		else if(language == "Ukrainian")
 		{
 			MainPage::UISettings::LANG_UI = UILangs::UKRAINIAN;
 		}
+
+		QString FontName = json.value("UI_FONT_NAME").toString();
+		int FontSize = json.value("UI_FONT_SIZE").toInt();
+		MainPage::UISettings::UI_FONT = QFont(FontName, FontSize);
 	}
 }
 
@@ -246,14 +251,17 @@ void Controller::OnSaveConfig()
 		break;
 	}
 
+	json["UI_FONT_NAME"] = MainPage::UISettings::UI_FONT.family();
+	json["UI_FONT_SIZE"] = MainPage::UISettings::UI_FONT.pointSize();
+
 	QFile file(settings_filename);
-	QByteArray bytes = QJsonDocument(json).toJson( QJsonDocument::Indented );
+	QByteArray bytes = QJsonDocument(json).toJson(QJsonDocument::Indented);
 	if (!file.open(QIODevice::WriteOnly))
 	{
 		qWarning("Couldn't open settings save file");
 		return;
 	}
-		QTextStream iStream( &file );
+		QTextStream iStream(&file);
 		iStream << bytes;
 		file.close();
 }

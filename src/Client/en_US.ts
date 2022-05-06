@@ -55,12 +55,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="175"/>
+        <location filename="Controller/Controller.cpp" line="180"/>
         <source>Retry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="176"/>
+        <location filename="Controller/Controller.cpp" line="181"/>
         <source>No connection to server. Retry?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -539,8 +539,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="38"/>
-        <location filename="View/MainPage/MainPage.cpp" line="246"/>
+        <location filename="View/MainPage/MainPage.cpp" line="40"/>
+        <location filename="View/MainPage/MainPage.cpp" line="247"/>
         <source>My Lists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -557,8 +557,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="42"/>
-        <location filename="View/MainPage/MainPage.cpp" line="250"/>
+        <location filename="View/MainPage/MainPage.cpp" line="44"/>
+        <location filename="View/MainPage/MainPage.cpp" line="251"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -609,48 +609,48 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="36"/>
-        <location filename="View/MainPage/MainPage.cpp" line="244"/>
+        <location filename="View/MainPage/MainPage.cpp" line="38"/>
+        <location filename="View/MainPage/MainPage.cpp" line="245"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="37"/>
-        <location filename="View/MainPage/MainPage.cpp" line="245"/>
+        <location filename="View/MainPage/MainPage.cpp" line="39"/>
+        <location filename="View/MainPage/MainPage.cpp" line="246"/>
         <source>My Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="39"/>
-        <location filename="View/MainPage/MainPage.cpp" line="247"/>
+        <location filename="View/MainPage/MainPage.cpp" line="41"/>
+        <location filename="View/MainPage/MainPage.cpp" line="248"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="40"/>
-        <location filename="View/MainPage/MainPage.cpp" line="248"/>
+        <location filename="View/MainPage/MainPage.cpp" line="42"/>
+        <location filename="View/MainPage/MainPage.cpp" line="249"/>
         <source>Daily List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="41"/>
-        <location filename="View/MainPage/MainPage.cpp" line="249"/>
+        <location filename="View/MainPage/MainPage.cpp" line="43"/>
+        <location filename="View/MainPage/MainPage.cpp" line="250"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="43"/>
-        <location filename="View/MainPage/MainPage.cpp" line="251"/>
+        <location filename="View/MainPage/MainPage.cpp" line="45"/>
+        <location filename="View/MainPage/MainPage.cpp" line="252"/>
         <source>My Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="311"/>
+        <location filename="View/MainPage/MainPage.cpp" line="312"/>
         <source>Current Balance:  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="312"/>
+        <location filename="View/MainPage/MainPage.cpp" line="313"/>
         <source>Predicted balance:  </source>
         <translation type="unfinished"></translation>
     </message>
@@ -658,7 +658,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="409"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="419"/>
         <source>Error updating page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1017,225 +1017,255 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="99"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="98"/>
         <source>User Info:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="133"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="132"/>
         <source>User&apos;s email:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="146"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="145"/>
         <source>*email*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="153"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="152"/>
         <source>Change email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="160"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="159"/>
         <source>Change password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="178"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="177"/>
         <source>Language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="190"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="189"/>
         <source>Choose a language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="204"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="203"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="209"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="208"/>
         <source>Українська</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="255"/>
-        <source>Color Scheme:</source>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="252"/>
+        <source>Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="262"/>
-        <source>Click on a button to choose a color scheme:</source>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="273"/>
+        <source>Custom font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="280"/>
+        <source>Current font is: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="299"/>
+        <source>Set to Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="322"/>
-        <source>Default</source>
+        <source>Change fonts size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="332"/>
-        <source>Dark Mode</source>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="340"/>
+        <source>Color Scheme:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="342"/>
-        <source>Winter Day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="356"/>
-        <source>Custom color scheme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="362"/>
-        <source>Select a color to modify:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="387"/>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="392"/>
-        <source>Top Banner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="397"/>
-        <source>Navigational Buttons</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="402"/>
-        <source>Error banner</source>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="347"/>
+        <source>Click on a button to choose a color scheme:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="407"/>
-        <source>Recommendation popup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="412"/>
-        <source>General Text</source>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="417"/>
-        <source>Product priority 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="422"/>
-        <source>Product priority 2</source>
+        <source>Dark Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="427"/>
-        <source>Product priority 3</source>
+        <source>Winter Day</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="432"/>
-        <source>Product priority 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="437"/>
-        <source>Product priority 5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="442"/>
-        <source>Active List</source>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="441"/>
+        <source>Custom color scheme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="447"/>
+        <source>Select a color to modify:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="472"/>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="477"/>
+        <source>Top Banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="482"/>
+        <source>Navigational Buttons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="487"/>
+        <source>Error banner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="492"/>
+        <source>Recommendation popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="497"/>
+        <source>General Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="502"/>
+        <source>Product priority 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="507"/>
+        <source>Product priority 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="512"/>
+        <source>Product priority 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="517"/>
+        <source>Product priority 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="522"/>
+        <source>Product priority 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="527"/>
+        <source>Active List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="532"/>
         <source>Inactive List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="455"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="540"/>
         <source>Current element color is:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="516"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="601"/>
         <source>Old password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="526"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="611"/>
         <source>Old password...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="533"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="618"/>
         <source>New password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="543"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="628"/>
         <source>New password...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="550"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="635"/>
         <source>Repeat new password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="563"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="648"/>
         <source>Repeat new password...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="600"/>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="697"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="685"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="782"/>
         <source>Go Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="607"/>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="704"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="692"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="789"/>
         <source>Submit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="616"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="701"/>
         <source>Change password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="627"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="712"/>
         <source>Change email:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="636"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="721"/>
         <source>Your current email:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="643"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="728"/>
         <source>*current email*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="650"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="735"/>
         <source>Your new email:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="660"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="745"/>
         <source>New email...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="176"/>
+        <source>Current font is: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
