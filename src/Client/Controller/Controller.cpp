@@ -83,7 +83,7 @@ void Controller::ReadSettings()
 		MainPage::ColorSettings::RECOMMENDATION = json.value("COLOR_RECOMMENDATION").toString();
 
 		QString FontName = json.value("UI_FONT_NAME").toString();
-		int FontSize= json.value("UI_FONT_SIZE").toInt();
+		int FontSize = json.value("UI_FONT_SIZE").toInt();
 		MainPage::UISettings::UI_FONT = QFont(FontName, FontSize);
 	}
 }

@@ -291,15 +291,15 @@ void MainPage::UpdatePage()
 
 	//general text and font size
 	setStyleSheet(QString("color:%1; font-family:%2; font-size:%3px")
-						  .arg(ColorSettings::LABEL_TEXT)
-						  .arg(MainPage::UISettings::UI_FONT.family())
-						  .arg(MainPage::UISettings::UI_FONT.pointSize()));
+		.arg(ColorSettings::LABEL_TEXT)
+		.arg(MainPage::UISettings::UI_FONT.family())
+		.arg(MainPage::UISettings::UI_FONT.pointSize()));
 
 	//recommendation widget
 	recommendation_widget->setStyleSheet(QString("background-color:" + ColorSettings::RECOMMENDATION));
 
 	//general text
-	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));	
+	setStyleSheet(QString("color:" + ColorSettings::LABEL_TEXT));
 
 	//nav buttons
 	QList<QToolButton*> list = m_ui->NavigationBar->findChildren<QToolButton*>();
