@@ -127,6 +127,7 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	}
 
 	AddVerification(in_dto.email); // ask for verification
+	bool isOkPressed;
 
 	QMessageBox::information(
 		&m_page,
@@ -135,7 +136,19 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	QString code = QInputDialog::getText(
 		&m_page,
 		tr("Input your verification code"),
-		tr("Code: "));
+		tr("Code: "),
+		QLineEdit::Normal,
+		"", &isOkPressed); // "" field is empty since we will not use default text for code label
+
+	if(!isOkPressed)
+	{
+		QMessageBox::warning(
+			&m_page,
+			tr("Spend&Note warning"),
+			tr("You will be asked for verification on your login"));
+		emit ChangePage(UIPages::LOGIN);
+		return;
+	}
 
 	CheckVerification(in_dto.email, code.toStdString()); // checking verification
 

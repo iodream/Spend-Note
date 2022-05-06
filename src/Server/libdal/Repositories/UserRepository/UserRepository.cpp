@@ -72,9 +72,9 @@ std::optional<User> UserRepository::GetByEmail(const std::string& email)
 	{
 		pqxx::nontransaction w(m_database_connection);
 		pqxx::result user_rows = w.exec(
-			"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT + ", " + db::user::VERIFIED +
-			" FROM " + db::user::TABLE_NAME +
-			" WHERE " + db::user::EMAIL + " = " + w.quote(email) + ";");
+					"SELECT " + db::user::ID + ", " + db::user::EMAIL + ", " + db::user::PASSWORD + ", " + db::user::SALT + ", " + db::user::VERIFIED +
+					" FROM " + db::user::TABLE_NAME +
+					" WHERE " + db::user::EMAIL + " = " + w.quote(email) + ";");
 
 		if (!user_rows.empty())
 		{

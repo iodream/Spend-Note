@@ -35,6 +35,58 @@ void LoginPageController::ConnectPage()
 
 }
 
+void LoginPageController::AddVerification(const std::string& email)
+{
+	AddVerificationModel add_verification_model{m_hostname};
+	AddVerificationModel::VerificationInDTO add_verification_dto;
+	add_verification_dto.email = email;
+	Net::Request request = add_verification_model.FormRequest(add_verification_dto);
+	Net::Response response;
+	try
+	{
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		return;
+	}
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		m_page.SetErrorBanner(response.status, response.reason);
+		return;
+	}
+}
+
+void LoginPageController::CheckVerification(const std::string& email, const std::string& code)
+{
+	CheckVerificationModel model{m_hostname};
+	CheckVerificationModel::VerificationInDTO dto{email, code};
+
+	if(!model.CheckData(dto))
+	{
+		m_page.SetErrorBanner("\"Code\" field should not be empty!");
+		return;
+	}
+
+	Net::Request request = model.FormRequest(dto);
+	Net::Response response;
+	try
+	{
+		response = m_http_client.Request(request);
+	}
+	catch(Poco::Exception& exc)
+	{
+		return;
+	}
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		m_page.SetErrorBanner(response.status, response.reason);
+		return;
+	}
+}
+
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
 {
 	LoginModel model{m_hostname};
@@ -47,7 +99,8 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 
 	auto request  = model.FormRequest(credentials);
 	Net::Response response;
-	try{
+	try
+	{
 		response = m_http_client.Request(request);
 	}
 	catch(Poco::Exception& exc)
@@ -59,8 +112,38 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 	{
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
-			m_page.ChangeLoginErrorLabel(
-				"Login or password is incorrect");
+			if(response.reason == Net::VERIFICATION_FAILED)
+			{
+				AddVerification(credentials.email); // ask for verification
+				bool isOkPressed;
+
+				QMessageBox::information(
+					&m_page,
+					tr("Spend&Note"),
+					tr("Verification code has been sent on ") +
+					QString::fromStdString(credentials.email));
+				QString code = QInputDialog::getText(
+					&m_page,
+					tr("Input your verification code"),
+					tr("Code: "),
+					QLineEdit::Normal,
+					"", &isOkPressed); // "" field is empty since we will not use default text for code label
+
+				if(!isOkPressed)
+				{
+					m_page.SetErrorBanner(
+						"Email verification was not passed!");
+					return;
+				}
+
+				CheckVerification(credentials.email, code.toStdString());
+				OnLogin(credentials);
+			}
+			else
+			{
+				m_page.ChangeLoginErrorLabel(
+					"Login or password is incorrect");
+			}
 		}
 		else
 		{

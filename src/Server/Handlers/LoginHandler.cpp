@@ -13,6 +13,7 @@
 #include "Server/Utils.h"
 #include "../libdal/Facade/DbFacade.h"
 #include "Net/Parsing.h"
+#include "Net/Constants.h"
 #include "Logger/ScopedLogger.h"
 
 #include "../Utils.h"
@@ -40,7 +41,7 @@ LoginHandler::JSONParser::Login LoginHandler::JSONParser::Parse(
 
 	try {
 		SafeReadString(json, "email", dto.email);
-  	SafeReadString(json, "password", dto.password);
+		SafeReadString(json, "password", dto.password);
 	}  catch (const ParsingError& ex) {
 		throw BadRequestError{std::string{"Parsing Error: "}.append(ex.what())};
 	}
@@ -52,17 +53,34 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 {
 	SCOPED_LOGGER;
 
-
 	auto dto = m_parser.Parse(request.json_payload);
-	auto user = m_facade->GetUserByEmail(dto.email);
+
+	std::optional<db::User> user;
+	try
+	{
+		user = m_facade->GetUserByEmail(dto.email);
+	}
+	catch(const db::DatabaseFailure& e)
+	{
+		return FormErrorResponse(
+			InternalError::Status::HTTP_INTERNAL_SERVER_ERROR,
+			"User does not exist");
+	}
 
 	dto.password_hash = HashingPassword(dto.password, user->salt);
-	if(!user || dto.password_hash != user->password_hash || !user.value().verified) {
-
+	if(!user || dto.password_hash != user->password_hash)
+	{
 		return FormErrorResponse(
 		NetError::Status::HTTP_UNAUTHORIZED,
 		"Invalid login data");
 	}
+	if(!user.value().verified)
+	{
+		return FormErrorResponse(
+		NetError::Status::HTTP_UNAUTHORIZED,
+		Net::VERIFICATION_FAILED);
+	}
+
 
 	Poco::JWT::Token token;
 	token.setType("JWT");
@@ -75,6 +93,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	Poco::JWT::Signer signer(user->password_hash);
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
+
 	return FormJSONResponse(m_formatter.Format(out_dto));
 
 }
