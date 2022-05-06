@@ -12,6 +12,7 @@ public:
 	MOCK_METHOD(std::optional<db::User>, GetUserByEmail, (const std::string&), (override));
 	MOCK_METHOD(bool, UpdateUser, (const db::User&), (override));
 	MOCK_METHOD(bool, UpdateUserPassword, (const db::IdType, const std::string&, const std::string&), (override));
+	MOCK_METHOD(bool, UpdateUserEmail, (const db::IdType, const std::string&), (override));
 	MOCK_METHOD(bool, UpdateUserVerification, (db::IdType), (override));
 	MOCK_METHOD(bool, RemoveUser, (db::IdType), (override));
 
