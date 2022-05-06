@@ -4,29 +4,26 @@
 
 #include "Net/Parsing.h"
 
-template <template<typename> typename CategoryFormatter, typename Income>
+template <template<typename> typename CategoryFormatter, typename PeriodicIncome>
 class PeriodicIncomeJSONFormatterBase
 {
-	using IncomeCategory = typename Income::CategoryType;
+	using IncomeCategory = typename PeriodicIncome::CategoryType;
 public:
 	QJsonObject Format(const PeriodicIncome& income)
 	{
-		CategoryFormatter<ProductCategory> category_formatter;
+		CategoryFormatter<IncomeCategory> category_formatter;
 		QJsonObject json;
-		auto category = product.category;
-		WriteId(json, "id", product.id);
-		WriteId(json, "list_id", product.list_id);
+		auto category = income.category;
+		WriteId(json, "id", income.id);
 
 		json["category"] = category_formatter.Format(category);
 
-		WriteString(json, "name", product.name);
-		WriteBigInt(json, "amount", product.amount);
-		WriteMoney(json, "price", product.price);
-		WriteBigInt(json, "priority", product.priority);
+		WriteString(json, "name", income.name);
+		WriteBigInt(json, "amount", income.amount);
 
-		WriteId(json, "period_id", product.period_id);
-		WriteString(json, "next_add_date", product.next_add_date);
-		WriteString(json, "add_until", product.add_until);
+		WriteId(json, "period_id", income.period_id);
+		WriteString(json, "next_add_date", income.next_add_date);
+		WriteString(json, "add_until", income.add_until);
 
 		return json;
 	}
