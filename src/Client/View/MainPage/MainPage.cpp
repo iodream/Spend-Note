@@ -19,6 +19,7 @@ QString MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
 QString MainPage::ColorSettings::LIST_ACTIVE = "rgba(37, 109, 217, 50%)";
 
 QFont MainPage::UISettings::UI_FONT;
+QFont MainPage::UISettings::UI_DEFAULT_FONT = QFont("Sans Serif", 11);
 bool MainPage::bNeedsGlobalUIUpdate = true;
 
 MainPage::MainPage(QWidget *parent)
@@ -357,4 +358,9 @@ void MainPage::OnRecommendationClicked(const Product& product)
 	PageData data{};
 	data.setValue(product);
 	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
+}
+
+QFont MainPage::UISettings::GetDefaultFont()
+{
+	return UI_DEFAULT_FONT;
 }

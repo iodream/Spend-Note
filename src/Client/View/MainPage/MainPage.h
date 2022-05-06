@@ -90,6 +90,9 @@ public:
 	{
 	public:
 		static QFont UI_FONT;
+		static QFont GetDefaultFont();
+	private:
+		static QFont UI_DEFAULT_FONT;
 	};
 
 	class ColorSettings

@@ -354,7 +354,7 @@ void SettingsSubPage::OnNewColorSelected()
 
 void SettingsSubPage::OnDefaultFontClicked()
 {
-	MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11);
+	MainPage::UISettings::UI_FONT = MainPage::UISettings::GetDefaultFont();
 	Update();
 	emit FontChange();
 }

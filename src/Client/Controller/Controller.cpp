@@ -49,7 +49,7 @@ void Controller::ReadSettings()
 	if(!file.open(QIODevice::ReadOnly))
 	{
 		qDebug() << "couldn't open settings file";
-		MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11); //set default font
+		MainPage::UISettings::UI_FONT = MainPage::UISettings::GetDefaultFont(); //set default font
 		MainPage::ColorSettings::RECOMMENDATION = "rgb(227, 136, 25)";
 		return;
 	}
