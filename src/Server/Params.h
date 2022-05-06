@@ -15,6 +15,7 @@ public:
 	const static std::string LIST_ID;
 	const static std::string PRODUCT_ID;
 	const static std::string PRODUCT_CATEGORY_ID;
+	const static std::string PERIODIC_PRODUCT_ID;
 	const static std::string INCOME_ID;
 	const static std::string INCOME_CATEGORY_ID;
 	const static std::string STATISTICS_TYPE;
