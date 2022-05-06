@@ -197,13 +197,13 @@ void Controller::OnSaveConfig()
 	json["UI_FONT_SIZE"] = MainPage::UISettings::UI_FONT.pointSize();
 
 	QFile file(settings_filename);
-	QByteArray bytes = QJsonDocument(json).toJson( QJsonDocument::Indented );
+	QByteArray bytes = QJsonDocument(json).toJson(QJsonDocument::Indented);
 	if (!file.open(QIODevice::WriteOnly))
 	{
 		qWarning("Couldn't open settings save file");
 		return;
 	}
-		QTextStream iStream( &file );
+		QTextStream iStream(&file);
 		iStream << bytes;
 		file.close();
 }
