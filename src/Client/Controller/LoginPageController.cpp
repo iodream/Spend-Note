@@ -69,7 +69,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 	m_http_client.set_token(user_data.token);
 
 	emit ReadSettings();
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 	emit ChangePage(UIPages::MAIN);
 }
 

@@ -17,7 +17,7 @@ public:
 		IdType& user_id,
 		LoginPage& page);
 
-	virtual ~LoginPageController() override {};
+	virtual ~LoginPageController() override {}
 
 private:
 	HTTPClient& m_http_client;
