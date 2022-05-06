@@ -3,10 +3,10 @@
 #include <stdexcept>
 #include "View/MainPage/MainPage.h"
 
-bool RecommendationWidget::bClosed = false;
 RecommendationWidget::RecommendationWidget(QWidget *parent)
 	: QWidget(parent)
 	, m_list_size(0)
+	, bClosed(false)
 	, m_ui(new Ui::RecommendationWidget)
 {
 	m_ui->setupUi(this);

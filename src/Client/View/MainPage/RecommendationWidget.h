@@ -24,7 +24,7 @@ public:
 	void Clear();
 	void SetListSize(int size);
 
-	static bool bClosed;
+	bool bClosed;
 private:
 	Ui::RecommendationWidget *m_ui;
 	int m_list_size;

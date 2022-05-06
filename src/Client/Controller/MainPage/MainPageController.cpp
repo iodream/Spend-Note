@@ -450,7 +450,7 @@ void MainPageController::UpdateRecommendations()
 
 void MainPageController::ShowRecommendation()
 {
-	RecommendationWidget::bClosed = false;
+	m_page.get_recommendation_widget().bClosed = false;
 	m_page.get_recommendation_widget().setVisible(true);
 }
 
@@ -473,7 +473,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 		m_page.HideRecommendation();
 	}
 	else
-		if (!RecommendationWidget::bClosed)
+		if (!m_page.get_recommendation_widget().bClosed)
 		{
 			m_page.ShowRecommendation();
 		}
