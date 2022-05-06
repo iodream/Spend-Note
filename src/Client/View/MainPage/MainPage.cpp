@@ -4,12 +4,12 @@
 #include "Exception.h"
 #include <QColorDialog>
 
-QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
-QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
-QString MainPage::ColorSettings::RECOMMENDATION = "rgb(242, 171, 17)";
-QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
+QString MainPage::ColorSettings::COLOR_TOP_BANNER = "rgba(163, 255, 188, 100%)";
+QString MainPage::ColorSettings::NAVBUTTONS = "rgba(41, 186, 167, 50%)";
+QString MainPage::ColorSettings::RECOMMENDATION = "rgba(232, 151, 12, 100%)";
+QString MainPage::ColorSettings::ERROR_BANNER = "rgba(239, 41, 41, 100%)";
 QString MainPage::ColorSettings::WINDOW_BACKGROUND = "";
-QString MainPage::ColorSettings::LABEL_TEXT = "black";
+QString MainPage::ColorSettings::LABEL_TEXT = "rgba(0, 0, 0, 100%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
