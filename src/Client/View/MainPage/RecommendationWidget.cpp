@@ -2,7 +2,7 @@
 #include "ui_RecommendationWidget.h"
 #include <stdexcept>
 #include "View/MainPage/MainPage.h"
-#include <iostream>
+
 bool RecommendationWidget::bClosed = false;
 RecommendationWidget::RecommendationWidget(QWidget *parent)
 	: QWidget(parent)
