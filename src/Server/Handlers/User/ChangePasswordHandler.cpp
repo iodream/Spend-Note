@@ -19,7 +19,7 @@ Net::Response ChangePasswordHandler::AuthHandle(const Net::Request& request)
 	{
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
-			"Verification code not found");
+			"Verification code not found(expired or does not exist)");
 	}
 
 	QDateTime current_time(QDateTime::currentDateTime());
@@ -41,7 +41,7 @@ Net::Response ChangePasswordHandler::AuthHandle(const Net::Request& request)
 		}
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
-			"Verification code not found");
+			"Verification code not found(expired or does not exist)");
 	}
 	else
 	{

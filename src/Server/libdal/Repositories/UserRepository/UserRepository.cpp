@@ -123,7 +123,8 @@ bool UserRepository::UpdatePassword(const IdType user_id, const std::string& pas
 	{
 		pqxx::work w(m_database_connection);
 
-		auto result = w.exec("SELECT " + user::ID +
+		auto result = w.exec(
+			"SELECT " + user::ID +
 			" FROM  " + user::TABLE_NAME +
 			" WHERE " + user::ID + " = " + w.quote(user_id));
 
@@ -134,8 +135,9 @@ bool UserRepository::UpdatePassword(const IdType user_id, const std::string& pas
 
 		w.exec0(
 			"UPDATE " + user::TABLE_NAME +
-			" SET " + user::PASSWORD + " = " + w.quote(password) +
-			", " + user::SALT + " = " + w.quote(salt) +
+			" SET " +
+				user::PASSWORD + " = " + w.quote(password) + ", " +
+				user::SALT + " = " + w.quote(salt) +
 			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
 		w.commit();
 	}

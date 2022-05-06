@@ -22,13 +22,13 @@
 
 namespace {
 
-const std::string LOGIN    = "/login";
-const std::string SIGNUP   = "/signup";
-const std::string VERIFICATION   = "/verification";
-const std::string INCOMES  = "/incomes";
-const std::string LISTS    = "/lists";
+const std::string LOGIN = "/login";
+const std::string SIGNUP = "/signup";
+const std::string VERIFICATION = "/verification";
+const std::string INCOMES = "/incomes";
+const std::string LISTS = "/lists";
 const std::string PRODUCTS = "/products";
-const std::string USERS    = "/users";
+const std::string USERS = "/users";
 const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
 const std::string CHANGE_PASSWORD = "/change-password";
