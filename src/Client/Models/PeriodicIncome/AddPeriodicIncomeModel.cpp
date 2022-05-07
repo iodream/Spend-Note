@@ -1,0 +1,37 @@
+#include "AddPeriodicIncomeModel.h"
+#include "Utils.h"
+
+Net::Request AddPeriodicIncomeModel::FormRequest(const PeriodicIncome& income)
+{
+	Net::Request request;
+	request.uri = m_hostname + "/users/" + std::to_string(income.id) + "/periodic-incomes" ;
+	request.method = Net::HTTP_METHOD_POST;
+	request.content_type = Net::CONTENT_TYPE_APPLICATION_JSON;
+	request.json_payload = QJsonDocument(m_formatter.Format(income));
+	return request;
+}
+
+PeriodicIncomeId AddPeriodicIncomeModel::ParseResponse(const Net::Response& response)
+{
+	PeriodicIncomeId income_id;
+
+	income_id = m_parser.Parse(response.json_payload.object());
+
+	return income_id;
+}
+
+bool AddPeriodicIncomeModel::CheckFields(const PeriodicIncome& income)
+{
+	std::string str = EraseWhitespace(income.name.toStdString());
+	if(str.empty())
+		return false;
+	str = income.amount;
+	if(str.empty())
+		return false;
+	str = EraseWhitespace(income.category.name.toStdString());
+	if(str.empty())
+		return false;
+	return true;
+}
+
+

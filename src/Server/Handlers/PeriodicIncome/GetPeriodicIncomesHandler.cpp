@@ -38,7 +38,7 @@ Net::Response GetPeriodicIncomesHandler::AuthHandle(const Net::Request& request)
 	}
 
 	std::vector<PeriodicIncome> incomes;
-	for (auto db_income : db_incomes) {
+	for (const db::PeriodicIncome& db_income : db_incomes) {
 		auto category = m_facade->GetIncomeCategoryById(db_income.category_id);
 		if (!category.has_value())
 		{

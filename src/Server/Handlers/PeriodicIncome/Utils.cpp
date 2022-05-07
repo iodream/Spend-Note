@@ -36,7 +36,7 @@ db::PeriodicIncome ToDBPeriodicIncome(const PeriodicIncome& income)
 	return db_income;
 }
 
-PeriodicIncome ToNetPeriodicIncome(const db::PeriodicIncome& db_income, const db::ProductCategory& category)
+PeriodicIncome ToNetPeriodicIncome(const db::PeriodicIncome& db_income, const db::IncomeCategory& category)
 {
 	SCOPED_LOGGER;
 	PeriodicIncome income;
