@@ -34,6 +34,12 @@ void Controller::InitLoginPageController()
 		&LoginPageController::ChangePage,
 		this,
 		&Controller::OnChangePage);
+
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::SetEmail,
+		this,
+		&Controller::OnSetEmail);
 }
 
 void Controller::InitSignupPageController()
@@ -65,7 +71,13 @@ void Controller::InitMainPageController()
 		m_main_page_controller.get(),
 		&MainPageController::ChangePage,
 		this,
-				&Controller::OnChangePage);
+		&Controller::OnChangePage);
+
+	connect(
+		this,
+		&Controller::SetEmail,
+		m_main_page_controller.get(),
+		&MainPageController::OnSetEmail);
 }
 
 bool Controller::AskUser(const QString& title, const QString& text)
@@ -98,4 +110,9 @@ void Controller::SetPage(UIPages page)
 void Controller::OnChangePage(UIPages page)
 {
 	SetPage(page);
+}
+
+void Controller::OnSetEmail(const std::string& email)
+{
+	emit SetEmail(email);
 }

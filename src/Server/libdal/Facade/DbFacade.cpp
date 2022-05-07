@@ -41,6 +41,7 @@ bool DbFacade::UpdateUser(const User &user)
 bool DbFacade::UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt)
 {
 	return m_users.UpdatePassword(user_id, password, salt);
+}
 
 bool DbFacade::UpdateUserEmail(const IdType user_id, const std::string &email)
 {

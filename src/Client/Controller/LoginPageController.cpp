@@ -79,6 +79,8 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 	m_http_client.set_auth_scheme(Net::AUTH_SCHEME_TYPE_BEARER);
 	m_http_client.set_token(user_data.token);
 
+	emit SetEmail(credentials.email);
+
 	emit ChangePage(UIPages::MAIN);
 }
 

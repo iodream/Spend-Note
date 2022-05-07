@@ -49,4 +49,8 @@ private:
 
 public slots:
 	void OnChangePage(UIPages page);
+	void OnSetEmail(const std::string& email);
+
+signals:
+	void SetEmail(const std::string& email);
 };

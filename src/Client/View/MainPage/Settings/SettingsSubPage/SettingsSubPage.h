@@ -15,6 +15,7 @@ public:
 	~SettingsSubPage();
 
 	void GoToMainSubPage();
+	void SetEmail(const QString& email);
 
 private:
 	Ui::SettingsSubPage *m_ui;
@@ -27,5 +28,8 @@ private slots:
 	void OnSubmitPasswordChangeButtonClicked();
 	void OnSubmitEmailChangeButtonClicked();
 	void OnGoBackClicked();
+
+signals:
+	void ChangeEmail(const QString& old_email, const QString& new_email);
 };
 

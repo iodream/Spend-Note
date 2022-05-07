@@ -334,6 +334,12 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		this,
+		&MainPageController::SetEmail,
+		m_settings_page_controller.get(),
+		&SettingsPageController::OnSetEmail);
 }
 
 void MainPageController::OnLogout()
@@ -461,4 +467,9 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 		return std::nullopt;
 	}
 
+}
+
+void MainPageController::OnSetEmail(const std::string& email)
+{
+	 emit SetEmail(email);
 }

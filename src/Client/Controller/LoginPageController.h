@@ -30,6 +30,7 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void SetEmail(const std::string& email);
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);
