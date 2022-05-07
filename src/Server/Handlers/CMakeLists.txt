@@ -14,7 +14,6 @@ list(APPEND Spend-Note-Server_SOURCES
 )
 
 add_subdirectory(Entities)
-
 add_subdirectory(Product)
 add_subdirectory(List)
 add_subdirectory(Income)

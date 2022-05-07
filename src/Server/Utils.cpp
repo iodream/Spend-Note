@@ -41,3 +41,13 @@ std::string HashingPassword(const std::string& password, const std::string& salt
 
 	return hashed_password;
 }
+
+std::string CreateSalt()
+{
+	std::string salt;
+
+	std::sample(Net::SALT_CHARACTERS.begin(), Net::SALT_CHARACTERS.end(), std::back_inserter(salt),
+		Net::SALT_SIZE, std::mt19937{std::random_device{}()});
+
+	return salt;
+}

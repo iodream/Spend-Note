@@ -17,10 +17,10 @@ std::optional<IdType> UserRepository::Add(const User &user)
 	{
 		pqxx::work w(m_database_connection);
 		auto id_rows = w.exec(
-			"INSERT INTO " + db::user::TABLE_NAME + " (" +
-				db::user::EMAIL + ", " +
-				db::user::PASSWORD + ", " +
-				db::user::SALT + ", " +
+			"INSERT INTO " + user::TABLE_NAME + " (" +
+				user::EMAIL + ", " +
+				user::PASSWORD + ", " +
+				user::SALT + ", " +
 				user::VERIFIED +
 			") VALUES (" +
 				w.quote(user.email) + ", " +
@@ -132,6 +132,37 @@ bool UserRepository::UpdateEmail(const IdType user_id, const std::string &email)
 		w.exec0(
 			"UPDATE " + user::TABLE_NAME +
 			" SET " + user::EMAIL + " = " + w.quote(email) +
+			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
+		w.commit();
+	}
+	catch(const pqxx::failure& e)
+	{
+		throw DatabaseFailure(e.what());
+	}
+	return true;
+}
+
+bool UserRepository::UpdatePassword(const IdType user_id, const std::string& password, const std::string& salt)
+{
+	try
+	{
+		pqxx::work w(m_database_connection);
+
+		auto result = w.exec(
+			"SELECT " + user::ID +
+			" FROM  " + user::TABLE_NAME +
+			" WHERE " + user::ID + " = " + w.quote(user_id));
+
+		if (result.empty())
+		{
+			return false;
+		}
+
+		w.exec0(
+			"UPDATE " + user::TABLE_NAME +
+			" SET " +
+				user::PASSWORD + " = " + w.quote(password) + ", " +
+				user::SALT + " = " + w.quote(salt) +
 			" WHERE " + user::ID + " = " + w.quote(user_id) + ";");
 		w.commit();
 	}

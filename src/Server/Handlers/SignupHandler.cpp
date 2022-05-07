@@ -22,7 +22,7 @@
 #include "Net/Constants.h"
 #include "../Utils.h"
 
-const unsigned long code_expiration_in_secs = 900;
+//const unsigned long code_expiration_in_secs = 900;
 
 SignupHandler::SignupHandler()
 {
@@ -44,16 +44,6 @@ SignupHandler::JSONParser::Credentials SignupHandler::JSONParser::Parse(
 	}
 
 	return dto;
-}
-
-std::string SignupHandler::CreateSalt()
-{
-	std::string salt;
-
-	std::sample(Net::SALT_CHARACTERS.begin(), Net::SALT_CHARACTERS.end(), std::back_inserter(salt),
-						Net::SALT_SIZE, std::mt19937{std::random_device{}()});
-
-	return salt;
 }
 
 Net::Response SignupHandler::Handle(Net::Request& request)
