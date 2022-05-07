@@ -324,7 +324,7 @@ background-color: #29baa7</string>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="Settings">
+       <widget class="QToolButton" name="GoToSettingsButton">
         <property name="minimumSize">
          <size>
           <width>50</width>
@@ -415,7 +415,7 @@ background-color: #29baa7</string>
      <zorder>GoToListsButton</zorder>
      <zorder>GoBackButton</zorder>
      <zorder>LogoutButton</zorder>
-     <zorder>Settings</zorder>
+     <zorder>GoToSettingsButton</zorder>
      <zorder>GoToCategoriesButton</zorder>
     </widget>
    </item>
