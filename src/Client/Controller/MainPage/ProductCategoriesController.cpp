@@ -81,7 +81,7 @@ bool ProductCategoriesController::UpdateProductCategoryPage()
 	return true;
 }
 
-bool ProductCategoriesController::UpdateProductCategoryPageColors()
+void ProductCategoriesController::UpdateProductCategoryPageColors()
 {
 	m_category_edit_page.UpdateColors();
 }
