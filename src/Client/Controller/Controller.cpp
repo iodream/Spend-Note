@@ -83,7 +83,7 @@ void Controller::ReadSettings()
 		MainPage::ColorSettings::RECOMMENDATION = json.value("COLOR_RECOMMENDATION").toString();
 
 		QString FontName = json.value("UI_FONT_NAME").toString();
-		int FontSize= json.value("UI_FONT_SIZE").toInt();
+		int FontSize = json.value("UI_FONT_SIZE").toInt();
 		MainPage::UISettings::UI_FONT = QFont(FontName, FontSize);
 	}
 }
@@ -198,13 +198,13 @@ void Controller::OnSaveConfig()
 	json["UI_FONT_SIZE"] = MainPage::UISettings::UI_FONT.pointSize();
 
 	QFile file(settings_filename);
-	QByteArray bytes = QJsonDocument(json).toJson( QJsonDocument::Indented );
+	QByteArray bytes = QJsonDocument(json).toJson(QJsonDocument::Indented);
 	if (!file.open(QIODevice::WriteOnly))
 	{
 		qWarning("Couldn't open settings save file");
 		return;
 	}
-		QTextStream iStream( &file );
+		QTextStream iStream(&file);
 		iStream << bytes;
 		file.close();
 }

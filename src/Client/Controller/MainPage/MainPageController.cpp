@@ -401,6 +401,7 @@ void MainPageController::OnFontChange()
 {
 	m_page.UpdatePage();
 }
+
 void MainPageController::OnRecommendationClosed()
 {
 	m_page.HideRecommendation();

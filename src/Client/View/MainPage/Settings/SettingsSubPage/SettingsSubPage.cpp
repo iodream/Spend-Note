@@ -156,8 +156,10 @@ void SettingsSubPage::OnGoBackClicked()
 void SettingsSubPage::OnFontChange()
 {
 	MainPage::bNeedsGlobalUIUpdate = true;
+
 	QFont previous_font = MainPage::UISettings::UI_FONT;
 	QFont font = QFontDialog::getFont(nullptr, previous_font); //use previous font if cancel is pressed
+
 	MainPage::UISettings::UI_FONT = font;
 
 	emit FontChange();
