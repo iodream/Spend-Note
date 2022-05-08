@@ -38,7 +38,7 @@ Net::Response UpdatePeriodicIncomeHandler::AuthHandle(const Net::Request& reques
 			"Update periodic income with id \"" + std::to_string(income_id) + "\" is forbidden");
 	}
 
-	auto income_db = ToDBPeriodicIncome(income);
+	auto income_db = ToDBPeriodicIncome(income, request.uid);
 
 	m_facade->UpdatePeriodicIncome(income_db);
 	return FormEmptyResponse();

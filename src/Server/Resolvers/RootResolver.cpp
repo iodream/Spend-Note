@@ -23,7 +23,7 @@ namespace {
 const std::string LOGIN    = "/login";
 const std::string SIGNUP   = "/signup";
 const std::string INCOMES  = "/incomes";
-const std::string PERIODIC_INCOMES  = "/incomes";
+const std::string PERIODIC_INCOMES  = "/periodic-incomes";
 const std::string LISTS    = "/lists";
 const std::string PRODUCTS = "/products";
 const std::string USERS    = "/users";
