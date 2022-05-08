@@ -164,7 +164,9 @@ void SettingsSubPage::OnFontChange()
 {
 	MainPage::bNeedsGlobalUIUpdate = true;
 
-	QFont font = QFontDialog::getFont(nullptr, QFont("Sans Serif", 11)); //use this font if cancel is pressed
+	QFont previous_font = MainPage::UISettings::UI_FONT;
+	QFont font = QFontDialog::getFont(nullptr, previous_font); //use previous font if cancel is pressed
+
 	MainPage::UISettings::UI_FONT = font;
 
 	emit FontChange();
@@ -199,20 +201,19 @@ void SettingsSubPage::OnColorScheme1Selected()
 	MainPage::bNeedsGlobalUIUpdate = true;
 
 	MainPage::ColorSettings::WINDOW_BACKGROUND = "";
-	MainPage::ColorSettings::LABEL_TEXT= "black";
-	MainPage::ColorSettings::COLOR_TOP_BANNER= "#a3ffbc";
-	MainPage::ColorSettings::ERROR_BANNER= "#ef2929";
+	MainPage::ColorSettings::LABEL_TEXT= "rgba(0, 0, 0, 100%)";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "rgba(163, 255, 188, 100%)";
+	MainPage::ColorSettings::ERROR_BANNER= "rgba(239, 41, 41, 100%)";
 	MainPage::ColorSettings::LIST_ACTIVE= "rgba(100, 230, 53, 50%)";
 	MainPage::ColorSettings::LIST_INACTIVE= "rgba(37, 109, 217, 50%)";
-	MainPage::ColorSettings::NAVBUTTONS= "#29baa7";
-
-	//set in rgba to specify transparency
+	MainPage::ColorSettings::NAVBUTTONS= "rgba(41, 186, 167, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(232, 151, 12, 100%)";
 	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(201, 60, 32, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(224, 133, 29, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(202, 224, 31, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(35, 217, 108, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(25, 96, 209, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(227, 136, 25)";
+
 	emit ColorSchemeChanged();
 }
 
@@ -221,19 +222,19 @@ void SettingsSubPage::OnColorScheme2Selected()
 {
 	MainPage::bNeedsGlobalUIUpdate = true;
 
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#334257";
-	MainPage::ColorSettings::LABEL_TEXT= "#eeeeee";
-	MainPage::ColorSettings::COLOR_TOP_BANNER= "#5584ac";
-	MainPage::ColorSettings::ERROR_BANNER= "#990909";
-	MainPage::ColorSettings::LIST_ACTIVE= "#5b9bd5";
-	MainPage::ColorSettings::LIST_INACTIVE= "#92a9bd";
-	MainPage::ColorSettings::NAVBUTTONS= "#406882";
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "rgba(51, 66, 87, 100%)";
+	MainPage::ColorSettings::LABEL_TEXT= "rgba(238, 238, 238, 100%)";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "rgba(85, 132, 172, 100%)";
+	MainPage::ColorSettings::ERROR_BANNER= "rgba(153, 9, 9, 100%)";
+	MainPage::ColorSettings::LIST_ACTIVE= "rgba(91, 155, 213, 50%)";
+	MainPage::ColorSettings::LIST_INACTIVE= "rgba(146, 169, 189, 50%)";
+	MainPage::ColorSettings::NAVBUTTONS= "rgba(64, 104, 130, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(153, 9, 9, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(197, 90, 17, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(191, 144, 0, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(84, 130, 53, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(47, 85, 151, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(105, 152, 171, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(105, 152, 171, 100%)";
 
 	emit ColorSchemeChanged();
 }
@@ -243,19 +244,19 @@ void SettingsSubPage::OnColorScheme3Selected()
 {
 	MainPage::bNeedsGlobalUIUpdate = true;
 
-	MainPage::ColorSettings::WINDOW_BACKGROUND = "#edf7fa";
-	MainPage::ColorSettings::LABEL_TEXT= "black";
-	MainPage::ColorSettings::COLOR_TOP_BANNER= "#8faadc";
-	MainPage::ColorSettings::ERROR_BANNER= "#ef2929";
-	MainPage::ColorSettings::LIST_ACTIVE= "#ffe699";
-	MainPage::ColorSettings::LIST_INACTIVE= "#9dc3e6";
-	MainPage::ColorSettings::NAVBUTTONS= "#9dc3e6";
+	MainPage::ColorSettings::WINDOW_BACKGROUND = "rgba(237, 247, 250, 100%)";
+	MainPage::ColorSettings::LABEL_TEXT= "rgba(0, 0, 0, 100%)";
+	MainPage::ColorSettings::COLOR_TOP_BANNER= "rgba(143, 170, 220, 100%)";
+	MainPage::ColorSettings::ERROR_BANNER= "rgba(239, 41, 41, 100%)";
+	MainPage::ColorSettings::LIST_ACTIVE= "rgba(255, 230, 153, 50%)";
+	MainPage::ColorSettings::LIST_INACTIVE= "rgba(157, 195, 230, 50%)";
+	MainPage::ColorSettings::NAVBUTTONS= "rgba(157, 195, 230, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO1= "rgba(255, 122, 91, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO2= "rgba(243, 168, 117, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO3= "rgba(255, 204, 102, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO4= "rgba(169, 209, 142, 50%)";
 	MainPage::ColorSettings::PRODUCT_PRIO5= "rgba(143, 170, 220, 50%)";
-	MainPage::ColorSettings::RECOMMENDATION= "rgba(143, 170, 220, 50%)";
+	MainPage::ColorSettings::RECOMMENDATION= "rgba(143, 170, 220, 100%)";
 
 	emit ColorSchemeChanged();
 }
@@ -401,7 +402,7 @@ void SettingsSubPage::changeEvent(QEvent* event)
 
 void SettingsSubPage::OnDefaultFontClicked()
 {
-	MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11);
+	MainPage::UISettings::UI_FONT = MainPage::UISettings::GetDefaultFont();
 	Update();
 	emit FontChange();
 }

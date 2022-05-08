@@ -40,6 +40,7 @@ void ProductItem::UpdateColor()
 	}
 }
 
+
 void ProductItem::changeEvent(QEvent* event)
 {
 	if(event)
@@ -53,6 +54,16 @@ void ProductItem::changeEvent(QEvent* event)
 
 		QWidget::changeEvent(event);
 	}
+}
+
+void ProductItem::HideCheck()
+{
+	m_ui->PurchasedCheckbox->setHidden(true);
+}
+
+void ProductItem::SetText(const QString& text)
+{
+	m_ui->Number->setText(text);
 }
 
 void ProductItem::Update()

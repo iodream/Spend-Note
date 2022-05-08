@@ -9,6 +9,7 @@
 #include "StatisticsPageController.h"
 #include "IncomeCategoriesController.h"
 #include "ProductCategoriesController.h"
+#include "ProductRecommendationController.h"
 #include "SettingsPageController.h"
 #include "NavHistory.h"
 
@@ -33,12 +34,15 @@ public:
 	virtual ~MainPageController() override {}
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
+	void UpdateRecommendations();
+	void ShowRecommendation();
 
 private:
 	void ConnectPage();
 
 	void InitListPagesController();
 	void InitProductPagesController();
+	void InitProductRecommendationController();
 	void InitIncomePagesController();
 	void InitDailyListPageController();
 	void InitStatisticsPageController();
@@ -67,6 +71,8 @@ private:
 	std::unique_ptr<StatisticsPageController> m_statistics_page_controller;
 	std::unique_ptr<IncomeCategoriesController> m_income_categories_controller;
 	std::unique_ptr<ProductCategoriesController> m_product_categories_controller;
+	std::unique_ptr<ProductRecommendationController> m_product_recommendation_controller;
+
 	std::unique_ptr<SettingsPageController> m_settings_page_controller;
 
 signals:

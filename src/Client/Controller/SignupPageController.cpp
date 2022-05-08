@@ -37,13 +37,13 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 	SignupModel model{m_hostname};
 	if (!model.CheckPassRepeat(in_dto))
 	{
-		m_page.SetErrorBanner("Passwords must match!");
+		m_page.SetErrorBanner(tr("Passwords must match!"));
 		return;
 	}
 
 	if (!model.CheckData(in_dto))
 	{
-		m_page.SetErrorBanner("Email or password can't be empty!");
+		m_page.SetErrorBanner(tr("Email or password can't be empty!"));
 		return;
 	}
 

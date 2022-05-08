@@ -19,12 +19,14 @@ MainPageController::MainPageController(
 	ConnectPage();
 	InitListPagesController();
 	InitProductPagesController();
+	InitProductRecommendationController();
 	InitIncomePagesController();
 	InitDailyListPageController();
 	InitStatisticsPageController();
 	InitIncomeCategoriesController();
 	InitProductCategoriesController();
 	InitSettingsPageController();
+	OnUIUpdate(); //need to update once here for recommendation widget
 }
 
 void MainPageController::ConnectPage()
@@ -138,6 +140,27 @@ void MainPageController::InitProductPagesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitProductRecommendationController()
+{
+	m_product_recommendation_controller =
+		std::make_unique<ProductRecommendationController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page);
+
+	connect(
+		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+}
 void MainPageController::InitIncomePagesController()
 {
 	m_income_pages_controller =
@@ -419,11 +442,22 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_page.SetErrorBanner(tr("Error updating page"));
 	}
 
-	// global UI update only when it's needed becuse its costly
+	// global UI update only when it's needed because its costly
 	if(MainPage::bNeedsGlobalUIUpdate)
 	{
 		OnUIUpdate();
 	}
+}
+
+void MainPageController::UpdateRecommendations()
+{
+	m_product_recommendation_controller->UpdateRecommendations();
+}
+
+void MainPageController::ShowRecommendation()
+{
+	m_page.get_recommendation_widget().bClosed = false;
+	m_page.get_recommendation_widget().setVisible(true);
 }
 
 void MainPageController::OnServerError(const int code, const std::string& desc)
@@ -440,11 +474,22 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
+	if(page != MainSubPages::LISTS)
+	{
+		m_page.HideRecommendation();
+	}
+	else
+		if (!m_page.get_recommendation_widget().bClosed)
+		{
+			m_page.ShowRecommendation();
+		}
+
 	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
 
 	switch(page)
 	{
 	case MainSubPages::LISTS:
+		UpdateRecommendations();
 		return m_list_pages_controller->UpdateListPage();
 	case MainSubPages::CREATE_LIST:
 		return m_list_pages_controller->UpdateListCreatePage();

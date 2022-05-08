@@ -366,14 +366,14 @@
 <context>
     <name>ListPagesController</name>
     <message>
-        <location filename="Controller/MainPage/ListPagesController.cpp" line="214"/>
-        <location filename="Controller/MainPage/ListPagesController.cpp" line="367"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="215"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="368"/>
         <source>List name can&apos;t be empty</source>
         <translation>Назва списку не може бути пустою</translation>
     </message>
     <message>
-        <location filename="Controller/MainPage/ListPagesController.cpp" line="246"/>
-        <location filename="Controller/MainPage/ListPagesController.cpp" line="315"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="247"/>
+        <location filename="Controller/MainPage/ListPagesController.cpp" line="316"/>
         <source>Product data can&apos;t be empty</source>
         <translation>Дані продукту не можуть бути пустими</translation>
     </message>
@@ -551,8 +551,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="40"/>
-        <location filename="View/MainPage/MainPage.cpp" line="247"/>
+        <location filename="View/MainPage/MainPage.cpp" line="43"/>
+        <location filename="View/MainPage/MainPage.cpp" line="260"/>
         <source>My Lists</source>
         <translation>Мої списки</translation>
     </message>
@@ -569,8 +569,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="44"/>
-        <location filename="View/MainPage/MainPage.cpp" line="251"/>
+        <location filename="View/MainPage/MainPage.cpp" line="47"/>
+        <location filename="View/MainPage/MainPage.cpp" line="264"/>
         <source>Statistics</source>
         <translation>Статистика</translation>
     </message>
@@ -621,48 +621,48 @@ Incomes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="38"/>
-        <location filename="View/MainPage/MainPage.cpp" line="245"/>
+        <location filename="View/MainPage/MainPage.cpp" line="41"/>
+        <location filename="View/MainPage/MainPage.cpp" line="258"/>
         <source>Back</source>
         <translation>Перейти назад</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="39"/>
-        <location filename="View/MainPage/MainPage.cpp" line="246"/>
+        <location filename="View/MainPage/MainPage.cpp" line="42"/>
+        <location filename="View/MainPage/MainPage.cpp" line="259"/>
         <source>My Incomes</source>
         <translation>Мої доходи</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="41"/>
-        <location filename="View/MainPage/MainPage.cpp" line="248"/>
+        <location filename="View/MainPage/MainPage.cpp" line="44"/>
+        <location filename="View/MainPage/MainPage.cpp" line="261"/>
         <source>Log Out</source>
         <translation>Вийти</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="42"/>
-        <location filename="View/MainPage/MainPage.cpp" line="249"/>
+        <location filename="View/MainPage/MainPage.cpp" line="45"/>
+        <location filename="View/MainPage/MainPage.cpp" line="262"/>
         <source>Daily List</source>
         <translation>Щоденний список</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="43"/>
-        <location filename="View/MainPage/MainPage.cpp" line="250"/>
+        <location filename="View/MainPage/MainPage.cpp" line="46"/>
+        <location filename="View/MainPage/MainPage.cpp" line="263"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="45"/>
-        <location filename="View/MainPage/MainPage.cpp" line="252"/>
+        <location filename="View/MainPage/MainPage.cpp" line="48"/>
+        <location filename="View/MainPage/MainPage.cpp" line="265"/>
         <source>My Categories</source>
         <translation>Мої категорії</translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="312"/>
+        <location filename="View/MainPage/MainPage.cpp" line="325"/>
         <source>Current Balance:  </source>
         <translation>Поточний баланс:  </translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="313"/>
+        <location filename="View/MainPage/MainPage.cpp" line="326"/>
         <source>Predicted balance:  </source>
         <translation>Передбачений баланс:  </translation>
     </message>
@@ -670,7 +670,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="419"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="442"/>
         <source>Error updating page</source>
         <translation>Помилка оновлення сторінки</translation>
     </message>
@@ -988,37 +988,19 @@ Incomes</source>
     </message>
 </context>
 <context>
-    <name>RecommendationItem</name>
-    <message>
-        <location filename="View/MainPage/RecommendationItem.ui" line="26"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/RecommendationItem.ui" line="112"/>
-        <source>TextLabel</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/RecommendationItem.ui" line="119"/>
-        <source>1</source>
-        <translation></translation>
-    </message>
-</context>
-<context>
     <name>RecommendationWidget</name>
     <message>
-        <location filename="View/MainPage/RecommendationWidget.ui" line="20"/>
+        <location filename="View/MainPage/RecommendationWidget.ui" line="26"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/RecommendationWidget.ui" line="72"/>
+        <location filename="View/MainPage/RecommendationWidget.ui" line="78"/>
         <source>Recommended:</source>
         <translation>Рекомендовано:</translation>
     </message>
     <message>
-        <location filename="View/MainPage/RecommendationWidget.ui" line="101"/>
+        <location filename="View/MainPage/RecommendationWidget.ui" line="107"/>
         <source>X</source>
         <translation></translation>
     </message>
@@ -1283,7 +1265,7 @@ Incomes</source>
         <translation>Новий email...</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="176"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="178"/>
         <source>Current font is: %1 %2</source>
         <translation>Поточний шрифт: </translation>
     </message>
@@ -1377,6 +1359,19 @@ Incomes</source>
         <location filename="View/SignupPage/SignupPage.ui" line="313"/>
         <source>Submit</source>
         <translation>Підтвердити</translation>
+    </message>
+</context>
+<context>
+    <name>SignupPageController</name>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="40"/>
+        <source>Passwords must match!</source>
+        <translation>Паролі повинні співпадати!</translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="46"/>
+        <source>Email or password can&apos;t be empty!</source>
+        <translation>Email та пароль не можуть бути порожніми!</translation>
     </message>
 </context>
 <context>

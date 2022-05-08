@@ -71,12 +71,12 @@ void SignupPage::SetErrorBanner(const int code, const std::string& description)
 	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
 }
 
-void SignupPage::SetErrorBanner(const std::string& description)
+void SignupPage::SetErrorBanner(const QString& description)
 {
 	m_ui->ErrorWidget->setVisible(true);
 	m_ui->ErrorTitleLabel->setVisible(false);
 	m_ui->ErrorCodeLabel->setText("");
-	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
+	m_ui->ErrorDescriptionLabel->setText(description);
 }
 
 void SignupPage::CloseErrorBanner()

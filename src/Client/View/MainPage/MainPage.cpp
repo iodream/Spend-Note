@@ -4,12 +4,14 @@
 #include "Exception.h"
 #include <QColorDialog>
 
-QString MainPage::ColorSettings::COLOR_TOP_BANNER = "#a3ffbc";
-QString MainPage::ColorSettings::NAVBUTTONS = "#29baa7";
-QString MainPage::ColorSettings::RECOMMENDATION = "rgba(227, 136, 25)";
-QString MainPage::ColorSettings::ERROR_BANNER = "#ef2929";
+
+QString MainPage::ColorSettings::COLOR_TOP_BANNER = "rgba(163, 255, 188, 100%)";
+QString MainPage::ColorSettings::NAVBUTTONS = "rgba(41, 186, 167, 50%)";
+QString MainPage::ColorSettings::RECOMMENDATION = "rgba(232, 151, 12, 100%)";
+QString MainPage::ColorSettings::ERROR_BANNER = "rgba(239, 41, 41, 100%)";
 QString MainPage::ColorSettings::WINDOW_BACKGROUND = "";
-QString MainPage::ColorSettings::LABEL_TEXT = "black";
+QString MainPage::ColorSettings::LABEL_TEXT = "rgba(0, 0, 0, 100%)";
+
 QString MainPage::ColorSettings::PRODUCT_PRIO1 = "rgba(201, 60, 32, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO2 = "rgba(224, 133, 29, 50%)";
 QString MainPage::ColorSettings::PRODUCT_PRIO3 = "rgba(202, 224, 31, 50%)";
@@ -25,9 +27,10 @@ const std::map<UILangs, QString> MainPage::UISettings::translation_file{
 	{UILangs::UKRAINIAN, "uk_UA"},
 };
 
-bool MainPage::bNeedsGlobalUIUpdate = true;
-
 QFont MainPage::UISettings::UI_FONT;
+QFont MainPage::UISettings::UI_DEFAULT_FONT = QFont("Sans Serif", 11);
+
+bool MainPage::bNeedsGlobalUIUpdate = true;
 
 MainPage::MainPage(QWidget *parent)
 	: QWidget(parent)
@@ -121,13 +124,18 @@ MainPage::MainPage(QWidget *parent)
 	InitSettingsSubPage();
 
 	recommendation_widget = std::make_shared<RecommendationWidget>(this);
-	recommendation_item = std::make_shared<RecommendationItem>("", List(), recommendation_widget.get());
 
 	connect(
-				recommendation_widget.get(),
-				&RecommendationWidget::RecommendationClosed,
-				this,
-				&MainPage::OnRecommendationClosed);
+		recommendation_widget.get(),
+		&RecommendationWidget::RecommendationClosed,
+		this,
+		&MainPage::OnRecommendationClosed);
+
+	connect(
+		recommendation_widget.get(),
+		&RecommendationWidget::GoToProductView,
+		this,
+		&MainPage::GoToProductView);
 }
 
 void MainPage::resizeEvent(QResizeEvent *event)
@@ -222,6 +230,11 @@ void MainPage::InitCategoriesEditSubPage()
 void MainPage::HideRecommendation()
 {
 	recommendation_widget->hide();
+}
+
+void MainPage::ShowRecommendation()
+{
+	recommendation_widget->show();
 }
 
 void MainPage::InitSettingsSubPage()
@@ -363,21 +376,27 @@ void MainPage::CloseErrorBanner()
 	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
 }
 
-void MainPage::UpdateRecommendation(const List& list)
+void MainPage::UpdateRecommendation(const Product& product)
 {
-	recommendation_item = std::make_shared<RecommendationItem>(list.name, list, recommendation_widget.get());
-
-	connect(
-		recommendation_item.get(),
-		&RecommendationItem::clicked,
-		this,
-		&MainPage::OnRecommendationClicked);
-
-	recommendation_widget->RemoveItem();
-	recommendation_widget->AppendItem(recommendation_item.get());
+	recommendation_widget->Clear();
+	ProductItem* it = new ProductItem(product);
+	recommendation_widget->AppendProduct(it);
+		connect(
+			recommendation_widget.get(),
+			&RecommendationWidget::GoToProductView,
+			this,
+			&MainPage::OnRecommendationClicked);
 }
 
-void MainPage::OnRecommendationClicked()
+void MainPage::OnRecommendationClicked(const Product& product)
 {
-	emit GoToProducts(recommendation_item->get_list());
+	HideRecommendation();
+	PageData data{};
+	data.setValue(product);
+	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
+}
+
+QFont MainPage::UISettings::GetDefaultFont()
+{
+	return UI_DEFAULT_FONT;
 }
