@@ -49,7 +49,8 @@ void Controller::ReadSettings()
 	if(!file.open(QIODevice::ReadOnly))
 	{
 		qDebug() << "couldn't open settings file";
-		MainPage::UISettings::UI_FONT = QFont("Sans Serif", 11); //set default font
+		MainPage::UISettings::UI_FONT = MainPage::UISettings::GetDefaultFont(); //set default font
+		MainPage::ColorSettings::RECOMMENDATION = "rgb(227, 136, 25)";
 		return;
 	}
 	QByteArray bytes = file.readAll();
@@ -75,7 +76,6 @@ void Controller::ReadSettings()
 		MainPage::ColorSettings::PRODUCT_PRIO3 = json.value("COLOR_PRODUCT_PRIORITY3").toString();
 		MainPage::ColorSettings::PRODUCT_PRIO4 = json.value("COLOR_PRODUCT_PRIORITY4").toString();
 		MainPage::ColorSettings::PRODUCT_PRIO5 = json.value("COLOR_PRODUCT_PRIORITY5").toString();
-		MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
 		MainPage::ColorSettings::ERROR_BANNER = json.value("COLOR_ERROR_BANNER").toString();
 		MainPage::ColorSettings::LIST_ACTIVE = json.value("COLOR_LIST_ACTIVE").toString();
 		MainPage::ColorSettings::LIST_INACTIVE = json.value("COLOR_LIST_INACTIVE").toString();
@@ -159,6 +159,7 @@ void Controller::SetPage(UIPages page)
 {
 	switch (page) {
 	case UIPages::MAIN:
+		m_main_page_controller->ShowRecommendation();
 		m_main_page_controller->ChangeSubPage(MainSubPages::LISTS);
 		break;
 	case UIPages::LOGIN:

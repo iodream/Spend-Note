@@ -25,17 +25,15 @@ public:
 	void Update();
 
 	Product get_product() const { return m_product; }
-
+	QString get_color();
 	void set_number(int number);
 	int get_number();
-
-	QString get_color();
+	void HideCheck();
+	void SetText(const QString&);
 
 private:
 	void UpdateColor();
-
 	Product m_product;
-
 	int m_number{1};
 	QString m_color;
 

@@ -54,31 +54,7 @@ public:
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
 	void HideRecommendation();
-
-	static bool bNeedsGlobalUIUpdate;
-
-private:
-	void InitListsSubPage();
-	void InitListCreateSubPage();
-	void InitProductQuickCreateSubPage();
-	void InitListEditSubPage();
-	void InitListViewSubPage();
-
-	void InitProductsSubPage();
-	void InitProductCreateSubPage();
-	void InitProductEditSubPage();
-	void InitProductViewSubPage();
-
-	void InitIncomesSubPage();
-	void InitIncomesCreateSubPage();
-
-	void InitIncomeViewSubPage();
-	void InitIncomeEditPage();
-
-	void InitDailyListSubPage();
-	void InitStatisticsSubPage();
-	void InitCategoriesEditSubPage();
-	void InitSettingsSubPage();
+	void ShowRecommendation();
 
 public:
 	ListsSubPage& get_lists_spage() { return m_lists_spage; }
@@ -101,12 +77,42 @@ public:
 	DailyListSubPage& get_daily_list_spage() { return m_dailylist_spage; }
 	StatisticSubPage& get_statistics_spage() { return m_statistics_spage; }
 	CategoryEditPage& get_categories_edit_spage() { return m_categories_edit_spage; }
-
+	RecommendationWidget& get_recommendation_widget() { return *recommendation_widget; }
 
 	SettingsSubPage& get_settings_spage() { return m_settings_spage; }
 
 	void resizeEvent(QResizeEvent* event);
-	void UpdateRecommendation(const List& list);
+	void UpdateRecommendation(const Product& list);
+
+	static bool bNeedsGlobalUIUpdate;
+
+	class UISettings
+	{
+	public:
+		static QFont UI_FONT;
+		static QFont GetDefaultFont();
+	private:
+		static QFont UI_DEFAULT_FONT;
+	};
+
+	class ColorSettings
+	{
+	public:
+		static QString COLOR_TOP_BANNER;
+		static QString NAVBUTTONS;
+		static QString RECOMMENDATION;
+		static QString ERROR_BANNER;
+		static QString WINDOW_BACKGROUND;
+		static QString LABEL_TEXT;
+		static QString PRODUCT_PRIO1;
+		static QString PRODUCT_PRIO2;
+		static QString PRODUCT_PRIO3;
+		static QString PRODUCT_PRIO4;
+		static QString PRODUCT_PRIO5;
+		static QString LIST_INACTIVE;
+		static QString LIST_ACTIVE;
+	};
+
 private:
 	Ui::MainPage *m_ui;
 
@@ -131,16 +137,40 @@ private:
 	StatisticSubPage m_statistics_spage;
 	CategoryEditPage m_categories_edit_spage;
 	std::shared_ptr<RecommendationWidget> recommendation_widget;
-	std::shared_ptr<RecommendationItem> recommendation_item;
 	SettingsSubPage m_settings_spage;
+
+	void InitListsSubPage();
+	void InitListCreateSubPage();
+	void InitProductQuickCreateSubPage();
+	void InitListEditSubPage();
+	void InitListViewSubPage();
+
+	void InitProductsSubPage();
+	void InitProductCreateSubPage();
+	void InitProductEditSubPage();
+	void InitProductViewSubPage();
+
+	void InitIncomesSubPage();
+	void InitIncomesCreateSubPage();
+
+	void InitIncomeViewSubPage();
+	void InitIncomeEditPage();
+
+	void InitDailyListSubPage();
+	void InitStatisticsSubPage();
+	void InitCategoriesEditSubPage();
+	void InitSettingsSubPage();
+
 
 signals:
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void Logout();
 	void GoBack(int n=1);
 	void RecommendationClosed();
+	void RecommendationClicked(const Product& product);
+
 	void ColorSchemeChanged();
-	void GoToProducts(List);
+	void GoToProductView(const Product& product);
 
 
 public slots:
@@ -151,32 +181,7 @@ public slots:
 	void OnGoToStatiticsClicked();
 	void OnGoToCategoriesEditClicked();
 	void OnRecommendationClosed();
-	void OnRecommendationClicked();
+	void OnRecommendationClicked(const Product& product);
 	void OnGoToSettingsClicked();
-
-public:
-	class UISettings
-	{
-	public:
-		static QFont UI_FONT;
-	};
-
-	class ColorSettings
-	{
-	public:
-		static QString COLOR_TOP_BANNER;
-		static QString NAVBUTTONS;
-		static QString RECOMMENDATION;
-		static QString ERROR_BANNER;
-		static QString WINDOW_BACKGROUND;
-		static QString LABEL_TEXT;
-		static QString PRODUCT_PRIO1;
-		static QString PRODUCT_PRIO2;
-		static QString PRODUCT_PRIO3;
-		static QString PRODUCT_PRIO4;
-		static QString PRODUCT_PRIO5;
-		static QString LIST_INACTIVE;
-		static QString LIST_ACTIVE;
-	};
 };
 
