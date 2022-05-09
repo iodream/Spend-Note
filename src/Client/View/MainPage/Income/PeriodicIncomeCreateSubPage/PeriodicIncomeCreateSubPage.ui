@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IncomeCreateSubPage</class>
- <widget class="QWidget" name="IncomeCreateSubPage">
+ <class>PeriodicIncomeCreateSubPage</class>
+ <widget class="QWidget" name="PeriodicIncomeCreateSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="NewIncomeLabel">
      <property name="text">
-      <string>New Income</string>
+      <string>New Periodic Income</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -108,12 +108,12 @@
      <item row="8" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Expire date:</string>
+        <string>Generate until:</string>
        </property>
       </widget>
      </item>
      <item row="8" column="1">
-      <widget class="QDateEdit" name="ExpirationDateEdit">
+      <widget class="QDateEdit" name="GenerateUntil">
        <property name="dateTime">
         <datetime>
          <hour>0</hour>
@@ -130,6 +130,37 @@
        <property name="calendarPopup">
         <bool>true</bool>
        </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="RepeatLabel">
+       <property name="text">
+        <string>Repeating</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QComboBox" name="RepeatSelect">
+       <item>
+        <property name="text">
+         <string>Daily</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Weekly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monthly</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Annually</string>
+        </property>
+       </item>
       </widget>
      </item>
     </layout>

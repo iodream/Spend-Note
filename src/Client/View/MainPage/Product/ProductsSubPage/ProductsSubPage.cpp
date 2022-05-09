@@ -10,12 +10,12 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 	, m_ui(new Ui::ProductsSubPage)
 {
 	m_ui->setupUi(this);
-	set_list_size(0);
+	set_regular_list_size(0);
 
 	connect(
 		m_ui->AddItemButton,
 		&QPushButton::clicked,
-		[this](bool ignored){ GoToCreateProduct(m_list.id); });
+		[this](bool ignored){ GoToCreateProduct(m_regular_list.id); });
 
 	connect(
 		m_ui->ViewList,
@@ -26,15 +26,15 @@ ProductsSubPage::ProductsSubPage(QWidget *parent)
 
 void ProductsSubPage::AppendProduct(ProductItem* product)
 {
-	InsertProduct(product, get_list_size());
+	InsertProduct(product, get_regular_list_size());
 }
 
 void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 {
-	if (get_list_size() < idx || idx < 0) {
+	if (get_regular_list_size() < idx || idx < 0) {
 		throw Exception("Trying to insert a widget out of range");
 	}
-	m_ui->ItemsLayout->insertWidget(idx, product);
+	m_ui->RegularItemsLayout->insertWidget(idx, product);
 
 	connect(
 		product,
@@ -42,13 +42,13 @@ void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 		[this, product](){ OnProductClicked(product); });
 
 	product->set_number(idx + 1);
-	set_list_size(get_list_size() + 1);
+	set_regular_list_size(get_regular_list_size() + 1);
 	UpdateProductNumbers(idx + 1);
 }
 
 void ProductsSubPage::UpdateProductNumbers(int idx)
 {
-	while (idx < get_list_size())
+	while (idx < get_regular_list_size())
 	{
 		auto* product = SafeGetProduct(idx);
 		product->set_number(++idx);
@@ -63,9 +63,9 @@ void ProductsSubPage::OnProductClicked(ProductItem* product)
 
 ProductItem* ProductsSubPage::SafeGetProduct(int idx)
 {
-	QLayoutItem *layout = m_ui->ItemsLayout->itemAt(idx);
+	QLayoutItem *layout = m_ui->RegularItemsLayout->itemAt(idx);
 	if (!layout) {
-		throw Exception("Failed to get product layout");
+		throw Exception("Failed to get regular product layout");
 	}
 	auto* product = qobject_cast<ProductItem*>(layout->widget());
 	if (!product) {
@@ -77,38 +77,38 @@ ProductItem* ProductsSubPage::SafeGetProduct(int idx)
 void ProductsSubPage::RemoveProduct(ProductItem* product)
 {
 	int idx = product->get_number() - 1;
-	QLayoutItem *layout = m_ui->ItemsLayout->takeAt(idx);
+	QLayoutItem *layout = m_ui->RegularItemsLayout->takeAt(idx);
 	if (!layout) {
 		throw Exception("Failed to get product layout");
 	}
 
 	delete layout->widget();
 	delete layout;
-	set_list_size(get_list_size() - 1);
+	set_regular_list_size(get_regular_list_size() - 1);
 
 	UpdateProductNumbers(idx);
 }
 
-void ProductsSubPage::set_list_size(int size)
+void ProductsSubPage::set_regular_list_size(int size)
 {
-	m_list_size = size;
-	m_ui->ListSize->setText(QString("%1").arg(m_list_size));
+	m_regular_list_size = size;
+	m_ui->ListSize->setText(QString("%1").arg(m_regular_list_size));
 	m_ui->ListSize->show();
 }
 
-int ProductsSubPage::get_list_size()
+int ProductsSubPage::get_regular_list_size()
 {
-	return m_list_size;
+	return m_regular_list_size;
 }
 
-void ProductsSubPage::set_list(List list)
+void ProductsSubPage::set_regular_list(List list)
 {
-	m_list = list;
+	m_regular_list = list;
 }
 
-List ProductsSubPage::get_list()
+List ProductsSubPage::get_regular_list()
 {
-	return m_list;
+	return m_regular_list;
 }
 
 ProductsSubPage::~ProductsSubPage()
@@ -119,7 +119,7 @@ ProductsSubPage::~ProductsSubPage()
 void ProductsSubPage::Update(
 	const std::vector<Product>& products)
 {
-	m_ui->ListName->setText(m_list.name);
+	m_ui->ListName->setText(m_regular_list.name);
 	Clear();
 	for (auto it = products.begin(); it != products.end(); it++) {
 		ProductItem* item = new ProductItem(*it);
@@ -130,7 +130,7 @@ void ProductsSubPage::Update(
 
 void ProductsSubPage::UpdateColors()
 {
-	for(int i=0; i<get_list_size(); i++)
+	for(int i=0; i<get_regular_list_size(); i++)
 	{
 		auto product = SafeGetProduct(i);
 		product->Update();
@@ -140,14 +140,14 @@ void ProductsSubPage::UpdateColors()
 
 void ProductsSubPage::Clear()
 {
-	while (get_list_size()) {
-		QLayoutItem *layout = m_ui->ItemsLayout->takeAt(0);
+	while (get_regular_list_size()) {
+		QLayoutItem *layout = m_ui->RegularItemsLayout->takeAt(0);
 		if (!layout) {
 			throw Exception("Failed to get product layout");
 		}
 
 		delete layout->widget();
 		delete layout;
-		set_list_size(get_list_size() - 1);
+		set_regular_list_size(get_regular_list_size() - 1);
 	}
 }
