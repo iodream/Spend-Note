@@ -248,19 +248,19 @@ bool ProductRepository::Update(const Product& product)
 		}
 
 		w.exec0(
-				"UPDATE " + db::product::TABLE_NAME +
+				"UPDATE " + product::TABLE_NAME +
 				" SET " +
-					db::product::LIST_ID + " = " + w.quote(product.list_id) + ", " +
-					db::product::CATEGORY_ID + " = " + w.quote(product.category_id) + ", " +
-					db::product::NAME + " = " + w.quote(product.name) + ", " +
-					db::product::PRICE + " = " + w.quote(product.price) + ", " +
-					db::product::AMOUNT + " = " + w.quote(product.amount) + ", " +
-					db::product::PRIORITY + " = " + w.quote(product.product_priority) + ", " +
-					db::product::IS_BOUGHT + " = " + w.quote(product.is_bought) + ", " +
-					db::product::ADD_DATE + " = " + w.quote(product.add_date) + ", " +
-					db::product::PURCHASE_DATE + " = " + w.quote(product.purchase_date) + ", " +
-					db::product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) + ", " +
-					db::product::PERIODIC_ID +  + " = " + w.quote(product.periodic_id) + ", " +
+					product::LIST_ID + " = " + w.quote(product.list_id) + ", " +
+					product::CATEGORY_ID + " = " + w.quote(product.category_id) + ", " +
+					product::NAME + " = " + w.quote(product.name) + ", " +
+					product::PRICE + " = " + w.quote(product.price) + ", " +
+					product::AMOUNT + " = " + w.quote(product.amount) + ", " +
+					product::PRIORITY + " = " + w.quote(product.product_priority) + ", " +
+					product::IS_BOUGHT + " = " + w.quote(product.is_bought) + ", " +
+					product::ADD_DATE + " = " + w.quote(product.add_date) + ", " +
+					product::PURCHASE_DATE + " = " + w.quote(product.purchase_date) + ", " +
+					product::BUY_UNTIL_DATE +  + " = " + w.quote(product.buy_until_date) + ", " +
+					product::PERIODIC_ID +  + " = " + w.quote(product.periodic_id) +
 				" WHERE " + db::product::ID + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}

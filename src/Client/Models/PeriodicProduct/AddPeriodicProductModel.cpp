@@ -13,7 +13,7 @@ Net::Request AddPeriodicProductModel::FormRequest(const PeriodicProduct& product
 	return request;
 }
 
-ProductId AddPeriodicProductModel::ParseResponse(const Net::Response& response)
+PeriodicProductId AddPeriodicProductModel::ParseResponse(const Net::Response& response)
 {
 	PeriodicProductId product_id;
 

@@ -296,7 +296,7 @@ bool PeriodicProductRepository::UpdateAddNext(const PeriodicProduct& product)
 
 		w.exec0(
 			"UPDATE " + periodicProduct::TABLE_NAME +
-			" SET " + periodicProduct::NEXT_ADD_DATE + " = " + w.quote(product.next_add_date) + " + " + PeriodIdToString(product.period_id) + +
+			" SET " + periodicProduct::NEXT_ADD_DATE + " = TIMESTAMP " + w.quote(product.next_add_date) + " + INTERVAL " + PeriodIdToString(product.period_id) + +
 			" WHERE " + periodicProduct::ID + " = " + w.quote(product.id) + ";");
 		w.commit();
 	}

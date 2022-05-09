@@ -22,8 +22,11 @@ void LoginHandler::UpdatePeriodicProducts(db::IdType user_id)
 {
 	const auto periodic_products = m_facade->GetPeriodicProductsForUser(user_id);
 
-	for (const auto& periodic_product : periodic_products) {
-		while (m_facade->CanPeriodicProductGenerate(periodic_product.id)) {
+	for (const auto& old_periodic_product : periodic_products) {
+
+		while (m_facade->CanPeriodicProductGenerate(old_periodic_product.id)) {
+			const auto periodic_product = m_facade->GetPeriodicProductById(old_periodic_product.id).value();
+
 			// Generate product
 			db::Product product;
 			product.id = 0;
@@ -34,7 +37,7 @@ void LoginHandler::UpdatePeriodicProducts(db::IdType user_id)
 			product.amount = periodic_product.amount;
 			product.product_priority = periodic_product.product_priority;
 			product.is_bought = false;
-			product.add_date = QDateTime::currentDateTime().toString(Qt::ISODate).toStdString();
+			product.add_date = periodic_product.next_add_date;
 			product.purchase_date = std::nullopt;
 			product.buy_until_date = std::nullopt;
 			product.periodic_id = periodic_product.id;

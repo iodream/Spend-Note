@@ -2,7 +2,7 @@
 
 #include "../Handlers/PeriodicProduct/RemovePeriodicProductHandler.h"
 #include "../Handlers/PeriodicProduct/UpdatePeriodicProductHandler.h"
-#include "../Handlers/PeriodicProduct/GetProductsForPeriodicProductHandler.h"
+#include "../Handlers/Product/GetProductsForPeriodicProductHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 
 #include "Utils.h"

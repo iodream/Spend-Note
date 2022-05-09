@@ -3,7 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "Net/Entities/Product/ProductId.h"
+#include "Net/Entities/PeriodicProduct/PeriodicProductId.h"
 #include "Net/Constants.h"
 #include "Net/Message.h"
 
