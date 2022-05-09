@@ -3,28 +3,28 @@
 
 PeriodicIncomeEditSubPage::PeriodicIncomeEditSubPage(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::PeriodicIncomeEditSubPage)
+	m_ui(new Ui::PeriodicIncomeEditSubPage)
 {
-	ui->setupUi(this);
+	m_ui->setupUi(this);
 
-	ui->GenerateUntil->setDisplayFormat(
+	m_ui->GenerateUntil->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
 
-	ui->NewCategoryName->setVisible(false);
-	ui->NewCategorySaveButton->setVisible(false);
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
 
 	connect(
-		ui->SubmitButton,
+		m_ui->SubmitButton,
 		&QPushButton::clicked,
 		this,
 		&PeriodicIncomeEditSubPage::OnEditIncome);
 	connect(
-		ui->NewCategoryButton,
+		m_ui->NewCategoryButton,
 		&QPushButton::released,
 		this,
 		&PeriodicIncomeEditSubPage::OnNewCategoryPushed);
 	connect(
-		ui->NewCategorySaveButton,
+		m_ui->NewCategorySaveButton,
 		&QPushButton::released,
 		this,
 		&PeriodicIncomeEditSubPage::OnNewCategorySaved);
@@ -35,17 +35,17 @@ PeriodicIncomeEditSubPage::PeriodicIncomeEditSubPage(QWidget *parent) :
 void PeriodicIncomeEditSubPage::OnEditIncome()
 {
 	m_income.add_time = QDate::currentDate().toString();
-	m_income.amount = ui->Amount->value();
-	m_income.category.id = qvariant_cast<IdType>(ui->Category->currentData());
-	m_income.category.name = ui->Category->currentText();
-	m_income.expiration_time = ui->GenerateUntil->date().toString();
-	m_income.name = ui->NameLineEdit->text();
+	m_income.amount = m_ui->Amount->value();
+	m_income.category.id = qvariant_cast<IdType>(m_ui->Category->currentData());
+	m_income.category.name = m_ui->Category->currentText();
+	m_income.expiration_time = m_ui->GenerateUntil->date().toString();
+	m_income.name = m_ui->NameLineEdit->text();
 	emit UpdateIncome();
 }
 
 void PeriodicIncomeEditSubPage::SetMinimumDate(const QDate& date)
 {
-	ui->GenerateUntil->setMinimumDate(date);
+	m_ui->GenerateUntil->setMinimumDate(date);
 }
 
 const Income& PeriodicIncomeEditSubPage::get_income()
@@ -61,51 +61,51 @@ void PeriodicIncomeEditSubPage::set_income(const Income& income)
 void PeriodicIncomeEditSubPage::Update(const Income& income)
 {
 	m_income = income;
-	ui->NameLineEdit->setText(income.name);
-	ui->Amount->setValue(income.amount);
-	ui->Category->setCurrentText(income.category.name);
+	m_ui->NameLineEdit->setText(income.name);
+	m_ui->Amount->setValue(income.amount);
+	m_ui->Category->setCurrentText(income.category.name);
 }
 
 PeriodicIncomeEditSubPage::~PeriodicIncomeEditSubPage()
 {
-	delete ui;
+	delete m_ui;
 }
 
 IncomeCategory PeriodicIncomeEditSubPage::get_category()
 {
 	IncomeCategory category;
-	category.id = qvariant_cast<IdType>(ui->Category->currentData());
-	category.name = ui->Category->currentText();
+	category.id = qvariant_cast<IdType>(m_ui->Category->currentData());
+	category.name = m_ui->Category->currentText();
 	return category;
 }
 
 
 void PeriodicIncomeEditSubPage::FillCategoryBox(const std::vector<IncomeCategory>& income)
 {
-	ui->Category->clear();
+	m_ui->Category->clear();
 	for(const auto& el : income)
 	{
-		ui->Category->addItem(el.name, el.id);
+		m_ui->Category->addItem(el.name, el.id);
 	}
 }
 
 void PeriodicIncomeEditSubPage::OnNewCategoryPushed()
 {
-	ui->NewCategoryName->setVisible(true);
-	ui->NewCategorySaveButton->setVisible(true);
-	ui->NewCategoryButton->setDisabled(true);
+	m_ui->NewCategoryName->setVisible(true);
+	m_ui->NewCategorySaveButton->setVisible(true);
+	m_ui->NewCategoryButton->setDisabled(true);
 }
 
 void PeriodicIncomeEditSubPage::OnNewCategorySaved()
 {
-	ui->NewCategoryName->setVisible(false);
-	ui->NewCategorySaveButton->setVisible(false);
-	ui->NewCategoryButton->setDisabled(false);
+	m_ui->NewCategoryName->setVisible(false);
+	m_ui->NewCategorySaveButton->setVisible(false);
+	m_ui->NewCategoryButton->setDisabled(false);
 
 	IncomeCategory cat;
 
 	cat.id = 0;
-	cat.name = ui->NewCategoryName->text();
+	cat.name = m_ui->NewCategoryName->text();
 
 	emit AddIncomeCategory(cat);
 	emit UpdateCategories();

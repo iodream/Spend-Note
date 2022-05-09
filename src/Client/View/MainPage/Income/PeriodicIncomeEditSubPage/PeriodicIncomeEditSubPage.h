@@ -36,7 +36,7 @@ public slots:
 	IncomeCategory get_category();
 
 private:
-	Ui::PeriodicIncomeEditSubPage *ui;
+	Ui::PeriodicIncomeEditSubPage *m_ui;
 	Income m_income;
 };
 
