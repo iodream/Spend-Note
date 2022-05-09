@@ -101,22 +101,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="49"/>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="97"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="111"/>
         <source>Expire date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="80"/>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="128"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="104"/>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
@@ -149,17 +149,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="49"/>
+        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="97"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="66"/>
+        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="114"/>
         <source>Expire date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="73"/>
+        <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="121"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,6 +214,16 @@
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="140"/>
         <source>New income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="168"/>
+        <source>One-time incomes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="207"/>
+        <source>Periodic incomes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -672,6 +682,431 @@ Incomes</source>
     </message>
 </context>
 <context>
+    <name>PeriodicIncomeCreateSubPage</name>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="20"/>
+        <source>New Periodic Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="32"/>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="42"/>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="63"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="97"/>
+        <source>Amount:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="111"/>
+        <source>Generate until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="128"/>
+        <source>yyyy-MM-dd hh:mm:ss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="138"/>
+        <source>Repeating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="146"/>
+        <source>Daily</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="151"/>
+        <source>Weekly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="156"/>
+        <source>Monthly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="161"/>
+        <source>Annually</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="184"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeriodicIncomeEditSubPage</name>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="20"/>
+        <source>Edit Periodic Income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="32"/>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="42"/>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="49"/>
+        <source>Amount:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="66"/>
+        <source>Generate until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="73"/>
+        <source>yyyy-MM-dd hh:mm:ss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="131"/>
+        <source>Repeating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="139"/>
+        <source>Daily</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="144"/>
+        <source>Weekly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="149"/>
+        <source>Monthly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="154"/>
+        <source>Annually</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="177"/>
+        <source>Submit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeriodicIncomeViewSubPage</name>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="22"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="44"/>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="69"/>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="94"/>
+        <source>Generate until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="116"/>
+        <source>Repeating:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="142"/>
+        <source>Edit income</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="159"/>
+        <source>Delete income</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeriodicProductCreateSubPage</name>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="25"/>
+        <source>New periodic product</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="42"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="57"/>
+        <source>Price</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="76"/>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="86"/>
+        <source>Added on:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="93"/>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="122"/>
+        <source>yyyy-MM-dd hh:mm:ss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="108"/>
+        <source>Generate until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="132"/>
+        <source>Repeating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="140"/>
+        <source>Daily</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="145"/>
+        <source>Weekly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="150"/>
+        <source>Monthy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="155"/>
+        <source>Annually</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="168"/>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="183"/>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="201"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="250"/>
+        <source>Save product</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeriodicProductEditSubPage</name>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="25"/>
+        <source>Edit periodic product</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="42"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="57"/>
+        <source>Price</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="76"/>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="86"/>
+        <source>Added on:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="93"/>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="122"/>
+        <source>yyyy-MM-dd hh:mm:ss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="108"/>
+        <source>Generate until:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="132"/>
+        <source>Repeating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="140"/>
+        <source>Daily</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="145"/>
+        <source>Weekly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="150"/>
+        <source>Monthy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="155"/>
+        <source>Annually</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="168"/>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="183"/>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="201"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="250"/>
+        <source>Save product</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PeriodicProductViewSubPage</name>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="26"/>
+        <source>Periodic product info:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="43"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="65"/>
+        <source>Price</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="87"/>
+        <source>Amount</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="109"/>
+        <source>Added on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="131"/>
+        <source>Generate until</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="143"/>
+        <source>Repeating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="155"/>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="177"/>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="230"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="252"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProductCategoriesController</name>
     <message>
         <location filename="Controller/MainPage/ProductCategoriesController.cpp" line="96"/>
@@ -727,12 +1162,12 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="147"/>
+        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="185"/>
         <source>Is bought</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="172"/>
+        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="153"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
@@ -785,7 +1220,7 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.ui" line="144"/>
+        <location filename="View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.ui" line="186"/>
         <source>Is bought</source>
         <translation type="unfinished"></translation>
     </message>
@@ -915,27 +1350,27 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="121"/>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="131"/>
         <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="143"/>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="175"/>
         <source>Is bought</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="155"/>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="153"/>
         <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="211"/>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="214"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="233"/>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="236"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -965,6 +1400,16 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="209"/>
         <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="237"/>
+        <source>Regular products</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="276"/>
+        <source>Periodic products</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ProductViewSubPage</class>
- <widget class="QWidget" name="ProductViewSubPage">
+ <class>PeriodicProductViewSubPage</class>
+ <widget class="QWidget" name="PeriodicProductViewSubPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Product Info:</string>
+      <string>Periodic product info:</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -99,19 +99,19 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLabel" name="BuyUntilLabel">
+      <widget class="QLabel" name="AddedDateLabel">
        <property name="font">
         <font>
          <pointsize>11</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Buy until</string>
+        <string>Added on</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QLineEdit" name="BuyUntil">
+      <widget class="QLineEdit" name="AddedDate">
        <property name="styleSheet">
         <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
        </property>
@@ -121,6 +121,30 @@
       </widget>
      </item>
      <item row="4" column="0">
+      <widget class="QLabel" name="GenerateUntilLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Generate until</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="RepeatingLabel">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Repeating</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
       <widget class="QLabel" name="PriorityLabel">
        <property name="font">
         <font>
@@ -132,7 +156,7 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
+     <item row="6" column="1">
       <widget class="QLineEdit" name="Priority">
        <property name="styleSheet">
         <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
@@ -142,7 +166,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="CategoryLabel">
        <property name="font">
         <font>
@@ -154,7 +178,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="7" column="1">
       <widget class="QLineEdit" name="Category">
        <property name="styleSheet">
         <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
@@ -164,25 +188,17 @@
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="IsBoughtLabel">
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Is bought</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="IsBought">
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="GenerateUntil">
        <property name="styleSheet">
         <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
        </property>
-       <property name="readOnly">
-        <bool>true</bool>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="Repeating">
+       <property name="styleSheet">
+        <string notr="true">    border-width: 1px;   border-style: solid;    border-radius: 4px;</string>
        </property>
       </widget>
      </item>
@@ -214,7 +230,7 @@
         <string>Edit</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="../../../../resources.qrc">
          <normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</normaloff>:/Icons/Icons/baseline_edit_black_24dp.png</iconset>
        </property>
        <property name="iconSize">
@@ -236,7 +252,7 @@
         <string>Delete</string>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="../../../../resources.qrc">
          <normaloff>:/Icons/Icons/baseline_cancel_black_24dp.png</normaloff>:/Icons/Icons/baseline_cancel_black_24dp.png</iconset>
        </property>
        <property name="iconSize">
@@ -251,6 +267,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

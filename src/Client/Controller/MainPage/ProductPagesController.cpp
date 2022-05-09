@@ -216,7 +216,7 @@ void ProductPagesController::OnDeleteProduct()
 bool ProductPagesController::UpdateProductsPage()
 {
 	GetProductsModel model{m_hostname};
-	List list = m_products_page.get_list();
+	List list = m_products_page.get_regular_list();
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
@@ -235,7 +235,7 @@ bool ProductPagesController::UpdateProductsPage()
 bool ProductPagesController::UpdateProductsPage(List list)
 {
 	GetProductsModel model{m_hostname};
-	m_products_page.set_list(list);
+	m_products_page.set_regular_list(list);
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
