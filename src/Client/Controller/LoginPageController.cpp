@@ -19,19 +19,30 @@ LoginPageController::LoginPageController(
 	ConnectPage();
 }
 
+void LoginPageController::UpdateLoginPage()
+{
+	m_page.Update();
+}
+
 void LoginPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::Login,
 		this,
 		&LoginPageController::OnLogin);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::GotoSignup,
 		this,
 		&LoginPageController::OnGoToSignupPage);
+
+	connect(
+		&m_page,
+		&LoginPage::LanguageChanged,
+		this,
+		&LoginPageController::LanguageChanged);
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
@@ -52,7 +63,7 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 		if(response.status == Poco::Net::HTTPResponse::HTTP_UNAUTHORIZED)
 		{
 			m_page.ChangeLoginErrorLabel(
-				"Email or password is incorrect");
+				tr("Login or password is incorrect").toStdString());
 		}
 		else
 		{

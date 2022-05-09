@@ -51,7 +51,7 @@ private:
 	void UpdateCategoryBoxes();
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 	void AddIncomeCategory(IncomeCategory);

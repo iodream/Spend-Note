@@ -31,7 +31,7 @@ public:
 
 	bool UpdateProductCategoryPage();
 
-	bool UpdateProductCategoryPageColors();
+	void UpdateProductCategoryPageColors();
 private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -44,7 +44,7 @@ private:
 
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 
 	void GoBack(int n=1);

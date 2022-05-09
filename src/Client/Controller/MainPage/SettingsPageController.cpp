@@ -21,6 +21,18 @@ SettingsPageController::SettingsPageController(
 		&SettingsSubPage::ColorSchemeChanged,
 		this,
 		&SettingsPageController::OnColorSchemeChanged);
+
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::LanguageChanged,
+		this,
+		&SettingsPageController::OnColorSchemeChanged);
+
+	connect(
+		&m_settings_page,
+		&SettingsSubPage::LanguageChanged,
+		this,
+		&SettingsPageController::LanguageChanged);
 }
 
 void SettingsPageController::OnColorSchemeChanged()

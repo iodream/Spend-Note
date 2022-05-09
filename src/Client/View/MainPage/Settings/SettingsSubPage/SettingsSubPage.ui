@@ -74,10 +74,10 @@
             <x>0</x>
             <y>0</y>
             <width>535</width>
-            <height>583</height>
+            <height>648</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,1,10,0,0,0,0,0,0,0">
+          <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,1,10,0,0,0,0,0,0,0,0,0">
            <item>
             <widget class="QLabel" name="UserInfoLabel_2">
              <property name="sizePolicy">
@@ -163,6 +163,69 @@
             </layout>
            </item>
            <item>
+            <widget class="QLabel" name="LanguageLabel">
+             <property name="font">
+              <font>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(85, 87, 83);
+background-color: rgb(186, 189, 182);</string>
+             </property>
+             <property name="text">
+              <string>Language:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="LanguageLayout">
+             <property name="spacing">
+              <number>2</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Choose a language:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="LanguageBox">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>English</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Українська</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -194,9 +257,15 @@
             <layout class="QFormLayout" name="FontsLayout">
              <item row="1" column="1">
               <widget class="QPushButton" name="FontSelectButton">
+               <property name="minimumSize">
+                <size>
+                 <width>113</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
-                 <width>79</width>
+                 <width>145</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -214,9 +283,15 @@
              </item>
              <item row="3" column="1">
               <widget class="QPushButton" name="DefaultFontButton">
+               <property name="minimumSize">
+                <size>
+                 <width>113</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
-                 <width>104</width>
+                 <width>145</width>
                  <height>16777215</height>
                 </size>
                </property>

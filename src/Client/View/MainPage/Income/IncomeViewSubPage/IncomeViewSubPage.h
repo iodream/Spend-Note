@@ -23,6 +23,7 @@ public:
 	void set_income(const Income& income);
 	Income get_income() const;
 
+	void changeEvent(QEvent* event);
 signals:
 	void GoBack(int n=1);
 	void GoToEditIncome(Income income);

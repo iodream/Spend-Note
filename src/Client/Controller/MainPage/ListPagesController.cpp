@@ -212,7 +212,7 @@ void ListPagesController::OnCreateList()
 	new_list.owner_id = m_user_id;
 	if(!model.CheckName(new_list.name))
 	{
-		emit ClientError("List name can't be empty");
+		emit ClientError(tr("List name can't be empty"));
 		return;
 	}
 
@@ -244,7 +244,7 @@ void ListPagesController::OnCreateList()
 
 		if(!model.CheckFields(new_product))
 		{
-			emit ClientError("Product data can't be empty");
+			emit ClientError(tr("Product data can't be empty"));
 			return;
 		}
 		auto request  = model.FormRequest(new_product);
@@ -313,7 +313,7 @@ void ListPagesController::OnQuickAddItem()
 
 	if(!AddProductModel::CheckFields(new_item))
 	{
-		emit ClientError("Product data can't be empty");
+		emit ClientError(tr("Product data can't be empty"));
 		return;
 	}
 
@@ -365,7 +365,7 @@ void ListPagesController::OnUpdateList()
 
 	if(!model.CheckName(list.name))
 	{
-		emit ClientError("List name can't be empty");
+		emit ClientError(tr("List name can't be empty"));
 		return;
 	}
 

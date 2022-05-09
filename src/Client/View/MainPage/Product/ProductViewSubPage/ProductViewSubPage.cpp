@@ -19,6 +19,21 @@ ProductViewSubPage::ProductViewSubPage(QWidget *parent) :
 		&ProductViewSubPage::DeleteProduct);
 }
 
+void ProductViewSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 ProductViewSubPage::~ProductViewSubPage()
 {
 	delete m_ui;

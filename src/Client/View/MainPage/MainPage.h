@@ -51,8 +51,9 @@ public:
 	void UpdatePage();
 
 	void SetErrorBanner(const int code, const std::string& description);
-	void SetErrorBanner(const std::string& description);
+	void SetErrorBanner(const QString& description);
 	void CloseErrorBanner();
+	void changeEvent(QEvent* event);
 	void HideRecommendation();
 	void ShowRecommendation();
 
@@ -89,6 +90,8 @@ public:
 	class UISettings
 	{
 	public:
+		static UILangs LANG_UI;
+		static const std::map<UILangs, QString> translation_file;
 		static QFont UI_FONT;
 		static QFont GetDefaultFont();
 	private:
@@ -172,7 +175,6 @@ signals:
 	void ColorSchemeChanged();
 	void GoToProductView(const Product& product);
 
-
 public slots:
 	void OnGoToListsClicked();
 	void OnGoToIncomesClicked();
@@ -184,4 +186,3 @@ public slots:
 	void OnRecommendationClicked(const Product& product);
 	void OnGoToSettingsClicked();
 };
-

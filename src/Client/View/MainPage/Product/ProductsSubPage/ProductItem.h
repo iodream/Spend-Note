@@ -31,6 +31,8 @@ public:
 	void HideCheck();
 	void SetText(const QString&);
 
+	void changeEvent(QEvent* event);
+
 private:
 	void UpdateColor();
 	Product m_product;

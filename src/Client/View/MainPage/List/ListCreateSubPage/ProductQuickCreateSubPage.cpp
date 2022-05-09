@@ -39,6 +39,21 @@ ProductQuickCreateSubPage::~ProductQuickCreateSubPage()
 	delete m_ui;
 }
 
+void ProductQuickCreateSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 QString ProductQuickCreateSubPage::GetName()
 {
 	return m_ui->Name->text();

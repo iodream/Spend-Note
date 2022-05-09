@@ -47,6 +47,7 @@ public:
 
 	QChart* InitChart(QLayout* layout);
 
+	void changeEvent(QEvent* event);
 private slots:
 	void OnForwardButtonClicked();
 	void OnBackButtonClicked();

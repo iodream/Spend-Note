@@ -14,6 +14,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Charts REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Charts REQUIRED)
+find_package(Qt6LinguistTools)
+
 
 set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
@@ -21,6 +23,7 @@ set(Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Utils.h
 )
+
 
 list(APPEND Spend-Note-Client_LIBS
     PocoNet
@@ -42,19 +45,25 @@ list(APPEND Spend-Note-Client_SOURCES
     ${Spend-Note-Logger_SOURCES}
 )
 
+qt6_create_translation(QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} en_US.ts uk_UA.ts)
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(
         Spend-Note-Client
         MANUAL_FINALIZATION
         ${Spend-Note-Client_SOURCES}
         ${CMAKE_CURRENT_SOURCE_DIR}/resources.qrc
-    )
+        "${QM_FILES}")
 endif()
+
+
 
 list(APPEND Spend-Note-Client_LIBS
     Qt::Core
     Qt::Widgets
 )
+
+
 
 target_include_directories(Spend-Note-Client PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 

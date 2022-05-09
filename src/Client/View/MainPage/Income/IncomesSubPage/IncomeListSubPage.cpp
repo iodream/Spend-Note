@@ -19,10 +19,27 @@ IncomeListSubPage::IncomeListSubPage(QWidget* parent)
 		&IncomeListSubPage::GoToCreateIncome);
 }
 
+void IncomeListSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
+
 void IncomeListSubPage::AppendRegularIncome(IncomeListItem* income)
 {
 	InsertRegularIncome(income, get_regular_list_size());
 }
+
 
 void IncomeListSubPage::InsertRegularIncome(IncomeListItem* income, int idx)
 {

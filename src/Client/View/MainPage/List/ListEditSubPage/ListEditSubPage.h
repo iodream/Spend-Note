@@ -24,7 +24,7 @@ public:
 	void set_list(const List& list);
 	List get_list();
 	IdType get_state_id() const;
-
+	void changeEvent(QEvent* event);
 signals:
 	void UpdateListView(PageData& data);
 

@@ -2,6 +2,7 @@
 #include "ui_ProductItem.h"
 
 #include "View/Constants.h"
+
 #include "View/MainPage/MainPage.h"
 
 ProductItem::ProductItem(Product product, QWidget *parent)
@@ -36,6 +37,22 @@ void ProductItem::UpdateColor()
 	case 5:
 		m_color = MainPage::ColorSettings::PRODUCT_PRIO5;
 		break;
+	}
+}
+
+
+void ProductItem::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
 	}
 }
 

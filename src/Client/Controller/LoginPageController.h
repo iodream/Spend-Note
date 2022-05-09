@@ -4,7 +4,6 @@
 
 #include "View/LoginPage/LoginPage.h"
 #include "Common.h"
-#include "View/Constants.h"
 #include "Models/LoginModel.h"
 
 class LoginPageController : public QObject
@@ -18,6 +17,7 @@ public:
 		LoginPage& page);
 
 	virtual ~LoginPageController() override {}
+	void UpdateLoginPage();
 
 private:
 	HTTPClient& m_http_client;
@@ -30,8 +30,8 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void LanguageChanged();
 	void ReadSettings();
-
 
 public slots:
 	void OnLogin(LoginModel::JSONFormatter::Credentials credentials);

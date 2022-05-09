@@ -20,8 +20,8 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 	m_pie_income_amount_chart = InitChart(m_ui->AmountIncomeChart);
 	m_bar_income_chart = InitChart(m_ui->BarIncomeChart);
 
-	m_ui->tabWidget->setTabText(0, "Outcomes");
-	m_ui->tabWidget->setTabText(1, "Incomes");
+	m_ui->tabWidget->setTabText(0, tr("Outcomes"));
+	m_ui->tabWidget->setTabText(1, tr("Incomes"));
 
 	m_ui->tabWidget->setCurrentIndex(0);
 
@@ -59,6 +59,21 @@ StatisticSubPage::StatisticSubPage(QWidget *parent) :
 StatisticSubPage::~StatisticSubPage()
 {
 	delete m_ui;
+}
+
+void StatisticSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
 }
 
 QString StatisticSubPage::GetProductCategoryById(IdType id, const std::vector<ProductCategory>& category)

@@ -28,9 +28,12 @@ public:
 	void Update(const std::vector<Income>& incomes);
 	void Clear();
 
+	void changeEvent(QEvent* event);
+
 	void set_regular_list_size(int size);
 	int get_regular_list_size();
 	void UpdateColors();
+
 private:
 	Ui::IncomeListSubPage *m_ui;
 

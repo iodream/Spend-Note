@@ -23,6 +23,21 @@ IncomeViewSubPage::IncomeViewSubPage(QWidget *parent)
 		[this](){ emit DeleteIncome(m_income); });
 }
 
+void IncomeViewSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 IncomeViewSubPage::~IncomeViewSubPage()
 {
 	delete m_ui;

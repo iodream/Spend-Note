@@ -96,6 +96,12 @@ SettingsSubPage::SettingsSubPage(QWidget *parent) :
 		&QPushButton::clicked,
 		this,
 		&SettingsSubPage::OnNewColorSelected);
+
+	connect(
+		m_ui->LanguageBox,
+		&QComboBox::currentTextChanged,
+		this,
+		&SettingsSubPage::OnLangSelected);
 }
 
 SettingsSubPage::~SettingsSubPage()
@@ -126,6 +132,7 @@ void SettingsSubPage::UpdateColors()
 	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 	m_ui->UserInfoLabel_2->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 	m_ui->ColorSchemeLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
+	m_ui->LanguageLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 	m_ui->FontsLabel->setStyleSheet("background-color: " + MainPage::ColorSettings::COLOR_TOP_BANNER);
 }
 
@@ -173,6 +180,19 @@ void SettingsSubPage::Update()
 		.arg(QString::number(MainPage::UISettings::UI_FONT.pointSize())));
 
 	m_ui->FontSpinBox->setValue(MainPage::UISettings::UI_FONT.pointSize());
+
+	switch(MainPage::UISettings::LANG_UI)
+	{
+	case UILangs::AMERICAN_ENGLISH:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	case UILangs::UKRAINIAN:
+		m_ui->LanguageBox->setCurrentText("Українська");
+		break;
+	default:
+		m_ui->LanguageBox->setCurrentText("English");
+		break;
+	}
 }
 
 //default colors
@@ -350,6 +370,34 @@ void SettingsSubPage::OnNewColorSelected()
 	}
 	OnColorSchemeCustomSelect(m_ui->CustomColorsSelectBox->currentIndex());
 	emit ColorSchemeChanged();
+}
+
+void SettingsSubPage::OnLangSelected(QString lang)
+{
+	if(lang == "English")
+	{
+		MainPage::UISettings::LANG_UI = UILangs::AMERICAN_ENGLISH;
+	}
+	else if(lang == "Українська")
+	{
+		MainPage::UISettings::LANG_UI = UILangs::UKRAINIAN;
+	}
+	emit LanguageChanged();
+}
+
+void SettingsSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
 }
 
 void SettingsSubPage::OnDefaultFontClicked()

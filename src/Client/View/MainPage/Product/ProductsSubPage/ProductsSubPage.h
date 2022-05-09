@@ -31,11 +31,14 @@ public:
 
 	void Clear();
 
+	void changeEvent(QEvent* event);
+
 	void set_regular_list_size(int size);
 	int get_regular_list_size();
 
 	void set_regular_list(List list);
 	List get_regular_list();
+
 
 signals:
 	void GoToCreateProduct(IdType list_id);

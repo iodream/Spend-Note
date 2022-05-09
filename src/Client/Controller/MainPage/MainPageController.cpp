@@ -31,19 +31,19 @@ MainPageController::MainPageController(
 
 void MainPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::Logout,
 		this,
 		&MainPageController::OnLogout);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::ChangeSubPage,
 		this,
 		&MainPageController::OnChangeSubPage);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::GoBack,
 		this,
@@ -154,7 +154,6 @@ void MainPageController::InitProductRecommendationController()
 		&ProductRecommendationController::ServerError,
 		this,
 		&MainPageController::OnServerError);
-
 
 	connect(
 		m_product_recommendation_controller.get(),
@@ -371,6 +370,12 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::ColorSchemeChanged,
 		this,
 		&MainPageController::OnUIUpdate);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::LanguageChanged,
+		this,
+		&MainPageController::LanguageChanged);
 }
 
 void MainPageController::OnLogout()
@@ -434,7 +439,7 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		m_page.SetErrorBanner("Error updating page");
+		m_page.SetErrorBanner(tr("Error updating page"));
 	}
 
 	// global UI update only when it's needed because its costly
@@ -460,7 +465,7 @@ void MainPageController::OnServerError(const int code, const std::string& desc)
 	m_page.SetErrorBanner(code, desc);
 }
 
-void MainPageController::OnClientError(const std::string& desc)
+void MainPageController::OnClientError(const QString& desc)
 {
 	m_page.SetErrorBanner(desc);
 }
