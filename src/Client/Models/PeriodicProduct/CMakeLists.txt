@@ -7,8 +7,6 @@ list(APPEND Spend-Note-Client_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/AddPeriodicProductModel.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/GetPeriodicProductsModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/GetPeriodicProductsModel.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsForPeriodicProductModel.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/GetProductsForPeriodicProductModel.cpp
 )
 
 set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)
