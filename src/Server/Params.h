@@ -20,6 +20,7 @@ public:
 	const static std::string STATISTICS_TYPE;
 	const static std::string STATISTICS_PERIOD;
 	const static std::string STATISTICS_FORMAT;
+	const static std::string PERIODIC_PRODUCT_ID;
 
 private:
 	std::unordered_map<std::string, Value> m_data;

@@ -11,6 +11,7 @@ BEGIN;
 \i db-populate/product.sql
 
 \i db-populate/period_type.sql
+\i db-populate/periodic_product.sql
 \i db-populate/periodic_income.sql
 
 COMMIT;

@@ -27,6 +27,7 @@ add_library(libdal STATIC
 	DTOs/Product.h
 	DTOs/Statistics.h
 	DTOs/ProductCategory.h
+	DTOs/PeriodicProduct.h
 	DTOs/PeriodicIncome.h
 	DTOs/PeriodType.h
 
@@ -40,6 +41,7 @@ add_library(libdal STATIC
 	Repositories/BalanceRepository/BalanceRepository.h Repositories/BalanceRepository/BalanceRepository.cpp
 	Repositories/StatisticsRepository/StatisticsRepository.h Repositories/StatisticsRepository/StatisticsRepository.cpp
 	Repositories/RecommendationRepository/RecommendationRepository.h Repositories/RecommendationRepository/RecommendationRepository.cpp
+	Repositories/PeriodicProductRepository/PeriodicProductRepository.h Repositories/PeriodicProductRepository/PeriodicProductRepository.cpp
 	Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.cpp
 
 	Facade/IDbFacade.h
@@ -56,6 +58,6 @@ target_link_libraries(libdal Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(libdal -lpqxx -lpq)
 
 if(TestLibdal)
-    add_executable(TestLibdal main.cpp)
-    target_link_libraries(TestLibdal libdal)
+	add_executable(TestLibdal main.cpp)
+	target_link_libraries(TestLibdal libdal)
 endif()

@@ -21,6 +21,9 @@
 #include "Net/Tools/Parsers/Statistics/StatisticPercentagePerCategoryJSONParser.h"
 #include "Net/Tools/Parsers/Statistics/StatisticPerDayJSONParserBase.h"
 
+#include "Net/Tools/Parsers/PeriodicProduct/PeriodicProductJSONParserBase.h"
+#include "Net/Tools/Parsers/PeriodicProduct/PeriodicProductIdJSONParser.h"
+
 #include "Net/Tools/Parsers/ArrayJSONParserBase.h"
 
 using IncomeCategoryJSONParser =
@@ -58,3 +61,8 @@ using StatisticsPerCategoryJSONParser =
 	ArrayJSONParserBase<StatisticPerCategoryJSONParser, StatisticPerCategory>;
 using StatisticsPercentagePerCategoryJSONParser =
 	ArrayJSONParserBase<StatisticPercentagePerCategoryJSONParser, StatisticPercentagePerCategory>;
+
+using PeriodicProductJSONParser =
+	PeriodicProductJSONParserBase<ProductCategoryJSONParserBase, PeriodicProduct>;
+using PeriodicProductsJSONParser =
+	ArrayJSONParserBase<PeriodicProductJSONParser, PeriodicProduct>;

@@ -5,3 +5,4 @@ VALUES
 	('weekly'),
 	('monthly'),
 	('yearly');
+

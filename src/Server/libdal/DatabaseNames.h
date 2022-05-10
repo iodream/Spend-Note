@@ -32,19 +32,19 @@ namespace db
 	}
 
 	namespace periodicIncome
-		{
-			const std::string TABLE_NAME = "PeriodicIncome";
-			const std::string ID = "id";
-			const std::string NAME = "name";
-			const std::string USER_ID = "userId";
-			const std::string AMOUNT = "amount";
-			const std::string CATEGORY_ID = "categoryId";
+	{
+		const std::string TABLE_NAME = "PeriodicIncome";
+		const std::string ID = "id";
+		const std::string NAME = "name";
+		const std::string USER_ID = "userId";
+		const std::string AMOUNT = "amount";
+		const std::string CATEGORY_ID = "categoryId";
 
 
-			const std::string PERIOD_ID = "periodId";
-			const std::string NEXT_ADD_DATE = "nextAddDate";
-			const std::string ADD_UNTIL = "addUntil";
-		}
+		const std::string PERIOD_ID = "periodId";
+		const std::string NEXT_ADD_DATE = "nextAddDate";
+		const std::string ADD_UNTIL = "addUntil";
+	}
 
 	namespace list
 	{
@@ -76,6 +76,22 @@ namespace db
 		const std::string ADD_DATE = "addDate";
 		const std::string PURCHASE_DATE = "purchaseDate";
 		const std::string BUY_UNTIL_DATE = "buyUntilDate";
+		const std::string PERIODIC_ID = "periodicId";
+	}
+
+	namespace periodicProduct
+	{
+		const std::string TABLE_NAME = "PeriodicProduct";
+		const std::string ID = "id";
+		const std::string LIST_ID = "listId";
+		const std::string CATEGORY_ID = "categoryId";
+		const std::string NAME = "name";
+		const std::string PRICE = "price";
+		const std::string AMOUNT = "amount";
+		const std::string PRIORITY = "productPriority";
+		const std::string PERIOD_ID = "periodId";
+		const std::string NEXT_ADD_DATE = "nextAddDate";
+		const std::string ADD_UNTIL = "addUntil";
 	}
 
 	namespace productCategory
