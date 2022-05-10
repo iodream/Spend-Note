@@ -16,6 +16,7 @@ public:
 	void SetMinimumDate(const QDate& date);
 	~IncomeCreateSubPage();
 	void Clear();
+	void changeEvent(QEvent* event);
 
 signals:
 	void CreateIncome(Income& income);

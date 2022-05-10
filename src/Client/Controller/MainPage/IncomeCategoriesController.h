@@ -38,7 +38,7 @@ private:
 
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 
 	void GoBack(int n=1);
@@ -47,5 +47,5 @@ public slots:
 	void OnAddIncomeCategory(IncomeCategory category);
 	void OnDeleteIncomeCategory(IncomeCategoryId id);
 	void OnUpdateIncomeCategory(IncomeCategory category);
-	void OnClientError(const std::string& desc);
+	void OnClientError(const QString& desc);
 };

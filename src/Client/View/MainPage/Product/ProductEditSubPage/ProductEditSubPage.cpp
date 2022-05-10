@@ -17,7 +17,6 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 	m_ui->BuyUntil->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
 
-	//m_ui->BuyUntil->setDate(QDate::currentDate());
 	SetMinimumDate(QDate::currentDate());
 
 	m_ui->NewCategoryName->setVisible(false);
@@ -38,6 +37,21 @@ ProductEditSubPage::ProductEditSubPage(QWidget *parent) :
 ProductEditSubPage::~ProductEditSubPage()
 {
 	delete m_ui;
+}
+
+void ProductEditSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
 }
 
 void ProductEditSubPage::set_product(const Product& product)

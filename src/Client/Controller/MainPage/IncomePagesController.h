@@ -34,6 +34,7 @@ public:
 	bool UpdateIncomeViewPage(const PageData& data);
 	bool UpdateIncomeEditPage(const PageData& data);
 
+	void UpdateIncomesPageColors();
 private:
 	void ConnectIncomesPage();
 	void ConnectIncomeViewPage();
@@ -50,7 +51,7 @@ private:
 	void UpdateCategoryBoxes();
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 	void AddIncomeCategory(IncomeCategory);

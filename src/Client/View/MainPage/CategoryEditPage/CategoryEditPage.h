@@ -15,7 +15,9 @@ public:
 	~CategoryEditPage();
 	void Update(const std::vector<ProductCategory>& categories);
 	void Update(const std::vector<IncomeCategory>& categories);
+	void changeEvent(QEvent* event);
 
+	void UpdateColors();
 signals:
 	void AddIncomeCategory(IncomeCategory);
 	void AddProductCategory(ProductCategory);
@@ -24,7 +26,7 @@ signals:
 	void RemoveIncomeCategory(IncomeCategoryId);
 	void RemoveProductCategory(ProductCategoryId);
 
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 
 public slots:
 	void OnEditCategoryClicked();

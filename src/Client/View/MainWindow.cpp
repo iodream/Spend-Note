@@ -1,6 +1,10 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
+#include "View/MainPage/MainPage.h"
+
+UIPages MainWindow::active_page = UIPages::LOGIN;
+
 LoginPage& MainWindow::get_login_page()
 {
 	return m_login_page;
@@ -31,6 +35,21 @@ MainWindow::MainWindow(QWidget *parent)
 	m_ui->stackedWidget->insertWidget(PageToInt(UIPages::MAIN), &get_main_page());
 }
 
+void MainWindow::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QMainWindow::changeEvent(event);
+	}
+}
+
 MainWindow::~MainWindow()
 {
 	delete m_ui;
@@ -39,4 +58,21 @@ MainWindow::~MainWindow()
 void MainWindow::SetCurrentPage(UIPages page)
 {
 	m_ui->stackedWidget->setCurrentIndex(PageToInt(page));
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+	if(active_page == UIPages::LOGIN || active_page == UIPages::SIGNUP) // dont save default settings to file if we are not logged in
+		{
+			event->accept();
+			return;
+		}
+
+	emit SaveConfig();
+}
+
+//update background color here
+void MainWindow::UpdateColors()
+{
+	setStyleSheet(QString("background-color:" + MainPage::ColorSettings::WINDOW_BACKGROUND));
 }

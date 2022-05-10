@@ -24,6 +24,7 @@ public:
 
 	void set_product(const Product& product);
 	Product get_product();
+	void changeEvent(QEvent* event);
 signals:
 	void EditProduct();
 	void DeleteProduct();

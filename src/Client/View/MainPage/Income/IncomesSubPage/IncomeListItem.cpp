@@ -4,12 +4,7 @@
 #include "View/Constants.h"
 #include <QDate>
 #include <QDateTime>
-namespace {
-
-const QString DEFAULT_COLOR_ODD  = "rgba(163, 255, 188, 50%)";
-}
-
-#include <iostream>
+#include "View/MainPage/MainPage.h"
 
 IncomeListItem::IncomeListItem(Income income, QWidget *parent)
 	: QPushButton(parent)
@@ -24,25 +19,39 @@ IncomeListItem::~IncomeListItem()
 	delete m_ui;
 }
 
+void IncomeListItem::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 void IncomeListItem::UpdateColor()
 {
-	m_color = DEFAULT_COLOR_ODD;
+	m_color = MainPage::ColorSettings::LIST_ACTIVE;
 }
 
 void IncomeListItem::Update()
 {
 	m_ui->Name->setText(m_income.name);
 	QDateTime date = QDateTime::fromString(
-		m_income.expiration_time, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_income.expiration_time, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 	m_ui->ExpirationTime->setText(QLocale::system().toString(date, QLocale::system().dateTimeFormat()));
 	m_ui->Amount->setText(QString::number(m_income.amount));
 	m_ui->Category->setText(m_income.category.name);
 	m_ui->Number->setText(QString("%1").arg(m_number));
 
 	UpdateColor();
-	m_ui->Holder->setStyleSheet(
+	setStyleSheet(
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
-	m_ui->Holder->show();
 }
 
 void IncomeListItem::set_number(int number)

@@ -34,6 +34,21 @@ ProductCreateSubPage::ProductCreateSubPage(QWidget *parent) :
 	m_ui->NewCategorySaveButton->setVisible(false);
 }
 
+void ProductCreateSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 ProductCreateSubPage::~ProductCreateSubPage()
 {
 	delete m_ui;

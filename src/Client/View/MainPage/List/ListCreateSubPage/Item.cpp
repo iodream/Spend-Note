@@ -1,6 +1,8 @@
 #include "Item.h"
 #include "ui_Item.h"
 
+#include "View/MainPage/MainPage.h"
+
 Item::Item(QString name, QWidget *parent)
 	: QPushButton(parent)
 	, m_ui(new Ui::Item)
@@ -8,6 +10,7 @@ Item::Item(QString name, QWidget *parent)
 {
 	m_ui->setupUi(this);
 	Update();
+	setStyleSheet("background-color:" + QString(MainPage::ColorSettings::LIST_ACTIVE));
 }
 
 Item::~Item()

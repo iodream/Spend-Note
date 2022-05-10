@@ -13,6 +13,7 @@
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
 #include "Repositories/RecommendationRepository/RecommendationRepository.h"
 #include "Repositories/PeriodicProductRepository/PeriodicProductRepository.h"
+#include "Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h"
 
 namespace db
 {
@@ -82,7 +83,18 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
-	Product GetRecommendation(const IdType& user_id) override;
+	std::optional<Product> GetRecommendation(const IdType& user_id) override;
+
+	std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) override;
+	std::optional<PeriodicIncome> GetPeriodicIncomeById(IdType id) override;
+	std::vector<PeriodicIncome> GetAllPeriodicIncomes(IdType user_id) override;
+	bool UpdatePeriodicIncome(const PeriodicIncome& income) override;
+	bool RemovePeriodicIncome(IdType id) override;
+	bool CanUserEditPeriodicIncome(IdType user_id, IdType income_id) override;
+	std::vector<PeriodType> GetAllPeriodTypes() override;
+	bool CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id) override;
+	bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) override;
+
 
 	std::optional<IdType> AddPeriodicProduct(const PeriodicProduct& product) override;
 	std::optional<PeriodicProduct> GetPeriodicProductById(IdType id) override;
@@ -90,7 +102,6 @@ public:
 	bool UpdatePeriodicProduct(const PeriodicProduct& product) override;
 	bool RemovePeriodicProduct(IdType id) override;
 
-	std::vector<PeriodType> GetAllPeriodTypes() override;
 	bool CanPeriodicProductGenerate(IdType periodic_id) override;
 	bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) override;
 	std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) override;
@@ -109,5 +120,6 @@ private:
 	StatisticsRepository m_statistics;
 	RecommendationRepository m_recommendation;
 	PeriodicProductRepository m_periodic_products;
+	PeriodicIncomeRepository m_periodic_income;
 };
 }

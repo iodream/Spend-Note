@@ -16,6 +16,7 @@
 #include "DTOs/Statistics.h"
 #include "DTOs/IncomeCategory.h"
 #include "DTOs/PeriodicProduct.h"
+#include "DTOs/PeriodicIncome.h"
 #include "DTOs/PeriodType.h"
 
 namespace db
@@ -86,7 +87,17 @@ public:
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
 
-	virtual Product GetRecommendation(const IdType& user_id) = 0;
+	virtual std::optional<Product> GetRecommendation(const IdType& user_id) = 0;
+
+	virtual std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) = 0;
+	virtual std::optional<PeriodicIncome> GetPeriodicIncomeById(IdType id) = 0;
+	virtual std::vector<PeriodicIncome> GetAllPeriodicIncomes(IdType user_id) = 0;
+	virtual bool UpdatePeriodicIncome(const PeriodicIncome& income) = 0;
+	virtual bool RemovePeriodicIncome(IdType id) = 0;
+	virtual bool CanUserEditPeriodicIncome(IdType user_id, IdType income_id) = 0;
+	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
+	virtual bool CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id) = 0;
+	virtual bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) = 0;
 
 	virtual std::optional<IdType> AddPeriodicProduct(const PeriodicProduct& product) = 0;
 	virtual std::optional<PeriodicProduct> GetPeriodicProductById(IdType id) = 0;
@@ -94,7 +105,6 @@ public:
 	virtual bool UpdatePeriodicProduct(const PeriodicProduct& product) = 0;
 	virtual bool RemovePeriodicProduct(IdType id) = 0;
 
-	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
 	virtual bool CanPeriodicProductGenerate(IdType periodic_id) = 0;
 	virtual bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) = 0;
 	virtual std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) = 0;

@@ -33,7 +33,7 @@ public:
 	void FillCategoryBox(const std::vector<ProductCategory>& categories);
 	void SetRangeOfSpinBox();
 	void SetMinimumDate(const QDate& date);
-
+	void changeEvent(QEvent* event);
 signals:
 	void CreateProduct();
 	void AddProductCategory(ProductCategory);

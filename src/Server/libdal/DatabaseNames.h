@@ -13,6 +13,7 @@ namespace db
 		const std::string CATEGORY_ID = "categoryId";
 		const std::string ADD_TIME = "addTime";
 		const std::string EXPIRATION_TIME= "expirationTime";
+		const std::string PERIODIC_ID = "periodicId";
 	}
 
 	namespace incomeCategory
@@ -21,6 +22,28 @@ namespace db
 		const std::string ID = "id";
 		const std::string USER_ID = "userId";
 		const std::string NAME = "name";
+	}
+
+	namespace periodType
+	{
+		const std::string TABLE_NAME = "PeriodType";
+		const std::string ID = "id";
+		const std::string NAME = "name";
+	}
+
+	namespace periodicIncome
+	{
+		const std::string TABLE_NAME = "PeriodicIncome";
+		const std::string ID = "id";
+		const std::string NAME = "name";
+		const std::string USER_ID = "userId";
+		const std::string AMOUNT = "amount";
+		const std::string CATEGORY_ID = "categoryId";
+
+
+		const std::string PERIOD_ID = "periodId";
+		const std::string NEXT_ADD_DATE = "nextAddDate";
+		const std::string ADD_UNTIL = "addUntil";
 	}
 
 	namespace list
@@ -76,13 +99,6 @@ namespace db
 		const std::string TABLE_NAME = "ProductCategory";
 		const std::string ID = "id";
 		const std::string USER_ID = "userId";
-		const std::string NAME = "name";
-	}
-
-	namespace periodType
-	{
-		const std::string TABLE_NAME = "PeriodType";
-		const std::string ID = "id";
 		const std::string NAME = "name";
 	}
 

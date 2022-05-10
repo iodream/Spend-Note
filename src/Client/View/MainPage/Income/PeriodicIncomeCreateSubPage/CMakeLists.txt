@@ -1,0 +1,7 @@
+list(APPEND Spend-Note-Client_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/PeriodicIncomeCreateSubPage.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/PeriodicIncomeCreateSubPage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/PeriodicIncomeCreateSubPage.ui
+)
+
+set(Spend-Note-Client_SOURCES "${Spend-Note-Client_SOURCES}" PARENT_SCOPE)

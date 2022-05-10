@@ -10,7 +10,7 @@ class RecommendationRepository
 {
 public:
 	RecommendationRepository(pqxx::connection& db_connection);
-	Product GetRecommendation(const IdType& user_id);
+	std::optional<Product> GetRecommendation(const IdType& user_id);
 
 
 private:
