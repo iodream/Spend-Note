@@ -53,6 +53,28 @@ LoginHandler::LoginHandler()
 
 }
 
+void LoginHandler::UpdatePeriodicIncomes(db::IdType user_id)
+{
+	const auto periodic_incomes = m_facade->GetAllPeriodicIncomes(user_id);
+
+	for (const auto& periodic_income : periodic_incomes) {
+		while (m_facade->CanGeneratePeriodicIncome(user_id, periodic_income.id)) {
+			// Generate income
+			db::Income income;
+			income.id = 0;
+			income.user_id = user_id;
+			income.category_id = periodic_income.category_id;
+			income.name = periodic_income.name;
+			income.amount = periodic_income.amount;
+			income.add_time = QDateTime::currentDateTime().toString(Qt::ISODate).toStdString();
+			income.expiration_time = std::nullopt;
+
+			m_facade->AddIncome(income);
+			m_facade->UpdatePeriodicIncome(periodic_income);
+		}
+	}
+}
+
 QJsonDocument LoginHandler::JSONFormatter::Format(const OutDto& dto)
 {
 	SCOPED_LOGGER;
@@ -105,6 +127,7 @@ Net::Response LoginHandler::Handle(Net::Request& request)
 	std::string jwt = signer.sign(token, Poco::JWT::Signer::ALGO_HS256);
 	JSONFormatter::OutDto out_dto{jwt, user->id};
 
+	UpdatePeriodicIncomes(user->id);
 	UpdatePeriodicProducts(user->id);
 
 	return FormJSONResponse(m_formatter.Format(out_dto));

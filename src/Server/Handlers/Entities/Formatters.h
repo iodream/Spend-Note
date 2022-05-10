@@ -6,6 +6,8 @@
 #include "Net/Tools/Formatters/Income/IncomeJSONFormatterBase.h"
 #include "Net/Tools/Formatters/Income/IncomeIdJSONFormatter.h"
 #include "Net/Tools/Formatters/Income/IncomeCategoryIdJSONFormatter.h"
+#include "Net/Tools/Formatters/PeriodicIncome/PeriodicIncomeIdJSONFormatter.h"
+#include "Net/Tools/Formatters/PeriodicIncome/PeriodicIncomeJSONFormatterBase.h"
 
 #include "Net/Tools/Formatters/List/ListJSONFormatterBase.h"
 #include "Net/Tools/Formatters/List/ListStateJSONFormatterBase.h"
@@ -34,6 +36,11 @@ using IncomesJSONFormatter =
 	ArrayJSONFormatterBase<IncomeJSONFormatter, Income>;
 using IncomeCategoriesJSONFormatter =
 	ArrayJSONFormatterBase<IncomeCategoryJSONFormatter, IncomeCategory>;
+
+using PeriodicIncomeJSONFormatter =
+	PeriodicIncomeJSONFormatterBase<ProductCategoryJSONFormatterBase, PeriodicIncome>;
+using PeriodicIncomesJSONFormatter =
+	ArrayJSONFormatterBase<PeriodicIncomeJSONFormatter, PeriodicIncome>;
 
 using ListStateJSONFormatter =
 	ListStateJSONFormatterBase<ListState>;

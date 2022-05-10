@@ -11,6 +11,8 @@ list(APPEND Spend-Note-Server_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/ListsResolver.h
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomesResolver.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomesResolver.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/PeriodicIncomesResolver.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/PeriodicIncomesResolver.h
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoriesResolver.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/IncomeCategoriesResolver.h
 	${CMAKE_CURRENT_SOURCE_DIR}/PeriodicProductsResolver.cpp

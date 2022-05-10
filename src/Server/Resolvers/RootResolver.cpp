@@ -8,6 +8,7 @@
 #include "UsersResolver.h"
 #include "IncomeCategoriesResolver.h"
 #include "ProductCategoriesResolver.h"
+#include "PeriodicIncomesResolver.h"
 #include "PeriodicProductsResolver.h"
 
 #include "../Handlers/LoginHandler.h"
@@ -23,6 +24,7 @@ namespace {
 const std::string LOGIN    = "/login";
 const std::string SIGNUP   = "/signup";
 const std::string INCOMES  = "/incomes";
+const std::string PERIODIC_INCOMES  = "/periodic-incomes";
 const std::string LISTS    = "/lists";
 const std::string PRODUCTS = "/products";
 const std::string USERS    = "/users";
@@ -37,6 +39,8 @@ RootResolver::RootResolver()
 	SCOPED_LOGGER;
 	m_resolvers[INCOMES] =
 		std::unique_ptr<ISubDomainResolver>(new IncomesResolver());
+	m_resolvers[PERIODIC_INCOMES] =
+		std::unique_ptr<ISubDomainResolver>(new PeriodicIncomesResolver());
 	m_resolvers[LISTS] =
 		std::unique_ptr<ISubDomainResolver>(new ListsResolver());
 	m_resolvers[PRODUCTS] =
