@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QWidget>
-#include "RecommendationItem.h"
+#include "Product/ProductsSubPage/ProductItem.h"
 
 namespace Ui {
 class RecommendationWidget;
@@ -15,17 +15,25 @@ public:
 	explicit RecommendationWidget(QWidget *parent = nullptr);
 	~RecommendationWidget();
 
-	void AppendItem(RecommendationItem* Item);
-	void InsertItem(RecommendationItem* Item, int idx);
-	void RemoveItem();
+	void AppendProduct(ProductItem* Item);
+	void InsertProduct(ProductItem* Item, int idx);
+	void RemoveProduct();
 
+	ProductItem* SafeGetProduct(int idx);
 	int GetListSize();
+	void Clear();
 	void SetListSize(int size);
 
+	bool bClosed;
 private:
 	Ui::RecommendationWidget *m_ui;
 	int m_list_size;
 
 signals:
 	void RecommendationClosed();
+	void GoToProductView(const Product& product);
+
+public slots:
+	void OnProductClicked(ProductItem* product);
+
 };

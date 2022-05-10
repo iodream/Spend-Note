@@ -23,6 +23,9 @@
 #include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
 #include "Net/Entities/Statistics/StatisticPerDayBase.h"
 
+#include "Net/Entities/PeriodicProduct/PeriodicProductBase.h"
+#include "Net/Entities/PeriodicProduct/PeriodicProductId.h"
+
 using String = std::string;
 
 using Income = IncomeBase<IncomeCategoryBase, String>;
@@ -33,6 +36,7 @@ using List = ListBase<ListStateBase, String>;
 using ListState = ListStateBase<String>;
 
 using Product = ProductBase<ProductCategoryBase, String>;
+using PeriodicProduct = PeriodicProductBase<ProductCategoryBase, String>;
 using ProductCategory = ProductCategoryBase<String>;
 
 using StatisticPerDay = StatisticPerDayBase<String>;

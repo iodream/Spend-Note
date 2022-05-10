@@ -33,10 +33,13 @@ private:
 
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
+	void FontChange();
 	void ColorSchemeChanged();
+	void LanguageChanged();
 	void GoBack(int n=1);
+
 
 public slots:
 	void OnColorSchemeChanged();

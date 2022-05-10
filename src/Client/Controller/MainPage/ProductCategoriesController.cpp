@@ -81,7 +81,7 @@ bool ProductCategoriesController::UpdateProductCategoryPage()
 	return true;
 }
 
-bool ProductCategoriesController::UpdateProductCategoryPageColors()
+void ProductCategoriesController::UpdateProductCategoryPageColors()
 {
 	m_category_edit_page.UpdateColors();
 }
@@ -93,7 +93,7 @@ void ProductCategoriesController::OnAddProductCategory(ProductCategory category)
 
 	if(!model.CheckFields(category))
 	{
-		emit ClientError("Fields can't be empty!");
+		emit ClientError(tr("Fields can't be empty!"));
 		return;
 	}
 

@@ -36,7 +36,7 @@ std::vector<ProductCategory> StatisticsPageController::GetProductCategories()
 	}
 	catch(Poco::Exception& exc)
 	{
-		emit ClientError("Request to server failed");
+		emit ClientError(tr("Request to server failed"));
 		return {};
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
@@ -59,7 +59,7 @@ std::vector<IncomeCategory> StatisticsPageController::GetIncomeCategories()
 	}
 	catch(Poco::Exception& exc)
 	{
-		emit ClientError("Request to server failed");
+		emit ClientError(tr("Request to server failed"));
 		return {};
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
@@ -124,7 +124,7 @@ void StatisticsPageController::OnPercentChartSelected()
 	}
 	catch(Poco::Exception& exc)
 	{
-		emit ClientError("Request to server failed");
+		emit ClientError(tr("Request to server failed"));
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
@@ -159,7 +159,7 @@ void StatisticsPageController::OnAmountChartSelected()
 	}
 	catch(Poco::Exception& exc)
 	{
-		emit ClientError("Request to server failed");
+		emit ClientError(tr("Request to server failed"));
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
@@ -194,7 +194,7 @@ void StatisticsPageController::OnBalanceChartSelected()
 	}
 	catch(Poco::Exception& exc)
 	{
-		emit ClientError("Request to server failed");
+		emit ClientError(tr("Request to server failed"));
 	}
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{

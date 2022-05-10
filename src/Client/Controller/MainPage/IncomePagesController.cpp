@@ -163,13 +163,13 @@ void IncomePagesController::OnCreateIncome(Income& income)
 
 	if(!model.CheckFields(income))
 	{
-		emit ClientError("Fields can't be empty!");
+		emit ClientError(tr("Fields can't be empty!"));
 		return;
 	}
 
 	if(!model.CheckExpDate(income))
 	{
-		emit ClientError("Expiration date can't be in the past");
+		emit ClientError(tr("Expiration date can't be in the past"));
 		return;
 	}
 
@@ -256,13 +256,13 @@ void IncomePagesController::OnUpdateIncome()
 
 	if(!model.CheckFields(income))
 	{
-		emit ClientError("Fields can't be empty!");
+		emit ClientError(tr("Fields can't be empty!"));
 		return;
 	}
 
 	if(model.CheckExpDate(income))
 	{
-		emit ClientError("Expiration date can't be in the past");
+		emit ClientError(tr("Expiration date can't be in the past"));
 		return;
 	}
 

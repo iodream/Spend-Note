@@ -92,6 +92,7 @@ Net::Response HTTPClient::Request(const Net::Request& net_request)
 	{
 		try{
 			SendRequest(request, session, net_request);
+			Retry = false;
 		}
 		catch(const Poco::Exception& exc)
 		{

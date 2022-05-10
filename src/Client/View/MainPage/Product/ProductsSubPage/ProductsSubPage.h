@@ -31,11 +31,14 @@ public:
 
 	void Clear();
 
-	void set_list_size(int size);
-	int get_list_size();
+	void changeEvent(QEvent* event);
 
-	void set_list(List list);
-	List get_list();
+	void set_regular_list_size(int size);
+	int get_regular_list_size();
+
+	void set_regular_list(List list);
+	List get_regular_list();
+
 
 signals:
 	void GoToCreateProduct(IdType list_id);
@@ -47,6 +50,6 @@ private slots:
 
 private:
 	Ui::ProductsSubPage *m_ui;
-	List m_list;
-	int m_list_size;
+	List m_regular_list, m_periodic_list;
+	int m_regular_list_size, m_periodic_list_size;
 };

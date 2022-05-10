@@ -32,6 +32,8 @@ public:
 
 	void Clear();
 	void FillCategoryBox(const std::vector<ProductCategory>& categories);
+	void changeEvent(QEvent* event);
+
 
 signals:
 	void QuickAddItem();

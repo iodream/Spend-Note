@@ -21,6 +21,7 @@ public:
 
 	const Income& get_income();
 	void set_income(const Income& income);
+	void changeEvent(QEvent* event);
 
 signals:
 	void UpdateIncome();

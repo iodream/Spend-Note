@@ -9,7 +9,8 @@ int main(int argc, char *argv[])
 	ScopedLogger::Init("ClientScopedLogger.log"); // mandatory
 	SCOPED_LOGGER;
 	QApplication a(argc, argv);
-	Controller controller;
+
+	Controller controller(&a);
 
 	controller.Start();
 //	controller.StartTest();

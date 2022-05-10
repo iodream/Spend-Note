@@ -216,7 +216,7 @@ void ProductPagesController::OnDeleteProduct()
 bool ProductPagesController::UpdateProductsPage()
 {
 	GetProductsModel model{m_hostname};
-	List list = m_products_page.get_list();
+	List list = m_products_page.get_regular_list();
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
@@ -235,7 +235,7 @@ bool ProductPagesController::UpdateProductsPage()
 bool ProductPagesController::UpdateProductsPage(List list)
 {
 	GetProductsModel model{m_hostname};
-	m_products_page.set_list(list);
+	m_products_page.set_regular_list(list);
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);
 
@@ -267,26 +267,26 @@ void ProductPagesController::UpdateProductColors()
 
 void ProductPagesController::UpdateCategoryBox()
 {
-		GetProductCategoriesModel model{m_hostname};
-		auto request = model.FormRequest(m_user_id);
+	GetProductCategoriesModel model{m_hostname};
+	auto request = model.FormRequest(m_user_id);
 
-		try
+	try
+	{
+		auto response = m_http_client.Request(request);
+
+		if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 		{
-			auto response = m_http_client.Request(request);
-
-			if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-			{
-				emit ServerError(response.status, response.reason);
-				return ;
-			}
-
-			m_edit_page.FillCategoryBox(model.ParseResponse(response));
-			m_create_page.FillCategoryBox(model.ParseResponse(response));
+			emit ServerError(response.status, response.reason);
+			return ;
 		}
-		catch (const Poco::Exception& ex)
-		{
-			return;
-		}
+
+		m_edit_page.FillCategoryBox(model.ParseResponse(response));
+		m_create_page.FillCategoryBox(model.ParseResponse(response));
+	}
+	catch (const Poco::Exception& ex)
+	{
+		return;
+	}
 }
 
 void ProductPagesController::SetRangeOfSpinBoxes()

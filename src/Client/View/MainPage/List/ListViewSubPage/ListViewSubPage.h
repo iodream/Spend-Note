@@ -21,6 +21,7 @@ public:
 
 	void set_list(const List& list);
 	List get_list() const;
+	void changeEvent(QEvent* event);
 
 signals:
 	void GoToEditList(List list);

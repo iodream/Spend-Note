@@ -147,7 +147,7 @@ void IncomeCategoriesController::OnUpdateIncomeCategory(IncomeCategory category)
 	UpdateIncomeCategoryPage();
 }
 
-void IncomeCategoriesController::OnClientError(const std::string& desc)
+void IncomeCategoriesController::OnClientError(const QString& desc)
 {
 	emit ClientError(desc); //rethrow signal so that it reaches MainPageController
 }

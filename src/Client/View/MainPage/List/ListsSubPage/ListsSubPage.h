@@ -35,7 +35,7 @@ public:
 
 	void set_list_size(int size);
 	int get_list_size();
-
+	void changeEvent(QEvent* event);
 signals:
 	void GoToCreateList();
 	void GoToProducts(const List& list);

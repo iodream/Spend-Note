@@ -46,6 +46,21 @@ CategoryEditPage::~CategoryEditPage()
 	delete ui;
 }
 
+void CategoryEditPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 void CategoryEditPage::Update(const std::vector<ProductCategory>& categories)
 {
 	ui->NewCategoryEdit->setVisible(false);
@@ -109,7 +124,7 @@ void CategoryEditPage::OnRemoveClicked()
 	{
 		if(ui->Incomes->currentRow() == -1) // if user didn't select a category
 		{
-			emit ClientError("Please Select an item!");
+			emit ClientError(tr("Please Select an item!"));
 			return;
 		}
 		int id = qvariant_cast<int>(ui->Incomes->currentItem()->data(Qt::UserRole));
@@ -120,7 +135,7 @@ void CategoryEditPage::OnRemoveClicked()
 	{
 		if(ui->Products->currentRow() == -1)
 		{
-			emit ClientError("Please Select an item!");
+			emit ClientError(tr("Please Select an item!"));
 			return;
 		}
 		int id = qvariant_cast<int>(ui->Products->currentItem()->data(Qt::UserRole));
@@ -137,7 +152,7 @@ void CategoryEditPage::OnCategoryEditConfirmClicked()
 		{
 			if(ui->Incomes->currentRow() == -1) // if user didn't select a category
 			{
-				emit ClientError("Please Select an item!");
+				emit ClientError(tr("Please Select an item!"));
 				return;
 			}
 			IncomeCategory cat;
@@ -151,7 +166,7 @@ void CategoryEditPage::OnCategoryEditConfirmClicked()
 	{
 		if(ui->Products->currentRow() == -1)
 		{
-			emit ClientError("Please Select an item!");
+			emit ClientError(tr("Please Select an item!"));
 			return;
 		}
 		ProductCategory cat;

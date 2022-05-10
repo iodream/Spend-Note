@@ -18,6 +18,9 @@
 #include "Net/Tools/Formatters/Product/ProductIdJSONFormatter.h"
 #include "Net/Tools/Formatters/Product/ProductCategoryIdJSONFormatter.h"
 
+#include "Net/Tools/Formatters/PeriodicProduct/PeriodicProductJSONFormatterBase.h"
+#include "Net/Tools/Formatters/PeriodicProduct/PeriodicProductIdJSONFormatter.h"
+
 #include "Net/Tools/Formatters/Statistics/BalanceJSONFormatter.h"
 #include "Net/Tools/Formatters/Statistics/StatisticPerCategoryJSONFormatter.h"
 #include "Net/Tools/Formatters/Statistics/StatisticPercentagePerCategoryJSONFormatter.h"
@@ -50,12 +53,17 @@ using ListStatesJSONFormatter =
 
 using ProductCategoryJSONFormatter =
 	ProductCategoryJSONFormatterBase<ProductCategory>;
+using ProductCategoriesJSONFormatter =
+	ArrayJSONFormatterBase<ProductCategoryJSONFormatter, ProductCategory>;
 using ProductJSONFormatter =
 	ProductJSONFormatterBase<ProductCategoryJSONFormatterBase, Product>;
 using ProductsJSONFormatter =
 	ArrayJSONFormatterBase<ProductJSONFormatter, Product>;
-using ProductCategoriesJSONFormatter =
-	ArrayJSONFormatterBase<ProductCategoryJSONFormatter, ProductCategory>;
+
+using PeriodicProductJSONFormatter =
+	PeriodicProductJSONFormatterBase<ProductCategoryJSONFormatterBase, PeriodicProduct>;
+using PeriodicProductsJSONFormatter =
+	ArrayJSONFormatterBase<PeriodicProductJSONFormatter, PeriodicProduct>;
 
 using StatisticPerDayJSONFormatter =
 	StatisticPerDayJSONFormatterBase<StatisticPerDay>;

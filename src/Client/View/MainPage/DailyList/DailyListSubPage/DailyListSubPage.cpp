@@ -13,6 +13,21 @@ DailyListSubPage::DailyListSubPage(QWidget* parent)
 	set_list_size(0);
 }
 
+void DailyListSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 void DailyListSubPage::AppendProduct(ProductItem *product)
 {
 	InsertProduct(product, get_list_size());

@@ -32,6 +32,8 @@ class LoginHandler : public ICommandHandler
 	};
 private:
 	void UpdatePeriodicIncomes(db::IdType user_id);
+	void UpdatePeriodicProducts(db::IdType user_id);
+
 public:
 	LoginHandler();
 	virtual ~LoginHandler() override {}

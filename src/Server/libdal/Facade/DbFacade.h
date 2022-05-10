@@ -12,6 +12,7 @@
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
 #include "Repositories/RecommendationRepository/RecommendationRepository.h"
+#include "Repositories/PeriodicProductRepository/PeriodicProductRepository.h"
 #include "Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h"
 
 namespace db
@@ -31,6 +32,7 @@ public:
 	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
+	std::vector<Product> GetProductsForPeriodicProduct(IdType periodic_id) override;
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
 
@@ -55,6 +57,7 @@ public:
 	bool CanUserEditList(IdType user_id, IdType list_id) override;
 	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
 	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
+	bool CanUserEditPeriodicProduct(IdType user_id, IdType product_id) override;
 
 	std::vector<Product> GetDailyList(IdType user_id) override;
 
@@ -93,6 +96,16 @@ public:
 	bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) override;
 
 
+	std::optional<IdType> AddPeriodicProduct(const PeriodicProduct& product) override;
+	std::optional<PeriodicProduct> GetPeriodicProductById(IdType id) override;
+	std::vector<PeriodicProduct> GetPeriodicProductsForList(IdType list_id) override;
+	bool UpdatePeriodicProduct(const PeriodicProduct& product) override;
+	bool RemovePeriodicProduct(IdType id) override;
+
+	bool CanPeriodicProductGenerate(IdType periodic_id) override;
+	bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) override;
+	std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -106,6 +119,7 @@ private:
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
 	RecommendationRepository m_recommendation;
+	PeriodicProductRepository m_periodic_products;
 	PeriodicIncomeRepository m_periodic_income;
 };
 }

@@ -19,29 +19,31 @@ MainPageController::MainPageController(
 	ConnectPage();
 	InitListPagesController();
 	InitProductPagesController();
+	InitProductRecommendationController();
 	InitIncomePagesController();
 	InitDailyListPageController();
 	InitStatisticsPageController();
 	InitIncomeCategoriesController();
 	InitProductCategoriesController();
 	InitSettingsPageController();
+	OnUIUpdate(); //need to update once here for recommendation widget
 }
 
 void MainPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::Logout,
 		this,
 		&MainPageController::OnLogout);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::ChangeSubPage,
 		this,
 		&MainPageController::OnChangeSubPage);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&MainPage::GoBack,
 		this,
@@ -97,12 +99,6 @@ void MainPageController::InitListPagesController()
 		&ListPagesController::UpdatePage,
 		this,
 		&MainPageController::OnUpdateSubPage);
-
-//	connect(
-//		m_list_pages_controller.get(),
-//		&ListPagesController::CreateProduct,
-//		m_product_pages_controller.get,
-//		&ProductPagesController::OnCreateProduct);
 }
 
 
@@ -144,6 +140,27 @@ void MainPageController::InitProductPagesController()
 		&MainPageController::OnGoBack);
 }
 
+void MainPageController::InitProductRecommendationController()
+{
+	m_product_recommendation_controller =
+		std::make_unique<ProductRecommendationController>(
+			m_http_client,
+			m_hostname,
+			m_user_id,
+			m_page);
+
+	connect(
+		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::ServerError,
+		this,
+		&MainPageController::OnServerError);
+
+	connect(
+		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::ClientError,
+		this,
+		&MainPageController::OnClientError);
+}
 void MainPageController::InitIncomePagesController()
 {
 	m_income_pages_controller =
@@ -342,12 +359,23 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::FontChange,
+		this,
+		&MainPageController::OnFontChange);
 
 	connect(
 		m_settings_page_controller.get(),
 		&SettingsPageController::ColorSchemeChanged,
 		this,
-		&MainPageController::OnColorSchemeChanged);
+		&MainPageController::OnUIUpdate);
+
+	connect(
+		m_settings_page_controller.get(),
+		&SettingsPageController::LanguageChanged,
+		this,
+		&MainPageController::LanguageChanged);
 }
 
 void MainPageController::OnLogout()
@@ -369,9 +397,14 @@ void MainPageController::OnLogout()
 	MainPage::ColorSettings::LIST_INACTIVE = "rgba(163, 255, 188, 50%)";
 	MainPage::ColorSettings::LIST_ACTIVE = "rgba(41, 118, 207, 50%)";
 
-	MainPage::bNeedColorUpdate = true;
+	MainPage::bNeedsGlobalUIUpdate = true;
 	emit ColorSchemeChanged();
 	emit ChangePage(UIPages::LOGIN);
+}
+
+void MainPageController::OnFontChange()
+{
+	m_page.UpdatePage();
 }
 
 void MainPageController::OnRecommendationClosed()
@@ -406,13 +439,25 @@ void MainPageController::ChangeSubPage(MainSubPages page, PageData data)
 		m_history.Update(page);
 	}
 	else {
-		m_page.SetErrorBanner("Error updating page");
+		m_page.SetErrorBanner(tr("Error updating page"));
 	}
 
-	if(MainPage::bNeedColorUpdate)
+	// global UI update only when it's needed because its costly
+	if(MainPage::bNeedsGlobalUIUpdate)
 	{
-		OnColorSchemeChanged();
+		OnUIUpdate();
 	}
+}
+
+void MainPageController::UpdateRecommendations()
+{
+	m_product_recommendation_controller->UpdateRecommendations();
+}
+
+void MainPageController::ShowRecommendation()
+{
+	m_page.get_recommendation_widget().bClosed = false;
+	m_page.get_recommendation_widget().setVisible(true);
 }
 
 void MainPageController::OnServerError(const int code, const std::string& desc)
@@ -420,7 +465,7 @@ void MainPageController::OnServerError(const int code, const std::string& desc)
 	m_page.SetErrorBanner(code, desc);
 }
 
-void MainPageController::OnClientError(const std::string& desc)
+void MainPageController::OnClientError(const QString& desc)
 {
 	m_page.SetErrorBanner(desc);
 }
@@ -429,11 +474,22 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 {
 	bool update_succeeded{true};
 
+	if(page != MainSubPages::LISTS)
+	{
+		m_page.HideRecommendation();
+	}
+	else
+		if (!m_page.get_recommendation_widget().bClosed)
+		{
+			m_page.ShowRecommendation();
+		}
+
 	m_page.ShowBalance(*UpdateUserBalance(m_user_id));
 
 	switch(page)
 	{
 	case MainSubPages::LISTS:
+		UpdateRecommendations();
 		return m_list_pages_controller->UpdateListPage();
 	case MainSubPages::CREATE_LIST:
 		return m_list_pages_controller->UpdateListCreatePage();
@@ -504,12 +560,13 @@ std::optional<Balance> MainPageController::UpdateUserBalance(const IdType &id)
 	}
 }
 
-void MainPageController::OnColorSchemeChanged()
+void MainPageController::OnUIUpdate()
 {
-	MainPage::bNeedColorUpdate = false;
+	MainPage::bNeedsGlobalUIUpdate = false;
+	// change colorscheme on upper-lvl Controller
 	emit ColorSchemeChanged();
 
-	m_page.UpdatePageColors();
+	m_page.UpdatePage();
 	m_list_pages_controller->UpdateListPageColors();
 	m_income_pages_controller->UpdateIncomesPageColors();
 	m_daily_list_page_controller->UpdatePageColors();

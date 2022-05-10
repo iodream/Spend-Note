@@ -21,6 +21,7 @@ public:
 	~MainWindow();
 
 	void SetCurrentPage(UIPages page);
+	void changeEvent(QEvent* event);
 	void closeEvent(QCloseEvent *event);
 
 	void UpdateColors();
