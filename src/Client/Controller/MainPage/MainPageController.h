@@ -69,8 +69,11 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void SetEmail(const std::string& email);
 
 public slots:
+	void OnSetEmail(const std::string& email);
+
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnUpdateSubPage(MainSubPages page, PageData data=PageData{});
 
