@@ -219,12 +219,12 @@
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="168"/>
         <source>One-time incomes</source>
-        <translation type="unfinished"></translation>
+        <translation>Одиничні доходи</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="207"/>
         <source>Periodic incomes</source>
-        <translation type="unfinished"></translation>
+        <translation>Періодичні доходи</translation>
     </message>
 </context>
 <context>
@@ -698,72 +698,72 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий періодичний дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="20"/>
         <source>New Periodic Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий Періодичний дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="32"/>
         <source>Name:</source>
-        <translation type="unfinished">Ім&apos;я:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="42"/>
         <source>Category:</source>
-        <translation type="unfinished">Категорія:</translation>
+        <translation>Категорія:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="63"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="97"/>
         <source>Amount:</source>
-        <translation type="unfinished">Кількість:</translation>
+        <translation>Кількість:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="111"/>
         <source>Generate until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="128"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="138"/>
         <source>Repeating</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="146"/>
         <source>Daily</source>
-        <translation type="unfinished"></translation>
+        <translation>Щодня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="151"/>
         <source>Weekly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="156"/>
         <source>Monthly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щомісяця</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="161"/>
         <source>Annually</source>
-        <translation type="unfinished"></translation>
+        <translation>Щороку</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="184"/>
         <source>Save</source>
-        <translation type="unfinished">Зберегти</translation>
+        <translation>Зберегти</translation>
     </message>
 </context>
 <context>
@@ -771,67 +771,67 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="20"/>
         <source>Edit Periodic Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінити Періодичний дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="32"/>
         <source>Name:</source>
-        <translation type="unfinished">Ім&apos;я:</translation>
+        <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="42"/>
         <source>Category:</source>
-        <translation type="unfinished">Категорія:</translation>
+        <translation>Категорія:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="49"/>
         <source>Amount:</source>
-        <translation type="unfinished">Кількість:</translation>
+        <translation>Кількість:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="66"/>
         <source>Generate until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="73"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="131"/>
         <source>Repeating</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="139"/>
         <source>Daily</source>
-        <translation type="unfinished"></translation>
+        <translation>Щодня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="144"/>
         <source>Weekly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="149"/>
         <source>Monthly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щомісяця</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="154"/>
         <source>Annually</source>
-        <translation type="unfinished"></translation>
+        <translation>Щороку</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="177"/>
         <source>Submit</source>
-        <translation type="unfinished">Підтвердити</translation>
+        <translation>Підтвердити</translation>
     </message>
 </context>
 <context>
@@ -839,42 +839,42 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="22"/>
         <source>Name</source>
-        <translation type="unfinished">Ім&apos;я</translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="44"/>
         <source>Amount</source>
-        <translation type="unfinished">Кількість</translation>
+        <translation>Кількість</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="69"/>
         <source>Category</source>
-        <translation type="unfinished">Категорія</translation>
+        <translation>Категорія</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="94"/>
         <source>Generate until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="116"/>
         <source>Repeating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="142"/>
         <source>Edit income</source>
-        <translation type="unfinished">Редагувати дохід</translation>
+        <translation>Редагувати дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeViewSubPage/PeriodicIncomeViewSubPage.ui" line="159"/>
         <source>Delete income</source>
-        <translation type="unfinished">Видалити дохід</translation>
+        <translation>Видалити дохід</translation>
     </message>
 </context>
 <context>
@@ -882,88 +882,88 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="25"/>
         <source>New periodic product</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий Періодичний продукт</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="42"/>
         <source>Name</source>
-        <translation type="unfinished">Ім&apos;я</translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="57"/>
         <source>Price</source>
-        <translation type="unfinished">Ціна</translation>
+        <translation>Ціна</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="76"/>
         <source>Amount</source>
-        <translation type="unfinished">Кількість</translation>
+        <translation>Кількість</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="86"/>
         <source>Added on:</source>
-        <translation type="unfinished"></translation>
+        <translation>Додано:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="93"/>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="122"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="108"/>
         <source>Generate until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="132"/>
         <source>Repeating</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="140"/>
         <source>Daily</source>
-        <translation type="unfinished"></translation>
+        <translation>Щодня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="145"/>
         <source>Weekly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="150"/>
         <source>Monthy</source>
-        <translation type="unfinished"></translation>
+        <translation>Щомісяця</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="155"/>
         <source>Annually</source>
-        <translation type="unfinished"></translation>
+        <translation>Щороку</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="168"/>
         <source>Priority</source>
-        <translation type="unfinished">Пріоритет</translation>
+        <translation>Пріоритет</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="183"/>
         <source>Category</source>
-        <translation type="unfinished">Категорія</translation>
+        <translation>Категорія</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="201"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="250"/>
         <source>Save product</source>
-        <translation type="unfinished">Зберегти продукт</translation>
+        <translation>Зберегти продукт</translation>
     </message>
 </context>
 <context>
@@ -971,88 +971,88 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="25"/>
         <source>Edit periodic product</source>
-        <translation type="unfinished"></translation>
+        <translation>Новий Періодичний продукт</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="42"/>
         <source>Name</source>
-        <translation type="unfinished">Ім&apos;я</translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="57"/>
         <source>Price</source>
-        <translation type="unfinished">Ціна</translation>
+        <translation>Ціна</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="76"/>
         <source>Amount</source>
-        <translation type="unfinished">Кількість</translation>
+        <translation>Кількість</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="86"/>
         <source>Added on:</source>
-        <translation type="unfinished"></translation>
+        <translation>Додано:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="93"/>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="122"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="108"/>
         <source>Generate until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="132"/>
         <source>Repeating</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="140"/>
         <source>Daily</source>
-        <translation type="unfinished"></translation>
+        <translation>Щодня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="145"/>
         <source>Weekly</source>
-        <translation type="unfinished"></translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="150"/>
         <source>Monthy</source>
-        <translation type="unfinished"></translation>
+        <translation>Щомісяця</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="155"/>
         <source>Annually</source>
-        <translation type="unfinished"></translation>
+        <translation>Щороку</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="168"/>
         <source>Priority</source>
-        <translation type="unfinished">Пріоритет</translation>
+        <translation>Пріоритет</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="183"/>
         <source>Category</source>
-        <translation type="unfinished">Категорія</translation>
+        <translation>Категорія</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="201"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="250"/>
         <source>Save product</source>
-        <translation type="unfinished">Зберегти продукт</translation>
+        <translation>Зберегти продукт</translation>
     </message>
 </context>
 <context>
@@ -1060,62 +1060,62 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="26"/>
         <source>Periodic product info:</source>
-        <translation type="unfinished"></translation>
+        <translation>Періодичний продукт:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="43"/>
         <source>Name</source>
-        <translation type="unfinished">Ім&apos;я</translation>
+        <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="65"/>
         <source>Price</source>
-        <translation type="unfinished">Ціна</translation>
+        <translation>Ціна</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="87"/>
         <source>Amount</source>
-        <translation type="unfinished">Кількість</translation>
+        <translation>Кількість</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="109"/>
         <source>Added on</source>
-        <translation type="unfinished"></translation>
+        <translation>Додано</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="131"/>
         <source>Generate until</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати до</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="143"/>
         <source>Repeating</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторюється</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="155"/>
         <source>Priority</source>
-        <translation type="unfinished">Пріоритет</translation>
+        <translation>Пріоритет</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="177"/>
         <source>Category</source>
-        <translation type="unfinished">Категорія</translation>
+        <translation>Категорія</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="230"/>
         <source>Edit</source>
-        <translation type="unfinished">Редагувати</translation>
+        <translation>Редагувати</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="252"/>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -1417,12 +1417,12 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="237"/>
         <source>Regular products</source>
-        <translation type="unfinished"></translation>
+        <translation>Звичайний продукт</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="276"/>
         <source>Periodic products</source>
-        <translation type="unfinished"></translation>
+        <translation>Періодичний продукт</translation>
     </message>
 </context>
 <context>
@@ -1712,7 +1712,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="178"/>
         <source>Current font is: %1 %2</source>
-        <translation>Поточний шрифт: </translation>
+        <translation>Поточний шрифт: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -1827,11 +1827,6 @@ Incomes</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
-        <source>Tab 1</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="54"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="89"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="117"/>
@@ -1842,9 +1837,9 @@ Incomes</source>
         <translation>Недостатньо даних</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
-        <source>Tab 2</source>
-        <translation></translation>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
+        <source>Expenses</source>
+        <translation>Витрати</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="277"/>
@@ -1872,6 +1867,7 @@ Incomes</source>
         <translation>Витрати</translation>
     </message>
     <message>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
         <source>Incomes</source>
         <translation>Доходи</translation>

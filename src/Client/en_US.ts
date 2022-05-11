@@ -1800,11 +1800,6 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
-        <source>Tab 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="54"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="89"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="117"/>
@@ -1815,8 +1810,8 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
-        <source>Tab 2</source>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
+        <source>Expenses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1845,6 +1840,7 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
         <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
         <source>Incomes</source>
         <translation type="unfinished"></translation>

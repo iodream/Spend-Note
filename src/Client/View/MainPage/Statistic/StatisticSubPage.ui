@@ -19,11 +19,11 @@
      <item>
       <widget class="QTabWidget" name="tabWidget">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="OutcomesCharts">
         <attribute name="title">
-         <string>Tab 1</string>
+         <string>Expenses</string>
         </attribute>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
@@ -132,7 +132,7 @@
        </widget>
        <widget class="QWidget" name="Incomes">
         <attribute name="title">
-         <string>Tab 2</string>
+         <string>Incomes</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
