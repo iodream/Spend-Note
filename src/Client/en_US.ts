@@ -434,7 +434,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="147"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="131"/>
         <source>New list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -574,7 +574,7 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="340"/>
-        <location filename="View/MainPage/MainPage.ui" line="581"/>
+        <location filename="View/MainPage/MainPage.ui" line="532"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -584,37 +584,37 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="484"/>
+        <location filename="View/MainPage/MainPage.ui" line="474"/>
         <source>Current Balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="539"/>
+        <location filename="View/MainPage/MainPage.ui" line="503"/>
         <source>Projected Balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="598"/>
+        <location filename="View/MainPage/MainPage.ui" line="549"/>
         <source>Error occured!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="610"/>
+        <location filename="View/MainPage/MainPage.ui" line="561"/>
         <source>Error code:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="622"/>
+        <location filename="View/MainPage/MainPage.ui" line="573"/>
         <source>*code*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="634"/>
+        <location filename="View/MainPage/MainPage.ui" line="585"/>
         <source>*desc*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.ui" line="641"/>
+        <location filename="View/MainPage/MainPage.ui" line="592"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
