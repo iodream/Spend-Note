@@ -37,6 +37,7 @@ MainPage::MainPage(QWidget *parent)
 	, m_ui(new Ui::MainPage)
 {
 	m_ui->setupUi(this);
+	m_ui->ErrorBanner->setVisible(false);
 
 	m_ui->GoBackButton->setToolTip(tr("Back"));
 	m_ui->GoToIncomesButton->setToolTip(tr("My Incomes"));
@@ -352,8 +353,8 @@ void MainPage::UpdatePage()
 
 void MainPage::SetErrorBanner(const int code, const std::string& description)
 {
-	m_ui->gridLayout_2->setRowStretch(2,1); // expands the banner
 	m_ui->ErrorTitleLabel->setVisible(true);
+	m_ui->ErrorBanner->setVisible(true);
 
 	m_ui->ErrorCodeLabel->setText(QString::number(code));
 	m_ui->ErrorDescriptionLabel->setText(QString::fromStdString(description));
@@ -361,8 +362,8 @@ void MainPage::SetErrorBanner(const int code, const std::string& description)
 
 void MainPage::SetErrorBanner(const QString& description)
 {
-	m_ui->gridLayout_2->setRowStretch(2,1);
 	m_ui->ErrorTitleLabel->setVisible(false);
+	m_ui->ErrorBanner->setVisible(true);
 
 	m_ui->ErrorCodeLabel->setText("");
 	m_ui->ErrorDescriptionLabel->setText(description);
@@ -370,7 +371,7 @@ void MainPage::SetErrorBanner(const QString& description)
 
 void MainPage::CloseErrorBanner()
 {
-	m_ui->gridLayout_2->setRowStretch(2, 0); // set the banner to its minimum height
+	m_ui->ErrorBanner->setVisible(false);
 }
 
 void MainPage::UpdateRecommendation(const Product& product)
