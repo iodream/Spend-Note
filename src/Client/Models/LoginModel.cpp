@@ -34,3 +34,13 @@ LoginModel::JSONParser::UserData LoginModel::ParseResponse(const Net::Response& 
 
 	return token;
 }
+
+bool LoginModel::IsEmailValid(const QString &email)
+{
+	QRegularExpression regex(REGEX_PATTERN, QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match = regex.match(email);
+
+	if (match.hasMatch())
+		return true;
+	return false;
+}

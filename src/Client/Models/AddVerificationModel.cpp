@@ -15,7 +15,6 @@ Net::Request AddVerificationModel::FormRequest(const VerificationInDTO& dto)
 QJsonDocument AddVerificationModel::JSONFormatter::Format(const VerificationInDTO& dto)
 {
 	QJsonObject json;
-
 	json["email"] = dto.email.c_str();
 	return QJsonDocument(json);
 }
