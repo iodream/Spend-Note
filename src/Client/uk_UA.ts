@@ -1426,7 +1426,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.cpp" line="110"/>
         <source>Items: </source>
-        <translation type="unfinished"></translation>
+        <translation>Елементи: </translation>
     </message>
 </context>
 <context>
