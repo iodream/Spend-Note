@@ -447,7 +447,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="73"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="66"/>
         <source>Spend &amp; Note</source>
         <translation></translation>
     </message>
@@ -460,7 +460,7 @@
         <translation type="vanished">Логін......</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="118"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="111"/>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
@@ -469,72 +469,72 @@
         <translation type="vanished">Пароль......</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="170"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="163"/>
         <source>Submit</source>
         <translation>Підтвердити</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="193"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="186"/>
         <source>Do not have an account yet?</source>
         <translation>Ще немає акаунту?</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="207"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="200"/>
         <source>Sign Up</source>
         <translation>Зареєструватися</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="383"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="376"/>
         <source>English</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="388"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="381"/>
         <source>Українська</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="289"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="282"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="100"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="93"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="107"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="100"/>
         <source>Email.....</source>
         <translation>Email.....</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="128"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="121"/>
         <source>Password...</source>
         <translation>Пароль...</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="311"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="304"/>
         <source>Login failed!</source>
         <translation>Логін невдалий!</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="318"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="311"/>
         <source>Error code:</source>
         <translation>Код помилки:</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="325"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="318"/>
         <source>*code*</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="337"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="330"/>
         <source>*description*</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="344"/>
+        <location filename="View/LoginPage/LoginPage.ui" line="337"/>
         <source>X</source>
         <translation></translation>
     </message>
