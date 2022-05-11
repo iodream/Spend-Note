@@ -363,7 +363,6 @@
     </message>
     <message>
         <location filename="View/MainPage/List/ListsSubPage/ListItem.ui" line="70"/>
-        <location filename="View/MainPage/List/ListsSubPage/ListItem.ui" line="149"/>
         <source>0</source>
         <translation></translation>
     </message>
@@ -1400,29 +1399,34 @@ Incomes</source>
         <translation>Ім&apos;я списку</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="113"/>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="103"/>
         <source>View list</source>
         <translation>Переглянути</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="160"/>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="140"/>
         <source>Items:</source>
         <translation>Елементи:</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="209"/>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="164"/>
         <source>Add</source>
         <translation>Додати</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="237"/>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="192"/>
         <source>Regular products</source>
         <translation>Звичайний продукт</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="276"/>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="231"/>
         <source>Periodic products</source>
         <translation>Періодичний продукт</translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.cpp" line="110"/>
+        <source>Items: </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

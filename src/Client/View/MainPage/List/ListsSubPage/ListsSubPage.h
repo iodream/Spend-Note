@@ -27,7 +27,6 @@ public:
 	void UpdateListNumbers(int idx);
 	void UpdateColors();
 
-
 	ListItem* SafeGetList(int idx);
 
 	void Update(const std::vector<List>& lists);
