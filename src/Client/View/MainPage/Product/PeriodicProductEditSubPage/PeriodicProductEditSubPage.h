@@ -4,9 +4,10 @@
 #include <QWidget>
 #include <QDateTime>
 
-#include "Common.h"
 #include "Entities/Entities.h"
 #include "Utils.h"
+#include "View/Constants.h"
+
 
 namespace Ui {
 class PeriodicProductEditSubPage;
@@ -28,9 +29,13 @@ public:
 	IdType GetCategoryId();
 	QString GetCategoryName();
 
+	void set_product(const PeriodicProduct& product);
+	PeriodicProduct get_product();
+
 	void Clear();
 	void FillCategoryBox(const std::vector<ProductCategory>& categories);
 	void SetRangeOfSpinBox();
+	void Update();
 	void SetMinimumDate(const QDate& date);
 
 signals:
@@ -44,4 +49,5 @@ public slots:
 
 private:
 	Ui::PeriodicProductEditSubPage *m_ui;
+	PeriodicProduct m_periodic_product;
 };

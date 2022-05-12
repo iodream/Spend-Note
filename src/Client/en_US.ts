@@ -550,7 +550,7 @@
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
         <location filename="View/MainPage/MainPage.cpp" line="43"/>
-        <location filename="View/MainPage/MainPage.cpp" line="260"/>
+        <location filename="View/MainPage/MainPage.cpp" line="278"/>
         <source>My Lists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -568,7 +568,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
         <location filename="View/MainPage/MainPage.cpp" line="47"/>
-        <location filename="View/MainPage/MainPage.cpp" line="264"/>
+        <location filename="View/MainPage/MainPage.cpp" line="282"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -620,47 +620,47 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="41"/>
-        <location filename="View/MainPage/MainPage.cpp" line="258"/>
+        <location filename="View/MainPage/MainPage.cpp" line="276"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="42"/>
-        <location filename="View/MainPage/MainPage.cpp" line="259"/>
+        <location filename="View/MainPage/MainPage.cpp" line="277"/>
         <source>My Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="44"/>
-        <location filename="View/MainPage/MainPage.cpp" line="261"/>
+        <location filename="View/MainPage/MainPage.cpp" line="279"/>
         <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="45"/>
-        <location filename="View/MainPage/MainPage.cpp" line="262"/>
+        <location filename="View/MainPage/MainPage.cpp" line="280"/>
         <source>Daily List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="46"/>
-        <location filename="View/MainPage/MainPage.cpp" line="263"/>
+        <location filename="View/MainPage/MainPage.cpp" line="281"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="48"/>
-        <location filename="View/MainPage/MainPage.cpp" line="265"/>
+        <location filename="View/MainPage/MainPage.cpp" line="283"/>
         <source>My Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="325"/>
+        <location filename="View/MainPage/MainPage.cpp" line="343"/>
         <source>Current Balance:  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="326"/>
+        <location filename="View/MainPage/MainPage.cpp" line="344"/>
         <source>Predicted balance:  </source>
         <translation type="unfinished"></translation>
     </message>
@@ -668,7 +668,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="442"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="445"/>
         <source>Error updating page</source>
         <translation type="unfinished"></translation>
     </message>

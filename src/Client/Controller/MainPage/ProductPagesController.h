@@ -53,8 +53,8 @@ private:
 
 	//void ConnectPeriodicProductsPage();
 	//void ConnectPeridoicViewPage();
-	//void ConnectPeriodicEditPage();
-	//void ConnectPeriodicCreatePage();
+	void ConnectPeriodicEditPage();
+	void ConnectPeriodicCreatePage();
 
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
@@ -85,7 +85,9 @@ public slots:
 	void OnDeleteProduct();
 
 	//void OnPeriodicProductCliked(const PeriodicProduct& product);
-	//void OnEditPeriodicProduct();
-	//void OnUpdatePeriodicProduct();
-	//void OnGoToCreatePeriodicProduct(IdType list_id);
+	void OnEditPeriodicProduct();
+	void OnUpdatePeriodicProduct();
+	void OnGoToCreatePeriodicProduct(IdType list_id);
+	void OnCreatePeriodicProduct();
+	//void OnDeletePeriodicProduct();
 };

@@ -118,6 +118,20 @@ void ProductPagesController::ConnectCreatePage()
 		&ProductPagesController::UpdateCategoryBox);
 }
 
+void ProductPagesController::ConnectPeriodicCreatePage()
+{
+	connect(
+		&m_periodic_create_page,
+		&PeriodicProductCreateSubPage::CreateProduct,
+		this,
+		&ProductPagesController::ConnectPeriodicCreatePage);
+	connect(
+		&m_periodic_create_page,
+		&PeriodicProductCreateSubPage::UpdateCategories,
+		this,
+		&ProductPagesController::UpdateCategoryBox);
+}
+
 void ProductPagesController::OnProductClicked(const Product& product)
 {
 	PageData data{};
@@ -126,10 +140,17 @@ void ProductPagesController::OnProductClicked(const Product& product)
 }
 
 
-
 void ProductPagesController::OnEditProduct()
 {
 	m_edit_page.set_product(m_view_page.get_product());
+	m_edit_page.Update();
+	UpdateCategoryBox();
+	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
+}
+
+void ProductPagesController::OnEditPeriodicProduct()
+{
+	m_periodic_edit_page.set_product(m_periodic_edit_page.get_product());
 	m_edit_page.Update();
 	UpdateCategoryBox();
 	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
@@ -165,11 +186,38 @@ void ProductPagesController::OnUpdateProduct()
 	emit GoBack(2);
 }
 
+void ProductPagesController::OnUpdatePeriodicProduct()
+{
+	UpdatePeriodicProductModel model{m_hostname};
+
+	PeriodicProduct product;
+
+	product = m_periodic_edit_page.get_product();
+
+	auto request = model.FormRequest(product);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit ServerError(response.status, response.reason);
+		return;
+	}
+
+	emit GoBack(2);
+}
+
 void ProductPagesController::OnGoToCreateProduct(IdType list_id)
 {
 	m_list_id = list_id;
 	m_create_page.Clear();
 	emit ChangeSubPage(MainSubPages::CREATE_PRODUCT);
+}
+
+void ProductPagesController::OnGoToCreatePeriodicProduct(IdType list_id)
+{
+	m_list_id = list_id;
+	m_periodic_create_page.Clear();
+	emit ChangeSubPage(MainSubPages::CREATE_PERIODIC_PRODUCT);
 }
 
 void ProductPagesController::OnCreateProduct()
@@ -213,37 +261,37 @@ void ProductPagesController::OnCreateProduct()
 	emit GoBack();
 }
 
-//void ProductPagesController::ConnectPeriodicCreatePage()
-//{
-//	AddPeriodicProductModel model{m_hostname};
+void ProductPagesController::OnCreatePeriodicProduct()
+{
+	AddPeriodicProductModel model{m_hostname};
 
-//	PeriodicProduct new_product;
-//	new_product.id = 0;
-//	new_product.name = m_periodic_create_page.GetName();
-//	new_product.price = m_periodic_create_page.GetPrice();
-//	new_product.amount = m_periodic_create_page.GetAmount();
-//	new_product.priority = m_periodic_create_page.GetPriority();
-//	new_product.category.id = m_periodic_create_page.GetCategoryId();
-//	new_product.category.name = m_periodic_create_page.GetCategoryName();
-//	new_product.add_until = m_periodic_create_page.GetGenerateUntil();
+	PeriodicProduct new_product;
+	new_product.id = 0;
+	new_product.name = m_periodic_create_page.GetName();
+	new_product.price = m_periodic_create_page.GetPrice();
+	new_product.amount = m_periodic_create_page.GetAmount();
+	new_product.priority = m_periodic_create_page.GetPriority();
+	new_product.category.id = m_periodic_create_page.GetCategoryId();
+	new_product.category.name = m_periodic_create_page.GetCategoryName();
+	new_product.add_until = m_periodic_create_page.GetGenerateUntil();
 
-//	new_product.list_id = m_list_id;
+	new_product.list_id = m_list_id;
 
-//	auto request  = model.FormRequest(new_product);
-//	//todo catch poco exception
-//	auto response = m_http_client.Request(request);
+	auto request  = model.FormRequest(new_product);
+	//todo catch poco exception
+	auto response = m_http_client.Request(request);
 
-//	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
-//	{
-//		emit ServerError(response.status, response.reason);
-//		return ;
-//	}
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit ServerError(response.status, response.reason);
+		return ;
+	}
 
-//	auto product_id = model.ParseResponse(response);
-//	Q_UNUSED(product_id);
+	auto product_id = model.ParseResponse(response);
+	Q_UNUSED(product_id);
 
-//	emit GoBack();
-//}
+	emit GoBack();
+}
 
 void ProductPagesController::OnDeleteProduct()
 {

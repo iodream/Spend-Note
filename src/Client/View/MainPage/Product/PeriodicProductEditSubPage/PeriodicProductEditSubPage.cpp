@@ -74,6 +74,37 @@ QString PeriodicProductEditSubPage::GetCategoryName()
 	return m_ui->Category->currentText();
 }
 
+void PeriodicProductEditSubPage::set_product(const PeriodicProduct& product)
+{
+	m_periodic_product = product;
+}
+
+PeriodicProduct PeriodicProductEditSubPage::get_product()
+{
+	m_periodic_product.name = m_ui->Name->text();
+	m_periodic_product.price = m_ui->Price->value();
+	m_periodic_product.amount = m_ui->Amount->value();
+	m_periodic_product.priority = m_ui->Priority->value();
+	m_periodic_product.category.id = qvariant_cast<IdType>(m_ui->Category->currentData());
+	m_periodic_product.add_until = m_ui->GenerateUntil->text();
+	m_periodic_product.category.name = qvariant_cast<QString>(m_ui->Category->currentData());
+
+	return m_periodic_product;
+}
+
+void PeriodicProductEditSubPage::Update()
+{
+	m_ui->Name->setText(m_periodic_product.name);
+	m_ui->Price->setValue(m_periodic_product.price);
+	m_ui->Amount->setValue(m_periodic_product.amount);
+	m_ui->Priority->setValue(m_periodic_product.priority);
+	m_ui->Category->setPlaceholderText(m_periodic_product.category.name);
+	m_ui->Category->setCurrentIndex(m_ui->Category->findData(m_periodic_product.category.id));
+	m_ui->GenerateUntil->setDateTime(QDateTime::fromString(m_periodic_product.add_until, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
+//	m_ui->AddDate->setDateTime(QDateTime::fromString(m_periodic_product., DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
+}
+
+
 void PeriodicProductEditSubPage::Clear()
 {
 	m_ui->Name->clear();
