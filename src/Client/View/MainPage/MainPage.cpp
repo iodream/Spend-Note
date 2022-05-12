@@ -112,6 +112,9 @@ MainPage::MainPage(QWidget *parent)
 	InitProductCreateSubPage();
 	InitProductEditSubPage();
 	InitProductViewSubPage();
+	InitPeriodicProductCreateSubPage();
+	InitPeriodicProductEditSubPage();
+	InitPeriodicProductViewSubPage();
 
 	InitIncomesSubPage();
 	InitIncomesCreateSubPage();
@@ -189,6 +192,21 @@ void MainPage::InitProductEditSubPage()
 void MainPage::InitProductViewSubPage()
 {
 	m_ui->Display->addWidget(&m_product_view_spage);
+}
+
+void MainPage::InitPeriodicProductCreateSubPage()
+{
+	m_ui->Display->addWidget(&m_periodic_create_spage);
+}
+
+void MainPage::InitPeriodicProductEditSubPage()
+{
+	m_ui->Display->addWidget(&m_periodic_edit_spage);
+}
+
+void MainPage::InitPeriodicProductViewSubPage()
+{
+	m_ui->Display->addWidget(&m_periodic_view_spage);
 }
 
 void MainPage::InitIncomesSubPage()

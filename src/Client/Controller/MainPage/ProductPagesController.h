@@ -6,6 +6,9 @@
 #include "View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.h"
 #include "View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.h"
 #include "View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.h"
+#include "View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.h"
+#include "View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.h"
+#include "View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.h"
 
 #include "Entities/PageData.h"
 
@@ -22,7 +25,10 @@ public:
 		ProductsSubPage& products_page,
 		ProductViewSubPage& view_page,
 		ProductEditSubPage& edit_page,
-		ProductCreateSubPage& create_page);
+		ProductCreateSubPage& create_page,
+		PeriodicProductCreateSubPage& periodic_create_page,
+		PeriodicProductEditSubPage& periodic_edit_page,
+		PeriodicProductViewSubPage& periodic_view_page);
 
 	virtual ~ProductPagesController() override {}
 
@@ -45,6 +51,11 @@ private:
 	void ConnectEditPage();
 	void ConnectCreatePage();
 
+	//void ConnectPeriodicProductsPage();
+	//void ConnectPeridoicViewPage();
+	//void ConnectPeriodicEditPage();
+	//void ConnectPeriodicCreatePage();
+
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
 	IdType& m_user_id;
@@ -54,6 +65,10 @@ private:
 	ProductViewSubPage& m_view_page;
 	ProductEditSubPage& m_edit_page;
 	ProductCreateSubPage& m_create_page;
+
+	PeriodicProductCreateSubPage& m_periodic_create_page;
+	PeriodicProductEditSubPage& m_periodic_edit_page;
+	PeriodicProductViewSubPage& m_periodic_view_page;
 
 signals:
 	void ServerError(const int code, const std::string& desc);
@@ -68,4 +83,9 @@ public slots:
 	void OnGoToCreateProduct(IdType list_id);
 	void OnCreateProduct();
 	void OnDeleteProduct();
+
+	//void OnPeriodicProductCliked(const PeriodicProduct& product);
+	//void OnEditPeriodicProduct();
+	//void OnUpdatePeriodicProduct();
+	//void OnGoToCreatePeriodicProduct(IdType list_id);
 };

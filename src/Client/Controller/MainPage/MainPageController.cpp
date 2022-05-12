@@ -113,7 +113,10 @@ void MainPageController::InitProductPagesController()
 			m_page.get_products_spage(),
 			m_page.get_product_view_spage(),
 			m_page.get_product_edit_spage(),
-			m_page.get_product_create_spage());
+			m_page.get_product_create_spage(),
+			m_page.get_periodic_product_create_spage(),
+			m_page.get_periodic_product_edit_spage(),
+			m_page.get_periodic_product_view_spage());
 
 	connect(
 		m_product_pages_controller.get(),

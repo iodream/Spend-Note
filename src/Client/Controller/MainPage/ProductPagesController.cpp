@@ -5,6 +5,10 @@
 #include "Models/Product/AddProductModel.h"
 #include "Models/Product/RemoveProductModel.h"
 #include "Models/Categories/Product/GetProductCategoriesModel.h"
+#include "Models/PeriodicProduct/AddPeriodicProductModel.h"
+#include "Models/PeriodicProduct/GetPeriodicProductsModel.h"
+#include "Models/PeriodicProduct/RemovePeriodicProductModel.h"
+#include "Models/PeriodicProduct/UpdatePeriodicProductModel.h"
 
 #include "Net/Constants.h"
 
@@ -15,7 +19,10 @@ ProductPagesController::ProductPagesController(
 	ProductsSubPage& products_page,
 	ProductViewSubPage& view_page,
 	ProductEditSubPage& edit_page,
-	ProductCreateSubPage& create_page)
+	ProductCreateSubPage& create_page,
+	PeriodicProductCreateSubPage& periodic_create_page,
+	PeriodicProductEditSubPage& periodic_edit_page,
+	PeriodicProductViewSubPage& periodic_view_page)
 	: m_http_client{http_client}
 	, m_hostname{hostname}
 	, m_user_id{user_id}
@@ -23,6 +30,9 @@ ProductPagesController::ProductPagesController(
 	, m_view_page{view_page}
 	, m_edit_page{edit_page}
 	, m_create_page{create_page}
+	, m_periodic_create_page{periodic_create_page}
+	, m_periodic_edit_page{periodic_edit_page}
+	, m_periodic_view_page{periodic_view_page}
 {
 	ConnectProductsPage();
 	ConnectViewPage();
@@ -32,7 +42,8 @@ ProductPagesController::ProductPagesController(
 
 bool ProductPagesController::UpdateProductsPage(PageData data)
 {
-	if (!data.canConvert<List>()) {
+	if (!data.canConvert<List>())
+	{
 		return UpdateProductsPage();
 	}
 	return UpdateProductsPage(qvariant_cast<List>(data));
@@ -40,7 +51,8 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
-	if (!data.canConvert<Product>()) {
+	if (!data.canConvert<Product>())
+	{
 		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
@@ -61,6 +73,7 @@ void ProductPagesController::ConnectProductsPage()
 		&ProductPagesController::OnGoToCreateProduct);
 }
 
+
 void ProductPagesController::ConnectViewPage()
 {
 	connect(
@@ -75,6 +88,7 @@ void ProductPagesController::ConnectViewPage()
 		this,
 		&ProductPagesController::OnDeleteProduct);
 }
+
 
 void ProductPagesController::ConnectEditPage()
 {
@@ -110,6 +124,8 @@ void ProductPagesController::OnProductClicked(const Product& product)
 	data.setValue(product);
 	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
 }
+
+
 
 void ProductPagesController::OnEditProduct()
 {
@@ -196,6 +212,38 @@ void ProductPagesController::OnCreateProduct()
 
 	emit GoBack();
 }
+
+//void ProductPagesController::ConnectPeriodicCreatePage()
+//{
+//	AddPeriodicProductModel model{m_hostname};
+
+//	PeriodicProduct new_product;
+//	new_product.id = 0;
+//	new_product.name = m_periodic_create_page.GetName();
+//	new_product.price = m_periodic_create_page.GetPrice();
+//	new_product.amount = m_periodic_create_page.GetAmount();
+//	new_product.priority = m_periodic_create_page.GetPriority();
+//	new_product.category.id = m_periodic_create_page.GetCategoryId();
+//	new_product.category.name = m_periodic_create_page.GetCategoryName();
+//	new_product.add_until = m_periodic_create_page.GetGenerateUntil();
+
+//	new_product.list_id = m_list_id;
+
+//	auto request  = model.FormRequest(new_product);
+//	//todo catch poco exception
+//	auto response = m_http_client.Request(request);
+
+//	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+//	{
+//		emit ServerError(response.status, response.reason);
+//		return ;
+//	}
+
+//	auto product_id = model.ParseResponse(response);
+//	Q_UNUSED(product_id);
+
+//	emit GoBack();
+//}
 
 void ProductPagesController::OnDeleteProduct()
 {

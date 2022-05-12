@@ -46,7 +46,8 @@ void ProductsSubPage::AppendProduct(ProductItem* product)
 
 void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 {
-	if (get_regular_list_size() < idx || idx < 0) {
+	if (get_regular_list_size() < idx || idx < 0)
+	{
 		throw Exception("Trying to insert a widget out of range");
 	}
 	m_ui->RegularItemsLayout->insertWidget(idx, product);
@@ -79,11 +80,13 @@ void ProductsSubPage::OnProductClicked(ProductItem* product)
 ProductItem* ProductsSubPage::SafeGetProduct(int idx)
 {
 	QLayoutItem *layout = m_ui->RegularItemsLayout->itemAt(idx);
-	if (!layout) {
+	if (!layout)
+	{
 		throw Exception("Failed to get regular product layout");
 	}
 	auto* product = qobject_cast<ProductItem*>(layout->widget());
-	if (!product) {
+	if (!product)
+	{
 		throw Exception("Failed to get product widget pointer");
 	}
 	return product;
@@ -93,7 +96,8 @@ void ProductsSubPage::RemoveProduct(ProductItem* product)
 {
 	int idx = product->get_number() - 1;
 	QLayoutItem *layout = m_ui->RegularItemsLayout->takeAt(idx);
-	if (!layout) {
+	if (!layout)
+	{
 		throw Exception("Failed to get product layout");
 	}
 
@@ -136,7 +140,8 @@ void ProductsSubPage::Update(
 {
 	m_ui->ListName->setText(m_regular_list.name);
 	Clear();
-	for (auto it = products.begin(); it != products.end(); it++) {
+	for (auto it = products.begin(); it != products.end(); it++)
+	{
 		ProductItem* item = new ProductItem(*it);
 		item->Update();
 		AppendProduct(item);
@@ -155,9 +160,11 @@ void ProductsSubPage::UpdateColors()
 
 void ProductsSubPage::Clear()
 {
-	while (get_regular_list_size()) {
+	while (get_regular_list_size())
+	{
 		QLayoutItem *layout = m_ui->RegularItemsLayout->takeAt(0);
-		if (!layout) {
+		if (!layout)
+		{
 			throw Exception("Failed to get product layout");
 		}
 

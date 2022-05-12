@@ -230,7 +230,7 @@
        <item>
         <widget class="QTabWidget" name="TabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="RegularLists">
           <attribute name="title">
@@ -248,7 +248,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>600</width>
-                <height>369</height>
+                <height>373</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="RegularItemsLayout">
@@ -287,7 +287,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>600</width>
-                <height>369</height>
+                <height>373</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="PeriodicItemsLayout">

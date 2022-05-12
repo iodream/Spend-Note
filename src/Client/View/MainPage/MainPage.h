@@ -15,6 +15,9 @@
 #include "Product/ProductCreateSubPage/ProductCreateSubPage.h"
 #include "Product/ProductEditSubPage/ProductEditSubPage.h"
 #include "Product/ProductViewSubPage/ProductViewSubPage.h"
+#include "Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.h"
+#include "Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.h"
+#include "Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.h"
 
 #include "Income/IncomesSubPage/IncomeListSubPage.h"
 #include "Income/IncomeCreateSubPage/IncomeCreateSubPage.h"
@@ -69,6 +72,9 @@ public:
 	ProductCreateSubPage& get_product_create_spage() { return m_product_create_spage; }
 	ProductEditSubPage& get_product_edit_spage() { return m_product_edit_spage; }
 	ProductViewSubPage& get_product_view_spage() { return m_product_view_spage; }
+	PeriodicProductCreateSubPage& get_periodic_product_create_spage() { return m_periodic_create_spage; }
+	PeriodicProductEditSubPage& get_periodic_product_edit_spage() { return m_periodic_edit_spage; }
+	PeriodicProductViewSubPage& get_periodic_product_view_spage() { return m_periodic_view_spage; }
 
 	IncomeListSubPage& get_incomes_spage() { return m_incomes_spage; }
 	IncomeCreateSubPage& get_incomes_create_spage() { return m_incomes_create_spage; }
@@ -129,6 +135,9 @@ private:
 	ProductCreateSubPage m_product_create_spage;
 	ProductEditSubPage m_product_edit_spage;
 	ProductViewSubPage m_product_view_spage;
+	PeriodicProductEditSubPage m_periodic_edit_spage;
+	PeriodicProductCreateSubPage m_periodic_create_spage;
+	PeriodicProductViewSubPage m_periodic_view_spage;
 
 	IncomeListSubPage m_incomes_spage;
 	IncomeCreateSubPage m_incomes_create_spage;
@@ -152,6 +161,9 @@ private:
 	void InitProductCreateSubPage();
 	void InitProductEditSubPage();
 	void InitProductViewSubPage();
+	void InitPeriodicProductCreateSubPage();
+	void InitPeriodicProductEditSubPage();
+	void InitPeriodicProductViewSubPage();
 
 	void InitIncomesSubPage();
 	void InitIncomesCreateSubPage();
