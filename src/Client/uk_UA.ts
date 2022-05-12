@@ -418,24 +418,24 @@
 <context>
     <name>ListsSubPage</name>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="14"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="20"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="69"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="75"/>
         <source>My Lists:</source>
         <translation>Мої списки:</translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="95"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="101"/>
         <source>Items:</source>
         <translation>Елементи:</translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="131"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="137"/>
         <source>New list</source>
-        <translation>Новий список</translation>
+        <translation>Новий</translation>
     </message>
 </context>
 <context>
@@ -679,7 +679,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="442"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="443"/>
         <source>Error updating page</source>
         <translation>Помилка оновлення сторінки</translation>
     </message>
@@ -687,7 +687,7 @@ Incomes</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="View/MainWindow.ui" line="20"/>
+        <location filename="View/MainWindow.ui" line="14"/>
         <source>Spend &amp; Note</source>
         <translation></translation>
     </message>
