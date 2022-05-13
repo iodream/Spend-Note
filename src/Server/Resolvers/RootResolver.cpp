@@ -32,8 +32,8 @@ const std::string PRODUCTS = "/products";
 const std::string USERS = "/users";
 const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
-const std::string CHANGE_PASSWORD = "/change-password";
-const std::string CHANGE_EMAIL = "/change-email";
+const std::string PASSWORD = "/password";
+const std::string EMAIL = "/email";
 
 
 }
@@ -81,13 +81,13 @@ ICommandHandler* RootResolver::Resolve(
 			return new CheckVerificationHandler();
 		return new MethodNotAllowedHandler();
 	}
-	else if(segment == CHANGE_PASSWORD){
-		if(method == Net::HTTP_METHOD_POST)
+	else if(segment == PASSWORD){
+		if(method == Net::HTTP_METHOD_PUT)
 			return new ChangePasswordHandler();
     return new MethodNotAllowedHandler();
   }
-	else if (segment == CHANGE_EMAIL) {
-		if(method == Net::HTTP_METHOD_POST)
+	else if (segment == EMAIL) {
+		if(method == Net::HTTP_METHOD_PUT)
 			return new ChangeEmailHandler();
 		return new MethodNotAllowedHandler();
 	}
