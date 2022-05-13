@@ -33,7 +33,7 @@ private:
 	void ConnectPage();
 
 	void AddVerification(const std::string& email);
-	void CheckVerification(const std::string& email, const std::string& code);
+	bool CheckVerification(const std::string& email, const std::string& code);
 
 signals:
 	void ChangePage(UIPages page);

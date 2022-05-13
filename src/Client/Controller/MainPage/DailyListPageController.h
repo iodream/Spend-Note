@@ -20,9 +20,10 @@ public:
 		IdType& user_id,
 		DailyListSubPage& daily_list_page);
 
-	virtual ~DailyListPageController() override {};
+	virtual ~DailyListPageController() override {}
 
 	bool UpdateDailyListPage();
+	void UpdatePageColors();
 
 private:
 	HTTPClient& m_http_client;
@@ -35,7 +36,7 @@ private:
 
 signals:
 	void ServerError(const int code, const std::string& desc);
-	void ClientError(const std::string& desc);
+	void ClientError(const QString& desc);
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void UpdatePage(MainSubPages page, PageData data=PageData{});
 

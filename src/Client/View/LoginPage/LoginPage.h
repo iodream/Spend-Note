@@ -3,6 +3,7 @@
 #include <QWidget>
 
 #include "Models/LoginModel.h"
+#include "View/Constants.h"
 
 namespace Ui {
 class LoginPage;
@@ -21,6 +22,9 @@ public:
 	void SetErrorBanner(const int code, const std::string& description);
 	void SetErrorBanner(const std::string& description);
 	void CloseErrorBanner();
+	void changeEvent(QEvent* event);
+	void Update();
+
 
 private:
 	Ui::LoginPage *m_ui;
@@ -28,11 +32,15 @@ private:
 signals:
 	void GotoSignup();
 	void Login(LoginModel::JSONFormatter::Credentials credentials);
+	void LanguageChanged();
+
 
 private slots:
 	void OnLoginSubmitButtonClicked();
 	void OnSignupButtonClicked();
 	void OnPasswordTextChanged(const QString& arg1);
 	void OnLoginTextChanged(const QString& arg1);
+	void OnLangSelected(QString lang);
+	void OnShowPasswordChecked();
 };
 

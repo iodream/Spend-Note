@@ -1,6 +1,7 @@
 #include "ListsSubPage.h"
 #include "ui_ListsSubPage.h"
 #include "Exception.h"
+#include "View/MainPage/MainPage.h"
 
 ListsSubPage::ListsSubPage(QWidget *parent)
 	: QWidget(parent)
@@ -14,6 +15,21 @@ ListsSubPage::ListsSubPage(QWidget *parent)
 		&QPushButton::released,
 		this,
 		&ListsSubPage::GoToCreateList);
+}
+
+void ListsSubPage::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+			break;
+		}
+
+		QWidget::changeEvent(event);
+	}
 }
 
 void ListsSubPage::AppendList(ListItem* list)
@@ -107,6 +123,18 @@ void ListsSubPage::Update(const std::vector<List>& lists)
 		item->Update();
 		AppendList(item);
 	}
+	if(MainPage::UISettings::LANG_UI == UILangs::AMERICAN_ENGLISH)
+		qDebug() << "LANG IN lists subpage IS: ENGLISH";
+}
+
+void ListsSubPage::UpdateColors()
+{
+	for(int i=0;i<get_list_size();i++)
+	{
+		auto list = SafeGetList(i);
+		list->Update();
+	}
+	m_ui->frame->setStyleSheet("background-color:" + QString(MainPage::ColorSettings::COLOR_TOP_BANNER));
 }
 
 void ListsSubPage::Clear()

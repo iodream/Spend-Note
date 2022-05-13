@@ -17,23 +17,27 @@ public:
 	explicit IncomeListSubPage(QWidget *parent=nullptr);
 	~IncomeListSubPage();
 
-	void AppendIncome(IncomeListItem* income);
-	void InsertIncome(IncomeListItem* income, int idx);
-	void RemoveIncome(IncomeListItem* income);
+	void AppendRegularIncome(IncomeListItem* income);
+	void InsertRegularIncome(IncomeListItem* income, int idx);
+	void RemoveRegularIncome(IncomeListItem* income);
 
 	void UpdateNumbers(int idx);
 
-	IncomeListItem* SafeGetIncome(int idx);
+	IncomeListItem* SafeGetRegularIncome(int idx);
 
 	void Update(const std::vector<Income>& incomes);
 	void Clear();
 
-	void set_list_size(int size);
-	int get_list_size();
+	void changeEvent(QEvent* event);
+
+	void set_regular_list_size(int size);
+	int get_regular_list_size();
+	void UpdateColors();
+
 private:
 	Ui::IncomeListSubPage *m_ui;
 
-	int m_list_size;
+	int m_regular_list_size, m_periodic_list_size;
 
 signals:
 	void GoToCreateIncome();

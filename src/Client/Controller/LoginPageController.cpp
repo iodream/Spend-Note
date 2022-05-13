@@ -1,10 +1,9 @@
 #include "LoginPageController.h"
 
 #include "Models/LoginModel.h"
+#include "View/MainPage/MainPage.h"
 
 #include "Net/Constants.h"
-
-
 
 LoginPageController::LoginPageController(
 	HTTPClient& http_client,
@@ -19,20 +18,24 @@ LoginPageController::LoginPageController(
 	ConnectPage();
 }
 
+void LoginPageController::UpdateLoginPage()
+{
+	m_page.Update();
+}
+
 void LoginPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::Login,
 		this,
 		&LoginPageController::OnLogin);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&LoginPage::GotoSignup,
 		this,
 		&LoginPageController::OnGoToSignupPage);
-
 }
 
 void LoginPageController::AddVerification(const std::string& email)
@@ -85,6 +88,12 @@ void LoginPageController::CheckVerification(const std::string& email, const std:
 		m_page.SetErrorBanner(response.status, response.reason);
 		return;
 	}
+
+	connect(
+		&m_page,
+		&LoginPage::LanguageChanged,
+		this,
+		&LoginPageController::LanguageChanged);
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)
@@ -144,6 +153,8 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 				m_page.ChangeLoginErrorLabel(
 					"Login or password is incorrect");
 			}
+			m_page.ChangeLoginErrorLabel(
+				tr("Login or password is incorrect").toStdString());
 		}
 		else
 		{
@@ -160,7 +171,8 @@ void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credent
 	m_http_client.set_token(user_data.token);
 
 	emit SetEmail(credentials.email);
-
+	emit ReadSettings();
+	MainPage::bNeedsGlobalUIUpdate = true;
 	emit ChangePage(UIPages::MAIN);
 }
 
@@ -169,4 +181,3 @@ void LoginPageController::OnGoToSignupPage()
 	m_page.CloseErrorBanner();
 	emit ChangePage(UIPages::SIGNUP);
 }
-

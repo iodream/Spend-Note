@@ -6,6 +6,8 @@
 #include "Net/Entities/Income/IncomeId.h"
 #include "Net/Entities/Income/IncomeCategoryBase.h"
 #include "Net/Entities/Income/IncomeCategoryId.h"
+#include "Net/Entities/PeriodicIncome/PeriodicIncomeBase.h"
+#include "Net/Entities/PeriodicIncome/PeriodicIncomeId.h"
 
 #include "Net/Entities/List/ListBase.h"
 #include "Net/Entities/List/ListId.h"
@@ -25,16 +27,21 @@
 #include "Net/Entities/User/PasswordUpdate.h"
 #include "Net/Entities/User/Token.h"
 
+#include "Net/Entities/PeriodicProduct/PeriodicProductBase.h"
+#include "Net/Entities/PeriodicProduct/PeriodicProductId.h"
+
 
 using String = std::string;
 
 using Income = IncomeBase<IncomeCategoryBase, String>;
 using IncomeCategory = IncomeCategoryBase<String>;
+using PeriodicIncome = PeriodicIncomeBase<ProductCategoryBase, String>;
 
 using List = ListBase<ListStateBase, String>;
 using ListState = ListStateBase<String>;
 
 using Product = ProductBase<ProductCategoryBase, String>;
+using PeriodicProduct = PeriodicProductBase<ProductCategoryBase, String>;
 using ProductCategory = ProductCategoryBase<String>;
 
 using StatisticPerDay = StatisticPerDayBase<String>;

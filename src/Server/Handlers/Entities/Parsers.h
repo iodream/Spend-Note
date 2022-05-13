@@ -6,6 +6,8 @@
 #include "Net/Tools/Parsers/Income/IncomeJSONParserBase.h"
 #include "Net/Tools/Parsers/Income/IncomeIdJSONParser.h"
 #include "Net/Tools/Parsers/Income/IncomeCategoryIdJSONParser.h"
+#include "Net/Tools/Parsers/PeriodicIncome/PeriodicIncomeIdJSONParser.h"
+#include "Net/Tools/Parsers/PeriodicIncome/PeriodicIncomeJSONParserBase.h"
 
 #include "Net/Tools/Parsers/List/ListJSONParserBase.h"
 #include "Net/Tools/Parsers/List/ListStateJSONParserBase.h"
@@ -23,6 +25,8 @@
 
 #include "Net/Tools/Parsers/User/PasswordUpdateJSONParser.h"
 #include "Net/Tools/Parsers/User/EmailUpdateJSONParser.h"
+#include "Net/Tools/Parsers/PeriodicProduct/PeriodicProductJSONParserBase.h"
+#include "Net/Tools/Parsers/PeriodicProduct/PeriodicProductIdJSONParser.h"
 
 #include "Net/Tools/Parsers/ArrayJSONParserBase.h"
 
@@ -34,6 +38,11 @@ using IncomesJSONParser =
 	ArrayJSONParserBase<IncomeJSONParser, Income>;
 using IncomeCategoriesJSONParser =
 	ArrayJSONParserBase<IncomeCategoryJSONParser, IncomeCategory>;
+
+using PeriodicIncomeJSONParser =
+	PeriodicIncomeJSONParserBase<ProductCategoryJSONParserBase, PeriodicIncome>;
+using PeriodicIncomesJSONParser =
+	ArrayJSONParserBase<PeriodicIncomeJSONParser, PeriodicIncome>;
 
 using ListStateJSONParser =
 	ListStateJSONParserBase<ListState>;
@@ -52,6 +61,11 @@ using ProductsJSONParser =
 	ArrayJSONParserBase<ProductJSONParser, Product>;
 using ProductCategoriesJSONParser =
 	ArrayJSONParserBase<ProductCategoryJSONParser, ProductCategory>;
+
+using PeriodicProductJSONParser =
+	PeriodicProductJSONParserBase<ProductCategoryJSONParserBase, PeriodicProduct>;
+using PeriodicProductsJSONParser =
+	ArrayJSONParserBase<PeriodicProductJSONParser, Product>;
 
 using StatisticPerDayJSONParser =
 	StatisticPerDayJSONParserBase<StatisticPerDay>;

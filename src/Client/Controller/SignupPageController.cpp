@@ -19,13 +19,13 @@ SignupPageController::SignupPageController(
 
 void SignupPageController::ConnectPage()
 {
-	QObject::connect(
+	connect(
 		&m_page,
 		&SignupPage::Signup,
 		this,
 		&SignupPageController::OnSignup);
 
-	QObject::connect(
+	connect(
 		&m_page,
 		&SignupPage::GoToLoginPage,
 		this,
@@ -55,7 +55,7 @@ void SignupPageController::AddVerification(const std::string& email)
 	}
 }
 
-void SignupPageController::CheckVerification(const std::string& email, const std::string& code)
+bool SignupPageController::CheckVerification(const std::string& email, const std::string& code)
 {
 	CheckVerificationModel model{m_hostname};
 	CheckVerificationModel::VerificationInDTO dto{email, code};
@@ -63,7 +63,7 @@ void SignupPageController::CheckVerification(const std::string& email, const std
 	if(!model.CheckData(dto))
 	{
 		m_page.SetErrorBanner("\"Code\" field should not be empty!");
-		return;
+		return false;
 	}
 
 	Net::Request request = model.FormRequest(dto);
@@ -74,14 +74,15 @@ void SignupPageController::CheckVerification(const std::string& email, const std
 	}
 	catch(Poco::Exception& exc)
 	{
-		return;
+		return false;
 	}
 
 	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
 	{
 		m_page.SetErrorBanner(response.status, response.reason);
-		return;
+		return false;
 	}
+	return true;
 }
 
 void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
@@ -90,13 +91,13 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 
 	if (!model.CheckPassRepeat(in_dto))
 	{
-		m_page.SetErrorBanner("Passwords must match!");
+		m_page.SetErrorBanner(tr("Passwords must match!"));
 		return;
 	}
 
 	if (!model.CheckData(in_dto))
 	{
-		m_page.SetErrorBanner("Username or password can't be empty!");
+		m_page.SetErrorBanner(tr("Email or password can't be empty!"));
 		return;
 	}
 
@@ -150,9 +151,10 @@ void SignupPageController::OnSignup(const SignupModel::SignupInDTO& in_dto)
 		return;
 	}
 
-	CheckVerification(in_dto.email, code.toStdString()); // checking verification
+	 if (CheckVerification(in_dto.email, code.toStdString())) {
+		 emit ChangePage(UIPages::LOGIN);
+	 }
 
-	emit ChangePage(UIPages::LOGIN);
 }
 
 void SignupPageController::OnGoToLoginPage()

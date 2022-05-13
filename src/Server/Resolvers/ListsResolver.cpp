@@ -2,9 +2,11 @@
 
 #include "../Handlers/List/RemoveListHandler.h"
 #include "../Handlers/List/UpdateListHandler.h"
+#include "../Handlers/List/GetListStatesHandler.h"
 #include "../Handlers/Product/GetProductsHandler.h"
 #include "../Handlers/Product/AddProductHandler.h"
-#include "../Handlers/List/GetListStatesHandler.h"
+#include "../Handlers/PeriodicProduct/GetPeriodicProductsHandler.h"
+#include "../Handlers/PeriodicProduct/AddPeriodicProductHandler.h"
 
 #include "../Handlers/MethodNotAllowedHandler.h"
 
@@ -15,6 +17,7 @@
 namespace {
 
 const std::string PRODUCTS = "/products";
+const std::string PERIODIC_PRODUCTS = "/periodic-products";
 const std::string STATES = "/states";
 
 }
@@ -45,8 +48,13 @@ ICommandHandler* ListsResolver::Resolve(
 		else if (method == Net::HTTP_METHOD_POST)
 			return new AddProductHandler();
 		return new MethodNotAllowedHandler();
-	}
-	else if (segment == STATES){
+	} else if (segment == PERIODIC_PRODUCTS) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetPeriodicProductsHandler();
+		else if (method == Net::HTTP_METHOD_POST)
+			return new AddPeriodicProductHandler();
+		return new MethodNotAllowedHandler();
+	} else if (segment == STATES){
 		if (method == Net::HTTP_METHOD_GET)
 			return new GetListStatesHandler();
 		return new MethodNotAllowedHandler();

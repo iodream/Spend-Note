@@ -196,42 +196,50 @@ color: rgb(255, 255, 255);</string>
        </widget>
       </item>
       <item>
-       <layout class="QFormLayout" name="formLayout_2">
-        <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetFixedSize</enum>
+        </property>
+        <property name="topMargin">
+         <number>48</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
          <widget class="QLabel" name="usernameLabel">
           <property name="text">
-           <string>Create a username:</string>
+           <string>Type your email:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item>
          <widget class="QLineEdit" name="usernameLineEdit">
           <property name="text">
            <string/>
           </property>
           <property name="placeholderText">
-           <string>Type your username</string>
+           <string>Type your email...</string>
           </property>
          </widget>
         </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0">
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="horizontalSpacing">
+         <number>9</number>
+        </property>
         <item row="1" column="0">
-         <widget class="QLabel" name="passwordCreateLabel">
-          <property name="text">
-           <string>Create a password:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="passwordCreateLineEdit">
-          <property name="echoMode">
-           <enum>QLineEdit::Password</enum>
-          </property>
-          <property name="placeholderText">
-           <string>Create password...</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
          <widget class="QLabel" name="passwordRepeatLabel">
           <property name="minimumSize">
            <size>
@@ -247,13 +255,37 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="1">
          <widget class="QLineEdit" name="passwordRepeatLineEdit">
           <property name="echoMode">
            <enum>QLineEdit::Password</enum>
           </property>
           <property name="placeholderText">
            <string>Repeat password...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="passwordCreateLabel">
+          <property name="text">
+           <string>Create a password:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="passwordCreateLineEdit">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Create password...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QCheckBox" name="showPassword">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>

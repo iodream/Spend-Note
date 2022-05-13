@@ -15,6 +15,11 @@
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
 #include "DTOs/VerificationCode.h"
+#include "DTOs/IncomeCategory.h"
+#include "DTOs/PeriodicProduct.h"
+#include "DTOs/PeriodicIncome.h"
+#include "DTOs/PeriodType.h"
+
 
 namespace db
 {
@@ -37,6 +42,8 @@ public:
 	virtual std::optional<IdType> AddProduct(const Product& product) = 0;
 	virtual std::optional<Product> GetProductById(IdType id) = 0;
 	virtual std::vector<Product> GetProductsForList(IdType list_id) = 0;
+	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
+	virtual std::vector<Product> GetProductsForPeriodicProduct(IdType periodic_id) = 0;
 	virtual bool UpdateProduct(const Product& product) = 0;
 	virtual bool RemoveProduct(IdType id) = 0;
 
@@ -61,8 +68,7 @@ public:
 	virtual bool CanUserEditList(IdType user_id, IdType list_id) = 0;
 	virtual bool CanUserEditProduct(IdType user_id, IdType product_id) = 0;
 	virtual bool CanUserEditIncome(IdType user_id, IdType income_id) = 0;
-
-	virtual std::vector<Product> GetDailyList(IdType user_id) = 0;
+	virtual bool CanUserEditPeriodicProduct(IdType user_id, IdType product_id) = 0;
 
 	virtual std::vector<ExpensePerCategory> ExpensesPerCategory(IdType user_id, Period period) = 0;
 	virtual std::vector<ExpensePercentagePerCategory> ExpensesPercentagePerCategory(IdType user_id, Period period) = 0;
@@ -91,5 +97,27 @@ public:
 	virtual std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) = 0;
 	virtual bool UpdateVerificationCode(const VerificationCode& code) = 0;
 	virtual bool RemoveVerificationCode(IdType id) = 0;
+
+	virtual std::optional<Product> GetRecommendation(const IdType& user_id) = 0;
+
+	virtual std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) = 0;
+	virtual std::optional<PeriodicIncome> GetPeriodicIncomeById(IdType id) = 0;
+	virtual std::vector<PeriodicIncome> GetAllPeriodicIncomes(IdType user_id) = 0;
+	virtual bool UpdatePeriodicIncome(const PeriodicIncome& income) = 0;
+	virtual bool RemovePeriodicIncome(IdType id) = 0;
+	virtual bool CanUserEditPeriodicIncome(IdType user_id, IdType income_id) = 0;
+	virtual std::vector<PeriodType> GetAllPeriodTypes() = 0;
+	virtual bool CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id) = 0;
+	virtual bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) = 0;
+
+	virtual std::optional<IdType> AddPeriodicProduct(const PeriodicProduct& product) = 0;
+	virtual std::optional<PeriodicProduct> GetPeriodicProductById(IdType id) = 0;
+	virtual std::vector<PeriodicProduct> GetPeriodicProductsForList(IdType list_id) = 0;
+	virtual bool UpdatePeriodicProduct(const PeriodicProduct& product) = 0;
+	virtual bool RemovePeriodicProduct(IdType id) = 0;
+
+	virtual bool CanPeriodicProductGenerate(IdType periodic_id) = 0;
+	virtual bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) = 0;
+	virtual std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) = 0;
 };
 }

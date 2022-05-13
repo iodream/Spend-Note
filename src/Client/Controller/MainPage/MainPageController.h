@@ -9,6 +9,7 @@
 #include "StatisticsPageController.h"
 #include "IncomeCategoriesController.h"
 #include "ProductCategoriesController.h"
+#include "ProductRecommendationController.h"
 #include "SettingsPageController.h"
 #include "NavHistory.h"
 
@@ -17,6 +18,8 @@
 #include "View/Constants.h"
 
 #include "Entities/PageData.h"
+
+#include "View/MainPage/RecommendationWidget.h"
 
 class MainPageController : public QObject
 {
@@ -31,13 +34,15 @@ public:
 	virtual ~MainPageController() override {}
 
 	void ChangeSubPage(MainSubPages page, PageData data=PageData{});
-
+	void UpdateRecommendations();
+	void ShowRecommendation();
 
 private:
 	void ConnectPage();
 
 	void InitListPagesController();
 	void InitProductPagesController();
+	void InitProductRecommendationController();
 	void InitIncomePagesController();
 	void InitDailyListPageController();
 	void InitStatisticsPageController();
@@ -47,6 +52,7 @@ private:
 
 
 	bool UpdateSubPage(MainSubPages page, PageData data);
+
 	std::optional<Balance> UpdateUserBalance(const IdType& id);
 
 private:
@@ -65,21 +71,25 @@ private:
 	std::unique_ptr<StatisticsPageController> m_statistics_page_controller;
 	std::unique_ptr<IncomeCategoriesController> m_income_categories_controller;
 	std::unique_ptr<ProductCategoriesController> m_product_categories_controller;
+	std::unique_ptr<ProductRecommendationController> m_product_recommendation_controller;
+
 	std::unique_ptr<SettingsPageController> m_settings_page_controller;
 
 signals:
 	void ChangePage(UIPages page);
 	void SetEmail(const std::string& email);
+	void ColorSchemeChanged();
+	void SaveConfig();
+	void LanguageChanged();
 
 public slots:
-	void OnSetEmail(const std::string& email);
-
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnUpdateSubPage(MainSubPages page, PageData data=PageData{});
-
 	void OnServerError(const int code, const std::string& desc);
-	void OnClientError(const std::string& desc);
-
+	void OnClientError(const QString& desc);
 	void OnGoBack(int n=1);
 	void OnLogout();
+	void OnFontChange();
+	void OnUIUpdate();
+	void OnRecommendationClosed();
 };
