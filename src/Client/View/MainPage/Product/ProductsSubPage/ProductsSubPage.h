@@ -27,6 +27,7 @@ public:
 	ProductItem* SafeGetProduct(int idx);
 
 	void Update(const std::vector<Product>& products);
+	void Update(const std::vector<PeriodicProduct>& products);
 	void UpdateColors();
 
 	void Clear();
@@ -39,11 +40,17 @@ public:
 	void set_regular_list(List list);
 	List get_regular_list();
 
+	void set_periodic_list_size(int size);
+	int get_periodic_list_size();
+
+	void set_periodic_list(List list);
+	List get_periodic_list();
 
 signals:
 	void GoToCreateProduct(IdType list_id);
 	void GoToViewList();
 	void ProductClicked(const Product& product);
+	void PeriodicProductClicked(const PeriodicProduct& product);
 
 private slots:
 	void OnProductClicked(ProductItem* product);

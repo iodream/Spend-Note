@@ -38,6 +38,9 @@ ProductPagesController::ProductPagesController(
 	ConnectViewPage();
 	ConnectEditPage();
 	ConnectCreatePage();
+	ConnectPeriodicEditPage();
+	ConnectPeriodicCreatePage();
+	ConnectPeridoicViewPage();
 }
 
 bool ProductPagesController::UpdateProductsPage(PageData data)
@@ -89,6 +92,20 @@ void ProductPagesController::ConnectViewPage()
 		&ProductPagesController::OnDeleteProduct);
 }
 
+void ProductPagesController::ConnectPeridoicViewPage()
+{
+	connect(
+		&m_periodic_view_page,
+		&PeriodicProductViewSubPage::EditProduct,
+		this,
+		&ProductPagesController::OnEditPeriodicProduct);
+
+	connect(
+		&m_periodic_view_page,
+		&PeriodicProductViewSubPage::DeleteProduct,
+		this,
+		&ProductPagesController::OnDeletePeriodicProduct);
+}
 
 void ProductPagesController::ConnectEditPage()
 {
@@ -103,6 +120,21 @@ void ProductPagesController::ConnectEditPage()
 		this,
 		&ProductPagesController::UpdateCategoryBox);
 }
+
+void ProductPagesController::ConnectPeriodicEditPage()
+{
+	connect(
+		&m_periodic_edit_page,
+		&PeriodicProductEditSubPage::CreateProduct,
+		this,
+		&ProductPagesController::OnUpdatePeriodicProduct);
+	connect(
+		&m_periodic_edit_page,
+		&PeriodicProductEditSubPage::UpdateCategories,
+		this,
+		&ProductPagesController::UpdateCategoryBox);
+}
+
 
 void ProductPagesController::ConnectCreatePage()
 {
@@ -124,7 +156,7 @@ void ProductPagesController::ConnectPeriodicCreatePage()
 		&m_periodic_create_page,
 		&PeriodicProductCreateSubPage::CreateProduct,
 		this,
-		&ProductPagesController::ConnectPeriodicCreatePage);
+		&ProductPagesController::OnCreatePeriodicProduct);
 	connect(
 		&m_periodic_create_page,
 		&PeriodicProductCreateSubPage::UpdateCategories,
@@ -139,6 +171,13 @@ void ProductPagesController::OnProductClicked(const Product& product)
 	emit ChangeSubPage(MainSubPages::VIEW_PRODUCT, data);
 }
 
+
+void ProductPagesController::OnPeriodicProductCliked(const PeriodicProduct& product)
+{
+	PageData data{};
+	data.setValue(product);
+	emit ChangeSubPage(MainSubPages::VIEW_PERIODIC_PRODUCT, data);
+}
 
 void ProductPagesController::OnEditProduct()
 {
@@ -309,6 +348,22 @@ void ProductPagesController::OnDeleteProduct()
 	emit GoBack();
 }
 
+void ProductPagesController::OnDeletePeriodicProduct()
+{
+	RemovePeriodicProductModel model{m_hostname};
+	PeriodicProductId id{m_periodic_view_page.get_product().id};
+	auto request = model.FormRequest(id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit ServerError(response.status, response.reason);
+		return;
+	}
+
+	emit GoBack();
+}
+
 bool ProductPagesController::UpdateProductsPage()
 {
 	GetProductsModel model{m_hostname};
@@ -331,6 +386,8 @@ bool ProductPagesController::UpdateProductsPage()
 bool ProductPagesController::UpdateProductsPage(List list)
 {
 	GetProductsModel model{m_hostname};
+	GetPeriodicProductsModel p_model{m_hostname};
+
 	m_products_page.set_regular_list(list);
 	auto request  = model.FormRequest(list.id);
 	auto response = m_http_client.Request(request);

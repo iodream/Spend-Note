@@ -13,6 +13,14 @@ ProductItem::ProductItem(Product product, QWidget *parent)
 	m_ui->setupUi(this);
 }
 
+ProductItem::ProductItem(PeriodicProduct product, QWidget *parent)
+	: QPushButton(parent)
+	, m_periodic_product(product)
+	, m_ui(new Ui::ProductItem)
+{
+	m_ui->setupUi(this);
+}
+
 ProductItem::~ProductItem()
 {
 	delete m_ui;

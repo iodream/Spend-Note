@@ -51,8 +51,7 @@ private:
 	void ConnectEditPage();
 	void ConnectCreatePage();
 
-	//void ConnectPeriodicProductsPage();
-	//void ConnectPeridoicViewPage();
+	void ConnectPeridoicViewPage();
 	void ConnectPeriodicEditPage();
 	void ConnectPeriodicCreatePage();
 
@@ -84,10 +83,10 @@ public slots:
 	void OnCreateProduct();
 	void OnDeleteProduct();
 
-	//void OnPeriodicProductCliked(const PeriodicProduct& product);
+	void OnPeriodicProductCliked(const PeriodicProduct& product);
 	void OnEditPeriodicProduct();
 	void OnUpdatePeriodicProduct();
 	void OnGoToCreatePeriodicProduct(IdType list_id);
 	void OnCreatePeriodicProduct();
-	//void OnDeletePeriodicProduct();
+	void OnDeletePeriodicProduct();
 };

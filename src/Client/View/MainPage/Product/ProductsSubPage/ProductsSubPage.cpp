@@ -130,6 +130,28 @@ List ProductsSubPage::get_regular_list()
 	return m_regular_list;
 }
 
+void ProductsSubPage::set_periodic_list_size(int size)
+{
+	m_regular_list_size = size;
+	m_ui->ListSize->setText(QString("%1").arg(m_regular_list_size));
+	m_ui->ListSize->show();
+}
+
+int ProductsSubPage::get_periodic_list_size()
+{
+	return m_periodic_list_size;
+}
+
+void ProductsSubPage::set_periodic_list(List list)
+{
+	m_periodic_list = list;
+}
+
+List ProductsSubPage::get_periodic_list()
+{
+	return m_periodic_list;
+}
+
 ProductsSubPage::~ProductsSubPage()
 {
 	delete m_ui;
@@ -137,6 +159,19 @@ ProductsSubPage::~ProductsSubPage()
 
 void ProductsSubPage::Update(
 	const std::vector<Product>& products)
+{
+	m_ui->ListName->setText(m_regular_list.name);
+	Clear();
+	for (auto it = products.begin(); it != products.end(); it++)
+	{
+		ProductItem* item = new ProductItem(*it);
+		item->Update();
+		AppendProduct(item);
+	}
+}
+
+void ProductsSubPage::Update(
+	const std::vector<PeriodicProduct>& products)
 {
 	m_ui->ListName->setText(m_regular_list.name);
 	Clear();

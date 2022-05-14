@@ -20,6 +20,7 @@ public:
 	using IdType = int;
 
 	explicit ProductItem(Product product, QWidget *parent = nullptr);
+	explicit ProductItem(PeriodicProduct product, QWidget *parent = nullptr);
 	~ProductItem();
 
 	void Update();
@@ -36,6 +37,7 @@ public:
 private:
 	void UpdateColor();
 	Product m_product;
+	PeriodicProduct m_periodic_product;
 	int m_number{1};
 	QString m_color;
 
