@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+    cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -41,7 +41,7 @@ list(APPEND Spend-Note-Server_LIBS
     PocoFoundation
     PocoJWT
     PocoJSON	
-	PocoNetSSL
+    PocoNetSSL
 )
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../Net ${CMAKE_CURRENT_BINARY_DIR}/Net)

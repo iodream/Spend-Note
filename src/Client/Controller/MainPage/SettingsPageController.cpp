@@ -65,7 +65,7 @@ void SettingsPageController::ConnectSettingsPage()
 
 bool SettingsPageController::IsEmailValid(const QString& email) const
 {
-	QRegularExpression regex(REGEX_PATTERN, QRegularExpression::CaseInsensitiveOption);
+	QRegularExpression regex(EMAIL_REGEX, QRegularExpression::CaseInsensitiveOption);
 		QRegularExpressionMatch match = regex.match(email);
 
 		if (match.hasMatch())

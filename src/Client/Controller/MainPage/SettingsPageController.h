@@ -37,7 +37,7 @@ private:
 	IdType& m_user_id;
 
 
-	const QString REGEX_PATTERN = "^[A-Z0-9a-z._-]{1,}@(\\w+)(\\.(\\w+))(\\.(\\w+))?(\\.(\\w+))?$";
+	const QString EMAIL_REGEX = "^[A-Z0-9a-z._-]{1,}@(\\w+)(\\.(\\w+))(\\.(\\w+))?(\\.(\\w+))?$";
 	bool IsEmailValid(const QString& email) const;
 	void AddVerification(const std::string& email);
 
