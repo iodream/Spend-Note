@@ -42,6 +42,9 @@ public:
 	void UpdateProductColors();
 
 
+	bool UpdatePeriodicProductsPage();
+	bool UpdatePeriodicProductsPage(List list);
+
 	void SetRangeOfSpinBoxes();
 	void UpdateCategoryBox();
 

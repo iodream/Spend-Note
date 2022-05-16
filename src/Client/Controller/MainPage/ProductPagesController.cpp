@@ -61,6 +61,7 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 	return UpdateViewPage(qvariant_cast<Product>(data));
 }
 
+
 void ProductPagesController::ConnectProductsPage()
 {
 	connect(
@@ -383,10 +384,28 @@ bool ProductPagesController::UpdateProductsPage()
 	return true;
 }
 
+bool ProductPagesController::UpdatePeriodicProductsPage()
+{
+	GetPeriodicProductsModel model{m_hostname};
+	List list = m_products_page.get_periodic_list();
+	auto request  = model.FormRequest(list.id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit ServerError(response.status, response.reason);
+		return false;
+	}
+
+	auto products = model.ParseResponse(response);
+
+	m_products_page.Update(products);
+	return true;
+}
+
 bool ProductPagesController::UpdateProductsPage(List list)
 {
 	GetProductsModel model{m_hostname};
-	GetPeriodicProductsModel p_model{m_hostname};
 
 	m_products_page.set_regular_list(list);
 	auto request  = model.FormRequest(list.id);
@@ -404,6 +423,28 @@ bool ProductPagesController::UpdateProductsPage(List list)
 	m_products_page.Update(products);
 	return true;
 }
+
+bool ProductPagesController::UpdatePeriodicProductsPage(List list)
+{
+	GetPeriodicProductsModel model{m_hostname};
+
+	m_products_page.set_periodic_list(list);
+	auto request  = model.FormRequest(list.id);
+	auto response = m_http_client.Request(request);
+
+	if(response.status >= Poco::Net::HTTPResponse::HTTP_BAD_REQUEST)
+	{
+		emit ServerError(response.status, response.reason);
+		return false;
+	}
+
+	auto products = model.ParseResponse(response);
+	UpdateCategoryBox();
+	SetRangeOfSpinBoxes();
+	m_products_page.Update(products);
+	return true;
+}
+
 
 bool ProductPagesController::UpdateViewPage(Product product)
 {
