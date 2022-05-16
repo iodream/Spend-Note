@@ -944,7 +944,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="150"/>
-        <source>Monthy</source>
+        <source>Monthly</source>
+        <oldsource>Monthy</oldsource>
         <translation>Щомісяця</translation>
     </message>
     <message>
@@ -1614,7 +1615,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="482"/>
         <source>Navigational Buttons</source>
-        <translation>Кнопки Навігації</translation>
+        <translation>Кнопки навігації</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="487"/>

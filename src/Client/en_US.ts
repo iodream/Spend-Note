@@ -944,7 +944,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductCreateSubPage/PeriodicProductCreateSubPage.ui" line="150"/>
-        <source>Monthy</source>
+        <source>Monthly</source>
+        <oldsource>Monthy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
