@@ -11,7 +11,7 @@
     <message>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.ui" line="30"/>
         <source>My Categories:</source>
-        <translation>Мої категорії:</translation>
+        <translation>Мої Категорії:</translation>
     </message>
     <message>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.ui" line="52"/>
@@ -26,7 +26,7 @@
     <message>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.ui" line="101"/>
         <source>Category name</source>
-        <translation></translation>
+        <translation>Назва категорії</translation>
     </message>
     <message>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.ui" line="153"/>
@@ -49,20 +49,20 @@
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="155"/>
         <location filename="View/MainPage/CategoryEditPage/CategoryEditPage.cpp" line="169"/>
         <source>Please Select an item!</source>
-        <translation>Будь ласка, виберіть елемент!</translation>
+        <translation>Будь ласка, зробіть вибір!</translation>
     </message>
 </context>
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="196"/>
+        <location filename="Controller/Controller.cpp" line="203"/>
         <source>Retry?</source>
-        <translation>Ще раз?</translation>
+        <translation>Повторити?</translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="197"/>
+        <location filename="Controller/Controller.cpp" line="204"/>
         <source>No connection to server. Retry?</source>
-        <translation>Немає з&apos;єднання з сервером. Спробувати ще раз?</translation>
+        <translation>Немає з&apos;єднання з сервером. Повторити?</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="20"/>
         <source>New Income</source>
-        <translation>Новий дохід</translation>
+        <translation>Новий Дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="32"/>
@@ -101,6 +101,11 @@
         <translation>Категорія:</translation>
     </message>
     <message>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
+        <source>+</source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="97"/>
         <source>Amount:</source>
         <translation>Кількість:</translation>
@@ -108,16 +113,11 @@
     <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="111"/>
         <source>Expire date:</source>
-        <translation>Термін дії:</translation>
+        <translation>Кінцева дата:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="128"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
-        <source>+</source>
         <translation></translation>
     </message>
     <message>
@@ -136,7 +136,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="20"/>
         <source>Edit Income</source>
-        <translation>Редагувати дохід</translation>
+        <translation>Редагувати Дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="32"/>
@@ -156,7 +156,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="114"/>
         <source>Expire date:</source>
-        <translation>Термін дії:</translation>
+        <translation>Кінцева дата:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomeEditSubPage/IncomeEditSubPage.ui" line="121"/>
@@ -191,7 +191,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListItem.ui" line="153"/>
         <source>Expires:</source>
-        <translation>Термін дії:</translation>
+        <translation>Кінцева дата:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListItem.ui" line="199"/>
@@ -209,7 +209,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="59"/>
         <source>My Incomes:</source>
-        <translation>Мої доходи:</translation>
+        <translation>Мої Доходи:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomesSubPage/IncomeListSubPage.ui" line="140"/>
@@ -267,7 +267,7 @@
     <message>
         <location filename="View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.ui" line="94"/>
         <source>Expires</source>
-        <translation>Термін дії</translation>
+        <translation>Кінцева дата</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/IncomeViewSubPage/IncomeViewSubPage.ui" line="123"/>
@@ -318,12 +318,12 @@
     <message>
         <location filename="View/MainPage/List/ListCreateSubPage/ListCreateSubPage.ui" line="124"/>
         <source>Add Item</source>
-        <translation>Додати елемент</translation>
+        <translation>Додати продукт</translation>
     </message>
     <message>
         <location filename="View/MainPage/List/ListCreateSubPage/ListCreateSubPage.ui" line="146"/>
         <source>Clear all</source>
-        <translation>Видалити всі</translation>
+        <translation>Видалити все</translation>
     </message>
     <message>
         <location filename="View/MainPage/List/ListCreateSubPage/ListCreateSubPage.ui" line="170"/>
@@ -378,13 +378,13 @@
         <location filename="Controller/MainPage/ListPagesController.cpp" line="215"/>
         <location filename="Controller/MainPage/ListPagesController.cpp" line="368"/>
         <source>List name can&apos;t be empty</source>
-        <translation>Назва списку не може бути пустою</translation>
+        <translation>Ім&apos;я списку не може бути порожнім</translation>
     </message>
     <message>
         <location filename="Controller/MainPage/ListPagesController.cpp" line="247"/>
         <location filename="Controller/MainPage/ListPagesController.cpp" line="316"/>
         <source>Product data can&apos;t be empty</source>
-        <translation>Дані продукту не можуть бути пустими</translation>
+        <translation>Дані продукту не можуть бути порожніми</translation>
     </message>
 </context>
 <context>
@@ -425,12 +425,12 @@
     <message>
         <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="69"/>
         <source>My Lists:</source>
-        <translation>Мої списки:</translation>
+        <translation>Мої Списки:</translation>
     </message>
     <message>
         <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="95"/>
         <source>Items:</source>
-        <translation>Елементи:</translation>
+        <translation>Продукти:</translation>
     </message>
     <message>
         <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="131"/>
@@ -451,12 +451,14 @@
         <translation></translation>
     </message>
     <message>
-        <source>Login</source>
-        <translation type="vanished">Логін</translation>
+        <location filename="View/LoginPage/LoginPage.ui" line="93"/>
+        <source>Email</source>
+        <translation>Емейл</translation>
     </message>
     <message>
-        <source>Login.....</source>
-        <translation type="vanished">Логін......</translation>
+        <location filename="View/LoginPage/LoginPage.ui" line="100"/>
+        <source>Email.....</source>
+        <translation>Емейл.....</translation>
     </message>
     <message>
         <location filename="View/LoginPage/LoginPage.ui" line="111"/>
@@ -464,8 +466,9 @@
         <translation>Пароль</translation>
     </message>
     <message>
-        <source>Password.....</source>
-        <translation type="vanished">Пароль......</translation>
+        <location filename="View/LoginPage/LoginPage.ui" line="121"/>
+        <source>Password...</source>
+        <translation>Пароль...</translation>
     </message>
     <message>
         <location filename="View/LoginPage/LoginPage.ui" line="163"/>
@@ -475,7 +478,7 @@
     <message>
         <location filename="View/LoginPage/LoginPage.ui" line="186"/>
         <source>Do not have an account yet?</source>
-        <translation>Ще немає акаунту?</translation>
+        <translation>Ще не маєте акаунту?</translation>
     </message>
     <message>
         <location filename="View/LoginPage/LoginPage.ui" line="200"/>
@@ -483,39 +486,14 @@
         <translation>Зареєструватися</translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="376"/>
-        <source>English</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="381"/>
-        <source>Українська</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="View/LoginPage/LoginPage.ui" line="282"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="93"/>
-        <source>Email</source>
-        <translation>Email</translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="100"/>
-        <source>Email.....</source>
-        <translation>Email.....</translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="121"/>
-        <source>Password...</source>
-        <translation>Пароль...</translation>
-    </message>
-    <message>
         <location filename="View/LoginPage/LoginPage.ui" line="304"/>
         <source>Login failed!</source>
-        <translation>Логін невдалий!</translation>
+        <translation>Невдалий логін!</translation>
     </message>
     <message>
         <location filename="View/LoginPage/LoginPage.ui" line="311"/>
@@ -537,13 +515,43 @@
         <source>X</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="376"/>
+        <source>English</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="381"/>
+        <source>Українська</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>LoginPageController</name>
     <message>
-        <location filename="Controller/LoginPageController.cpp" line="66"/>
+        <location filename="Controller/LoginPageController.cpp" line="131"/>
+        <source>Spend&amp;Note</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="132"/>
+        <source>Verification code has been sent on </source>
+        <translation>Код перевірки було надіслано на </translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="136"/>
+        <source>Input your verification code</source>
+        <translation>Введіть Ваш код перевірки</translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="137"/>
+        <source>Code: </source>
+        <translation>Код: </translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="157"/>
         <source>Login or password is incorrect</source>
-        <translation>Неправильний логін або пароль</translation>
+        <translation>Логін або пароль неправильні</translation>
     </message>
 </context>
 <context>
@@ -556,25 +564,25 @@
     <message>
         <location filename="View/MainPage/MainPage.ui" line="108"/>
         <source>Go Back</source>
-        <translation>Перейти назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
         <location filename="View/MainPage/MainPage.cpp" line="47"/>
         <location filename="View/MainPage/MainPage.cpp" line="264"/>
         <source>My Lists</source>
-        <translation>Мої списки</translation>
+        <translation>Мої Списки</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="198"/>
         <source>My 
 Incomes</source>
-        <translation>Мої доходи</translation>
+        <translation>Мої Доходи</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="244"/>
         <source>Daily list</source>
-        <translation>Щоденний список</translation>
+        <translation>Щоденник список</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
@@ -597,17 +605,17 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="474"/>
         <source>Current Balance</source>
-        <translation>Поточний баланс</translation>
+        <translation>Поточний Баланс</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="503"/>
         <source>Projected Balance</source>
-        <translation>Проектований баланс</translation>
+        <translation>Прогнозований Баланс</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="555"/>
         <source>Error occured!</source>
-        <translation>Сталася помилка!</translation>
+        <translation>Виникла помилка!</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="567"/>
@@ -633,13 +641,13 @@ Incomes</source>
         <location filename="View/MainPage/MainPage.cpp" line="45"/>
         <location filename="View/MainPage/MainPage.cpp" line="262"/>
         <source>Back</source>
-        <translation>Перейти назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="46"/>
         <location filename="View/MainPage/MainPage.cpp" line="263"/>
         <source>My Incomes</source>
-        <translation>Мої доходи</translation>
+        <translation>Мої Доходи</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="48"/>
@@ -651,7 +659,7 @@ Incomes</source>
         <location filename="View/MainPage/MainPage.cpp" line="49"/>
         <location filename="View/MainPage/MainPage.cpp" line="266"/>
         <source>Daily List</source>
-        <translation>Щоденний список</translation>
+        <translation>Щоденник Список</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="50"/>
@@ -663,23 +671,23 @@ Incomes</source>
         <location filename="View/MainPage/MainPage.cpp" line="52"/>
         <location filename="View/MainPage/MainPage.cpp" line="269"/>
         <source>My Categories</source>
-        <translation>Мої категорії</translation>
+        <translation>Мої Категорії</translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="329"/>
         <source>Current Balance:  </source>
-        <translation>Поточний баланс:  </translation>
+        <translation>Поточний Баланс:  </translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="330"/>
         <source>Predicted balance:  </source>
-        <translation>Передбачений баланс:  </translation>
+        <translation>Прогнозований Баланс:  </translation>
     </message>
 </context>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="443"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="450"/>
         <source>Error updating page</source>
         <translation>Помилка оновлення сторінки</translation>
     </message>
@@ -697,12 +705,12 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="14"/>
         <source>Form</source>
-        <translation>Новий періодичний дохід</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="20"/>
         <source>New Periodic Income</source>
-        <translation>Новий Періодичний дохід</translation>
+        <translation>Новий Періодичний Дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeCreateSubPage/PeriodicIncomeCreateSubPage.ui" line="32"/>
@@ -775,7 +783,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="20"/>
         <source>Edit Periodic Income</source>
-        <translation>Змінити Періодичний дохід</translation>
+        <translation>Редагувати Періодичний Дохід</translation>
     </message>
     <message>
         <location filename="View/MainPage/Income/PeriodicIncomeEditSubPage/PeriodicIncomeEditSubPage.ui" line="32"/>
@@ -975,7 +983,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="25"/>
         <source>Edit periodic product</source>
-        <translation>Новий Періодичний продукт</translation>
+        <translation>Редагувати періодичний продукт</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductEditSubPage/PeriodicProductEditSubPage.ui" line="42"/>
@@ -1064,7 +1072,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="26"/>
         <source>Periodic product info:</source>
-        <translation>Періодичний продукт:</translation>
+        <translation>Переглянути періодичний продукт:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/PeriodicProductViewSubPage/PeriodicProductViewSubPage.ui" line="43"/>
@@ -1173,14 +1181,14 @@ Incomes</source>
         <translation>Категорія</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="185"/>
-        <source>Is bought</source>
-        <translation>Вже куплений</translation>
-    </message>
-    <message>
         <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="153"/>
         <source>+</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="185"/>
+        <source>Is bought</source>
+        <translation>Куплений</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="221"/>
@@ -1233,7 +1241,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.ui" line="186"/>
         <source>Is bought</source>
-        <translation>Вже куплений</translation>
+        <translation>Куплений</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductEditSubPage/ProductEditSubPage.ui" line="222"/>
@@ -1262,7 +1270,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductItem.ui" line="191"/>
         <source>Price:</source>
-        <translation>Ціна:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductItem.ui" line="201"/>
@@ -1320,7 +1328,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.ui" line="166"/>
         <source>Is bought</source>
-        <translation>Вже куплений</translation>
+        <translation>Куплений</translation>
     </message>
     <message>
         <location filename="View/MainPage/List/ListCreateSubPage/ProductQuickCreateSubPage.ui" line="220"/>
@@ -1338,7 +1346,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="26"/>
         <source>Product Info:</source>
-        <translation>Інформація про продукт:</translation>
+        <translation>Переглянути Продукт:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="43"/>
@@ -1366,14 +1374,14 @@ Incomes</source>
         <translation>Пріоритет</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="175"/>
-        <source>Is bought</source>
-        <translation>Вже куплений</translation>
-    </message>
-    <message>
         <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="153"/>
         <source>Category</source>
         <translation>Категорія</translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="175"/>
+        <source>Is bought</source>
+        <translation>Куплений</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="214"/>
@@ -1396,7 +1404,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="82"/>
         <source>ListName</source>
-        <translation>Ім&apos;я списку</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="103"/>
@@ -1406,7 +1414,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="140"/>
         <source>Items:</source>
-        <translation>Елементи:</translation>
+        <translation>Продукти:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="164"/>
@@ -1416,24 +1424,17 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="192"/>
         <source>Regular products</source>
-        <translation>Звичайний продукт</translation>
+        <translation>Звичайні продукти</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.ui" line="231"/>
         <source>Periodic products</source>
-        <translation>Періодичний продукт</translation>
+        <translation>Періодичні продукти</translation>
     </message>
     <message>
         <location filename="View/MainPage/Product/ProductsSubPage/ProductsSubPage.cpp" line="110"/>
         <source>Items: </source>
-        <translation>Елементи: </translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>Please Select an item!</source>
-        <translation type="vanished">Будь ласка, виберіть елемент!</translation>
+        <translation>Продукти: </translation>
     </message>
 </context>
 <context>
@@ -1455,6 +1456,35 @@ Incomes</source>
     </message>
 </context>
 <context>
+    <name>SettingsPageController</name>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="117"/>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="155"/>
+        <source>Spend&amp;Note</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="118"/>
+        <source>Verification code has been sent on </source>
+        <translation>Код перевірки було надіслано на </translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="121"/>
+        <source>Input your verification code</source>
+        <translation>Введіть Ваш код перевірки</translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="122"/>
+        <source>Code: </source>
+        <translation>Код: </translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="156"/>
+        <source>Your email has been updated</source>
+        <translation>Ваш Емейл було оновлено</translation>
+    </message>
+</context>
+<context>
     <name>SettingsSubPage</name>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="20"/>
@@ -1469,12 +1499,12 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="98"/>
         <source>User Info:</source>
-        <translation>Дані користувача:</translation>
+        <translation>Дані Користувача:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="132"/>
         <source>User&apos;s email:</source>
-        <translation>Email користувача:</translation>
+        <translation>Емейл користувача:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="145"/>
@@ -1484,7 +1514,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="152"/>
         <source>Change email</source>
-        <translation>Змінити email</translation>
+        <translation>Змінити емейл</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="159"/>
@@ -1529,12 +1559,12 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="299"/>
         <source>Set to Default</source>
-        <translation>По замовчуванню</translation>
+        <translation>За замовчуванням</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="322"/>
         <source>Change fonts size:</source>
-        <translation>Змінити розмір:</translation>
+        <translation>Змінити розмір шрифта:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="340"/>
@@ -1564,7 +1594,7 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="441"/>
         <source>Custom color scheme</source>
-        <translation>Моя кольорова гама</translation>
+        <translation>Власна кольорова гама</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="447"/>
@@ -1579,22 +1609,22 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="477"/>
         <source>Top Banner</source>
-        <translation>Верхній банер</translation>
+        <translation>Верхній баннер</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="482"/>
         <source>Navigational Buttons</source>
-        <translation>Навігаційні кнопки</translation>
+        <translation>Кнопки Навігації</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="487"/>
         <source>Error banner</source>
-        <translation>Банер помилок</translation>
+        <translation>Баннер помилок</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="492"/>
         <source>Recommendation popup</source>
-        <translation>Рекомендаційний віджет</translation>
+        <translation>Рекомендації</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="497"/>
@@ -1604,27 +1634,27 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="502"/>
         <source>Product priority 1</source>
-        <translation>1-ий пріоритет продукту</translation>
+        <translation>Пріоритет продукту 1</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="507"/>
         <source>Product priority 2</source>
-        <translation>2-ий пріоритет продукту</translation>
+        <translation>Пріоритет продукту 2</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="512"/>
         <source>Product priority 3</source>
-        <translation>3-ій пріоритет продукту</translation>
+        <translation>Пріоритет продукту 3</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="517"/>
         <source>Product priority 4</source>
-        <translation>4-ий пріоритет продукту</translation>
+        <translation>Пріоритет продукту 4</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="522"/>
         <source>Product priority 5</source>
-        <translation>5-ий пріоритет продукту</translation>
+        <translation>Пріоритет продукту 5</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="527"/>
@@ -1675,7 +1705,7 @@ Incomes</source>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="685"/>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="782"/>
         <source>Go Back</source>
-        <translation>Перейти назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="692"/>
@@ -1686,17 +1716,17 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="701"/>
         <source>Change password:</source>
-        <translation>Поміняти пароль:</translation>
+        <translation>Змінити пароль:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="712"/>
         <source>Change email:</source>
-        <translation>Поміняти email:</translation>
+        <translation>Змінити емейл:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="721"/>
         <source>Your current email:</source>
-        <translation>Ваш поточний email:</translation>
+        <translation>Ваш поточний емейл:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="728"/>
@@ -1706,15 +1736,15 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="735"/>
         <source>Your new email:</source>
-        <translation>Ваш новий email:</translation>
+        <translation>Ваш новий емейл:</translation>
     </message>
     <message>
         <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.ui" line="745"/>
         <source>New email...</source>
-        <translation>Новий email...</translation>
+        <translation>Новий емейл...</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="178"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="185"/>
         <source>Current font is: %1 %2</source>
         <translation>Поточний шрифт: %1 %2</translation>
     </message>
@@ -1759,15 +1789,27 @@ Incomes</source>
     <message>
         <location filename="View/SignupPage/SignupPage.ui" line="191"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Registration&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Реєстрація&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation></translation>
     </message>
     <message>
-        <source>Create a username:</source>
-        <translation type="vanished">Створіть імя користувача:</translation>
+        <location filename="View/SignupPage/SignupPage.ui" line="215"/>
+        <source>Type your email:</source>
+        <translation>Введіть ваш емейл:</translation>
     </message>
     <message>
-        <source>Type your username</source>
-        <translation type="vanished">Введіть ім&apos;я користувача</translation>
+        <location filename="View/SignupPage/SignupPage.ui" line="225"/>
+        <source>Type your email...</source>
+        <translation>Введіть ваш емейл...</translation>
+    </message>
+    <message>
+        <location filename="View/SignupPage/SignupPage.ui" line="251"/>
+        <source>Repeat password:</source>
+        <translation>Повторіть пароль:</translation>
+    </message>
+    <message>
+        <location filename="View/SignupPage/SignupPage.ui" line="264"/>
+        <source>Repeat password...</source>
+        <translation>Повторіть пароль...</translation>
     </message>
     <message>
         <location filename="View/SignupPage/SignupPage.ui" line="271"/>
@@ -1778,26 +1820,6 @@ Incomes</source>
         <location filename="View/SignupPage/SignupPage.ui" line="281"/>
         <source>Create password...</source>
         <translation>Створіть пароль...</translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="251"/>
-        <source>Repeat password:</source>
-        <translation>Повторіть пароль:</translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="215"/>
-        <source>Type your email:</source>
-        <translation>Введіть Ваш email:</translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="225"/>
-        <source>Type your email...</source>
-        <translation>Введіть Ваш email...</translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="264"/>
-        <source>Repeat password...</source>
-        <translation>Повторіть пароль...</translation>
     </message>
     <message>
         <location filename="View/SignupPage/SignupPage.ui" line="299"/>
@@ -1813,14 +1835,44 @@ Incomes</source>
 <context>
     <name>SignupPageController</name>
     <message>
-        <location filename="Controller/SignupPageController.cpp" line="40"/>
+        <location filename="Controller/SignupPageController.cpp" line="94"/>
         <source>Passwords must match!</source>
-        <translation>Паролі повинні співпадати!</translation>
+        <translation>Паролі мусять співпадати!</translation>
     </message>
     <message>
-        <location filename="Controller/SignupPageController.cpp" line="46"/>
+        <location filename="Controller/SignupPageController.cpp" line="100"/>
         <source>Email or password can&apos;t be empty!</source>
-        <translation>Email та пароль не можуть бути порожніми!</translation>
+        <translation>Емейл чи пароль не можуть бути порожніми!</translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="135"/>
+        <source>Spend&amp;Note</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="136"/>
+        <source>Verification code has been sent on </source>
+        <translation>Код перевірки було надіслано на </translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="139"/>
+        <source>Input your verification code</source>
+        <translation>Введіть Ваш код перевірки</translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="140"/>
+        <source>Code: </source>
+        <translation>Код: </translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="148"/>
+        <source>Spend&amp;Note warning</source>
+        <translation>Попередження від Spend&amp;Note</translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="149"/>
+        <source>You will be asked for verification on your login</source>
+        <translation>Вас запитають про підтвердження під час логіну</translation>
     </message>
 </context>
 <context>
@@ -1829,6 +1881,11 @@ Incomes</source>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="14"/>
         <source>Form</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
+        <source>Expenses</source>
+        <translation>Витрати</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="54"/>
@@ -1841,40 +1898,35 @@ Incomes</source>
         <translation>Недостатньо даних</translation>
     </message>
     <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="26"/>
-        <source>Expenses</source>
-        <translation>Витрати</translation>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
+        <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
+        <source>Incomes</source>
+        <translation>Доходи</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="277"/>
         <source>daily</source>
-        <translation>Щоденно</translation>
+        <translation>Щодня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="282"/>
         <source>weekly</source>
-        <translation>Тижнево</translation>
+        <translation>Щотижня</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="287"/>
         <source>monthly</source>
-        <translation>За місяць</translation>
+        <translation>Щомісяця</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="292"/>
         <source>yearly</source>
-        <translation>За рік</translation>
+        <translation>Щороку</translation>
     </message>
     <message>
         <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="23"/>
         <source>Outcomes</source>
         <translation>Витрати</translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.ui" line="135"/>
-        <location filename="View/MainPage/Statistic/StatisticSubPage.cpp" line="24"/>
-        <source>Incomes</source>
-        <translation>Доходи</translation>
     </message>
 </context>
 <context>

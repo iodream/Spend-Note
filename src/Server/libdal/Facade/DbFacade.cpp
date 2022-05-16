@@ -14,7 +14,9 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
+		, m_verification_codes(m_connection)
 		, m_recommendation(m_connection)
+		, m_periodic_products(m_connection)
 		, m_periodic_income(m_connection)
 {
 }
@@ -29,14 +31,29 @@ std::optional<User> DbFacade::GetUserById(IdType id)
 	return m_users.GetById(id);
 }
 
-std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
+std::optional<User> DbFacade::GetUserByEmail(const std::string& email)
 {
-	return m_users.GetByLogin(login);
+	return m_users.GetByEmail(email);
 }
 
 bool DbFacade::UpdateUser(const User &user)
 {
 	return m_users.Update(user);
+}
+
+bool DbFacade::UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt)
+{
+	return m_users.UpdatePassword(user_id, password, salt);
+}
+
+bool DbFacade::UpdateUserEmail(const IdType user_id, const std::string &email)
+{
+	return m_users.UpdateEmail(user_id, email);
+}
+
+bool DbFacade::UpdateUserVerification(IdType id)
+{
+	return m_users.UpdateVerification(id);
 }
 
 bool DbFacade::RemoveUser(IdType id)
@@ -156,6 +173,11 @@ bool DbFacade::CanUserEditIncome(IdType user_id, IdType income_id)
 	return m_incomes.CanUserEditIncome(user_id, income_id);
 }
 
+bool DbFacade::CanUserEditPeriodicProduct(IdType user_id, IdType product_id)
+{
+	return m_periodic_products.CanUserEditProduct(user_id, product_id);
+}
+
 std::vector<Product> DbFacade::GetDailyList(IdType user_id)
 {
 	return m_products.GetDailyList(user_id);
@@ -251,9 +273,84 @@ bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
 }
 
+std::optional<IdType> DbFacade::AddVerificationCode(const VerificationCode& code)
+{
+	return m_verification_codes.Add(code);
+}
+
+std::optional<VerificationCode> DbFacade::GetVerificationCodeById(IdType id)
+{
+	return m_verification_codes.GetById(id);
+}
+
+std::optional<VerificationCode> DbFacade::GetVerificationCodeByUserId(IdType user_id)
+{
+	return m_verification_codes.GetByUserId(user_id);
+}
+
+bool DbFacade::UpdateVerificationCode(const VerificationCode& code)
+{
+	return m_verification_codes.Update(code);
+}
+
+bool DbFacade::RemoveVerificationCode(IdType id)
+{
+	return m_verification_codes.Remove(id);
+}
+
 std::optional<Product> DbFacade::GetRecommendation(const IdType &user_id)
 {
 	return m_recommendation.GetRecommendation(user_id);
+}
+
+std::optional<IdType> DbFacade::AddPeriodicProduct(const PeriodicProduct& product)
+{
+	return m_periodic_products.Add(product);
+}
+
+std::optional<PeriodicProduct> DbFacade::GetPeriodicProductById(IdType id)
+{
+	return m_periodic_products.GetById(id);
+}
+
+std::vector<PeriodicProduct> DbFacade::GetPeriodicProductsForList(IdType list_id)
+{
+	return m_periodic_products.GetByListId(list_id);
+}
+
+bool DbFacade::UpdatePeriodicProduct(const PeriodicProduct& product)
+{
+	return m_periodic_products.Update(product);
+}
+
+bool DbFacade::RemovePeriodicProduct(IdType id)
+{
+	return m_periodic_products.Remove(id);
+}
+
+std::vector<PeriodType> DbFacade::GetAllPeriodTypes()
+{
+	return m_periodic_products.GetAllPeriodTypes();
+}
+
+bool DbFacade::CanPeriodicProductGenerate(IdType periodic_id)
+{
+	return m_periodic_products.CanGenerate(periodic_id);
+}
+
+bool DbFacade::UpdatePeriodicProductAddNext(const PeriodicProduct& product)
+{
+	return m_periodic_products.UpdateAddNext(product);
+}
+
+std::vector<PeriodicProduct> DbFacade::GetPeriodicProductsForUser(IdType user_id)
+{
+	return m_periodic_products.GetByUserId(user_id);
+}
+
+std::vector<Product> DbFacade::GetProductsForPeriodicProduct(IdType periodic_id)
+{
+	return m_products.GetByPeriodicProductId(periodic_id);
 }
 
 std::optional<IdType> DbFacade::AddPeriodicIncome(const PeriodicIncome& income)
@@ -284,11 +381,6 @@ bool DbFacade::RemovePeriodicIncome(IdType id)
 bool DbFacade::CanUserEditPeriodicIncome(IdType user_id, IdType income_id)
 {
 	return m_periodic_income.CanUserEditIncome(user_id, income_id);
-}
-
-std::vector<PeriodType> DbFacade::GetAllPeriodTypes()
-{
-	return m_periodic_income.GetAllPeriodTypes();
 }
 
 bool DbFacade::CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id)

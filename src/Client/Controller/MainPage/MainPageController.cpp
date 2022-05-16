@@ -359,6 +359,13 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		this,
+		&MainPageController::SetEmail,
+		m_settings_page_controller.get(),
+		&SettingsPageController::OnSetEmail);
+
 	connect(
 		m_settings_page_controller.get(),
 		&SettingsPageController::FontChange,

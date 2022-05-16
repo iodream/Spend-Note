@@ -19,5 +19,6 @@ namespace db
 		Timestamp add_date;
 		std::optional<Timestamp> purchase_date;
 		std::optional<Timestamp> buy_until_date;
+		std::optional<IdType> periodic_id;
 	};
 }

@@ -56,10 +56,14 @@ private:
 
 public slots:
 	void OnChangePage(UIPages page);
+
+signals:
+	void SetEmail(const std::string& email);
+
+private:
 	void OnLanguageChanged();
 	void OnSaveConfig();
 	void OnColorSchemeChanged();
 	void ReadSettings();
 	void OnScaleMinimumSize();
-
 };

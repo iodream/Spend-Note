@@ -1,11 +1,16 @@
 #pragma once
 
+#include <QInputDialog>
+#include <QMessageBox>
+
 #include "HTTPClient.h"
 
 #include "View/SignupPage/SignupPage.h"
 #include "Common.h"
 #include "View/Constants.h"
 #include "Models/SignupModel.h"
+#include "Models/AddVerificationModel.h"
+#include "Models/CheckVerificationModel.h"
 
 class SignupPageController : public QObject
 {
@@ -23,10 +28,12 @@ private:
 	HTTPClient& m_http_client;
 	std::string& m_hostname;
 	IdType& m_user_id;
-
 	SignupPage& m_page;
 
 	void ConnectPage();
+
+	void AddVerification(const std::string& email);
+	bool CheckVerification(const std::string& email, const std::string& code);
 
 signals:
 	void ChangePage(UIPages page);

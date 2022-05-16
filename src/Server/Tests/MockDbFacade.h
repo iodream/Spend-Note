@@ -9,13 +9,17 @@ public:
 
 	MOCK_METHOD(std::optional<db::IdType>, AddUser, (const db::User&), (override));
 	MOCK_METHOD(std::optional<db::User>, GetUserById, (db::IdType), (override));
-	MOCK_METHOD(std::optional<db::User>, GetUserByLogin, (const std::string&), (override));
+	MOCK_METHOD(std::optional<db::User>, GetUserByEmail, (const std::string&), (override));
 	MOCK_METHOD(bool, UpdateUser, (const db::User&), (override));
+	MOCK_METHOD(bool, UpdateUserPassword, (const db::IdType, const std::string&, const std::string&), (override));
+	MOCK_METHOD(bool, UpdateUserEmail, (const db::IdType, const std::string&), (override));
+	MOCK_METHOD(bool, UpdateUserVerification, (db::IdType), (override));
 	MOCK_METHOD(bool, RemoveUser, (db::IdType), (override));
 
 	MOCK_METHOD(std::optional<db::IdType>, AddProduct, (const db::Product&), (override));
 	MOCK_METHOD(std::optional<db::Product>, GetProductById, (db::IdType), (override));
 	MOCK_METHOD(std::vector<db::Product>, GetProductsForList, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::Product>, GetProductsForPeriodicProduct, (db::IdType), (override));
 	MOCK_METHOD(bool, UpdateProduct, (const db::Product&), (override));
 	MOCK_METHOD(bool, RemoveProduct, (db::IdType), (override));
 
@@ -41,6 +45,7 @@ public:
 	MOCK_METHOD(bool, CanUserEditProduct, (db::IdType, db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditIncome, (db::IdType, db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditIncomeCategory, (db::IdType, db::IdType), (override));
+	MOCK_METHOD(bool, CanUserEditPeriodicProduct, (db::IdType, db::IdType), (override));
 
 	MOCK_METHOD(std::vector<db::Product>, GetDailyList, (db::IdType), (override));
 
@@ -64,8 +69,25 @@ public:
 	MOCK_METHOD(bool, UpdateProductCategory, (const db::ProductCategory& category), (override));
 	MOCK_METHOD(bool, RemoveProductCategory, (db::IdType), (override));
 	MOCK_METHOD(bool, CanUserEditProductCategory, (db::IdType, db::IdType), (override));
-	MOCK_METHOD(std::optional<db::Product>, GetRecommendation, (const db::IdType&), (override));
 
+	MOCK_METHOD(std::optional<db::IdType>, AddVerificationCode, (const db::VerificationCode&), (override));
+	MOCK_METHOD(std::optional<db::VerificationCode>, GetVerificationCodeById, (db::IdType), (override));
+	MOCK_METHOD(std::optional<db::VerificationCode>, GetVerificationCodeByUserId, (db::IdType), (override));
+	MOCK_METHOD(bool, UpdateVerificationCode, (const db::VerificationCode&), (override));
+	MOCK_METHOD(bool, RemoveVerificationCode, (db::IdType), (override));
+
+	MOCK_METHOD(std::optional<db::IdType>, AddPeriodicProduct, (const db::PeriodicProduct&), (override));
+	MOCK_METHOD(std::optional<db::PeriodicProduct>, GetPeriodicProductById, (db::IdType), (override));
+	MOCK_METHOD(std::vector<db::PeriodicProduct>, GetPeriodicProductsForList, (db::IdType), (override));
+	MOCK_METHOD(bool, UpdatePeriodicProduct, (const db::PeriodicProduct&), (override));
+	MOCK_METHOD(bool, RemovePeriodicProduct, (db::IdType), (override));
+
+	MOCK_METHOD(std::vector<db::PeriodType>, GetAllPeriodTypes, (), (override));
+	MOCK_METHOD(bool, CanPeriodicProductGenerate, (db::IdType), (override));
+	MOCK_METHOD(bool, UpdatePeriodicProductAddNext, (const db::PeriodicProduct&), (override));
+	MOCK_METHOD(std::vector<db::PeriodicProduct>, GetPeriodicProductsForUser, (db::IdType), (override));
+
+	MOCK_METHOD(std::optional<db::Product>, GetRecommendation, (const db::IdType&), (override));
 
 	MOCK_METHOD(std::optional<db::IdType>, AddPeriodicIncome, (const db::PeriodicIncome& income), (override));
 	MOCK_METHOD(std::optional<db::PeriodicIncome>, GetPeriodicIncomeById, (db::IdType id), (override));
@@ -73,7 +95,6 @@ public:
 	MOCK_METHOD(bool, UpdatePeriodicIncome, (const db::PeriodicIncome& income), (override));
 	MOCK_METHOD(bool, RemovePeriodicIncome, (db::IdType id), (override));
 	MOCK_METHOD(bool, CanUserEditPeriodicIncome, (db::IdType user_id, db::IdType income_id), (override));
-	MOCK_METHOD(std::vector<db::PeriodType>, GetAllPeriodTypes, (), (override));
 	MOCK_METHOD(bool, CanGeneratePeriodicIncome, (db::IdType user_id, db::IdType periodic_id), (override));
 	MOCK_METHOD(bool, UpdateAddNextPeriodicIncome, (const db::PeriodicIncome& income), (override));
 };

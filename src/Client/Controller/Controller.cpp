@@ -106,15 +106,6 @@ void Controller::ReadSettings()
 	}
 }
 
-void Controller::OnScaleMinimumSize()
-{
-	auto currentMinSize = m_main_window.minimumSize();
-	auto fontSize = MainPage::UISettings::UI_FONT.pointSize();
-	auto newMinWidth = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_X;
-	auto newMinHeight = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_Y;
-	m_main_window.setMinimumSize(newMinWidth, newMinHeight);
-}
-
 void Controller::InitLoginPageController()
 {
 	m_login_page_controller =
@@ -129,6 +120,15 @@ void Controller::InitLoginPageController()
 		&LoginPageController::ChangePage,
 		this,
 		&Controller::OnChangePage);
+
+	connect(
+		m_login_page_controller.get(),
+		&LoginPageController::SetEmail,
+		[this](const std::string& email)
+		{
+			emit SetEmail(email);
+		});
+
 	connect(
 		m_login_page_controller.get(),
 		&LoginPageController::LanguageChanged,
@@ -169,6 +169,13 @@ void Controller::InitMainPageController()
 		this,
 		&Controller::OnChangePage);
 
+	connect(
+		this,
+		&Controller::SetEmail,
+		[this](const std::string& email)
+		{
+			emit m_main_page_controller->SetEmail(email);
+		});
 	connect(
 		m_main_page_controller.get(),
 		&MainPageController::ColorSchemeChanged,
@@ -286,4 +293,13 @@ void Controller::OnSaveConfig()
 void Controller::OnColorSchemeChanged()
 {
 	m_main_window.UpdateColors();
+}
+
+void Controller::OnScaleMinimumSize()
+{
+	auto currentMinSize = m_main_window.minimumSize();
+	auto fontSize = MainPage::UISettings::UI_FONT.pointSize();
+	auto newMinWidth = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_X;
+	auto newMinHeight = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_Y;
+	m_main_window.setMinimumSize(newMinWidth, newMinHeight);
 }

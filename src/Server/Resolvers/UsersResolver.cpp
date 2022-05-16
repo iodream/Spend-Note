@@ -4,6 +4,8 @@
 #include "../Handlers/List/AddListHandler.h"
 #include "../Handlers/Income/GetIncomesHandler.h"
 #include "../Handlers/Income/AddIncomeHandler.h"
+#include "../Handlers/PeriodicIncome/GetPeriodicIncomesHandler.h"
+#include "../Handlers/PeriodicIncome/AddPeriodicIncomeHandler.h"
 #include "../Handlers/MethodNotAllowedHandler.h"
 #include "../Handlers/Statistics/GetBalanceHandler.h"
 #include "../Handlers/List/GetDailyListHandler.h"
@@ -28,6 +30,7 @@ const std::string INCOME_CATEGORIES = "/income-categories";
 const std::string PRODUCT_CATEGORIES = "/product-categories";
 const std::string STATISTICS = "/statistics";
 const std::string RECOMMENDATION = "/recommendation";
+const std::string PERIODIC_INCOMES = "/periodic-incomes";
 }
 
 ICommandHandler* UsersResolver::Resolve(
@@ -62,6 +65,13 @@ ICommandHandler* UsersResolver::Resolve(
 			return new GetIncomesHandler();
 		else if (method == Net::HTTP_METHOD_POST)
 			return new AddIncomeHandler();
+		return new MethodNotAllowedHandler();
+	}
+	else if (segment == PERIODIC_INCOMES) {
+		if (method == Net::HTTP_METHOD_GET)
+			return new GetPeriodicIncomesHandler();
+		else if (method == Net::HTTP_METHOD_POST)
+			return new AddPeriodicIncomeHandler();
 		return new MethodNotAllowedHandler();
 	}
 	else if (segment == BALANCE) {

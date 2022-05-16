@@ -6,6 +6,7 @@
 #include "../libdal/Types.h"
 
 #include "ICommandHandler.h"
+#include "Verification/EmailSender.h"
 
 class SignupHandler : public ICommandHandler
 {
@@ -13,7 +14,7 @@ class SignupHandler : public ICommandHandler
 	{
 	public:
 		struct Credentials {
-			std::string login;
+			std::string email;
 			std::string password;
 			std::string password_hash;
 			std::string salt;
@@ -21,12 +22,13 @@ class SignupHandler : public ICommandHandler
 		Credentials Parse(const QJsonDocument& payload);
 	};
 
-	std::string CreateSalt();
 public:
 	SignupHandler();
 	virtual ~SignupHandler() override {}
 
 	Net::Response Handle(Net::Request& request) override;
 
+private:
+	const size_t code_length = 6;
 	JSONParser m_parser{};
 };

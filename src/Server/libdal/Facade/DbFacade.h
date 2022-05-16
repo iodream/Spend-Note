@@ -11,8 +11,11 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
+#include "Repositories/VerificationCodeRepository/VerificationCodeRepository.h"
 #include "Repositories/RecommendationRepository/RecommendationRepository.h"
+#include "Repositories/PeriodicProductRepository/PeriodicProductRepository.h"
 #include "Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h"
+
 
 namespace db
 {
@@ -24,13 +27,17 @@ public:
 
 	std::optional<IdType> AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
-	std::optional<User> GetUserByLogin(const std::string& login) override;
+	std::optional<User> GetUserByEmail(const std::string& email) override;
 	bool UpdateUser(const User &user) override;
+	bool UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt) override;
+	bool UpdateUserEmail(const IdType user_id, const std::string& email) override;
+	bool UpdateUserVerification(IdType id) override;
 	bool RemoveUser(IdType id) override;
 
 	std::optional<IdType> AddProduct(const Product& product) override;
 	std::optional<Product> GetProductById(IdType id) override;
 	std::vector<Product> GetProductsForList(IdType list_id) override;
+	std::vector<Product> GetProductsForPeriodicProduct(IdType periodic_id) override;
 	bool UpdateProduct(const Product& user) override;
 	bool RemoveProduct(IdType id) override;
 
@@ -55,6 +62,7 @@ public:
 	bool CanUserEditList(IdType user_id, IdType list_id) override;
 	bool CanUserEditProduct(IdType user_id, IdType product_id) override;
 	bool CanUserEditIncome(IdType user_id, IdType income_id) override;
+	bool CanUserEditPeriodicProduct(IdType user_id, IdType product_id) override;
 
 	std::vector<Product> GetDailyList(IdType user_id) override;
 
@@ -80,6 +88,12 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
+	std::optional<IdType> AddVerificationCode(const VerificationCode& code) override;
+	std::optional<VerificationCode> GetVerificationCodeById(IdType id) override;
+	std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) override;
+	bool UpdateVerificationCode(const VerificationCode& code) override;
+	bool RemoveVerificationCode(IdType id) override;
+
 	std::optional<Product> GetRecommendation(const IdType& user_id) override;
 
 	std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) override;
@@ -93,6 +107,16 @@ public:
 	bool UpdateAddNextPeriodicIncome(const PeriodicIncome& income) override;
 
 
+	std::optional<IdType> AddPeriodicProduct(const PeriodicProduct& product) override;
+	std::optional<PeriodicProduct> GetPeriodicProductById(IdType id) override;
+	std::vector<PeriodicProduct> GetPeriodicProductsForList(IdType list_id) override;
+	bool UpdatePeriodicProduct(const PeriodicProduct& product) override;
+	bool RemovePeriodicProduct(IdType id) override;
+
+	bool CanPeriodicProductGenerate(IdType periodic_id) override;
+	bool UpdatePeriodicProductAddNext(const PeriodicProduct& product) override;
+	std::vector<PeriodicProduct> GetPeriodicProductsForUser(IdType user_id) override;
+
 private:
 	pqxx::connection m_connection;
 
@@ -105,7 +129,9 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
+	VerificationCodeRepository m_verification_codes;
 	RecommendationRepository m_recommendation;
+	PeriodicProductRepository m_periodic_products;
 	PeriodicIncomeRepository m_periodic_income;
 };
 }

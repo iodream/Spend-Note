@@ -22,7 +22,7 @@ class LoginHandler : public ICommandHandler
 	{
 	public:
 		struct Login{
-			std::string login;
+			std::string email;
 			std::string password;
 			std::string password_hash;
 			std::string salt;
@@ -30,6 +30,10 @@ class LoginHandler : public ICommandHandler
 	Login Parse(const QJsonDocument& payload);
 
 	};
+private:
+	void UpdatePeriodicIncomes(db::IdType user_id);
+	void UpdatePeriodicProducts(db::IdType user_id);
+
 public:
 	LoginHandler();
 	virtual ~LoginHandler() override {}

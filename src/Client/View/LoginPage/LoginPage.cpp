@@ -97,7 +97,7 @@ void LoginPage::CloseErrorBanner()
 void LoginPage::OnLoginSubmitButtonClicked()
 {
 	LoginModel::JSONFormatter::Credentials credentials;
-	credentials.login = m_ui->loginLineEdit->text().toStdString();
+	credentials.email = m_ui->loginLineEdit->text().toStdString();
 	credentials.password = m_ui->passwordLineEdit->text().toStdString();
 	emit Login(credentials);
 }

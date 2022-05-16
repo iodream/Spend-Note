@@ -15,9 +15,7 @@ Net::Request LoginModel::FormRequest(JSONFormatter::Credentials credentials)
 QJsonDocument LoginModel::JSONFormatter::Format(const Credentials& credentials)
 {
 	QJsonObject json;
-	QByteArray password = QByteArray::fromStdString(credentials.password);
-
-	json["login"] = credentials.login.c_str();
+	json["email"] = credentials.email.c_str();
 	json["password"] = credentials.password.c_str();
 	return QJsonDocument(json);
 }
@@ -35,4 +33,14 @@ LoginModel::JSONParser::UserData LoginModel::ParseResponse(const Net::Response& 
 	m_parser.Parse(response.json_payload.object(), token);
 
 	return token;
+}
+
+bool LoginModel::IsEmailValid(const QString &email)
+{
+	QRegularExpression regex(REGEX_PATTERN, QRegularExpression::CaseInsensitiveOption);
+	QRegularExpressionMatch match = regex.match(email);
+
+	if (match.hasMatch())
+		return true;
+	return false;
 }
