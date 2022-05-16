@@ -22,7 +22,7 @@ class LoginHandler : public ICommandHandler
 	{
 	public:
 		struct Login{
-			std::string login;
+			std::string email;
 			std::string password;
 			std::string password_hash;
 			std::string salt;

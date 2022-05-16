@@ -87,7 +87,7 @@ void SignupPage::CloseErrorBanner()
 void SignupPage::OnSignupSubmitButtonClicked()
 {
 	SignupModel::SignupInDTO dto;
-	dto.login = m_ui->usernameLineEdit->text().toStdString();
+	dto.email = m_ui->usernameLineEdit->text().toStdString();
 	dto.password = m_ui->passwordCreateLineEdit->text().toStdString();
 	dto.pass_repeat = m_ui->passwordRepeatLineEdit->text().toStdString();
 	emit Signup(dto);

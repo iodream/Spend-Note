@@ -23,8 +23,13 @@
 #include "Net/Entities/Statistics/StatisticPercentagePerCategory.h"
 #include "Net/Entities/Statistics/StatisticPerDayBase.h"
 
+#include "Net/Entities/User/EmailUpdate.h"
+#include "Net/Entities/User/PasswordUpdate.h"
+#include "Net/Entities/User/Token.h"
+
 #include "Net/Entities/PeriodicProduct/PeriodicProductBase.h"
 #include "Net/Entities/PeriodicProduct/PeriodicProductId.h"
+
 
 using String = std::string;
 

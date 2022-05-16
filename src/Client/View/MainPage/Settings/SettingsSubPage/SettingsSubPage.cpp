@@ -122,6 +122,12 @@ void SettingsSubPage::GoToMainSubPage()
 	m_ui->stackedWidget->setCurrentIndex(0);
 }
 
+void SettingsSubPage::SetEmail(const QString& email)
+{
+	m_ui->Email->setText(email);
+	m_ui->CurrentEmail->setText(email);
+}
+
 void SettingsSubPage::OnChangePasswordButtonClicked()
 {
 	m_ui->stackedWidget->setCurrentIndex(1);
@@ -149,8 +155,9 @@ void SettingsSubPage::OnSubmitPasswordChangeButtonClicked()
 
 void SettingsSubPage::OnSubmitEmailChangeButtonClicked()
 {
+	QString new_email = m_ui->NewEmailLineEdit->text();
 	m_ui->NewEmailLineEdit->setText("");
-	GoToMainSubPage(); // also mocked
+	emit ChangeEmail(m_ui->Email->text(), new_email);
 }
 
 void SettingsSubPage::OnGoBackClicked()

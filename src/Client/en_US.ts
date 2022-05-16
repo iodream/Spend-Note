@@ -55,12 +55,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="180"/>
+        <location filename="Controller/Controller.cpp" line="197"/>
         <source>Retry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="181"/>
+        <location filename="Controller/Controller.cpp" line="198"/>
         <source>No connection to server. Retry?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -101,6 +101,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
+        <source>+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="97"/>
         <source>Amount:</source>
         <translation type="unfinished"></translation>
@@ -113,11 +118,6 @@
     <message>
         <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="128"/>
         <source>yyyy-MM-dd hh:mm:ss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/Income/IncomeCreateSubPage/IncomeCreateSubPage.ui" line="63"/>
-        <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -447,6 +447,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="73"/>
+        <source>Spend &amp; Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="View/LoginPage/LoginPage.ui" line="100"/>
         <source>Email</source>
         <translation type="unfinished"></translation>
@@ -457,8 +462,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="118"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="View/LoginPage/LoginPage.ui" line="128"/>
         <source>Password...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="170"/>
+        <source>Submit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="193"/>
+        <source>Do not have an account yet?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/LoginPage/LoginPage.ui" line="207"/>
+        <source>Sign Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -492,31 +517,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="73"/>
-        <source>Spend &amp; Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="118"/>
-        <source>Password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="170"/>
-        <source>Submit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="193"/>
-        <source>Do not have an account yet?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/LoginPage/LoginPage.ui" line="207"/>
-        <source>Sign Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="View/LoginPage/LoginPage.ui" line="383"/>
         <source>English</source>
         <translation type="unfinished"></translation>
@@ -530,7 +530,27 @@
 <context>
     <name>LoginPageController</name>
     <message>
-        <location filename="Controller/LoginPageController.cpp" line="66"/>
+        <location filename="Controller/LoginPageController.cpp" line="131"/>
+        <source>Spend&amp;Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="132"/>
+        <source>Verification code has been sent on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="136"/>
+        <source>Input your verification code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="137"/>
+        <source>Code: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/LoginPageController.cpp" line="157"/>
         <source>Login or password is incorrect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -668,7 +688,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="442"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="449"/>
         <source>Error updating page</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1162,13 +1182,13 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="185"/>
-        <source>Is bought</source>
+        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="153"/>
+        <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="153"/>
-        <source>+</source>
+        <location filename="View/MainPage/Product/ProductCreateSubPage/ProductCreateSubPage.ui" line="185"/>
+        <source>Is bought</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1355,13 +1375,13 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="175"/>
-        <source>Is bought</source>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="153"/>
+        <source>Category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="153"/>
-        <source>Category</source>
+        <location filename="View/MainPage/Product/ProductViewSubPage/ProductViewSubPage.ui" line="175"/>
+        <source>Is bought</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1428,6 +1448,35 @@ Incomes</source>
     <message>
         <location filename="View/MainPage/RecommendationWidget.ui" line="107"/>
         <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsPageController</name>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="117"/>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="155"/>
+        <source>Spend&amp;Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="118"/>
+        <source>Verification code has been sent on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="121"/>
+        <source>Input your verification code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="122"/>
+        <source>Code: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/MainPage/SettingsPageController.cpp" line="156"/>
+        <source>Your email has been updated</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1691,7 +1740,7 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="178"/>
+        <location filename="View/MainPage/Settings/SettingsSubPage/SettingsSubPage.cpp" line="185"/>
         <source>Current font is: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1739,21 +1788,6 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="271"/>
-        <source>Create a password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="281"/>
-        <source>Create password...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/SignupPage/SignupPage.ui" line="251"/>
-        <source>Repeat password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="View/SignupPage/SignupPage.ui" line="215"/>
         <source>Type your email:</source>
         <translation type="unfinished"></translation>
@@ -1764,8 +1798,23 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="View/SignupPage/SignupPage.ui" line="251"/>
+        <source>Repeat password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="View/SignupPage/SignupPage.ui" line="264"/>
         <source>Repeat password...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/SignupPage/SignupPage.ui" line="271"/>
+        <source>Create a password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/SignupPage/SignupPage.ui" line="281"/>
+        <source>Create password...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1782,13 +1831,43 @@ Incomes</source>
 <context>
     <name>SignupPageController</name>
     <message>
-        <location filename="Controller/SignupPageController.cpp" line="40"/>
+        <location filename="Controller/SignupPageController.cpp" line="94"/>
         <source>Passwords must match!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Controller/SignupPageController.cpp" line="46"/>
+        <location filename="Controller/SignupPageController.cpp" line="100"/>
         <source>Email or password can&apos;t be empty!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="135"/>
+        <source>Spend&amp;Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="136"/>
+        <source>Verification code has been sent on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="139"/>
+        <source>Input your verification code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="140"/>
+        <source>Code: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="148"/>
+        <source>Spend&amp;Note warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Controller/SignupPageController.cpp" line="149"/>
+        <source>You will be asked for verification on your login</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

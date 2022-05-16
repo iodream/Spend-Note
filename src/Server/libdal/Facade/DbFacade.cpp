@@ -14,6 +14,7 @@ DbFacade::DbFacade(const std::string& connection_string)
 		, m_income_categories(m_connection)
 		, m_balance_repository(m_connection)
 		, m_statistics(m_connection)
+		, m_verification_codes(m_connection)
 		, m_recommendation(m_connection)
 		, m_periodic_products(m_connection)
 		, m_periodic_income(m_connection)
@@ -30,14 +31,29 @@ std::optional<User> DbFacade::GetUserById(IdType id)
 	return m_users.GetById(id);
 }
 
-std::optional<User> DbFacade::GetUserByLogin(const std::string& login)
+std::optional<User> DbFacade::GetUserByEmail(const std::string& email)
 {
-	return m_users.GetByLogin(login);
+	return m_users.GetByEmail(email);
 }
 
 bool DbFacade::UpdateUser(const User &user)
 {
 	return m_users.Update(user);
+}
+
+bool DbFacade::UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt)
+{
+	return m_users.UpdatePassword(user_id, password, salt);
+}
+
+bool DbFacade::UpdateUserEmail(const IdType user_id, const std::string &email)
+{
+	return m_users.UpdateEmail(user_id, email);
+}
+
+bool DbFacade::UpdateUserVerification(IdType id)
+{
+	return m_users.UpdateVerification(id);
 }
 
 bool DbFacade::RemoveUser(IdType id)
@@ -255,6 +271,31 @@ bool DbFacade::RemoveProductCategory(IdType id)
 bool DbFacade::CanUserEditProductCategory(IdType user_id, IdType category_id)
 {
 	return m_product_categories.CanUserEditProductCategory(user_id, category_id);
+}
+
+std::optional<IdType> DbFacade::AddVerificationCode(const VerificationCode& code)
+{
+	return m_verification_codes.Add(code);
+}
+
+std::optional<VerificationCode> DbFacade::GetVerificationCodeById(IdType id)
+{
+	return m_verification_codes.GetById(id);
+}
+
+std::optional<VerificationCode> DbFacade::GetVerificationCodeByUserId(IdType user_id)
+{
+	return m_verification_codes.GetByUserId(user_id);
+}
+
+bool DbFacade::UpdateVerificationCode(const VerificationCode& code)
+{
+	return m_verification_codes.Update(code);
+}
+
+bool DbFacade::RemoveVerificationCode(IdType id)
+{
+	return m_verification_codes.Remove(id);
 }
 
 std::optional<Product> DbFacade::GetRecommendation(const IdType &user_id)
