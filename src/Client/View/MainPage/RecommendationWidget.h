@@ -18,6 +18,7 @@ public:
 	void AppendProduct(ProductItem* Item);
 	void InsertProduct(ProductItem* Item, int idx);
 	void RemoveProduct();
+	void changeEvent(QEvent* event);
 
 	ProductItem* SafeGetProduct(int idx);
 	int GetListSize();
