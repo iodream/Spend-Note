@@ -106,7 +106,6 @@ void Controller::ReadSettings()
 	}
 }
 
-
 void Controller::InitLoginPageController()
 {
 	m_login_page_controller =
@@ -188,6 +187,13 @@ void Controller::InitMainPageController()
 		&MainPageController::LanguageChanged,
 		this,
 		&Controller::OnLanguageChanged);
+	connect(
+		m_main_page_controller.get(),
+		&MainPageController::ScaleMinimumSize,
+		this,
+		&Controller::OnScaleMinimumSize);
+
+	OnScaleMinimumSize();
 }
 
 bool Controller::AskUser(const QString& title, const QString& text)
@@ -287,4 +293,13 @@ void Controller::OnSaveConfig()
 void Controller::OnColorSchemeChanged()
 {
 	m_main_window.UpdateColors();
+}
+
+void Controller::OnScaleMinimumSize()
+{
+	auto currentMinSize = m_main_window.minimumSize();
+	auto fontSize = MainPage::UISettings::UI_FONT.pointSize();
+	auto newMinWidth = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_X;
+	auto newMinHeight = fontSize * MainPage::UISettings::WINDOW_SCALE_FACTOR_Y;
+	m_main_window.setMinimumSize(newMinWidth, newMinHeight);
 }

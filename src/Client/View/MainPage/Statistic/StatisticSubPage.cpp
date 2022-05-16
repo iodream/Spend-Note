@@ -517,14 +517,36 @@ void StatisticSubPage::HideEmptyMessage()
 
 std::string StatisticSubPage::GetCurrentRange()
 {
-	return m_ui->periods->currentText().toStdString();
+	switch(m_ui->periods->currentIndex())
+	{
+	case 0: return "daily";
+	case 1: return "weekly";
+	case 2: return "monthly";
+	case 3: return "annually";
+	}
+	return std::string("");
 }
 
 std::string StatisticSubPage::GetCurrentTabName()
 {
-	if(!m_ui->tabWidget->currentIndex()) // if indedx == 0
+	return m_ui->tabWidget->tabText(m_ui->tabWidget->currentIndex()).toStdString();
+}
+
+std::string StatisticSubPage::GetCurrentTabNameDefault()
+{
+	if(m_ui->tabWidget->currentIndex() == 0)
+	{
 		return STATISTIC_EXPENSES;
-	return STATISTIC_INCOMES;
+	}
+	else
+	{
+		return STATISTIC_INCOMES;
+	};
+}
+
+int StatisticSubPage::GetCurrentTabIndex()
+{
+	return m_ui->tabWidget->currentIndex();
 }
 
 void StatisticSubPage::OnRefreshButtonClicked()

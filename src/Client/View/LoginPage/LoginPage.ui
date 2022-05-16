@@ -17,20 +17,7 @@
    <iconset>
     <normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</normaloff>../../../../77-770172_dollar-clipart-psd-bag-of-money-icon-png.jpeg</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0" columnstretch="1,0,0,0,0,0,0,0,0,0,0,0">
-   <item row="5" column="11">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>91</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
+  <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0,0,0,0,0,0,0">
    <item row="5" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
@@ -46,6 +33,12 @@
    </item>
    <item row="5" column="8">
     <widget class="QWidget" name="loginWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,4,0">
       <item>
        <spacer name="horizontalSpacer_3">
@@ -411,6 +404,19 @@ color: rgb(255, 255, 255);</string>
       <string/>
      </property>
     </widget>
+   </item>
+   <item row="5" column="11">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>91</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

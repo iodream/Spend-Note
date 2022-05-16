@@ -65,4 +65,5 @@ private:
 	void OnSaveConfig();
 	void OnColorSchemeChanged();
 	void ReadSettings();
+	void OnScaleMinimumSize();
 };

@@ -44,3 +44,9 @@ const QString DATE_FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
 
 const std::string STATISTIC_EXPENSES = "expenses";
 const std::string STATISTIC_INCOMES = "incomes";
+
+enum STATISTICS_PAGE_TABS
+{
+	STATISTIC_TAB_EXPENSES = 0,
+	STATISTIC_TAB_INCOMES
+};
