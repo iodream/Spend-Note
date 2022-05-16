@@ -34,6 +34,10 @@ bool ProductRecommendationController::UpdateRecommendations()
 		emit ServerError(response.status, response.reason);
 		return false;
 	}
+	if(response.status == Poco::Net::HTTPResponse::HTTP_NO_CONTENT)
+	{
+		return true;
+	}
 
 	auto recommendation = model.ParseResponse(response);
 	m_main_page.UpdateRecommendation(recommendation);
