@@ -404,6 +404,7 @@ void MainPageController::OnLogout()
 
 void MainPageController::OnFontChange()
 {
+	emit ScaleMinimumSize();
 	m_page.UpdatePage();
 }
 

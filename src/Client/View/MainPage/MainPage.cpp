@@ -30,6 +30,9 @@ const std::map<UILangs, QString> MainPage::UISettings::translation_file{
 QFont MainPage::UISettings::UI_FONT;
 QFont MainPage::UISettings::UI_DEFAULT_FONT = QFont("Sans Serif", 11);
 
+const float MainPage::UISettings::WINDOW_SCALE_FACTOR_X = 50;
+const float MainPage::UISettings::WINDOW_SCALE_FACTOR_Y = 40;
+
 bool MainPage::bNeedsGlobalUIUpdate = true;
 
 MainPage::MainPage(QWidget *parent)

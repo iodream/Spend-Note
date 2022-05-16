@@ -520,14 +520,11 @@ std::string StatisticSubPage::GetCurrentRange()
 	switch(m_ui->periods->currentIndex())
 	{
 	case 0: return "daily";
-			break;
 	case 1: return "weekly";
-			break;
 	case 2: return "monthly";
-			break;
 	case 3: return "annually";
-			break;
 	}
+	return std::string("");
 }
 
 std::string StatisticSubPage::GetCurrentTabName()
@@ -541,7 +538,7 @@ std::string StatisticSubPage::GetCurrentTabNameDefault()
 	{
 		return STATISTIC_EXPENSES;
 	}
-		else
+	else
 	{
 		return STATISTIC_INCOMES;
 	};

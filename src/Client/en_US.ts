@@ -55,12 +55,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="180"/>
+        <location filename="Controller/Controller.cpp" line="196"/>
         <source>Retry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="181"/>
+        <location filename="Controller/Controller.cpp" line="197"/>
         <source>No connection to server. Retry?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -418,22 +418,22 @@
 <context>
     <name>ListsSubPage</name>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="20"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="75"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="69"/>
         <source>My Lists:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="101"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="95"/>
         <source>Items:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="137"/>
+        <location filename="View/MainPage/List/ListsSubPage/ListsSubPage.ui" line="131"/>
         <source>New list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -548,8 +548,8 @@
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="150"/>
-        <location filename="View/MainPage/MainPage.cpp" line="44"/>
-        <location filename="View/MainPage/MainPage.cpp" line="261"/>
+        <location filename="View/MainPage/MainPage.cpp" line="47"/>
+        <location filename="View/MainPage/MainPage.cpp" line="264"/>
         <source>My Lists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -566,8 +566,8 @@ Incomes</source>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.ui" line="283"/>
-        <location filename="View/MainPage/MainPage.cpp" line="48"/>
-        <location filename="View/MainPage/MainPage.cpp" line="265"/>
+        <location filename="View/MainPage/MainPage.cpp" line="51"/>
+        <location filename="View/MainPage/MainPage.cpp" line="268"/>
         <source>Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -618,48 +618,48 @@ Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="42"/>
-        <location filename="View/MainPage/MainPage.cpp" line="259"/>
-        <source>Back</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="View/MainPage/MainPage.cpp" line="43"/>
-        <location filename="View/MainPage/MainPage.cpp" line="260"/>
-        <source>My Incomes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="View/MainPage/MainPage.cpp" line="45"/>
         <location filename="View/MainPage/MainPage.cpp" line="262"/>
-        <source>Log Out</source>
+        <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="46"/>
         <location filename="View/MainPage/MainPage.cpp" line="263"/>
-        <source>Daily List</source>
+        <source>My Incomes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="47"/>
-        <location filename="View/MainPage/MainPage.cpp" line="264"/>
-        <source>Settings</source>
+        <location filename="View/MainPage/MainPage.cpp" line="48"/>
+        <location filename="View/MainPage/MainPage.cpp" line="265"/>
+        <source>Log Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="View/MainPage/MainPage.cpp" line="49"/>
         <location filename="View/MainPage/MainPage.cpp" line="266"/>
+        <source>Daily List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/MainPage.cpp" line="50"/>
+        <location filename="View/MainPage/MainPage.cpp" line="267"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="View/MainPage/MainPage.cpp" line="52"/>
+        <location filename="View/MainPage/MainPage.cpp" line="269"/>
         <source>My Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="326"/>
+        <location filename="View/MainPage/MainPage.cpp" line="329"/>
         <source>Current Balance:  </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="View/MainPage/MainPage.cpp" line="327"/>
+        <location filename="View/MainPage/MainPage.cpp" line="330"/>
         <source>Predicted balance:  </source>
         <translation type="unfinished"></translation>
     </message>

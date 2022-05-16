@@ -80,6 +80,7 @@ signals:
 	void ColorSchemeChanged();
 	void SaveConfig();
 	void LanguageChanged();
+	void ScaleMinimumSize();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
