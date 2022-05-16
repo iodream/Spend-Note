@@ -55,12 +55,12 @@
 <context>
     <name>Controller</name>
     <message>
-        <location filename="Controller/Controller.cpp" line="203"/>
+        <location filename="Controller/Controller.cpp" line="205"/>
         <source>Retry?</source>
         <translation>Повторити?</translation>
     </message>
     <message>
-        <location filename="Controller/Controller.cpp" line="204"/>
+        <location filename="Controller/Controller.cpp" line="206"/>
         <source>No connection to server. Retry?</source>
         <translation>Немає з&apos;єднання з сервером. Повторити?</translation>
     </message>
@@ -687,7 +687,7 @@ Incomes</source>
 <context>
     <name>MainPageController</name>
     <message>
-        <location filename="Controller/MainPage/MainPageController.cpp" line="450"/>
+        <location filename="Controller/MainPage/MainPageController.cpp" line="456"/>
         <source>Error updating page</source>
         <translation>Помилка оновлення сторінки</translation>
     </message>

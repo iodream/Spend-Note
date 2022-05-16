@@ -151,6 +151,12 @@ void MainPageController::InitProductRecommendationController()
 
 	connect(
 		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::RecommendationClosed,
+		this,
+		&MainPageController::OnRecommendationClosed);
+
+	connect(
+		m_product_recommendation_controller.get(),
 		&ProductRecommendationController::ServerError,
 		this,
 		&MainPageController::OnServerError);
