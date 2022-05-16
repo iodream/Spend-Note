@@ -36,6 +36,12 @@ void LoginPageController::ConnectPage()
 		&LoginPage::GotoSignup,
 		this,
 		&LoginPageController::OnGoToSignupPage);
+
+	connect(
+		&m_page,
+		&LoginPage::LanguageChanged,
+		this,
+		&LoginPageController::LanguageChanged);
 }
 
 void LoginPageController::AddVerification(const std::string& email)
@@ -88,12 +94,6 @@ void LoginPageController::CheckVerification(const std::string& email, const std:
 		m_page.SetErrorBanner(response.status, response.reason);
 		return;
 	}
-
-	connect(
-		&m_page,
-		&LoginPage::LanguageChanged,
-		this,
-		&LoginPageController::LanguageChanged);
 }
 
 void LoginPageController::OnLogin(LoginModel::JSONFormatter::Credentials credentials)

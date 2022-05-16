@@ -123,17 +123,19 @@ void Controller::InitLoginPageController()
 
 	connect(
 		m_login_page_controller.get(),
+		&LoginPageController::LanguageChanged,
+		this,
+		&Controller::OnLanguageChanged);
+
+	connect(
+		m_login_page_controller.get(),
 		&LoginPageController::SetEmail,
 		[this](const std::string& email)
 		{
 			emit SetEmail(email);
 		});
 
-	connect(
-		m_login_page_controller.get(),
-		&LoginPageController::LanguageChanged,
-		this,
-		&Controller::OnLanguageChanged);
+
 
 	m_login_page_controller->UpdateLoginPage();
 }

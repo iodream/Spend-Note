@@ -522,7 +522,7 @@ std::string StatisticSubPage::GetCurrentRange()
 	case 0: return "daily";
 	case 1: return "weekly";
 	case 2: return "monthly";
-	case 3: return "annually";
+	case 3: return "yearly";
 	}
 	return std::string("");
 }

@@ -36,6 +36,8 @@ bool ProductRecommendationController::UpdateRecommendations()
 	}
 	if(response.status == Poco::Net::HTTPResponse::HTTP_NO_CONTENT)
 	{
+
+		emit RecommendationClosed();
 		return true;
 	}
 

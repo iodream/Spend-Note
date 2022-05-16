@@ -32,4 +32,5 @@ private:
 signals:
 	void ServerError(const int code, const std::string& desc);
 	void ClientError(const QString& desc);
+	void RecommendationClosed();
 };
