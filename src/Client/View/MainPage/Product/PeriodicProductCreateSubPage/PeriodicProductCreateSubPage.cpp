@@ -13,6 +13,12 @@ PeriodicProductCreateSubPage::PeriodicProductCreateSubPage(QWidget *parent) :
 		this,
 		&PeriodicProductCreateSubPage::CreateProduct);
 
+	m_ui->AddedDate->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
+
+	m_ui->AddedDate->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
+
 	m_ui->GenerateUntil->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
 
@@ -72,6 +78,16 @@ IdType PeriodicProductCreateSubPage::GetCategoryId()
 QString PeriodicProductCreateSubPage::GetCategoryName()
 {
 	return m_ui->Category->currentText();
+}
+
+QString PeriodicProductCreateSubPage::GetAddNext()
+{
+	return toDBstring(m_ui->AddedDate->dateTime());
+}
+
+IdType PeriodicProductCreateSubPage::GetPeriodId()
+{
+	return m_ui->RepeatingSelect->currentIndex() + 1; // hardcoded db index from combobox index
 }
 
 void PeriodicProductCreateSubPage::Clear()

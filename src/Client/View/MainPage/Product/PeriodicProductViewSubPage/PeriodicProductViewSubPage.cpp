@@ -41,12 +41,13 @@ void PeriodicProductViewSubPage::Update()
 	m_ui->GenerateUntil->setText(QLocale::system().toString(add_until_date, QLocale::system().dateTimeFormat()));
 
 	const std::array periods = {
-		"daily",
-		"weekly",
-		"monthly",
-		"yearly"
+		"Daily",
+		"Weekly",
+		"Monthly",
+		"Yearly"
 	};
-	m_ui->Repeating->setText(periods[m_product.period_id]);
+
+	m_ui->Repeating->setText(periods[m_product.period_id - 1]);
 	m_ui->Priority->setText(QString::number(m_product.priority));
 	m_ui->Category->setText(m_product.category.name);
 }

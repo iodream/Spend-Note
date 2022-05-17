@@ -27,6 +27,8 @@ public:
 	BigInt GetPriority();
 	IdType GetCategoryId();
 	QString GetCategoryName();
+	QString GetAddNext();
+	IdType GetPeriodId();
 
 	void Clear();
 	void FillCategoryBox(const std::vector<ProductCategory>& categories);

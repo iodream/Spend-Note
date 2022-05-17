@@ -349,6 +349,8 @@ void ProductPagesController::OnCreatePeriodicProduct()
 	new_product.category.id = m_periodic_create_page.GetCategoryId();
 	new_product.category.name = m_periodic_create_page.GetCategoryName();
 	new_product.add_until = m_periodic_create_page.GetGenerateUntil();
+	new_product.next_add_date = m_periodic_create_page.GetAddNext();
+	new_product.period_id = m_periodic_create_page.GetPeriodId();
 
 	new_product.list_id = m_list_id;
 
@@ -518,6 +520,9 @@ void ProductPagesController::UpdateCategoryBox()
 
 		m_edit_page.FillCategoryBox(model.ParseResponse(response));
 		m_create_page.FillCategoryBox(model.ParseResponse(response));
+
+		m_periodic_edit_page.FillCategoryBox(model.ParseResponse(response));
+		m_periodic_create_page.FillCategoryBox(model.ParseResponse(response));
 	}
 	catch (const Poco::Exception& ex)
 	{
@@ -529,4 +534,7 @@ void ProductPagesController::SetRangeOfSpinBoxes()
 {
 	m_edit_page.SetRangeOfSpinBox();
 	m_create_page.SetRangeOfSpinBox();
+
+	m_periodic_edit_page.SetRangeOfSpinBox();
+	m_periodic_create_page.SetRangeOfSpinBox();
 }
