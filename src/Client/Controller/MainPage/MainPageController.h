@@ -77,17 +77,17 @@ private:
 
 signals:
 	void ChangePage(UIPages page);
+	void SetEmail(const std::string& email);
 	void ColorSchemeChanged();
 	void SaveConfig();
 	void LanguageChanged();
+	void ScaleMinimumSize();
 
 public slots:
 	void OnChangeSubPage(MainSubPages page, PageData data=PageData{});
 	void OnUpdateSubPage(MainSubPages page, PageData data=PageData{});
-
 	void OnServerError(const int code, const std::string& desc);
 	void OnClientError(const QString& desc);
-
 	void OnGoBack(int n=1);
 	void OnLogout();
 	void OnFontChange();

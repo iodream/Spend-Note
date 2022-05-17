@@ -24,6 +24,8 @@ const AuthSchemeType AUTH_SCHEME_TYPE_BEARER = "Bearer";
 
 const std::string DUMMY_PASSWORD = "0123456789ABCDEF0123456789ABCDEF";
 
+const std::string VERIFICATION_FAILED = "Verification failed";
+
 const int SALT_SIZE = 6;
 
 const std::vector<char> SALT_CHARACTERS

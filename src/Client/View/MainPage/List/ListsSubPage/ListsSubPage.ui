@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>887</width>
-    <height>602</height>
+    <width>650</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,22 +115,6 @@
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Maximum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
           <widget class="QPushButton" name="AddItemButton">
            <property name="minimumSize">
             <size>
@@ -178,8 +162,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>849</width>
-            <height>508</height>
+            <width>612</width>
+            <height>373</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="ItemsLayout">

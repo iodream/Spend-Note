@@ -44,6 +44,9 @@ public:
 
 	std::string GetCurrentRange();
 	std::string GetCurrentTabName();
+	std::string GetCurrentTabNameDefault();
+
+	int GetCurrentTabIndex();
 
 	QChart* InitChart(QLayout* layout);
 

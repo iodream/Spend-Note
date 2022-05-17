@@ -154,6 +154,12 @@ void MainPageController::InitProductRecommendationController()
 
 	connect(
 		m_product_recommendation_controller.get(),
+		&ProductRecommendationController::RecommendationClosed,
+		this,
+		&MainPageController::OnRecommendationClosed);
+
+	connect(
+		m_product_recommendation_controller.get(),
 		&ProductRecommendationController::ServerError,
 		this,
 		&MainPageController::OnServerError);
@@ -362,6 +368,13 @@ void MainPageController::InitSettingsPageController()
 		&SettingsPageController::GoBack,
 		this,
 		&MainPageController::OnGoBack);
+
+	connect(
+		this,
+		&MainPageController::SetEmail,
+		m_settings_page_controller.get(),
+		&SettingsPageController::OnSetEmail);
+
 	connect(
 		m_settings_page_controller.get(),
 		&SettingsPageController::FontChange,
@@ -407,6 +420,7 @@ void MainPageController::OnLogout()
 
 void MainPageController::OnFontChange()
 {
+	emit ScaleMinimumSize();
 	m_page.UpdatePage();
 }
 

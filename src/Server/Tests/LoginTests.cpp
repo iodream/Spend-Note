@@ -18,10 +18,11 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	auto facade = std::make_unique<MockDbFacade>();
 	db::User existing_user;
 	existing_user.id = 1;
-	existing_user.login = "Test user";
+
+	existing_user.email = "example@mail.com";
 	existing_user.password_hash = "Test password hash";
 
-	EXPECT_CALL(*facade, GetUserByLogin(_))
+	EXPECT_CALL(*facade, GetUserByEmail(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
 	auto handler = std::make_unique<LoginHandler>();
@@ -31,7 +32,7 @@ TEST(LoginHandlerTest, USER_LOGIN_INVALID)
 	request.method = Net::HTTP_METHOD_POST;
 	{
 		QJsonObject json;
-		json["login"] = "Test user";
+		json["email"] = "Test user";
 		json["password"] = "Test password hash1";
 		request.json_payload = QJsonDocument(json);
 	}
@@ -48,10 +49,11 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	auto facade = std::make_unique<MockDbFacade>();
 	db::User existing_user;
 	existing_user.id = 1;
-	existing_user.login = "Test user";
+
+	existing_user.email = "example@mail.com";
 	existing_user.password_hash = "Test password hash";
 
-	EXPECT_CALL(*facade, GetUserByLogin(_))
+	EXPECT_CALL(*facade, GetUserByEmail(_))
 		.WillOnce(Return(std::optional{existing_user}));
 
 	auto handler = std::make_unique<LoginHandler>();
@@ -61,7 +63,7 @@ TEST(LoginHandlerTest, USER_LOGIN_OK)
 	request.method = Net::HTTP_METHOD_POST;
 	{
 		QJsonObject json;
-		json["login"] = "Test user"; // login data is the same
+		json["email"] = "Test user"; // login data is the same
 		json["password"] = "Test password hash";
 		request.json_payload = QJsonDocument(json);
 	}

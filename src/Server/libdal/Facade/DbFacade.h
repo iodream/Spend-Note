@@ -11,9 +11,11 @@
 #include "Repositories/ListStateRepository/ListStateRepository.h"
 #include "Repositories/BalanceRepository/BalanceRepository.h"
 #include "Repositories/StatisticsRepository/StatisticsRepository.h"
+#include "Repositories/VerificationCodeRepository/VerificationCodeRepository.h"
 #include "Repositories/RecommendationRepository/RecommendationRepository.h"
 #include "Repositories/PeriodicProductRepository/PeriodicProductRepository.h"
 #include "Repositories/PeriodicIncomeRepository/PeriodicIncomeRepository.h"
+
 
 namespace db
 {
@@ -25,8 +27,11 @@ public:
 
 	std::optional<IdType> AddUser(const User &user) override;
 	std::optional<User> GetUserById(IdType id) override;
-	std::optional<User> GetUserByLogin(const std::string& login) override;
+	std::optional<User> GetUserByEmail(const std::string& email) override;
 	bool UpdateUser(const User &user) override;
+	bool UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt) override;
+	bool UpdateUserEmail(const IdType user_id, const std::string& email) override;
+	bool UpdateUserVerification(IdType id) override;
 	bool RemoveUser(IdType id) override;
 
 	std::optional<IdType> AddProduct(const Product& product) override;
@@ -83,6 +88,12 @@ public:
 	bool RemoveProductCategory(IdType id) override;
 	bool CanUserEditProductCategory(IdType user_id, IdType category_id) override;
 
+	std::optional<IdType> AddVerificationCode(const VerificationCode& code) override;
+	std::optional<VerificationCode> GetVerificationCodeById(IdType id) override;
+	std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) override;
+	bool UpdateVerificationCode(const VerificationCode& code) override;
+	bool RemoveVerificationCode(IdType id) override;
+
 	std::optional<Product> GetRecommendation(const IdType& user_id) override;
 
 	std::optional<IdType> AddPeriodicIncome(const PeriodicIncome& income) override;
@@ -118,6 +129,7 @@ private:
 	ListStateRepository m_list_states;
 	BalanceRepository m_balance_repository;
 	StatisticsRepository m_statistics;
+	VerificationCodeRepository m_verification_codes;
 	RecommendationRepository m_recommendation;
 	PeriodicProductRepository m_periodic_products;
 	PeriodicIncomeRepository m_periodic_income;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <random>
+
 #include "Net/Message.h"
 
 Net::Response FormErrorResponse(
@@ -11,3 +13,5 @@ Net::Response FormErrorResponse(
 	const char* reason);
 
 std::string HashingPassword(const std::string& password, const std::string& salt);
+
+std::string CreateSalt();

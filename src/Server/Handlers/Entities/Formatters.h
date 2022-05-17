@@ -26,6 +26,8 @@
 #include "Net/Tools/Formatters/Statistics/StatisticPercentagePerCategoryJSONFormatter.h"
 #include "Net/Tools/Formatters/Statistics/StatisticPerDayJSONFormatterBase.h"
 
+#include "Net/Tools/Formatters/User/TokenJSONFormatter.h"
+
 #include "Net/Tools/Formatters/ArrayJSONFormatterBase.h"
 
 using IncomeCategoryJSONFormatter =

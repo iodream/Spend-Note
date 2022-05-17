@@ -11,6 +11,11 @@ const std::string PORT = "port";
 const std::string SERVER_LOGGER_NAME = "server_logger_name";
 const std::string SERVER_SCOPED_LOGGER_NAME = "server_scoped_logger_name";
 const std::string CONFIG_DIRECTORY = "config_directory";
+const std::string MAILHOST= "mailhost";
+const std::string EMAIL_SENDER = "email_sender";
+const std::string EMAIL_USERNAME = "email_username";
+const std::string EMAIL_PASSWORD = "email_password";
+const std::string SMTP_PORT = "SMTP_port";
 }
 
 class ConfigManager

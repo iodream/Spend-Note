@@ -14,10 +14,12 @@
 #include "DTOs/List.h"
 #include "DTOs/ListState.h"
 #include "DTOs/Statistics.h"
+#include "DTOs/VerificationCode.h"
 #include "DTOs/IncomeCategory.h"
 #include "DTOs/PeriodicProduct.h"
 #include "DTOs/PeriodicIncome.h"
 #include "DTOs/PeriodType.h"
+
 
 namespace db
 {
@@ -30,8 +32,11 @@ public:
 
 	virtual std::optional<IdType> AddUser(const User& user) = 0;
 	virtual std::optional<User> GetUserById(IdType id) = 0;
-	virtual std::optional<User> GetUserByLogin(const std::string& login) = 0;
+	virtual std::optional<User> GetUserByEmail(const std::string& email) = 0;
 	virtual bool UpdateUser(const User& user) = 0;
+	virtual bool UpdateUserPassword(const IdType user_id, const std::string& password, const std::string& salt) = 0;
+	virtual bool UpdateUserEmail(const IdType user_id, const std::string& email) = 0;
+	virtual bool UpdateUserVerification(IdType id) = 0;
 	virtual bool RemoveUser(IdType id) = 0;
 
 	virtual std::optional<IdType> AddProduct(const Product& product) = 0;
@@ -86,6 +91,12 @@ public:
 	virtual bool UpdateProductCategory(const ProductCategory& category) = 0;
 	virtual bool RemoveProductCategory(IdType id) = 0;
 	virtual bool CanUserEditProductCategory(IdType user_id, IdType category_id) = 0;
+
+	virtual std::optional<IdType> AddVerificationCode(const VerificationCode& code) = 0;
+	virtual std::optional<VerificationCode> GetVerificationCodeById(IdType id) = 0;
+	virtual std::optional<VerificationCode> GetVerificationCodeByUserId(IdType user_id) = 0;
+	virtual bool UpdateVerificationCode(const VerificationCode& code) = 0;
+	virtual bool RemoveVerificationCode(IdType id) = 0;
 
 	virtual std::optional<Product> GetRecommendation(const IdType& user_id) = 0;
 

@@ -98,6 +98,8 @@ public:
 	public:
 		static UILangs LANG_UI;
 		static const std::map<UILangs, QString> translation_file;
+		static const float WINDOW_SCALE_FACTOR_X;
+		static const float WINDOW_SCALE_FACTOR_Y;
 		static QFont UI_FONT;
 		static QFont GetDefaultFont();
 	private:

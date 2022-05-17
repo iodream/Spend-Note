@@ -63,6 +63,20 @@ int RecommendationWidget::GetListSize()
 	return m_list_size;
 }
 
+void RecommendationWidget::changeEvent(QEvent* event)
+{
+	if(event)
+	{
+		switch(event->type())
+		{
+		case QEvent::LanguageChange:
+			m_ui->retranslateUi(this);
+		}
+
+		QWidget::changeEvent(event);
+	}
+}
+
 void RecommendationWidget::SetListSize(int size)
 {
 	m_list_size = size;

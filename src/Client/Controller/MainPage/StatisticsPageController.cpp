@@ -115,7 +115,7 @@ void StatisticsPageController::OnPercentChartSelected()
 {
 	GetStatisticsPercentagePerCategoryModel model{m_hostname};
 	auto request  = model.FormRequest(m_user_id,
-		m_statistics_page.GetCurrentTabName(),
+		m_statistics_page.GetCurrentTabNameDefault(),
 		m_statistics_page.GetCurrentRange());
 
 	Net::Response response;
@@ -133,12 +133,12 @@ void StatisticsPageController::OnPercentChartSelected()
 
 	auto expenses = model.ParseResponse(response);
 
-	if(m_statistics_page.GetCurrentTabName() == STATISTIC_EXPENSES)
+	if(m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_EXPENSES)
 	{
 		auto product_categories = GetProductCategories();
 		m_statistics_page.UpdateProductPiePercentChart(expenses, product_categories);
 	}
-	else if (m_statistics_page.GetCurrentTabName() == STATISTIC_INCOMES)
+	else if (m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_INCOMES)
 	{
 		auto income_categories = GetIncomeCategories();
 		m_statistics_page.UpdateIncomePiePercentChart(expenses, income_categories);
@@ -149,7 +149,7 @@ void StatisticsPageController::OnAmountChartSelected()
 {
 	GetStatisticsPerCategoryModel model{m_hostname};
 	auto request  = model.FormRequest(m_user_id,
-		m_statistics_page.GetCurrentTabName(),
+		m_statistics_page.GetCurrentTabNameDefault(),
 		m_statistics_page.GetCurrentRange());
 
 	Net::Response response;
@@ -168,12 +168,12 @@ void StatisticsPageController::OnAmountChartSelected()
 
 	auto expenses = model.ParseResponse(response);
 
-	if(m_statistics_page.GetCurrentTabName() == STATISTIC_EXPENSES)
+	if(m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_EXPENSES)
 	{
 		auto product_categories = GetProductCategories();
 		m_statistics_page.UpdateProductPieAmountChart(expenses, product_categories);
 	}
-	else if (m_statistics_page.GetCurrentTabName() == STATISTIC_INCOMES)
+	else if (m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_INCOMES)
 	{
 		auto income_categories = GetIncomeCategories();
 		m_statistics_page.UpdateIncomePieAmountChart(expenses, income_categories);
@@ -184,7 +184,7 @@ void StatisticsPageController::OnBalanceChartSelected()
 {
 	GetStatisticsPerDayModel model{m_hostname};
 	auto request  = model.FormRequest(m_user_id,
-		m_statistics_page.GetCurrentTabName(),
+		m_statistics_page.GetCurrentTabNameDefault(),
 		m_statistics_page.GetCurrentRange());
 
 	Net::Response response;
@@ -203,8 +203,8 @@ void StatisticsPageController::OnBalanceChartSelected()
 
 	auto expenses = model.ParseResponse(response);
 
-	if(m_statistics_page.GetCurrentTabName() == STATISTIC_EXPENSES)
+	if(m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_EXPENSES)
 		m_statistics_page.UpdateBarBalanceChart(expenses);
-	else if (m_statistics_page.GetCurrentTabName() == STATISTIC_INCOMES)
+	else if (m_statistics_page.GetCurrentTabIndex() == STATISTIC_TAB_INCOMES)
 		m_statistics_page.UpdateBarIncomeChart(expenses);
 }

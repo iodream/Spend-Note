@@ -30,12 +30,16 @@ Net::Response GetRecommendationProductHandler::AuthHandle(const Net::Request& re
 	std::optional<db::Product> db_product;
 	try
 	{
-		db_product = m_facade->GetRecommendation(user_id).value();
+		db_product = m_facade->GetRecommendation(user_id);
 	}
 	catch (const db::NonexistentResource& ex) {
 		return FormErrorResponse(
 			NetError::Status::HTTP_NOT_FOUND,
 			"User with id = \"" + std::to_string(user_id) + "\" not found");
+	}
+
+	if (!db_product.has_value()) {
+		return FormEmptyResponse();
 	}
 
 	auto category = m_facade->GetProductCategoryById(db_product.value().category_id);

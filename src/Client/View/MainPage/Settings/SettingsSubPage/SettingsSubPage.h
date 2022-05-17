@@ -16,9 +16,11 @@ public:
 	~SettingsSubPage();
 
 	void GoToMainSubPage();
+	void SetEmail(const QString& email);
 	void changeEvent(QEvent* event);
 	void Update();
 	void UpdateColors();
+	void FontSizeChange(int);
 private:
 	Ui::SettingsSubPage *m_ui;
 	static int CurColorElemSelected;
@@ -26,6 +28,9 @@ private:
 
 signals:
 	void FontChange();
+	void ChangeEmail(const QString& old_email, const QString& new_email);
+	void ColorSchemeChanged();
+	void LanguageChanged();
 
 private slots:
 	void OnChangePasswordButtonClicked();
@@ -41,10 +46,6 @@ private slots:
 	void OnNewColorSelected();
 	void OnLangSelected(QString lang);
 	void OnDefaultFontClicked();
-	void FontSizeChange(int);
 
-signals:
-	void ColorSchemeChanged();
-	void LanguageChanged();
 };
 

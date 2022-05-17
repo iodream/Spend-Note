@@ -176,8 +176,7 @@ void ProductsSubPage::RemoveProduct(ProductItem* product)
 void ProductsSubPage::set_regular_list_size(int size)
 {
 	m_regular_list_size = size;
-	//m_ui->ListSize->setText(QString("%1").arg(m_regular_list_size));
-	//m_ui->ListSize->show();
+	m_ui->ItemsSize->setText( tr("Items: ") + QString("%1").arg(m_regular_list_size));
 }
 
 int ProductsSubPage::get_regular_list_size()
@@ -199,7 +198,7 @@ void ProductsSubPage::set_periodic_list_size(int size)
 {
 	m_periodic_list_size = size;
 	//m_ui->ListSize->setText(QString("%1").arg(m_regular_list_size));
-	m_ui->ListSize->show();
+	//m_ui->ListSize->show();
 }
 
 int ProductsSubPage::get_periodic_list_size()
