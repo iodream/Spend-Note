@@ -344,7 +344,7 @@ bool DbFacade::CanUserEditPeriodicIncome(IdType user_id, IdType income_id)
 
 bool DbFacade::CanGeneratePeriodicIncome(IdType user_id, IdType periodic_id)
 {
-	return m_periodic_income.CanUserEditIncome(user_id, periodic_id);
+	return m_periodic_income.CanGenerate(periodic_id);
 }
 
 bool DbFacade::UpdateAddNextPeriodicIncome(const PeriodicIncome& income)

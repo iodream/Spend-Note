@@ -57,8 +57,10 @@ void LoginHandler::UpdatePeriodicIncomes(db::IdType user_id)
 {
 	const auto periodic_incomes = m_facade->GetAllPeriodicIncomes(user_id);
 
-	for (const auto& periodic_income : periodic_incomes) {
-		while (m_facade->CanGeneratePeriodicIncome(user_id, periodic_income.id)) {
+	for (const auto& old_periodic_income : periodic_incomes) {
+		while (m_facade->CanGeneratePeriodicIncome(user_id, old_periodic_income.id)) {
+			const auto periodic_income = m_facade->GetPeriodicIncomeById(old_periodic_income.id).value();
+
 			// Generate income
 			db::Income income;
 			income.id = 0;
@@ -66,11 +68,11 @@ void LoginHandler::UpdatePeriodicIncomes(db::IdType user_id)
 			income.category_id = periodic_income.category_id;
 			income.name = periodic_income.name;
 			income.amount = periodic_income.amount;
-			income.add_time = QDateTime::currentDateTime().toString(Qt::ISODate).toStdString();
+			income.add_time = periodic_income.next_add_date;
 			income.expiration_time = std::nullopt;
 
 			m_facade->AddIncome(income);
-			m_facade->UpdatePeriodicIncome(periodic_income);
+			m_facade->UpdateAddNextPeriodicIncome(periodic_income);
 		}
 	}
 }

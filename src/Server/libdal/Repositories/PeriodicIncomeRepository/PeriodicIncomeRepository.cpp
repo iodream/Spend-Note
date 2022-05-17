@@ -287,7 +287,7 @@ bool PeriodicIncomeRepository::UpdateAddNext(const PeriodicIncome& income)
 
 		w.exec0(
 			"UPDATE " + periodicIncome::TABLE_NAME +
-			" SET " + periodicIncome::NEXT_ADD_DATE + " = " + w.quote(income.next_add_date) + " + " + PeriodIdToString(income.period_id) + +
+			" SET " + periodicIncome::NEXT_ADD_DATE + " = TIMESTAMP " + w.quote(income.next_add_date) + " + INTERVAL " + PeriodIdToString(income.period_id) +
 			" WHERE " + periodicIncome::ID + " = " + w.quote(income.id) + ";");
 		w.commit();
 	}
