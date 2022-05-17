@@ -278,7 +278,7 @@ void ListPagesController::OnGoToProducts(const List& list)
 
 void ListPagesController::OnGoToViewList()
 {
-	auto list = m_product_page.get_regular_list();
+	auto list = m_product_page.get_regular_list(); // r
 	PageData data{};
 	data.setValue(list);
 	emit ChangeSubPage(MainSubPages::VIEW_LIST, data);

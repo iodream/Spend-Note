@@ -27,6 +27,7 @@ public:
 
 	Product get_product() const { return std::get<Product>(m_product); }
 	PeriodicProduct get_periodic_product() const { return std::get<PeriodicProduct>(m_product); }
+
 	QString get_color();
 	void set_number(int number);
 	int get_number();

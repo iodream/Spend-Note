@@ -43,7 +43,7 @@ public:
 	bool UpdateViewPage(PeriodicProduct product);
 	void UpdateProductColors();
 
-
+	bool UpdatePeriodicProductsPage(PageData data);
 	bool UpdatePeriodicProductsPage();
 	bool UpdatePeriodicProductsPage(List list);
 

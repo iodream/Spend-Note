@@ -57,6 +57,15 @@ bool ProductPagesController::UpdateProductsPage(PageData data)
 	return a && b;
 }
 
+bool ProductPagesController::UpdatePeriodicProductsPage(PageData data)
+{
+	if (!data.canConvert<List>())
+	{
+		return UpdatePeriodicProductsPage();
+	}
+	return UpdatePeriodicProductsPage(qvariant_cast<List>(data));
+}
+
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 {
 	if (!data.canConvert<Product>())

@@ -55,6 +55,12 @@ void ProductsSubPage::AppendProduct(ProductItem* product)
 	InsertProduct(product, get_regular_list_size());
 }
 
+void ProductsSubPage::AppendPeriodicProduct(ProductItem* product)
+{
+	InsertPeriodicProduct(product, get_periodic_list_size());
+}
+
+
 void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 {
 	if (get_regular_list_size() < idx || idx < 0)
@@ -71,11 +77,6 @@ void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 	product->set_number(idx + 1);
 	set_regular_list_size(get_regular_list_size() + 1);
 	UpdateProductNumbers(idx + 1);
-}
-
-void ProductsSubPage::AppendPeriodicProduct(ProductItem* product)
-{
-	InsertPeriodicProduct(product, get_periodic_list_size());
 }
 
 void ProductsSubPage::InsertPeriodicProduct(ProductItem* product, int idx)
