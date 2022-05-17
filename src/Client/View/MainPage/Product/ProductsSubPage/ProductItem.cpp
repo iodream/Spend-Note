@@ -92,6 +92,24 @@ void ProductItem::Update()
 		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
 }
 
+void ProductItem::UpdatePeriodic()
+{
+	m_ui->ProductName->setText(m_product.name);
+	QDateTime date = QDateTime::fromString(
+		m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_ui->BuyUntil->setText(QLocale::system().toString(date, QLocale::system().dateTimeFormat()));
+	m_ui->Price->setText(QString("%1").arg(m_product.price));
+	m_ui->Number->setText(QString("%1").arg(m_number));
+	m_ui->PurchasedCheckbox->setChecked(m_product.is_bought);
+	UpdateColor();
+	if(m_product.is_bought)
+		m_ui->PurchasedCheckbox->setChecked(true);
+	else
+		m_ui->PurchasedCheckbox->setChecked(false);
+	setStyleSheet(
+		QString("%1 %2;").arg(STYLESHEET_BACKGROUND_COLOR, m_color));
+}
+
 void ProductItem::set_number(int number)
 {
 	m_number = number;

@@ -22,6 +22,9 @@ public:
 	void InsertProduct(ProductItem* product, int idx);
 	void RemoveProduct(ProductItem* product);
 
+	void AppendPeriodicProduct(ProductItem* product);
+	void InsertPeriodicProduct(ProductItem* product, int idx);
+
 	void UpdateProductNumbers(int idx);
 
 	ProductItem* SafeGetProduct(int idx);
@@ -54,6 +57,7 @@ signals:
 
 private slots:
 	void OnProductClicked(ProductItem* product);
+	void OnPeriodicProductClicked(ProductItem* product);
 
 private:
 	Ui::ProductsSubPage *m_ui;

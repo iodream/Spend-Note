@@ -501,6 +501,7 @@ bool MainPageController::UpdateSubPage(MainSubPages page, PageData data)
 	case MainSubPages::VIEW_LIST:
 		return m_list_pages_controller->UpdateListViewPage(data);
 	case MainSubPages::PRODUCTS:
+		m_product_pages_controller->UpdatePeriodicProductsPage(data);
 		return m_product_pages_controller->UpdateProductsPage(data);
 	case MainSubPages::VIEW_PRODUCT:
 		return m_product_pages_controller->UpdateViewProductSubPage(data);

@@ -24,8 +24,10 @@ public:
 	~ProductItem();
 
 	void Update();
+	void UpdatePeriodic();
 
 	Product get_product() const { return m_product; }
+	PeriodicProduct get_periodic_product() const { return m_periodic_product; }
 	QString get_color();
 	void set_number(int number);
 	int get_number();

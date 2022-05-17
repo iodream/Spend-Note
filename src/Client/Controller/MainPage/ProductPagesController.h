@@ -41,7 +41,7 @@ public:
 	bool UpdateViewPage(Product product);
 	void UpdateProductColors();
 
-
+	bool UpdatePeriodicProductsPage(PageData data);
 	bool UpdatePeriodicProductsPage();
 	bool UpdatePeriodicProductsPage(List list);
 

@@ -44,6 +44,12 @@ void ProductsSubPage::AppendProduct(ProductItem* product)
 	InsertProduct(product, get_regular_list_size());
 }
 
+void ProductsSubPage::AppendPeriodicProduct(ProductItem* product)
+{
+	InsertPeriodicProduct(product, get_periodic_list_size());
+}
+
+
 void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 {
 	if (get_regular_list_size() < idx || idx < 0)
@@ -62,6 +68,25 @@ void ProductsSubPage::InsertProduct(ProductItem* product, int idx)
 	UpdateProductNumbers(idx + 1);
 }
 
+void ProductsSubPage::InsertPeriodicProduct(ProductItem* product, int idx)
+{
+	if (get_periodic_list_size() < idx || idx < 0)
+	{
+		throw Exception("Trying to insert a widget out of range");
+	}
+	m_ui->PeriodicItemsLayout->insertWidget(idx, product);
+
+	connect(
+		product,
+		&ProductItem::released,
+		[this, product](){ OnPeriodicProductClicked(product); });
+
+	product->set_number(idx + 1);
+	set_periodic_list_size(get_periodic_list_size() + 1);
+	UpdateProductNumbers(idx + 1);
+}
+
+
 void ProductsSubPage::UpdateProductNumbers(int idx)
 {
 	while (idx < get_regular_list_size())
@@ -75,6 +100,11 @@ void ProductsSubPage::UpdateProductNumbers(int idx)
 void ProductsSubPage::OnProductClicked(ProductItem* product)
 {
 	emit ProductClicked(product->get_product());
+}
+
+void ProductsSubPage::OnPeriodicProductClicked(ProductItem* product)
+{
+	emit PeriodicProductClicked(product->get_periodic_product());
 }
 
 ProductItem* ProductsSubPage::SafeGetProduct(int idx)
@@ -173,13 +203,13 @@ void ProductsSubPage::Update(
 void ProductsSubPage::Update(
 	const std::vector<PeriodicProduct>& products)
 {
-	m_ui->ListName->setText(m_regular_list.name);
+	m_ui->ListName->setText(m_periodic_list.name);
 	Clear();
 	for (auto it = products.begin(); it != products.end(); it++)
 	{
 		ProductItem* item = new ProductItem(*it);
-		item->Update();
-		AppendProduct(item);
+		item->UpdatePeriodic();
+		AppendPeriodicProduct(item);
 	}
 }
 
