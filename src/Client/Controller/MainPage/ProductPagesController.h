@@ -37,8 +37,10 @@ public:
 
 	bool UpdateProductsPage(PageData data);
 	bool UpdateViewProductSubPage(PageData data);
+	bool UpdateViewPeriodicProductSubPage(PageData data);
 
 	bool UpdateViewPage(Product product);
+	bool UpdateViewPage(PeriodicProduct product);
 	void UpdateProductColors();
 
 
@@ -54,7 +56,7 @@ private:
 	void ConnectEditPage();
 	void ConnectCreatePage();
 
-	void ConnectPeridoicViewPage();
+	void ConnectPeriodicViewPage();
 	void ConnectPeriodicEditPage();
 	void ConnectPeriodicCreatePage();
 
@@ -86,7 +88,7 @@ public slots:
 	void OnCreateProduct();
 	void OnDeleteProduct();
 
-	void OnPeriodicProductCliked(const PeriodicProduct& product);
+	void OnPeriodicProductClicked(const PeriodicProduct& product);
 	void OnEditPeriodicProduct();
 	void OnUpdatePeriodicProduct();
 	void OnGoToCreatePeriodicProduct(IdType list_id);

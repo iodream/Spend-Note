@@ -40,16 +40,21 @@ ProductPagesController::ProductPagesController(
 	ConnectCreatePage();
 	ConnectPeriodicEditPage();
 	ConnectPeriodicCreatePage();
-	ConnectPeridoicViewPage();
+	ConnectPeriodicViewPage();
 }
 
 bool ProductPagesController::UpdateProductsPage(PageData data)
 {
 	if (!data.canConvert<List>())
 	{
-		return UpdateProductsPage();
+		bool a = UpdateProductsPage();
+		bool b = UpdatePeriodicProductsPage();
+		return a && b;
 	}
-	return UpdateProductsPage(qvariant_cast<List>(data));
+
+	bool a = UpdateProductsPage(qvariant_cast<List>(data));
+	bool b = UpdatePeriodicProductsPage(qvariant_cast<List>(data));
+	return a && b;
 }
 
 bool ProductPagesController::UpdateViewProductSubPage(PageData data)
@@ -59,6 +64,15 @@ bool ProductPagesController::UpdateViewProductSubPage(PageData data)
 		return true; // skip update for this case if PageData is invalid
 	}
 	return UpdateViewPage(qvariant_cast<Product>(data));
+}
+
+bool ProductPagesController::UpdateViewPeriodicProductSubPage(PageData data)
+{
+	if (!data.canConvert<PeriodicProduct>())
+	{
+		return true; // skip update for this case if PageData is invalid
+	}
+	return UpdateViewPage(qvariant_cast<PeriodicProduct>(data));
 }
 
 
@@ -72,9 +86,21 @@ void ProductPagesController::ConnectProductsPage()
 
 	connect(
 		&m_products_page,
+		&ProductsSubPage::PeriodicProductClicked,
+		this,
+		&ProductPagesController::OnPeriodicProductClicked);
+
+	connect(
+		&m_products_page,
 		&ProductsSubPage::GoToCreateProduct,
 		this,
 		&ProductPagesController::OnGoToCreateProduct);
+
+	connect(
+		&m_products_page,
+		&ProductsSubPage::GoToCreatePeriodicProduct,
+		this,
+		&ProductPagesController::OnGoToCreatePeriodicProduct);
 }
 
 
@@ -93,7 +119,7 @@ void ProductPagesController::ConnectViewPage()
 		&ProductPagesController::OnDeleteProduct);
 }
 
-void ProductPagesController::ConnectPeridoicViewPage()
+void ProductPagesController::ConnectPeriodicViewPage()
 {
 	connect(
 		&m_periodic_view_page,
@@ -173,7 +199,7 @@ void ProductPagesController::OnProductClicked(const Product& product)
 }
 
 
-void ProductPagesController::OnPeriodicProductCliked(const PeriodicProduct& product)
+void ProductPagesController::OnPeriodicProductClicked(const PeriodicProduct& product)
 {
 	PageData data{};
 	data.setValue(product);
@@ -450,6 +476,13 @@ bool ProductPagesController::UpdateViewPage(Product product)
 {
 	m_view_page.set_product(product);
 	m_view_page.Update();
+	return true;
+}
+
+bool ProductPagesController::UpdateViewPage(PeriodicProduct product)
+{
+	m_periodic_view_page.set_product(product);
+	m_periodic_view_page.Update();
 	return true;
 }
 

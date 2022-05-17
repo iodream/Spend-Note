@@ -30,20 +30,33 @@ void PeriodicProductViewSubPage::Update()
 	m_ui->Price->setText(QString::number(m_product.price));
 	m_ui->Amount->setText(QString::number(m_product.amount));
 
-	QDateTime date = QDateTime::fromString(
-		m_product.buy_until_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	QDateTime add_date = QDateTime::fromString(
+		m_product.next_add_date,
+		DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_ui->AddedDate->setText(QLocale::system().toString(add_date, QLocale::system().dateTimeFormat()));
 
-	m_ui->GenerateUntil->setText(QLocale::system().toString(date, QLocale::system().dateTimeFormat()));
+	QDateTime add_until_date = QDateTime::fromString(
+		m_product.add_until,
+		DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+	m_ui->GenerateUntil->setText(QLocale::system().toString(add_until_date, QLocale::system().dateTimeFormat()));
+
+	const std::array periods = {
+		"daily",
+		"weekly",
+		"monthly",
+		"yearly"
+	};
+	m_ui->Repeating->setText(periods[m_product.period_id]);
 	m_ui->Priority->setText(QString::number(m_product.priority));
 	m_ui->Category->setText(m_product.category.name);
 }
 
-void PeriodicProductViewSubPage::set_product(const Product& product)
+void PeriodicProductViewSubPage::set_product(const PeriodicProduct& product)
 {
 	m_product = product;
 }
 
-Product PeriodicProductViewSubPage::get_product()
+PeriodicProduct PeriodicProductViewSubPage::get_product()
 {
 	return m_product;
 }

@@ -22,15 +22,22 @@ public:
 	void InsertProduct(ProductItem* product, int idx);
 	void RemoveProduct(ProductItem* product);
 
+	void AppendPeriodicProduct(ProductItem* product);
+	void InsertPeriodicProduct(ProductItem* product, int idx);
+	void RemovePeriodicProduct(ProductItem* product);
+
 	void UpdateProductNumbers(int idx);
+	void UpdatePeriodicProductNumbers(int idx);
 
 	ProductItem* SafeGetProduct(int idx);
+	ProductItem* SafeGetPeriodicProduct(int idx);
 
 	void Update(const std::vector<Product>& products);
 	void Update(const std::vector<PeriodicProduct>& products);
 	void UpdateColors();
 
 	void Clear();
+	void ClearPeriodic();
 
 	void changeEvent(QEvent* event);
 
@@ -48,12 +55,14 @@ public:
 
 signals:
 	void GoToCreateProduct(IdType list_id);
+	void GoToCreatePeriodicProduct(IdType list_id);
 	void GoToViewList();
 	void ProductClicked(const Product& product);
 	void PeriodicProductClicked(const PeriodicProduct& product);
 
 private slots:
 	void OnProductClicked(ProductItem* product);
+	void OnPeriodicProductClicked(ProductItem* product);
 
 private:
 	Ui::ProductsSubPage *m_ui;

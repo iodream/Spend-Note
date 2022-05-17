@@ -22,13 +22,13 @@ public:
 
 	void Update();
 
-	void set_product(const Product& product);
-	Product get_product();
+	void set_product(const PeriodicProduct& product);
+	PeriodicProduct get_product();
 signals:
 	void EditProduct();
 	void DeleteProduct();
 
 private:
 	Ui::PeriodicProductViewSubPage *m_ui;
-	Product m_product;
+	PeriodicProduct m_product;
 };
