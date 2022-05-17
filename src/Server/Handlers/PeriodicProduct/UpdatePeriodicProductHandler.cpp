@@ -41,5 +41,5 @@ Net::Response UpdatePeriodicProductHandler::AuthHandle(const Net::Request& reque
 	auto product_db = ToDBPeriodicProduct(product);
 
 	m_facade->UpdatePeriodicProduct(product_db);
-	return FormEmptyResponse();
+	return FormEmptyResponse(NetError::Status::HTTP_OK);
 }

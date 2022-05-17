@@ -32,5 +32,5 @@ Net::Response RemovePeriodicProductHandler::AuthHandle(const Net::Request& reque
 	}
 
 	m_facade->RemovePeriodicProduct(product_id);
-	return FormEmptyResponse();
+	return FormEmptyResponse(NetError::Status::HTTP_OK);
 }
