@@ -39,7 +39,7 @@ public:
 	void SetMinimumDate(const QDate& date);
 
 signals:
-	void CreateProduct();
+	void UpdateProduct();
 	void AddProductCategory(ProductCategory);
 	void UpdateCategories();
 

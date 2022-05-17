@@ -161,7 +161,7 @@ void ProductPagesController::ConnectPeriodicEditPage()
 {
 	connect(
 		&m_periodic_edit_page,
-		&PeriodicProductEditSubPage::CreateProduct,
+		&PeriodicProductEditSubPage::UpdateProduct,
 		this,
 		&ProductPagesController::OnUpdatePeriodicProduct);
 	connect(
@@ -225,10 +225,10 @@ void ProductPagesController::OnEditProduct()
 
 void ProductPagesController::OnEditPeriodicProduct()
 {
-	m_periodic_edit_page.set_product(m_periodic_edit_page.get_product());
-	m_edit_page.Update();
+	m_periodic_edit_page.set_product(m_periodic_view_page.get_product());
+	m_periodic_edit_page.Update();
 	UpdateCategoryBox();
-	emit ChangeSubPage(MainSubPages::EDIT_PRODUCT);
+	emit ChangeSubPage(MainSubPages::EDIT_PERIODIC_PRODUCT);
 }
 
 void ProductPagesController::OnUpdateProduct()
@@ -265,9 +265,7 @@ void ProductPagesController::OnUpdatePeriodicProduct()
 {
 	UpdatePeriodicProductModel model{m_hostname};
 
-	PeriodicProduct product;
-
-	product = m_periodic_edit_page.get_product();
+	PeriodicProduct product = m_periodic_edit_page.get_product();
 
 	auto request = model.FormRequest(product);
 	auto response = m_http_client.Request(request);

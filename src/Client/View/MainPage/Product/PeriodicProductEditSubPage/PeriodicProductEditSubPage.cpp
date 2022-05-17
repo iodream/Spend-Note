@@ -11,7 +11,13 @@ PeriodicProductEditSubPage::PeriodicProductEditSubPage(QWidget *parent) :
 		m_ui->SaveButton,
 		&QPushButton::clicked,
 		this,
-		&PeriodicProductEditSubPage::CreateProduct);
+		&PeriodicProductEditSubPage::UpdateProduct);
+
+	m_ui->AddDate->setDisplayFormat(
+		QLocale::system().dateTimeFormat());
+
+	m_ui->AddDate->setDate(QDate::currentDate());
+	SetMinimumDate(QDate::currentDate());
 
 	m_ui->GenerateUntil->setDisplayFormat(
 		QLocale::system().dateTimeFormat());
@@ -85,9 +91,11 @@ PeriodicProduct PeriodicProductEditSubPage::get_product()
 	m_periodic_product.price = m_ui->Price->value();
 	m_periodic_product.amount = m_ui->Amount->value();
 	m_periodic_product.priority = m_ui->Priority->value();
-	m_periodic_product.category.id = qvariant_cast<IdType>(m_ui->Category->currentData());
-	m_periodic_product.add_until = m_ui->GenerateUntil->text();
-	m_periodic_product.category.name = qvariant_cast<QString>(m_ui->Category->currentData());
+	m_periodic_product.category.id = m_ui->Category->currentIndex() + 1; //qvariant_cast<IdType>(m_ui->Category->currentData());
+	m_periodic_product.category.name = qvariant_cast<QString>(m_ui->Category->currentText());
+	m_periodic_product.add_until = toDBstring(m_ui->GenerateUntil->dateTime());
+	m_periodic_product.next_add_date = toDBstring(m_ui->AddDate->dateTime());;
+	m_periodic_product.period_id = m_ui->RepeatingSelect->currentIndex() + 1;
 
 	return m_periodic_product;
 }
@@ -101,9 +109,9 @@ void PeriodicProductEditSubPage::Update()
 	m_ui->Category->setPlaceholderText(m_periodic_product.category.name);
 	m_ui->Category->setCurrentIndex(m_ui->Category->findData(m_periodic_product.category.id));
 	m_ui->GenerateUntil->setDateTime(QDateTime::fromString(m_periodic_product.add_until, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
-//	m_ui->AddDate->setDateTime(QDateTime::fromString(m_periodic_product., DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
+	m_ui->AddDate->setDateTime(QDateTime::fromString(m_periodic_product.next_add_date, DATE_FORMAT_YYYY_MM_DD_HH_MM_SS));
+	m_ui->RepeatingSelect->setCurrentIndex(m_periodic_product.period_id - 1);
 }
-
 
 void PeriodicProductEditSubPage::Clear()
 {
